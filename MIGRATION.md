@@ -1,7 +1,8 @@
 # Migration queue — components still living in launchstore-frontend & launchstore-storefront
 
-**Total to migrate:** ~120 `.tsx` files across 17 categories (Hero stub is
-already in `src/puck/components/homepage/Hero/`).
+**Total to migrate:** ~120 `.tsx` files across 17 categories.
+
+**Status (2026-07-06):** Hero is DONE — full migration in shared, frontend + storefront are thin re-exports. AI registry is populated from `hero.meta.ts`.
 
 Each row = 1 PR that touches 3 repos:
 1. **shared:** add new files at `src/puck/components/<category>/<Component>/`
@@ -9,19 +10,88 @@ Each row = 1 PR that touches 3 repos:
 3. **storefront:** delete duplicate, swap import site
 
 The backend (`launchstore`) needs no per-component PR — registry regenerates
-automatically each time shared's `prebuild` runs (and shipped via the new
-`registry.json` consumer switch, see `roadmap.md`).
+automatically each time shared's `prebuild` runs.
 
 ---
 
-## Order & rationale
+## Status overview
 
-**Wave 1: presentational components (no data deps). Easy wins.** ~30 components
-estimated. Each migration: 1-2 files, ~50-80 LoC, no live-API wiring.
+| Wave | Status | Count | Components |
+|---|---|---|---|
+| ✅ done | Hero | 1 | `homepage/Hero` — full migration (editor extends fields; renderer uses as-is; AI registry populated) |
+| Wave 1.1 | ☐ | 8 | `homepage/CustomHTML, StatsSection, TrustBadges, CountdownTimer, PromotionalBannerGrid, Testimonials, WhatsAppOptIn, Newsletter` |
+| Wave 1.2 | ☐ | 33 | `content/* (7)`, `layout/* (7)`, `footer/* (3)`, `generic/* (16)` |
+| Wave 2.1 | ☐ | 3 | `homepage/CategoriesGrid, FeaturedProducts, CategoryProducts` |
+| Wave 2.2 | ☐ | 37 | `category/* (5)`, `product/* (18)`, `product-image-gallery/* (3)`, `swiper/* (5)`, `navigation/* (6)` |
+| Wave 3 | ☐ | 29 | `cart/* (6)`, `checkout/* (7)`, `order/* (4)`, `account/* (4)`, `form/* (8)` |
+| Wave 4 | ☐ | 10 | `collection/* (9)`, `custom/* (1)` |
+| **Total remaining** | | **120** | |
+
+---
+
+## Wave 1 migration pattern (proven by Hero)
+
+How Hero migrated cleanly — copy this for Wave 1 components:
+
+### Shared (single source of truth)
+
+```
+src/puck/components/<category>/<Component>/
+├── index.ts              ← public re-exports
+├── <Component>.tsx       ← Puck ComponentConfig (label + fields + defaultProps + render)
+├── <component>.fields.ts ← Puck Field definitions (text/radio/select/custom/array/object)
+├── <component>.meta.ts   ← AI capability descriptor (intent, searchTags, visualRole, dataDeps, props)
+└── <component>.types.ts  ← TS interface for props
+```
+
+### Frontend (editor — extends fields, doesn't redefine)
+
+```tsx
+'use client';
+import { HeroSection as SharedHeroSection } from '@launchstore/shared-puck';
+import type { HeroSectionProps } from '@launchstore/shared-puck';
+import MediaPickerField from '../../fields/MediaPickerField';
+import ColorField from '@/components/theme/ColorField';
+
+export const HeroSection = {
+  ...SharedHeroSection,
+  fields: {
+    ...SharedHeroSection.fields,
+    imageUrl: { type: 'custom', render: ({ value, onChange }) =>
+      <MediaPickerField value={value || ''} onChange={onChange} />
+    },
+    textColor: { type: 'custom', render: ({ value, onChange }) =>
+      <ColorField ... />
+    },
+  },
+};
+export type { HeroSectionProps };
+export default HeroSection;
+```
+
+### Storefront (renderer — uses as-is, no custom widgets)
+
+```tsx
+import { HeroSection as SharedHeroSection } from '@launchstore/shared-puck';
+export const HeroSection: any = SharedHeroSection;
+export type { HeroSectionProps } from '@launchstore/shared-puck';
+```
+
+The `as any` cast on the renderer side is intentional — it's because Puck's
+generic `Config` slot in the renderer is strictly-typed and doesn't quite match
+the shared component's `ComponentConfig<HeroSectionProps>` shape at compile
+time. Runtime is identical. Revisit when migrating all Wave 1+ components.
+
+---
+
+## Order & rationale (legacy table — see Status overview above for the consolidated view)
+
+**Wave 1: presentational components (no data deps).** Easy wins.
+Each migration: 1-2 files, ~50-80 LoC, no live-API wiring.
 
 | Status | Category | Component | Notes |
 |---|---|---|---|
-| ✅ stub | homepage | Hero | Already here as 5-file stub (T-002). Complete it as Wave 1.1 (move real frontend + storefront impl). |
+| ✅ done | homepage | Hero | Full migration. See Wave 1 migration pattern above. |
 | ☐ | homepage | CustomHTML | Pure HTML, no props besides inner content. |
 | ☐ | homepage | StatsSection | Number cards, static props. |
 | ☐ | homepage | TrustBadges | Image list. |

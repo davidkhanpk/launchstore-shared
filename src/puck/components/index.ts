@@ -7,3 +7,4 @@
  */
 
 export * from './homepage/Hero';
+export * from './homepage/CustomHTML';

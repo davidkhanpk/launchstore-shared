@@ -1,0 +1,44 @@
+{
+  "name": "@launchstore/shared-puck",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Single source of truth for Puck components + AI capability registry, shared between launchstore-frontend (editor) and launchstore-storefront (renderer).",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./registry": {
+      "types": "./dist/registry.d.ts",
+      "default": "./dist/registry.json"
+    },
+    "./registry.json": "./dist/registry.json",
+    "./components/*": {
+      "types": "./dist/components/*.d.ts",
+      "default": "./dist/components/*.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:registry": "tsx scripts/build-registry.ts",
+    "prebuild": "npm run build:registry",
+    "dev": "tsc -p tsconfig.json --watch",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@puckeditor/core": "latest",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "rimraf": "^5.0.5",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.2"
+  }
+}

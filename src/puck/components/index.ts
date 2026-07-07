@@ -9,3 +9,5 @@
 export * from './homepage/Hero';
 export * from './homepage/CustomHTML';
 export * from './homepage/Testimonials';
+export * from './homepage/Newsletter';
+export * from './homepage/PromotionalBannerGrid';

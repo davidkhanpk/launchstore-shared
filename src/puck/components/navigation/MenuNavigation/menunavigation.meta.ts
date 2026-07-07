@@ -1,0 +1,36 @@
+export const menuNavigationMeta = {
+  name: 'MenuNavigation',
+  label: 'Menu Navigation',
+  description: 'Top-level storefront navigation menu. Puck canvas uses CSS-popover dropdowns (no @medusajs/ui dependency) with hover-driven sub-panels. Items can be plain links or have a dropdown of children. Mega-menu style is configurable (default dropdown or grid). Data is injected at render-time via the `menuData` prop by the consumer wrapper (frontend reads from useMenu hook, storefront projects layout-level menu fetch).',
+  category: 'navigation',
+  intent: ['nav', 'navigation', 'menu', 'header', 'dropdown'],
+  visualRole: 'block',
+  dataDeps: ['menuData'],
+  copyFields: [],
+  themeable: ['textColor', 'hoverColor', 'dropdownBackground', 'dropdownBorder', 'dropdownShadow', 'dropdownRadius'],
+  a11yRisk: 'medium',
+  a11yNotes: 'Trigger button uses aria-expanded. Dropdown panel is hover-driven (not keyboard-navigable in this implementation; consumer can add focus tracking if needed). Replaces the original @medusajs/ui DropdownMenu which had idiomatic ARIA menu semantics \u2014 if a11y is critical, the consumer should layer in keyboard handlers.',
+  mobileBehavior: 'responsive',
+  searchTags: ['nav', 'navigation', 'menu', 'header', 'dropdown', 'popover'],
+
+  props: {
+    menuHandle: { type: 'string', required: true },
+    layout: { type: 'enum', options: ['horizontal', 'vertical', 'stacked'], required: true },
+    alignment: { type: 'enum', options: ['left', 'center', 'right'], required: true },
+    hoverEffect: { type: 'enum', options: ['underline', 'background', 'color', 'none'], required: true },
+    textColor: { type: 'string', required: true },
+    hoverColor: { type: 'string', required: true },
+    fontSize: { type: 'enum', options: ['sm', 'base', 'lg'], required: true },
+    fontWeight: { type: 'enum', options: ['normal', 'medium', 'semibold', 'bold'], required: true },
+    showDropdownArrows: { type: 'boolean', required: true },
+    dropdownStyle: { type: 'enum', options: ['default', 'mega'], required: true },
+    maxDepth: { type: 'enum', options: ['1', '2', '3'], required: true },
+    menuData: { type: 'array', required: false, items: '$item' },
+    dropdownBackground: { type: 'string', required: false },
+    dropdownBorder: { type: 'string', required: false },
+    dropdownShadow: { type: 'enum', options: ['sm', 'md', 'lg', 'xl'], required: false },
+    dropdownRadius: { type: 'enum', options: ['sm', 'md', 'lg', 'xl'], required: false },
+  },
+} as const;
+
+export type MenuNavigationMeta = typeof menuNavigationMeta;

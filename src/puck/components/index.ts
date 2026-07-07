@@ -15,6 +15,7 @@ export * from './homepage/StatsSection';
 export * from './homepage/TrustBadges';
 export * from './homepage/CountdownTimer';
 export * from './homepage/CategoriesGrid';
+export * from './homepage/FeaturedProducts';
 export * from './content/Video';
 export * from './content/Text';
 export * from './content/Heading';

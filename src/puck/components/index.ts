@@ -24,3 +24,5 @@ export * from './content/Button';
 export * from './layout/Container';
 export * from './layout/Columns';
 export * from './layout/Section';
+export * from './layout/FlexRow';
+export * from './layout/FlexColumn';

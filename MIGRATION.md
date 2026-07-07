@@ -2,7 +2,9 @@
 
 **Total to migrate:** ~120 `.tsx` files across 17 categories.
 
-**Status (2026-07-06):** Hero is DONE — full migration in shared, frontend + storefront are thin re-exports. AI registry is populated from `hero.meta.ts`.
+**Status (2026-07-07):** 15 components migrated across 2 categories (homepage + content).
+- HeroSection, CustomHTML, StatsSection, TrustBadges, CountdownTimer, PromotionalBannerGrid, Testimonials, Newsletter are in shared with `*.meta.ts`. (homepage/ — 8/8 done)
+- All 7 `content/*` (Video, Text, Heading, Link, Image, RichTextContent, Button) are in shared with `*.meta.ts`. (content/ — 7/7 done)
 
 Each row = 1 PR that touches 3 repos:
 1. **shared:** add new files at `src/puck/components/<category>/<Component>/`
@@ -19,13 +21,13 @@ automatically each time shared's `prebuild` runs.
 | Wave | Status | Count | Components |
 |---|---|---|---|
 | ✅ done | Hero | 1 | `homepage/Hero` — full migration (editor extends fields; renderer uses as-is; AI registry populated) |
-| Wave 1.1 | ☐ | 8 | `homepage/CustomHTML, StatsSection, TrustBadges, CountdownTimer, PromotionalBannerGrid, Testimonials, WhatsAppOptIn, Newsletter` |
-| Wave 1.2 | ☐ | 33 | `content/* (7)`, `layout/* (7)`, `footer/* (3)`, `generic/* (16)` |
+| Wave 1.1 | ✅ done | 7 | `homepage/CustomHTML, Testimonials, Newsletter, PromotionalBannerGrid, StatsSection, TrustBadges, CountdownTimer` — all migrated (WhatsAppOptIn deferred to Wave 2 since it gates on a backend hook) |
+| Wave 1.2 | 1/4 done | 33 | `content/* (7/7 DONE)`, `layout/* (0/7)`, `footer/* (0/3)`, `generic/* (0/16)` |
 | Wave 2.1 | ☐ | 3 | `homepage/CategoriesGrid, FeaturedProducts, CategoryProducts` |
 | Wave 2.2 | ☐ | 37 | `category/* (5)`, `product/* (18)`, `product-image-gallery/* (3)`, `swiper/* (5)`, `navigation/* (6)` |
 | Wave 3 | ☐ | 29 | `cart/* (6)`, `checkout/* (7)`, `order/* (4)`, `account/* (4)`, `form/* (8)` |
 | Wave 4 | ☐ | 10 | `collection/* (9)`, `custom/* (1)` |
-| **Total remaining** | | **120** | |
+| **Total remaining** | | **101** | (15 done, 105 to go) |
 
 ---
 

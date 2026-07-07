@@ -17,3 +17,4 @@ export * from './homepage/CountdownTimer';
 export * from './content/Video';
 export * from './content/Text';
 export * from './content/Heading';
+export * from './content/Link';

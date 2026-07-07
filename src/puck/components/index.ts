@@ -19,3 +19,4 @@ export * from './content/Text';
 export * from './content/Heading';
 export * from './content/Link';
 export * from './content/Image';
+export * from './content/RichTextContent';

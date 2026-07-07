@@ -1,0 +1,28 @@
+export const productMetadataMeta = {
+  name: 'ProductMetadata',
+  label: 'Product Metadata',
+  description: 'Renders SKU, weight, dimensions, and origin country in a list, grid, or table layout. Lucide icons replaced with inline SVG (Package, Ruler, Weight, Globe). Per-field on/off toggles. Reads from the shared product shape; consumer wrapper injects the product at render-time.',
+  category: 'product',
+  intent: ['product', 'metadata', 'sku', 'specs'],
+  visualRole: 'block',
+  dataDeps: ['product (injected)'],
+  copyFields: ['titleText'],
+  themeable: [],
+  a11yRisk: 'low',
+  a11yNotes: 'List/grid use semantic <dt>/<dd>. Table uses <table>/<tbody>. Each icon has decorative-only class \u2014 text label accompanies it.',
+  mobileBehavior: 'responsive',
+  searchTags: ['product', 'metadata', 'sku', 'specs', 'dimensions', 'weight'],
+
+  props: {
+    showTitle: { type: 'boolean', required: true },
+    titleText: { type: 'string', required: true },
+    showSku: { type: 'boolean', required: true },
+    showWeight: { type: 'boolean', required: true },
+    showDimensions: { type: 'boolean', required: true },
+    showOrigin: { type: 'boolean', required: true },
+    layout: { type: 'enum', options: ['list', 'grid', 'table'], required: true },
+    product: { type: 'object', required: false },
+  },
+} as const;
+
+export type ProductMetadataMeta = typeof productMetadataMeta;

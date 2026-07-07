@@ -35,3 +35,7 @@ export * from './generic/Spacer';
 export * from './generic/Divider';
 export * from './generic/Badge';
 export * from './generic/Alert';
+export * from './generic/Avatar';
+export * from './generic/Card';
+export * from './generic/Grid';
+export * from './generic/Icon';

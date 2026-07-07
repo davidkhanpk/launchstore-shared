@@ -39,3 +39,6 @@ export * from './generic/Avatar';
 export * from './generic/Card';
 export * from './generic/Grid';
 export * from './generic/Icon';
+export * from './generic/List';
+export * from './generic/Tabs';
+export * from './generic/Accordion';

@@ -21,3 +21,6 @@ export * from './content/Link';
 export * from './content/Image';
 export * from './content/RichTextContent';
 export * from './content/Button';
+export * from './layout/Container';
+export * from './layout/Columns';
+export * from './layout/Section';

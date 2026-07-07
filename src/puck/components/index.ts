@@ -21,6 +21,8 @@ export * from './category/CategoryBreadcrumbs';
 export * from './category/CategoryTitle';
 export * from './category/CategoryDescription';
 export * from './category/CategoryMetadata';
+export * from './navigation/Logo';
+export * from './navigation/SearchIcon';
 export * from './content/Video';
 export * from './content/Text';
 export * from './content/Heading';

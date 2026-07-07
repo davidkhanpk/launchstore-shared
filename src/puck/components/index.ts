@@ -14,3 +14,4 @@ export * from './homepage/PromotionalBannerGrid';
 export * from './homepage/StatsSection';
 export * from './homepage/TrustBadges';
 export * from './homepage/CountdownTimer';
+export * from './content/Video';

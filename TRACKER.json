@@ -4,10 +4,10 @@
   "version": "2026-07-07",
   "snapshot": {
     "totalComponents": 120,
-    "migrated": 37,
-    "remaining": 83,
+    "migrated": 39,
+    "remaining": 80,
     "categoriesDone": ["homepage", "content", "layout", "footer", "generic"],
-    "lastUpdated": "2026-07-07"
+    "lastUpdated": "2026-07-07-T2"
   },
   "epics": [
     { "id": "E-W1.1", "wave": "1.1", "title": "Wave 1.1 homepage", "count": 7, "status": "done" },
@@ -15,8 +15,8 @@
     { "id": "E-W1.2b", "wave": "1.2b", "title": "Wave 1.2b layout", "count": 7, "status": "done" },
     { "id": "E-W1.2c", "wave": "1.2c", "title": "Wave 1.2c footer", "count": 3, "status": "done" },
     { "id": "E-W1.2d", "wave": "1.2d", "title": "Wave 1.2d generic", "count": 11, "status": "done" },
-    { "id": "E-W2.1", "wave": "2.1", "title": "Wave 2.1 homepage data-driven", "count": 3, "status": "in_progress", "note": "1 of 3 done (CategoriesGrid); 2 blocked on D-1" },
-    { "id": "E-W2.1R", "wave": "2.1R", "title": "Wave 2.1 remaining", "count": 2, "status": "blocked", "blockedBy": ["D-1"] },
+    { "id": "E-W2.1", "wave": "2.1", "title": "Wave 2.1 homepage data-driven", "count": 3, "status": "done", "note": "3 of 3 done (CategoriesGrid + FeaturedProducts + CategoryProducts)" },
+    { "id": "E-W2.1R", "wave": "2.1R", "title": "Wave 2.1 remaining", "count": 2, "status": "done" },
     { "id": "E-W2.2", "wave": "2.2", "title": "Wave 2.2 product/nav", "count": 37, "status": "pending" },
     { "id": "E-W3", "wave": "3", "title": "Wave 3 cart/checkout/order/account/form", "count": 29, "status": "pending" },
     { "id": "E-W4", "wave": "4", "title": "Wave 4 collection/custom", "count": 10, "status": "pending" },

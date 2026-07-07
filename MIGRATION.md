@@ -22,12 +22,12 @@ automatically each time shared's `prebuild` runs.
 |---|---|---|---|
 | ✅ done | Hero | 1 | `homepage/Hero` — full migration (editor extends fields; renderer uses as-is; AI registry populated) |
 | Wave 1.1 | ✅ done | 7 | `homepage/CustomHTML, Testimonials, Newsletter, PromotionalBannerGrid, StatsSection, TrustBadges, CountdownTimer` — all migrated (WhatsAppOptIn deferred to Wave 2 since it gates on a backend hook) |
-| Wave 1.2 | 1/4 done | 33 | `content/* (7/7 DONE)`, `layout/* (0/7)`, `footer/* (0/3)`, `generic/* (0/16)` |
+| Wave 1.2 | 4/4 done | 33 | `content/* (7/7 DONE)`, `layout/* (7/7 DONE)`, `footer/* (3/3 DONE)`, `generic/* (11/11 DONE — Wave 1.2d)` |
 | Wave 2.1 | ☐ | 3 | `homepage/CategoriesGrid, FeaturedProducts, CategoryProducts` |
 | Wave 2.2 | ☐ | 37 | `category/* (5)`, `product/* (18)`, `product-image-gallery/* (3)`, `swiper/* (5)`, `navigation/* (6)` |
 | Wave 3 | ☐ | 29 | `cart/* (6)`, `checkout/* (7)`, `order/* (4)`, `account/* (4)`, `form/* (8)` |
 | Wave 4 | ☐ | 10 | `collection/* (9)`, `custom/* (1)` |
-| **Total remaining** | | **101** | (15 done, 105 to go) |
+| **Total remaining** | | **83** | (36 done, 83 to go) |
 
 ---
 

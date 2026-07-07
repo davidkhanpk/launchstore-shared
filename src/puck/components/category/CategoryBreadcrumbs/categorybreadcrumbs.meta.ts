@@ -1,0 +1,30 @@
+export const categoryBreadcrumbsMeta = {
+  name: 'CategoryBreadcrumbs',
+  label: 'Category Breadcrumbs',
+  description: 'Breadcrumb trail from category root to current. Walks parent_category chain automatically. Renders semantic <nav aria-label="Breadcrumb"> with aria-current="page" on the active segment.',
+  category: 'category',
+  intent: ['breadcrumb', 'navigation', 'trail', 'path', 'category-nav'],
+  visualRole: 'inline',
+  dataDeps: ['category (consumer-injected, includes parent_category chain)'],
+  copyFields: ['homeText'],
+  themeable: ['textColor', 'activeColor', 'hoverColor'],
+  a11yRisk: 'low',
+  a11yNotes: 'Uses semantic <nav aria-label="Breadcrumb"> + <span aria-current="page"> on the active item. Tailwind hover-only styles; the hoverColor prop is set inline via JS handlers in storefront variant (we use Tailwind hover:opacity-80 for now).',
+  mobileBehavior: 'responsive',
+  searchTags: ['breadcrumb', 'navigation', 'trail', 'nav', 'aria-current'],
+
+  props: {
+    category: { type: 'object' },
+    countryCode: { type: 'string' },
+    separator: { type: 'string', required: true },
+    showHome: { type: 'boolean', required: true },
+    homeText: { type: 'string', required: true },
+    fontSize: { type: 'string', required: true },
+    textColor: { type: 'string', required: true },
+    activeColor: { type: 'string', required: true },
+    hoverColor: { type: 'string', required: true },
+    marginBottom: { type: 'string', required: true },
+  },
+} as const;
+
+export type CategoryBreadcrumbsMeta = typeof categoryBreadcrumbsMeta;

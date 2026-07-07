@@ -28,3 +28,6 @@ export * from './layout/FlexRow';
 export * from './layout/FlexColumn';
 export * from './layout/Header';
 export * from './layout/Footer';
+export * from './footer/ContactInfo';
+export * from './footer/Copyright';
+export * from './footer/SocialIcons';

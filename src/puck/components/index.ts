@@ -33,6 +33,7 @@ export * from './product/ProductReviews';
 export * from './product/QuantitySelector';
 export * from './product/StockIndicator';
 export * from './product/WishlistButton';
+export * from './product/ProductVariantSelector';
 export * from './navigation/Logo';
 export * from './navigation/SearchIcon';
 export * from './navigation/MobileMenu';

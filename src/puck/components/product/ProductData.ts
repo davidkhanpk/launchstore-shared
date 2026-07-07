@@ -16,6 +16,12 @@
  *   - ProductPrice: variants[]
  *   - ProductMetadata: variants[0].sku + weight/length/width/height/origin_country
  */
+export interface ProductDataVariantOption {
+  /** Medusa convention: references ProductDataOption.id. */
+  option_id?: string;
+  value?: string;
+}
+
 export interface ProductDataVariant {
   id: string;
   sku?: string;
@@ -27,6 +33,20 @@ export interface ProductDataVariant {
   inventory_quantity?: number | null;
   /** When true, variant is sold by enabling pre-order even if quantity=0. */
   allow_backorder?: boolean;
+  options?: ProductDataVariantOption[];
+}
+
+export interface ProductDataOptionValue {
+  id: string;
+  value: string;
+  /** For color-swatch rendering, the swatch background color. */
+  metadata?: { color?: string };
+}
+
+export interface ProductDataOption {
+  id: string;
+  title: string;
+  values?: ProductDataOptionValue[];
 }
 
 export interface ProductDataPrice {
@@ -63,6 +83,17 @@ export interface ProductData {
   origin_country?: string | null;
   metadata?: Record<string, any>;
   variants?: ProductDataVariant[];
+  /** Medusa option structure used by ProductVariantSelector. */
+  options?: ProductDataOption[];
   collection?: ProductDataCollection | null;
   categories?: ProductDataCategory[];
+  /** Used by ProductImageGallery. */
+  images?: ProductDataImage[];
+  thumbnail?: string;
+}
+
+export interface ProductDataImage {
+  id?: string;
+  url: string;
+  alt?: string;
 }

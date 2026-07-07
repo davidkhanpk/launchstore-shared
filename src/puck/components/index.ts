@@ -31,3 +31,7 @@ export * from './layout/Footer';
 export * from './footer/ContactInfo';
 export * from './footer/Copyright';
 export * from './footer/SocialIcons';
+export * from './generic/Spacer';
+export * from './generic/Divider';
+export * from './generic/Badge';
+export * from './generic/Alert';

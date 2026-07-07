@@ -29,6 +29,7 @@ export * from './product/ProductPrice';
 export * from './product/ProductAccordion';
 export * from './product/ProductBreadcrumbs';
 export * from './product/ProductRating';
+export * from './product/ProductReviews';
 export * from './navigation/Logo';
 export * from './navigation/SearchIcon';
 export * from './navigation/MobileMenu';

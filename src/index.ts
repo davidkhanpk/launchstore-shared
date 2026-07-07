@@ -14,4 +14,5 @@
 export const SHARED_PUCK_VERSION = '0.0.1';
 
 export * from './puck/components';
+export { resolveColor, resolveColors, isTokenPath } from './theme/resolveColor';
 

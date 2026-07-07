@@ -1,0 +1,31 @@
+export const trustBadgesMeta = {
+  name: 'TrustBadges',
+  label: 'Trust Badges',
+  description: 'A row or grid of trust-signal badges with emoji icons, titles, and short descriptions (e.g. "Free Shipping", "Secure Checkout", "24/7 Support"). 13 icons available covering common e-commerce trust signals.',
+  category: 'homepage',
+  intent: ['trust', 'reassurance', 'shipping', 'support', 'security'],
+  visualRole: 'mid-page',
+  dataDeps: [],
+  copyFields: ['title', 'subtitle', 'badges[].title', 'badges[].description'],
+  themeable: ['backgroundColor', 'textColor', 'badges[].iconColor'],
+  a11yRisk: 'low',
+  a11yNotes: 'Emoji icons are visual only — titles carry the meaning for screen readers. Decorative emoji should ideally be aria-hidden, but current implementation reads both.',
+  mobileBehavior: 'responsive',
+  searchTags: ['trust', 'badges', 'icons', 'shipping', 'security', 'support', 'reassurance'],
+
+  props: {
+    title: { type: 'string' },
+    subtitle: { type: 'string' },
+    layout: { type: 'enum', options: ['horizontal', 'grid', 'stacked'] },
+    columns: { type: 'enum', options: ['2', '3', '4', '5'] },
+    alignment: { type: 'enum', options: ['left', 'center', 'right'] },
+    badges: { type: 'array' },
+    backgroundColor: { type: 'string' },
+    textColor: { type: 'string' },
+    spacing: { type: 'enum', options: ['compact', 'normal', 'spacious'] },
+    showBorder: { type: 'boolean', required: true },
+    borderRadius: { type: 'enum', options: ['none', 'sm', 'md', 'lg'] },
+  },
+} as const;
+
+export type TrustBadgesMeta = typeof trustBadgesMeta;

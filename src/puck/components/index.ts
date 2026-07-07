@@ -11,3 +11,6 @@ export * from './homepage/CustomHTML';
 export * from './homepage/Testimonials';
 export * from './homepage/Newsletter';
 export * from './homepage/PromotionalBannerGrid';
+export * from './homepage/StatsSection';
+export * from './homepage/TrustBadges';
+export * from './homepage/CountdownTimer';

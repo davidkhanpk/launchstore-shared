@@ -1,0 +1,33 @@
+export const quantitySelectorMeta = {
+  name: 'QuantitySelector',
+  label: 'Quantity Selector',
+  description: 'Stepped quantity input with +/- buttons. Optional label, three sizes, three border styles, margin/padding shortcuts. Optional controlled mode: pass `quantity` + `setQuantity` to drive from the cart context; otherwise the component uses internal state. Lucide Minus/Plus replaced with inline SVG.',
+  category: 'product',
+  intent: ['product', 'quantity', 'qty', 'cart-input'],
+  visualRole: 'inline',
+  dataDeps: ['quantity (optional)', 'setQuantity (optional)'],
+  copyFields: ['labelText'],
+  themeable: [],
+  a11yRisk: 'low',
+  a11yNotes: 'Decrease/increase buttons have aria-label. Number input has aria-label="Quantity". Min/max enforced on increment/decrement + manual input.',
+  mobileBehavior: 'responsive',
+  searchTags: ['product', 'quantity', 'qty', 'cart', 'input', 'stepper'],
+
+  props: {
+    showLabel: { type: 'boolean', required: true },
+    labelText: { type: 'string', required: true },
+    minQuantity: { type: 'number', required: true },
+    maxQuantity: { type: 'number', required: true },
+    defaultQuantity: { type: 'number', required: true },
+    size: { type: 'enum', options: ['small', 'medium', 'large'], required: true },
+    style: { type: 'enum', options: ['default', 'minimal', 'rounded'], required: true },
+    marginTop: { type: 'string', required: true },
+    marginBottom: { type: 'string', required: true },
+    marginLeft: { type: 'string', required: true },
+    marginRight: { type: 'string', required: true },
+    paddingX: { type: 'string', required: true },
+    paddingY: { type: 'string', required: true },
+  },
+} as const;
+
+export type QuantitySelectorMeta = typeof quantitySelectorMeta;

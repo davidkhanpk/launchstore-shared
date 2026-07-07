@@ -23,6 +23,10 @@ export interface ProductDataVariant {
   length?: number | null;
   width?: number | null;
   height?: number | null;
+  /** Stock count for this variant. Used by StockIndicator. */
+  inventory_quantity?: number | null;
+  /** When true, variant is sold by enabling pre-order even if quantity=0. */
+  allow_backorder?: boolean;
 }
 
 export interface ProductDataPrice {

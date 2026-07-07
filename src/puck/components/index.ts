@@ -26,3 +26,5 @@ export * from './layout/Columns';
 export * from './layout/Section';
 export * from './layout/FlexRow';
 export * from './layout/FlexColumn';
+export * from './layout/Header';
+export * from './layout/Footer';

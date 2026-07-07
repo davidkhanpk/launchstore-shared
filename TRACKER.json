@@ -1,0 +1,190 @@
+{
+  "$schema": "1.0",
+  "name": "launchstore-shared migration",
+  "version": "2026-07-07",
+  "snapshot": {
+    "totalComponents": 120,
+    "migrated": 37,
+    "remaining": 83,
+    "categoriesDone": ["homepage", "content", "layout", "footer", "generic"],
+    "lastUpdated": "2026-07-07"
+  },
+  "epics": [
+    { "id": "E-W1.1", "wave": "1.1", "title": "Wave 1.1 homepage", "count": 7, "status": "done" },
+    { "id": "E-W1.2a", "wave": "1.2a", "title": "Wave 1.2a content", "count": 7, "status": "done" },
+    { "id": "E-W1.2b", "wave": "1.2b", "title": "Wave 1.2b layout", "count": 7, "status": "done" },
+    { "id": "E-W1.2c", "wave": "1.2c", "title": "Wave 1.2c footer", "count": 3, "status": "done" },
+    { "id": "E-W1.2d", "wave": "1.2d", "title": "Wave 1.2d generic", "count": 11, "status": "done" },
+    { "id": "E-W2.1", "wave": "2.1", "title": "Wave 2.1 homepage data-driven", "count": 3, "status": "in_progress", "note": "1 of 3 done (CategoriesGrid); 2 blocked on D-1" },
+    { "id": "E-W2.1R", "wave": "2.1R", "title": "Wave 2.1 remaining", "count": 2, "status": "blocked", "blockedBy": ["D-1"] },
+    { "id": "E-W2.2", "wave": "2.2", "title": "Wave 2.2 product/nav", "count": 37, "status": "pending" },
+    { "id": "E-W3", "wave": "3", "title": "Wave 3 cart/checkout/order/account/form", "count": 29, "status": "pending" },
+    { "id": "E-W4", "wave": "4", "title": "Wave 4 collection/custom", "count": 10, "status": "pending" },
+    { "id": "E-P5", "phase": "5", "title": "Phase 5 publish", "count": 6, "status": "pending" }
+  ],
+  "decisions": [
+    {
+      "id": "D-1",
+      "title": "ProductPreview migration strategy",
+      "blocks": ["E-W2.1R", "E-W2.2.product"],
+      "options": [
+        { "id": "A", "label": "Migrate ProductPreview into shared as SharedProductCard", "effort": "~300-500 LoC migration" },
+        { "id": "B", "label": "Render-prop escape hatch — shared takes renderProduct?: (product, region) => ReactNode", "effort": "~30 LoC" }
+      ],
+      "recommended": "B",
+      "rationale": "Keeps Wave 2.1-2/3 tight; defer ProductPreview lift to a focused wave once cart actually needs it"
+    },
+    {
+      "id": "D-2",
+      "title": "Storefront Swiper CSS import strategy",
+      "blocks": ["E-W2.2.swiper", "E-W2.2.product-image-gallery"],
+      "options": [
+        { "id": "A", "label": "Per-component side-effect import" },
+        { "id": "B", "label": "Global _app.tsx CSS pre-import" },
+        { "id": "C", "label": "CSS-in-JS via stylesheet tag" }
+      ],
+      "recommended": "B",
+      "rationale": "Single line in _app.tsx; per-component imports redundant"
+    },
+    {
+      "id": "D-3",
+      "title": "CartContext contract",
+      "blocks": ["E-W3"],
+      "options": [
+        { "id": "A", "label": "Define CartProvider in shared (creates dep on storefront SDK bridge)" },
+        { "id": "B", "label": "Pass cart state via prop drilling" },
+        { "id": "C", "label": "Forward-ref pattern" }
+      ],
+      "recommended": "A",
+      "rationale": "Cart components need shared cart state; explicit provider is the cleanest"
+    },
+    {
+      "id": "D-4",
+      "title": "Data-fetching contract for *Client wrappers",
+      "blocks": ["E-W2.1R", "E-W2.2", "E-W3", "E-W4"],
+      "options": [
+        { "id": "A", "label": "Each consumer hardcodes its own fetch paths (current pattern)" },
+        { "id": "B", "label": "Shared exposes <DataSource> wrapper that takes a fetcher function as prop" }
+      ],
+      "recommended": "A",
+      "rationale": "Per consumer type; only unify if 5+ consumers need the same shape"
+    },
+    {
+      "id": "D-5",
+      "title": "Selected IDs storage standard",
+      "blocks": ["E-W2.1R"],
+      "options": [
+        { "id": "A", "label": "string[] (CategoriesGrid established)" },
+        { "id": "B", "label": "comma-separated string (legacy)" }
+      ],
+      "recommended": "A",
+      "rationale": "Standardize on string[] going forward"
+    }
+  ],
+  "tasks": [
+    { "id": "T-038", "epic": "E-W2.1R", "component": "FeaturedProducts", "storefrontFiles": ["homepage/FeaturedProducts.tsx", "homepage/FeaturedProductsClient.tsx"], "blockedBy": ["D-1"], "notes": "Uses ProductPreview + region + Swiper" },
+    { "id": "T-039", "epic": "E-W2.1R", "component": "CategoryProducts", "storefrontFiles": ["homepage/CategoryProducts.tsx", "homepage/CategoryProductsClient.tsx"], "blockedBy": ["D-1"] },
+
+    { "id": "T-040", "epic": "E-W2.2", "subcategory": "category", "component": "CategoryBreadcrumbs" },
+    { "id": "T-041", "epic": "E-W2.2", "subcategory": "category", "component": "CategoryTitle" },
+    { "id": "T-042", "epic": "E-W2.2", "subcategory": "category", "component": "CategoryDescription" },
+    { "id": "T-043", "epic": "E-W2.2", "subcategory": "category", "component": "CategoryMetadata" },
+    { "id": "T-044", "epic": "E-W2.2", "subcategory": "category", "component": "CategoryProductsGrid", "blockedBy": ["D-1"] },
+
+    { "id": "T-045", "epic": "E-W2.2", "subcategory": "product", "component": "ProductCard", "blockedBy": ["D-1"] },
+    { "id": "T-046", "epic": "E-W2.2", "subcategory": "product", "component": "ProductAccordion" },
+    { "id": "T-047", "epic": "E-W2.2", "subcategory": "product", "component": "ProductBreadcrumbs" },
+    { "id": "T-048", "epic": "E-W2.2", "subcategory": "product", "component": "ProductTitle" },
+    { "id": "T-049", "epic": "E-W2.2", "subcategory": "product", "component": "ProductDescription" },
+    { "id": "T-050", "epic": "E-W2.2", "subcategory": "product", "component": "ProductMetadata" },
+    { "id": "T-051", "epic": "E-W2.2", "subcategory": "product", "component": "ProductPrice" },
+    { "id": "T-052", "epic": "E-W2.2", "subcategory": "product", "component": "ProductRating" },
+    { "id": "T-053", "epic": "E-W2.2", "subcategory": "product", "component": "ProductReviews" },
+    { "id": "T-054", "epic": "E-W2.2", "subcategory": "product", "component": "ProductVariantSelector" },
+    { "id": "T-055", "epic": "E-W2.2", "subcategory": "product", "component": "ProductImageGallery" },
+    { "id": "T-056", "epic": "E-W2.2", "subcategory": "product", "component": "AddToCart", "blockedBy": ["D-3"] },
+    { "id": "T-057", "epic": "E-W2.2", "subcategory": "product", "component": "QuantitySelector" },
+    { "id": "T-058", "epic": "E-W2.2", "subcategory": "product", "component": "WishlistButton" },
+    { "id": "T-059", "epic": "E-W2.2", "subcategory": "product", "component": "StockIndicator" },
+    { "id": "T-060", "epic": "E-W2.2", "subcategory": "product", "component": "BundledProductDetail" },
+    { "id": "T-061", "epic": "E-W2.2", "subcategory": "product", "component": "RelatedProducts", "blockedBy": ["D-1"] },
+    { "id": "T-062", "epic": "E-W2.2", "subcategory": "product", "component": "RecentlyViewedProducts" },
+
+    { "id": "T-063", "epic": "E-W2.2", "subcategory": "product-image-gallery", "component": "ImageGalleryMinimal" },
+    { "id": "T-064", "epic": "E-W2.2", "subcategory": "product-image-gallery", "component": "ImageGalleryZoom" },
+    { "id": "T-065", "epic": "E-W2.2", "subcategory": "product-image-gallery", "component": "ImageGalleryFullscreen" },
+
+    { "id": "T-066", "epic": "E-W2.2", "subcategory": "swiper", "component": "ImageGallery", "blockedBy": ["D-2"] },
+    { "id": "T-067", "epic": "E-W2.2", "subcategory": "swiper", "component": "ProductCarousel", "blockedBy": ["D-1", "D-2"] },
+    { "id": "T-068", "epic": "E-W2.2", "subcategory": "swiper", "component": "TestimonialCarousel", "blockedBy": ["D-2"] },
+    { "id": "T-069", "epic": "E-W2.2", "subcategory": "swiper", "component": "LogoCarousel", "blockedBy": ["D-2"] },
+    { "id": "T-070", "epic": "E-W2.2", "subcategory": "swiper", "component": "ContentSlider", "blockedBy": ["D-2"] },
+
+    { "id": "T-071", "epic": "E-W2.2", "subcategory": "navigation", "component": "Logo" },
+    { "id": "T-072", "epic": "E-W2.2", "subcategory": "navigation", "component": "MenuNavigation", "note": "frontend has useMenu hook; storefront lacks" },
+    { "id": "T-073", "epic": "E-W2.2", "subcategory": "navigation", "component": "MenuNavigationRenderer" },
+    { "id": "T-074", "epic": "E-W2.2", "subcategory": "navigation", "component": "CategoryMegaMenu" },
+    { "id": "T-075", "epic": "E-W2.2", "subcategory": "navigation", "component": "MobileMenu" },
+    { "id": "T-076", "epic": "E-W2.2", "subcategory": "navigation", "component": "MobileMenuItem" },
+    { "id": "T-077", "epic": "E-W2.2", "subcategory": "navigation", "component": "SearchBar" },
+    { "id": "T-078", "epic": "E-W2.2", "subcategory": "navigation", "component": "SearchIcon", "note": "may duplicate Wave 1.2d Icon" },
+    { "id": "T-079", "epic": "E-W2.2", "subcategory": "navigation", "component": "AccountButton" },
+    { "id": "T-080", "epic": "E-W2.2", "subcategory": "navigation", "component": "CartButton", "blockedBy": ["D-3"] },
+
+    { "id": "T-081", "epic": "E-W3", "subcategory": "cart", "component": "CartItems", "blockedBy": ["D-3"] },
+    { "id": "T-082", "epic": "E-W3", "subcategory": "cart", "component": "CartItemsPreview", "blockedBy": ["D-3"] },
+    { "id": "T-083", "epic": "E-W3", "subcategory": "cart", "component": "CartProgressBar" },
+    { "id": "T-084", "epic": "E-W3", "subcategory": "cart", "component": "CartSummary", "blockedBy": ["D-3"] },
+    { "id": "T-085", "epic": "E-W3", "subcategory": "cart", "component": "EmptyCart" },
+    { "id": "T-086", "epic": "E-W3", "subcategory": "cart", "component": "SignInPrompt" },
+    { "id": "T-087", "epic": "E-W3", "subcategory": "cart", "component": "OrderSummary", "blockedBy": ["D-3"] },
+
+    { "id": "T-088", "epic": "E-W3", "subcategory": "checkout", "component": "CheckoutForm" },
+    { "id": "T-089", "epic": "E-W3", "subcategory": "checkout", "component": "ShippingAddress" },
+    { "id": "T-090", "epic": "E-W3", "subcategory": "checkout", "component": "ShippingMethod" },
+    { "id": "T-091", "epic": "E-W3", "subcategory": "checkout", "component": "PaymentMethod" },
+    { "id": "T-092", "epic": "E-W3", "subcategory": "checkout", "component": "DiscountCode" },
+    { "id": "T-093", "epic": "E-W3", "subcategory": "checkout", "component": "OrderReview" },
+    { "id": "T-094", "epic": "E-W3", "subcategory": "checkout", "component": "OrderTotals" },
+
+    { "id": "T-095", "epic": "E-W3", "subcategory": "order", "component": "OrderConfirmation" },
+    { "id": "T-096", "epic": "E-W3", "subcategory": "order", "component": "OrderDetails" },
+    { "id": "T-097", "epic": "E-W3", "subcategory": "order", "component": "OrderActions" },
+    { "id": "T-098", "epic": "E-W3", "subcategory": "order", "component": "OrderTimeline" },
+
+    { "id": "T-099", "epic": "E-W3", "subcategory": "account", "component": "AccountProfile" },
+    { "id": "T-100", "epic": "E-W3", "subcategory": "account", "component": "AddressBook" },
+    { "id": "T-101", "epic": "E-W3", "subcategory": "account", "component": "OrderHistory" },
+    { "id": "T-102", "epic": "E-W3", "subcategory": "account", "component": "WishlistItems" },
+
+    { "id": "T-103", "epic": "E-W3", "subcategory": "form", "component": "FormContainer" },
+    { "id": "T-104", "epic": "E-W3", "subcategory": "form", "component": "FormContext" },
+    { "id": "T-105", "epic": "E-W3", "subcategory": "form", "component": "FormField" },
+    { "id": "T-106", "epic": "E-W3", "subcategory": "form", "component": "FormHeading" },
+    { "id": "T-107", "epic": "E-W3", "subcategory": "form", "component": "FormDivider" },
+    { "id": "T-108", "epic": "E-W3", "subcategory": "form", "component": "FormChoiceField" },
+    { "id": "T-109", "epic": "E-W3", "subcategory": "form", "component": "FormSelectField" },
+    { "id": "T-110", "epic": "E-W3", "subcategory": "form", "component": "FormSubmitButton" },
+    { "id": "T-111", "epic": "E-W3", "subcategory": "form", "component": "FormEmbed" },
+
+    { "id": "T-112", "epic": "E-W4", "subcategory": "collection", "component": "CollectionBreadcrumbs" },
+    { "id": "T-113", "epic": "E-W4", "subcategory": "collection", "component": "CollectionTitle" },
+    { "id": "T-114", "epic": "E-W4", "subcategory": "collection", "component": "CollectionDescription" },
+    { "id": "T-115", "epic": "E-W4", "subcategory": "collection", "component": "CollectionHeader" },
+    { "id": "T-116", "epic": "E-W4", "subcategory": "collection", "component": "CollectionMetadata" },
+    { "id": "T-117", "epic": "E-W4", "subcategory": "collection", "component": "Pagination" },
+    { "id": "T-118", "epic": "E-W4", "subcategory": "collection", "component": "ProductFilters" },
+    { "id": "T-119", "epic": "E-W4", "subcategory": "collection", "component": "ProductGrid", "blockedBy": ["D-1"] },
+    { "id": "T-120", "epic": "E-W4", "subcategory": "collection", "component": "ProductSort" },
+    { "id": "T-121", "epic": "E-W4", "subcategory": "collection", "component": "SavedBlock" },
+
+    { "id": "T-122", "epic": "E-W4", "subcategory": "custom", "component": "Custom", "note": "user-injected; structure varies per use" },
+
+    { "id": "T-123", "epic": "E-P5", "task": "Decide publish target (GitHub vs npm)" },
+    { "id": "T-124", "epic": "E-P5", "task": "git remote add origin git@github.com:launchstore/shared-puck.git" },
+    { "id": "T-125", "epic": "E-P5", "task": "Push main (initial) + tag v0.0.1" },
+    { "id": "T-126", "epic": "E-P5", "task": "Swap launchstore-frontend/package.json dep to github:launchstore/shared-puck#v0.0.1" },
+    { "id": "T-127", "epic": "E-P5", "task": "Swap launchstore-storefront/package.json dep similarly" },
+    { "id": "T-128", "epic": "E-P5", "task": "(optional) Publish to npm as @launchstore/shared-puck@0.0.1" }
+  ]
+}

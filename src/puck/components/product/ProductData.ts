@@ -35,6 +35,16 @@ export interface ProductDataPrice {
   percentage_diff?: string;
 }
 
+export interface ProductDataCollection {
+  title: string;
+  handle: string;
+}
+
+export interface ProductDataCategory {
+  name: string;
+  handle: string;
+}
+
 export interface ProductData {
   id: string;
   title: string;
@@ -49,4 +59,6 @@ export interface ProductData {
   origin_country?: string | null;
   metadata?: Record<string, any>;
   variants?: ProductDataVariant[];
+  collection?: ProductDataCollection | null;
+  categories?: ProductDataCategory[];
 }

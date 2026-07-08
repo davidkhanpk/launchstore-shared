@@ -7,10 +7,10 @@
 
 ## Snapshot (2026-07-08)
 
-- **111 / 120 components migrated to shared** (92.5%)
-- **16 categories complete**: homepage, content, layout, footer, generic, category, product, navigation, swiper, cart, checkout, order, account, form, collection, custom
-- **9 components remain**: Phase 5 (remote-publish steps T-123..T-128, 6 tasks) + deferred (T-063/064/065 ImageGallery variants, T-044 CategoryProductsGrid, T-091+ still need wrappers)
-- LoC removed from consumer wrappers so far: ~13,000+ across 50+ components
+- **115 / 120 components migrated to shared** (95.8%)
+- **17 categories complete**: homepage, content, layout, footer, generic, category, product, navigation, swiper, cart, checkout, order, account, form, collection, custom, product-image-gallery
+- **5 components remain**: Phase 5 (remote-publish steps T-123..T-128, 6 tasks) — T-044 CategoryProductsGrid + T-063/064/065 ImageGallery variants now done
+- LoC removed from consumer wrappers so far: ~15,000+ across 70+ components
 
 **Bulk session 2026-07-08**:
 - Wave 3 (cart/checkout/order/account): 21 components

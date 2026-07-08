@@ -46,6 +46,7 @@ export * from './account';
 export * from './form';
 export * from './collection';
 export * from './custom';
+export * from './product-image-gallery';
 export * from './swiper/ImageGallery';
 export * from './swiper/TestimonialCarousel';
 export * from './swiper/LogoCarousel';

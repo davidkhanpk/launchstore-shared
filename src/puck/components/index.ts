@@ -36,6 +36,8 @@ export * from './product/WishlistButton';
 export * from './product/ProductVariantSelector';
 export * from './product/BundledProductDetail';
 export * from './product/ProductCard';
+export * from './product/RelatedProducts';
+export * from './product/RecentlyViewedProducts';
 export * from './swiper/ImageGallery';
 export * from './swiper/TestimonialCarousel';
 export * from './swiper/LogoCarousel';

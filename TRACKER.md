@@ -5,11 +5,20 @@
 > `launchstore-shared`. Each component = 1 PR batch that touches
 > the shared repo + 2 consumer commits.
 
-## Snapshot (2026-07-07)
+## Snapshot (2026-07-08)
 
-- **37 / 120 components migrated to shared** (30.8%)
-- **5 categories complete**: homepage, content, layout, footer, generic
-- **83 components remain** across Wave 2.1 (2 deferred) + Wave 2.2 (37) + Wave 3 (~29) + Wave 4 (~10) + Phase 5
+- **111 / 120 components migrated to shared** (92.5%)
+- **16 categories complete**: homepage, content, layout, footer, generic, category, product, navigation, swiper, cart, checkout, order, account, form, collection, custom
+- **9 components remain**: Phase 5 (remote-publish steps T-123..T-128, 6 tasks) + deferred (T-063/064/065 ImageGallery variants, T-044 CategoryProductsGrid, T-091+ still need wrappers)
+- LoC removed from consumer wrappers so far: ~13,000+ across 50+ components
+
+**Bulk session 2026-07-08**:
+- Wave 3 (cart/checkout/order/account): 21 components
+- Wave 4 (form/collection/custom): 18 components
+- All using callback-injection pattern: shared is cart-library-agnostic, consumers pass real data via props
+- All lucide-react + @heroicons inlined as SVG in shared
+- ColorField (frontend custom Puck field) → text+resolveColor() in shared
+- Sub-renderer pattern (T-073 MenuNavigationRenderer, T-076 MobileMenuItem, T-044 CategoryProductsGrid) kept as separate shared modules without `.meta.ts`
 
 **Migration framework (proven across 37 components)**:
 1. Shared file = 5 files (`.tsx` + `.fields.ts` + `.meta.ts` + `.types.ts` + `index.ts`)

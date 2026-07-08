@@ -1,0 +1,90 @@
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+import { useState } from 'react';
+import { addToCartFields } from './addtocart.fields';
+import { resolveColor } from '../../../../theme/resolveColor';
+const CartSvg = ({ size = 20 }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("circle", { cx: "9", cy: "21", r: "1" }), _jsx("circle", { cx: "20", cy: "21", r: "1" }), _jsx("path", { d: "M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" })] }));
+const CheckSvg = ({ size = 20 }) => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: _jsx("polyline", { points: "20 6 9 17 4 12" }) }));
+const ClockSvg = ({ size = 20 }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("circle", { cx: "12", cy: "12", r: "10" }), _jsx("polyline", { points: "12 6 12 12 16 14" })] }));
+const VARIANT = {
+    primary: 'bg-black text-white hover:bg-gray-900',
+    secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300',
+    outline: 'border-2 border-black text-black hover:bg-black hover:text-white bg-transparent',
+    ghost: 'text-black hover:bg-gray-100 bg-transparent',
+    custom: '',
+};
+const SIZE = { sm: 'text-sm', md: 'text-base', lg: 'text-lg' };
+const formatPreorderDate = (iso) => {
+    try {
+        return new Date(iso).toLocaleDateString();
+    }
+    catch {
+        return iso;
+    }
+};
+const noopAdd = async () => { };
+export const AddToCart = {
+    label: 'Add to Cart Button',
+    fields: addToCartFields,
+    defaultProps: {
+        text: 'Add to Cart', preorderText: 'Pre-order',
+        variant: 'primary', size: 'md', fullWidth: false, showIcon: true, disabled: false,
+        backgroundColor: '#000000', textColor: '#ffffff',
+        hoverBackgroundColor: '#1f2937', hoverTextColor: '#ffffff', borderColor: '#000000',
+        useThemeColors: false,
+        marginTop: 'mt-4', marginBottom: 'mb-4', marginLeft: 'ml-0', marginRight: 'mr-0',
+        paddingX: 'px-6', paddingY: 'py-3', borderRadius: 'rounded-lg',
+    },
+    render: (rawProps) => {
+        const { text, preorderText, variant = 'primary', size = 'md', fullWidth = false, showIcon = true, disabled = false, backgroundColor = '#000000', textColor = '#ffffff', hoverBackgroundColor = '#1f2937', hoverTextColor = '#ffffff', borderColor = '#000000', useThemeColors = false, marginTop = 'mt-4', marginBottom = 'mb-4', marginLeft = 'ml-0', marginRight = 'mr-0', paddingX = 'px-6', paddingY = 'py-3', borderRadius = 'rounded-lg', selectedVariantId, quantity = 1, onAdd, isLoading = false, inStock = true, isPreorder = false, preorderAvailableDate, theme, } = rawProps;
+        const [justAdded, setJustAdded] = useState(false);
+        const [isHovered, setIsHovered] = useState(false);
+        const hasVariant = !!selectedVariantId;
+        const add = onAdd || noopAdd;
+        const handleClick = async () => {
+            if (!hasVariant || disabled)
+                return;
+            try {
+                await add(selectedVariantId, quantity);
+                setJustAdded(true);
+                setTimeout(() => setJustAdded(false), 2000);
+            }
+            catch { }
+        };
+        const resolve = (color) => useThemeColors ? resolveColor(color) : color;
+        // Editor preview (no product)
+        if (!hasVariant) {
+            return (_jsxs("button", { type: "button", disabled: true, className: `
+          ${VARIANT[variant || 'primary']} ${SIZE[size || 'md']}
+          ${fullWidth ? 'w-full' : ''} ${marginTop} ${marginBottom} ${marginLeft} ${marginRight}
+          ${paddingX} ${paddingY} ${borderRadius}
+          font-medium transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed
+          flex items-center justify-center gap-2 ${variant === 'outline' ? 'border-2' : ''}
+        `, children: [showIcon && _jsx(CartSvg, {}), text || 'Add to Cart'] }));
+        }
+        const customStyles = {};
+        if (variant === 'custom') {
+            customStyles.backgroundColor = isHovered ? resolve(hoverBackgroundColor) : resolve(backgroundColor);
+            customStyles.color = isHovered ? resolve(hoverTextColor) : resolve(textColor);
+            if (borderColor) {
+                customStyles.borderColor = resolve(borderColor);
+                customStyles.borderWidth = '2px';
+                customStyles.borderStyle = 'solid';
+            }
+        }
+        const isBtnDisabled = disabled || !inStock || isLoading;
+        const widthClass = fullWidth ? 'w-full' : '';
+        return (_jsxs(_Fragment, { children: [_jsxs("button", { type: "button", disabled: isBtnDisabled, className: `
+            ${variant === 'custom' ? '' : VARIANT[variant || 'primary']}
+            ${SIZE[size || 'md']} ${widthClass}
+            ${marginTop} ${marginBottom} ${marginLeft} ${marginRight}
+            ${paddingX} ${paddingY} ${borderRadius}
+            font-medium transition-all duration-200
+            disabled:opacity-50 disabled:cursor-not-allowed
+            flex items-center justify-center gap-2
+            ${justAdded ? '!bg-green-600 !text-white' : ''}
+            ${variant === 'outline' ? 'border-2' : ''}
+          `, style: variant === 'custom' ? customStyles : undefined, onClick: handleClick, onMouseEnter: () => setIsHovered(true), onMouseLeave: () => setIsHovered(false), children: [showIcon && (justAdded ? _jsx(CheckSvg, {}) : isPreorder ? _jsx(ClockSvg, {}) : _jsx(CartSvg, {})), _jsx("span", { children: isLoading ? 'Adding…' : justAdded ? 'Added!' : !inStock ? 'Out of Stock' : isPreorder ? (preorderText || 'Pre-order') : (text || 'Add to Cart') })] }), isPreorder && preorderAvailableDate && (_jsxs("p", { className: "text-sm text-ui-fg-subtle mt-1", children: ["Ships on ", formatPreorderDate(preorderAvailableDate)] }))] }));
+    },
+};
+export default AddToCart;
+//# sourceMappingURL=AddToCart.js.map

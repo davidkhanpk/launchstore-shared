@@ -1,0 +1,26 @@
+export const cartItemsMeta = {
+    name: 'CartItems',
+    label: 'Cart Items',
+    description: 'Cart line-item list with 3 layouts (table/list/card), 3 image sizes, optional preorder badge, optional quantity selector and delete. Cart-library-agnostic: takes items[], onQuantityChange, onDelete, updatingItems, formatPrice. Lucide Trash/Plus/Minus replaced with inline SVG.',
+    category: 'cart',
+    intent: ['cart', 'line-items', 'cart-table', 'cart-list', 'cart-card'],
+    visualRole: 'block',
+    dataDeps: ['items (cart flow)', 'onQuantityChange (injected)', 'onDelete (injected)'],
+    copyFields: ['emptyMessage'],
+    themeable: [],
+    a11yRisk: 'medium',
+    a11yNotes: 'Real <table>/<button> elements with onClick. Quantity buttons convey direction via labels. Pre-order badge is decorative; actual product route via <a> tag with text. Mock item thumbnails use via.placeholder.com which is not a real product.',
+    mobileBehavior: 'responsive',
+    searchTags: ['cart', 'items', 'table', 'line-items'],
+    props: {
+        layout: { type: 'enum', options: ['table', 'list', 'card'], required: true },
+        showImages: { type: 'boolean', required: true },
+        showVariantInfo: { type: 'boolean', required: true },
+        showQuantitySelector: { type: 'boolean', required: true },
+        showDeleteButton: { type: 'boolean', required: true },
+        imageSize: { type: 'enum', options: ['sm', 'md', 'lg'], required: true },
+        maxQuantity: { type: 'number', required: true },
+        emptyMessage: { type: 'string', required: true },
+    },
+};
+//# sourceMappingURL=cartitems.meta.js.map

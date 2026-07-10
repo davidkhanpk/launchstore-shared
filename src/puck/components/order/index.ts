@@ -6,6 +6,14 @@ export { OrderDetails } from './OrderDetails';
 export type { OrderDetailsProps, OrderDetailsWithData, OrderItem, OrderAddress, OrderPayment } from './OrderDetails';
 export { OrderTimeline } from './OrderTimeline';
 export type { OrderTimelineProps, OrderTimelineWithData, OrderTimelineStep } from './OrderTimeline';
+export { SuccessIcon } from './SuccessIcon';
+export type { SuccessIconProps } from './SuccessIcon';
+export { TrackingInfo } from './TrackingInfo';
+export type { TrackingInfoProps } from './TrackingInfo';
+export { NextSteps } from './NextSteps';
+export type { NextStepsProps, NextStep } from './NextSteps';
+export { PremiumServices } from './PremiumServices';
+export type { PremiumServicesProps, PremiumService } from './PremiumServices';
 
 export { orderActionsMeta, type OrderActionsMeta } from './orderactions.meta';
 export { orderConfirmationMeta, type OrderConfirmationMeta } from './orderconfirmation.meta';

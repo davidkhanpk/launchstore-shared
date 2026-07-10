@@ -92,22 +92,10 @@ export const AddToCart: ComponentConfig<AddToCartWithData> = {
 
     const resolve = (color: string) => useThemeColors ? resolveColor(color) : color;
 
-    // Editor preview (no product)
-    if (!hasVariant) {
-      return (
-        <button type="button" disabled className={`
-          ${VARIANT[(variant as AddToCartVariant) || 'primary']} ${SIZE[(size as AddToCartSize) || 'md']}
-          ${fullWidth ? 'w-full' : ''} ${marginTop} ${marginBottom} ${marginLeft} ${marginRight}
-          ${paddingX} ${paddingY} ${borderRadius}
-          font-medium transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed
-          flex items-center justify-center gap-2 ${variant === 'outline' ? 'border-2' : ''}
-        `}>
-          {showIcon && <CartSvg />}
-          {text || 'Add to Cart'}
-        </button>
-      );
-    }
-
+    // Custom color styles — computed once so BOTH the editor preview (no
+    // product/variant selected) and the live storefront render honor them.
+    // Previously this only ran in the product-present branch, so changing
+    // Background/Text/Hover/Border colors in the editor had no visible effect.
     const customStyles: React.CSSProperties = {};
     if (variant === 'custom') {
       customStyles.backgroundColor = isHovered ? resolve(hoverBackgroundColor) : resolve(backgroundColor);
@@ -117,6 +105,26 @@ export const AddToCart: ComponentConfig<AddToCartWithData> = {
         customStyles.borderWidth = '2px';
         customStyles.borderStyle = 'solid';
       }
+    }
+
+    // Editor preview (no product)
+    if (!hasVariant) {
+      return (
+        <button type="button" disabled className={`
+          ${variant === 'custom' ? '' : VARIANT[(variant as AddToCartVariant) || 'primary']} ${SIZE[(size as AddToCartSize) || 'md']}
+          ${fullWidth ? 'w-full' : ''} ${marginTop} ${marginBottom} ${marginLeft} ${marginRight}
+          ${paddingX} ${paddingY} ${borderRadius}
+          font-medium transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed
+          flex items-center justify-center gap-2 ${variant === 'outline' ? 'border-2' : ''}
+        `}
+          style={variant === 'custom' ? customStyles : undefined}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {showIcon && <CartSvg />}
+          {text || 'Add to Cart'}
+        </button>
+      );
     }
 
     const isBtnDisabled = disabled || !inStock || isLoading;

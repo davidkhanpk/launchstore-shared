@@ -16,6 +16,10 @@ export { ProductGrid } from './ProductGrid';
 export type { CollectionProductGridProps, ProductGridWithData } from './ProductGrid';
 export { ProductFilters } from './ProductFilters';
 export type { ProductFiltersProps, ProductFiltersWithData } from './ProductFilters';
+export { CollectionHero } from './CollectionHero';
+export type { CollectionHeroProps } from './CollectionHero';
+export { FilterGroup } from './FilterGroup';
+export type { FilterGroupProps, FilterOption } from './FilterGroup';
 
 export { collectionBreadcrumbsMeta, type CollectionBreadcrumbsMeta } from './collectionbreadcrumbs.meta';
 export { collectionDescriptionMeta, type CollectionDescriptionMeta } from './collectiondescription.meta';

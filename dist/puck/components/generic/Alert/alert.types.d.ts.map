@@ -1,1 +1,0 @@
-{"version":3,"file":"alert.types.d.ts","sourceRoot":"","sources":["../../../../../src/puck/components/generic/Alert/alert.types.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,UAAU;IACzB,EAAE,CAAC,EAAE,MAAM,CAAC;IACZ,IAAI,EAAE,MAAM,GAAG,SAAS,GAAG,SAAS,GAAG,OAAO,CAAC;IAC/C,KAAK,CAAC,EAAE,MAAM,CAAC;IACf,OAAO,EAAE,MAAM,CAAC;IAChB,QAAQ,EAAE,OAAO,CAAC;IAClB,WAAW,EAAE,OAAO,CAAC;CACtB"}

@@ -14,6 +14,14 @@ export { NextSteps } from './NextSteps';
 export type { NextStepsProps, NextStep } from './NextSteps';
 export { PremiumServices } from './PremiumServices';
 export type { PremiumServicesProps, PremiumService } from './PremiumServices';
+export { OrderNumber } from './OrderNumber';
+export type { OrderNumberProps } from './OrderNumber';
+export { CustomerEmail } from './CustomerEmail';
+export type { CustomerEmailProps } from './CustomerEmail';
+export { OrderTotal } from './OrderTotal';
+export type { OrderTotalProps } from './OrderTotal';
+export { OrderDate } from './OrderDate';
+export type { OrderDateProps } from './OrderDate';
 
 export { orderActionsMeta, type OrderActionsMeta } from './orderactions.meta';
 export { orderConfirmationMeta, type OrderConfirmationMeta } from './orderconfirmation.meta';

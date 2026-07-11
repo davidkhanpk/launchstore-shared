@@ -1,0 +1,25 @@
+export const productPriceMeta = {
+    name: 'ProductPrice',
+    label: 'Product Price',
+    description: 'Renders the product price with optional compare-at (strikethrough original) and savings percentage badge. Consumer provides `resolvePrice(product)` callback for region/currency-aware pricing (e.g., wrapping @lib/util/get-product-price). Font size, color, weight, and horizontal/vertical layout are configurable.',
+    category: 'product',
+    intent: ['product', 'price', 'sale', 'compare-at'],
+    visualRole: 'inline',
+    dataDeps: ['product (injected)', 'resolvePrice (injected)'],
+    copyFields: [],
+    themeable: ['color'],
+    a11yRisk: 'low',
+    a11yNotes: 'Compare-at price uses semantic <span> with line-through class (visual cue only, no role needed). Savings badge is plain text inside <span>.',
+    mobileBehavior: 'responsive',
+    searchTags: ['product', 'price', 'sale', 'compare-at', 'savings'],
+    props: {
+        fontSize: { type: 'enum', options: ['sm', 'md', 'lg', 'xl', '2xl'], required: true },
+        color: { type: 'enum', options: ['default', 'black', 'gray', 'primary'], required: true },
+        showComparePrice: { type: 'boolean', required: true },
+        layout: { type: 'enum', options: ['horizontal', 'vertical'], required: true },
+        fontWeight: { type: 'enum', options: ['normal', 'medium', 'semibold', 'bold'], required: true },
+        showSavingsPercentage: { type: 'boolean', required: true },
+        product: { type: 'object', required: false },
+    },
+};
+//# sourceMappingURL=productprice.meta.js.map

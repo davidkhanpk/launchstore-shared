@@ -56,6 +56,9 @@ echo [2/5] Skipping npm run build (--skip-build)
 goto :build_done
 :run_build
 echo [2/5] Running npm run build ...
+:: Always clean first — `tsc` is incremental and a stale tsconfig.tsbuildinfo
+:: can otherwise cause it to emit NOTHING, shipping an empty dist/.
+call npm run clean
 call npm run build
 if !errorlevel! neq 0 (
     echo [FAIL] npm run build failed

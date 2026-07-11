@@ -1,0 +1,46 @@
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+import { useState } from 'react';
+const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
+const accountProfileFields = {
+    layout: { type: 'select', label: 'Layout', options: [{ label: 'Single Column', value: 'single-column' }, { label: 'Two Column', value: 'two-column' }, { label: 'Card Grid', value: 'card-grid' }] },
+    showAvatar: { type: 'radio', label: 'Show Avatar', options: RADIO_YES_NO },
+    showPersonalInfo: { type: 'radio', label: 'Show Personal Info', options: RADIO_YES_NO },
+    showContactInfo: { type: 'radio', label: 'Show Contact Info', options: RADIO_YES_NO },
+    showPreferences: { type: 'radio', label: 'Show Preferences', options: RADIO_YES_NO },
+    allowEditing: { type: 'radio', label: 'Allow Editing', options: RADIO_YES_NO },
+    editButtonText: { type: 'text', label: 'Edit Button Text' },
+    saveButtonText: { type: 'text', label: 'Save Button Text' },
+    cancelButtonText: { type: 'text', label: 'Cancel Button Text' },
+    backgroundColor: { type: 'text', label: 'Background Color' },
+    textColor: { type: 'text', label: 'Text Color' },
+};
+const User = ({ size = 20 }) => (_jsxs("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: [_jsx("path", { d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" }), _jsx("circle", { cx: "12", cy: "7", r: "4" })] }));
+const Mail = ({ size = 20 }) => (_jsxs("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: [_jsx("path", { d: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" }), _jsx("polyline", { points: "22,6 12,13 2,6" })] }));
+const Phone = ({ size = 20 }) => (_jsx("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: _jsx("path", { d: "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" }) }));
+const MapPin = ({ size = 20 }) => (_jsxs("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: [_jsx("path", { d: "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" }), _jsx("circle", { cx: "12", cy: "10", r: "3" })] }));
+const Edit = ({ size = 20 }) => (_jsxs("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: [_jsx("path", { d: "M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" }), _jsx("path", { d: "M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" })] }));
+const Save = ({ size = 20 }) => (_jsxs("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: [_jsx("path", { d: "M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" }), _jsx("polyline", { points: "17 21 17 13 7 13 7 21" }), _jsx("polyline", { points: "7 3 7 8 15 8" })] }));
+const MOCK = { firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', phone: '+1 (555) 123-4567', birthday: '1990-01-15', address: '123 Main St, City, State 12345', newsletter: true, orderNotifications: true };
+export const AccountProfile = {
+    label: 'Account Profile',
+    fields: accountProfileFields,
+    defaultProps: { layout: 'two-column', showAvatar: true, showPersonalInfo: true, showContactInfo: true, showPreferences: true, allowEditing: true, editButtonText: 'Edit Profile', saveButtonText: 'Save Changes', cancelButtonText: 'Cancel', backgroundColor: '#f9fafb', textColor: '#111827' },
+    render: (raw) => {
+        const { layout = 'two-column', showAvatar, showPersonalInfo, showContactInfo, showPreferences, allowEditing, editButtonText = 'Edit Profile', saveButtonText = 'Save Changes', cancelButtonText = 'Cancel', backgroundColor = '#f9fafb', textColor = '#111827' } = raw;
+        const profile = raw.profile ?? MOCK;
+        const avatarUrl = raw.avatarUrl;
+        const onSave = raw.onSave ?? (() => { });
+        const [isEditing, setIsEditing] = useState(false);
+        const [form, setForm] = useState(profile);
+        const handle = (k, v) => setForm((p) => ({ ...p, [k]: v }));
+        const handleSave = async () => { await onSave(form); setIsEditing(false); };
+        const handleCancel = () => { setForm(profile); setIsEditing(false); };
+        const initials = `${form.firstName[0] || ''}${form.lastName[0] || ''}`.toUpperCase();
+        const field = (key, value, type = 'text', readonly = true) => isEditing && !readonly
+            ? _jsx("input", { type: type, value: value || '', onChange: (e) => handle(key, e.target.value), className: "w-full px-3 py-2 border border-gray-300 rounded" })
+            : _jsx("p", { className: "text-gray-900", children: String(value || '—') });
+        return (_jsxs("div", { style: { backgroundColor, color: textColor }, className: "p-8 rounded-lg", children: [_jsxs("div", { className: layout === 'card-grid' ? 'grid grid-cols-1 md:grid-cols-2 gap-6' : layout === 'single-column' ? 'space-y-6' : 'grid grid-cols-1 md:grid-cols-2 gap-6', children: [showAvatar && (_jsxs("div", { className: "flex items-center gap-4 pb-4 border-b border-gray-200 md:col-span-2", children: [avatarUrl ? _jsx("img", { src: avatarUrl, alt: profile.firstName, className: "w-20 h-20 rounded-full object-cover" }) : (_jsx("div", { className: "w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold", children: initials })), _jsxs("div", { children: [_jsxs("h2", { className: "text-2xl font-semibold", children: [profile.firstName, " ", profile.lastName] }), _jsx("p", { className: "text-sm opacity-70", children: profile.email })] })] })), showPersonalInfo && (_jsxs("div", { className: "bg-white p-6 rounded-lg shadow-sm", children: [_jsxs("h3", { className: "text-lg font-semibold mb-4 flex items-center gap-2", children: [_jsx(User, {}), " Personal Info"] }), _jsxs("div", { className: "space-y-3", children: [_jsxs("div", { children: [_jsx("label", { className: "text-sm text-gray-600", children: "First Name" }), field('firstName', form.firstName, 'text', false)] }), _jsxs("div", { children: [_jsx("label", { className: "text-sm text-gray-600", children: "Last Name" }), field('lastName', form.lastName, 'text', false)] }), form.birthday && _jsxs("div", { children: [_jsx("label", { className: "text-sm text-gray-600", children: "Birthday" }), field('birthday', form.birthday, 'date', false)] })] })] })), showContactInfo && (_jsxs("div", { className: "bg-white p-6 rounded-lg shadow-sm", children: [_jsxs("h3", { className: "text-lg font-semibold mb-4 flex items-center gap-2", children: [_jsx(Mail, {}), " Contact Info"] }), _jsxs("div", { className: "space-y-3", children: [_jsxs("div", { children: [_jsx("label", { className: "text-sm text-gray-600", children: "Email" }), field('email', form.email, 'email', false)] }), form.phone && _jsxs("div", { children: [_jsx("label", { className: "text-sm text-gray-600", children: "Phone" }), field('phone', form.phone, 'tel', false)] }), form.address && _jsxs("div", { children: [_jsx("label", { className: "text-sm text-gray-600", children: "Address" }), field('address', form.address, 'text', false)] })] })] })), showPreferences && (_jsxs("div", { className: "bg-white p-6 rounded-lg shadow-sm md:col-span-2", children: [_jsxs("h3", { className: "text-lg font-semibold mb-4 flex items-center gap-2", children: [_jsx(Phone, {}), " Preferences"] }), _jsxs("div", { className: "space-y-3", children: [_jsxs("label", { className: "flex items-center gap-2", children: [_jsx("input", { type: "checkbox", checked: !!form.newsletter, onChange: (e) => handle('newsletter', e.target.checked), disabled: !isEditing, className: "h-4 w-4" }), _jsx("span", { children: "Subscribe to newsletter" })] }), _jsxs("label", { className: "flex items-center gap-2", children: [_jsx("input", { type: "checkbox", checked: !!form.orderNotifications, onChange: (e) => handle('orderNotifications', e.target.checked), disabled: !isEditing, className: "h-4 w-4" }), _jsx("span", { children: "Order notifications" })] })] })] }))] }), allowEditing && (_jsx("div", { className: "mt-6 flex gap-3", children: isEditing ? (_jsxs(_Fragment, { children: [_jsxs("button", { onClick: handleSave, className: "flex items-center gap-2 px-4 py-2 bg-black text-white rounded hover:bg-gray-800", children: [_jsx(Save, {}), " ", saveButtonText] }), _jsx("button", { onClick: handleCancel, className: "px-4 py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-50", children: cancelButtonText })] })) : (_jsxs("button", { onClick: () => setIsEditing(true), className: "flex items-center gap-2 px-4 py-2 bg-black text-white rounded hover:bg-gray-800", children: [_jsx(Edit, {}), " ", editButtonText] })) }))] }));
+    },
+};
+export default AccountProfile;
+//# sourceMappingURL=AccountProfile.js.map

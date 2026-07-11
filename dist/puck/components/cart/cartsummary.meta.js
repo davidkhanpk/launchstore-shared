@@ -1,0 +1,28 @@
+export const cartSummaryMeta = {
+    name: 'CartSummary',
+    label: 'Cart Summary',
+    description: 'Cart summary with subtotal, shipping (with free-shipping progress bar), tax, discount, total, optional coupon code input + applied coupon display, checkout button, and trust badges. Cart-library-agnostic: takes totals, appliedCoupon, onApplyCoupon, onRemoveCoupon, onCheckout, formatPrice. Lucide Bag/Tag/ArrowRight/Shield/Check replaced with inline SVG.',
+    category: 'cart',
+    intent: ['cart', 'summary', 'totals', 'coupon', 'checkout-button'],
+    visualRole: 'block',
+    dataDeps: ['totals (cart flow)', 'appliedCoupon (cart flow)', 'onApplyCoupon (injected)', 'onRemoveCoupon (injected)', 'onCheckout (injected)'],
+    copyFields: ['checkoutButtonText'],
+    themeable: [],
+    a11yRisk: 'low',
+    a11yNotes: 'Real <button> + <input> with onClick/onChange. Coupon remove and Checkout actions are keyboard accessible. Trust badges are decorative <img> with alt text.',
+    mobileBehavior: 'responsive',
+    searchTags: ['cart', 'summary', 'totals', 'coupon', 'checkout'],
+    props: {
+        showSubtotal: { type: 'boolean', required: true },
+        showShipping: { type: 'boolean', required: true },
+        showTax: { type: 'boolean', required: true },
+        showDiscount: { type: 'boolean', required: true },
+        showCouponInput: { type: 'boolean', required: true },
+        showCheckoutButton: { type: 'boolean', required: true },
+        checkoutButtonText: { type: 'string', required: true },
+        freeShippingThreshold: { type: 'number', required: true },
+        position: { type: 'enum', options: ['sidebar', 'bottom'], required: true },
+        showTrustBadges: { type: 'boolean', required: true },
+    },
+};
+//# sourceMappingURL=cartsummary.meta.js.map

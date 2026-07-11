@@ -1,0 +1,25 @@
+export const linkMeta = {
+    name: 'Link',
+    label: 'Link',
+    description: 'Inline anchor with typography controls (size, weight, underline behavior on hover/always/none). Color accepts theme tokens (e.g. brand.primary) or hex. Renders as <a href> with target=_self/_blank and rel=noopener noreferrer when target is _blank.',
+    category: 'content',
+    intent: ['link', 'anchor', 'href', 'cta', 'navigation'],
+    visualRole: 'inline',
+    dataDeps: [],
+    copyFields: ['text'],
+    themeable: ['color'],
+    a11yRisk: 'medium',
+    a11yNotes: 'Color contrast must clear WCAG AA. Avoid using only color to distinguish a link — label text and underline behavior should make the link affordant. When target=_blank, rel=noopener noreferrer is auto-applied.',
+    mobileBehavior: 'responsive',
+    searchTags: ['link', 'a', 'anchor', 'href', 'url', 'click', 'cta'],
+    props: {
+        text: { type: 'string', required: true },
+        href: { type: 'string', required: true },
+        target: { type: 'enum', options: ['_self', '_blank'] },
+        color: { type: 'string' },
+        fontSize: { type: 'enum', options: ['sm', 'base', 'lg', 'xl'] },
+        fontWeight: { type: 'enum', options: ['normal', 'medium', 'semibold', 'bold'] },
+        underline: { type: 'enum', options: ['always', 'hover', 'none'] },
+    },
+};
+//# sourceMappingURL=link.meta.js.map

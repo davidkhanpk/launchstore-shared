@@ -1,0 +1,4 @@
+import type { Field } from '@puckeditor/core';
+export declare const ICON_NAMES: readonly ["HeartIcon", "StarIcon", "BookmarkIcon", "CheckIcon", "XMarkIcon", "PlusIcon", "MinusIcon", "ChevronDownIcon", "ChevronUpIcon", "ChevronLeftIcon", "ChevronRightIcon", "ArrowLeftIcon", "ArrowRightIcon", "ArrowUpIcon", "ArrowDownIcon", "MagnifyingGlassIcon", "ShoppingCartIcon", "ShoppingBagIcon", "UserIcon", "UsersIcon", "HomeIcon", "EnvelopeIcon", "PhoneIcon", "CalendarIcon", "ClockIcon", "BellIcon", "Cog6ToothIcon", "InformationCircleIcon", "ExclamationCircleIcon", "CheckCircleIcon", "XCircleIcon", "MapPinIcon", "TagIcon", "EyeIcon", "DocumentIcon", "GiftIcon", "QuestionMarkCircleIcon"];
+export declare const iconFields: Record<string, Field>;
+//# sourceMappingURL=icon.fields.d.ts.map

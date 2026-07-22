@@ -4,24 +4,31 @@ setlocal enabledelayedexpansion
 :: ---------------------------------------------------------------------------
 :: launchstore-shared publish script
 ::
-:: Reads current version, bumps it, rebuilds dist/, commits, tags, pushes.
+:: Reads current version, bumps it, rebuilds dist/, commits, tags, pushes,
+:: then optionally updates the dep string + runs `npm install` in each
+:: consumer repo so the new version is ready to use immediately.
 ::
 :: Usage:
-::   publish.bat              [default: patch bump]
-::   publish.bat patch        [explicit patch bump]
-::   publish.bat minor        [minor bump]
-::   publish.bat major        [major bump]
-::   publish.bat --no-push    [skip git push; stage locally only]
-::   publish.bat --skip-build [skip npm run build; assumes dist/ is fresh]
-::   publish.bat --no-push --skip-build [dry-run with current dist/]
+::   publish.bat                 [default: patch bump + install in consumers]
+::   publish.bat patch           [explicit patch bump]
+::   publish.bat minor           [minor bump]
+::   publish.bat major           [major bump]
+::   publish.bat --no-push       [skip git push; stage locally only]
+::   publish.bat --skip-build    [skip npm run build; assumes dist/ is fresh]
+::   publish.bat --no-install    [skip consumer install + dep string bump]
+::   publish.bat --only <name>  [install in one consumer; name = frontend|storefront|backend]
+::   publish.bat --no-push --skip-build --no-install [dry-run with current dist/]
 ::
-:: After a successful run, bump the dep string in each consumer's
-:: package.json and run .\build-and-push\frontend.bat / backend.bat to roll.
+:: After a successful run with --no-install, bump the dep string in each
+:: consumer's package.json and run .\build-and-push\frontend.bat / backend.bat
+:: to roll.
 :: ---------------------------------------------------------------------------
 
 set "BUMP_TYPE=patch"
 set "SHOULD_PUSH=1"
 set "SHOULD_BUILD=1"
+set "SHOULD_INSTALL=1"
+set "ONLY_CONSUMER="
 
 :: Parse args
 for %%a in (%*) do (
@@ -30,21 +37,36 @@ for %%a in (%*) do (
     if "%%a"=="patch"     set "BUMP_TYPE=patch"
     if "%%a"=="--no-push" set "SHOULD_PUSH=0"
     if "%%a"=="--skip-build" set "SHOULD_BUILD=0"
+    if "%%a"=="--no-install" set "SHOULD_INSTALL=0"
+    if "%%a"=="--only"     set "NEXT_IS_ONLY=1"
+    if defined NEXT_IS_ONLY (
+        if not "!NEXT_IS_ONLY!"=="1" (
+            set "ONLY_CONSUMER=%%a"
+            set "NEXT_IS_ONLY="
+        )
+    )
 )
+:: If --only is the last arg (no value follows), NEXT_IS_ONLY stays set — clear it.
+if defined NEXT_IS_ONLY set "NEXT_IS_ONLY="
 
-:: Script sits at the repo root
+:: Script sits at the repo root (launchstore-shared/).
+:: Consumer repos live at the parent's children: ../launchstore-frontend etc.
 set "ROOT_DIR=%~dp0"
+set "PARENT_DIR=%ROOT_DIR%.."
+
 cd /d "%ROOT_DIR%"
 
 echo.
 echo ============================================================
 echo   publish.bat       ^|       bump: %BUMP_TYPE%
+echo   install-in-consumers: %SHOULD_INSTALL%
+if not "%ONLY_CONSUMER%"=="" echo   only-consumer: %ONLY_CONSUMER%
 echo   cwd: %ROOT_DIR%
 echo ============================================================
 echo.
 
 :: ---- Step 1: Bump version in package.json ---------------------------
-echo [1/5] Bumping version ...
+echo [1/6] Bumping version ...
 for /f "tokens=*" %%i in ('node -e "var p=require('./package.json');var v=p.version.split('.').map(Number);if(process.argv[1]==='major')v[0]++;else if(process.argv[1]==='minor')v[1]++;else v[2]++;var nv=v.join('.');p.version=nv;require('fs').writeFileSync('package.json',JSON.stringify(p,null,2)+'\n');console.log(nv);" %BUMP_TYPE%') do set "NEW_VERSION=%%i"
 if !errorlevel! neq 0 goto :fail
 echo        new version: %NEW_VERSION%
@@ -52,10 +74,10 @@ echo.
 
 :: ---- Step 2: npm run build ------------------------------------------
 if "%SHOULD_BUILD%"=="1" goto :run_build
-echo [2/5] Skipping npm run build (--skip-build)
+echo [2/6] Skipping npm run build (--skip-build)
 goto :build_done
 :run_build
-echo [2/5] Running npm run build ...
+echo [2/6] Running npm run build ...
 :: Always clean first — `tsc` is incremental and a stale tsconfig.tsbuildinfo
 :: can otherwise cause it to emit NOTHING, shipping an empty dist/.
 call npm run clean
@@ -71,7 +93,7 @@ echo        [OK] dist/ built
 echo.
 
 :: ---- Step 3: git add + commit ---------------------------------------
-echo [3/5] Committing changes ...
+echo [3/6] Committing changes ...
 set "COMMIT_MSG=chore: release v%NEW_VERSION%"
 git add -A
 if !errorlevel! neq 0 (
@@ -87,7 +109,7 @@ if !errorlevel! neq 0 (
 echo.
 
 :: ---- Step 4: git tag -----------------------------------------------
-echo [4/5] Tagging v%NEW_VERSION% ...
+echo [4/6] Tagging v%NEW_VERSION% ...
 :: Use -a -m before the tag name so Windows git parses args correctly.
 git tag -a v%NEW_VERSION% -m "Release v%NEW_VERSION%"
 if !errorlevel! neq 0 (
@@ -99,7 +121,7 @@ echo.
 
 :: ---- Step 5: git push (branch + tag) -------------------------------
 if "%SHOULD_PUSH%"=="0" goto :skip_push
-echo [5/5] Pushing to origin ...
+echo [5/6] Pushing to origin ...
 for /f "tokens=*" %%b in ('git rev-parse --abbrev-ref HEAD') do set "BRANCH=%%b"
 echo        pushing branch: %BRANCH%
 git push origin %BRANCH%
@@ -114,22 +136,150 @@ if !errorlevel! neq 0 (
     exit /b 1
 )
 echo.
+goto :install_phase
+:skip_push
+echo [5/6] Skipping push, --no-push was set
+echo.
+:install_phase
+
+:: ---- Step 6: Install in consumer repos -----------------------------
+:: Update the @launchstore/shared-puck dep string + run `npm install` in
+:: each consumer. Honors --no-install (skip entirely) and --only <name>
+:: (filter to a single consumer; name must be one of: frontend, storefront,
+:: backend). The backend (NestJS parent) needs --legacy-peer-deps to work
+:: around the zod 3 vs 4 peer dep conflict with @langchain — that's set
+:: automatically when we recognize the consumer by name.
+if "%SHOULD_INSTALL%"=="0" goto :skip_install
+echo [6/6] Installing v%NEW_VERSION% in consumer repos ...
+echo.
+
+:: Build the dep string. Note: this script will set the entry in BOTH
+:: dependencies and devDependencies if present (some consumers keep it in
+:: devDependencies), so consumers don't have to move it.
+set "NEW_DEP=github:davidkhanpk/launchstore-shared#v%NEW_VERSION%"
+
+:: Consumer list. Format: name|relative_path|npm_install_flags
+:: Add more rows here as new consumers are added.
+set "CONSUMER_FRONTEND=frontend|launchstore-frontend|"
+set "CONSUMER_STOREFRONT=storefront|launchstore-storefront|"
+:: The backend is the parent dir (D:\Repos\launchstore), reached via ".."
+:: from launchstore-shared/. The backend's npm install needs
+:: --legacy-peer-deps to work around the zod 3 vs 4 peer dep conflict
+:: with @langchain.
+set "CONSUMER_BACKEND=backend|..|--legacy-peer-deps"
+
+:: Filter to ONLY_CONSUMER if --only was passed. Validates the name.
+set "CONSUMER_LIST="
+if "%ONLY_CONSUMER%"=="" (
+    set "CONSUMER_LIST=CONSUMER_FRONTEND CONSUMER_STOREFRONT CONSUMER_BACKEND"
+) else (
+    if /i "%ONLY_CONSUMER%"=="frontend"  set "CONSUMER_LIST=CONSUMER_FRONTEND"
+    if /i "%ONLY_CONSUMER%"=="storefront" set "CONSUMER_LIST=CONSUMER_STOREFRONT"
+    if /i "%ONLY_CONSUMER%"=="backend"   set "CONSUMER_LIST=CONSUMER_BACKEND"
+    if "!CONSUMER_LIST!"=="" (
+        echo [FAIL] Unknown consumer "%ONLY_CONSUMER%". Use: frontend, storefront, or backend.
+        exit /b 1
+    )
+)
+
+set "CONSUMER_OK=0"
+set "CONSUMER_SKIP=0"
+set "CONSUMER_FAIL=0"
+
+for %%V in (%CONSUMER_LIST%) do (
+    call set "ROW=%%%%V%%"
+    for /f "tokens=1,2,3 delims=|" %%a in ("!ROW!") do (
+        set "CNAME=%%a"
+        set "CREL=%%b"
+        set "CFLAGS=%%c"
+    )
+    if "!CREL!"=="" (
+        echo        [SKIP] !CNAME! (parent backend, run separately)
+        set /a CONSUMER_SKIP=CONSUMER_SKIP+1
+    ) else (
+        set "CDIR=!PARENT_DIR!\!CREL!"
+        if not exist "!CDIR!\package.json" (
+            echo        [SKIP] !CNAME! — !CDIR!\package.json not found
+            set /a CONSUMER_SKIP=CONSUMER_SKIP+1
+        ) else (
+            echo        -------- !CNAME! ^(!CDIR!^) --------
+            pushd "!CDIR!" >nul
+            if !errorlevel! neq 0 (
+                echo        [FAIL] could not cd into !CDIR!
+                popd >nul
+                set /a CONSUMER_FAIL=CONSUMER_FAIL+1
+            ) else (
+                :: 6a. Update dep string in package.json (BOTH dependencies
+                ::     and devDependencies if present, BOM-safe).
+                ::     Exit code 2 = no entry to update (skip, don't fail).
+                ::     Exit code 0 = updated successfully.
+                node -e "var p=require('./package.json');var s=process.argv[1];var d='github:davidkhanpk/launchstore-shared#v'+process.argv[2];var k='@launchstore/shared-puck';var hit=false;if(p.dependencies&&p.dependencies[k]){p.dependencies[k]=d;hit=true}if(p.devDependencies&&p.devDependencies[k]){p.devDependencies[k]=d;hit=true}if(!hit){process.stderr.write('no entry to update, skipping\n');process.exit(2)}var raw=JSON.stringify(p,null,2)+'\n';var fs=require('fs');var b=Buffer.from(raw,'utf8');fs.writeFileSync('package.json',b);console.log('   dep string ^-> '+d);" "!NEW_DEP!" "%NEW_VERSION%" 2>nul
+                if !errorlevel! equ 2 (
+                    echo        [SKIP] no @launchstore/shared-puck entry in package.json
+                    set /a CONSUMER_SKIP=CONSUMER_SKIP+1
+                ) else if !errorlevel! neq 0 (
+                    echo        [FAIL] failed to update package.json
+                    set /a CONSUMER_FAIL=CONSUMER_FAIL+1
+                ) else (
+                    :: 6b. Run npm install. Use the per-consumer flags (the
+                    ::     backend needs --legacy-peer-deps).
+                    echo        running: npm install !CFLAGS!
+                    call npm install !CFLAGS!
+                    if !errorlevel! neq 0 (
+                        echo        [FAIL] npm install failed in !CNAME!
+                        set /a CONSUMER_FAIL=CONSUMER_FAIL+1
+                    ) else (
+                        echo        [OK]   installed in !CNAME!
+                        set /a CONSUMER_OK=CONSUMER_OK+1
+                    )
+                )
+                popd >nul
+            )
+        )
+    )
+    echo.
+)
+
+echo        install summary: ok=!CONSUMER_OK! skip=!CONSUMER_SKIP! fail=!CONSUMER_FAIL!
+if !CONSUMER_FAIL! gtr 0 (
+    echo.
+    echo [WARN] Some consumer installs failed. Re-run with --only ^<name^> to retry.
+    set "HAD_FAIL=1"
+) else (
+    set "HAD_FAIL=0"
+)
+goto :install_done
+:skip_install
+echo [6/6] Skipping consumer install (--no-install)
+:install_done
+echo.
+
+:: ---- Final summary ----------------------------------------------
+if "%SHOULD_PUSH%"=="0" goto :summary_nopush
 echo ============================================================
 echo   [OK] Done - v%NEW_VERSION% published
 echo ============================================================
-echo.
-echo Next steps - bump the dep string in each consumer:
-echo   1a. launchstore-frontend\package.json
-echo   1b. launchstore-storefront\package.json
-echo   1c. launchstore\package.json
-echo Change "@launchstore/shared-puck": "github:davidkhanpk/launchstore-shared#v0.0.3"
-echo to                       "github:davidkhanpk/launchstore-shared#v%NEW_VERSION%"
-echo   2. build-and-push\backend.bat
-echo   3. build-and-push\frontend.bat
+if "%SHOULD_INSTALL%"=="0" (
+    echo.
+    echo Next steps (you skipped the consumer install):
+    echo   1. bump the dep string in each consumer's package.json
+    echo   2. run npm install in each consumer
+    echo   3. build-and-push\storefront.bat / frontend.bat / backend.bat to roll
+) else (
+    if "%HAD_FAIL%"=="1" (
+        echo.
+        echo Consumers with install failures still need manual attention.
+    ) else (
+        echo.
+        echo Next steps - roll the new version to prod:
+        echo   build-and-push\storefront.bat
+        echo   build-and-push\frontend.bat
+        echo   build-and-push\backend.bat
+    )
+)
 echo.
 goto :end
-:skip_push
-echo [5/5] Skipping push, --no-push was set
+:summary_nopush
 echo ============================================================
 echo   [OK] Local release staged - NOT pushed
 echo ============================================================

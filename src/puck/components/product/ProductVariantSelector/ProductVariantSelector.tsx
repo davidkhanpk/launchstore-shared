@@ -109,9 +109,16 @@ export const ProductVariantSelector: ComponentConfig<ProductVariantSelectorWithS
     }
     const options = product.options || [];
 
-    // Initialize selection on mount if empty
+    // Initialize selection on mount if empty.
+    // Runs in BOTH controlled and uncontrolled modes — previously gated on
+    // !controlled, which meant the parent (ProductVariantProvider) would
+    // hand the selector an empty `selectedOptions={}` and the UI would show
+    // nothing highlighted until the user clicked an option. The matching-
+    // variant effect (below) will then see the new selectedOptions and call
+    // externalSetVariant, so the AddToCart's selectedVariant gets populated
+    // and the button enables correctly on first paint.
     useEffect(() => {
-      if (!controlled && options.length > 0 && Object.keys(selectedOptions).length === 0) {
+      if (options.length > 0 && Object.keys(selectedOptions).length === 0) {
         const init: SelectedOptions = {};
         options.forEach((opt) => {
           if (opt.values && opt.values.length > 0) init[opt.id] = opt.values[0].value;

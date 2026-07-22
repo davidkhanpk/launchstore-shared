@@ -211,9 +211,14 @@ for %%V in (%CONSUMER_LIST%) do (
             ) else (
                 :: 6a. Update dep string in package.json (BOTH dependencies
                 ::     and devDependencies if present, BOM-safe).
+                ::     Pass only the version (e.g. "0.1.13") and build the full
+                ::     dep string inside the node script — this avoids the
+                ::     argv-off-by-one trap where process.argv[2] would be the
+                ::     full dep string and concatenating "v" + the full string
+                ::     produces a malformed value.
                 ::     Exit code 2 = no entry to update (skip, don't fail).
                 ::     Exit code 0 = updated successfully.
-                node -e "var p=require('./package.json');var s=process.argv[1];var d='github:davidkhanpk/launchstore-shared#v'+process.argv[2];var k='@launchstore/shared-puck';var hit=false;if(p.dependencies&&p.dependencies[k]){p.dependencies[k]=d;hit=true}if(p.devDependencies&&p.devDependencies[k]){p.devDependencies[k]=d;hit=true}if(!hit){process.stderr.write('no entry to update, skipping\n');process.exit(2)}var raw=JSON.stringify(p,null,2)+'\n';var fs=require('fs');var b=Buffer.from(raw,'utf8');fs.writeFileSync('package.json',b);console.log('   dep string ^-> '+d);" "!NEW_DEP!" "%NEW_VERSION%" 2>nul
+                node -e "var p=require('./package.json');var v=process.argv[2];var d='github:davidkhanpk/launchstore-shared#v'+v;var k='@launchstore/shared-puck';var hit=false;if(p.dependencies&&p.dependencies[k]){p.dependencies[k]=d;hit=true}if(p.devDependencies&&p.devDependencies[k]){p.devDependencies[k]=d;hit=true}if(!hit){process.stderr.write('no entry to update, skipping\n');process.exit(2)}var raw=JSON.stringify(p,null,2)+'\n';var fs=require('fs');var b=Buffer.from(raw,'utf8');fs.writeFileSync('package.json',b);console.log('   dep string ^-> '+d);" "%NEW_VERSION%" 2>nul
                 if !errorlevel! equ 2 (
                     echo        [SKIP] no @launchstore/shared-puck entry in package.json
                     set /a CONSUMER_SKIP=CONSUMER_SKIP+1

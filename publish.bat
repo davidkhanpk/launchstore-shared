@@ -193,55 +193,7 @@ for %%V in (%CONSUMER_LIST%) do (
         set "CREL=%%b"
         set "CFLAGS=%%c"
     )
-    if "!CREL!"=="" (
-        echo        [SKIP] !CNAME! (parent backend, run separately)
-        set /a CONSUMER_SKIP=CONSUMER_SKIP+1
-    ) else (
-        set "CDIR=!PARENT_DIR!\!CREL!"
-        if not exist "!CDIR!\package.json" (
-            echo        [SKIP] !CNAME! — !CDIR!\package.json not found
-            set /a CONSUMER_SKIP=CONSUMER_SKIP+1
-        ) else (
-            echo        -------- !CNAME! ^(!CDIR!^) --------
-            pushd "!CDIR!" >nul
-            if !errorlevel! neq 0 (
-                echo        [FAIL] could not cd into !CDIR!
-                popd >nul
-                set /a CONSUMER_FAIL=CONSUMER_FAIL+1
-            ) else (
-                :: 6a. Update dep string in package.json (BOTH dependencies
-                ::     and devDependencies if present, BOM-safe).
-                ::     Pass only the version (e.g. "0.1.13") and build the full
-                ::     dep string inside the node script — this avoids the
-                ::     argv-off-by-one trap where process.argv[2] would be the
-                ::     full dep string and concatenating "v" + the full string
-                ::     produces a malformed value.
-                ::     Exit code 2 = no entry to update (skip, don't fail).
-                ::     Exit code 0 = updated successfully.
-                node -e "var p=require('./package.json');var v=process.argv[2];var d='github:davidkhanpk/launchstore-shared#v'+v;var k='@launchstore/shared-puck';var hit=false;if(p.dependencies&&p.dependencies[k]){p.dependencies[k]=d;hit=true}if(p.devDependencies&&p.devDependencies[k]){p.devDependencies[k]=d;hit=true}if(!hit){process.stderr.write('no entry to update, skipping\n');process.exit(2)}var raw=JSON.stringify(p,null,2)+'\n';var fs=require('fs');var b=Buffer.from(raw,'utf8');fs.writeFileSync('package.json',b);console.log('   dep string ^-> '+d);" "%NEW_VERSION%" 2>nul
-                if !errorlevel! equ 2 (
-                    echo        [SKIP] no @launchstore/shared-puck entry in package.json
-                    set /a CONSUMER_SKIP=CONSUMER_SKIP+1
-                ) else if !errorlevel! neq 0 (
-                    echo        [FAIL] failed to update package.json
-                    set /a CONSUMER_FAIL=CONSUMER_FAIL+1
-                ) else (
-                    :: 6b. Run npm install. Use the per-consumer flags (the
-                    ::     backend needs --legacy-peer-deps).
-                    echo        running: npm install !CFLAGS!
-                    call npm install !CFLAGS!
-                    if !errorlevel! neq 0 (
-                        echo        [FAIL] npm install failed in !CNAME!
-                        set /a CONSUMER_FAIL=CONSUMER_FAIL+1
-                    ) else (
-                        echo        [OK]   installed in !CNAME!
-                        set /a CONSUMER_OK=CONSUMER_OK+1
-                    )
-                )
-                popd >nul
-            )
-        )
-    )
+    call :install_in_consumer "!CNAME!" "!CREL!" "!CFLAGS!"
     echo.
 )
 
@@ -293,6 +245,84 @@ echo.
 echo When ready run:
 echo    git push origin %BRANCH%
 echo    git push origin v%NEW_VERSION%
+
+:: ---- Subroutine: install in one consumer --------------------------------
+:: Called from the for loop in step 6 with three args:
+::   %~1 = consumer name (e.g. "frontend")
+::   %~2 = relative path from launchstore-shared/ (e.g. "launchstore-frontend" or "..")
+::   %~3 = npm install flags (e.g. "" or "--legacy-peer-deps")
+::
+:: Side effects:
+::   - mutates CONSUMER_OK / CONSUMER_SKIP / CONSUMER_FAIL counters
+::   - pushes/pops the consumer's cwd
+::   - on success: consumer's package.json + node_modules are updated
+::
+:: Why a subroutine: inlining this in the for loop made the nesting 4 levels
+:: deep (for/if/if/if) and CMD's parser choked on the `else if` chain with
+:: "else was unexpected at this time". Extracting to a subroutine keeps
+:: nesting to 2 levels which is reliable.
+:install_in_consumer
+set "CNAME=%~1"
+set "CREL=%~2"
+set "CFLAGS=%~3"
+
+if "!CREL!"=="" (
+    echo        [SKIP] !CNAME! (parent backend, run separately)
+    set /a CONSUMER_SKIP=CONSUMER_SKIP+1
+    goto :eof
+)
+
+set "CDIR=!PARENT_DIR!\!CREL!"
+if not exist "!CDIR!\package.json" (
+    echo        [SKIP] !CNAME! — !CDIR!\package.json not found
+    set /a CONSUMER_SKIP=CONSUMER_SKIP+1
+    goto :eof
+)
+
+echo        -------- !CNAME! ^(!CDIR!^) --------
+pushd "!CDIR!" >nul
+if !errorlevel! neq 0 (
+    echo        [FAIL] could not cd into !CDIR!
+    set /a CONSUMER_FAIL=CONSUMER_FAIL+1
+    goto :eof
+)
+set "DID_PUSH=1"
+
+:: 6a. Update dep string in package.json.
+::     Pass only the version; node script builds the full dep string from it.
+::     Exit code 2 = no entry to update (skip, don't fail).
+::     Exit code 0 = updated successfully.
+::     Other non-zero = unexpected error (fail).
+node -e "var p=require('./package.json');var v=process.argv[2];var d='github:davidkhanpk/launchstore-shared#v'+v;var k='@launchstore/shared-puck';var hit=false;if(p.dependencies&&p.dependencies[k]){p.dependencies[k]=d;hit=true}if(p.devDependencies&&p.devDependencies[k]){p.devDependencies[k]=d;hit=true}if(!hit){process.stderr.write('no entry to update, skipping\n');process.exit(2)}var raw=JSON.stringify(p,null,2)+'\n';var fs=require('fs');var b=Buffer.from(raw,'utf8');fs.writeFileSync('package.json',b);console.log('   dep string ^-> '+d);" "%NEW_VERSION%" 2>nul
+set "NODE_RC=!errorlevel!"
+
+if !NODE_RC! equ 2 (
+    echo        [SKIP] no @launchstore/shared-puck entry in package.json
+    set /a CONSUMER_SKIP=CONSUMER_SKIP+1
+    popd >nul
+    goto :eof
+)
+if !NODE_RC! neq 0 (
+    echo        [FAIL] failed to update package.json ^(!NODE_RC!^)
+    set /a CONSUMER_FAIL=CONSUMER_FAIL+1
+    popd >nul
+    goto :eof
+)
+
+:: 6b. Run npm install. Use the per-consumer flags (the backend needs
+::     --legacy-peer-deps to work around the zod 3 vs 4 peer dep
+::     conflict with @langchain).
+echo        running: npm install !CFLAGS!
+call npm install !CFLAGS!
+if !errorlevel! neq 0 (
+    echo        [FAIL] npm install failed in !CNAME!
+    set /a CONSUMER_FAIL=CONSUMER_FAIL+1
+) else (
+    echo        [OK]   installed in !CNAME!
+    set /a CONSUMER_OK=CONSUMER_OK+1
+)
+popd >nul
+goto :eof
 
 :fail
 echo.

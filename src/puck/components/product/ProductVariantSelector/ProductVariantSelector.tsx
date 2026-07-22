@@ -109,14 +109,19 @@ export const ProductVariantSelector: ComponentConfig<ProductVariantSelectorWithS
     }
     const options = product.options || [];
 
-    // Initialize selection on mount if empty.
-    // Runs in BOTH controlled and uncontrolled modes — previously gated on
-    // !controlled, which meant the parent (ProductVariantProvider) would
-    // hand the selector an empty `selectedOptions={}` and the UI would show
-    // nothing highlighted until the user clicked an option. The matching-
-    // variant effect (below) will then see the new selectedOptions and call
-    // externalSetVariant, so the AddToCart's selectedVariant gets populated
-    // and the button enables correctly on first paint.
+    // Initialize selection when options become available and nothing is
+    // selected yet. Runs in BOTH controlled and uncontrolled modes, and
+    // RE-RUNS whenever options.length changes (e.g. when the product
+    // loads asynchronously after the selector mounts, or when the user
+    // navigates to a different product). The previous version had `[]`
+    // as deps, which meant the effect only ran once at mount — if the
+    // product wasn't loaded yet, the effect saw options=[] and silently
+    // did nothing, and nothing re-ran when the product finally arrived.
+    // Now: when options transitions from 0 → N, the effect re-fires and
+    // seeds the first value of each option. The matching-variant effect
+    // (below) then sees the new selectedOptions and calls externalSetVariant,
+    // so the AddToCart's selectedVariant gets populated and the button
+    // enables correctly on first paint.
     useEffect(() => {
       if (options.length > 0 && Object.keys(selectedOptions).length === 0) {
         const init: SelectedOptions = {};
@@ -126,7 +131,7 @@ export const ProductVariantSelector: ComponentConfig<ProductVariantSelectorWithS
         setOptions(init);
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [options.length]);
 
     // Find matching variant when options change
     useEffect(() => {

@@ -37,9 +37,17 @@ for %%a in (%*) do (
 :: Script sits at the repo root (launchstore-shared/).
 :: Consumer repos live at the parent's children: ../launchstore-frontend etc.
 set "ROOT_DIR=%~dp0"
-set "PARENT_DIR=%ROOT_DIR%.."
 
 cd /d "%ROOT_DIR%"
+
+:: Resolve the parent dir to an absolute path. The string %ROOT_DIR%..
+:: is a valid path but contains a literal "..", and CMD's pushd + if not
+:: exist do NOT reliably resolve ".." mid-path on every Windows build
+:: (they treat "\..\foo" as a drive-relative component and fail with
+:: "The system cannot find the drive specified."). Resolve once at the
+:: top of the script using for's %%~fP modifier, then use the absolute
+:: form for every pushd / if not exist call.
+for %%P in ("%ROOT_DIR%..") do set "PARENT_DIR=%%~fP"
 
 echo.
 echo ============================================================

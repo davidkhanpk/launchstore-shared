@@ -191,6 +191,7 @@ echo.
 echo When ready run:
 echo    git push origin %BRANCH%
 echo    git push origin v%NEW_VERSION%
+goto :end
 
 :fail
 echo.

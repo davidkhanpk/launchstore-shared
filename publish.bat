@@ -255,17 +255,17 @@ if "!CREL!"=="" (
     goto :eof
 )
 
-set "CDIR=!PARENT_DIR!\!CREL!"
-if not exist "!CDIR!\package.json" (
-    echo        [SKIP] !CNAME! — !CDIR!\package.json not found
+set "CDIR=%PARENT_DIR%\%CREL%"
+if not exist "%CDIR%\package.json" (
+    echo        [SKIP] !CNAME! — %CDIR%\package.json not found
     set /a CONSUMER_SKIP=CONSUMER_SKIP+1
     goto :eof
 )
 
 echo        -------- !CNAME! ^(!CDIR!^) --------
-pushd "!CDIR!" >nul
+pushd "%CDIR%" >nul
 if !errorlevel! neq 0 (
-    echo        [FAIL] could not cd into !CDIR!
+    echo        [FAIL] could not cd into %CDIR%
     set /a CONSUMER_FAIL=CONSUMER_FAIL+1
     goto :eof
 )

@@ -178,18 +178,28 @@ set "REL_backend=.."
 set "FLAGS_backend=--legacy-peer-deps"
 
 :: Filter to ONLY_CONSUMER if --only was passed. Validates the name.
+:: NOTE: we use goto-based control flow here instead of an if/else with
+:: nested single-line ifs. CMD's parser reliably mishandles
+::   if A (X) else (
+::       if B C
+::       if D E
+::   )
+:: — the inner ifs sometimes get associated with the wrong block, leaving
+:: CONSUMER_LIST empty. Goto labels are unambiguous.
 set "CONSUMER_LIST="
-if "%ONLY_CONSUMER%"=="" (
-    set "CONSUMER_LIST=frontend storefront backend"
-) else (
-    if /i "%ONLY_CONSUMER%"=="frontend"  set "CONSUMER_LIST=frontend"
-    if /i "%ONLY_CONSUMER%"=="storefront" set "CONSUMER_LIST=storefront"
-    if /i "%ONLY_CONSUMER%"=="backend"   set "CONSUMER_LIST=backend"
-    if "!CONSUMER_LIST!"=="" (
-        echo [FAIL] Unknown consumer "%ONLY_CONSUMER%". Use: frontend, storefront, or backend.
-        exit /b 1
-    )
-)
+if "%ONLY_CONSUMER%"=="" goto :consumer_list_default
+if /i "%ONLY_CONSUMER%"=="frontend"  set "CONSUMER_LIST=frontend"
+if /i "%ONLY_CONSUMER%"=="storefront" set "CONSUMER_LIST=storefront"
+if /i "%ONLY_CONSUMER%"=="backend"   set "CONSUMER_LIST=backend"
+if not "!CONSUMER_LIST!"=="" goto :consumer_list_done
+echo [FAIL] Unknown consumer "%ONLY_CONSUMER%". Use: frontend, storefront, or backend.
+exit /b 1
+goto :consumer_list_done
+
+:consumer_list_default
+set "CONSUMER_LIST=frontend storefront backend"
+
+:consumer_list_done
 
 set "CONSUMER_OK=0"
 set "CONSUMER_SKIP=0"
@@ -197,8 +207,17 @@ set "CONSUMER_FAIL=0"
 
 for %%V in (%CONSUMER_LIST%) do (
     set "CNAME=%%V"
-    set "CREL=!REL_%%V!"
-    set "CFLAGS=!FLAGS_%%V!"
+    :: Look up the consumer's data. Direct if-chains (no nested parens)
+    :: are reliable in CMD. The earlier !REL_%%V! delayed-expansion
+    :: indirection was correct in theory but in practice left CREL
+    :: empty for all 3 consumers on some Windows builds, which is
+    :: what made ok/skip/fail all report 0 in the previous run.
+    set "CREL="
+    set "CFLAGS="
+    if "!CNAME!"=="frontend"   set "CREL=launchstore-frontend"
+    if "!CNAME!"=="storefront" set "CREL=launchstore-storefront"
+    if "!CNAME!"=="backend"    set "CREL=.."
+    if "!CNAME!"=="backend"    set "CFLAGS=--legacy-peer-deps"
     call :install_in_consumer "!CNAME!" "!CREL!" "!CFLAGS!"
     echo.
 )

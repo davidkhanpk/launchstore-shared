@@ -65,15 +65,20 @@ export const AddToCart = {
                 customStyles.borderStyle = 'solid';
             }
         }
-        // Editor preview (no product)
+        // Editor preview OR live render with no variant selected yet (multi-variant
+        // product, user hasn't picked). Same UI: the button is disabled because
+        // we don't have a variant to add, but the TEXT reflects stock state so
+        // the shopper sees "Out of Stock" instead of a misleading "Add to Cart"
+        // when the product is actually unavailable.
         if (!hasVariant) {
+            const previewText = !inStock ? 'Out of Stock' : (text || 'Add to Cart');
             return (_jsxs("button", { type: "button", disabled: true, className: `
           ${variant === 'custom' ? '' : VARIANT[variant || 'primary']} ${SIZE[size || 'md']}
           ${fullWidth ? 'w-full' : ''} ${marginTop} ${marginBottom} ${marginLeft} ${marginRight}
           ${paddingX} ${paddingY} ${borderRadius}
           font-medium transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed
           flex items-center justify-center gap-2 ${variant === 'outline' ? 'border-2' : ''}
-        `, style: variant === 'custom' ? customStyles : undefined, onMouseEnter: () => setIsHovered(true), onMouseLeave: () => setIsHovered(false), children: [showIcon && _jsx(CartSvg, {}), text || 'Add to Cart'] }));
+        `, style: variant === 'custom' ? customStyles : undefined, onMouseEnter: () => setIsHovered(true), onMouseLeave: () => setIsHovered(false), children: [showIcon && _jsx(CartSvg, {}), previewText] }));
         }
         const isBtnDisabled = disabled || !inStock || isLoading;
         const widthClass = fullWidth ? 'w-full' : '';

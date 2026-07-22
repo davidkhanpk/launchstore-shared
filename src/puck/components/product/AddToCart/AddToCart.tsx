@@ -107,8 +107,13 @@ export const AddToCart: ComponentConfig<AddToCartWithData> = {
       }
     }
 
-    // Editor preview (no product)
+    // Editor preview OR live render with no variant selected yet (multi-variant
+    // product, user hasn't picked). Same UI: the button is disabled because
+    // we don't have a variant to add, but the TEXT reflects stock state so
+    // the shopper sees "Out of Stock" instead of a misleading "Add to Cart"
+    // when the product is actually unavailable.
     if (!hasVariant) {
+      const previewText = !inStock ? 'Out of Stock' : (text || 'Add to Cart');
       return (
         <button type="button" disabled className={`
           ${variant === 'custom' ? '' : VARIANT[(variant as AddToCartVariant) || 'primary']} ${SIZE[(size as AddToCartSize) || 'md']}
@@ -122,7 +127,7 @@ export const AddToCart: ComponentConfig<AddToCartWithData> = {
           onMouseLeave={() => setIsHovered(false)}
         >
           {showIcon && <CartSvg />}
-          {text || 'Add to Cart'}
+          {previewText}
         </button>
       );
     }

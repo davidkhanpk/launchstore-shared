@@ -134,61 +134,24 @@ echo.
 :install_phase
 
 :: ---- Step 6: Update dep string + npm install in every consumer -----
-:: Always runs. This is the standard release flow — every publish ships
-:: the new version to every consumer without manual intervention. Each
-:: consumer is its own subdirectory under the parent repo:
-::   ../launchstore-frontend  (Next.js Puck editor)
-::   ../launchstore-storefront (Next.js Medusa renderer)
-::   ../..                    (NestJS parent backend)
-::
-:: The backend (NestJS parent) needs --legacy-peer-deps to work around the
-:: zod 3 vs 4 peer dep conflict with @langchain.
+:: Always runs. Every publish ships the new version to every consumer
+:: without manual intervention. The actual work is delegated to a Python
+:: script — the previous in-CMD implementation (for-loop + subroutine +
+:: delayed expansion) was unreliable on some Windows builds and produced
+:: 9 "drive not found" errors with skip=3. The Python script handles
+:: path resolution, dep-string updates, and npm install for all 3
+:: consumers deterministically. The backend gets --legacy-peer-deps to
+:: work around the zod 3 vs 4 peer dep conflict with @langchain.
 echo [6/6] Installing v%NEW_VERSION% in consumer repos ...
 echo.
-
-:: Build the dep string. Note: this script will set the entry in BOTH
-:: dependencies and devDependencies if present (some consumers keep it in
-:: devDependencies), so consumers don't have to move it.
-set "NEW_DEP=github:davidkhanpk/launchstore-shared#v%NEW_VERSION%"
-
-:: ---- Consumer table ---------------------------------------------------
-:: Each consumer has its own entry: REL_<name> (path) and FLAGS_<name>
-:: (npm install flags). The for loop below uses sequential if-chains
-:: (no nested parens, no delayed-expansion indirection) to pick them
-:: up — CMD's parser reliably chokes on the more clever patterns, and
-:: we hit that hard. Plain string compares work.
-set "CONSUMER_LIST=frontend storefront backend"
-
-set "CONSUMER_OK=0"
-set "CONSUMER_SKIP=0"
-set "CONSUMER_FAIL=0"
-
-for %%V in (%CONSUMER_LIST%) do (
-    :: Use %%V directly in if-compares instead of bouncing through
-    :: !CNAME!. Delayed expansion inside a for loop's parens block is
-    :: fragile on some Windows builds and can leave the !-bound variable
-    :: empty even after the same code sets it via `set "X=%%V"`. The
-    :: for-loop variable itself is reliably available as %%V, so we just
-    :: use that directly. This is what makes the consumer install work
-    :: end-to-end.
-    set "CREL="
-    set "CFLAGS="
-    if "%%V"=="frontend"   set "CREL=launchstore-frontend"
-    if "%%V"=="storefront" set "CREL=launchstore-storefront"
-    if "%%V"=="backend"    set "CREL=.."
-    if "%%V"=="backend"    set "CFLAGS=--legacy-peer-deps"
-    call :install_in_consumer "%%V" "!CREL!" "!CFLAGS!"
+set "HAD_FAIL=0"
+python "%~dp0scripts\install_in_consumers.py" "%NEW_VERSION%"
+if !errorlevel! neq 0 (
     echo.
-)
-
-echo        install summary: ok=!CONSUMER_OK! skip=!CONSUMER_SKIP! fail=!CONSUMER_FAIL!
-if !CONSUMER_FAIL! gtr 0 (
-    echo.
-    echo [WARN] Some consumer installs failed. Fix the failing consumer
-    echo        and re-run publish.bat — the next bump will retry them.
+    echo [WARN] Consumer install reported failures. See output above.
+    echo        Fix the failing consumer and re-run publish.bat ^- the
+    echo        next bump will retry it.
     set "HAD_FAIL=1"
-) else (
-    set "HAD_FAIL=0"
 )
 echo.
 
@@ -228,93 +191,6 @@ echo.
 echo When ready run:
 echo    git push origin %BRANCH%
 echo    git push origin v%NEW_VERSION%
-
-:: ---- Subroutine: install in one consumer ----------------------------
-:: Called from the for loop in step 6 with three args:
-::   %~1 = consumer name (e.g. "frontend")
-::   %~2 = relative path from launchstore-shared/ (e.g. "launchstore-frontend" or "..")
-::   %~3 = npm install flags (e.g. "" or "--legacy-peer-deps")
-::
-:: Side effects:
-::   - mutates CONSUMER_OK / CONSUMER_SKIP / CONSUMER_FAIL counters
-::   - pushes/pops the consumer's cwd
-::   - on success: consumer's package.json + node_modules are updated
-::
-:: Why a subroutine: inlining this in the for loop made the nesting 4 levels
-:: deep (for/if/if/if) and CMD's parser choked on the `else if` chain with
-:: "else was unexpected at this time". Extracting to a subroutine keeps
-:: nesting to 2 levels which is reliable.
-:install_in_consumer
-set "CNAME=%~1"
-set "CREL=%~2"
-set "CFLAGS=%~3"
-
-if "!CREL!"=="" (
-    echo        [SKIP] !CNAME! (parent backend, run separately)
-    set /a CONSUMER_SKIP=CONSUMER_SKIP+1
-    goto :eof
-)
-
-set "CDIR=%PARENT_DIR%\%CREL%"
-if not exist "%CDIR%\package.json" (
-    echo        [SKIP] !CNAME! — %CDIR%\package.json not found
-    set /a CONSUMER_SKIP=CONSUMER_SKIP+1
-    goto :eof
-)
-
-echo        -------- !CNAME! ^(!CDIR!^) --------
-pushd "%CDIR%" >nul
-if !errorlevel! neq 0 (
-    echo        [FAIL] could not cd into %CDIR%
-    set /a CONSUMER_FAIL=CONSUMER_FAIL+1
-    goto :eof
-)
-
-:: 6a. Update dep string in package.json.
-::     Pass only the version; node script builds the full dep string from it.
-::     Exit code 2 = no entry to update (skip, don't fail).
-::     Exit code 0 = updated successfully.
-::     Other non-zero = unexpected error (fail).
-::
-:: IMPORTANT: argv[1] is the version, not argv[2]. With
-:: `node -e SCRIPT ARG1` the arg lands at argv[1] because Node does not
-:: inject a [eval] placeholder for -e scripts in modern versions. We
-:: confirmed this with:
-::   argv[0] = node path
-::   argv[1] = "0.1.17"  (the version)
-::   argv[2] = undefined
-:: The earlier "process.argv[2]" produced "#vundefined" — a silent bug
-:: that wrote garbage to consumers' package.json.
-node -e "var p=require('./package.json');var v=process.argv[1];var d='github:davidkhanpk/launchstore-shared#v'+v;var k='@launchstore/shared-puck';var hit=false;if(p.dependencies&&p.dependencies[k]){p.dependencies[k]=d;hit=true}if(p.devDependencies&&p.devDependencies[k]){p.devDependencies[k]=d;hit=true}if(!hit){process.stderr.write('no entry to update, skipping\n');process.exit(2)}var raw=JSON.stringify(p,null,2)+'\n';var fs=require('fs');var b=Buffer.from(raw,'utf8');fs.writeFileSync('package.json',b);console.log('   dep string ^-> '+d);" "%NEW_VERSION%" 2>nul
-set "NODE_RC=!errorlevel!"
-
-if !NODE_RC! equ 2 (
-    echo        [SKIP] no @launchstore/shared-puck entry in package.json
-    set /a CONSUMER_SKIP=CONSUMER_SKIP+1
-    popd >nul
-    goto :eof
-)
-if !NODE_RC! neq 0 (
-    echo        [FAIL] failed to update package.json ^(!NODE_RC!^)
-    set /a CONSUMER_FAIL=CONSUMER_FAIL+1
-    popd >nul
-    goto :eof
-)
-
-:: 6b. Run npm install. Use the per-consumer flags (the backend needs
-::     --legacy-peer-deps to work around the zod 3 vs 4 peer dep
-::     conflict with @langchain).
-echo        running: npm install !CFLAGS!
-call npm install !CFLAGS!
-if !errorlevel! neq 0 (
-    echo        [FAIL] npm install failed in !CNAME!
-    set /a CONSUMER_FAIL=CONSUMER_FAIL+1
-) else (
-    echo        [OK]   installed in !CNAME!
-    set /a CONSUMER_OK=CONSUMER_OK+1
-)
-popd >nul
-goto :eof
 
 :fail
 echo.

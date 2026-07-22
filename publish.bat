@@ -158,24 +158,33 @@ echo.
 :: devDependencies), so consumers don't have to move it.
 set "NEW_DEP=github:davidkhanpk/launchstore-shared#v%NEW_VERSION%"
 
-:: Consumer list. Format: name|relative_path|npm_install_flags
-:: Add more rows here as new consumers are added.
-set "CONSUMER_FRONTEND=frontend|launchstore-frontend|"
-set "CONSUMER_STOREFRONT=storefront|launchstore-storefront|"
-:: The backend is the parent dir (D:\Repos\launchstore), reached via ".."
-:: from launchstore-shared/. The backend's npm install needs
-:: --legacy-peer-deps to work around the zod 3 vs 4 peer dep conflict
-:: with @langchain.
-set "CONSUMER_BACKEND=backend|..|--legacy-peer-deps"
+:: ---- Consumer table ----------------------------------------------------
+:: Each consumer has its own env vars: REL_<name> and FLAGS_<name>.
+:: The for loop below uses delayed expansion (!REL_%%V!) to look them up
+:: without any call set indirection. This is the pattern that actually
+:: works in CMD — the earlier `call set "ROW=%%%%V%%"` form silently
+:: produced empty CREL for all 3 consumers (the call expansion was
+:: eating too many of the percent signs and the result was "" instead
+:: of the value of the env var).
+:: Add new consumers here by adding 2 lines + 1 entry to CONSUMER_LIST.
+set "REL_frontend=launchstore-frontend"
+set "FLAGS_frontend="
+set "REL_storefront=launchstore-storefront"
+set "FLAGS_storefront="
+:: Backend is the parent dir (D:\Repos\launchstore), reached via "..".
+:: Backend's npm install needs --legacy-peer-deps to work around the
+:: zod 3 vs 4 peer dep conflict with @langchain.
+set "REL_backend=.."
+set "FLAGS_backend=--legacy-peer-deps"
 
 :: Filter to ONLY_CONSUMER if --only was passed. Validates the name.
 set "CONSUMER_LIST="
 if "%ONLY_CONSUMER%"=="" (
-    set "CONSUMER_LIST=CONSUMER_FRONTEND CONSUMER_STOREFRONT CONSUMER_BACKEND"
+    set "CONSUMER_LIST=frontend storefront backend"
 ) else (
-    if /i "%ONLY_CONSUMER%"=="frontend"  set "CONSUMER_LIST=CONSUMER_FRONTEND"
-    if /i "%ONLY_CONSUMER%"=="storefront" set "CONSUMER_LIST=CONSUMER_STOREFRONT"
-    if /i "%ONLY_CONSUMER%"=="backend"   set "CONSUMER_LIST=CONSUMER_BACKEND"
+    if /i "%ONLY_CONSUMER%"=="frontend"  set "CONSUMER_LIST=frontend"
+    if /i "%ONLY_CONSUMER%"=="storefront" set "CONSUMER_LIST=storefront"
+    if /i "%ONLY_CONSUMER%"=="backend"   set "CONSUMER_LIST=backend"
     if "!CONSUMER_LIST!"=="" (
         echo [FAIL] Unknown consumer "%ONLY_CONSUMER%". Use: frontend, storefront, or backend.
         exit /b 1
@@ -187,12 +196,9 @@ set "CONSUMER_SKIP=0"
 set "CONSUMER_FAIL=0"
 
 for %%V in (%CONSUMER_LIST%) do (
-    call set "ROW=%%%%V%%"
-    for /f "tokens=1,2,3 delims=|" %%a in ("!ROW!") do (
-        set "CNAME=%%a"
-        set "CREL=%%b"
-        set "CFLAGS=%%c"
-    )
+    set "CNAME=%%V"
+    set "CREL=!REL_%%V!"
+    set "CFLAGS=!FLAGS_%%V!"
     call :install_in_consumer "!CNAME!" "!CREL!" "!CFLAGS!"
     echo.
 )
@@ -212,30 +218,48 @@ echo [6/6] Skipping consumer install (--no-install)
 echo.
 
 :: ---- Final summary ----------------------------------------------
+:: The next-step message varies based on (a) whether we pushed and
+:: (b) whether the install phase ran cleanly. Use goto-based control flow
+:: instead of nested if/else — CMD's parser chokes on deeply nested
+:: if/else after a for loop, but goto is rock-solid.
 if "%SHOULD_PUSH%"=="0" goto :summary_nopush
+
 echo ============================================================
 echo   [OK] Done - v%NEW_VERSION% published
 echo ============================================================
-if "%SHOULD_INSTALL%"=="0" (
-    echo.
-    echo Next steps (you skipped the consumer install):
-    echo   1. bump the dep string in each consumer's package.json
-    echo   2. run npm install in each consumer
-    echo   3. build-and-push\storefront.bat / frontend.bat / backend.bat to roll
-) else (
-    if "%HAD_FAIL%"=="1" (
-        echo.
-        echo Consumers with install failures still need manual attention.
-    ) else (
-        echo.
-        echo Next steps - roll the new version to prod:
-        echo   build-and-push\storefront.bat
-        echo   build-and-push\frontend.bat
-        echo   build-and-push\backend.bat
-    )
-)
+
+:: Decide which "next steps" block to print based on install outcome.
+:: We have 3 cases: install was skipped, install had failures, install
+:: succeeded. Map each case to a unique token, then goto.
+if "%SHOULD_INSTALL%"=="0" goto :next_steps_skipped
+if "%HAD_FAIL%"=="1" goto :next_steps_failures
+goto :next_steps_success
+
+:next_steps_skipped
+echo.
+echo Next steps (you skipped the consumer install):
+echo   1. bump the dep string in each consumer's package.json
+echo   2. run npm install in each consumer
+echo   3. build-and-push\storefront.bat / frontend.bat / backend.bat to roll
 echo.
 goto :end
+
+:next_steps_failures
+echo.
+echo Consumers with install failures still need manual attention.
+echo   Re-run with --only ^<name^> to retry a specific consumer.
+echo.
+goto :end
+
+:next_steps_success
+echo.
+echo Next steps - roll the new version to prod:
+echo   build-and-push\storefront.bat
+echo   build-and-push\frontend.bat
+echo   build-and-push\backend.bat
+echo.
+goto :end
+
 :summary_nopush
 echo ============================================================
 echo   [OK] Local release staged - NOT pushed

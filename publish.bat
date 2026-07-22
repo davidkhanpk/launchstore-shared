@@ -156,14 +156,20 @@ set "CONSUMER_SKIP=0"
 set "CONSUMER_FAIL=0"
 
 for %%V in (%CONSUMER_LIST%) do (
-    set "CNAME=%%V"
+    :: Use %%V directly in if-compares instead of bouncing through
+    :: !CNAME!. Delayed expansion inside a for loop's parens block is
+    :: fragile on some Windows builds and can leave the !-bound variable
+    :: empty even after the same code sets it via `set "X=%%V"`. The
+    :: for-loop variable itself is reliably available as %%V, so we just
+    :: use that directly. This is what makes the consumer install work
+    :: end-to-end.
     set "CREL="
     set "CFLAGS="
-    if "!CNAME!"=="frontend"   set "CREL=launchstore-frontend"
-    if "!CNAME!"=="storefront" set "CREL=launchstore-storefront"
-    if "!CNAME!"=="backend"    set "CREL=.."
-    if "!CNAME!"=="backend"    set "CFLAGS=--legacy-peer-deps"
-    call :install_in_consumer "!CNAME!" "!CREL!" "!CFLAGS!"
+    if "%%V"=="frontend"   set "CREL=launchstore-frontend"
+    if "%%V"=="storefront" set "CREL=launchstore-storefront"
+    if "%%V"=="backend"    set "CREL=.."
+    if "%%V"=="backend"    set "CFLAGS=--legacy-peer-deps"
+    call :install_in_consumer "%%V" "!CREL!" "!CFLAGS!"
     echo.
 )
 

@@ -17,6 +17,13 @@ export interface ShippingMethodWithData extends ShippingMethodProps {
     selectedId?: string;
     onSelect?: (id: string) => void;
     onContinue?: () => void;
+    pickupOption?: {
+        id: string;
+        name: string;
+        price: string;
+        time: string;
+        description: string;
+    };
 }
 export declare const ShippingMethod: ComponentConfig<ShippingMethodWithData>;
 export default ShippingMethod;

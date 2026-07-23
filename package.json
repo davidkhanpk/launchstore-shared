@@ -1,6 +1,6 @@
 {
   "name": "@launchstore/shared-puck",
-  "version": "0.1.29",
+  "version": "0.1.30",
   "private": true,
   "description": "Single source of truth for Puck components + AI capability registry, shared between launchstore-frontend (editor) and launchstore-storefront (renderer).",
   "main": "dist/index.js",

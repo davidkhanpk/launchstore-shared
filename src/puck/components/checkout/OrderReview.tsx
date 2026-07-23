@@ -42,9 +42,9 @@ export interface OrderReviewWithData extends OrderReviewProps {
   onAgreedChange?: (v: boolean) => void;
 }
 
-const MOCK_ADDR = { name: 'John Doe', street: '123 Main Street, Apt 4B', city: 'New York', state: 'NY', zip: '10001', country: 'United States', email: 'john.doe@example.com' };
-const MOCK_SHIP = { name: 'Standard Shipping', price: '$9.95', estimate: '5-7 business days' };
-const MOCK_PAY = { description: 'Credit Card ending in 3456' };
+// No static MOCK — the storefront wrapper injects real Medusa shipping
+// address / shipping method / payment method via Puck context. If no data
+// is passed, we show empty fields instead of fake ones.
 
 export const OrderReview: ComponentConfig<OrderReviewWithData> = {
   label: 'Order Review & Place Order',
@@ -52,9 +52,9 @@ export const OrderReview: ComponentConfig<OrderReviewWithData> = {
   defaultProps: { showTermsCheckbox: true, showPolicies: true, showSecurityBadge: true, buttonText: 'Place Order', buttonSize: 'large' },
   render: (raw: any) => {
     const { showTermsCheckbox, showPolicies, showSecurityBadge, buttonText = 'Place Order', buttonSize = 'large' } = raw as OrderReviewWithData;
-    const addr = (raw as any).shippingAddress ?? MOCK_ADDR;
-    const ship = (raw as any).shippingMethod ?? MOCK_SHIP;
-    const pay = (raw as any).paymentMethod ?? MOCK_PAY;
+    const addr = (raw as any).shippingAddress;
+    const ship = (raw as any).shippingMethod;
+    const pay = (raw as any).paymentMethod;
     const termsHref = (raw as any).termsHref ?? '#';
     const privacyHref = (raw as any).privacyHref ?? '#';
     const refundHref = (raw as any).refundHref ?? '#';
@@ -75,17 +75,33 @@ export const OrderReview: ComponentConfig<OrderReviewWithData> = {
         <div className="space-y-4 mb-6">
           <div className="border border-gray-100 rounded-lg p-4 bg-gray-50">
             <h3 className="font-medium text-gray-900 mb-3">Shipping to:</h3>
-            <p className="text-sm text-gray-700">{addr.name}<br />{addr.street}<br />{addr.city}, {addr.state} {addr.zip}<br />{addr.country}</p>
-            <p className="text-sm text-gray-600 mt-2">{addr.email}</p>
+            {addr ? (
+              <>
+                <p className="text-sm text-gray-700">{addr.name}<br />{addr.street}<br />{addr.city}, {addr.state} {addr.zip}<br />{addr.country}</p>
+                {addr.email && <p className="text-sm text-gray-600 mt-2">{addr.email}</p>}
+              </>
+            ) : (
+              <p className="text-sm text-gray-500">Please complete the shipping step.</p>
+            )}
           </div>
           <div className="border border-gray-100 rounded-lg p-4 bg-gray-50">
             <h3 className="font-medium text-gray-900 mb-2">Shipping Method:</h3>
-            <p className="text-sm text-gray-700">{ship.name} - {ship.price}</p>
-            <p className="text-xs text-gray-600 mt-1">Estimated delivery: {ship.estimate}</p>
+            {ship ? (
+              <>
+                <p className="text-sm text-gray-700">{ship.name} - {ship.price}</p>
+                {ship.estimate && <p className="text-xs text-gray-600 mt-1">Estimated delivery: {ship.estimate}</p>}
+              </>
+            ) : (
+              <p className="text-sm text-gray-500">Please complete the delivery step.</p>
+            )}
           </div>
           <div className="border border-gray-100 rounded-lg p-4 bg-gray-50">
             <h3 className="font-medium text-gray-900 mb-2">Payment Method:</h3>
-            <p className="text-sm text-gray-700">{pay.description}</p>
+            {pay ? (
+              <p className="text-sm text-gray-700">{pay.description}</p>
+            ) : (
+              <p className="text-sm text-gray-500">Please complete the payment step.</p>
+            )}
           </div>
         </div>
 

@@ -32,14 +32,12 @@ export interface ShippingMethodWithData extends ShippingMethodProps {
   selectedId?: string;
   onSelect?: (id: string) => void;
   onContinue?: () => void;
+  pickupOption?: { id: string; name: string; price: string; time: string; description: string };
 }
 
-const BASE_METHODS = [
-  { id: 'standard', name: 'Standard Shipping', price: '$9.95', time: '5-7 business days', description: 'Delivered by ground shipping' },
-  { id: 'express', name: 'Express Shipping', price: '$19.95', time: '2-3 business days', description: 'Expedited delivery service' },
-  { id: 'overnight', name: 'Overnight Shipping', price: '$39.95', time: 'Next business day', description: 'Guaranteed next-day delivery' },
-];
-const PICKUP = { id: 'pickup', name: 'Store Pickup', price: 'FREE', time: 'Ready in 2-4 hours', description: 'Pick up at our store location' };
+// No static MOCK — the storefront wrapper injects real Medusa shipping
+// options via Puck context. If no data is passed, we show an empty state.
+// The shared component is purely presentational.
 
 export const ShippingMethod: ComponentConfig<ShippingMethodWithData> = {
   label: 'Shipping Method',
@@ -47,11 +45,33 @@ export const ShippingMethod: ComponentConfig<ShippingMethodWithData> = {
   defaultProps: { layout: 'list', showDeliveryTime: true, showDeliveryDescription: false, showPickupOption: false, defaultSelection: 'standard' },
   render: (raw: any) => {
     const { layout = 'list', showDeliveryTime, showDeliveryDescription, showPickupOption, defaultSelection = 'standard' } = raw as ShippingMethodWithData;
-    const baseMethods = (raw as any).methods ?? BASE_METHODS;
-    const methods = showPickupOption ? [...baseMethods, PICKUP] : baseMethods;
+    const baseMethods: any[] | undefined = (raw as any).methods;
+    const pickup: any | undefined = (raw as any).pickupOption ?? ((raw as any).showPickupOption
+      ? { id: 'pickup', name: 'Store Pickup', price: 'FREE', time: 'Ready in 2-4 hours', description: 'Pick up at our store location' }
+      : undefined);
+    const methods = baseMethods
+      ? (pickup ? [...baseMethods, pickup] : baseMethods)
+      : undefined;
     const selectedId: string = (raw as any).selectedId ?? defaultSelection;
     const onSelect: (id: string) => void = (raw as any).onSelect ?? (() => {});
     const onContinue: () => void = (raw as any).onContinue ?? (() => {});
+
+    // Empty state: no methods provided. The storefront wrapper injects
+    // real Medusa shipping options; if none are returned, show this
+    // instead of a hardcoded fallback list.
+    if (!methods || methods.length === 0) {
+      return (
+        <div className="border border-gray-200 rounded-lg p-6 bg-white">
+          <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200">
+            <Truck />
+            <h2 className="text-xl font-semibold text-gray-900">Delivery Method</h2>
+          </div>
+          <p className="text-sm text-gray-500">
+            No shipping options are available for this region yet.
+          </p>
+        </div>
+      );
+    }
 
     const renderMethod = (method: any) => {
       if (layout === 'cards') {
@@ -62,12 +82,12 @@ export const ShippingMethod: ComponentConfig<ShippingMethodWithData> = {
                 <Truck />
                 <div>
                   <h4 className="font-medium text-gray-900">{method.name}</h4>
-                  {showDeliveryTime && <p className="text-sm text-gray-600 mt-1"><Clock /> {method.time}</p>}
+                  {showDeliveryTime && method.time && <p className="text-sm text-gray-600 mt-1"><Clock /> {method.time}</p>}
                 </div>
               </div>
               <span className="font-bold text-gray-900">{method.price}</span>
             </div>
-            {showDeliveryDescription && <p className="text-sm text-gray-500 mt-2">{method.description}</p>}
+            {showDeliveryDescription && method.description && <p className="text-sm text-gray-500 mt-2">{method.description}</p>}
           </div>
         );
       }
@@ -77,7 +97,7 @@ export const ShippingMethod: ComponentConfig<ShippingMethodWithData> = {
             <div className="flex items-center gap-2">
               <input type="radio" name="shipping" className="h-4 w-4" checked={method.id === selectedId} onChange={() => onSelect(method.id)} />
               <span className="text-sm font-medium text-gray-900">{method.name}</span>
-              {showDeliveryTime && <span className="text-xs text-gray-500">({method.time})</span>}
+              {showDeliveryTime && method.time && <span className="text-xs text-gray-500">({method.time})</span>}
             </div>
             <span className="text-sm font-medium text-gray-900">{method.price}</span>
           </label>
@@ -90,8 +110,8 @@ export const ShippingMethod: ComponentConfig<ShippingMethodWithData> = {
               <input type="radio" name="shipping" className="h-4 w-4" checked={method.id === selectedId} onChange={() => onSelect(method.id)} />
               <div>
                 <div className="flex items-center gap-2"><Truck /><h4 className="font-medium text-gray-900">{method.name}</h4></div>
-                {showDeliveryTime && <p className="text-sm text-gray-600 mt-1 ml-8"><Clock /> {method.time}</p>}
-                {showDeliveryDescription && <p className="text-sm text-gray-500 mt-1 ml-8">{method.description}</p>}
+                {showDeliveryTime && method.time && <p className="text-sm text-gray-600 mt-1 ml-8"><Clock /> {method.time}</p>}
+                {showDeliveryDescription && method.description && <p className="text-sm text-gray-500 mt-1 ml-8">{method.description}</p>}
               </div>
             </div>
             <span className="font-bold text-gray-900">{method.price}</span>
@@ -110,7 +130,7 @@ export const ShippingMethod: ComponentConfig<ShippingMethodWithData> = {
           {methods.map(renderMethod)}
         </div>
         <div className="mt-6">
-          <button onClick={onContinue} className="w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors font-medium">Continue to Payment</button>
+          <button type="button" onClick={onContinue} className="w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors font-medium">Continue to Payment</button>
         </div>
       </div>
     );

@@ -27,16 +27,10 @@ const Spinner = ({ size = 20 }: { size?: number }) => (
 interface ShippingMethod { id: string; name: string; price: number; estimate: string; }
 interface PaymentMethod { id: string; name: string; icon: string; }
 
-const DEFAULT_SHIPPING: ShippingMethod[] = [
-  { id: 'standard', name: 'Standard Shipping', price: 995, estimate: '5-7 business days' },
-  { id: 'express', name: 'Express Shipping', price: 1995, estimate: '2-3 business days' },
-  { id: 'overnight', name: 'Overnight Shipping', price: 3995, estimate: 'Next business day' },
-];
-const DEFAULT_PAYMENT: PaymentMethod[] = [
-  { id: 'card', name: 'Credit/Debit Card', icon: '💳' },
-  { id: 'paypal', name: 'PayPal', icon: '🅿️' },
-  { id: 'apple', name: 'Apple Pay', icon: '🍎' },
-];
+// No static defaults. The storefront wrapper injects real Medusa
+// shipping + payment options via Puck context. If no data is passed
+// (e.g. fetch failed or region has none), the form shows a clear
+// "not available" empty state instead of fake options.
 
 export interface CheckoutFormData {
   email: string;
@@ -75,8 +69,8 @@ export const CheckoutForm: ComponentConfig<CheckoutFormWithData> = {
   render: (raw: any) => {
     const { showStepIndicators, enableGuestCheckout, requirePhoneNumber, showSaveAddressCheckbox, defaultCountry = 'US', showOrderNotes } = raw as CheckoutFormWithData;
     const initialStep = (raw as any).initialStep ?? 1;
-    const shippingMethods: ShippingMethod[] = (raw as any).shippingMethods ?? DEFAULT_SHIPPING;
-    const paymentMethods: PaymentMethod[] = (raw as any).paymentMethods ?? DEFAULT_PAYMENT;
+    const shippingMethods: ShippingMethod[] | undefined = (raw as any).shippingMethods;
+    const paymentMethods: PaymentMethod[] | undefined = (raw as any).paymentMethods;
     const onSubmit: (d: CheckoutFormData) => void | Promise<void> = (raw as any).onSubmit ?? (() => {});
     const onStepChange: (s: number) => void = (raw as any).onStepChange ?? (() => {});
     const externalProcessing: boolean = (raw as any).isProcessing ?? false;
@@ -193,23 +187,27 @@ export const CheckoutForm: ComponentConfig<CheckoutFormWithData> = {
           {currentStep === 2 && (
             <div className="border border-gray-200 rounded-lg p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-6">Choose Delivery Method</h2>
-              <div className="space-y-3 mb-6">
-                {shippingMethods.map((method) => (
-                  <label key={method.id} className={`flex items-center justify-between p-4 border rounded cursor-pointer transition-colors ${formData.shippingMethod === method.id ? 'border-black bg-gray-50' : 'border-gray-300 hover:border-gray-400'}`}>
-                    <div className="flex items-center">
-                      <input type="radio" name="shippingMethod" value={method.id} checked={formData.shippingMethod === method.id} onChange={(e) => handleField('shippingMethod', e.target.value)} className="mr-4" />
-                      <div>
-                        <p className="font-medium text-gray-900">{method.name}</p>
-                        <p className="text-sm text-gray-600">{method.estimate}</p>
+              {(!shippingMethods || shippingMethods.length === 0) ? (
+                <p className="text-sm text-gray-500 mb-6">No shipping options are available for this region yet.</p>
+              ) : (
+                <div className="space-y-3 mb-6">
+                  {shippingMethods.map((method) => (
+                    <label key={method.id} className={`flex items-center justify-between p-4 border rounded cursor-pointer transition-colors ${formData.shippingMethod === method.id ? 'border-black bg-gray-50' : 'border-gray-300 hover:border-gray-400'}`}>
+                      <div className="flex items-center">
+                        <input type="radio" name="shippingMethod" value={method.id} checked={formData.shippingMethod === method.id} onChange={(e) => handleField('shippingMethod', e.target.value)} className="mr-4" />
+                        <div>
+                          <p className="font-medium text-gray-900">{method.name}</p>
+                          <p className="text-sm text-gray-600">{method.estimate}</p>
+                        </div>
                       </div>
-                    </div>
-                    <span className="font-semibold text-gray-900">{formatPrice(method.price)}</span>
-                  </label>
-                ))}
-              </div>
+                      <span className="font-semibold text-gray-900">{formatPrice(method.price)}</span>
+                    </label>
+                  ))}
+                </div>
+              )}
               <div className="flex justify-between">
                 <button type="button" onClick={() => setStep(1)} className="px-6 py-3 border border-gray-300 text-gray-700 rounded hover:bg-gray-50">Back</button>
-                <button type="button" onClick={() => setStep(3)} disabled={!formData.shippingMethod} className="px-6 py-3 bg-black text-white rounded hover:bg-gray-800 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">Continue to Payment <ChevronRight /></button>
+                <button type="button" onClick={() => setStep(3)} disabled={!formData.shippingMethod || !shippingMethods?.length} className="px-6 py-3 bg-black text-white rounded hover:bg-gray-800 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">Continue to Payment <ChevronRight /></button>
               </div>
             </div>
           )}
@@ -217,36 +215,29 @@ export const CheckoutForm: ComponentConfig<CheckoutFormWithData> = {
           {currentStep === 3 && (
             <div className="border border-gray-200 rounded-lg p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-6">Payment Information</h2>
-              <div className="space-y-3 mb-6">
-                {paymentMethods.map((method) => (
-                  <label key={method.id} className={`flex items-center p-4 border rounded cursor-pointer transition-colors ${formData.paymentMethod === method.id ? 'border-black bg-gray-50' : 'border-gray-300 hover:border-gray-400'}`}>
-                    <input type="radio" name="paymentMethod" value={method.id} checked={formData.paymentMethod === method.id} onChange={(e) => handleField('paymentMethod', e.target.value)} className="mr-4" />
-                    <span className="text-2xl mr-3">{method.icon}</span>
-                    <span className="font-medium text-gray-900">{method.name}</span>
-                  </label>
-                ))}
-              </div>
-              {formData.paymentMethod === 'card' && (
-                <div className="space-y-4 mb-6 p-4 bg-gray-50 rounded">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Card Number *</label>
-                    <input type="text" placeholder="1234 5678 9012 3456" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-black" required />
+              {(!paymentMethods || paymentMethods.length === 0) ? (
+                <p className="text-sm text-gray-500 mb-6">No payment methods are available for this region yet.</p>
+              ) : (
+                <>
+                  <div className="space-y-3 mb-6">
+                    {paymentMethods.map((method) => (
+                      <label key={method.id} className={`flex items-center p-4 border rounded cursor-pointer transition-colors ${formData.paymentMethod === method.id ? 'border-black bg-gray-50' : 'border-gray-300 hover:border-gray-400'}`}>
+                        <input type="radio" name="paymentMethod" value={method.id} checked={formData.paymentMethod === method.id} onChange={(e) => handleField('paymentMethod', e.target.value)} className="mr-4" />
+                        {method.icon && <span className="text-2xl mr-3">{method.icon}</span>}
+                        <span className="font-medium text-gray-900">{method.name}</span>
+                      </label>
+                    ))}
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Expiry Date *</label>
-                      <input type="text" placeholder="MM/YY" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-black" required />
+                  {formData.paymentMethod === 'card' && (
+                    <div className="space-y-4 mb-6 p-4 bg-gray-50 rounded">
+                      <p className="text-xs text-gray-500">Card details are collected by the payment provider&apos;s hosted form (Stripe Elements, etc.), not here.</p>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">CVV *</label>
-                      <input type="text" placeholder="123" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-black" required />
-                    </div>
-                  </div>
-                </div>
+                  )}
+                </>
               )}
               <div className="flex justify-between">
                 <button type="button" onClick={() => setStep(2)} className="px-6 py-3 border border-gray-300 text-gray-700 rounded hover:bg-gray-50">Back</button>
-                <button type="submit" disabled={!formData.paymentMethod || isProcessing} className="px-8 py-3 bg-black text-white rounded hover:bg-gray-800 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                <button type="submit" disabled={!formData.paymentMethod || isProcessing || !paymentMethods?.length} className="px-8 py-3 bg-black text-white rounded hover:bg-gray-800 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
                   {isProcessing ? <><Spinner /> Processing…</> : 'Complete Order'}
                 </button>
               </div>

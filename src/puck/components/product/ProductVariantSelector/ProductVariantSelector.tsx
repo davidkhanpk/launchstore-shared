@@ -101,10 +101,21 @@ export const ProductVariantSelector: ComponentConfig<ProductVariantSelectorWithS
     const selectedOptions = controlled ? (externalOpts as SelectedOptions) : localOpts;
     const setOptions: SetSelectedOptions = controlled ? (externalSetOpts as SetSelectedOptions) : setLocalOpts;
 
+    console.log('[PVS render]', {
+      controlled,
+      productId: product?.id,
+      variantsLen: product?.variants?.length,
+      optionsLen: (product?.options || []).length,
+      selectedOptionsKeys: Object.keys(selectedOptions),
+      selectedVariantId: selectedVariant?.id,
+    });
+
     if (!product || !product.variants || product.variants.length === 0) {
+      console.log('[PVS render] early return: no product/variants');
       return <div className="text-gray-400 italic">No variants available</div>;
     }
     if (product.variants.length === 1 && (!product.options || product.options.length === 0)) {
+      console.log('[PVS render] early return: single variant, no options');
       return <div />;
     }
     const options = product.options || [];
@@ -123,11 +134,13 @@ export const ProductVariantSelector: ComponentConfig<ProductVariantSelectorWithS
     // so the AddToCart's selectedVariant gets populated and the button
     // enables correctly on first paint.
     useEffect(() => {
+      console.log('[PVS init effect] fired. options.length=', options.length, 'selectedOptions=', JSON.stringify(selectedOptions));
       if (options.length > 0 && Object.keys(selectedOptions).length === 0) {
         const init: SelectedOptions = {};
         options.forEach((opt) => {
           if (opt.values && opt.values.length > 0) init[opt.id] = opt.values[0].value;
         });
+        console.log('[PVS init effect] setting init=', JSON.stringify(init));
         setOptions(init);
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -135,12 +148,14 @@ export const ProductVariantSelector: ComponentConfig<ProductVariantSelectorWithS
 
     // Find matching variant when options change
     useEffect(() => {
+      console.log('[PVS match effect] fired. selectedOptions=', JSON.stringify(selectedOptions), 'options.length=', options.length);
       if (Object.keys(selectedOptions).length === options.length) {
         const match = product.variants?.find((variant) =>
           variant.options?.every((vo) => {
             const oid = vo.option_id; const v = vo.value; return oid && v && selectedOptions[oid] === v;
           })
         );
+        console.log('[PVS match effect] match=', match?.id, 'externalSetVariant?', typeof externalSetVariant);
         if (externalSetVariant && match) {
           externalSetVariant({
             id: match.id, sku: match.sku ?? undefined,

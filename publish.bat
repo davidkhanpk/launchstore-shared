@@ -133,25 +133,79 @@ echo [5/6] Skipping push, --no-push was set
 echo.
 :install_phase
 
-:: ---- Step 6: Update dep string + npm install in every consumer -----
+:: ---- Step 6: Focused install of @launchstore/shared-puck in every consumer -----
 :: Always runs. Every publish ships the new version to every consumer
-:: without manual intervention. The actual work is delegated to a Python
-:: script — the previous in-CMD implementation (for-loop + subroutine +
-:: delayed expansion) was unreliable on some Windows builds and produced
-:: 9 "drive not found" errors with skip=3. The Python script handles
-:: path resolution, dep-string updates, and npm install for all 3
-:: consumers deterministically. The backend gets --legacy-peer-deps to
-:: work around the zod 3 vs 4 peer dep conflict with @langchain.
+:: without manual intervention. We use `npm install @launchstore/shared-puck@<spec>`
+:: (NOT a bare `npm install`) — this updates only the one package entry in
+:: node_modules and package-lock.json, and re-resolves just that one entry's
+:: git tag → commit hash. Takes ~5s per consumer instead of 1+ min for a
+:: full tree install, and avoids unrelated lockfile churn.
+::
+:: The backend gets --legacy-peer-deps to work around the zod 3 vs 4 peer
+:: dep conflict with @langchain.
 echo [6/6] Installing v%NEW_VERSION% in consumer repos ...
 echo.
 set "HAD_FAIL=0"
-python "%~dp0scripts\install_in_consumers.py" "%NEW_VERSION%"
-if !errorlevel! neq 0 (
-    echo.
-    echo [WARN] Consumer install reported failures. See output above.
+set "SHARED_SPEC=@launchstore/shared-puck@github:davidkhanpk/launchstore-shared#v%NEW_VERSION%"
+
+:: --- storefront ---
+echo        installing in launchstore-storefront ...
+pushd "%PARENT_DIR%\launchstore-storefront" >nul
+if errorlevel 1 (
+    echo        [FAIL] could not cd to launchstore-storefront
+    set "HAD_FAIL=1"
+) else (
+    call npm install %SHARED_SPEC%
+    if !errorlevel! neq 0 (
+        echo        [FAIL] npm install failed in launchstore-storefront
+        set "HAD_FAIL=1"
+    ) else (
+        echo        [OK]   launchstore-storefront
+    )
+    popd >nul
+)
+echo.
+
+:: --- frontend ---
+echo        installing in launchstore-frontend ...
+pushd "%PARENT_DIR%\launchstore-frontend" >nul
+if errorlevel 1 (
+    echo        [FAIL] could not cd to launchstore-frontend
+    set "HAD_FAIL=1"
+) else (
+    call npm install %SHARED_SPEC%
+    if !errorlevel! neq 0 (
+        echo        [FAIL] npm install failed in launchstore-frontend
+        set "HAD_FAIL=1"
+    ) else (
+        echo        [OK]   launchstore-frontend
+    )
+    popd >nul
+)
+echo.
+
+:: --- parent backend (uses --legacy-peer-deps for zod/langchain conflict) ---
+echo        installing in parent backend ...
+pushd "%PARENT_DIR%" >nul
+if errorlevel 1 (
+    echo        [FAIL] could not cd to parent backend
+    set "HAD_FAIL=1"
+) else (
+    call npm install %SHARED_SPEC% --legacy-peer-deps
+    if !errorlevel! neq 0 (
+        echo        [FAIL] npm install failed in parent backend
+        set "HAD_FAIL=1"
+    ) else (
+        echo        [OK]   parent backend
+    )
+    popd >nul
+)
+echo.
+
+if !HAD_FAIL! equ 1 (
+    echo [WARN] Some consumer installs failed. See output above.
     echo        Fix the failing consumer and re-run publish.bat ^- the
     echo        next bump will retry it.
-    set "HAD_FAIL=1"
 )
 echo.
 

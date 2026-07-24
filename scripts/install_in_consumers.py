@@ -1,26 +1,31 @@
 #!/usr/bin/env python3
 """
-install_in_consumers.py — robustly update @launchstore/shared-puck dep string
-in every launchstore consumer repo, then run `npm install` so package-lock.json
-gets the new version.
+install_in_consumers.py — update the @launchstore/shared-puck dep string in
+every launchstore consumer repo and run a focused install of just that one
+package (not a full `npm install` of the whole tree).
 
-This replaces the broken CMD subroutine in publish.bat. The bat file calls this
-after a successful version bump + git push.
+This is what publish.bat calls after a successful version bump + git push.
+
+Why focused install instead of full `npm install`:
+  - A full `npm install` in a big repo can take 1+ minute and trigger
+    re-resolution of every package, which is unnecessary and can introduce
+    unrelated lockfile churn.
+  - We're only changing the version pin for ONE package. The
+    `npm install <pkg>@<spec>` form updates only that one entry, finishes
+    in a few seconds, and leaves the rest of the lockfile untouched.
+  - The lockfile's resolved commit hash for the github: dep still needs
+    to be swapped though, otherwise npm will detect an inconsistency and
+    fall back to a full resolution. So we edit that one line.
 
 Usage:
     python install_in_consumers.py <new_version>
-    e.g. python install_in_consumers.py 0.1.23
+    e.g. python install_in_consumers.py 0.1.30
 
 Exit codes:
-    0 = all consumers updated + npm install succeeded
+    0 = all consumers updated + focused install succeeded
     1 = at least one consumer failed (details printed to stderr)
-
-Env overrides (rarely needed):
-    LAUNCHSTORE_PARENT_DIR  - absolute path of the parent dir (D:\\Repos\\launchstore)
-                              Defaults to the script's inferred parent.
 """
 from __future__ import annotations
-import json
 import os
 import re
 import subprocess
@@ -29,7 +34,22 @@ from pathlib import Path
 
 DEP_KEY = "@launchstore/shared-puck"
 DEP_RE = re.compile(rf'"{re.escape(DEP_KEY)}"\s*:\s*"[^"]*"')
+DEP_URL = "github:davidkhanpk/launchstore-shared"
 BOM = b"\xef\xbb\xbf"
+
+# Old commit hashes we've shipped previously. Add new ones as releases go
+# out so any consumer that somehow still has a stale pin gets unstuck.
+# These are populated from the git tag → commit history of launchstore-shared.
+KNOWN_OLD_HASHES = [
+    "2b9ba83087ff6798449381e2f9bf3a5a6a38e748",  # v0.1.11
+    "5f825f508ac8320427ff7927dec63bcc4a901cc2",  # v0.0.9
+    "cbedbadf1f7baecf1014915ed9753d36fca6e6dd",  # v0.1.29
+    "9183283dd56ead4518a591abf6ba616b086dcb7a",  # v0.1.23
+    "ea37ed792d8801efa5d3ba44222444b2e02e2849",  # v0.1.27
+    "296707273d2fd1f35b379f0537817b9e60171630",  # v0.1.23 (^{})
+    "5ea358d3f36b20dff280f7cc686b00fd436cb3bf",  # v0.1.21 (^{})
+    "8147b47067e4af9ace1383b04b38e4ccc9f79717",  # v0.1.27 (^{})
+]
 
 # Consumer table. Each entry is (display_name, package.json path, npm install flags).
 # Order matches the previous publish.bat behavior (frontend, storefront, backend).
@@ -58,48 +78,90 @@ def write_text(p: Path, text: str, *, had_bom: bool) -> None:
 def update_dep_string(p: Path, new_version: str) -> tuple[bool, str]:
     """Update the @launchstore/shared-puck dep string. Returns (changed, new_string)."""
     text, had_bom = read_text(p)
-    new_dep = f'"{DEP_KEY}": "github:davidkhanpk/launchstore-shared#v{new_version}"'
+    new_dep = f'"{DEP_KEY}": "{DEP_URL}#v{new_version}"'
     matches = DEP_RE.findall(text)
     if not matches:
         return (False, "")
     if matches[0] == new_dep:
         return (False, new_dep)  # already up to date
-    # Replace ALL occurrences (defensive: shouldn't be more than one, but just in case)
     new_text = DEP_RE.sub(new_dep, text)
     write_text(p, new_text, had_bom=had_bom)
     return (True, new_dep)
 
 
-def run_npm_install(cwd: Path, flags: list[str]) -> tuple[bool, str]:
-    """Run `npm install <flags>` in `cwd`. Returns (ok, summary_line)."""
-    # On Windows, `npm` is a .cmd shim. subprocess.run with a list on Windows
-    # uses CreateProcess which does NOT auto-resolve .cmd via PATHEXT, so we
-    # need shell=True (or `cmd /c npm ...`). shell=True inherits the user's
-    # PATH, which is what we want.
-    cmd_parts = " ".join(["npm", "install", *flags])
+def get_new_commit_hash(shared_repo: Path, new_version: str) -> str | None:
+    """Resolve the new tag to a commit hash in the shared repo."""
+    try:
+        out = subprocess.run(
+            ["git", "rev-parse", f"v{new_version}", "--"],
+            cwd=shared_repo,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        return out.stdout.strip().splitlines()[0]
+    except Exception:
+        return None
+
+
+def update_lockfile_hash(consumer_dir: Path, new_commit: str) -> int:
+    """Swap any KNOWN_OLD_HASHES for `new_commit` in this consumer's lockfile.
+
+    The lockfile's `resolved` line for a github: dep pins a specific commit
+    hash. If the dep string changes but the lockfile hash doesn't, npm will
+    detect the inconsistency and re-resolve the whole tree. We patch the
+    hash in place so the next `npm install <pkg>...` is a no-op for
+    everything except the one entry we're upgrading.
+    """
+    lockfile = consumer_dir / "package-lock.json"
+    if not lockfile.exists():
+        return 0
+    raw = lockfile.read_text(encoding="utf-8")
+    total = 0
+    for old in KNOWN_OLD_HASHES:
+        new_raw, n = re.subn(
+            rf"({re.escape(DEP_URL)}\.git)#{re.escape(old)}",
+            rf"\1#{new_commit}",
+            raw,
+        )
+        if n:
+            raw = new_raw
+            total += n
+    if total:
+        lockfile.write_text(raw, encoding="utf-8")
+    return total
+
+
+def run_focused_install(cwd: Path, new_version: str, flags: list[str]) -> tuple[bool, str]:
+    """Run `npm install @launchstore/shared-puck@<github:...#vX.Y.Z>` only.
+
+    This updates the one package in node_modules + lockfile instead of
+    resolving the entire tree. Much faster (~5s vs 1+ min).
+    """
+    spec = f"{DEP_KEY}@{DEP_URL}#v{new_version}"
+    cmd_parts = " ".join(["npm", "install", spec, *flags])
     try:
         result = subprocess.run(
             cmd_parts,
             cwd=cwd,
             capture_output=True,
             text=True,
-            timeout=900,  # 15 min max
+            timeout=300,  # 5 min cap; this should normally finish in seconds
             shell=True,
         )
     except subprocess.TimeoutExpired:
-        return (False, "TIMEOUT after 15min")
+        return (False, "TIMEOUT after 5min")
     except FileNotFoundError:
         return (False, "npm not found in PATH")
 
     if result.returncode == 0:
-        # Try to extract the final summary line
-        last_meaningful = ""
+        last = ""
         for line in reversed(result.stdout.splitlines()):
             line = line.strip()
             if line and not line.startswith("npm warn"):
-                last_meaningful = line
+                last = line
                 break
-        return (True, last_meaningful or "ok")
+        return (True, last or "ok")
     return (False, f"exit code {result.returncode}")
 
 
@@ -108,28 +170,40 @@ def main() -> int:
         print("usage: install_in_consumers.py <new_version>", file=sys.stderr)
         return 1
     new_version = sys.argv[1].lstrip("v")
+    shared_repo = Path(__file__).resolve().parent.parent  # scripts/.. = repo root
+    new_commit = get_new_commit_hash(shared_repo, new_version)
+    if not new_commit:
+        print(f"  [WARN] could not resolve v{new_version} to a commit hash; lockfile may need a manual patch", file=sys.stderr)
     print(f"=== installing v{new_version} in {len(CONSUMERS)} consumer repos ===")
+    if new_commit:
+        print(f"  new commit hash: {new_commit}")
     print()
 
-    results: list[tuple[str, bool, str]] = []  # (name, ok, detail)
+    results: list[tuple[str, bool, str]] = []
 
     for name, pj_path, flags in CONSUMERS:
+        consumer_dir = pj_path.parent
         if not pj_path.exists():
             print(f"  [FAIL] {name}: package.json not found at {pj_path}")
             results.append((name, False, "no package.json"))
             continue
 
-        # Update the dep string
+        # 1. Update the dep string in package.json
         changed, new_dep = update_dep_string(pj_path, new_version)
         if new_dep:
             print(f"  [{name}] dep string -> {new_dep}")
         else:
             print(f"  [{name}] [WARN] no @launchstore/shared-puck entry in package.json")
 
-        # Run npm install
-        npm_flags_str = " ".join(flags) if flags else ""
-        print(f"  [{name}] running: npm install {npm_flags_str}".rstrip())
-        ok, detail = run_npm_install(pj_path.parent, flags)
+        # 2. Patch the lockfile's resolved commit hash so npm install is a no-op
+        if new_commit:
+            n = update_lockfile_hash(consumer_dir, new_commit)
+            if n:
+                print(f"  [{name}] lockfile: patched {n} resolved-hash entry/entries")
+
+        # 3. Focused install of just the shared-puck package
+        print(f"  [{name}] running: npm install {DEP_KEY}@<{DEP_URL}#v{new_version}>")
+        ok, detail = run_focused_install(consumer_dir, new_version, flags)
         if ok:
             print(f"  [{name}] [OK]   {detail}")
             results.append((name, True, "ok"))
@@ -138,7 +212,6 @@ def main() -> int:
             results.append((name, False, detail))
         print()
 
-    # Summary
     ok_count = sum(1 for _, ok, _ in results if ok)
     print("=== install summary ===")
     for name, ok, detail in results:

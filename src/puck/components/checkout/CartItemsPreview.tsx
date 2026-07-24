@@ -28,10 +28,8 @@ export interface CartItemsPreviewWithData extends CartItemsPreviewProps {
   items?: Array<{ id: string; title: string; variant: string; price: string; quantity: number; total: string; image?: string }>;
 }
 
-const MOCK: NonNullable<CartItemsPreviewWithData['items']> = [
-  { id: '1', title: 'Classic T-Shirt', variant: 'Medium / Black', price: '$29.99', quantity: 2, total: '$59.98', image: 'https://via.placeholder.com/100' },
-  { id: '2', title: 'Denim Jeans', variant: '32x34 / Blue', price: '$79.99', quantity: 1, total: '$79.99', image: 'https://via.placeholder.com/100' },
-];
+// No static MOCK — the storefront wrapper injects real Medusa cart items
+// via Puck context. If no data is passed, the component shows an empty state.
 
 const SIZES = { sm: 'w-12 h-12', md: 'w-16 h-16', lg: 'w-20 h-20' } as const;
 
@@ -41,7 +39,7 @@ export const CartItemsPreview: ComponentConfig<CartItemsPreviewWithData> = {
   defaultProps: { showImages: true, showQuantity: true, showVariantInfo: true, imageSize: 'md', layout: 'list' },
   render: (raw: any) => {
     const { showImages, showQuantity, showVariantInfo, imageSize = 'md', layout = 'list' } = raw as CartItemsPreviewWithData;
-    const items = (raw as any).items ?? MOCK;
+    const items = (raw as any).items ?? [];
     return (
       <div className="border border-gray-200 rounded-lg p-6 bg-white">
         <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200">

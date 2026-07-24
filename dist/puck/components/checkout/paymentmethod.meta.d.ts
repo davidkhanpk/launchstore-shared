@@ -1,7 +1,7 @@
 export declare const paymentMethodMeta: {
     readonly name: "PaymentMethod";
     readonly label: "Payment Method";
-    readonly description: "Payment method selector with 3 layouts (list/cards/icons), express checkout top/bottom, optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue.";
+    readonly description: "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue. No express checkout — that lives outside Medusa's payment session flow and must be wired separately via Stripe Express Checkout Element if/when a real integration is built.";
     readonly category: "checkout";
     readonly intent: readonly ["payment", "checkout", "card"];
     readonly visualRole: "block";
@@ -9,7 +9,7 @@ export declare const paymentMethodMeta: {
     readonly copyFields: readonly [];
     readonly themeable: readonly [];
     readonly a11yRisk: "low";
-    readonly a11yNotes: "Real <input type=\"radio\"> + <button>. Card form uncontrolled for Puck preview.";
+    readonly a11yNotes: "Real <input type=\"radio\"> + <button>.";
     readonly mobileBehavior: "responsive";
     readonly searchTags: readonly ["payment", "checkout", "card", "paypal", "apple-pay"];
     readonly props: {
@@ -28,11 +28,6 @@ export declare const paymentMethodMeta: {
         };
         readonly enableSaveCard: {
             readonly type: "boolean";
-            readonly required: true;
-        };
-        readonly expressCheckoutPosition: {
-            readonly type: "enum";
-            readonly options: readonly ["top", "bottom", "none"];
             readonly required: true;
         };
     };

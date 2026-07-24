@@ -46,11 +46,12 @@ export const ShippingMethod: ComponentConfig<ShippingMethodWithData> = {
   render: (raw: any) => {
     const { layout = 'list', showDeliveryTime, showDeliveryDescription, showPickupOption, defaultSelection = 'standard' } = raw as ShippingMethodWithData;
     const baseMethods: any[] | undefined = (raw as any).methods;
-    const pickup: any | undefined = (raw as any).pickupOption ?? ((raw as any).showPickupOption
-      ? { id: 'pickup', name: 'Store Pickup', price: 'FREE', time: 'Ready in 2-4 hours', description: 'Pick up at our store location' }
-      : undefined);
+    // Pickup is a real Medusa option, just like any other shipping method. If
+    // the storefront wrapper passes a `pickupOption` prop, we add it. There
+    // is NO hardcoded fallback — the wrapper is responsible for the data.
+    const pickup: any | undefined = (raw as any).pickupOption;
     const methods = baseMethods
-      ? (pickup ? [...baseMethods, pickup] : baseMethods)
+      ? (showPickupOption && pickup ? [...baseMethods, pickup] : baseMethods)
       : undefined;
     const selectedId: string = (raw as any).selectedId ?? defaultSelection;
     const onSelect: (id: string) => void = (raw as any).onSelect ?? (() => {});

@@ -4,7 +4,6 @@ export interface PaymentMethodProps {
     showPaymentIcons: boolean;
     showSecurityBadges: boolean;
     enableSaveCard: boolean;
-    expressCheckoutPosition: 'top' | 'bottom' | 'none';
 }
 export interface PaymentMethodWithData extends PaymentMethodProps {
     methods?: Array<{

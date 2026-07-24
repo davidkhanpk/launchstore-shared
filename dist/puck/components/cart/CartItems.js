@@ -11,10 +11,6 @@ const cartItemsFields = {
     maxQuantity: { type: 'number', label: 'Max Quantity' },
     emptyMessage: { type: 'text', label: 'Empty Cart Message' },
 };
-const MOCK_ITEMS = [
-    { id: '1', title: 'Sample Product', product_title: 'Sample Product', product_handle: 'sample-product', thumbnail: 'https://via.placeholder.com/150', variant: { id: 'v1', title: 'Medium / Black', options: [{ value: 'Medium' }, { value: 'Black' }] }, quantity: 2, unit_price: 2999, total: 5998 },
-    { id: '2', title: 'Another Product', product_title: 'Another Product', product_handle: 'another-product', thumbnail: 'https://via.placeholder.com/150', variant: { id: 'v2', title: 'Large / White', options: [{ value: 'Large' }, { value: 'White' }] }, quantity: 1, unit_price: 4999, total: 4999 },
-];
 const defaultFormat = (price) => `$${(price / 100).toFixed(2)}`;
 export const CartItems = {
     label: 'Cart Items',
@@ -25,7 +21,7 @@ export const CartItems = {
     },
     render: (raw) => {
         const { layout = 'table', showImages, showVariantInfo, showQuantitySelector, showDeleteButton, imageSize = 'md', maxQuantity = 10, emptyMessage = 'Your cart is empty' } = raw;
-        const items = raw.items ?? MOCK_ITEMS;
+        const items = raw.items ?? [];
         const updating = raw.updatingItems ?? {};
         const onQuantityChange = raw.onQuantityChange ?? (() => { });
         const onDelete = raw.onDelete ?? (() => { });

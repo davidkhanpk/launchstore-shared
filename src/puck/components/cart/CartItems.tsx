@@ -17,10 +17,10 @@ const cartItemsFields = {
   emptyMessage: { type: 'text', label: 'Empty Cart Message' },
 } as Record<string, Field>;
 
-const MOCK_ITEMS: CartItem[] = [
-  { id: '1', title: 'Sample Product', product_title: 'Sample Product', product_handle: 'sample-product', thumbnail: 'https://via.placeholder.com/150', variant: { id: 'v1', title: 'Medium / Black', options: [{ value: 'Medium' }, { value: 'Black' }] }, quantity: 2, unit_price: 2999, total: 5998 },
-  { id: '2', title: 'Another Product', product_title: 'Another Product', product_handle: 'another-product', thumbnail: 'https://via.placeholder.com/150', variant: { id: 'v2', title: 'Large / White', options: [{ value: 'Large' }, { value: 'White' }] }, quantity: 1, unit_price: 4999, total: 4999 },
-];
+// No static MOCK_ITEMS — the storefront wrapper injects real Medusa cart
+// items via Puck context. If no data is passed, the component shows an
+// empty state (the configurable `emptyMessage` field). The wrapper
+// provides `sampleItems` from context for editor preview.
 
 export interface CartItemsWithData extends CartItemsProps {
   items?: CartItem[];
@@ -41,7 +41,7 @@ export const CartItems: ComponentConfig<CartItemsWithData> = {
   },
   render: (raw: any) => {
     const { layout = 'table', showImages, showVariantInfo, showQuantitySelector, showDeleteButton, imageSize = 'md', maxQuantity = 10, emptyMessage = 'Your cart is empty' } = raw as CartItemsWithData;
-    const items: CartItem[] = (raw as any).items ?? MOCK_ITEMS;
+    const items: CartItem[] = (raw as any).items ?? [];
     const updating: Record<string, boolean> = (raw as any).updatingItems ?? {};
     const onQuantityChange: CartItemUpdateFn = (raw as any).onQuantityChange ?? (() => {});
     const onDelete: CartItemDeleteFn = (raw as any).onDelete ?? (() => {});

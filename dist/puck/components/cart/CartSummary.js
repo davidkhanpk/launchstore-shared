@@ -18,7 +18,6 @@ const Tag = ({ size = 16 }) => (_jsxs("svg", { width: size, height: size, viewBo
 const ArrowRight = ({ size = 20 }) => (_jsxs("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: [_jsx("line", { x1: "5", y1: "12", x2: "19", y2: "12" }), _jsx("polyline", { points: "12 5 19 12 12 19" })] }));
 const Shield = ({ size = 16 }) => (_jsx("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: _jsx("path", { d: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" }) }));
 const Check = ({ size = 16 }) => (_jsx("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: _jsx("polyline", { points: "20 6 9 17 4 12" }) }));
-const MOCK_TOTALS = { subtotal: 10997, shipping: 995, tax: 880, discount: 1099, total: 11773 };
 const defaultFormat = (p) => `$${(p / 100).toFixed(2)}`;
 export const CartSummary = {
     label: 'Cart Summary',
@@ -32,7 +31,7 @@ export const CartSummary = {
         const [code, setCode] = useState('');
         const [applying, setApplying] = useState(false);
         const [error, setError] = useState(null);
-        const totals = raw.totals ?? MOCK_TOTALS;
+        const totals = raw.totals ?? { subtotal: 0, shipping: 0, tax: 0, discount: 0, total: 0 };
         const appliedCoupon = raw.appliedCoupon ?? null;
         const onApply = raw.onApplyCoupon ?? (() => { });
         const onRemove = raw.onRemoveCoupon ?? (() => { });

@@ -22,12 +22,8 @@ const Lock = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
 );
 
-const MOCK_ITEMS: CartItem[] = [
-  { id: '1', title: 'Sample Product', product_title: 'Sample Product', product_handle: 'sample', thumbnail: 'https://via.placeholder.com/80', variant: { id: 'v1', title: 'Medium / Black', options: [{ value: 'Medium' }, { value: 'Black' }] }, quantity: 2, unit_price: 2999, total: 5998 },
-  { id: '2', title: 'Another Product', product_title: 'Another Product', product_handle: 'another', thumbnail: 'https://via.placeholder.com/80', variant: { id: 'v2', title: 'Large / White', options: [{ value: 'Large' }, { value: 'White' }] }, quantity: 1, unit_price: 4999, total: 4999 },
-];
-
-const MOCK_TOTALS = { subtotal: 10997, shipping: 995, tax: 880, discount: 1099, total: 11773 };
+// No static MOCK — the storefront wrapper injects real Medusa cart data
+// via Puck context. If no data is passed, we show empty/zero values.
 
 export interface OrderSummaryWithData extends OrderSummaryProps {
   items?: CartItem[];
@@ -46,8 +42,8 @@ export const OrderSummary: ComponentConfig<OrderSummaryWithData> = {
   },
   render: (raw: any) => {
     const { position = 'sidebar', showItemImages, showItemQuantity, showItemPrice, showSubtotal, showShipping, showTax, showDiscount, showTotal, compactView } = raw as OrderSummaryWithData;
-    const items: CartItem[] = (raw as any).items ?? MOCK_ITEMS;
-    const totals = (raw as any).totals ?? MOCK_TOTALS;
+    const items: CartItem[] = (raw as any).items ?? [];
+    const totals = (raw as any).totals ?? { subtotal: 0, shipping: 0, tax: 0, discount: 0, total: 0 };
     const formatPrice: (p: number) => string = (raw as any).formatPrice ?? defaultFormat;
     const containerClass = position === 'sidebar' ? 'sticky top-4 border border-gray-200 rounded-lg p-6 bg-white shadow-sm' : 'border border-gray-200 rounded-lg p-6 bg-white';
 

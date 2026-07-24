@@ -9,7 +9,6 @@ const paymentMethodFields = {
   showPaymentIcons: { type: 'radio', label: 'Show Payment Icons', options: RADIO_YES_NO },
   showSecurityBadges: { type: 'radio', label: 'Show Security Badges', options: RADIO_YES_NO },
   enableSaveCard: { type: 'radio', label: 'Allow Save Card', options: RADIO_YES_NO },
-  expressCheckoutPosition: { type: 'select', label: 'Express Checkout Position', options: [{ label: 'Top', value: 'top' }, { label: 'Bottom', value: 'bottom' }, { label: 'None', value: 'none' }] },
 } as Record<string, Field>;
 
 const Card = ({ size = 20 }: { size?: number }) => (
@@ -27,7 +26,6 @@ export interface PaymentMethodProps {
   showPaymentIcons: boolean;
   showSecurityBadges: boolean;
   enableSaveCard: boolean;
-  expressCheckoutPosition: 'top' | 'bottom' | 'none';
 }
 
 export interface PaymentMethodWithData extends PaymentMethodProps {
@@ -44,9 +42,9 @@ export interface PaymentMethodWithData extends PaymentMethodProps {
 export const PaymentMethod: ComponentConfig<PaymentMethodWithData> = {
   label: 'Payment Method',
   fields: paymentMethodFields as ComponentConfig<PaymentMethodWithData>['fields'],
-  defaultProps: { layout: 'list', showPaymentIcons: true, showSecurityBadges: true, enableSaveCard: true, expressCheckoutPosition: 'top' },
+  defaultProps: { layout: 'list', showPaymentIcons: true, showSecurityBadges: true, enableSaveCard: true },
   render: (raw: any) => {
-    const { layout = 'list', showPaymentIcons, showSecurityBadges, enableSaveCard, expressCheckoutPosition = 'top' } = raw as PaymentMethodWithData;
+    const { layout = 'list', showPaymentIcons, showSecurityBadges, enableSaveCard } = raw as PaymentMethodWithData;
     const methods: any[] | undefined = (raw as any).methods;
     const selectedId: string = (raw as any).selectedId ?? '';
     const onSelect: (id: string) => void = (raw as any).onSelect ?? (() => {});
@@ -77,17 +75,6 @@ export const PaymentMethod: ComponentConfig<PaymentMethodWithData> = {
           <h2 className="text-xl font-semibold text-gray-900">Payment Method</h2>
         </div>
 
-        {expressCheckoutPosition === 'top' && (
-          <div className="mb-6 pb-6 border-b border-gray-200">
-            <p className="text-sm text-gray-600 mb-3">Express checkout</p>
-            <div className="grid grid-cols-2 gap-3">
-              <button type="button" className="border-2 border-gray-900 rounded-lg px-4 py-3 font-medium hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"><Lock /> Shop Pay</button>
-              <button type="button" className="border-2 border-gray-300 rounded-lg px-4 py-3 font-medium hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">G Pay</button>
-            </div>
-            <div className="mt-4 text-center"><span className="text-sm text-gray-500">— OR —</span></div>
-          </div>
-        )}
-
         <div className="space-y-4 mb-6">
           {methods.map((method: any) => (
             <div key={method.id} className={`border-2 rounded-lg p-4 transition-colors cursor-pointer ${method.id === selectedId ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-500'}`} onClick={() => onSelect(method.id)}>
@@ -117,15 +104,6 @@ export const PaymentMethod: ComponentConfig<PaymentMethodWithData> = {
             <div className="flex items-center justify-center gap-6 text-sm text-gray-600">
               <div className="flex items-center gap-2"><Lock /> <span>SSL Encrypted</span></div>
               <div className="flex items-center gap-2"><Shield /> <span>PCI Compliant</span></div>
-            </div>
-          </div>
-        )}
-
-        {expressCheckoutPosition === 'bottom' && (
-          <div className="mt-6 pt-6 border-t border-gray-200">
-            <div className="grid grid-cols-2 gap-3">
-              <button type="button" className="border-2 border-gray-900 rounded-lg px-4 py-3 font-medium hover:bg-gray-50 transition-colors">Shop Pay</button>
-              <button type="button" className="border-2 border-gray-300 rounded-lg px-4 py-3 font-medium hover:bg-gray-50 transition-colors">G Pay</button>
             </div>
           </div>
         )}

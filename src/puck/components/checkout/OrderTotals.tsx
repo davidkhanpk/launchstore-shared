@@ -32,7 +32,8 @@ export interface OrderTotalsWithData extends OrderTotalsProps {
   totals?: { subtotal: string; shipping: string; tax: string; discount: string; total: string; discountCode?: string };
 }
 
-const MOCK = { subtotal: '$109.97', shipping: '$9.95', tax: '$8.80', discount: '-$10.99', total: '$117.73', discountCode: 'SAVE10' };
+// No static MOCK — the storefront wrapper injects real Medusa cart totals
+// via Puck context. If no data is passed, we show zeros (the cart is empty).
 
 export const OrderTotals: ComponentConfig<OrderTotalsWithData> = {
   label: 'Order Totals',
@@ -40,7 +41,7 @@ export const OrderTotals: ComponentConfig<OrderTotalsWithData> = {
   defaultProps: { showSubtotal: true, showShipping: true, showTax: true, showDiscount: true, showTotal: true, highlightTotal: true, layout: 'default' },
   render: (raw: any) => {
     const { showSubtotal, showShipping, showTax, showDiscount, showTotal, highlightTotal, layout = 'default' } = raw as OrderTotalsWithData;
-    const totals = (raw as any).totals ?? MOCK;
+    const totals = (raw as any).totals ?? { subtotal: '', shipping: '', tax: '', discount: '', total: '' };
     const textSize = layout === 'compact' ? 'text-sm' : 'text-base';
     const spacing = layout === 'compact' ? 'space-y-2' : 'space-y-3';
 

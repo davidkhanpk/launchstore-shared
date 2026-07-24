@@ -34,7 +34,8 @@ const Check = ({ size = 16 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="20 6 9 17 4 12" /></svg>
 );
 
-const MOCK_TOTALS: CartTotals = { subtotal: 10997, shipping: 995, tax: 880, discount: 1099, total: 11773 };
+// No static MOCK_TOTALS — the storefront wrapper injects real Medusa cart
+// totals via Puck context. If no data is passed, we show zeros.
 
 export interface CartSummaryWithData extends CartSummaryProps {
   totals?: CartTotals;
@@ -61,7 +62,7 @@ export const CartSummary: ComponentConfig<CartSummaryWithData> = {
     const [applying, setApplying] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const totals: CartTotals = (raw as any).totals ?? MOCK_TOTALS;
+    const totals: CartTotals = (raw as any).totals ?? { subtotal: 0, shipping: 0, tax: 0, discount: 0, total: 0 };
     const appliedCoupon: CartCoupon | null = (raw as any).appliedCoupon ?? null;
     const onApply: (c: string) => void | Promise<void> = (raw as any).onApplyCoupon ?? (() => {});
     const onRemove: () => void = (raw as any).onRemoveCoupon ?? (() => {});

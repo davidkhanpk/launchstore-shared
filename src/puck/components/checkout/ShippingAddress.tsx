@@ -40,7 +40,10 @@ export interface ShippingAddressWithData extends ShippingAddressProps {
   states?: Array<{ code: string; name: string }>;
 }
 
-const MOCK_COUNTRIES = [{ code: 'US', name: 'United States' }, { code: 'CA', name: 'Canada' }, { code: 'GB', name: 'United Kingdom' }];
+// No static MOCK_COUNTRIES — the storefront wrapper injects the cart's
+// region countries via Puck context. If no data is passed, the country
+// dropdown is empty (user must enter address manually or region has no
+// configured countries).
 
 export const ShippingAddress: ComponentConfig<ShippingAddressWithData> = {
   label: 'Shipping Address',
@@ -51,7 +54,7 @@ export const ShippingAddress: ComponentConfig<ShippingAddressWithData> = {
     const sameAsBilling: boolean = (raw as any).sameAsBilling ?? true;
     const onSameAsBillingChange: (v: boolean) => void = (raw as any).onSameAsBillingChange ?? (() => {});
     const onContinue: () => void = (raw as any).onContinue ?? (() => {});
-    const countries = (raw as any).countries ?? MOCK_COUNTRIES;
+    const countries = (raw as any).countries ?? [];
     const gridCols = layout === 'two-column' ? 'grid-cols-2' : 'grid-cols-1';
     const cityGrid = layout === 'two-column' ? 'grid-cols-3' : 'grid-cols-1';
 

@@ -36,7 +36,7 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-07-24T06:52:57.601Z",
+  "generatedAt": "2026-07-24T10:18:16.496Z",
   "total": 115,
   "entries": [
     {
@@ -2318,7 +2318,7 @@ export const registry: CompiledRegistry = {
     {
       "name": "PaymentMethod",
       "label": "Payment Method",
-      "description": "Payment method selector with 3 layouts (list/cards/icons), express checkout top/bottom, optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue.",
+      "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue. No express checkout — that lives outside Medusa's payment session flow and must be wired separately via Stripe Express Checkout Element if/when a real integration is built.",
       "category": "checkout",
       "intent": [
         "payment",
@@ -2361,15 +2361,6 @@ export const registry: CompiledRegistry = {
         "enableSaveCard": {
           "type": "boolean",
           "required": true
-        },
-        "expressCheckoutPosition": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "top",
-            "bottom",
-            "none"
-          ]
         }
       },
       "jsonSchema": {
@@ -2393,15 +2384,6 @@ export const registry: CompiledRegistry = {
         "enableSaveCard": {
           "type": "boolean",
           "required": true
-        },
-        "expressCheckoutPosition": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "top",
-            "bottom",
-            "none"
-          ]
         }
       },
       "metaPath": "src\\puck\\components\\checkout\\paymentmethod.meta.ts"
@@ -18972,7 +18954,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "PaymentMethod",
         "label": "Payment Method",
-        "description": "Payment method selector with 3 layouts (list/cards/icons), express checkout top/bottom, optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue.",
+        "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue. No express checkout — that lives outside Medusa's payment session flow and must be wired separately via Stripe Express Checkout Element if/when a real integration is built.",
         "category": "checkout",
         "intent": [
           "payment",
@@ -19015,15 +18997,6 @@ export const registry: CompiledRegistry = {
           "enableSaveCard": {
             "type": "boolean",
             "required": true
-          },
-          "expressCheckoutPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top",
-              "bottom",
-              "none"
-            ]
           }
         },
         "jsonSchema": {
@@ -19047,15 +19020,6 @@ export const registry: CompiledRegistry = {
           "enableSaveCard": {
             "type": "boolean",
             "required": true
-          },
-          "expressCheckoutPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top",
-              "bottom",
-              "none"
-            ]
           }
         },
         "metaPath": "src\\puck\\components\\checkout\\paymentmethod.meta.ts"
@@ -39484,7 +39448,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "PaymentMethod",
         "label": "Payment Method",
-        "description": "Payment method selector with 3 layouts (list/cards/icons), express checkout top/bottom, optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue.",
+        "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue. No express checkout — that lives outside Medusa's payment session flow and must be wired separately via Stripe Express Checkout Element if/when a real integration is built.",
         "category": "checkout",
         "intent": [
           "payment",
@@ -39527,15 +39491,6 @@ export const registry: CompiledRegistry = {
           "enableSaveCard": {
             "type": "boolean",
             "required": true
-          },
-          "expressCheckoutPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top",
-              "bottom",
-              "none"
-            ]
           }
         },
         "jsonSchema": {
@@ -39559,15 +39514,6 @@ export const registry: CompiledRegistry = {
           "enableSaveCard": {
             "type": "boolean",
             "required": true
-          },
-          "expressCheckoutPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top",
-              "bottom",
-              "none"
-            ]
           }
         },
         "metaPath": "src\\puck\\components\\checkout\\paymentmethod.meta.ts"
@@ -41034,7 +40980,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "PaymentMethod",
         "label": "Payment Method",
-        "description": "Payment method selector with 3 layouts (list/cards/icons), express checkout top/bottom, optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue.",
+        "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue. No express checkout — that lives outside Medusa's payment session flow and must be wired separately via Stripe Express Checkout Element if/when a real integration is built.",
         "category": "checkout",
         "intent": [
           "payment",
@@ -41077,15 +41023,6 @@ export const registry: CompiledRegistry = {
           "enableSaveCard": {
             "type": "boolean",
             "required": true
-          },
-          "expressCheckoutPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top",
-              "bottom",
-              "none"
-            ]
           }
         },
         "jsonSchema": {
@@ -41109,15 +41046,6 @@ export const registry: CompiledRegistry = {
           "enableSaveCard": {
             "type": "boolean",
             "required": true
-          },
-          "expressCheckoutPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top",
-              "bottom",
-              "none"
-            ]
           }
         },
         "metaPath": "src\\puck\\components\\checkout\\paymentmethod.meta.ts"
@@ -53447,7 +53375,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "PaymentMethod",
         "label": "Payment Method",
-        "description": "Payment method selector with 3 layouts (list/cards/icons), express checkout top/bottom, optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue.",
+        "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue. No express checkout — that lives outside Medusa's payment session flow and must be wired separately via Stripe Express Checkout Element if/when a real integration is built.",
         "category": "checkout",
         "intent": [
           "payment",
@@ -53490,15 +53418,6 @@ export const registry: CompiledRegistry = {
           "enableSaveCard": {
             "type": "boolean",
             "required": true
-          },
-          "expressCheckoutPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top",
-              "bottom",
-              "none"
-            ]
           }
         },
         "jsonSchema": {
@@ -53522,15 +53441,6 @@ export const registry: CompiledRegistry = {
           "enableSaveCard": {
             "type": "boolean",
             "required": true
-          },
-          "expressCheckoutPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top",
-              "bottom",
-              "none"
-            ]
           }
         },
         "metaPath": "src\\puck\\components\\checkout\\paymentmethod.meta.ts"

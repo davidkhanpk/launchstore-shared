@@ -36,7 +36,7 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-07-24T10:18:16.496Z",
+  "generatedAt": "2026-07-24T12:02:19.785Z",
   "total": 115,
   "entries": [
     {
@@ -2478,7 +2478,7 @@ export const registry: CompiledRegistry = {
     {
       "name": "ShippingMethod",
       "label": "Shipping Method",
-      "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, defaultSelection.",
+      "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, pickupOption?. The wrapper injects real Medusa shipping options and the currently selected option ID; no static fallback list.",
       "category": "checkout",
       "intent": [
         "shipping",
@@ -2487,7 +2487,9 @@ export const registry: CompiledRegistry = {
       ],
       "visualRole": "block",
       "dataDeps": [
-        "methods (consumer)"
+        "methods (consumer)",
+        "pickupOption? (consumer)",
+        "selectedId (consumer)"
       ],
       "copyFields": [],
       "themeable": [],
@@ -2496,8 +2498,7 @@ export const registry: CompiledRegistry = {
       "searchTags": [
         "shipping",
         "delivery",
-        "checkout",
-        "method"
+        "checkout"
       ],
       "propSchema": {
         "layout": {
@@ -2520,15 +2521,6 @@ export const registry: CompiledRegistry = {
         "showPickupOption": {
           "type": "boolean",
           "required": true
-        },
-        "defaultSelection": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "standard",
-            "express",
-            "overnight"
-          ]
         }
       },
       "jsonSchema": {
@@ -2552,15 +2544,6 @@ export const registry: CompiledRegistry = {
         "showPickupOption": {
           "type": "boolean",
           "required": true
-        },
-        "defaultSelection": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "standard",
-            "express",
-            "overnight"
-          ]
         }
       },
       "metaPath": "src\\puck\\components\\checkout\\shippingmethod.meta.ts"
@@ -19114,7 +19097,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "ShippingMethod",
         "label": "Shipping Method",
-        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, defaultSelection.",
+        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, pickupOption?. The wrapper injects real Medusa shipping options and the currently selected option ID; no static fallback list.",
         "category": "checkout",
         "intent": [
           "shipping",
@@ -19123,7 +19106,9 @@ export const registry: CompiledRegistry = {
         ],
         "visualRole": "block",
         "dataDeps": [
-          "methods (consumer)"
+          "methods (consumer)",
+          "pickupOption? (consumer)",
+          "selectedId (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -19132,8 +19117,7 @@ export const registry: CompiledRegistry = {
         "searchTags": [
           "shipping",
           "delivery",
-          "checkout",
-          "method"
+          "checkout"
         ],
         "propSchema": {
           "layout": {
@@ -19156,15 +19140,6 @@ export const registry: CompiledRegistry = {
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "jsonSchema": {
@@ -19188,15 +19163,6 @@ export const registry: CompiledRegistry = {
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "metaPath": "src\\puck\\components\\checkout\\shippingmethod.meta.ts"
@@ -35562,7 +35528,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "ShippingMethod",
         "label": "Shipping Method",
-        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, defaultSelection.",
+        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, pickupOption?. The wrapper injects real Medusa shipping options and the currently selected option ID; no static fallback list.",
         "category": "checkout",
         "intent": [
           "shipping",
@@ -35571,7 +35537,9 @@ export const registry: CompiledRegistry = {
         ],
         "visualRole": "block",
         "dataDeps": [
-          "methods (consumer)"
+          "methods (consumer)",
+          "pickupOption? (consumer)",
+          "selectedId (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -35580,8 +35548,7 @@ export const registry: CompiledRegistry = {
         "searchTags": [
           "shipping",
           "delivery",
-          "checkout",
-          "method"
+          "checkout"
         ],
         "propSchema": {
           "layout": {
@@ -35604,15 +35571,6 @@ export const registry: CompiledRegistry = {
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "jsonSchema": {
@@ -35636,15 +35594,6 @@ export const registry: CompiledRegistry = {
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "metaPath": "src\\puck\\components\\checkout\\shippingmethod.meta.ts"
@@ -39608,7 +39557,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "ShippingMethod",
         "label": "Shipping Method",
-        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, defaultSelection.",
+        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, pickupOption?. The wrapper injects real Medusa shipping options and the currently selected option ID; no static fallback list.",
         "category": "checkout",
         "intent": [
           "shipping",
@@ -39617,7 +39566,9 @@ export const registry: CompiledRegistry = {
         ],
         "visualRole": "block",
         "dataDeps": [
-          "methods (consumer)"
+          "methods (consumer)",
+          "pickupOption? (consumer)",
+          "selectedId (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -39626,8 +39577,7 @@ export const registry: CompiledRegistry = {
         "searchTags": [
           "shipping",
           "delivery",
-          "checkout",
-          "method"
+          "checkout"
         ],
         "propSchema": {
           "layout": {
@@ -39650,15 +39600,6 @@ export const registry: CompiledRegistry = {
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "jsonSchema": {
@@ -39682,15 +39623,6 @@ export const registry: CompiledRegistry = {
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "metaPath": "src\\puck\\components\\checkout\\shippingmethod.meta.ts"
@@ -54018,7 +53950,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "ShippingMethod",
         "label": "Shipping Method",
-        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, defaultSelection.",
+        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, pickupOption?. The wrapper injects real Medusa shipping options and the currently selected option ID; no static fallback list.",
         "category": "checkout",
         "intent": [
           "shipping",
@@ -54027,7 +53959,9 @@ export const registry: CompiledRegistry = {
         ],
         "visualRole": "block",
         "dataDeps": [
-          "methods (consumer)"
+          "methods (consumer)",
+          "pickupOption? (consumer)",
+          "selectedId (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -54036,8 +53970,7 @@ export const registry: CompiledRegistry = {
         "searchTags": [
           "shipping",
           "delivery",
-          "checkout",
-          "method"
+          "checkout"
         ],
         "propSchema": {
           "layout": {
@@ -54060,15 +53993,6 @@ export const registry: CompiledRegistry = {
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "jsonSchema": {
@@ -54092,15 +54016,6 @@ export const registry: CompiledRegistry = {
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "metaPath": "src\\puck\\components\\checkout\\shippingmethod.meta.ts"

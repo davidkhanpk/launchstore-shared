@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-07-24T10:18:16.496Z",
+  "generatedAt": "2026-07-24T12:02:19.785Z",
   "total": 115,
   "entries": [
     {
@@ -2442,7 +2442,7 @@
     {
       "name": "ShippingMethod",
       "label": "Shipping Method",
-      "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, defaultSelection.",
+      "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, pickupOption?. The wrapper injects real Medusa shipping options and the currently selected option ID; no static fallback list.",
       "category": "checkout",
       "intent": [
         "shipping",
@@ -2451,7 +2451,9 @@
       ],
       "visualRole": "block",
       "dataDeps": [
-        "methods (consumer)"
+        "methods (consumer)",
+        "pickupOption? (consumer)",
+        "selectedId (consumer)"
       ],
       "copyFields": [],
       "themeable": [],
@@ -2460,8 +2462,7 @@
       "searchTags": [
         "shipping",
         "delivery",
-        "checkout",
-        "method"
+        "checkout"
       ],
       "propSchema": {
         "layout": {
@@ -2484,15 +2485,6 @@
         "showPickupOption": {
           "type": "boolean",
           "required": true
-        },
-        "defaultSelection": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "standard",
-            "express",
-            "overnight"
-          ]
         }
       },
       "jsonSchema": {
@@ -2516,15 +2508,6 @@
         "showPickupOption": {
           "type": "boolean",
           "required": true
-        },
-        "defaultSelection": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "standard",
-            "express",
-            "overnight"
-          ]
         }
       },
       "metaPath": "src\\puck\\components\\checkout\\shippingmethod.meta.ts"
@@ -19078,7 +19061,7 @@
       {
         "name": "ShippingMethod",
         "label": "Shipping Method",
-        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, defaultSelection.",
+        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, pickupOption?. The wrapper injects real Medusa shipping options and the currently selected option ID; no static fallback list.",
         "category": "checkout",
         "intent": [
           "shipping",
@@ -19087,7 +19070,9 @@
         ],
         "visualRole": "block",
         "dataDeps": [
-          "methods (consumer)"
+          "methods (consumer)",
+          "pickupOption? (consumer)",
+          "selectedId (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -19096,8 +19081,7 @@
         "searchTags": [
           "shipping",
           "delivery",
-          "checkout",
-          "method"
+          "checkout"
         ],
         "propSchema": {
           "layout": {
@@ -19120,15 +19104,6 @@
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "jsonSchema": {
@@ -19152,15 +19127,6 @@
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "metaPath": "src\\puck\\components\\checkout\\shippingmethod.meta.ts"
@@ -35526,7 +35492,7 @@
       {
         "name": "ShippingMethod",
         "label": "Shipping Method",
-        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, defaultSelection.",
+        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, pickupOption?. The wrapper injects real Medusa shipping options and the currently selected option ID; no static fallback list.",
         "category": "checkout",
         "intent": [
           "shipping",
@@ -35535,7 +35501,9 @@
         ],
         "visualRole": "block",
         "dataDeps": [
-          "methods (consumer)"
+          "methods (consumer)",
+          "pickupOption? (consumer)",
+          "selectedId (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -35544,8 +35512,7 @@
         "searchTags": [
           "shipping",
           "delivery",
-          "checkout",
-          "method"
+          "checkout"
         ],
         "propSchema": {
           "layout": {
@@ -35568,15 +35535,6 @@
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "jsonSchema": {
@@ -35600,15 +35558,6 @@
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "metaPath": "src\\puck\\components\\checkout\\shippingmethod.meta.ts"
@@ -39572,7 +39521,7 @@
       {
         "name": "ShippingMethod",
         "label": "Shipping Method",
-        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, defaultSelection.",
+        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, pickupOption?. The wrapper injects real Medusa shipping options and the currently selected option ID; no static fallback list.",
         "category": "checkout",
         "intent": [
           "shipping",
@@ -39581,7 +39530,9 @@
         ],
         "visualRole": "block",
         "dataDeps": [
-          "methods (consumer)"
+          "methods (consumer)",
+          "pickupOption? (consumer)",
+          "selectedId (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -39590,8 +39541,7 @@
         "searchTags": [
           "shipping",
           "delivery",
-          "checkout",
-          "method"
+          "checkout"
         ],
         "propSchema": {
           "layout": {
@@ -39614,15 +39564,6 @@
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "jsonSchema": {
@@ -39646,15 +39587,6 @@
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "metaPath": "src\\puck\\components\\checkout\\shippingmethod.meta.ts"
@@ -53982,7 +53914,7 @@
       {
         "name": "ShippingMethod",
         "label": "Shipping Method",
-        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, defaultSelection.",
+        "description": "Shipping method selector with 3 layouts (list/cards/compact) + optional pickup option. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue, pickupOption?. The wrapper injects real Medusa shipping options and the currently selected option ID; no static fallback list.",
         "category": "checkout",
         "intent": [
           "shipping",
@@ -53991,7 +53923,9 @@
         ],
         "visualRole": "block",
         "dataDeps": [
-          "methods (consumer)"
+          "methods (consumer)",
+          "pickupOption? (consumer)",
+          "selectedId (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -54000,8 +53934,7 @@
         "searchTags": [
           "shipping",
           "delivery",
-          "checkout",
-          "method"
+          "checkout"
         ],
         "propSchema": {
           "layout": {
@@ -54024,15 +53957,6 @@
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "jsonSchema": {
@@ -54056,15 +53980,6 @@
           "showPickupOption": {
             "type": "boolean",
             "required": true
-          },
-          "defaultSelection": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "standard",
-              "express",
-              "overnight"
-            ]
           }
         },
         "metaPath": "src\\puck\\components\\checkout\\shippingmethod.meta.ts"

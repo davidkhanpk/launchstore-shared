@@ -5,7 +5,6 @@ const shippingMethodFields = {
     showDeliveryTime: { type: 'radio', label: 'Show Delivery Time', options: RADIO_YES_NO },
     showDeliveryDescription: { type: 'radio', label: 'Show Description', options: RADIO_YES_NO },
     showPickupOption: { type: 'radio', label: 'Show Pickup Option', options: RADIO_YES_NO },
-    defaultSelection: { type: 'select', label: 'Default Selection', options: [{ label: 'Standard', value: 'standard' }, { label: 'Express', value: 'express' }, { label: 'Overnight', value: 'overnight' }] },
 };
 const Truck = ({ size = 20 }) => (_jsxs("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: [_jsx("rect", { x: "1", y: "3", width: "15", height: "13" }), _jsx("polygon", { points: "16 8 20 8 23 11 23 16 16 16 16 8" }), _jsx("circle", { cx: "5.5", cy: "18.5", r: "2.5" }), _jsx("circle", { cx: "18.5", cy: "18.5", r: "2.5" })] }));
 const Clock = ({ size = 16 }) => (_jsxs("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: [_jsx("circle", { cx: "12", cy: "12", r: "10" }), _jsx("polyline", { points: "12 6 12 12 16 14" })] }));
@@ -15,9 +14,9 @@ const Clock = ({ size = 16 }) => (_jsxs("svg", { width: size, height: size, view
 export const ShippingMethod = {
     label: 'Shipping Method',
     fields: shippingMethodFields,
-    defaultProps: { layout: 'list', showDeliveryTime: true, showDeliveryDescription: false, showPickupOption: false, defaultSelection: 'standard' },
+    defaultProps: { layout: 'list', showDeliveryTime: true, showDeliveryDescription: false, showPickupOption: false },
     render: (raw) => {
-        const { layout = 'list', showDeliveryTime, showDeliveryDescription, showPickupOption, defaultSelection = 'standard' } = raw;
+        const { layout = 'list', showDeliveryTime, showDeliveryDescription, showPickupOption } = raw;
         const baseMethods = raw.methods;
         // Pickup is a real Medusa option, just like any other shipping method. If
         // the storefront wrapper passes a `pickupOption` prop, we add it. There
@@ -26,7 +25,9 @@ export const ShippingMethod = {
         const methods = baseMethods
             ? (showPickupOption && pickup ? [...baseMethods, pickup] : baseMethods)
             : undefined;
-        const selectedId = raw.selectedId ?? defaultSelection;
+        // selectedId comes from the wrapper (cart.shipping_methods[0]?.shipping_option_id).
+        // No fallback to a static label — the wrapper is the only source of truth.
+        const selectedId = raw.selectedId ?? '';
         const onSelect = raw.onSelect ?? (() => { });
         const onContinue = raw.onContinue ?? (() => { });
         // Empty state: no methods provided. The storefront wrapper injects

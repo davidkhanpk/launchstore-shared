@@ -9,7 +9,6 @@ const shippingMethodFields = {
   showDeliveryTime: { type: 'radio', label: 'Show Delivery Time', options: RADIO_YES_NO },
   showDeliveryDescription: { type: 'radio', label: 'Show Description', options: RADIO_YES_NO },
   showPickupOption: { type: 'radio', label: 'Show Pickup Option', options: RADIO_YES_NO },
-  defaultSelection: { type: 'select', label: 'Default Selection', options: [{ label: 'Standard', value: 'standard' }, { label: 'Express', value: 'express' }, { label: 'Overnight', value: 'overnight' }] },
 } as Record<string, Field>;
 
 const Truck = ({ size = 20 }: { size?: number }) => (
@@ -24,7 +23,6 @@ export interface ShippingMethodProps {
   showDeliveryTime: boolean;
   showDeliveryDescription: boolean;
   showPickupOption: boolean;
-  defaultSelection: 'standard' | 'express' | 'overnight';
 }
 
 export interface ShippingMethodWithData extends ShippingMethodProps {
@@ -42,9 +40,9 @@ export interface ShippingMethodWithData extends ShippingMethodProps {
 export const ShippingMethod: ComponentConfig<ShippingMethodWithData> = {
   label: 'Shipping Method',
   fields: shippingMethodFields as ComponentConfig<ShippingMethodWithData>['fields'],
-  defaultProps: { layout: 'list', showDeliveryTime: true, showDeliveryDescription: false, showPickupOption: false, defaultSelection: 'standard' },
+  defaultProps: { layout: 'list', showDeliveryTime: true, showDeliveryDescription: false, showPickupOption: false },
   render: (raw: any) => {
-    const { layout = 'list', showDeliveryTime, showDeliveryDescription, showPickupOption, defaultSelection = 'standard' } = raw as ShippingMethodWithData;
+    const { layout = 'list', showDeliveryTime, showDeliveryDescription, showPickupOption } = raw as ShippingMethodWithData;
     const baseMethods: any[] | undefined = (raw as any).methods;
     // Pickup is a real Medusa option, just like any other shipping method. If
     // the storefront wrapper passes a `pickupOption` prop, we add it. There
@@ -53,7 +51,9 @@ export const ShippingMethod: ComponentConfig<ShippingMethodWithData> = {
     const methods = baseMethods
       ? (showPickupOption && pickup ? [...baseMethods, pickup] : baseMethods)
       : undefined;
-    const selectedId: string = (raw as any).selectedId ?? defaultSelection;
+    // selectedId comes from the wrapper (cart.shipping_methods[0]?.shipping_option_id).
+    // No fallback to a static label — the wrapper is the only source of truth.
+    const selectedId: string = (raw as any).selectedId ?? '';
     const onSelect: (id: string) => void = (raw as any).onSelect ?? (() => {});
     const onContinue: () => void = (raw as any).onContinue ?? (() => {});
 

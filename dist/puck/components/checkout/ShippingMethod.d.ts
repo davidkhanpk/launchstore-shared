@@ -4,7 +4,6 @@ export interface ShippingMethodProps {
     showDeliveryTime: boolean;
     showDeliveryDescription: boolean;
     showPickupOption: boolean;
-    defaultSelection: 'standard' | 'express' | 'overnight';
 }
 export interface ShippingMethodWithData extends ShippingMethodProps {
     methods?: Array<{

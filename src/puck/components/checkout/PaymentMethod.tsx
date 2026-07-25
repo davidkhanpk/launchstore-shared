@@ -1,6 +1,7 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import type { Field } from '@puckeditor/core';
+import { resolvePaymentMeta, type PaymentProviderMeta } from '../../payment-info';
 
 const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
 
@@ -15,7 +16,7 @@ const Card = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="1" y="4" width="22" height="16" rx="2" /><line x1="1" y1="10" x2="23" y2="10" /></svg>
 );
 const Lock = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x1="3" y1="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
 );
 const Shield = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
@@ -28,16 +29,29 @@ export interface PaymentMethodProps {
   enableSaveCard: boolean;
 }
 
+/**
+ * Each `Method` only needs `id`. The shared component looks up the display
+ * meta (title, description, icon) from `PAYMENT_INFO_MAP`. Wrappers can
+ * override per-method by passing extra fields (name/description/icon).
+ */
+export interface PaymentMethodItem {
+  id: string;
+  name?: string;
+  icon?: React.JSX.Element;
+  description?: string;
+}
+
 export interface PaymentMethodWithData extends PaymentMethodProps {
-  methods?: Array<{ id: string; name: string; icon: string; description: string }>;
+  methods?: PaymentMethodItem[];
   selectedId?: string;
   onSelect?: (id: string) => void;
   onContinue?: () => void;
 }
 
 // No static MOCK — the storefront wrapper injects real Medusa payment
-// providers via Puck context. If no data is passed, we show an empty
-// state. The shared component is purely presentational.
+// providers via Puck context. The shared component looks up display meta
+// from `PAYMENT_INFO_MAP` in `payment-info.tsx`. If no data is passed,
+// we show an empty state. The shared component is purely presentational.
 
 export const PaymentMethod: ComponentConfig<PaymentMethodWithData> = {
   label: 'Payment Method',
@@ -45,7 +59,7 @@ export const PaymentMethod: ComponentConfig<PaymentMethodWithData> = {
   defaultProps: { layout: 'list', showPaymentIcons: true, showSecurityBadges: true, enableSaveCard: true },
   render: (raw: any) => {
     const { layout = 'list', showPaymentIcons, showSecurityBadges, enableSaveCard } = raw as PaymentMethodWithData;
-    const methods: any[] | undefined = (raw as any).methods;
+    const methods: PaymentMethodItem[] | undefined = (raw as any).methods;
     const selectedId: string = (raw as any).selectedId ?? '';
     const onSelect: (id: string) => void = (raw as any).onSelect ?? (() => {});
     const onContinue: () => void = (raw as any).onContinue ?? (() => {});
@@ -68,6 +82,18 @@ export const PaymentMethod: ComponentConfig<PaymentMethodWithData> = {
       );
     }
 
+    // Resolve each method's display meta. Wrapper can override name/icon/
+    // description per item; otherwise we use PAYMENT_INFO_MAP[id].
+    const renderable = methods.map((m) => {
+      const meta: PaymentProviderMeta = resolvePaymentMeta(m.id);
+      return {
+        id: m.id,
+        name: m.name ?? meta.title,
+        icon: m.icon ?? meta.icon,
+        description: m.description ?? meta.description,
+      };
+    });
+
     return (
       <div className="border border-gray-200 rounded-lg p-6 bg-white">
         <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
@@ -76,11 +102,11 @@ export const PaymentMethod: ComponentConfig<PaymentMethodWithData> = {
         </div>
 
         <div className="space-y-4 mb-6">
-          {methods.map((method: any) => (
-            <div key={method.id} className={`border-2 rounded-lg p-4 transition-colors cursor-pointer ${method.id === selectedId ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-500'}`} onClick={() => onSelect(method.id)}>
+          {renderable.map((method) => (
+            <div key={method.id} onClick={() => onSelect(method.id)} className={`border-2 rounded-lg p-4 transition-colors cursor-pointer ${method.id === selectedId ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-500'}`}>
               <div className="flex items-center gap-3">
                 <input type="radio" name="payment" className="h-4 w-4" checked={method.id === selectedId} onChange={() => onSelect(method.id)} />
-                {showPaymentIcons && method.icon && <span className="text-2xl">{method.icon}</span>}
+                {showPaymentIcons && method.icon && <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-gray-700">{method.icon}</span>}
                 <div className="flex-1">
                   <h4 className="font-medium text-gray-900">{method.name}</h4>
                   {method.description && <p className="text-sm text-gray-600">{method.description}</p>}

@@ -3,13 +3,30 @@ export interface ShippingAddressProps {
     showBillingAddress: boolean;
     requirePhone: boolean;
     showCompanyField: boolean;
+    showAddress2Field: boolean;
+    showProvinceField: boolean;
     enableAddressAutocomplete: boolean;
     defaultSameAsBilling: boolean;
     layout: 'single-column' | 'two-column';
 }
+/** Address shape compatible with `BaseCartAddress` and `BaseCustomerAddress`. */
+export interface ShippingAddressValue {
+    id?: string;
+    first_name?: string;
+    last_name?: string;
+    company?: string;
+    address_1?: string;
+    address_2?: string;
+    city?: string;
+    province?: string;
+    postal_code?: string;
+    country_code?: string;
+    phone?: string;
+}
 export interface ShippingAddressWithData extends ShippingAddressProps {
     onContinue?: () => void;
     onSameAsBillingChange?: (v: boolean) => void;
+    onSelectSavedAddress?: (address: ShippingAddressValue) => void;
     sameAsBilling?: boolean;
     countries?: Array<{
         code: string;
@@ -19,6 +36,12 @@ export interface ShippingAddressWithData extends ShippingAddressProps {
         code: string;
         name: string;
     }>;
+    /**
+     * Saved customer addresses (filtered by region) shown as a dropdown for
+     * logged-in customers. Wrapper passes `customer.addresses` filtered by
+     * the cart's region countries. If empty/undefined, the dropdown is hidden.
+     */
+    savedAddresses?: ShippingAddressValue[];
 }
 export declare const ShippingAddress: ComponentConfig<ShippingAddressWithData>;
 export default ShippingAddress;

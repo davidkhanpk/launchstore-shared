@@ -1,11 +1,11 @@
 export declare const shippingAddressMeta: {
     readonly name: "ShippingAddress";
     readonly label: "Shipping Address";
-    readonly description: "Shipping address form (contact + address + optional company + same-as-billing) with 2 layouts (single/two column). Cart-library-agnostic: takes sameAsBilling, onSameAsBillingChange, onContinue, countries, states.";
+    readonly description: "Shipping address form (contact + address + optional company + same-as-billing) with 2 layouts (single/two column). Shows saved addresses dropdown for logged-in customers. Cart-library-agnostic: takes sameAsBilling, onSameAsBillingChange, onSelectSavedAddress, onContinue, countries, states, savedAddresses[].";
     readonly category: "checkout";
     readonly intent: readonly ["shipping", "address", "checkout", "form"];
     readonly visualRole: "block";
-    readonly dataDeps: readonly ["countries (consumer)"];
+    readonly dataDeps: readonly ["countries (consumer)", "savedAddresses? (consumer)"];
     readonly copyFields: readonly [];
     readonly themeable: readonly [];
     readonly a11yRisk: "low";
@@ -22,6 +22,14 @@ export declare const shippingAddressMeta: {
             readonly required: true;
         };
         readonly showCompanyField: {
+            readonly type: "boolean";
+            readonly required: true;
+        };
+        readonly showAddress2Field: {
+            readonly type: "boolean";
+            readonly required: true;
+        };
+        readonly showProvinceField: {
             readonly type: "boolean";
             readonly required: true;
         };

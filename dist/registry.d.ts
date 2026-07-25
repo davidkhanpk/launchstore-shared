@@ -36,7 +36,7 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-07-24T12:02:19.785Z",
+  "generatedAt": "2026-07-25T18:52:38.773Z",
   "total": 115,
   "entries": [
     {
@@ -2318,7 +2318,7 @@ export const registry: CompiledRegistry = {
     {
       "name": "PaymentMethod",
       "label": "Payment Method",
-      "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue. No express checkout — that lives outside Medusa's payment session flow and must be wired separately via Stripe Express Checkout Element if/when a real integration is built.",
+      "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Display info (name, description, icon) comes from the shared PAYMENT_INFO_MAP keyed by Medusa provider id. No express checkout — those are the same Medusa provider IDs (pp_apple_pay_apple, pp_google_pay_google) shown with friendly names.",
       "category": "checkout",
       "intent": [
         "payment",
@@ -2327,7 +2327,8 @@ export const registry: CompiledRegistry = {
       ],
       "visualRole": "block",
       "dataDeps": [
-        "methods (consumer)"
+        "methods (consumer)",
+        "selectedId? (consumer)"
       ],
       "copyFields": [],
       "themeable": [],
@@ -2338,7 +2339,9 @@ export const registry: CompiledRegistry = {
         "checkout",
         "card",
         "paypal",
-        "apple-pay"
+        "apple-pay",
+        "google-pay",
+        "manual"
       ],
       "propSchema": {
         "layout": {
@@ -2391,7 +2394,7 @@ export const registry: CompiledRegistry = {
     {
       "name": "ShippingAddress",
       "label": "Shipping Address",
-      "description": "Shipping address form (contact + address + optional company + same-as-billing) with 2 layouts (single/two column). Cart-library-agnostic: takes sameAsBilling, onSameAsBillingChange, onContinue, countries, states.",
+      "description": "Shipping address form (contact + address + optional company + same-as-billing) with 2 layouts (single/two column). Shows saved addresses dropdown for logged-in customers. Cart-library-agnostic: takes sameAsBilling, onSameAsBillingChange, onSelectSavedAddress, onContinue, countries, states, savedAddresses[].",
       "category": "checkout",
       "intent": [
         "shipping",
@@ -2401,7 +2404,8 @@ export const registry: CompiledRegistry = {
       ],
       "visualRole": "block",
       "dataDeps": [
-        "countries (consumer)"
+        "countries (consumer)",
+        "savedAddresses? (consumer)"
       ],
       "copyFields": [],
       "themeable": [],
@@ -2423,6 +2427,14 @@ export const registry: CompiledRegistry = {
           "required": true
         },
         "showCompanyField": {
+          "type": "boolean",
+          "required": true
+        },
+        "showAddress2Field": {
+          "type": "boolean",
+          "required": true
+        },
+        "showProvinceField": {
           "type": "boolean",
           "required": true
         },
@@ -2453,6 +2465,14 @@ export const registry: CompiledRegistry = {
           "required": true
         },
         "showCompanyField": {
+          "type": "boolean",
+          "required": true
+        },
+        "showAddress2Field": {
+          "type": "boolean",
+          "required": true
+        },
+        "showProvinceField": {
           "type": "boolean",
           "required": true
         },
@@ -18937,7 +18957,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "PaymentMethod",
         "label": "Payment Method",
-        "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue. No express checkout — that lives outside Medusa's payment session flow and must be wired separately via Stripe Express Checkout Element if/when a real integration is built.",
+        "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Display info (name, description, icon) comes from the shared PAYMENT_INFO_MAP keyed by Medusa provider id. No express checkout — those are the same Medusa provider IDs (pp_apple_pay_apple, pp_google_pay_google) shown with friendly names.",
         "category": "checkout",
         "intent": [
           "payment",
@@ -18946,7 +18966,8 @@ export const registry: CompiledRegistry = {
         ],
         "visualRole": "block",
         "dataDeps": [
-          "methods (consumer)"
+          "methods (consumer)",
+          "selectedId? (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -18957,7 +18978,9 @@ export const registry: CompiledRegistry = {
           "checkout",
           "card",
           "paypal",
-          "apple-pay"
+          "apple-pay",
+          "google-pay",
+          "manual"
         ],
         "propSchema": {
           "layout": {
@@ -19010,7 +19033,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "ShippingAddress",
         "label": "Shipping Address",
-        "description": "Shipping address form (contact + address + optional company + same-as-billing) with 2 layouts (single/two column). Cart-library-agnostic: takes sameAsBilling, onSameAsBillingChange, onContinue, countries, states.",
+        "description": "Shipping address form (contact + address + optional company + same-as-billing) with 2 layouts (single/two column). Shows saved addresses dropdown for logged-in customers. Cart-library-agnostic: takes sameAsBilling, onSameAsBillingChange, onSelectSavedAddress, onContinue, countries, states, savedAddresses[].",
         "category": "checkout",
         "intent": [
           "shipping",
@@ -19020,7 +19043,8 @@ export const registry: CompiledRegistry = {
         ],
         "visualRole": "block",
         "dataDeps": [
-          "countries (consumer)"
+          "countries (consumer)",
+          "savedAddresses? (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -19042,6 +19066,14 @@ export const registry: CompiledRegistry = {
             "required": true
           },
           "showCompanyField": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddress2Field": {
+            "type": "boolean",
+            "required": true
+          },
+          "showProvinceField": {
             "type": "boolean",
             "required": true
           },
@@ -19072,6 +19104,14 @@ export const registry: CompiledRegistry = {
             "required": true
           },
           "showCompanyField": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddress2Field": {
+            "type": "boolean",
+            "required": true
+          },
+          "showProvinceField": {
             "type": "boolean",
             "required": true
           },
@@ -34928,7 +34968,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "ShippingAddress",
         "label": "Shipping Address",
-        "description": "Shipping address form (contact + address + optional company + same-as-billing) with 2 layouts (single/two column). Cart-library-agnostic: takes sameAsBilling, onSameAsBillingChange, onContinue, countries, states.",
+        "description": "Shipping address form (contact + address + optional company + same-as-billing) with 2 layouts (single/two column). Shows saved addresses dropdown for logged-in customers. Cart-library-agnostic: takes sameAsBilling, onSameAsBillingChange, onSelectSavedAddress, onContinue, countries, states, savedAddresses[].",
         "category": "checkout",
         "intent": [
           "shipping",
@@ -34938,7 +34978,8 @@ export const registry: CompiledRegistry = {
         ],
         "visualRole": "block",
         "dataDeps": [
-          "countries (consumer)"
+          "countries (consumer)",
+          "savedAddresses? (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -34960,6 +35001,14 @@ export const registry: CompiledRegistry = {
             "required": true
           },
           "showCompanyField": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddress2Field": {
+            "type": "boolean",
+            "required": true
+          },
+          "showProvinceField": {
             "type": "boolean",
             "required": true
           },
@@ -34990,6 +35039,14 @@ export const registry: CompiledRegistry = {
             "required": true
           },
           "showCompanyField": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddress2Field": {
+            "type": "boolean",
+            "required": true
+          },
+          "showProvinceField": {
             "type": "boolean",
             "required": true
           },
@@ -35441,7 +35498,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "ShippingAddress",
         "label": "Shipping Address",
-        "description": "Shipping address form (contact + address + optional company + same-as-billing) with 2 layouts (single/two column). Cart-library-agnostic: takes sameAsBilling, onSameAsBillingChange, onContinue, countries, states.",
+        "description": "Shipping address form (contact + address + optional company + same-as-billing) with 2 layouts (single/two column). Shows saved addresses dropdown for logged-in customers. Cart-library-agnostic: takes sameAsBilling, onSameAsBillingChange, onSelectSavedAddress, onContinue, countries, states, savedAddresses[].",
         "category": "checkout",
         "intent": [
           "shipping",
@@ -35451,7 +35508,8 @@ export const registry: CompiledRegistry = {
         ],
         "visualRole": "block",
         "dataDeps": [
-          "countries (consumer)"
+          "countries (consumer)",
+          "savedAddresses? (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -35473,6 +35531,14 @@ export const registry: CompiledRegistry = {
             "required": true
           },
           "showCompanyField": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddress2Field": {
+            "type": "boolean",
+            "required": true
+          },
+          "showProvinceField": {
             "type": "boolean",
             "required": true
           },
@@ -35503,6 +35569,14 @@ export const registry: CompiledRegistry = {
             "required": true
           },
           "showCompanyField": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddress2Field": {
+            "type": "boolean",
+            "required": true
+          },
+          "showProvinceField": {
             "type": "boolean",
             "required": true
           },
@@ -39397,7 +39471,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "PaymentMethod",
         "label": "Payment Method",
-        "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue. No express checkout — that lives outside Medusa's payment session flow and must be wired separately via Stripe Express Checkout Element if/when a real integration is built.",
+        "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Display info (name, description, icon) comes from the shared PAYMENT_INFO_MAP keyed by Medusa provider id. No express checkout — those are the same Medusa provider IDs (pp_apple_pay_apple, pp_google_pay_google) shown with friendly names.",
         "category": "checkout",
         "intent": [
           "payment",
@@ -39406,7 +39480,8 @@ export const registry: CompiledRegistry = {
         ],
         "visualRole": "block",
         "dataDeps": [
-          "methods (consumer)"
+          "methods (consumer)",
+          "selectedId? (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -39417,7 +39492,9 @@ export const registry: CompiledRegistry = {
           "checkout",
           "card",
           "paypal",
-          "apple-pay"
+          "apple-pay",
+          "google-pay",
+          "manual"
         ],
         "propSchema": {
           "layout": {
@@ -39470,7 +39547,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "ShippingAddress",
         "label": "Shipping Address",
-        "description": "Shipping address form (contact + address + optional company + same-as-billing) with 2 layouts (single/two column). Cart-library-agnostic: takes sameAsBilling, onSameAsBillingChange, onContinue, countries, states.",
+        "description": "Shipping address form (contact + address + optional company + same-as-billing) with 2 layouts (single/two column). Shows saved addresses dropdown for logged-in customers. Cart-library-agnostic: takes sameAsBilling, onSameAsBillingChange, onSelectSavedAddress, onContinue, countries, states, savedAddresses[].",
         "category": "checkout",
         "intent": [
           "shipping",
@@ -39480,7 +39557,8 @@ export const registry: CompiledRegistry = {
         ],
         "visualRole": "block",
         "dataDeps": [
-          "countries (consumer)"
+          "countries (consumer)",
+          "savedAddresses? (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -39502,6 +39580,14 @@ export const registry: CompiledRegistry = {
             "required": true
           },
           "showCompanyField": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddress2Field": {
+            "type": "boolean",
+            "required": true
+          },
+          "showProvinceField": {
             "type": "boolean",
             "required": true
           },
@@ -39532,6 +39618,14 @@ export const registry: CompiledRegistry = {
             "required": true
           },
           "showCompanyField": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddress2Field": {
+            "type": "boolean",
+            "required": true
+          },
+          "showProvinceField": {
             "type": "boolean",
             "required": true
           },
@@ -39956,7 +40050,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "ShippingAddress",
         "label": "Shipping Address",
-        "description": "Shipping address form (contact + address + optional company + same-as-billing) with 2 layouts (single/two column). Cart-library-agnostic: takes sameAsBilling, onSameAsBillingChange, onContinue, countries, states.",
+        "description": "Shipping address form (contact + address + optional company + same-as-billing) with 2 layouts (single/two column). Shows saved addresses dropdown for logged-in customers. Cart-library-agnostic: takes sameAsBilling, onSameAsBillingChange, onSelectSavedAddress, onContinue, countries, states, savedAddresses[].",
         "category": "checkout",
         "intent": [
           "shipping",
@@ -39966,7 +40060,8 @@ export const registry: CompiledRegistry = {
         ],
         "visualRole": "block",
         "dataDeps": [
-          "countries (consumer)"
+          "countries (consumer)",
+          "savedAddresses? (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -39988,6 +40083,14 @@ export const registry: CompiledRegistry = {
             "required": true
           },
           "showCompanyField": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddress2Field": {
+            "type": "boolean",
+            "required": true
+          },
+          "showProvinceField": {
             "type": "boolean",
             "required": true
           },
@@ -40018,6 +40121,14 @@ export const registry: CompiledRegistry = {
             "required": true
           },
           "showCompanyField": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddress2Field": {
+            "type": "boolean",
+            "required": true
+          },
+          "showProvinceField": {
             "type": "boolean",
             "required": true
           },
@@ -40912,7 +41023,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "PaymentMethod",
         "label": "Payment Method",
-        "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue. No express checkout — that lives outside Medusa's payment session flow and must be wired separately via Stripe Express Checkout Element if/when a real integration is built.",
+        "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Display info (name, description, icon) comes from the shared PAYMENT_INFO_MAP keyed by Medusa provider id. No express checkout — those are the same Medusa provider IDs (pp_apple_pay_apple, pp_google_pay_google) shown with friendly names.",
         "category": "checkout",
         "intent": [
           "payment",
@@ -40921,7 +41032,8 @@ export const registry: CompiledRegistry = {
         ],
         "visualRole": "block",
         "dataDeps": [
-          "methods (consumer)"
+          "methods (consumer)",
+          "selectedId? (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -40932,7 +41044,9 @@ export const registry: CompiledRegistry = {
           "checkout",
           "card",
           "paypal",
-          "apple-pay"
+          "apple-pay",
+          "google-pay",
+          "manual"
         ],
         "propSchema": {
           "layout": {
@@ -53307,7 +53421,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "PaymentMethod",
         "label": "Payment Method",
-        "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Cart-library-agnostic: takes methods[], selectedId, onSelect, onContinue. No express checkout — that lives outside Medusa's payment session flow and must be wired separately via Stripe Express Checkout Element if/when a real integration is built.",
+        "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Display info (name, description, icon) comes from the shared PAYMENT_INFO_MAP keyed by Medusa provider id. No express checkout — those are the same Medusa provider IDs (pp_apple_pay_apple, pp_google_pay_google) shown with friendly names.",
         "category": "checkout",
         "intent": [
           "payment",
@@ -53316,7 +53430,8 @@ export const registry: CompiledRegistry = {
         ],
         "visualRole": "block",
         "dataDeps": [
-          "methods (consumer)"
+          "methods (consumer)",
+          "selectedId? (consumer)"
         ],
         "copyFields": [],
         "themeable": [],
@@ -53327,7 +53442,9 @@ export const registry: CompiledRegistry = {
           "checkout",
           "card",
           "paypal",
-          "apple-pay"
+          "apple-pay",
+          "google-pay",
+          "manual"
         ],
         "propSchema": {
           "layout": {

@@ -10,6 +10,8 @@ const shippingAddressFields = {
   defaultSameAsBilling: { type: 'radio', label: 'Default Same as Shipping', options: RADIO_YES_NO },
   requirePhone: { type: 'radio', label: 'Require Phone Number', options: RADIO_YES_NO },
   showCompanyField: { type: 'radio', label: 'Show Company Field', options: RADIO_YES_NO },
+  showAddress2Field: { type: 'radio', label: 'Show Address Line 2', options: RADIO_YES_NO },
+  showProvinceField: { type: 'radio', label: 'Show State / Province', options: RADIO_YES_NO },
   enableAddressAutocomplete: { type: 'radio', label: 'Enable Address Autocomplete', options: RADIO_YES_NO },
 } as Record<string, Field>;
 
@@ -27,17 +29,41 @@ export interface ShippingAddressProps {
   showBillingAddress: boolean;
   requirePhone: boolean;
   showCompanyField: boolean;
+  showAddress2Field: boolean;
+  showProvinceField: boolean;
   enableAddressAutocomplete: boolean;
   defaultSameAsBilling: boolean;
   layout: 'single-column' | 'two-column';
 }
 
+/** Address shape compatible with `BaseCartAddress` and `BaseCustomerAddress`. */
+export interface ShippingAddressValue {
+  id?: string;
+  first_name?: string;
+  last_name?: string;
+  company?: string;
+  address_1?: string;
+  address_2?: string;
+  city?: string;
+  province?: string;
+  postal_code?: string;
+  country_code?: string;
+  phone?: string;
+}
+
 export interface ShippingAddressWithData extends ShippingAddressProps {
   onContinue?: () => void;
   onSameAsBillingChange?: (v: boolean) => void;
+  onSelectSavedAddress?: (address: ShippingAddressValue) => void;
   sameAsBilling?: boolean;
   countries?: Array<{ code: string; name: string }>;
   states?: Array<{ code: string; name: string }>;
+  /**
+   * Saved customer addresses (filtered by region) shown as a dropdown for
+   * logged-in customers. Wrapper passes `customer.addresses` filtered by
+   * the cart's region countries. If empty/undefined, the dropdown is hidden.
+   */
+  savedAddresses?: ShippingAddressValue[];
 }
 
 // No static MOCK_COUNTRIES — the storefront wrapper injects the cart's
@@ -48,13 +74,32 @@ export interface ShippingAddressWithData extends ShippingAddressProps {
 export const ShippingAddress: ComponentConfig<ShippingAddressWithData> = {
   label: 'Shipping Address',
   fields: shippingAddressFields as ComponentConfig<ShippingAddressWithData>['fields'],
-  defaultProps: { showBillingAddress: true, requirePhone: false, showCompanyField: false, enableAddressAutocomplete: true, defaultSameAsBilling: true, layout: 'two-column' },
+  defaultProps: {
+    showBillingAddress: true,
+    requirePhone: false,
+    showCompanyField: false,
+    showAddress2Field: true,
+    showProvinceField: true,
+    enableAddressAutocomplete: true,
+    defaultSameAsBilling: true,
+    layout: 'two-column',
+  },
   render: (raw: any) => {
-    const { showBillingAddress, requirePhone, showCompanyField, layout = 'two-column' } = raw as ShippingAddressWithData;
+    const {
+      showBillingAddress,
+      requirePhone,
+      showCompanyField,
+      showAddress2Field,
+      showProvinceField,
+      layout = 'two-column',
+    } = raw as ShippingAddressWithData;
     const sameAsBilling: boolean = (raw as any).sameAsBilling ?? true;
     const onSameAsBillingChange: (v: boolean) => void = (raw as any).onSameAsBillingChange ?? (() => {});
+    const onSelectSavedAddress: (a: ShippingAddressValue) => void = (raw as any).onSelectSavedAddress ?? (() => {});
     const onContinue: () => void = (raw as any).onContinue ?? (() => {});
     const countries = (raw as any).countries ?? [];
+    const states = (raw as any).states ?? [];
+    const savedAddresses: ShippingAddressValue[] = (raw as any).savedAddresses ?? [];
     const gridCols = layout === 'two-column' ? 'grid-cols-2' : 'grid-cols-1';
     const cityGrid = layout === 'two-column' ? 'grid-cols-3' : 'grid-cols-1';
 
@@ -64,6 +109,29 @@ export const ShippingAddress: ComponentConfig<ShippingAddressWithData> = {
           <MapPin />
           <h2 className="text-xl font-semibold text-gray-900">Shipping Address</h2>
         </div>
+
+        {savedAddresses.length > 0 && (
+          <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <p className="text-sm text-gray-700 mb-3">Use a saved address:</p>
+            <select
+              className="w-full px-4 py-2 border border-gray-300 rounded bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={(e) => {
+                const id = e.target.value;
+                if (!id) return;
+                const found = savedAddresses.find((a) => a.id === id);
+                if (found) onSelectSavedAddress(found);
+              }}
+              defaultValue=""
+            >
+              <option value="">Select a saved address…</option>
+              {savedAddresses.map((a) => (
+                <option key={a.id} value={a.id}>
+                  {a.first_name} {a.last_name} — {a.address_1}, {a.city}, {a.country_code?.toUpperCase()}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
         <div className="mb-6">
           <h3 className="text-sm font-medium text-gray-700 mb-4">Contact Information</h3>
@@ -104,21 +172,32 @@ export const ShippingAddress: ComponentConfig<ShippingAddressWithData> = {
               <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
               <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="123 Main Street" />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Apartment, suite, etc. (Optional)</label>
-              <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Apt 4B" />
-            </div>
+            {showAddress2Field && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Apartment, suite, etc. (Optional)</label>
+                <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Apt 4B" />
+              </div>
+            )}
             <div className={`grid ${cityGrid} gap-4`}>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
                 <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="New York" />
               </div>
+              {showProvinceField && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">State / Province</label>
+                  {states.length > 0 ? (
+                    <select className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                      <option value="">Select…</option>
+                      {states.map((s: any) => <option key={s.code} value={s.code}>{s.name}</option>)}
+                    </select>
+                  ) : (
+                    <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="NY" />
+                  )}
+                </div>
+              )}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">State *</label>
-                <select className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"><option>Select State</option></select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">ZIP Code *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">ZIP / Postal Code *</label>
                 <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="10001" />
               </div>
             </div>

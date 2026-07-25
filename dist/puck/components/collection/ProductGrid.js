@@ -15,22 +15,23 @@ const Eye = ({ size = 20 }) => (_jsxs("svg", { width: size, height: size, viewBo
 const aspectMap = { square: 'aspect-square', portrait: 'aspect-[3/4]', landscape: 'aspect-[4/3]' };
 const gapMap = { sm: 'gap-3', md: 'gap-6', lg: 'gap-8' };
 const colsMap = { '2': 'md:grid-cols-2', '3': 'md:grid-cols-2 lg:grid-cols-3', '4': 'md:grid-cols-2 lg:grid-cols-4' };
-const MOCK = [
-    { id: '1', title: 'Classic T-Shirt', handle: 'classic-t-shirt', thumbnail: 'https://placehold.co/400x400', price: '$29.99', compareAtPrice: '$39.99', badge: 'Sale' },
-    { id: '2', title: 'Denim Jeans', handle: 'denim-jeans', thumbnail: 'https://placehold.co/400x400', price: '$79.99' },
-    { id: '3', title: 'Leather Belt', handle: 'leather-belt', thumbnail: 'https://placehold.co/400x400', price: '$49.99', badge: 'New' },
-    { id: '4', title: 'Sneakers', handle: 'sneakers', thumbnail: 'https://placehold.co/400x400', price: '$99.99' },
-];
+// No static MOCK — the storefront wrapper injects real Medusa products via
+// Puck context. If no data is passed (editor preview / no collection), the
+// component renders the empty state. The shared component is purely
+// presentational.
 export const ProductGrid = {
     label: 'Product Grid',
     fields: productGridFields,
     defaultProps: { layout: 'grid', columns: '3', showQuickView: true, showWishlist: true, showCompare: false, imageAspectRatio: 'square', showBadges: true, gap: 'md' },
     render: (raw) => {
         const { layout = 'grid', columns = '3', showQuickView, showWishlist, showCompare, imageAspectRatio = 'square', showBadges, gap = 'md' } = raw;
-        const products = raw.products ?? MOCK;
+        const products = raw.products ?? [];
         const onQuickView = (id) => raw.onQuickView?.(id);
         const onAddToWishlist = (id) => raw.onAddToWishlist?.(id);
         const onCompare = (id) => raw.onCompare?.(id);
+        if (products.length === 0) {
+            return (_jsx("div", { className: `p-8 bg-gray-50 border border-dashed border-gray-300 rounded-lg text-center text-gray-500`, children: _jsx("p", { children: "No products to display." }) }));
+        }
         if (layout === 'list') {
             return (_jsx("div", { className: "space-y-6", children: products.map((p) => (_jsxs("div", { className: "flex gap-4 border border-gray-200 rounded-lg p-4", children: [_jsx("a", { href: `/products/${p.handle}`, className: "flex-shrink-0", children: _jsx("img", { src: p.thumbnail, alt: p.title, className: `${aspectMap[imageAspectRatio]} w-32 object-cover rounded` }) }), _jsxs("div", { className: "flex-1", children: [_jsx("a", { href: `/products/${p.handle}`, className: "font-semibold text-lg hover:underline", children: p.title }), _jsxs("div", { className: "mt-2 flex items-center gap-2", children: [_jsx("span", { className: "font-medium", children: p.price }), p.compareAtPrice && _jsx("span", { className: "text-sm text-gray-500 line-through", children: p.compareAtPrice }), showBadges && p.badge && _jsx("span", { className: "text-xs font-medium px-2 py-0.5 bg-red-100 text-red-700 rounded", children: p.badge })] }), _jsxs("div", { className: "mt-4 flex gap-2", children: [showQuickView && _jsx("button", { onClick: () => onQuickView(p.id), className: "p-2 border border-gray-300 rounded hover:bg-gray-50", title: "Quick view", children: _jsx(Eye, {}) }), showWishlist && _jsx("button", { onClick: () => onAddToWishlist(p.id), className: "p-2 border border-gray-300 rounded hover:bg-gray-50", title: "Add to wishlist", children: _jsx(Heart, {}) }), showCompare && _jsx("button", { onClick: () => onCompare(p.id), className: "px-3 py-1 text-sm border border-gray-300 rounded hover:bg-gray-50", children: "Compare" })] })] })] }, p.id))) }));
         }

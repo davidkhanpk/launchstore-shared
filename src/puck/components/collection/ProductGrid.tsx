@@ -41,12 +41,10 @@ const aspectMap = { square: 'aspect-square', portrait: 'aspect-[3/4]', landscape
 const gapMap = { sm: 'gap-3', md: 'gap-6', lg: 'gap-8' } as const;
 const colsMap = { '2': 'md:grid-cols-2', '3': 'md:grid-cols-2 lg:grid-cols-3', '4': 'md:grid-cols-2 lg:grid-cols-4' } as const;
 
-const MOCK = [
-  { id: '1', title: 'Classic T-Shirt', handle: 'classic-t-shirt', thumbnail: 'https://placehold.co/400x400', price: '$29.99', compareAtPrice: '$39.99', badge: 'Sale' },
-  { id: '2', title: 'Denim Jeans', handle: 'denim-jeans', thumbnail: 'https://placehold.co/400x400', price: '$79.99' },
-  { id: '3', title: 'Leather Belt', handle: 'leather-belt', thumbnail: 'https://placehold.co/400x400', price: '$49.99', badge: 'New' },
-  { id: '4', title: 'Sneakers', handle: 'sneakers', thumbnail: 'https://placehold.co/400x400', price: '$99.99' },
-];
+// No static MOCK — the storefront wrapper injects real Medusa products via
+// Puck context. If no data is passed (editor preview / no collection), the
+// component renders the empty state. The shared component is purely
+// presentational.
 
 export const ProductGrid: ComponentConfig<ProductGridWithData> = {
   label: 'Product Grid',
@@ -54,10 +52,18 @@ export const ProductGrid: ComponentConfig<ProductGridWithData> = {
   defaultProps: { layout: 'grid', columns: '3', showQuickView: true, showWishlist: true, showCompare: false, imageAspectRatio: 'square', showBadges: true, gap: 'md' },
   render: (raw: any) => {
     const { layout = 'grid', columns = '3', showQuickView, showWishlist, showCompare, imageAspectRatio = 'square', showBadges, gap = 'md'   } = raw as CollectionProductGridProps;
-    const products = (raw as any).products ?? MOCK;
+    const products: Array<{ id: string; title: string; handle: string; thumbnail: string; price: string; compareAtPrice?: string; badge?: string; }> = (raw as any).products ?? [];
     const onQuickView = (id: string) => (raw as any).onQuickView?.(id);
     const onAddToWishlist = (id: string) => (raw as any).onAddToWishlist?.(id);
     const onCompare = (id: string) => (raw as any).onCompare?.(id);
+
+    if (products.length === 0) {
+      return (
+        <div className={`p-8 bg-gray-50 border border-dashed border-gray-300 rounded-lg text-center text-gray-500`}>
+          <p>No products to display.</p>
+        </div>
+      );
+    }
 
     if (layout === 'list') {
       return (

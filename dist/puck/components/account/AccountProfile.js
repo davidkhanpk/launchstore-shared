@@ -20,22 +20,28 @@ const Phone = ({ size = 20 }) => (_jsx("svg", { width: size, height: size, viewB
 const MapPin = ({ size = 20 }) => (_jsxs("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: [_jsx("path", { d: "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" }), _jsx("circle", { cx: "12", cy: "10", r: "3" })] }));
 const Edit = ({ size = 20 }) => (_jsxs("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: [_jsx("path", { d: "M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" }), _jsx("path", { d: "M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" })] }));
 const Save = ({ size = 20 }) => (_jsxs("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: [_jsx("path", { d: "M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" }), _jsx("polyline", { points: "17 21 17 13 7 13 7 21" }), _jsx("polyline", { points: "7 3 7 8 15 8" })] }));
-const MOCK = { firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', phone: '+1 (555) 123-4567', birthday: '1990-01-15', address: '123 Main St, City, State 12345', newsletter: true, orderNotifications: true };
+// No static MOCK — the storefront wrapper injects real Medusa customer
+// data via Puck context. If no data is passed (editor preview / not signed
+// in), the component renders an empty-state placeholder. The shared
+// component is purely presentational.
 export const AccountProfile = {
     label: 'Account Profile',
     fields: accountProfileFields,
     defaultProps: { layout: 'two-column', showAvatar: true, showPersonalInfo: true, showContactInfo: true, showPreferences: true, allowEditing: true, editButtonText: 'Edit Profile', saveButtonText: 'Save Changes', cancelButtonText: 'Cancel', backgroundColor: '#f9fafb', textColor: '#111827' },
     render: (raw) => {
         const { layout = 'two-column', showAvatar, showPersonalInfo, showContactInfo, showPreferences, allowEditing, editButtonText = 'Edit Profile', saveButtonText = 'Save Changes', cancelButtonText = 'Cancel', backgroundColor = '#f9fafb', textColor = '#111827' } = raw;
-        const profile = raw.profile ?? MOCK;
+        const profile = raw.profile;
         const avatarUrl = raw.avatarUrl;
         const onSave = raw.onSave ?? (() => { });
+        if (!profile) {
+            return (_jsx("div", { style: { backgroundColor, color: textColor }, className: "p-8 rounded-lg text-center", children: _jsxs("div", { className: "py-16 flex flex-col items-center gap-3 text-gray-500", children: [_jsx("div", { className: "w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-2xl", children: "?" }), _jsx("p", { children: "Sign in to view your profile." })] }) }));
+        }
         const [isEditing, setIsEditing] = useState(false);
         const [form, setForm] = useState(profile);
         const handle = (k, v) => setForm((p) => ({ ...p, [k]: v }));
         const handleSave = async () => { await onSave(form); setIsEditing(false); };
         const handleCancel = () => { setForm(profile); setIsEditing(false); };
-        const initials = `${form.firstName[0] || ''}${form.lastName[0] || ''}`.toUpperCase();
+        const initials = `${(form.firstName?.[0] || '')}${(form.lastName?.[0] || '')}`.toUpperCase();
         const field = (key, value, type = 'text', readonly = true) => isEditing && !readonly
             ? _jsx("input", { type: type, value: value || '', onChange: (e) => handle(key, e.target.value), className: "w-full px-3 py-2 border border-gray-300 rounded" })
             : _jsx("p", { className: "text-gray-900", children: String(value || '—') });

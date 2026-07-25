@@ -12,21 +12,22 @@ const Clock = ({ size = 24 }) => (_jsxs("svg", { width: size, height: size, view
 const Package = ({ size = 24 }) => (_jsxs("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: [_jsx("line", { x1: "16.5", y1: "9.4", x2: "7.5", y2: "4.21" }), _jsx("path", { d: "M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" }), _jsx("polyline", { points: "3.27 6.96 12 12.01 20.73 6.96" }), _jsx("line", { x1: "12", y1: "22.08", x2: "12", y2: "12" })] }));
 const Truck = ({ size = 24 }) => (_jsxs("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", children: [_jsx("rect", { x: "1", y: "3", width: "15", height: "13" }), _jsx("polygon", { points: "16 8 20 8 23 11 23 16 16 16 16 8" }), _jsx("circle", { cx: "5.5", cy: "18.5", r: "2.5" }), _jsx("circle", { cx: "18.5", cy: "18.5", r: "2.5" })] }));
 const ICON_MAP = { Check, Clock, Package, Truck };
-const MOCK_STEPS = [
-    { id: 'placed', title: 'Order Placed', description: 'Your order has been confirmed', timestamp: 'Dec 21, 2025 - 10:30 AM', completed: true, iconName: 'Check' },
-    { id: 'processing', title: 'Processing', description: "We're preparing your order", timestamp: 'Dec 21, 2025 - 11:00 AM', completed: true, iconName: 'Clock' },
-    { id: 'shipped', title: 'Shipped', description: 'Your order is on its way', timestamp: 'Dec 22, 2025 - 2:00 PM', completed: true, iconName: 'Truck' },
-    { id: 'delivered', title: 'Delivered', description: 'Your order has been delivered', timestamp: 'Expected Dec 25, 2025', completed: false, iconName: 'Package' },
-];
+// No static MOCK — the storefront wrapper injects real order timeline steps
+// via Puck context. If no data is passed (editor preview / no order), the
+// component renders an empty-state placeholder. The shared component is
+// purely presentational.
 export const OrderTimeline = {
     label: 'Order Timeline',
     fields: orderTimelineFields,
     defaultProps: { showIcons: true, showTimestamps: true, showTrackingNumber: true, orientation: 'vertical', style: 'default' },
     render: (raw) => {
         const { showIcons, showTimestamps, showTrackingNumber, orientation = 'vertical', style = 'default' } = raw;
-        const steps = raw.steps ?? MOCK_STEPS;
-        const trackingNumber = raw.trackingNumber ?? '1Z999AA10123456784';
+        const steps = raw.steps ?? [];
+        const trackingNumber = raw.trackingNumber;
         const onCopyTracking = raw.onCopyTracking ?? (() => { });
+        if (steps.length === 0) {
+            return (_jsx("div", { className: "p-8 bg-gray-50 border border-dashed border-gray-300 rounded-lg text-center text-gray-500", children: _jsx("p", { children: "Order timeline will appear here once an order is loaded." }) }));
+        }
         const currentStepIndex = steps.findIndex((s) => !s.completed);
         if (orientation === 'horizontal') {
             return (_jsxs("div", { className: "w-full", children: [showTrackingNumber && (_jsx("div", { className: "mb-6 text-center", children: _jsxs("p", { className: "text-sm text-gray-600", children: ["Tracking Number: ", _jsx("strong", { className: "text-gray-900", children: trackingNumber })] }) })), _jsxs("div", { className: "flex items-start justify-between relative", children: [_jsx("div", { className: "absolute top-6 left-0 right-0 h-1 bg-gray-200", children: _jsx("div", { className: "h-full bg-green-500 transition-all", style: { width: `${(currentStepIndex / (steps.length - 1)) * 100}%` } }) }), steps.map((step, index) => {

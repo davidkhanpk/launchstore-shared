@@ -43,12 +43,10 @@ export interface OrderTimelineWithData extends OrderTimelineProps {
   onCopyTracking?: () => void;
 }
 
-const MOCK_STEPS: OrderTimelineStep[] = [
-  { id: 'placed', title: 'Order Placed', description: 'Your order has been confirmed', timestamp: 'Dec 21, 2025 - 10:30 AM', completed: true, iconName: 'Check' },
-  { id: 'processing', title: 'Processing', description: "We're preparing your order", timestamp: 'Dec 21, 2025 - 11:00 AM', completed: true, iconName: 'Clock' },
-  { id: 'shipped', title: 'Shipped', description: 'Your order is on its way', timestamp: 'Dec 22, 2025 - 2:00 PM', completed: true, iconName: 'Truck' },
-  { id: 'delivered', title: 'Delivered', description: 'Your order has been delivered', timestamp: 'Expected Dec 25, 2025', completed: false, iconName: 'Package' },
-];
+// No static MOCK — the storefront wrapper injects real order timeline steps
+// via Puck context. If no data is passed (editor preview / no order), the
+// component renders an empty-state placeholder. The shared component is
+// purely presentational.
 
 export const OrderTimeline: ComponentConfig<OrderTimelineWithData> = {
   label: 'Order Timeline',
@@ -56,9 +54,18 @@ export const OrderTimeline: ComponentConfig<OrderTimelineWithData> = {
   defaultProps: { showIcons: true, showTimestamps: true, showTrackingNumber: true, orientation: 'vertical', style: 'default' },
   render: (raw: any) => {
     const { showIcons, showTimestamps, showTrackingNumber, orientation = 'vertical', style = 'default' } = raw as OrderTimelineWithData;
-    const steps: OrderTimelineStep[] = (raw as any).steps ?? MOCK_STEPS;
-    const trackingNumber: string = (raw as any).trackingNumber ?? '1Z999AA10123456784';
+    const steps: OrderTimelineStep[] = (raw as any).steps ?? [];
+    const trackingNumber: string | undefined = (raw as any).trackingNumber;
     const onCopyTracking = (raw as any).onCopyTracking ?? (() => {});
+
+    if (steps.length === 0) {
+      return (
+        <div className="p-8 bg-gray-50 border border-dashed border-gray-300 rounded-lg text-center text-gray-500">
+          <p>Order timeline will appear here once an order is loaded.</p>
+        </div>
+      );
+    }
+
     const currentStepIndex = steps.findIndex((s) => !s.completed);
 
     if (orientation === 'horizontal') {

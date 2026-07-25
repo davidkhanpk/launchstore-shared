@@ -59,10 +59,10 @@ export interface WishlistItemsWithData extends WishlistItemsProps {
   onRemove?: (id: string) => void;
 }
 
-const MOCK: WishlistItem[] = [
-  { id: 'wli_01', variantId: 'var_01', productTitle: 'Classic Cotton T-Shirt', variantTitle: 'Navy / Large', thumbnail: 'https://placehold.co/80x80/e2e8f0/94a3b8?text=T-Shirt', productHandle: 'classic-cotton-t-shirt' },
-  { id: 'wli_02', variantId: 'var_02', productTitle: 'Running Sneakers Pro', variantTitle: 'White / 42', thumbnail: 'https://placehold.co/80x80/e2e8f0/94a3b8?text=Shoes', productHandle: 'running-sneakers-pro' },
-];
+// No static MOCK — the storefront wrapper injects real wishlist items via
+// Puck context. If no data is passed (editor preview / not signed in), the
+// component renders the empty state. The shared component is purely
+// presentational.
 
 export const WishlistItems: ComponentConfig<WishlistItemsWithData> = {
   label: 'Wishlist Items',
@@ -70,7 +70,7 @@ export const WishlistItems: ComponentConfig<WishlistItemsWithData> = {
   defaultProps: { title: 'My Wishlist', showTitle: true, showEmptyMessage: true, emptyTitle: 'Your wishlist is empty', emptyMessage: 'Save items you love and come back to them anytime.', showAddToCart: true, addToCartLabel: 'Add to Cart', removeLabel: 'Remove', backgroundColor: '#ffffff', cardBackgroundColor: '#ffffff', textColor: '#111827', borderRadius: '8px', padding: '0px', shadow: false },
   render: (raw: any) => {
     const { title, showTitle, showEmptyMessage, emptyTitle, emptyMessage, showAddToCart, addToCartLabel, removeLabel, backgroundColor, cardBackgroundColor, textColor, borderRadius, padding, shadow } = raw as WishlistItemsWithData;
-    const items: WishlistItem[] = (raw as any).items ?? MOCK;
+    const items: WishlistItem[] = (raw as any).items ?? [];
     const onAddToCart = (variantId: string) => (raw as any).onAddToCart ? (raw as any).onAddToCart(variantId) : (() => {});
     const onRemove = (id: string) => (raw as any).onRemove ? (raw as any).onRemove(id) : (() => {});
 

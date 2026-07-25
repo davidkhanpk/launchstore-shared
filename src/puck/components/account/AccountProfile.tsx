@@ -68,7 +68,10 @@ export interface AccountProfileWithData extends AccountProfileProps {
   onSave?: (profile: AccountProfile) => void | Promise<void>;
 }
 
-const MOCK: AccountProfile = { firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', phone: '+1 (555) 123-4567', birthday: '1990-01-15', address: '123 Main St, City, State 12345', newsletter: true, orderNotifications: true };
+// No static MOCK — the storefront wrapper injects real Medusa customer
+// data via Puck context. If no data is passed (editor preview / not signed
+// in), the component renders an empty-state placeholder. The shared
+// component is purely presentational.
 
 export const AccountProfile: ComponentConfig<AccountProfileWithData> = {
   label: 'Account Profile',
@@ -76,9 +79,20 @@ export const AccountProfile: ComponentConfig<AccountProfileWithData> = {
   defaultProps: { layout: 'two-column', showAvatar: true, showPersonalInfo: true, showContactInfo: true, showPreferences: true, allowEditing: true, editButtonText: 'Edit Profile', saveButtonText: 'Save Changes', cancelButtonText: 'Cancel', backgroundColor: '#f9fafb', textColor: '#111827' },
   render: (raw: any) => {
     const { layout = 'two-column', showAvatar, showPersonalInfo, showContactInfo, showPreferences, allowEditing, editButtonText = 'Edit Profile', saveButtonText = 'Save Changes', cancelButtonText = 'Cancel', backgroundColor = '#f9fafb', textColor = '#111827' } = raw as AccountProfileWithData;
-    const profile: AccountProfile = (raw as any).profile ?? MOCK;
+    const profile: AccountProfile | undefined = (raw as any).profile;
     const avatarUrl: string | undefined = (raw as any).avatarUrl;
     const onSave: (p: AccountProfile) => void | Promise<void> = (raw as any).onSave ?? (() => {});
+
+    if (!profile) {
+      return (
+        <div style={{ backgroundColor, color: textColor }} className="p-8 rounded-lg text-center">
+          <div className="py-16 flex flex-col items-center gap-3 text-gray-500">
+            <div className="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center text-2xl">?</div>
+            <p>Sign in to view your profile.</p>
+          </div>
+        </div>
+      );
+    }
 
     const [isEditing, setIsEditing] = useState(false);
     const [form, setForm] = useState<AccountProfile>(profile);
@@ -87,7 +101,7 @@ export const AccountProfile: ComponentConfig<AccountProfileWithData> = {
     const handleSave = async () => { await onSave(form); setIsEditing(false); };
     const handleCancel = () => { setForm(profile); setIsEditing(false); };
 
-    const initials = `${form.firstName[0] || ''}${form.lastName[0] || ''}`.toUpperCase();
+    const initials = `${(form.firstName?.[0] || '')}${(form.lastName?.[0] || '')}`.toUpperCase();
     const field = (key: keyof AccountProfile, value: any, type: string = 'text', readonly: boolean = true) =>
       isEditing && !readonly
         ? <input type={type} value={value as string || ''} onChange={(e) => handle(key, e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded" />

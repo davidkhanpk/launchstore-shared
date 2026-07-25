@@ -42,17 +42,10 @@ export interface OrderDetailsWithData extends OrderDetailsProps {
   formatPrice?: (price: number) => string;
 }
 
-const MOCK: Required<Pick<OrderDetailsWithData, 'items' | 'shippingAddress' | 'billingAddress' | 'payment' | 'shippingMethod' | 'totals'>> = {
-  items: [
-    { id: '1', title: 'Classic T-Shirt', variant: 'Medium / Black', thumbnail: 'https://via.placeholder.com/80', quantity: 2, unit_price: 2999, total: 5998 },
-    { id: '2', title: 'Denim Jeans', variant: '32x34 / Blue', thumbnail: 'https://via.placeholder.com/80', quantity: 1, unit_price: 7999, total: 7999 },
-  ],
-  shippingAddress: { first_name: 'John', last_name: 'Doe', address_1: '123 Main St', city: 'New York', province: 'NY', postal_code: '10001', country: 'United States' },
-  billingAddress: { first_name: 'John', last_name: 'Doe', address_1: '123 Main St', city: 'New York', province: 'NY', postal_code: '10001', country: 'United States' },
-  payment: { provider: 'Stripe', card_last4: '4242', card_brand: 'Visa' },
-  shippingMethod: { method: 'Standard Shipping', cost: 995 },
-  totals: { subtotal: 13997, shipping_total: 995, tax_total: 1120, total: 16112 },
-};
+// No static MOCK — the storefront wrapper injects real Medusa order data via
+// Puck context. If no data is passed (editor preview without sample order),
+// the component renders an empty-state placeholder. The shared component is
+// purely presentational.
 
 const defaultFormat = (p: number) => `$${(p / 100).toFixed(2)}`;
 
@@ -62,13 +55,23 @@ export const OrderDetails: ComponentConfig<OrderDetailsWithData> = {
   defaultProps: { showItemImages: true, showItemQuantity: true, showItemPrice: true, showShippingAddress: true, showBillingAddress: true, showPaymentMethod: true, showShippingMethod: true, showPricingBreakdown: true, compactView: false },
   render: (raw: any) => {
     const { showItemImages, showItemQuantity, showItemPrice, showShippingAddress, showBillingAddress, showPaymentMethod, showShippingMethod, showPricingBreakdown, compactView } = raw as OrderDetailsWithData;
-    const items = (raw as any).items ?? MOCK.items;
-    const shippingAddress = (raw as any).shippingAddress ?? MOCK.shippingAddress;
-    const billingAddress = (raw as any).billingAddress ?? MOCK.billingAddress;
-    const payment = (raw as any).payment ?? MOCK.payment;
-    const shippingMethod = (raw as any).shippingMethod ?? MOCK.shippingMethod;
-    const totals = (raw as any).totals ?? MOCK.totals;
+    const items: OrderItem[] = (raw as any).items ?? [];
+    const shippingAddress: OrderAddress | undefined = (raw as any).shippingAddress;
+    const billingAddress: OrderAddress | undefined = (raw as any).billingAddress;
+    const payment: OrderPayment | undefined = (raw as any).payment;
+    const shippingMethod = (raw as any).shippingMethod;
+    const totals = (raw as any).totals;
     const formatPrice: (p: number) => string = (raw as any).formatPrice ?? defaultFormat;
+
+    // Empty state: no order data. Show a placeholder so designers know
+    // what this component will look like once data is passed.
+    if (!items || items.length === 0) {
+      return (
+        <div className="max-w-4xl mx-auto p-6 bg-gray-50 border border-dashed border-gray-300 rounded-lg text-center text-gray-500">
+          <p>Order details will appear here once an order is loaded.</p>
+        </div>
+      );
+    }
 
     return (
       <div className="max-w-4xl mx-auto space-y-6">
@@ -96,7 +99,7 @@ export const OrderDetails: ComponentConfig<OrderDetailsWithData> = {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {showShippingAddress && (
+          {showShippingAddress && shippingAddress && (
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <h3 className="font-semibold text-gray-900 mb-3">Shipping Address</h3>
               <div className={`${compactView ? 'text-sm' : 'text-base'} text-gray-600 space-y-1`}>
@@ -107,7 +110,7 @@ export const OrderDetails: ComponentConfig<OrderDetailsWithData> = {
               </div>
             </div>
           )}
-          {showBillingAddress && (
+          {showBillingAddress && billingAddress && (
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <h3 className="font-semibold text-gray-900 mb-3">Billing Address</h3>
               <div className={`${compactView ? 'text-sm' : 'text-base'} text-gray-600 space-y-1`}>
@@ -118,7 +121,7 @@ export const OrderDetails: ComponentConfig<OrderDetailsWithData> = {
               </div>
             </div>
           )}
-          {showPaymentMethod && (
+          {showPaymentMethod && payment && (
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <h3 className="font-semibold text-gray-900 mb-3">Payment Method</h3>
               <div className={`${compactView ? 'text-sm' : 'text-base'} text-gray-600`}>
@@ -127,7 +130,7 @@ export const OrderDetails: ComponentConfig<OrderDetailsWithData> = {
               </div>
             </div>
           )}
-          {showShippingMethod && (
+          {showShippingMethod && shippingMethod && (
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <h3 className="font-semibold text-gray-900 mb-3">Shipping Method</h3>
               <div className={`${compactView ? 'text-sm' : 'text-base'} text-gray-600`}>

@@ -62,10 +62,10 @@ export interface AddressBookWithData extends AddressBookProps {
   onSetDefault?: (id: string) => void;
 }
 
-const MOCK: Address[] = [
-  { id: '1', type: 'shipping', firstName: 'John', lastName: 'Doe', address1: '123 Main Street', address2: 'Apt 4B', city: 'New York', state: 'NY', zip: '10001', country: 'United States', phone: '+1 (555) 123-4567', isDefault: true },
-  { id: '2', type: 'billing', firstName: 'John', lastName: 'Doe', company: 'Acme Corp', address1: '456 Park Ave', city: 'New York', state: 'NY', zip: '10022', country: 'United States', phone: '+1 (555) 987-6543', isDefault: false },
-];
+// No static MOCK — the storefront wrapper injects real Medusa customer
+// addresses via Puck context. If no data is passed (editor preview / not
+// signed in), the component renders the empty state. The shared component
+// is purely presentational.
 
 export const AddressBook: ComponentConfig<AddressBookWithData> = {
   label: 'Address Book',
@@ -73,7 +73,7 @@ export const AddressBook: ComponentConfig<AddressBookWithData> = {
   defaultProps: { layout: 'grid', showAddButton: true, showTypeLabels: true, maxAddresses: 10, backgroundColor: '#f9fafb', cardBackgroundColor: '#ffffff', textColor: '#111827', addButtonText: 'Add New Address', editButtonText: 'Edit', deleteButtonText: 'Delete', setDefaultText: 'Set as Default', defaultBadgeText: 'Default', emptyStateText: 'No addresses saved' },
   render: (raw: any) => {
     const { layout = 'grid', showAddButton, showTypeLabels, backgroundColor = '#f9fafb', cardBackgroundColor = '#ffffff', textColor = '#111827', addButtonText = 'Add New Address', editButtonText = 'Edit', deleteButtonText = 'Delete', setDefaultText = 'Set as Default', defaultBadgeText = 'Default', emptyStateText = 'No addresses saved' } = raw as AddressBookWithData;
-    const addresses: Address[] = (raw as any).addresses ?? MOCK;
+    const addresses: Address[] = (raw as any).addresses ?? [];
     const onAdd = (raw as any).onAdd ?? (() => {});
     const onEdit = (id: string) => (raw as any).onEdit ? (raw as any).onEdit(id) : (() => {});
     const onDelete = (id: string) => (raw as any).onDelete ? (raw as any).onDelete(id) : (() => {});

@@ -21,15 +21,10 @@ const STATUS_COLOR = {
     pending: 'bg-yellow-100 text-yellow-800', processing: 'bg-blue-100 text-blue-800',
     shipped: 'bg-purple-100 text-purple-800', delivered: 'bg-green-100 text-green-800', cancelled: 'bg-red-100 text-red-800',
 };
-const MOCK = [
-    { id: '1', orderNumber: 'ORD-2024-001', date: '2024-12-15', status: 'delivered', total: 14999, itemCount: 3, items: [
-            { id: 'i1', name: 'Classic T-Shirt', image: 'https://placehold.co/80', quantity: 2, price: 2999 },
-            { id: 'i2', name: 'Denim Jeans', image: 'https://placehold.co/80', quantity: 1, price: 7999 },
-        ] },
-    { id: '2', orderNumber: 'ORD-2024-002', date: '2024-12-20', status: 'shipped', total: 7999, itemCount: 1, items: [
-            { id: 'i3', name: 'Leather Belt', image: 'https://placehold.co/80', quantity: 1, price: 7999 },
-        ] },
-];
+// No static MOCK — the storefront wrapper injects real Medusa orders via
+// Puck context. If no data is passed (editor preview / no customer), the
+// component renders the empty state. The shared component is purely
+// presentational.
 const defaultFormat = (p) => `$${(p / 100).toFixed(2)}`;
 export const OrderHistory = {
     label: 'Order History',
@@ -37,7 +32,7 @@ export const OrderHistory = {
     defaultProps: { layout: 'list', showSearch: true, showFilters: true, defaultStatus: 'all', showImages: true, showItemCount: true, ordersPerPage: 10, backgroundColor: '#f9fafb', textColor: '#111827', emptyStateText: 'No orders found', viewDetailsText: 'View Details' },
     render: (raw) => {
         const { layout = 'list', showSearch, showFilters, defaultStatus = 'all', showImages, showItemCount, backgroundColor = '#f9fafb', textColor = '#111827', emptyStateText = 'No orders found', viewDetailsText = 'View Details' } = raw;
-        const orders = raw.orders ?? MOCK;
+        const orders = raw.orders ?? [];
         const onViewDetails = (id) => raw.onViewDetails ? raw.onViewDetails(id) : (() => { });
         const [q, setQ] = useState('');
         const [status, setStatus] = useState(defaultStatus);

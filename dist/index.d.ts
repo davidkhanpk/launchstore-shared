@@ -12,5 +12,6 @@
  */
 export declare const SHARED_PUCK_VERSION = "0.0.1";
 export * from './puck/components';
+export * from './puck/payment-info';
 export { resolveColor, resolveColors, isTokenPath } from './theme/resolveColor';
 //# sourceMappingURL=index.d.ts.map

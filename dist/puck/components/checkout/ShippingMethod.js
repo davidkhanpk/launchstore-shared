@@ -30,6 +30,7 @@ export const ShippingMethod = {
         const selectedId = raw.selectedId ?? '';
         const onSelect = raw.onSelect ?? (() => { });
         const onContinue = raw.onContinue ?? (() => { });
+        const showContinueButton = raw.showContinueButton ?? true;
         // Empty state: no methods provided. The storefront wrapper injects
         // real Medusa shipping options; if none are returned, show this
         // instead of a hardcoded fallback list.
@@ -45,7 +46,7 @@ export const ShippingMethod = {
             }
             return (_jsx("label", { className: `border rounded-lg p-4 cursor-pointer transition-colors block ${method.id === selectedId ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-blue-500'}`, children: _jsxs("div", { className: "flex items-center justify-between", children: [_jsxs("div", { className: "flex items-center gap-3", children: [_jsx("input", { type: "radio", name: "shipping", className: "h-4 w-4", checked: method.id === selectedId, onChange: () => onSelect(method.id) }), _jsxs("div", { children: [_jsxs("div", { className: "flex items-center gap-2", children: [_jsx(Truck, {}), _jsx("h4", { className: "font-medium text-gray-900", children: method.name })] }), showDeliveryTime && method.time && _jsxs("p", { className: "text-sm text-gray-600 mt-1 ml-8", children: [_jsx(Clock, {}), " ", method.time] }), showDeliveryDescription && method.description && _jsx("p", { className: "text-sm text-gray-500 mt-1 ml-8", children: method.description })] })] }), _jsx("span", { className: "font-bold text-gray-900", children: method.price })] }) }, method.id));
         };
-        return (_jsxs("div", { className: "border border-gray-200 rounded-lg p-6 bg-white", children: [_jsxs("div", { className: "flex items-center gap-3 mb-6 pb-4 border-b border-gray-200", children: [_jsx(Truck, {}), _jsx("h2", { className: "text-xl font-semibold text-gray-900", children: "Delivery Method" })] }), _jsx("div", { className: `space-y-${layout === 'compact' ? '2' : '4'}`, children: methods.map(renderMethod) }), _jsx("div", { className: "mt-6", children: _jsx("button", { type: "button", onClick: onContinue, className: "w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors font-medium", children: "Continue to Payment" }) })] }));
+        return (_jsxs("div", { className: "border border-gray-200 rounded-lg p-6 bg-white", children: [_jsxs("div", { className: "flex items-center gap-3 mb-6 pb-4 border-b border-gray-200", children: [_jsx(Truck, {}), _jsx("h2", { className: "text-xl font-semibold text-gray-900", children: "Delivery Method" })] }), _jsx("div", { className: `space-y-${layout === 'compact' ? '2' : '4'}`, children: methods.map(renderMethod) }), showContinueButton && (_jsx("div", { className: "mt-6", children: _jsx("button", { type: "button", onClick: onContinue, className: "w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors font-medium", children: "Continue to Payment" }) }))] }));
     },
 };
 export default ShippingMethod;

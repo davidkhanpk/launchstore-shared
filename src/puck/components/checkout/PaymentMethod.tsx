@@ -46,6 +46,13 @@ export interface PaymentMethodWithData extends PaymentMethodProps {
   selectedId?: string;
   onSelect?: (id: string) => void;
   onContinue?: () => void;
+  /**
+   * When `false`, the "Review Order" button is hidden. Use in
+   * single-page step-by-step checkouts to hide the button once the user
+   * has picked a payment method. Defaults to `true` for the legacy
+   * multi-step flow.
+   */
+  showContinueButton?: boolean;
 }
 
 // No static MOCK — the storefront wrapper injects real Medusa payment
@@ -63,6 +70,7 @@ export const PaymentMethod: ComponentConfig<PaymentMethodWithData> = {
     const selectedId: string = (raw as any).selectedId ?? '';
     const onSelect: (id: string) => void = (raw as any).onSelect ?? (() => {});
     const onContinue: () => void = (raw as any).onContinue ?? (() => {});
+    const showContinueButton: boolean = (raw as any).showContinueButton ?? true;
 
     // Empty state: no methods provided. This is the correct render when
     // the storefront wrapper hasn't injected data (e.g. region has no
@@ -134,9 +142,11 @@ export const PaymentMethod: ComponentConfig<PaymentMethodWithData> = {
           </div>
         )}
 
-        <div className="mt-6">
-          <button type="button" onClick={onContinue} className="w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors font-medium">Review Order</button>
-        </div>
+        {showContinueButton && (
+          <div className="mt-6">
+            <button type="button" onClick={onContinue} className="w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors font-medium">Review Order</button>
+          </div>
+        )}
       </div>
     );
   },

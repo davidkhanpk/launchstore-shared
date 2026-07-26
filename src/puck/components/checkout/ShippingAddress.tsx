@@ -54,6 +54,14 @@ export interface ShippingAddressValue {
 
 export interface ShippingAddressWithData extends ShippingAddressProps {
   onContinue?: () => void;
+  /**
+   * When `false`, the "Continue to Shipping Method" button is hidden.
+   * Use in single-page step-by-step checkouts to hide the button once
+   * the user has saved the address and moved to the next step. Defaults
+   * to `true` for the legacy multi-step flow where each step needs
+   * an explicit Continue click to advance.
+   */
+  showContinueButton?: boolean;
   onSameAsBillingChange?: (v: boolean) => void;
   onSelectSavedAddress?: (address: ShippingAddressValue) => void;
   /**
@@ -106,6 +114,7 @@ export const ShippingAddress: ComponentConfig<ShippingAddressWithData> = {
     const onSameAsBillingChange: (v: boolean) => void = (raw as any).onSameAsBillingChange ?? (() => {});
     const onSelectSavedAddress: (a: ShippingAddressValue) => void = (raw as any).onSelectSavedAddress ?? (() => {});
     const onContinue: () => void = (raw as any).onContinue ?? (() => {});
+    const showContinueButton: boolean = (raw as any).showContinueButton ?? true;
     const countries = (raw as any).countries ?? [];
     const states = (raw as any).states ?? [];
     const savedAddresses: ShippingAddressValue[] = (raw as any).savedAddresses ?? [];
@@ -236,9 +245,11 @@ export const ShippingAddress: ComponentConfig<ShippingAddressWithData> = {
           </div>
         )}
 
-        <div className="mt-6">
-          <button onClick={onContinue} className="w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors font-medium">Continue to Shipping Method</button>
-        </div>
+        {showContinueButton && (
+          <div className="mt-6">
+            <button onClick={onContinue} className="w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors font-medium">Continue to Shipping Method</button>
+          </div>
+        )}
       </div>
     );
   },

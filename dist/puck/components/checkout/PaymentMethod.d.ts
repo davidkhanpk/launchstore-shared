@@ -22,6 +22,13 @@ export interface PaymentMethodWithData extends PaymentMethodProps {
     selectedId?: string;
     onSelect?: (id: string) => void;
     onContinue?: () => void;
+    /**
+     * When `false`, the "Review Order" button is hidden. Use in
+     * single-page step-by-step checkouts to hide the button once the user
+     * has picked a payment method. Defaults to `true` for the legacy
+     * multi-step flow.
+     */
+    showContinueButton?: boolean;
 }
 export declare const PaymentMethod: ComponentConfig<PaymentMethodWithData>;
 export default PaymentMethod;

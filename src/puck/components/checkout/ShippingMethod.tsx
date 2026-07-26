@@ -30,6 +30,13 @@ export interface ShippingMethodWithData extends ShippingMethodProps {
   selectedId?: string;
   onSelect?: (id: string) => void;
   onContinue?: () => void;
+  /**
+   * When `false`, the "Continue to Payment" button is hidden. Use in
+   * single-page step-by-step checkouts to hide the button once the user
+   * has picked a shipping method. Defaults to `true` for the legacy
+   * multi-step flow.
+   */
+  showContinueButton?: boolean;
   pickupOption?: { id: string; name: string; price: string; time: string; description: string };
 }
 
@@ -56,6 +63,7 @@ export const ShippingMethod: ComponentConfig<ShippingMethodWithData> = {
     const selectedId: string = (raw as any).selectedId ?? '';
     const onSelect: (id: string) => void = (raw as any).onSelect ?? (() => {});
     const onContinue: () => void = (raw as any).onContinue ?? (() => {});
+    const showContinueButton: boolean = (raw as any).showContinueButton ?? true;
 
     // Empty state: no methods provided. The storefront wrapper injects
     // real Medusa shipping options; if none are returned, show this
@@ -130,9 +138,11 @@ export const ShippingMethod: ComponentConfig<ShippingMethodWithData> = {
         <div className={`space-y-${layout === 'compact' ? '2' : '4'}`}>
           {methods.map(renderMethod)}
         </div>
-        <div className="mt-6">
-          <button type="button" onClick={onContinue} className="w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors font-medium">Continue to Payment</button>
-        </div>
+        {showContinueButton && (
+          <div className="mt-6">
+            <button type="button" onClick={onContinue} className="w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors font-medium">Continue to Payment</button>
+          </div>
+        )}
       </div>
     );
   },

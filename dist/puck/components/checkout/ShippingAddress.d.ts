@@ -26,6 +26,14 @@ export interface ShippingAddressValue {
 }
 export interface ShippingAddressWithData extends ShippingAddressProps {
     onContinue?: () => void;
+    /**
+     * When `false`, the "Continue to Shipping Method" button is hidden.
+     * Use in single-page step-by-step checkouts to hide the button once
+     * the user has saved the address and moved to the next step. Defaults
+     * to `true` for the legacy multi-step flow where each step needs
+     * an explicit Continue click to advance.
+     */
+    showContinueButton?: boolean;
     onSameAsBillingChange?: (v: boolean) => void;
     onSelectSavedAddress?: (address: ShippingAddressValue) => void;
     /**

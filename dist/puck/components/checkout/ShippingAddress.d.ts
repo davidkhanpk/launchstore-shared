@@ -12,6 +12,7 @@ export interface ShippingAddressProps {
 /** Address shape compatible with `BaseCartAddress` and `BaseCustomerAddress`. */
 export interface ShippingAddressValue {
     id?: string;
+    email?: string;
     first_name?: string;
     last_name?: string;
     company?: string;
@@ -27,6 +28,14 @@ export interface ShippingAddressWithData extends ShippingAddressProps {
     onContinue?: () => void;
     onSameAsBillingChange?: (v: boolean) => void;
     onSelectSavedAddress?: (address: ShippingAddressValue) => void;
+    /**
+     * Controlled form values. If provided, the inputs render with `value={formData.X}`
+     * and call `onFormChange` on each keystroke. If undefined, inputs are
+     * uncontrolled (legacy behavior) — the wrapper must then read values from
+     * the DOM via refs or form submission.
+     */
+    formData?: ShippingAddressValue;
+    onFormChange?: (next: ShippingAddressValue) => void;
     sameAsBilling?: boolean;
     countries?: Array<{
         code: string;

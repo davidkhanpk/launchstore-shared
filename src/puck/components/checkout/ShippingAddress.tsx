@@ -39,6 +39,7 @@ export interface ShippingAddressProps {
 /** Address shape compatible with `BaseCartAddress` and `BaseCustomerAddress`. */
 export interface ShippingAddressValue {
   id?: string;
+  email?: string;
   first_name?: string;
   last_name?: string;
   company?: string;
@@ -55,6 +56,14 @@ export interface ShippingAddressWithData extends ShippingAddressProps {
   onContinue?: () => void;
   onSameAsBillingChange?: (v: boolean) => void;
   onSelectSavedAddress?: (address: ShippingAddressValue) => void;
+  /**
+   * Controlled form values. If provided, the inputs render with `value={formData.X}`
+   * and call `onFormChange` on each keystroke. If undefined, inputs are
+   * uncontrolled (legacy behavior) — the wrapper must then read values from
+   * the DOM via refs or form submission.
+   */
+  formData?: ShippingAddressValue;
+  onFormChange?: (next: ShippingAddressValue) => void;
   sameAsBilling?: boolean;
   countries?: Array<{ code: string; name: string }>;
   states?: Array<{ code: string; name: string }>;
@@ -100,6 +109,14 @@ export const ShippingAddress: ComponentConfig<ShippingAddressWithData> = {
     const countries = (raw as any).countries ?? [];
     const states = (raw as any).states ?? [];
     const savedAddresses: ShippingAddressValue[] = (raw as any).savedAddresses ?? [];
+    // Controlled form state. If wrapper provides formData + onFormChange,
+    // inputs render as controlled (value/onChange). Otherwise uncontrolled.
+    const formData: ShippingAddressValue | undefined = (raw as any).formData;
+    const onFormChange: ((next: ShippingAddressValue) => void) | undefined = (raw as any).onFormChange;
+    const ctrl = onFormChange
+      ? (key: keyof ShippingAddressValue, val: string) => onFormChange({ ...(formData ?? {}), [key]: val })
+      : null;
+    const v = (key: keyof ShippingAddressValue) => (formData?.[key] as string) ?? '';
     const gridCols = layout === 'two-column' ? 'grid-cols-2' : 'grid-cols-1';
     const cityGrid = layout === 'two-column' ? 'grid-cols-3' : 'grid-cols-1';
 
@@ -138,12 +155,12 @@ export const ShippingAddress: ComponentConfig<ShippingAddressWithData> = {
           <div className={`grid ${gridCols} gap-4`}>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2"><Mail /> Email *</label>
-              <input type="email" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="john@example.com" />
+              <input type="email" {...(ctrl ? { value: v('email'), onChange: (e: any) => ctrl('email', e.target.value) } : {})} className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="john@example.com" />
             </div>
             {requirePhone && (
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2"><Phone /> Phone *</label>
-                <input type="tel" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="+1 (555) 123-4567" />
+                <input type="tel" {...(ctrl ? { value: v('phone'), onChange: (e: any) => ctrl('phone', e.target.value) } : {})} className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="+1 (555) 123-4567" />
               </div>
             )}
           </div>
@@ -155,55 +172,55 @@ export const ShippingAddress: ComponentConfig<ShippingAddressWithData> = {
             <div className={`grid ${gridCols} gap-4`}>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
-                <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="John" />
+                <input type="text" {...(ctrl ? { value: v('first_name'), onChange: (e: any) => ctrl('first_name', e.target.value) } : {})} className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="John" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
-                <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Doe" />
+                <input type="text" {...(ctrl ? { value: v('last_name'), onChange: (e: any) => ctrl('last_name', e.target.value) } : {})} className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Doe" />
               </div>
             </div>
             {showCompanyField && (
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Company (Optional)</label>
-                <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Company Name" />
+                <input type="text" {...(ctrl ? { value: v('company'), onChange: (e: any) => ctrl('company', e.target.value) } : {})} className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Company Name" />
               </div>
             )}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Address *</label>
-              <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="123 Main Street" />
+              <input type="text" {...(ctrl ? { value: v('address_1'), onChange: (e: any) => ctrl('address_1', e.target.value) } : {})} className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="123 Main Street" />
             </div>
             {showAddress2Field && (
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Apartment, suite, etc. (Optional)</label>
-                <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Apt 4B" />
+                <input type="text" {...(ctrl ? { value: v('address_2'), onChange: (e: any) => ctrl('address_2', e.target.value) } : {})} className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Apt 4B" />
               </div>
             )}
             <div className={`grid ${cityGrid} gap-4`}>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">City *</label>
-                <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="New York" />
+                <input type="text" {...(ctrl ? { value: v('city'), onChange: (e: any) => ctrl('city', e.target.value) } : {})} className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="New York" />
               </div>
               {showProvinceField && (
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">State / Province</label>
                   {states.length > 0 ? (
-                    <select className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select {...(ctrl ? { value: v('province'), onChange: (e: any) => ctrl('province', e.target.value) } : {})} className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
                       <option value="">Select…</option>
                       {states.map((s: any) => <option key={s.code} value={s.code}>{s.name}</option>)}
                     </select>
                   ) : (
-                    <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="NY" />
+                    <input type="text" {...(ctrl ? { value: v('province'), onChange: (e: any) => ctrl('province', e.target.value) } : {})} className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="NY" />
                   )}
                 </div>
               )}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">ZIP / Postal Code *</label>
-                <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="10001" />
+                <input type="text" {...(ctrl ? { value: v('postal_code'), onChange: (e: any) => ctrl('postal_code', e.target.value) } : {})} className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="10001" />
               </div>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Country *</label>
-              <select className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <select {...(ctrl ? { value: v('country_code'), onChange: (e: any) => ctrl('country_code', e.target.value) } : {})} className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
                 {countries.map((c: any) => <option key={c.code} value={c.code}>{c.name}</option>)}
               </select>
             </div>

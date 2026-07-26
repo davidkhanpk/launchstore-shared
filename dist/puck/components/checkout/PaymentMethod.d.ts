@@ -29,6 +29,14 @@ export interface PaymentMethodWithData extends PaymentMethodProps {
      * multi-step flow.
      */
     showContinueButton?: boolean;
+    /**
+     * When `true`, the "Review Order" button is disabled and shows a
+     * spinner + "Saving..." label. Use during the API call that commits
+     * the staging choice to Medusa. Defaults to `false`.
+     */
+    isLoading?: boolean;
+    /** Optional label override for the button while loading. */
+    loadingText?: string;
 }
 export declare const PaymentMethod: ComponentConfig<PaymentMethodWithData>;
 export default PaymentMethod;

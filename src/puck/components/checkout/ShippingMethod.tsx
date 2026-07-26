@@ -17,6 +17,15 @@ const Truck = ({ size = 20 }: { size?: number }) => (
 const Clock = ({ size = 16 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
 );
+// Inline spinner (same shape as src/modules/common/icons/spinner.tsx in
+// the storefront). Kept inline so the shared package has no icon-lib
+// dependency and the icon matches the rest of the app visually.
+const Spinner = ({ size = 20 }: { size?: number }) => (
+  <svg className="animate-spin" width={size} height={size} fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+  </svg>
+);
 
 export interface ShippingMethodProps {
   layout: 'list' | 'cards' | 'compact';
@@ -37,6 +46,14 @@ export interface ShippingMethodWithData extends ShippingMethodProps {
    * multi-step flow.
    */
   showContinueButton?: boolean;
+  /**
+   * When `true`, the "Continue to Payment" button is disabled and shows
+   * a spinner + "Saving..." label. Use during the API call that commits
+   * the staging choice to Medusa. Defaults to `false`.
+   */
+  isLoading?: boolean;
+  /** Optional label override for the button while loading. */
+  loadingText?: string;
   pickupOption?: { id: string; name: string; price: string; time: string; description: string };
 }
 
@@ -64,6 +81,8 @@ export const ShippingMethod: ComponentConfig<ShippingMethodWithData> = {
     const onSelect: (id: string) => void = (raw as any).onSelect ?? (() => {});
     const onContinue: () => void = (raw as any).onContinue ?? (() => {});
     const showContinueButton: boolean = (raw as any).showContinueButton ?? true;
+    const isLoading: boolean = (raw as any).isLoading ?? false;
+    const loadingText: string = (raw as any).loadingText ?? 'Saving…';
 
     // Empty state: no methods provided. The storefront wrapper injects
     // real Medusa shipping options; if none are returned, show this
@@ -140,7 +159,10 @@ export const ShippingMethod: ComponentConfig<ShippingMethodWithData> = {
         </div>
         {showContinueButton && (
           <div className="mt-6">
-            <button type="button" onClick={onContinue} className="w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors font-medium">Continue to Payment</button>
+            <button type="button" onClick={onContinue} disabled={isLoading} className="w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors font-medium flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+              {isLoading && <Spinner size={18} />}
+              {isLoading ? loadingText : 'Continue to Payment'}
+            </button>
           </div>
         )}
       </div>

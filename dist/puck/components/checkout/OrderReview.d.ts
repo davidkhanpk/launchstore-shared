@@ -33,6 +33,8 @@ export interface OrderReviewWithData extends OrderReviewProps {
     isProcessing?: boolean;
     agreedToTerms?: boolean;
     onAgreedChange?: (v: boolean) => void;
+    /** Optional label override for the button while the order is being placed. */
+    processingText?: string;
 }
 export declare const OrderReview: ComponentConfig<OrderReviewWithData>;
 export default OrderReview;

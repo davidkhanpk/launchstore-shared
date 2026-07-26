@@ -23,6 +23,14 @@ export interface ShippingMethodWithData extends ShippingMethodProps {
      * multi-step flow.
      */
     showContinueButton?: boolean;
+    /**
+     * When `true`, the "Continue to Payment" button is disabled and shows
+     * a spinner + "Saving..." label. Use during the API call that commits
+     * the staging choice to Medusa. Defaults to `false`.
+     */
+    isLoading?: boolean;
+    /** Optional label override for the button while loading. */
+    loadingText?: string;
     pickupOption?: {
         id: string;
         name: string;

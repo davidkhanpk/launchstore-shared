@@ -18,6 +18,14 @@ const Check = ({ size = 20 }: { size?: number }) => (
 const Shield = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
 );
+// Inline spinner (matches src/modules/common/icons/spinner.tsx in the
+// storefront). Kept inline so the shared package has no icon-lib dep.
+const Spinner = ({ size = 20 }: { size?: number }) => (
+  <svg className="animate-spin" width={size} height={size} fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+  </svg>
+);
 
 export interface OrderReviewProps {
   showTermsCheckbox: boolean;
@@ -40,6 +48,8 @@ export interface OrderReviewWithData extends OrderReviewProps {
   isProcessing?: boolean;
   agreedToTerms?: boolean;
   onAgreedChange?: (v: boolean) => void;
+  /** Optional label override for the button while the order is being placed. */
+  processingText?: string;
 }
 
 // No static MOCK — the storefront wrapper injects real Medusa shipping
@@ -64,6 +74,7 @@ export const OrderReview: ComponentConfig<OrderReviewWithData> = {
     const isProcessing: boolean = (raw as any).isProcessing ?? false;
     const agreed: boolean = (raw as any).agreedToTerms ?? false;
     const onAgreedChange: (v: boolean) => void = (raw as any).onAgreedChange ?? (() => {});
+    const processingText: string = (raw as any).processingText ?? 'Placing order…';
 
     return (
       <div className="border border-gray-200 rounded-lg p-6 bg-white">
@@ -114,8 +125,9 @@ export const OrderReview: ComponentConfig<OrderReviewWithData> = {
           </div>
         )}
 
-        <button onClick={onPlaceOrder} disabled={isProcessing || (showTermsCheckbox && !agreed)} className={`w-full bg-black text-white rounded-lg hover:bg-gray-800 transition-colors font-medium flex items-center justify-center gap-2 ${buttonSize === 'large' ? 'py-4 text-lg' : 'py-3 text-base'} disabled:opacity-50 disabled:cursor-not-allowed`}>
-          <Check /> {buttonText}
+        <button onClick={onPlaceOrder} disabled={isProcessing || (showTermsCheckbox && !agreed)} className={`w-full bg-black text-white rounded-lg hover:bg-gray-800 transition-colors font-medium flex items-center justify-center gap-2 ${buttonSize === 'large' ? 'py-4 text-lg' : 'py-3 text-base'} disabled:opacity-60 disabled:cursor-not-allowed`}>
+          {isProcessing ? <Spinner size={buttonSize === 'large' ? 20 : 18} /> : <Check />}
+          {isProcessing ? processingText : buttonText}
         </button>
 
         {showSecurityBadge && (

@@ -34,6 +34,15 @@ export interface ShippingAddressWithData extends ShippingAddressProps {
      * an explicit Continue click to advance.
      */
     showContinueButton?: boolean;
+    /**
+     * When `true`, the "Continue to Shipping Method" button is disabled
+     * and shows a spinner + "Saving..." label. Use during the API call
+     * that saves the address to Medusa. Defaults to `false`. Matches
+     * the same prop on ShippingMethod / PaymentMethod / OrderReview.
+     */
+    isLoading?: boolean;
+    /** Optional label override for the button while loading. */
+    loadingText?: string;
     onSameAsBillingChange?: (v: boolean) => void;
     onSelectSavedAddress?: (address: ShippingAddressValue) => void;
     /**

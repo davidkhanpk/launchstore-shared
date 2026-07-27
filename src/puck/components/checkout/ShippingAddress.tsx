@@ -24,6 +24,14 @@ const Mail = ({ size = 16 }: { size?: number }) => (
 const Phone = ({ size = 16 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
 );
+// Inline spinner (same shape as src/modules/common/icons/spinner.tsx in the
+// storefront). Kept inline so the shared package has no icon-lib dep.
+const Spinner = ({ size = 18 }: { size?: number }) => (
+  <svg className="animate-spin" width={size} height={size} fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+  </svg>
+);
 
 export interface ShippingAddressProps {
   showBillingAddress: boolean;
@@ -62,6 +70,15 @@ export interface ShippingAddressWithData extends ShippingAddressProps {
    * an explicit Continue click to advance.
    */
   showContinueButton?: boolean;
+  /**
+   * When `true`, the "Continue to Shipping Method" button is disabled
+   * and shows a spinner + "Saving..." label. Use during the API call
+   * that saves the address to Medusa. Defaults to `false`. Matches
+   * the same prop on ShippingMethod / PaymentMethod / OrderReview.
+   */
+  isLoading?: boolean;
+  /** Optional label override for the button while loading. */
+  loadingText?: string;
   onSameAsBillingChange?: (v: boolean) => void;
   onSelectSavedAddress?: (address: ShippingAddressValue) => void;
   /**
@@ -115,6 +132,8 @@ export const ShippingAddress: ComponentConfig<ShippingAddressWithData> = {
     const onSelectSavedAddress: (a: ShippingAddressValue) => void = (raw as any).onSelectSavedAddress ?? (() => {});
     const onContinue: () => void = (raw as any).onContinue ?? (() => {});
     const showContinueButton: boolean = (raw as any).showContinueButton ?? true;
+    const isLoading: boolean = (raw as any).isLoading ?? false;
+    const loadingText: string = (raw as any).loadingText ?? 'Saving…';
     const countries = (raw as any).countries ?? [];
     const states = (raw as any).states ?? [];
     const savedAddresses: ShippingAddressValue[] = (raw as any).savedAddresses ?? [];
@@ -247,7 +266,10 @@ export const ShippingAddress: ComponentConfig<ShippingAddressWithData> = {
 
         {showContinueButton && (
           <div className="mt-6">
-            <button onClick={onContinue} className="w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors font-medium">Continue to Shipping Method</button>
+            <button onClick={onContinue} disabled={isLoading} className="w-full bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors font-medium flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+              {isLoading && <Spinner size={18} />}
+              {isLoading ? loadingText : 'Continue to Shipping Method'}
+            </button>
           </div>
         )}
       </div>

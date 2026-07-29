@@ -92,19 +92,25 @@ export const AddToCart: ComponentConfig<AddToCartWithData> = {
 
     const resolve = (color: string) => useThemeColors ? resolveColor(color) : color;
 
-    // Custom color styles — computed once so BOTH the editor preview (no
-    // product/variant selected) and the live storefront render honor them.
-    // Previously this only ran in the product-present branch, so changing
-    // Background/Text/Hover/Border colors in the editor had no visible effect.
-    const customStyles: React.CSSProperties = {};
-    if (variant === 'custom') {
-      customStyles.backgroundColor = isHovered ? resolve(hoverBackgroundColor) : resolve(backgroundColor);
-      customStyles.color = isHovered ? resolve(hoverTextColor) : resolve(textColor);
-      if (borderColor) {
-        customStyles.borderColor = resolve(borderColor);
-        customStyles.borderWidth = '2px';
-        customStyles.borderStyle = 'solid';
-      }
+    // Custom color styles — ALWAYS applied (regardless of `variant`), so that
+    // the color overrides take effect on the canvas even when the user has
+    // `variant` set to 'primary' / 'secondary' / 'outline' / 'ghost'.
+    // Inline styles have higher CSS specificity than the Tailwind classes
+    // from VARIANT[variant], so they win and the button shows the custom
+    // colors. The hover state still works via isHovered below.
+    //
+    // Previously this was gated on `variant === 'custom'`, which meant any
+    // non-custom variant silently ignored the color props — exactly the
+    // symptom in the bug report. The generic Button.tsx in the same project
+    // does NOT gate on variant; this aligns AddToCart with that pattern.
+    const customStyles: React.CSSProperties = {
+      backgroundColor: isHovered ? resolve(hoverBackgroundColor) : resolve(backgroundColor),
+      color: isHovered ? resolve(hoverTextColor) : resolve(textColor),
+    };
+    if (borderColor) {
+      customStyles.borderColor = resolve(borderColor);
+      customStyles.borderWidth = '2px';
+      customStyles.borderStyle = 'solid';
     }
 
     // Editor preview OR live render with no variant selected yet (multi-variant
@@ -122,7 +128,7 @@ export const AddToCart: ComponentConfig<AddToCartWithData> = {
           font-medium transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed
           flex items-center justify-center gap-2 ${variant === 'outline' ? 'border-2' : ''}
         `}
-          style={variant === 'custom' ? customStyles : undefined}
+          style={customStyles}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -150,7 +156,7 @@ export const AddToCart: ComponentConfig<AddToCartWithData> = {
             ${justAdded ? '!bg-green-600 !text-white' : ''}
             ${variant === 'outline' ? 'border-2' : ''}
           `}
-          style={variant === 'custom' ? customStyles : undefined}
+          style={customStyles}
           onClick={handleClick}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}

@@ -1,5 +1,6 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
+import { DropZone } from '@puckeditor/core';
 import { sectionFields } from './section.fields';
 import type { SectionProps } from './section.types';
 
@@ -19,10 +20,10 @@ export const Section: ComponentConfig<SectionProps> = {
   fields: sectionFields as ComponentConfig<SectionProps>['fields'],
   defaultProps: { paddingY: 'md', backgroundColor: 'transparent' },
   render: (props: any) => {
-    const { paddingY, backgroundColor, children } = props as SectionProps & { children?: React.ReactNode };
+    const { paddingY, backgroundColor } = props as SectionProps;
     return (
       <section className={`w-full ${PAD[paddingY] || 'py-8'} ${BG[backgroundColor] || 'bg-transparent'}`}>
-        {children}
+        <DropZone zone="content" />
       </section>
     );
   },

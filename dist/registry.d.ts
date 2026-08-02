@@ -36,7 +36,7 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-07-29T18:55:09.943Z",
+  "generatedAt": "2026-08-02T09:27:24.698Z",
   "total": 115,
   "entries": [
     {
@@ -171,6 +171,19 @@ export const registry: CompiledRegistry = {
           "type": "string",
           "required": true
         }
+      },
+      "defaultProps": {
+        "layout": "two-column",
+        "showAvatar": true,
+        "showPersonalInfo": true,
+        "showContactInfo": true,
+        "showPreferences": true,
+        "allowEditing": true,
+        "editButtonText": "Edit Profile",
+        "saveButtonText": "Save Changes",
+        "cancelButtonText": "Cancel",
+        "backgroundColor": "#f9fafb",
+        "textColor": "#111827"
       },
       "metaPath": "src\\puck\\components\\account\\accountprofile.meta.ts"
     },
@@ -327,6 +340,21 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "layout": "grid",
+        "showAddButton": true,
+        "showTypeLabels": true,
+        "maxAddresses": 10,
+        "backgroundColor": "#f9fafb",
+        "cardBackgroundColor": "#ffffff",
+        "textColor": "#111827",
+        "addButtonText": "Add New Address",
+        "editButtonText": "Edit",
+        "deleteButtonText": "Delete",
+        "setDefaultText": "Set as Default",
+        "defaultBadgeText": "Default",
+        "emptyStateText": "No addresses saved"
+      },
       "metaPath": "src\\puck\\components\\account\\addressbook.meta.ts"
     },
     {
@@ -476,6 +504,19 @@ export const registry: CompiledRegistry = {
           "type": "string",
           "required": true
         }
+      },
+      "defaultProps": {
+        "layout": "list",
+        "showSearch": true,
+        "showFilters": true,
+        "defaultStatus": "all",
+        "showImages": true,
+        "showItemCount": true,
+        "ordersPerPage": 10,
+        "backgroundColor": "#f9fafb",
+        "textColor": "#111827",
+        "emptyStateText": "No orders found",
+        "viewDetailsText": "View Details"
       },
       "metaPath": "src\\puck\\components\\account\\orderhistory.meta.ts"
     },
@@ -629,6 +670,22 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "title": "My Wishlist",
+        "showTitle": true,
+        "showEmptyMessage": true,
+        "emptyTitle": "Your wishlist is empty",
+        "emptyMessage": "Save items you love and come back to them anytime.",
+        "showAddToCart": true,
+        "addToCartLabel": "Add to Cart",
+        "removeLabel": "Remove",
+        "backgroundColor": "#ffffff",
+        "cardBackgroundColor": "#ffffff",
+        "textColor": "#111827",
+        "borderRadius": "8px",
+        "padding": "0px",
+        "shadow": false
+      },
       "metaPath": "src\\puck\\components\\account\\wishlistitems.meta.ts"
     },
     {
@@ -748,6 +805,16 @@ export const registry: CompiledRegistry = {
           "type": "string",
           "required": true
         }
+      },
+      "defaultProps": {
+        "layout": "table",
+        "showImages": true,
+        "showVariantInfo": true,
+        "showQuantitySelector": true,
+        "showDeleteButton": true,
+        "imageSize": "md",
+        "maxQuantity": 10,
+        "emptyMessage": "Your cart is empty"
       },
       "metaPath": "src\\puck\\components\\cart\\cartitems.meta.ts"
     },
@@ -876,6 +943,18 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "showSubtotal": true,
+        "showShipping": true,
+        "showTax": true,
+        "showDiscount": true,
+        "showCouponInput": true,
+        "showCheckoutButton": true,
+        "checkoutButtonText": "Proceed to Checkout",
+        "freeShippingThreshold": 50,
+        "position": "sidebar",
+        "showTrustBadges": true
+      },
       "metaPath": "src\\puck\\components\\cart\\cartsummary.meta.ts"
     },
     {
@@ -971,6 +1050,14 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "showStepIndicators": true,
+        "enableGuestCheckout": true,
+        "requirePhoneNumber": false,
+        "showSaveAddressCheckbox": true,
+        "defaultCountry": "US",
+        "showOrderNotes": true
+      },
       "metaPath": "src\\puck\\components\\cart\\checkoutform.meta.ts"
     },
     {
@@ -1046,6 +1133,13 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": true
         }
+      },
+      "defaultProps": {
+        "title": "Cart",
+        "message": "You don't have anything in your cart. Let's change that, use the link below to start browsing our products.",
+        "linkText": "Explore products",
+        "linkUrl": "/store",
+        "showOnlyWhenEmpty": true
       },
       "metaPath": "src\\puck\\components\\cart\\emptycart.meta.ts"
     },
@@ -1168,6 +1262,18 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "position": "sidebar",
+        "showItemImages": true,
+        "showItemQuantity": true,
+        "showItemPrice": true,
+        "showSubtotal": true,
+        "showShipping": true,
+        "showTax": true,
+        "showDiscount": true,
+        "showTotal": true,
+        "compactView": false
+      },
       "metaPath": "src\\puck\\components\\cart\\ordersummary.meta.ts"
     },
     {
@@ -1241,6 +1347,13 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": true
         }
+      },
+      "defaultProps": {
+        "title": "Already have an account?",
+        "message": "Sign in for a better experience.",
+        "signInLinkText": "Sign in",
+        "signUpLinkText": "Join us",
+        "showDivider": true
       },
       "metaPath": "src\\puck\\components\\cart\\signinprompt.meta.ts"
     },
@@ -1356,6 +1469,17 @@ export const registry: CompiledRegistry = {
           "type": "string",
           "required": true
         }
+      },
+      "defaultProps": {
+        "separator": "/",
+        "showHome": true,
+        "homeText": "Home",
+        "fontSize": "0.875rem",
+        "textColor": "#666666",
+        "activeColor": "#000000",
+        "hoverColor": "#333333",
+        "marginBottom": "1.5rem",
+        "className": ""
       },
       "metaPath": "src\\puck\\components\\category\\CategoryBreadcrumbs\\categorybreadcrumbs.meta.ts"
     },
@@ -1509,6 +1633,15 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "fontSize": "base",
+        "color": "gray",
+        "alignment": "left",
+        "lineHeight": "relaxed",
+        "maxWidth": "full",
+        "marginBottom": "2rem",
+        "className": ""
+      },
       "metaPath": "src\\puck\\components\\category\\CategoryDescription\\categorydescription.meta.ts"
     },
     {
@@ -1624,6 +1757,17 @@ export const registry: CompiledRegistry = {
           "type": "string",
           "required": true
         }
+      },
+      "defaultProps": {
+        "showHandle": false,
+        "showProductCount": true,
+        "showUpdatedDate": false,
+        "layout": "horizontal",
+        "fontSize": "0.875rem",
+        "textColor": "#666666",
+        "iconColor": "#999999",
+        "spacing": "1rem",
+        "className": ""
       },
       "metaPath": "src\\puck\\components\\category\\CategoryMetadata\\categorymetadata.meta.ts"
     },
@@ -1829,6 +1973,22 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "showTitle": false,
+        "title": "Products",
+        "titleAlignment": "left",
+        "columns": "4",
+        "gap": "md",
+        "gridLocation": "center",
+        "showSortFilter": true,
+        "sortPosition": "top-right",
+        "showPagination": true,
+        "paginationPosition": "bottom-center",
+        "showProductsPerPageDropdown": false,
+        "productsPerPageOptions": "12,24,36,48",
+        "productsPerPage": 12,
+        "className": ""
+      },
       "metaPath": "src\\puck\\components\\category\\categoryproductsgrid.meta.ts"
     },
     {
@@ -1977,6 +2137,15 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "tag": "h1",
+        "fontSize": "2xl",
+        "color": "black",
+        "alignment": "left",
+        "fontWeight": "bold",
+        "marginBottom": "1rem",
+        "className": ""
+      },
       "metaPath": "src\\puck\\components\\category\\CategoryTitle\\categorytitle.meta.ts"
     },
     {
@@ -2064,6 +2233,13 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "showImages": true,
+        "showQuantity": true,
+        "showVariantInfo": true,
+        "imageSize": "md",
+        "layout": "list"
+      },
       "metaPath": "src\\puck\\components\\checkout\\cartitemspreview.meta.ts"
     },
     {
@@ -2136,6 +2312,12 @@ export const registry: CompiledRegistry = {
           "type": "string",
           "required": true
         }
+      },
+      "defaultProps": {
+        "layout": "inline",
+        "showAppliedDiscounts": true,
+        "buttonText": "Apply",
+        "placeholder": "Enter discount code"
       },
       "metaPath": "src\\puck\\components\\checkout\\discountcode.meta.ts"
     },
@@ -2218,6 +2400,13 @@ export const registry: CompiledRegistry = {
             "large"
           ]
         }
+      },
+      "defaultProps": {
+        "showTermsCheckbox": true,
+        "showPolicies": true,
+        "showSecurityBadge": true,
+        "buttonText": "Place Order",
+        "buttonSize": "large"
       },
       "metaPath": "src\\puck\\components\\checkout\\orderreview.meta.ts"
     },
@@ -2313,6 +2502,15 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "showSubtotal": true,
+        "showShipping": true,
+        "showTax": true,
+        "showDiscount": true,
+        "showTotal": true,
+        "highlightTotal": true,
+        "layout": "default"
+      },
       "metaPath": "src\\puck\\components\\checkout\\ordertotals.meta.ts"
     },
     {
@@ -2388,6 +2586,12 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": true
         }
+      },
+      "defaultProps": {
+        "layout": "list",
+        "showPaymentIcons": true,
+        "showSecurityBadges": true,
+        "enableSaveCard": true
       },
       "metaPath": "src\\puck\\components\\checkout\\paymentmethod.meta.ts"
     },
@@ -2493,6 +2697,16 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "showBillingAddress": true,
+        "requirePhone": false,
+        "showCompanyField": false,
+        "showAddress2Field": true,
+        "showProvinceField": true,
+        "enableAddressAutocomplete": true,
+        "defaultSameAsBilling": true,
+        "layout": "two-column"
+      },
       "metaPath": "src\\puck\\components\\checkout\\shippingaddress.meta.ts"
     },
     {
@@ -2565,6 +2779,12 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": true
         }
+      },
+      "defaultProps": {
+        "layout": "list",
+        "showDeliveryTime": true,
+        "showDeliveryDescription": false,
+        "showPickupOption": false
       },
       "metaPath": "src\\puck\\components\\checkout\\shippingmethod.meta.ts"
     },
@@ -2673,6 +2893,13 @@ export const registry: CompiledRegistry = {
             "mb-6"
           ]
         }
+      },
+      "defaultProps": {
+        "showHomeIcon": true,
+        "separator": "chevron",
+        "textSize": "text-sm",
+        "textColor": "text-gray-500",
+        "marginBottom": "mb-4"
       },
       "metaPath": "src\\puck\\components\\collection\\collectionbreadcrumbs.meta.ts"
     },
@@ -2799,6 +3026,13 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "fontSize": "text-base",
+        "textAlign": "left",
+        "textColor": "text-gray-600",
+        "marginBottom": "mb-6",
+        "maxWidth": "max-w-3xl"
+      },
       "metaPath": "src\\puck\\components\\collection\\collectiondescription.meta.ts"
     },
     {
@@ -2915,6 +3149,15 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "showTitle": true,
+        "showDescription": true,
+        "showBanner": true,
+        "showProductCount": true,
+        "titleSize": "3xl",
+        "alignment": "center",
+        "bannerHeight": "md"
+      },
       "metaPath": "src\\puck\\components\\collection\\collectionheader.meta.ts"
     },
     {
@@ -3004,6 +3247,13 @@ export const registry: CompiledRegistry = {
             "text-gray-600"
           ]
         }
+      },
+      "defaultProps": {
+        "showHandle": false,
+        "showCreatedDate": false,
+        "showUpdatedDate": false,
+        "fontSize": "text-sm",
+        "textColor": "text-gray-500"
       },
       "metaPath": "src\\puck\\components\\collection\\collectionmetadata.meta.ts"
     },
@@ -3143,6 +3393,14 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "tag": "h1",
+        "fontSize": "text-3xl",
+        "textAlign": "left",
+        "fontWeight": "bold",
+        "marginBottom": "mb-4",
+        "showProductCount": true
+      },
       "metaPath": "src\\puck\\components\\collection\\collectiontitle.meta.ts"
     },
     {
@@ -3232,6 +3490,13 @@ export const registry: CompiledRegistry = {
             "right"
           ]
         }
+      },
+      "defaultProps": {
+        "showPageNumbers": true,
+        "showFirstLast": true,
+        "maxPageNumbers": 7,
+        "style": "numbered",
+        "alignment": "center"
       },
       "metaPath": "src\\puck\\components\\collection\\pagination.meta.ts"
     },
@@ -3336,6 +3601,16 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": true
         }
+      },
+      "defaultProps": {
+        "showPriceFilter": true,
+        "showCategoryFilter": true,
+        "showBrandFilter": true,
+        "showColorFilter": true,
+        "showSizeFilter": true,
+        "showRatingFilter": true,
+        "layout": "sidebar",
+        "defaultExpanded": true
       },
       "metaPath": "src\\puck\\components\\collection\\productfilters.meta.ts"
     },
@@ -3469,6 +3744,16 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "layout": "grid",
+        "columns": "3",
+        "showQuickView": true,
+        "showWishlist": true,
+        "showCompare": false,
+        "imageAspectRatio": "square",
+        "showBadges": true,
+        "gap": "md"
+      },
       "metaPath": "src\\puck\\components\\collection\\productgrid.meta.ts"
     },
     {
@@ -3558,6 +3843,12 @@ export const registry: CompiledRegistry = {
             "right"
           ]
         }
+      },
+      "defaultProps": {
+        "defaultSort": "featured",
+        "showResultCount": true,
+        "showViewToggle": true,
+        "position": "right"
       },
       "metaPath": "src\\puck\\components\\collection\\productsort.meta.ts"
     },
@@ -3796,6 +4087,26 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "text": "Click Me",
+        "url": "#",
+        "openInNewTab": false,
+        "variant": "primary",
+        "size": "md",
+        "fullWidth": false,
+        "backgroundColor": "#3b82f6",
+        "textColor": "#ffffff",
+        "borderColor": "#3b82f6",
+        "hoverBackgroundColor": "#2563eb",
+        "hoverTextColor": "#ffffff",
+        "showIcon": false,
+        "iconPosition": "right",
+        "borderRadius": "md",
+        "shadow": "md",
+        "alignment": "left",
+        "marginTop": 0,
+        "marginBottom": 16
+      },
       "metaPath": "src\\puck\\components\\content\\Button\\button.meta.ts"
     },
     {
@@ -4027,6 +4338,20 @@ export const registry: CompiledRegistry = {
           "type": "number",
           "required": true
         }
+      },
+      "defaultProps": {
+        "text": "Your Heading Here",
+        "level": "h2",
+        "fontWeight": "bold",
+        "textAlign": "left",
+        "color": "#1f2937",
+        "fontSize": "",
+        "lineHeight": "normal",
+        "letterSpacing": "normal",
+        "marginTop": 0,
+        "marginBottom": 16,
+        "animation": "none",
+        "animationDelay": 0
       },
       "metaPath": "src\\puck\\components\\content\\Heading\\heading.meta.ts"
     },
@@ -4321,6 +4646,29 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "src": "https://via.placeholder.com/800x600",
+        "alt": "Image description",
+        "aspectRatio": "auto",
+        "objectFit": "cover",
+        "width": "full",
+        "customWidth": "600px",
+        "showCaption": false,
+        "caption": "Image caption goes here",
+        "captionPosition": "bottom",
+        "captionAlign": "center",
+        "linkUrl": "",
+        "openInNewTab": false,
+        "borderRadius": "md",
+        "shadow": "md",
+        "showBorder": false,
+        "borderColor": "#e5e5e5",
+        "borderWidth": 2,
+        "hoverEffect": "none",
+        "alignment": "center",
+        "marginTop": 0,
+        "marginBottom": 16
+      },
       "metaPath": "src\\puck\\components\\content\\Image\\image.meta.ts"
     },
     {
@@ -4446,6 +4794,16 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "id": "link-1",
+        "text": "Click here",
+        "href": "#",
+        "target": "_self",
+        "color": "brand.primary",
+        "fontSize": "base",
+        "fontWeight": "normal",
+        "underline": "hover"
+      },
       "metaPath": "src\\puck\\components\\content\\Link\\link.meta.ts"
     },
     {
@@ -4521,6 +4879,11 @@ export const registry: CompiledRegistry = {
             "py-20"
           ]
         }
+      },
+      "defaultProps": {
+        "content": "",
+        "maxWidth": "max-w-3xl",
+        "padding": "py-12"
       },
       "metaPath": "src\\puck\\components\\content\\RichTextContent\\richtext.meta.ts"
     },
@@ -4699,6 +5062,20 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "text": "Add your text content here. You can write multiple paragraphs, include line breaks, and format your content as needed.",
+        "richText": false,
+        "fontSize": "base",
+        "fontWeight": "normal",
+        "lineHeight": "relaxed",
+        "textAlign": "left",
+        "color": "#374151",
+        "maxWidth": "",
+        "marginTop": 0,
+        "marginBottom": 16,
+        "paddingX": 0,
+        "paddingY": 0
+      },
       "metaPath": "src\\puck\\components\\content\\Text\\text.meta.ts"
     },
     {
@@ -4870,6 +5247,19 @@ export const registry: CompiledRegistry = {
           "type": "string"
         }
       },
+      "defaultProps": {
+        "videoType": "youtube",
+        "videoUrl": "",
+        "autoplay": false,
+        "loop": false,
+        "muted": true,
+        "controls": true,
+        "aspectRatio": "16:9",
+        "alignment": "center",
+        "borderRadius": "md",
+        "shadow": "md",
+        "caption": ""
+      },
       "metaPath": "src\\puck\\components\\content\\Video\\video.meta.ts"
     },
     {
@@ -4925,6 +5315,11 @@ export const registry: CompiledRegistry = {
           "type": "string",
           "required": true
         }
+      },
+      "defaultProps": {
+        "id": "saved-block-1",
+        "blockId": "",
+        "blockName": ""
       },
       "metaPath": "src\\puck\\components\\custom\\savedblock.meta.ts"
     },
@@ -5100,6 +5495,22 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "showAddress": true,
+        "address": "123 Main Street\nCity, State 12345\nCountry",
+        "showPhone": true,
+        "phone": "+1 (555) 123-4567",
+        "showEmail": true,
+        "email": "contact@example.com",
+        "showHours": true,
+        "hours": "Mon-Fri: 9:00 AM - 6:00 PM\nSat-Sun: 10:00 AM - 4:00 PM",
+        "showIcons": true,
+        "layout": "stacked",
+        "textColor": "#6b7280",
+        "iconColor": "#9ca3af",
+        "fontSize": "sm",
+        "gap": "md"
+      },
       "metaPath": "src\\puck\\components\\footer\\ContactInfo\\contactinfo.meta.ts"
     },
     {
@@ -5226,6 +5637,17 @@ export const registry: CompiledRegistry = {
           "type": "string",
           "required": true
         }
+      },
+      "defaultProps": {
+        "text": "All rights reserved.",
+        "showYear": true,
+        "alignment": "center",
+        "fontSize": "sm",
+        "textColor": "#6b7280",
+        "showDivider": true,
+        "dividerColor": "#e5e7eb",
+        "paddingTop": "1.5rem",
+        "paddingBottom": "1.5rem"
       },
       "metaPath": "src\\puck\\components\\footer\\Copyright\\copyright.meta.ts"
     },
@@ -5380,6 +5802,30 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "links": [
+          {
+            "platform": "facebook",
+            "url": "https://facebook.com"
+          },
+          {
+            "platform": "instagram",
+            "url": "https://instagram.com"
+          },
+          {
+            "platform": "twitter",
+            "url": "https://twitter.com"
+          }
+        ],
+        "size": "md",
+        "style": "circle",
+        "color": "#ffffff",
+        "hoverColor": "#3b82f6",
+        "backgroundColor": "#374151",
+        "hoverBackgroundColor": "#1f2937",
+        "gap": "md",
+        "alignment": "center"
+      },
       "metaPath": "src\\puck\\components\\footer\\SocialIcons\\socialicons.meta.ts"
     },
     {
@@ -5471,6 +5917,22 @@ export const registry: CompiledRegistry = {
           "type": "string",
           "required": true
         }
+      },
+      "defaultProps": {
+        "choiceType": "radio",
+        "label": "Choose one",
+        "helpText": "",
+        "required": false,
+        "options": [
+          {
+            "label": "Option 1"
+          },
+          {
+            "label": "Option 2"
+          }
+        ],
+        "labelColor": "text.primary",
+        "accentColor": "brand.primary"
       },
       "metaPath": "src\\puck\\components\\form\\formchoicefield.meta.ts"
     },
@@ -5611,6 +6073,15 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "formName": "Contact Form",
+        "submitButtonText": "Submit",
+        "successMessage": "Thank you! Your message has been sent.",
+        "padding": "lg",
+        "backgroundColor": "ui.background",
+        "borderRadius": "md",
+        "maxWidth": "lg"
+      },
       "metaPath": "src\\puck\\components\\form\\formcontainer.meta.ts"
     },
     {
@@ -5687,6 +6158,11 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "spacingTop": "sm",
+        "spacingBottom": "sm",
+        "color": "ui.border"
+      },
       "metaPath": "src\\puck\\components\\form\\formdivider.meta.ts"
     },
     {
@@ -5758,6 +6234,13 @@ export const registry: CompiledRegistry = {
           "type": "string",
           "required": true
         }
+      },
+      "defaultProps": {
+        "formId": "",
+        "padding": "24px",
+        "maxWidth": "640px",
+        "backgroundColor": "",
+        "borderRadius": "16px"
       },
       "metaPath": "src\\puck\\components\\form\\formembed.meta.ts"
     },
@@ -5886,6 +6369,17 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "fieldType": "text",
+        "label": "Field Label",
+        "placeholder": "",
+        "helpText": "",
+        "required": false,
+        "rows": 4,
+        "labelColor": "text.primary",
+        "inputBackground": "ui.surface",
+        "borderColor": "ui.border"
+      },
       "metaPath": "src\\puck\\components\\form\\formfield.meta.ts"
     },
     {
@@ -5974,6 +6468,12 @@ export const registry: CompiledRegistry = {
             "lg"
           ]
         }
+      },
+      "defaultProps": {
+        "text": "Section heading or instruction text",
+        "size": "md",
+        "color": "text.primary",
+        "marginBottom": "sm"
       },
       "metaPath": "src\\puck\\components\\form\\formheading.meta.ts"
     },
@@ -6066,6 +6566,23 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "label": "Select an option",
+        "placeholder": "Choose...",
+        "helpText": "",
+        "required": false,
+        "options": [
+          {
+            "label": "Option 1"
+          },
+          {
+            "label": "Option 2"
+          }
+        ],
+        "labelColor": "text.primary",
+        "inputBackground": "ui.surface",
+        "borderColor": "ui.border"
+      },
       "metaPath": "src\\puck\\components\\form\\formselectfield.meta.ts"
     },
     {
@@ -6152,6 +6669,13 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "label": "Submit",
+        "backgroundColor": "brand.primary",
+        "textColor": "text.inverse",
+        "fullWidth": true,
+        "borderRadius": "md"
+      },
       "metaPath": "src\\puck\\components\\form\\formsubmitbutton.meta.ts"
     },
     {
@@ -6231,6 +6755,29 @@ export const registry: CompiledRegistry = {
             "lg"
           ]
         }
+      },
+      "defaultProps": {
+        "id": "accordion-1",
+        "items": [
+          {
+            "id": "item-1",
+            "title": "What is your return policy?",
+            "content": "We offer a 30-day return policy on all items."
+          },
+          {
+            "id": "item-2",
+            "title": "How long does shipping take?",
+            "content": "Standard shipping takes 5-7 business days."
+          },
+          {
+            "id": "item-3",
+            "title": "Do you ship internationally?",
+            "content": "Yes, we ship to over 100 countries worldwide."
+          }
+        ],
+        "allowMultiple": false,
+        "bordered": true,
+        "rounded": "md"
       },
       "metaPath": "src\\puck\\components\\generic\\Accordion\\accordion.meta.ts"
     },
@@ -6319,6 +6866,13 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": true
         }
+      },
+      "defaultProps": {
+        "id": "alert-1",
+        "type": "info",
+        "message": "This is an alert message",
+        "showIcon": true,
+        "dismissible": false
       },
       "metaPath": "src\\puck\\components\\generic\\Alert\\alert.meta.ts"
     },
@@ -6447,6 +7001,17 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "id": "avatar-1",
+        "src": "",
+        "name": "John Doe",
+        "size": "md",
+        "shape": "circle",
+        "backgroundColor": "#6366f1",
+        "textColor": "#ffffff",
+        "showName": false,
+        "namePosition": "right"
+      },
       "metaPath": "src\\puck\\components\\generic\\Avatar\\avatar.meta.ts"
     },
     {
@@ -6567,6 +7132,13 @@ export const registry: CompiledRegistry = {
         "customTextColor": {
           "type": "string"
         }
+      },
+      "defaultProps": {
+        "id": "badge-1",
+        "text": "Badge",
+        "variant": "default",
+        "size": "md",
+        "rounded": "md"
       },
       "metaPath": "src\\puck\\components\\generic\\Badge\\badge.meta.ts"
     },
@@ -6694,6 +7266,15 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": true
         }
+      },
+      "defaultProps": {
+        "id": "card-1",
+        "padding": "lg",
+        "shadow": "md",
+        "border": true,
+        "rounded": "lg",
+        "backgroundColor": "#ffffff",
+        "hoverEffect": true
       },
       "metaPath": "src\\puck\\components\\generic\\Card\\card.meta.ts"
     },
@@ -6831,6 +7412,15 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "id": "divider-1",
+        "style": "solid",
+        "thickness": "1",
+        "color": "#e5e7eb",
+        "width": "full",
+        "marginTop": "md",
+        "marginBottom": "md"
+      },
       "metaPath": "src\\puck\\components\\generic\\Divider\\divider.meta.ts"
     },
     {
@@ -6945,6 +7535,13 @@ export const registry: CompiledRegistry = {
             "xl"
           ]
         }
+      },
+      "defaultProps": {
+        "id": "grid-1",
+        "columns": "3",
+        "tabletColumns": "2",
+        "mobileColumns": "1",
+        "gap": "md"
       },
       "metaPath": "src\\puck\\components\\generic\\Grid\\grid.meta.ts"
     },
@@ -7176,6 +7773,14 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "id": "icon-1",
+        "size": "md",
+        "strokeWidth": "2",
+        "alignment": "center",
+        "marginTop": "none",
+        "marginBottom": "md"
+      },
       "metaPath": "src\\puck\\components\\generic\\Icon\\icon.meta.ts"
     },
     {
@@ -7286,6 +7891,24 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "id": "list-1",
+        "items": [
+          {
+            "text": "First item"
+          },
+          {
+            "text": "Second item"
+          },
+          {
+            "text": "Third item"
+          }
+        ],
+        "type": "bullet",
+        "spacing": "normal",
+        "fontSize": "base",
+        "color": "#374151"
+      },
       "metaPath": "src\\puck\\components\\generic\\List\\list.meta.ts"
     },
     {
@@ -7378,6 +8001,13 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "id": "spacer-1",
+        "height": "md",
+        "showDivider": false,
+        "dividerStyle": "solid",
+        "dividerColor": "#e5e7eb"
+      },
       "metaPath": "src\\puck\\components\\generic\\Spacer\\spacer.meta.ts"
     },
     {
@@ -7461,6 +8091,29 @@ export const registry: CompiledRegistry = {
             "bordered"
           ]
         }
+      },
+      "defaultProps": {
+        "id": "tabs-1",
+        "tabs": [
+          {
+            "id": "tab-1",
+            "label": "Tab 1",
+            "content": "Content for tab 1"
+          },
+          {
+            "id": "tab-2",
+            "label": "Tab 2",
+            "content": "Content for tab 2"
+          },
+          {
+            "id": "tab-3",
+            "label": "Tab 3",
+            "content": "Content for tab 3"
+          }
+        ],
+        "defaultTab": 0,
+        "alignment": "left",
+        "tabStyle": "underline"
       },
       "metaPath": "src\\puck\\components\\generic\\Tabs\\tabs.meta.ts"
     },
@@ -7722,6 +8375,28 @@ export const registry: CompiledRegistry = {
         "error": {
           "type": "string"
         }
+      },
+      "defaultProps": {
+        "sectionTitle": "Shop by Category",
+        "sectionSubtitle": "Browse our popular categories",
+        "showTitle": true,
+        "columns": 4,
+        "columnsTablet": 3,
+        "columnsMobile": 2,
+        "gap": 24,
+        "showCategoryImage": true,
+        "showCategoryName": true,
+        "showProductCount": true,
+        "imageAspectRatio": "square",
+        "backgroundColor": "#f9fafb",
+        "textColor": "#000000",
+        "cardStyle": "shadow",
+        "borderRadius": "lg",
+        "hoverEffect": "scale",
+        "categorySource": "all",
+        "selectedCategoryIds": [],
+        "loading": false,
+        "error": ""
       },
       "metaPath": "src\\puck\\components\\homepage\\CategoriesGrid\\categoriesgrid.meta.ts"
     },
@@ -8068,6 +8743,41 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "sectionTitle": "Shop by Category",
+        "sectionSubtitle": "Discover our curated collection",
+        "showTitle": true,
+        "categoryId": "",
+        "categoryName": "",
+        "displayMode": "grid",
+        "productsPerRow": 4,
+        "maxProducts": 12,
+        "slidesPerView": 4,
+        "slidesPerViewTablet": 3,
+        "slidesPerViewMobile": 1,
+        "spaceBetween": 20,
+        "autoplay": false,
+        "autoplayDelay": 3000,
+        "loop": false,
+        "navigation": true,
+        "pagination": true,
+        "imageAspectRatio": "square",
+        "showPrice": true,
+        "showAddToCart": true,
+        "showRating": false,
+        "showBadges": true,
+        "showViewAllButton": true,
+        "viewAllButtonText": "View All Products",
+        "backgroundColor": "#f9fafb",
+        "textColor": "#111827",
+        "cardStyle": "shadow",
+        "borderRadius": "md",
+        "buttonColor": "#000000",
+        "buttonTextColor": "#ffffff",
+        "buttonRadius": "medium",
+        "loading": false,
+        "error": ""
+      },
       "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
     },
     {
@@ -8253,6 +8963,24 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "title": "Limited Time Offer",
+        "subtitle": "Sale ends soon",
+        "timerStyle": "boxes",
+        "showDays": true,
+        "showHours": true,
+        "showMinutes": true,
+        "showSeconds": true,
+        "showCTA": true,
+        "ctaText": "Shop Now",
+        "ctaLink": "/sale",
+        "backgroundColor": "#000000",
+        "textColor": "#ffffff",
+        "timerColor": "#ffffff",
+        "accentColor": "#3b82f6",
+        "spacing": "normal",
+        "mode": "live"
+      },
       "metaPath": "src\\puck\\components\\homepage\\CountdownTimer\\countdowntimer.meta.ts"
     },
     {
@@ -8396,6 +9124,19 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": true
         }
+      },
+      "defaultProps": {
+        "htmlContent": "<div class=\"custom-section\">\n  <h2>Custom HTML Section</h2>\n  <p>Add your custom HTML content here. You can include any HTML tags, inline styles, and even JavaScript.</p>\n  <button class=\"custom-btn\">Click Me</button>\n</div>",
+        "cssContent": ".custom-section {\n  text-align: center;\n}\n\n.custom-btn {\n  background-color: #3b82f6;\n  color: white;\n  padding: 12px 24px;\n  border: none;\n  border-radius: 8px;\n  cursor: pointer;\n  font-weight: 600;\n}\n\n.custom-btn:hover {\n  background-color: #2563eb;\n}",
+        "useContainer": true,
+        "maxWidth": "lg",
+        "paddingTop": 64,
+        "paddingBottom": 64,
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "backgroundColor": "#ffffff",
+        "backgroundImage": "",
+        "sanitizeHTML": true
       },
       "metaPath": "src\\puck\\components\\homepage\\CustomHTML\\customhtml.meta.ts"
     },
@@ -8681,6 +9422,35 @@ export const registry: CompiledRegistry = {
           "type": "string",
           "required": true
         }
+      },
+      "defaultProps": {
+        "sectionTitle": "Featured Products",
+        "sectionSubtitle": "Check out our most popular items",
+        "showTitle": true,
+        "displayMode": "carousel",
+        "productsPerRow": 4,
+        "maxProducts": 12,
+        "slidesPerView": 4,
+        "slidesPerViewTablet": 3,
+        "slidesPerViewMobile": 1,
+        "spaceBetween": 24,
+        "autoplay": true,
+        "autoplayDelay": 3000,
+        "loop": true,
+        "navigation": true,
+        "pagination": true,
+        "paginationStyle": "dots",
+        "productSource": "featured",
+        "categoryId": "",
+        "productIds": "",
+        "backgroundColor": "#ffffff",
+        "textColor": "#000000",
+        "cardStyle": "shadow",
+        "showPrice": true,
+        "showAddToCart": true,
+        "buttonText": "Add to Cart",
+        "loading": false,
+        "error": ""
       },
       "metaPath": "src\\puck\\components\\homepage\\FeaturedProducts\\featuredproducts.meta.ts"
     },
@@ -9119,6 +9889,28 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "title": "Join Our Newsletter",
+        "subtitle": "Stay Updated",
+        "description": "Get the latest updates on new products, exclusive deals, and special offers delivered straight to your inbox.",
+        "placeholderText": "Enter your email address",
+        "buttonText": "Subscribe",
+        "showPrivacyText": true,
+        "privacyText": "We respect your privacy. Unsubscribe at any time.",
+        "layout": "centered",
+        "showImage": true,
+        "imageUrl": "https://via.placeholder.com/600x400?text=Newsletter+Image",
+        "collectName": false,
+        "nameRequired": false,
+        "successMessage": "Thanks for subscribing! Check your email to confirm.",
+        "backgroundColor": "#000000",
+        "textColor": "#ffffff",
+        "inputBackground": "#ffffff",
+        "inputBorder": "#e5e5e5",
+        "buttonBackground": "#3b82f6",
+        "buttonTextColor": "#ffffff",
+        "borderRadius": "md"
+      },
       "metaPath": "src\\puck\\components\\homepage\\Newsletter\\newsletter.meta.ts"
     },
     {
@@ -9256,6 +10048,39 @@ export const registry: CompiledRegistry = {
         "minHeight": {
           "type": "string"
         }
+      },
+      "defaultProps": {
+        "title": "",
+        "subtitle": "",
+        "layout": "2-column",
+        "spacing": "md",
+        "banners": [
+          {
+            "id": "1",
+            "title": "New Collection",
+            "subtitle": "Shop the latest styles",
+            "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=400&fit=crop",
+            "ctaText": "Shop Now",
+            "ctaLink": "/store",
+            "overlayOpacity": 40,
+            "textColor": "#ffffff",
+            "textPosition": "bottom-left"
+          },
+          {
+            "id": "2",
+            "title": "Best Sellers",
+            "subtitle": "Top-rated products",
+            "imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+            "ctaText": "Explore",
+            "ctaLink": "/store",
+            "overlayOpacity": 40,
+            "textColor": "#ffffff",
+            "textPosition": "bottom-left"
+          }
+        ],
+        "borderRadius": "md",
+        "hoverEffect": "zoom",
+        "minHeight": "300px"
       },
       "metaPath": "src\\puck\\components\\homepage\\PromotionalBannerGrid\\promotionalbannergrid.meta.ts"
     },
@@ -9409,6 +10234,48 @@ export const registry: CompiledRegistry = {
             "lg"
           ]
         }
+      },
+      "defaultProps": {
+        "title": "Our Impact",
+        "subtitle": "Trusted by thousands",
+        "columns": "4",
+        "alignment": "center",
+        "stats": [
+          {
+            "id": "1",
+            "number": "10K+",
+            "label": "Happy Customers",
+            "icon": "people",
+            "iconColor": "#3b82f6"
+          },
+          {
+            "id": "2",
+            "number": "500+",
+            "label": "Products",
+            "icon": "package",
+            "iconColor": "#3b82f6"
+          },
+          {
+            "id": "3",
+            "number": "50+",
+            "label": "Countries",
+            "icon": "globe",
+            "iconColor": "#3b82f6"
+          },
+          {
+            "id": "4",
+            "number": "99%",
+            "label": "Satisfaction",
+            "icon": "star",
+            "iconColor": "#3b82f6"
+          }
+        ],
+        "backgroundColor": "#ffffff",
+        "textColor": "#000000",
+        "numberColor": "#3b82f6",
+        "spacing": "normal",
+        "showDividers": true,
+        "borderRadius": "md"
       },
       "metaPath": "src\\puck\\components\\homepage\\StatsSection\\statssection.meta.ts"
     },
@@ -9707,6 +10574,35 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "sectionTitle": "What Our Customers Say",
+        "sectionSubtitle": "Real reviews from real customers",
+        "showTitle": true,
+        "displayMode": "carousel",
+        "layout": "card",
+        "columns": 3,
+        "maxTestimonials": 6,
+        "slidesPerView": 2,
+        "slidesPerViewTablet": 1,
+        "slidesPerViewMobile": 1,
+        "spaceBetween": 32,
+        "autoplay": true,
+        "autoplayDelay": 5000,
+        "loop": true,
+        "navigation": true,
+        "pagination": true,
+        "effect": "slide",
+        "showAvatar": true,
+        "showName": true,
+        "showRole": true,
+        "showRating": true,
+        "showDate": false,
+        "backgroundColor": "#f9fafb",
+        "textColor": "#000000",
+        "cardBackground": "#ffffff",
+        "accentColor": "#3b82f6",
+        "borderRadius": "lg"
+      },
       "metaPath": "src\\puck\\components\\homepage\\Testimonials\\testimonials.meta.ts"
     },
     {
@@ -9871,6 +10767,48 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "title": "Why Shop With Us",
+        "subtitle": "",
+        "layout": "horizontal",
+        "columns": "4",
+        "alignment": "center",
+        "badges": [
+          {
+            "id": "1",
+            "icon": "truck",
+            "title": "Free Shipping",
+            "description": "On orders over $50",
+            "iconColor": "#3b82f6"
+          },
+          {
+            "id": "2",
+            "icon": "shield",
+            "title": "Secure Checkout",
+            "description": "100% secure payment",
+            "iconColor": "#3b82f6"
+          },
+          {
+            "id": "3",
+            "icon": "refresh",
+            "title": "Easy Returns",
+            "description": "30-day return policy",
+            "iconColor": "#3b82f6"
+          },
+          {
+            "id": "4",
+            "icon": "support",
+            "title": "24/7 Support",
+            "description": "Here when you need us",
+            "iconColor": "#3b82f6"
+          }
+        ],
+        "backgroundColor": "#ffffff",
+        "textColor": "#1f2937",
+        "spacing": "normal",
+        "showBorder": true,
+        "borderRadius": "none"
+      },
       "metaPath": "src\\puck\\components\\homepage\\TrustBadges\\trustbadges.meta.ts"
     },
     {
@@ -9989,6 +10927,13 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "columns": "2",
+        "layout": "50-50",
+        "gap": "lg",
+        "mobileStack": true,
+        "alignItems": "start"
+      },
       "metaPath": "src\\puck\\components\\layout\\Columns\\columns.meta.ts"
     },
     {
@@ -10059,6 +11004,10 @@ export const registry: CompiledRegistry = {
             "lg"
           ]
         }
+      },
+      "defaultProps": {
+        "maxWidth": "xl",
+        "padding": "md"
       },
       "metaPath": "src\\puck\\components\\layout\\Container\\container.meta.ts"
     },
@@ -10188,6 +11137,16 @@ export const registry: CompiledRegistry = {
         "borderRadius": {
           "type": "string"
         }
+      },
+      "defaultProps": {
+        "justifyContent": "start",
+        "alignItems": "start",
+        "gap": "md",
+        "fullHeight": false,
+        "minHeight": "auto",
+        "padding": "0",
+        "backgroundColor": "transparent",
+        "borderRadius": "0"
       },
       "metaPath": "src\\puck\\components\\layout\\FlexColumn\\flexcolumn.meta.ts"
     },
@@ -10336,6 +11295,17 @@ export const registry: CompiledRegistry = {
           "type": "string"
         }
       },
+      "defaultProps": {
+        "justifyContent": "space-between",
+        "alignItems": "center",
+        "gap": "md",
+        "wrap": "nowrap",
+        "fullWidth": true,
+        "maxWidth": "100%",
+        "padding": "0",
+        "backgroundColor": "transparent",
+        "borderRadius": "0"
+      },
       "metaPath": "src\\puck\\components\\layout\\FlexRow\\flexrow.meta.ts"
     },
     {
@@ -10482,6 +11452,17 @@ export const registry: CompiledRegistry = {
           "type": "string",
           "required": true
         }
+      },
+      "defaultProps": {
+        "columns": "4",
+        "backgroundColor": "#1f2937",
+        "textColor": "#ffffff",
+        "linkHoverColor": "#3b82f6",
+        "menuConfigs": [],
+        "paddingTop": "3rem",
+        "paddingBottom": "2rem",
+        "menuLoading": false,
+        "menuError": false
       },
       "metaPath": "src\\puck\\components\\layout\\Footer\\footer.meta.ts"
     },
@@ -10759,6 +11740,34 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "layout": "left-center-right",
+        "backgroundColor": "#ffffff",
+        "textColor": "#000000",
+        "sticky": true,
+        "shadow": true,
+        "transparent": false,
+        "logoPosition": "left",
+        "logoMaxWidth": "150px",
+        "logoUrl": "/logo.svg",
+        "logoAlt": "Store Logo",
+        "menuPosition": "center",
+        "menuStyle": "horizontal",
+        "menuHoverColor": "#3b82f6",
+        "actions": [
+          "search",
+          "account",
+          "cart"
+        ],
+        "actionsPosition": "right",
+        "showCartBadge": true,
+        "showLabels": false,
+        "cartBadgeCount": 0,
+        "menuLoading": false,
+        "menuError": false,
+        "mobileBreakpoint": "md",
+        "mobileMenuStyle": "drawer"
+      },
       "metaPath": "src\\puck\\components\\layout\\Header\\header.meta.ts"
     },
     {
@@ -10828,6 +11837,10 @@ export const registry: CompiledRegistry = {
             "primary"
           ]
         }
+      },
+      "defaultProps": {
+        "paddingY": "md",
+        "backgroundColor": "transparent"
       },
       "metaPath": "src\\puck\\components\\layout\\Section\\section.meta.ts"
     },
@@ -10966,6 +11979,18 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": true
         }
+      },
+      "defaultProps": {
+        "showLabel": false,
+        "label": "Account",
+        "iconSize": "md",
+        "iconColor": "#000000",
+        "hoverColor": "#3b82f6",
+        "style": "minimal",
+        "linkTo": "/account",
+        "signedInLink": "/account",
+        "showWhenSignedOut": true,
+        "showWhenSignedIn": true
       },
       "metaPath": "src\\puck\\components\\navigation\\AccountButton\\accountbutton.meta.ts"
     },
@@ -11120,6 +12145,18 @@ export const registry: CompiledRegistry = {
           "type": "number",
           "required": false
         }
+      },
+      "defaultProps": {
+        "showLabel": false,
+        "label": "Cart",
+        "showBadge": true,
+        "badgePosition": "top-right",
+        "iconSize": "md",
+        "iconColor": "#000000",
+        "hoverColor": "#3b82f6",
+        "badgeBackgroundColor": "#ef4444",
+        "badgeTextColor": "#ffffff",
+        "style": "minimal"
       },
       "metaPath": "src\\puck\\components\\navigation\\CartButton\\cartbutton.meta.ts"
     },
@@ -11346,6 +12383,19 @@ export const registry: CompiledRegistry = {
             "bold"
           ]
         }
+      },
+      "defaultProps": {
+        "imageUrl": "",
+        "altText": "Store Logo",
+        "linkTo": "/",
+        "maxWidth": "150px",
+        "maxHeight": "60px",
+        "showText": true,
+        "text": "My Store",
+        "textPosition": "right",
+        "textSize": "xl",
+        "textColor": "#000000",
+        "textWeight": "bold"
       },
       "metaPath": "src\\puck\\components\\navigation\\Logo\\logo.meta.ts"
     },
@@ -11614,6 +12664,24 @@ export const registry: CompiledRegistry = {
           ]
         }
       },
+      "defaultProps": {
+        "menuHandle": "default",
+        "layout": "horizontal",
+        "alignment": "center",
+        "hoverEffect": "underline",
+        "textColor": "#111827",
+        "hoverColor": "#3b82f6",
+        "fontSize": "base",
+        "fontWeight": "medium",
+        "showDropdownArrows": true,
+        "dropdownStyle": "default",
+        "maxDepth": "3",
+        "menuData": [],
+        "dropdownBackground": "#ffffff",
+        "dropdownBorder": "#e5e7eb",
+        "dropdownShadow": "lg",
+        "dropdownRadius": "md"
+      },
       "metaPath": "src\\puck\\components\\navigation\\MenuNavigation\\menunavigation.meta.ts"
     },
     {
@@ -11799,6 +12867,13 @@ export const registry: CompiledRegistry = {
             "right"
           ]
         }
+      },
+      "defaultProps": {
+        "items": [],
+        "theme": {},
+        "isOpen": false,
+        "drawerMaxWidth": "400px",
+        "animationDirection": "left"
       },
       "metaPath": "src\\puck\\components\\navigation\\MobileMenu\\mobilemenu.meta.ts"
     },
@@ -11992,6 +13067,22 @@ export const registry: CompiledRegistry = {
           "items": "$item"
         }
       },
+      "defaultProps": {
+        "placeholder": "Search products...",
+        "style": "outlined",
+        "size": "md",
+        "showIcon": true,
+        "iconPosition": "left",
+        "fullWidth": false,
+        "maxWidth": "400px",
+        "borderRadius": "md",
+        "backgroundColor": "#ffffff",
+        "textColor": "#000000",
+        "borderColor": "#e5e7eb",
+        "focusBorderColor": "#3b82f6",
+        "showPopularSearches": false,
+        "popularSearches": []
+      },
       "metaPath": "src\\puck\\components\\navigation\\SearchBar\\searchbar.meta.ts"
     },
     {
@@ -12087,6 +13178,13 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": true
         }
+      },
+      "defaultProps": {
+        "iconSize": "md",
+        "iconColor": "#000000",
+        "hoverColor": "#3b82f6",
+        "style": "minimal",
+        "openSearchOnClick": true
       },
       "metaPath": "src\\puck\\components\\navigation\\SearchIcon\\searchicon.meta.ts"
     },
@@ -12197,6 +13295,15 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "showDownloadInvoice": true,
+        "showTrackShipment": true,
+        "showContactSupport": true,
+        "showReorder": true,
+        "showReturnRequest": false,
+        "layout": "buttons",
+        "buttonStyle": "outlined"
+      },
       "metaPath": "src\\puck\\components\\order\\orderactions.meta.ts"
     },
     {
@@ -12295,6 +13402,15 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": true
         }
+      },
+      "defaultProps": {
+        "showCheckmark": true,
+        "titleText": "Order Confirmed!",
+        "messageText": "Thank you for your order. We've received your order and will begin processing it right away.",
+        "showOrderNumber": true,
+        "showEmailConfirmation": true,
+        "showContinueShopping": true,
+        "style": "success"
       },
       "metaPath": "src\\puck\\components\\order\\orderconfirmation.meta.ts"
     },
@@ -12399,6 +13515,17 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "showItemImages": true,
+        "showItemQuantity": true,
+        "showItemPrice": true,
+        "showShippingAddress": true,
+        "showBillingAddress": true,
+        "showPaymentMethod": true,
+        "showShippingMethod": true,
+        "showPricingBreakdown": true,
+        "compactView": false
+      },
       "metaPath": "src\\puck\\components\\order\\orderdetails.meta.ts"
     },
     {
@@ -12488,6 +13615,13 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": true
         }
+      },
+      "defaultProps": {
+        "showIcons": true,
+        "showTimestamps": true,
+        "showTrackingNumber": true,
+        "orientation": "vertical",
+        "style": "default"
       },
       "metaPath": "src\\puck\\components\\order\\ordertimeline.meta.ts"
     },
@@ -12718,6 +13852,28 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "text": "Add to Cart",
+        "preorderText": "Pre-order",
+        "variant": "primary",
+        "size": "md",
+        "fullWidth": false,
+        "showIcon": true,
+        "disabled": false,
+        "backgroundColor": "#000000",
+        "textColor": "#ffffff",
+        "hoverBackgroundColor": "#1f2937",
+        "hoverTextColor": "#ffffff",
+        "borderColor": "#000000",
+        "useThemeColors": false,
+        "marginTop": "mt-4",
+        "marginBottom": "mb-4",
+        "marginLeft": "ml-0",
+        "marginRight": "mr-0",
+        "paddingX": "px-6",
+        "paddingY": "py-3",
+        "borderRadius": "rounded-lg"
+      },
       "metaPath": "src\\puck\\components\\product\\AddToCart\\addtocart.meta.ts"
     },
     {
@@ -12792,6 +13948,12 @@ export const registry: CompiledRegistry = {
           "type": "object",
           "required": false
         }
+      },
+      "defaultProps": {
+        "showSavingsBadge": true,
+        "showItemImages": true,
+        "buttonText": "Add Bundle to Cart",
+        "bundleIdOverride": ""
       },
       "metaPath": "src\\puck\\components\\product\\BundledProductDetail\\bundledproductdetail.meta.ts"
     },
@@ -12884,6 +14046,31 @@ export const registry: CompiledRegistry = {
           "required": false
         }
       },
+      "defaultProps": {
+        "sections": [
+          {
+            "id": "description",
+            "title": "Product Details",
+            "contentType": "description",
+            "customContent": ""
+          },
+          {
+            "id": "material",
+            "title": "Material & Care",
+            "contentType": "material",
+            "customContent": ""
+          },
+          {
+            "id": "shipping",
+            "title": "Shipping & Returns",
+            "contentType": "shipping",
+            "customContent": "<p>Free shipping on orders over $50. Returns accepted within 30 days.</p>"
+          }
+        ],
+        "allowMultiple": false,
+        "defaultOpen": "description",
+        "borderStyle": "top"
+      },
       "metaPath": "src\\puck\\components\\product\\ProductAccordion\\productaccordion.meta.ts"
     },
     {
@@ -12967,6 +14154,11 @@ export const registry: CompiledRegistry = {
           "type": "object",
           "required": false
         }
+      },
+      "defaultProps": {
+        "showHomeIcon": true,
+        "separator": "arrow",
+        "textTransform": "none"
       },
       "metaPath": "src\\puck\\components\\product\\ProductBreadcrumbs\\productbreadcrumbs.meta.ts"
     },
@@ -13409,6 +14601,40 @@ export const registry: CompiledRegistry = {
           "required": false
         }
       },
+      "defaultProps": {
+        "layout": "vertical",
+        "enableSwiper": true,
+        "aspectRatio": "square",
+        "borderRadius": "md",
+        "showShadow": true,
+        "hoverZoom": true,
+        "showTitle": true,
+        "titleSize": "lg",
+        "titleWeight": "semibold",
+        "titleAlign": "left",
+        "showPrice": true,
+        "priceSize": "lg",
+        "priceColor": "#000000",
+        "showCompareAtPrice": true,
+        "showSavingsBadge": true,
+        "showBadges": true,
+        "showSaleBadge": true,
+        "showNewBadge": true,
+        "showLowStockBadge": true,
+        "badgePosition": "top-right",
+        "showAddToCart": true,
+        "buttonText": "Add to Cart",
+        "buttonStyle": "filled",
+        "buttonSize": "md",
+        "showCartIcon": true,
+        "cardRadius": "lg",
+        "cardBorder": "sm",
+        "cardShadow": true,
+        "cardBackground": "#ffffff",
+        "accentColor": "#000000",
+        "fontFamily": "inherit",
+        "productId": ""
+      },
       "metaPath": "src\\puck\\components\\product\\ProductCard\\productcard.meta.ts"
     },
     {
@@ -13553,6 +14779,16 @@ export const registry: CompiledRegistry = {
           "required": false
         }
       },
+      "defaultProps": {
+        "fontSize": "base",
+        "color": "gray",
+        "lineHeight": "normal",
+        "maxWidth": "prose",
+        "marginTop": "mt-4",
+        "marginBottom": "mb-4",
+        "paddingX": "px-0",
+        "paddingY": "py-0"
+      },
       "metaPath": "src\\puck\\components\\product\\ProductDescription\\productdescription.meta.ts"
     },
     {
@@ -13661,6 +14897,15 @@ export const registry: CompiledRegistry = {
           "type": "object",
           "required": false
         }
+      },
+      "defaultProps": {
+        "showTitle": true,
+        "titleText": "Product Details",
+        "showSku": true,
+        "showWeight": true,
+        "showDimensions": true,
+        "showOrigin": true,
+        "layout": "list"
       },
       "metaPath": "src\\puck\\components\\product\\ProductMetadata\\productmetadata.meta.ts"
     },
@@ -13799,6 +15044,14 @@ export const registry: CompiledRegistry = {
           "required": false
         }
       },
+      "defaultProps": {
+        "fontSize": "xl",
+        "color": "black",
+        "showComparePrice": true,
+        "layout": "horizontal",
+        "fontWeight": "semibold",
+        "showSavingsPercentage": true
+      },
       "metaPath": "src\\puck\\components\\product\\ProductPrice\\productprice.meta.ts"
     },
     {
@@ -13857,6 +15110,10 @@ export const registry: CompiledRegistry = {
             "lg"
           ]
         }
+      },
+      "defaultProps": {
+        "showCount": true,
+        "size": "md"
       },
       "metaPath": "src\\puck\\components\\product\\ProductRating\\productrating.meta.ts"
     },
@@ -13951,6 +15208,12 @@ export const registry: CompiledRegistry = {
           "type": "object",
           "required": false
         }
+      },
+      "defaultProps": {
+        "showRatingsSummary": true,
+        "showVerifiedBadge": true,
+        "sortBy": "recent",
+        "reviewsPerPage": 5
       },
       "metaPath": "src\\puck\\components\\product\\ProductReviews\\productreviews.meta.ts"
     },
@@ -14124,6 +15387,17 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "tag": "h1",
+        "fontSize": "2xl",
+        "color": "black",
+        "alignment": "left",
+        "fontWeight": "bold",
+        "marginTop": "mt-0",
+        "marginBottom": "mb-4",
+        "paddingX": "px-0",
+        "paddingY": "py-0"
+      },
       "metaPath": "src\\puck\\components\\product\\ProductTitle\\producttitle.meta.ts"
     },
     {
@@ -14264,6 +15538,17 @@ export const registry: CompiledRegistry = {
           "type": "object",
           "required": false
         }
+      },
+      "defaultProps": {
+        "selectorStyle": "buttons",
+        "showLabels": true,
+        "showStock": true,
+        "marginTop": "mt-4",
+        "marginBottom": "mb-4",
+        "marginLeft": "ml-0",
+        "marginRight": "mr-0",
+        "paddingX": "px-0",
+        "paddingY": "py-0"
       },
       "metaPath": "src\\puck\\components\\product\\ProductVariantSelector\\productvariantselector.meta.ts"
     },
@@ -14425,6 +15710,21 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "showLabel": true,
+        "labelText": "Quantity",
+        "minQuantity": 1,
+        "maxQuantity": 99,
+        "defaultQuantity": 1,
+        "size": "medium",
+        "style": "default",
+        "marginTop": "mt-4",
+        "marginBottom": "mb-4",
+        "marginLeft": "ml-0",
+        "marginRight": "mr-0",
+        "paddingX": "px-0",
+        "paddingY": "py-0"
+      },
       "metaPath": "src\\puck\\components\\product\\QuantitySelector\\quantityselector.meta.ts"
     },
     {
@@ -14515,6 +15815,13 @@ export const registry: CompiledRegistry = {
           "type": "object",
           "required": false
         }
+      },
+      "defaultProps": {
+        "showIcon": true,
+        "showText": true,
+        "showQuantity": true,
+        "lowStockThreshold": 10,
+        "style": "default"
       },
       "metaPath": "src\\puck\\components\\product\\StockIndicator\\stockindicator.meta.ts"
     },
@@ -14629,6 +15936,13 @@ export const registry: CompiledRegistry = {
           "type": "object",
           "required": false
         }
+      },
+      "defaultProps": {
+        "showLabel": true,
+        "labelText": "Add to Wishlist",
+        "size": "medium",
+        "style": "outline",
+        "iconPosition": "left"
       },
       "metaPath": "src\\puck\\components\\product\\WishlistButton\\wishlistbutton.meta.ts"
     },
@@ -14825,6 +16139,21 @@ export const registry: CompiledRegistry = {
           "type": "string",
           "required": true
         }
+      },
+      "defaultProps": {
+        "containerWidth": "large",
+        "maxHeight": 700,
+        "mobileHeight": 400,
+        "thumbnailsPerView": 5,
+        "thumbnailPosition": "bottom",
+        "thumbnailShape": "rounded",
+        "navigationStyle": "minimal",
+        "enableZoom": true,
+        "maxZoom": 3,
+        "showImageCounter": true,
+        "enableFullscreen": true,
+        "imageFit": "cover",
+        "backgroundColor": "#ffffff"
       },
       "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryfullscreen.meta.ts"
     },
@@ -15024,6 +16353,21 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "containerWidth": "large",
+        "maxHeight": 600,
+        "mobileHeight": 400,
+        "aspectRatio": "square",
+        "showNavigation": true,
+        "navigationStyle": "minimal",
+        "showPagination": true,
+        "paginationStyle": "dots",
+        "loop": true,
+        "autoHeight": false,
+        "spacing": 16,
+        "imageFit": "cover",
+        "backgroundColor": "#ffffff"
+      },
       "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryminimal.meta.ts"
     },
     {
@@ -15217,6 +16561,21 @@ export const registry: CompiledRegistry = {
           "type": "string",
           "required": true
         }
+      },
+      "defaultProps": {
+        "containerWidth": "large",
+        "maxHeight": 600,
+        "mobileHeight": 400,
+        "maxZoom": 3,
+        "showThumbnails": true,
+        "thumbnailsPerView": 4,
+        "thumbnailShape": "rounded",
+        "aspectRatio": "square",
+        "enableDoubleClickZoom": true,
+        "spacing": 16,
+        "navigationStyle": "minimal",
+        "imageFit": "cover",
+        "backgroundColor": "#ffffff"
       },
       "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryzoom.meta.ts"
     },
@@ -15478,6 +16837,26 @@ export const registry: CompiledRegistry = {
           "type": "number",
           "required": true
         }
+      },
+      "defaultProps": {
+        "slideHeight": "lg",
+        "contentWidth": "contained",
+        "contentPosition": "center",
+        "effect": "fade",
+        "showNavigation": true,
+        "navigationColor": "#ffffff",
+        "navigationPosition": "center",
+        "showPagination": true,
+        "paginationType": "bullets",
+        "paginationColor": "#ffffff",
+        "enableAutoplay": true,
+        "autoplayDelay": 5000,
+        "pauseOnHover": true,
+        "loop": true,
+        "speed": 600,
+        "enableOverlay": true,
+        "overlayColor": "#000000",
+        "overlayOpacity": 40
       },
       "metaPath": "src\\puck\\components\\swiper\\ContentSlider\\contentslider.meta.ts"
     },
@@ -15785,6 +17164,32 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "containerWidth": "large",
+        "customWidth": 800,
+        "maxHeight": 500,
+        "layout": "thumbnails",
+        "mainImageAspectRatio": "landscape",
+        "showThumbnails": true,
+        "thumbnailPosition": "bottom",
+        "thumbnailsPerView": 5,
+        "thumbnailSpacing": 12,
+        "showNavigation": true,
+        "navigationColor": "#000000",
+        "navigationSize": "md",
+        "showPagination": false,
+        "paginationType": "bullets",
+        "paginationColor": "#3b82f6",
+        "enableZoom": true,
+        "maxZoomScale": 3,
+        "loop": true,
+        "autoHeight": false,
+        "spaceBetween": 10,
+        "borderRadius": "md",
+        "showBorder": true,
+        "borderColor": "#e5e5e5",
+        "backgroundColor": "#f9fafb"
+      },
       "metaPath": "src\\puck\\components\\swiper\\ImageGallery\\imagegallery.meta.ts"
     },
     {
@@ -15988,6 +17393,26 @@ export const registry: CompiledRegistry = {
           "type": "number",
           "required": true
         }
+      },
+      "defaultProps": {
+        "logosPerView": 6,
+        "logosPerViewTablet": 4,
+        "logosPerViewMobile": 2,
+        "enableAutoplay": true,
+        "autoplaySpeed": 2000,
+        "freeMode": true,
+        "loop": true,
+        "spaceBetween": 40,
+        "grayscale": true,
+        "grayscaleHover": true,
+        "logoMaxHeight": 60,
+        "backgroundColor": "#ffffff",
+        "logoBackgroundColor": "transparent",
+        "showBorder": false,
+        "borderColor": "#e5e5e5",
+        "borderRadius": "none",
+        "paddingY": 60,
+        "paddingX": 20
       },
       "metaPath": "src\\puck\\components\\swiper\\LogoCarousel\\logocarousel.meta.ts"
     },
@@ -16358,6 +17783,41 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "sectionTitle": "Popular Products",
+        "showTitle": true,
+        "productSource": "featured",
+        "productIds": "",
+        "collectionId": "",
+        "categoryId": "",
+        "maxProducts": 12,
+        "slidesPerView": 4,
+        "slidesPerViewTablet": 3,
+        "slidesPerViewMobile": 1,
+        "spaceBetween": 24,
+        "effect": "slide",
+        "speed": 600,
+        "navigation": true,
+        "navigationColor": "#000000",
+        "pagination": true,
+        "paginationType": "bullets",
+        "paginationColor": "#3b82f6",
+        "autoplay": false,
+        "autoplayDelay": 3000,
+        "pauseOnHover": true,
+        "loop": true,
+        "centeredSlides": false,
+        "freeMode": false,
+        "showProductImage": true,
+        "showProductTitle": true,
+        "showProductPrice": true,
+        "showAddToCart": true,
+        "imageAspectRatio": "square",
+        "backgroundColor": "#ffffff",
+        "cardBackground": "#ffffff",
+        "cardBorderRadius": "lg",
+        "cardShadow": true
+      },
       "metaPath": "src\\puck\\components\\swiper\\ProductCarousel\\productcarousel.meta.ts"
     },
     {
@@ -16667,6 +18127,35 @@ export const registry: CompiledRegistry = {
           "required": true
         }
       },
+      "defaultProps": {
+        "layout": "card",
+        "cardsPerView": 3,
+        "cardsPerViewTablet": 2,
+        "cardsPerViewMobile": 1,
+        "effect": "slide",
+        "showNavigation": true,
+        "navigationColor": "#1f2937",
+        "showPagination": true,
+        "paginationType": "bullets",
+        "paginationColor": "#3b82f6",
+        "enableAutoplay": true,
+        "autoplayDelay": 5000,
+        "pauseOnHover": true,
+        "loop": true,
+        "spaceBetween": 24,
+        "centeredSlides": false,
+        "showAvatar": true,
+        "showRating": true,
+        "showRole": true,
+        "backgroundColor": "#f9fafb",
+        "cardBackground": "#ffffff",
+        "textColor": "#1f2937",
+        "accentColor": "#f59e0b",
+        "borderRadius": "lg",
+        "cardShadow": "md",
+        "paddingY": 80,
+        "paddingX": 20
+      },
       "metaPath": "src\\puck\\components\\swiper\\TestimonialCarousel\\testimonialcarousel.meta.ts"
     }
   ],
@@ -16804,6 +18293,19 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "two-column",
+          "showAvatar": true,
+          "showPersonalInfo": true,
+          "showContactInfo": true,
+          "showPreferences": true,
+          "allowEditing": true,
+          "editButtonText": "Edit Profile",
+          "saveButtonText": "Save Changes",
+          "cancelButtonText": "Cancel",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827"
         },
         "metaPath": "src\\puck\\components\\account\\accountprofile.meta.ts"
       },
@@ -16960,6 +18462,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "layout": "grid",
+          "showAddButton": true,
+          "showTypeLabels": true,
+          "maxAddresses": 10,
+          "backgroundColor": "#f9fafb",
+          "cardBackgroundColor": "#ffffff",
+          "textColor": "#111827",
+          "addButtonText": "Add New Address",
+          "editButtonText": "Edit",
+          "deleteButtonText": "Delete",
+          "setDefaultText": "Set as Default",
+          "defaultBadgeText": "Default",
+          "emptyStateText": "No addresses saved"
+        },
         "metaPath": "src\\puck\\components\\account\\addressbook.meta.ts"
       },
       {
@@ -17109,6 +18626,19 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "list",
+          "showSearch": true,
+          "showFilters": true,
+          "defaultStatus": "all",
+          "showImages": true,
+          "showItemCount": true,
+          "ordersPerPage": 10,
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827",
+          "emptyStateText": "No orders found",
+          "viewDetailsText": "View Details"
         },
         "metaPath": "src\\puck\\components\\account\\orderhistory.meta.ts"
       },
@@ -17262,6 +18792,22 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "title": "My Wishlist",
+          "showTitle": true,
+          "showEmptyMessage": true,
+          "emptyTitle": "Your wishlist is empty",
+          "emptyMessage": "Save items you love and come back to them anytime.",
+          "showAddToCart": true,
+          "addToCartLabel": "Add to Cart",
+          "removeLabel": "Remove",
+          "backgroundColor": "#ffffff",
+          "cardBackgroundColor": "#ffffff",
+          "textColor": "#111827",
+          "borderRadius": "8px",
+          "padding": "0px",
+          "shadow": false
+        },
         "metaPath": "src\\puck\\components\\account\\wishlistitems.meta.ts"
       }
     ],
@@ -17383,6 +18929,16 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "table",
+          "showImages": true,
+          "showVariantInfo": true,
+          "showQuantitySelector": true,
+          "showDeleteButton": true,
+          "imageSize": "md",
+          "maxQuantity": 10,
+          "emptyMessage": "Your cart is empty"
         },
         "metaPath": "src\\puck\\components\\cart\\cartitems.meta.ts"
       },
@@ -17511,6 +19067,18 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showSubtotal": true,
+          "showShipping": true,
+          "showTax": true,
+          "showDiscount": true,
+          "showCouponInput": true,
+          "showCheckoutButton": true,
+          "checkoutButtonText": "Proceed to Checkout",
+          "freeShippingThreshold": 50,
+          "position": "sidebar",
+          "showTrustBadges": true
+        },
         "metaPath": "src\\puck\\components\\cart\\cartsummary.meta.ts"
       },
       {
@@ -17606,6 +19174,14 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showStepIndicators": true,
+          "enableGuestCheckout": true,
+          "requirePhoneNumber": false,
+          "showSaveAddressCheckbox": true,
+          "defaultCountry": "US",
+          "showOrderNotes": true
+        },
         "metaPath": "src\\puck\\components\\cart\\checkoutform.meta.ts"
       },
       {
@@ -17681,6 +19257,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "title": "Cart",
+          "message": "You don't have anything in your cart. Let's change that, use the link below to start browsing our products.",
+          "linkText": "Explore products",
+          "linkUrl": "/store",
+          "showOnlyWhenEmpty": true
         },
         "metaPath": "src\\puck\\components\\cart\\emptycart.meta.ts"
       },
@@ -17803,6 +19386,18 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "position": "sidebar",
+          "showItemImages": true,
+          "showItemQuantity": true,
+          "showItemPrice": true,
+          "showSubtotal": true,
+          "showShipping": true,
+          "showTax": true,
+          "showDiscount": true,
+          "showTotal": true,
+          "compactView": false
+        },
         "metaPath": "src\\puck\\components\\cart\\ordersummary.meta.ts"
       },
       {
@@ -17876,6 +19471,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "title": "Already have an account?",
+          "message": "Sign in for a better experience.",
+          "signInLinkText": "Sign in",
+          "signUpLinkText": "Join us",
+          "showDivider": true
         },
         "metaPath": "src\\puck\\components\\cart\\signinprompt.meta.ts"
       }
@@ -17993,6 +19595,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "separator": "/",
+          "showHome": true,
+          "homeText": "Home",
+          "fontSize": "0.875rem",
+          "textColor": "#666666",
+          "activeColor": "#000000",
+          "hoverColor": "#333333",
+          "marginBottom": "1.5rem",
+          "className": ""
         },
         "metaPath": "src\\puck\\components\\category\\CategoryBreadcrumbs\\categorybreadcrumbs.meta.ts"
       },
@@ -18146,6 +19759,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "fontSize": "base",
+          "color": "gray",
+          "alignment": "left",
+          "lineHeight": "relaxed",
+          "maxWidth": "full",
+          "marginBottom": "2rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryDescription\\categorydescription.meta.ts"
       },
       {
@@ -18261,6 +19883,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showHandle": false,
+          "showProductCount": true,
+          "showUpdatedDate": false,
+          "layout": "horizontal",
+          "fontSize": "0.875rem",
+          "textColor": "#666666",
+          "iconColor": "#999999",
+          "spacing": "1rem",
+          "className": ""
         },
         "metaPath": "src\\puck\\components\\category\\CategoryMetadata\\categorymetadata.meta.ts"
       },
@@ -18466,6 +20099,22 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showTitle": false,
+          "title": "Products",
+          "titleAlignment": "left",
+          "columns": "4",
+          "gap": "md",
+          "gridLocation": "center",
+          "showSortFilter": true,
+          "sortPosition": "top-right",
+          "showPagination": true,
+          "paginationPosition": "bottom-center",
+          "showProductsPerPageDropdown": false,
+          "productsPerPageOptions": "12,24,36,48",
+          "productsPerPage": 12,
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\categoryproductsgrid.meta.ts"
       },
       {
@@ -18614,6 +20263,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "tag": "h1",
+          "fontSize": "2xl",
+          "color": "black",
+          "alignment": "left",
+          "fontWeight": "bold",
+          "marginBottom": "1rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryTitle\\categorytitle.meta.ts"
       }
     ],
@@ -18703,6 +20361,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showImages": true,
+          "showQuantity": true,
+          "showVariantInfo": true,
+          "imageSize": "md",
+          "layout": "list"
+        },
         "metaPath": "src\\puck\\components\\checkout\\cartitemspreview.meta.ts"
       },
       {
@@ -18775,6 +20440,12 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "inline",
+          "showAppliedDiscounts": true,
+          "buttonText": "Apply",
+          "placeholder": "Enter discount code"
         },
         "metaPath": "src\\puck\\components\\checkout\\discountcode.meta.ts"
       },
@@ -18857,6 +20528,13 @@ export const registry: CompiledRegistry = {
               "large"
             ]
           }
+        },
+        "defaultProps": {
+          "showTermsCheckbox": true,
+          "showPolicies": true,
+          "showSecurityBadge": true,
+          "buttonText": "Place Order",
+          "buttonSize": "large"
         },
         "metaPath": "src\\puck\\components\\checkout\\orderreview.meta.ts"
       },
@@ -18952,6 +20630,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showSubtotal": true,
+          "showShipping": true,
+          "showTax": true,
+          "showDiscount": true,
+          "showTotal": true,
+          "highlightTotal": true,
+          "layout": "default"
+        },
         "metaPath": "src\\puck\\components\\checkout\\ordertotals.meta.ts"
       },
       {
@@ -19027,6 +20714,12 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "list",
+          "showPaymentIcons": true,
+          "showSecurityBadges": true,
+          "enableSaveCard": true
         },
         "metaPath": "src\\puck\\components\\checkout\\paymentmethod.meta.ts"
       },
@@ -19132,6 +20825,16 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showBillingAddress": true,
+          "requirePhone": false,
+          "showCompanyField": false,
+          "showAddress2Field": true,
+          "showProvinceField": true,
+          "enableAddressAutocomplete": true,
+          "defaultSameAsBilling": true,
+          "layout": "two-column"
+        },
         "metaPath": "src\\puck\\components\\checkout\\shippingaddress.meta.ts"
       },
       {
@@ -19204,6 +20907,12 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "list",
+          "showDeliveryTime": true,
+          "showDeliveryDescription": false,
+          "showPickupOption": false
         },
         "metaPath": "src\\puck\\components\\checkout\\shippingmethod.meta.ts"
       }
@@ -19314,6 +21023,13 @@ export const registry: CompiledRegistry = {
               "mb-6"
             ]
           }
+        },
+        "defaultProps": {
+          "showHomeIcon": true,
+          "separator": "chevron",
+          "textSize": "text-sm",
+          "textColor": "text-gray-500",
+          "marginBottom": "mb-4"
         },
         "metaPath": "src\\puck\\components\\collection\\collectionbreadcrumbs.meta.ts"
       },
@@ -19440,6 +21156,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "fontSize": "text-base",
+          "textAlign": "left",
+          "textColor": "text-gray-600",
+          "marginBottom": "mb-6",
+          "maxWidth": "max-w-3xl"
+        },
         "metaPath": "src\\puck\\components\\collection\\collectiondescription.meta.ts"
       },
       {
@@ -19556,6 +21279,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showTitle": true,
+          "showDescription": true,
+          "showBanner": true,
+          "showProductCount": true,
+          "titleSize": "3xl",
+          "alignment": "center",
+          "bannerHeight": "md"
+        },
         "metaPath": "src\\puck\\components\\collection\\collectionheader.meta.ts"
       },
       {
@@ -19645,6 +21377,13 @@ export const registry: CompiledRegistry = {
               "text-gray-600"
             ]
           }
+        },
+        "defaultProps": {
+          "showHandle": false,
+          "showCreatedDate": false,
+          "showUpdatedDate": false,
+          "fontSize": "text-sm",
+          "textColor": "text-gray-500"
         },
         "metaPath": "src\\puck\\components\\collection\\collectionmetadata.meta.ts"
       },
@@ -19784,6 +21523,14 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "tag": "h1",
+          "fontSize": "text-3xl",
+          "textAlign": "left",
+          "fontWeight": "bold",
+          "marginBottom": "mb-4",
+          "showProductCount": true
+        },
         "metaPath": "src\\puck\\components\\collection\\collectiontitle.meta.ts"
       },
       {
@@ -19873,6 +21620,13 @@ export const registry: CompiledRegistry = {
               "right"
             ]
           }
+        },
+        "defaultProps": {
+          "showPageNumbers": true,
+          "showFirstLast": true,
+          "maxPageNumbers": 7,
+          "style": "numbered",
+          "alignment": "center"
         },
         "metaPath": "src\\puck\\components\\collection\\pagination.meta.ts"
       },
@@ -19977,6 +21731,16 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showPriceFilter": true,
+          "showCategoryFilter": true,
+          "showBrandFilter": true,
+          "showColorFilter": true,
+          "showSizeFilter": true,
+          "showRatingFilter": true,
+          "layout": "sidebar",
+          "defaultExpanded": true
         },
         "metaPath": "src\\puck\\components\\collection\\productfilters.meta.ts"
       },
@@ -20110,6 +21874,16 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "layout": "grid",
+          "columns": "3",
+          "showQuickView": true,
+          "showWishlist": true,
+          "showCompare": false,
+          "imageAspectRatio": "square",
+          "showBadges": true,
+          "gap": "md"
+        },
         "metaPath": "src\\puck\\components\\collection\\productgrid.meta.ts"
       },
       {
@@ -20199,6 +21973,12 @@ export const registry: CompiledRegistry = {
               "right"
             ]
           }
+        },
+        "defaultProps": {
+          "defaultSort": "featured",
+          "showResultCount": true,
+          "showViewToggle": true,
+          "position": "right"
         },
         "metaPath": "src\\puck\\components\\collection\\productsort.meta.ts"
       }
@@ -20439,6 +22219,26 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Click Me",
+          "url": "#",
+          "openInNewTab": false,
+          "variant": "primary",
+          "size": "md",
+          "fullWidth": false,
+          "backgroundColor": "#3b82f6",
+          "textColor": "#ffffff",
+          "borderColor": "#3b82f6",
+          "hoverBackgroundColor": "#2563eb",
+          "hoverTextColor": "#ffffff",
+          "showIcon": false,
+          "iconPosition": "right",
+          "borderRadius": "md",
+          "shadow": "md",
+          "alignment": "left",
+          "marginTop": 0,
+          "marginBottom": 16
+        },
         "metaPath": "src\\puck\\components\\content\\Button\\button.meta.ts"
       },
       {
@@ -20670,6 +22470,20 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "text": "Your Heading Here",
+          "level": "h2",
+          "fontWeight": "bold",
+          "textAlign": "left",
+          "color": "#1f2937",
+          "fontSize": "",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "marginTop": 0,
+          "marginBottom": 16,
+          "animation": "none",
+          "animationDelay": 0
         },
         "metaPath": "src\\puck\\components\\content\\Heading\\heading.meta.ts"
       },
@@ -20964,6 +22778,29 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "src": "https://via.placeholder.com/800x600",
+          "alt": "Image description",
+          "aspectRatio": "auto",
+          "objectFit": "cover",
+          "width": "full",
+          "customWidth": "600px",
+          "showCaption": false,
+          "caption": "Image caption goes here",
+          "captionPosition": "bottom",
+          "captionAlign": "center",
+          "linkUrl": "",
+          "openInNewTab": false,
+          "borderRadius": "md",
+          "shadow": "md",
+          "showBorder": false,
+          "borderColor": "#e5e5e5",
+          "borderWidth": 2,
+          "hoverEffect": "none",
+          "alignment": "center",
+          "marginTop": 0,
+          "marginBottom": 16
+        },
         "metaPath": "src\\puck\\components\\content\\Image\\image.meta.ts"
       },
       {
@@ -21089,6 +22926,16 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "link-1",
+          "text": "Click here",
+          "href": "#",
+          "target": "_self",
+          "color": "brand.primary",
+          "fontSize": "base",
+          "fontWeight": "normal",
+          "underline": "hover"
+        },
         "metaPath": "src\\puck\\components\\content\\Link\\link.meta.ts"
       },
       {
@@ -21164,6 +23011,11 @@ export const registry: CompiledRegistry = {
               "py-20"
             ]
           }
+        },
+        "defaultProps": {
+          "content": "",
+          "maxWidth": "max-w-3xl",
+          "padding": "py-12"
         },
         "metaPath": "src\\puck\\components\\content\\RichTextContent\\richtext.meta.ts"
       },
@@ -21342,6 +23194,20 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Add your text content here. You can write multiple paragraphs, include line breaks, and format your content as needed.",
+          "richText": false,
+          "fontSize": "base",
+          "fontWeight": "normal",
+          "lineHeight": "relaxed",
+          "textAlign": "left",
+          "color": "#374151",
+          "maxWidth": "",
+          "marginTop": 0,
+          "marginBottom": 16,
+          "paddingX": 0,
+          "paddingY": 0
+        },
         "metaPath": "src\\puck\\components\\content\\Text\\text.meta.ts"
       },
       {
@@ -21513,6 +23379,19 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "videoType": "youtube",
+          "videoUrl": "",
+          "autoplay": false,
+          "loop": false,
+          "muted": true,
+          "controls": true,
+          "aspectRatio": "16:9",
+          "alignment": "center",
+          "borderRadius": "md",
+          "shadow": "md",
+          "caption": ""
+        },
         "metaPath": "src\\puck\\components\\content\\Video\\video.meta.ts"
       }
     ],
@@ -21570,6 +23449,11 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "saved-block-1",
+          "blockId": "",
+          "blockName": ""
         },
         "metaPath": "src\\puck\\components\\custom\\savedblock.meta.ts"
       }
@@ -21747,6 +23631,22 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showAddress": true,
+          "address": "123 Main Street\nCity, State 12345\nCountry",
+          "showPhone": true,
+          "phone": "+1 (555) 123-4567",
+          "showEmail": true,
+          "email": "contact@example.com",
+          "showHours": true,
+          "hours": "Mon-Fri: 9:00 AM - 6:00 PM\nSat-Sun: 10:00 AM - 4:00 PM",
+          "showIcons": true,
+          "layout": "stacked",
+          "textColor": "#6b7280",
+          "iconColor": "#9ca3af",
+          "fontSize": "sm",
+          "gap": "md"
+        },
         "metaPath": "src\\puck\\components\\footer\\ContactInfo\\contactinfo.meta.ts"
       },
       {
@@ -21873,6 +23773,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "text": "All rights reserved.",
+          "showYear": true,
+          "alignment": "center",
+          "fontSize": "sm",
+          "textColor": "#6b7280",
+          "showDivider": true,
+          "dividerColor": "#e5e7eb",
+          "paddingTop": "1.5rem",
+          "paddingBottom": "1.5rem"
         },
         "metaPath": "src\\puck\\components\\footer\\Copyright\\copyright.meta.ts"
       },
@@ -22027,6 +23938,30 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "links": [
+            {
+              "platform": "facebook",
+              "url": "https://facebook.com"
+            },
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com"
+            },
+            {
+              "platform": "twitter",
+              "url": "https://twitter.com"
+            }
+          ],
+          "size": "md",
+          "style": "circle",
+          "color": "#ffffff",
+          "hoverColor": "#3b82f6",
+          "backgroundColor": "#374151",
+          "hoverBackgroundColor": "#1f2937",
+          "gap": "md",
+          "alignment": "center"
+        },
         "metaPath": "src\\puck\\components\\footer\\SocialIcons\\socialicons.meta.ts"
       }
     ],
@@ -22120,6 +24055,22 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "choiceType": "radio",
+          "label": "Choose one",
+          "helpText": "",
+          "required": false,
+          "options": [
+            {
+              "label": "Option 1"
+            },
+            {
+              "label": "Option 2"
+            }
+          ],
+          "labelColor": "text.primary",
+          "accentColor": "brand.primary"
         },
         "metaPath": "src\\puck\\components\\form\\formchoicefield.meta.ts"
       },
@@ -22260,6 +24211,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "formName": "Contact Form",
+          "submitButtonText": "Submit",
+          "successMessage": "Thank you! Your message has been sent.",
+          "padding": "lg",
+          "backgroundColor": "ui.background",
+          "borderRadius": "md",
+          "maxWidth": "lg"
+        },
         "metaPath": "src\\puck\\components\\form\\formcontainer.meta.ts"
       },
       {
@@ -22336,6 +24296,11 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "spacingTop": "sm",
+          "spacingBottom": "sm",
+          "color": "ui.border"
+        },
         "metaPath": "src\\puck\\components\\form\\formdivider.meta.ts"
       },
       {
@@ -22407,6 +24372,13 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "formId": "",
+          "padding": "24px",
+          "maxWidth": "640px",
+          "backgroundColor": "",
+          "borderRadius": "16px"
         },
         "metaPath": "src\\puck\\components\\form\\formembed.meta.ts"
       },
@@ -22535,6 +24507,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "fieldType": "text",
+          "label": "Field Label",
+          "placeholder": "",
+          "helpText": "",
+          "required": false,
+          "rows": 4,
+          "labelColor": "text.primary",
+          "inputBackground": "ui.surface",
+          "borderColor": "ui.border"
+        },
         "metaPath": "src\\puck\\components\\form\\formfield.meta.ts"
       },
       {
@@ -22623,6 +24606,12 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "text": "Section heading or instruction text",
+          "size": "md",
+          "color": "text.primary",
+          "marginBottom": "sm"
         },
         "metaPath": "src\\puck\\components\\form\\formheading.meta.ts"
       },
@@ -22715,6 +24704,23 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "label": "Select an option",
+          "placeholder": "Choose...",
+          "helpText": "",
+          "required": false,
+          "options": [
+            {
+              "label": "Option 1"
+            },
+            {
+              "label": "Option 2"
+            }
+          ],
+          "labelColor": "text.primary",
+          "inputBackground": "ui.surface",
+          "borderColor": "ui.border"
+        },
         "metaPath": "src\\puck\\components\\form\\formselectfield.meta.ts"
       },
       {
@@ -22801,6 +24807,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "label": "Submit",
+          "backgroundColor": "brand.primary",
+          "textColor": "text.inverse",
+          "fullWidth": true,
+          "borderRadius": "md"
+        },
         "metaPath": "src\\puck\\components\\form\\formsubmitbutton.meta.ts"
       }
     ],
@@ -22882,6 +24895,29 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "accordion-1",
+          "items": [
+            {
+              "id": "item-1",
+              "title": "What is your return policy?",
+              "content": "We offer a 30-day return policy on all items."
+            },
+            {
+              "id": "item-2",
+              "title": "How long does shipping take?",
+              "content": "Standard shipping takes 5-7 business days."
+            },
+            {
+              "id": "item-3",
+              "title": "Do you ship internationally?",
+              "content": "Yes, we ship to over 100 countries worldwide."
+            }
+          ],
+          "allowMultiple": false,
+          "bordered": true,
+          "rounded": "md"
         },
         "metaPath": "src\\puck\\components\\generic\\Accordion\\accordion.meta.ts"
       },
@@ -22970,6 +25006,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "alert-1",
+          "type": "info",
+          "message": "This is an alert message",
+          "showIcon": true,
+          "dismissible": false
         },
         "metaPath": "src\\puck\\components\\generic\\Alert\\alert.meta.ts"
       },
@@ -23098,6 +25141,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "avatar-1",
+          "src": "",
+          "name": "John Doe",
+          "size": "md",
+          "shape": "circle",
+          "backgroundColor": "#6366f1",
+          "textColor": "#ffffff",
+          "showName": false,
+          "namePosition": "right"
+        },
         "metaPath": "src\\puck\\components\\generic\\Avatar\\avatar.meta.ts"
       },
       {
@@ -23218,6 +25272,13 @@ export const registry: CompiledRegistry = {
           "customTextColor": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "id": "badge-1",
+          "text": "Badge",
+          "variant": "default",
+          "size": "md",
+          "rounded": "md"
         },
         "metaPath": "src\\puck\\components\\generic\\Badge\\badge.meta.ts"
       },
@@ -23345,6 +25406,15 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "card-1",
+          "padding": "lg",
+          "shadow": "md",
+          "border": true,
+          "rounded": "lg",
+          "backgroundColor": "#ffffff",
+          "hoverEffect": true
         },
         "metaPath": "src\\puck\\components\\generic\\Card\\card.meta.ts"
       },
@@ -23482,6 +25552,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "divider-1",
+          "style": "solid",
+          "thickness": "1",
+          "color": "#e5e7eb",
+          "width": "full",
+          "marginTop": "md",
+          "marginBottom": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Divider\\divider.meta.ts"
       },
       {
@@ -23596,6 +25675,13 @@ export const registry: CompiledRegistry = {
               "xl"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "grid-1",
+          "columns": "3",
+          "tabletColumns": "2",
+          "mobileColumns": "1",
+          "gap": "md"
         },
         "metaPath": "src\\puck\\components\\generic\\Grid\\grid.meta.ts"
       },
@@ -23827,6 +25913,14 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "icon-1",
+          "size": "md",
+          "strokeWidth": "2",
+          "alignment": "center",
+          "marginTop": "none",
+          "marginBottom": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Icon\\icon.meta.ts"
       },
       {
@@ -23937,6 +26031,24 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "list-1",
+          "items": [
+            {
+              "text": "First item"
+            },
+            {
+              "text": "Second item"
+            },
+            {
+              "text": "Third item"
+            }
+          ],
+          "type": "bullet",
+          "spacing": "normal",
+          "fontSize": "base",
+          "color": "#374151"
+        },
         "metaPath": "src\\puck\\components\\generic\\List\\list.meta.ts"
       },
       {
@@ -24029,6 +26141,13 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "spacer-1",
+          "height": "md",
+          "showDivider": false,
+          "dividerStyle": "solid",
+          "dividerColor": "#e5e7eb"
+        },
         "metaPath": "src\\puck\\components\\generic\\Spacer\\spacer.meta.ts"
       },
       {
@@ -24112,6 +26231,29 @@ export const registry: CompiledRegistry = {
               "bordered"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "tabs-1",
+          "tabs": [
+            {
+              "id": "tab-1",
+              "label": "Tab 1",
+              "content": "Content for tab 1"
+            },
+            {
+              "id": "tab-2",
+              "label": "Tab 2",
+              "content": "Content for tab 2"
+            },
+            {
+              "id": "tab-3",
+              "label": "Tab 3",
+              "content": "Content for tab 3"
+            }
+          ],
+          "defaultTab": 0,
+          "alignment": "left",
+          "tabStyle": "underline"
         },
         "metaPath": "src\\puck\\components\\generic\\Tabs\\tabs.meta.ts"
       }
@@ -24375,6 +26517,28 @@ export const registry: CompiledRegistry = {
           "error": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Browse our popular categories",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCategoryImage": true,
+          "showCategoryName": true,
+          "showProductCount": true,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "categorySource": "all",
+          "selectedCategoryIds": [],
+          "loading": false,
+          "error": ""
         },
         "metaPath": "src\\puck\\components\\homepage\\CategoriesGrid\\categoriesgrid.meta.ts"
       },
@@ -24721,6 +26885,41 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Discover our curated collection",
+          "showTitle": true,
+          "categoryId": "",
+          "categoryName": "",
+          "displayMode": "grid",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 20,
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "loop": false,
+          "navigation": true,
+          "pagination": true,
+          "imageAspectRatio": "square",
+          "showPrice": true,
+          "showAddToCart": true,
+          "showRating": false,
+          "showBadges": true,
+          "showViewAllButton": true,
+          "viewAllButtonText": "View All Products",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827",
+          "cardStyle": "shadow",
+          "borderRadius": "md",
+          "buttonColor": "#000000",
+          "buttonTextColor": "#ffffff",
+          "buttonRadius": "medium",
+          "loading": false,
+          "error": ""
+        },
         "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
       },
       {
@@ -24906,6 +27105,24 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Limited Time Offer",
+          "subtitle": "Sale ends soon",
+          "timerStyle": "boxes",
+          "showDays": true,
+          "showHours": true,
+          "showMinutes": true,
+          "showSeconds": true,
+          "showCTA": true,
+          "ctaText": "Shop Now",
+          "ctaLink": "/sale",
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "timerColor": "#ffffff",
+          "accentColor": "#3b82f6",
+          "spacing": "normal",
+          "mode": "live"
+        },
         "metaPath": "src\\puck\\components\\homepage\\CountdownTimer\\countdowntimer.meta.ts"
       },
       {
@@ -25049,6 +27266,19 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "htmlContent": "<div class=\"custom-section\">\n  <h2>Custom HTML Section</h2>\n  <p>Add your custom HTML content here. You can include any HTML tags, inline styles, and even JavaScript.</p>\n  <button class=\"custom-btn\">Click Me</button>\n</div>",
+          "cssContent": ".custom-section {\n  text-align: center;\n}\n\n.custom-btn {\n  background-color: #3b82f6;\n  color: white;\n  padding: 12px 24px;\n  border: none;\n  border-radius: 8px;\n  cursor: pointer;\n  font-weight: 600;\n}\n\n.custom-btn:hover {\n  background-color: #2563eb;\n}",
+          "useContainer": true,
+          "maxWidth": "lg",
+          "paddingTop": 64,
+          "paddingBottom": 64,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "backgroundColor": "#ffffff",
+          "backgroundImage": "",
+          "sanitizeHTML": true
         },
         "metaPath": "src\\puck\\components\\homepage\\CustomHTML\\customhtml.meta.ts"
       },
@@ -25334,6 +27564,35 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "sectionTitle": "Featured Products",
+          "sectionSubtitle": "Check out our most popular items",
+          "showTitle": true,
+          "displayMode": "carousel",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 24,
+          "autoplay": true,
+          "autoplayDelay": 3000,
+          "loop": true,
+          "navigation": true,
+          "pagination": true,
+          "paginationStyle": "dots",
+          "productSource": "featured",
+          "categoryId": "",
+          "productIds": "",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "showPrice": true,
+          "showAddToCart": true,
+          "buttonText": "Add to Cart",
+          "loading": false,
+          "error": ""
         },
         "metaPath": "src\\puck\\components\\homepage\\FeaturedProducts\\featuredproducts.meta.ts"
       },
@@ -25772,6 +28031,28 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Join Our Newsletter",
+          "subtitle": "Stay Updated",
+          "description": "Get the latest updates on new products, exclusive deals, and special offers delivered straight to your inbox.",
+          "placeholderText": "Enter your email address",
+          "buttonText": "Subscribe",
+          "showPrivacyText": true,
+          "privacyText": "We respect your privacy. Unsubscribe at any time.",
+          "layout": "centered",
+          "showImage": true,
+          "imageUrl": "https://via.placeholder.com/600x400?text=Newsletter+Image",
+          "collectName": false,
+          "nameRequired": false,
+          "successMessage": "Thanks for subscribing! Check your email to confirm.",
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "inputBackground": "#ffffff",
+          "inputBorder": "#e5e5e5",
+          "buttonBackground": "#3b82f6",
+          "buttonTextColor": "#ffffff",
+          "borderRadius": "md"
+        },
         "metaPath": "src\\puck\\components\\homepage\\Newsletter\\newsletter.meta.ts"
       },
       {
@@ -25909,6 +28190,39 @@ export const registry: CompiledRegistry = {
           "minHeight": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "title": "",
+          "subtitle": "",
+          "layout": "2-column",
+          "spacing": "md",
+          "banners": [
+            {
+              "id": "1",
+              "title": "New Collection",
+              "subtitle": "Shop the latest styles",
+              "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=400&fit=crop",
+              "ctaText": "Shop Now",
+              "ctaLink": "/store",
+              "overlayOpacity": 40,
+              "textColor": "#ffffff",
+              "textPosition": "bottom-left"
+            },
+            {
+              "id": "2",
+              "title": "Best Sellers",
+              "subtitle": "Top-rated products",
+              "imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+              "ctaText": "Explore",
+              "ctaLink": "/store",
+              "overlayOpacity": 40,
+              "textColor": "#ffffff",
+              "textPosition": "bottom-left"
+            }
+          ],
+          "borderRadius": "md",
+          "hoverEffect": "zoom",
+          "minHeight": "300px"
         },
         "metaPath": "src\\puck\\components\\homepage\\PromotionalBannerGrid\\promotionalbannergrid.meta.ts"
       },
@@ -26062,6 +28376,48 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "title": "Our Impact",
+          "subtitle": "Trusted by thousands",
+          "columns": "4",
+          "alignment": "center",
+          "stats": [
+            {
+              "id": "1",
+              "number": "10K+",
+              "label": "Happy Customers",
+              "icon": "people",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "2",
+              "number": "500+",
+              "label": "Products",
+              "icon": "package",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "3",
+              "number": "50+",
+              "label": "Countries",
+              "icon": "globe",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "4",
+              "number": "99%",
+              "label": "Satisfaction",
+              "icon": "star",
+              "iconColor": "#3b82f6"
+            }
+          ],
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "numberColor": "#3b82f6",
+          "spacing": "normal",
+          "showDividers": true,
+          "borderRadius": "md"
         },
         "metaPath": "src\\puck\\components\\homepage\\StatsSection\\statssection.meta.ts"
       },
@@ -26360,6 +28716,35 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "sectionTitle": "What Our Customers Say",
+          "sectionSubtitle": "Real reviews from real customers",
+          "showTitle": true,
+          "displayMode": "carousel",
+          "layout": "card",
+          "columns": 3,
+          "maxTestimonials": 6,
+          "slidesPerView": 2,
+          "slidesPerViewTablet": 1,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 32,
+          "autoplay": true,
+          "autoplayDelay": 5000,
+          "loop": true,
+          "navigation": true,
+          "pagination": true,
+          "effect": "slide",
+          "showAvatar": true,
+          "showName": true,
+          "showRole": true,
+          "showRating": true,
+          "showDate": false,
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardBackground": "#ffffff",
+          "accentColor": "#3b82f6",
+          "borderRadius": "lg"
+        },
         "metaPath": "src\\puck\\components\\homepage\\Testimonials\\testimonials.meta.ts"
       },
       {
@@ -26524,6 +28909,48 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Why Shop With Us",
+          "subtitle": "",
+          "layout": "horizontal",
+          "columns": "4",
+          "alignment": "center",
+          "badges": [
+            {
+              "id": "1",
+              "icon": "truck",
+              "title": "Free Shipping",
+              "description": "On orders over $50",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "2",
+              "icon": "shield",
+              "title": "Secure Checkout",
+              "description": "100% secure payment",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "3",
+              "icon": "refresh",
+              "title": "Easy Returns",
+              "description": "30-day return policy",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "4",
+              "icon": "support",
+              "title": "24/7 Support",
+              "description": "Here when you need us",
+              "iconColor": "#3b82f6"
+            }
+          ],
+          "backgroundColor": "#ffffff",
+          "textColor": "#1f2937",
+          "spacing": "normal",
+          "showBorder": true,
+          "borderRadius": "none"
+        },
         "metaPath": "src\\puck\\components\\homepage\\TrustBadges\\trustbadges.meta.ts"
       }
     ],
@@ -26644,6 +29071,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "columns": "2",
+          "layout": "50-50",
+          "gap": "lg",
+          "mobileStack": true,
+          "alignItems": "start"
+        },
         "metaPath": "src\\puck\\components\\layout\\Columns\\columns.meta.ts"
       },
       {
@@ -26714,6 +29148,10 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "maxWidth": "xl",
+          "padding": "md"
         },
         "metaPath": "src\\puck\\components\\layout\\Container\\container.meta.ts"
       },
@@ -26843,6 +29281,16 @@ export const registry: CompiledRegistry = {
           "borderRadius": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "justifyContent": "start",
+          "alignItems": "start",
+          "gap": "md",
+          "fullHeight": false,
+          "minHeight": "auto",
+          "padding": "0",
+          "backgroundColor": "transparent",
+          "borderRadius": "0"
         },
         "metaPath": "src\\puck\\components\\layout\\FlexColumn\\flexcolumn.meta.ts"
       },
@@ -26991,6 +29439,17 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "justifyContent": "space-between",
+          "alignItems": "center",
+          "gap": "md",
+          "wrap": "nowrap",
+          "fullWidth": true,
+          "maxWidth": "100%",
+          "padding": "0",
+          "backgroundColor": "transparent",
+          "borderRadius": "0"
+        },
         "metaPath": "src\\puck\\components\\layout\\FlexRow\\flexrow.meta.ts"
       },
       {
@@ -27137,6 +29596,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "columns": "4",
+          "backgroundColor": "#1f2937",
+          "textColor": "#ffffff",
+          "linkHoverColor": "#3b82f6",
+          "menuConfigs": [],
+          "paddingTop": "3rem",
+          "paddingBottom": "2rem",
+          "menuLoading": false,
+          "menuError": false
         },
         "metaPath": "src\\puck\\components\\layout\\Footer\\footer.meta.ts"
       },
@@ -27414,6 +29884,34 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "layout": "left-center-right",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "sticky": true,
+          "shadow": true,
+          "transparent": false,
+          "logoPosition": "left",
+          "logoMaxWidth": "150px",
+          "logoUrl": "/logo.svg",
+          "logoAlt": "Store Logo",
+          "menuPosition": "center",
+          "menuStyle": "horizontal",
+          "menuHoverColor": "#3b82f6",
+          "actions": [
+            "search",
+            "account",
+            "cart"
+          ],
+          "actionsPosition": "right",
+          "showCartBadge": true,
+          "showLabels": false,
+          "cartBadgeCount": 0,
+          "menuLoading": false,
+          "menuError": false,
+          "mobileBreakpoint": "md",
+          "mobileMenuStyle": "drawer"
+        },
         "metaPath": "src\\puck\\components\\layout\\Header\\header.meta.ts"
       },
       {
@@ -27483,6 +29981,10 @@ export const registry: CompiledRegistry = {
               "primary"
             ]
           }
+        },
+        "defaultProps": {
+          "paddingY": "md",
+          "backgroundColor": "transparent"
         },
         "metaPath": "src\\puck\\components\\layout\\Section\\section.meta.ts"
       }
@@ -27623,6 +30125,18 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showLabel": false,
+          "label": "Account",
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "style": "minimal",
+          "linkTo": "/account",
+          "signedInLink": "/account",
+          "showWhenSignedOut": true,
+          "showWhenSignedIn": true
         },
         "metaPath": "src\\puck\\components\\navigation\\AccountButton\\accountbutton.meta.ts"
       },
@@ -27777,6 +30291,18 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showLabel": false,
+          "label": "Cart",
+          "showBadge": true,
+          "badgePosition": "top-right",
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "badgeBackgroundColor": "#ef4444",
+          "badgeTextColor": "#ffffff",
+          "style": "minimal"
         },
         "metaPath": "src\\puck\\components\\navigation\\CartButton\\cartbutton.meta.ts"
       },
@@ -28003,6 +30529,19 @@ export const registry: CompiledRegistry = {
               "bold"
             ]
           }
+        },
+        "defaultProps": {
+          "imageUrl": "",
+          "altText": "Store Logo",
+          "linkTo": "/",
+          "maxWidth": "150px",
+          "maxHeight": "60px",
+          "showText": true,
+          "text": "My Store",
+          "textPosition": "right",
+          "textSize": "xl",
+          "textColor": "#000000",
+          "textWeight": "bold"
         },
         "metaPath": "src\\puck\\components\\navigation\\Logo\\logo.meta.ts"
       },
@@ -28271,6 +30810,24 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "menuHandle": "default",
+          "layout": "horizontal",
+          "alignment": "center",
+          "hoverEffect": "underline",
+          "textColor": "#111827",
+          "hoverColor": "#3b82f6",
+          "fontSize": "base",
+          "fontWeight": "medium",
+          "showDropdownArrows": true,
+          "dropdownStyle": "default",
+          "maxDepth": "3",
+          "menuData": [],
+          "dropdownBackground": "#ffffff",
+          "dropdownBorder": "#e5e7eb",
+          "dropdownShadow": "lg",
+          "dropdownRadius": "md"
+        },
         "metaPath": "src\\puck\\components\\navigation\\MenuNavigation\\menunavigation.meta.ts"
       },
       {
@@ -28456,6 +31013,13 @@ export const registry: CompiledRegistry = {
               "right"
             ]
           }
+        },
+        "defaultProps": {
+          "items": [],
+          "theme": {},
+          "isOpen": false,
+          "drawerMaxWidth": "400px",
+          "animationDirection": "left"
         },
         "metaPath": "src\\puck\\components\\navigation\\MobileMenu\\mobilemenu.meta.ts"
       },
@@ -28649,6 +31213,22 @@ export const registry: CompiledRegistry = {
             "items": "$item"
           }
         },
+        "defaultProps": {
+          "placeholder": "Search products...",
+          "style": "outlined",
+          "size": "md",
+          "showIcon": true,
+          "iconPosition": "left",
+          "fullWidth": false,
+          "maxWidth": "400px",
+          "borderRadius": "md",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "borderColor": "#e5e7eb",
+          "focusBorderColor": "#3b82f6",
+          "showPopularSearches": false,
+          "popularSearches": []
+        },
         "metaPath": "src\\puck\\components\\navigation\\SearchBar\\searchbar.meta.ts"
       },
       {
@@ -28744,6 +31324,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "style": "minimal",
+          "openSearchOnClick": true
         },
         "metaPath": "src\\puck\\components\\navigation\\SearchIcon\\searchicon.meta.ts"
       }
@@ -28856,6 +31443,15 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showDownloadInvoice": true,
+          "showTrackShipment": true,
+          "showContactSupport": true,
+          "showReorder": true,
+          "showReturnRequest": false,
+          "layout": "buttons",
+          "buttonStyle": "outlined"
+        },
         "metaPath": "src\\puck\\components\\order\\orderactions.meta.ts"
       },
       {
@@ -28954,6 +31550,15 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showCheckmark": true,
+          "titleText": "Order Confirmed!",
+          "messageText": "Thank you for your order. We've received your order and will begin processing it right away.",
+          "showOrderNumber": true,
+          "showEmailConfirmation": true,
+          "showContinueShopping": true,
+          "style": "success"
         },
         "metaPath": "src\\puck\\components\\order\\orderconfirmation.meta.ts"
       },
@@ -29058,6 +31663,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showItemImages": true,
+          "showItemQuantity": true,
+          "showItemPrice": true,
+          "showShippingAddress": true,
+          "showBillingAddress": true,
+          "showPaymentMethod": true,
+          "showShippingMethod": true,
+          "showPricingBreakdown": true,
+          "compactView": false
+        },
         "metaPath": "src\\puck\\components\\order\\orderdetails.meta.ts"
       },
       {
@@ -29147,6 +31763,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showIcons": true,
+          "showTimestamps": true,
+          "showTrackingNumber": true,
+          "orientation": "vertical",
+          "style": "default"
         },
         "metaPath": "src\\puck\\components\\order\\ordertimeline.meta.ts"
       }
@@ -29379,6 +32002,28 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Add to Cart",
+          "preorderText": "Pre-order",
+          "variant": "primary",
+          "size": "md",
+          "fullWidth": false,
+          "showIcon": true,
+          "disabled": false,
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "hoverBackgroundColor": "#1f2937",
+          "hoverTextColor": "#ffffff",
+          "borderColor": "#000000",
+          "useThemeColors": false,
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-6",
+          "paddingY": "py-3",
+          "borderRadius": "rounded-lg"
+        },
         "metaPath": "src\\puck\\components\\product\\AddToCart\\addtocart.meta.ts"
       },
       {
@@ -29453,6 +32098,12 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showSavingsBadge": true,
+          "showItemImages": true,
+          "buttonText": "Add Bundle to Cart",
+          "bundleIdOverride": ""
         },
         "metaPath": "src\\puck\\components\\product\\BundledProductDetail\\bundledproductdetail.meta.ts"
       },
@@ -29545,6 +32196,31 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "sections": [
+            {
+              "id": "description",
+              "title": "Product Details",
+              "contentType": "description",
+              "customContent": ""
+            },
+            {
+              "id": "material",
+              "title": "Material & Care",
+              "contentType": "material",
+              "customContent": ""
+            },
+            {
+              "id": "shipping",
+              "title": "Shipping & Returns",
+              "contentType": "shipping",
+              "customContent": "<p>Free shipping on orders over $50. Returns accepted within 30 days.</p>"
+            }
+          ],
+          "allowMultiple": false,
+          "defaultOpen": "description",
+          "borderStyle": "top"
+        },
         "metaPath": "src\\puck\\components\\product\\ProductAccordion\\productaccordion.meta.ts"
       },
       {
@@ -29628,6 +32304,11 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showHomeIcon": true,
+          "separator": "arrow",
+          "textTransform": "none"
         },
         "metaPath": "src\\puck\\components\\product\\ProductBreadcrumbs\\productbreadcrumbs.meta.ts"
       },
@@ -30070,6 +32751,40 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "layout": "vertical",
+          "enableSwiper": true,
+          "aspectRatio": "square",
+          "borderRadius": "md",
+          "showShadow": true,
+          "hoverZoom": true,
+          "showTitle": true,
+          "titleSize": "lg",
+          "titleWeight": "semibold",
+          "titleAlign": "left",
+          "showPrice": true,
+          "priceSize": "lg",
+          "priceColor": "#000000",
+          "showCompareAtPrice": true,
+          "showSavingsBadge": true,
+          "showBadges": true,
+          "showSaleBadge": true,
+          "showNewBadge": true,
+          "showLowStockBadge": true,
+          "badgePosition": "top-right",
+          "showAddToCart": true,
+          "buttonText": "Add to Cart",
+          "buttonStyle": "filled",
+          "buttonSize": "md",
+          "showCartIcon": true,
+          "cardRadius": "lg",
+          "cardBorder": "sm",
+          "cardShadow": true,
+          "cardBackground": "#ffffff",
+          "accentColor": "#000000",
+          "fontFamily": "inherit",
+          "productId": ""
+        },
         "metaPath": "src\\puck\\components\\product\\ProductCard\\productcard.meta.ts"
       },
       {
@@ -30214,6 +32929,16 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "fontSize": "base",
+          "color": "gray",
+          "lineHeight": "normal",
+          "maxWidth": "prose",
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
+        },
         "metaPath": "src\\puck\\components\\product\\ProductDescription\\productdescription.meta.ts"
       },
       {
@@ -30322,6 +33047,15 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showTitle": true,
+          "titleText": "Product Details",
+          "showSku": true,
+          "showWeight": true,
+          "showDimensions": true,
+          "showOrigin": true,
+          "layout": "list"
         },
         "metaPath": "src\\puck\\components\\product\\ProductMetadata\\productmetadata.meta.ts"
       },
@@ -30460,6 +33194,14 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "fontSize": "xl",
+          "color": "black",
+          "showComparePrice": true,
+          "layout": "horizontal",
+          "fontWeight": "semibold",
+          "showSavingsPercentage": true
+        },
         "metaPath": "src\\puck\\components\\product\\ProductPrice\\productprice.meta.ts"
       },
       {
@@ -30518,6 +33260,10 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "showCount": true,
+          "size": "md"
         },
         "metaPath": "src\\puck\\components\\product\\ProductRating\\productrating.meta.ts"
       },
@@ -30612,6 +33358,12 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showRatingsSummary": true,
+          "showVerifiedBadge": true,
+          "sortBy": "recent",
+          "reviewsPerPage": 5
         },
         "metaPath": "src\\puck\\components\\product\\ProductReviews\\productreviews.meta.ts"
       },
@@ -30785,6 +33537,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "tag": "h1",
+          "fontSize": "2xl",
+          "color": "black",
+          "alignment": "left",
+          "fontWeight": "bold",
+          "marginTop": "mt-0",
+          "marginBottom": "mb-4",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
+        },
         "metaPath": "src\\puck\\components\\product\\ProductTitle\\producttitle.meta.ts"
       },
       {
@@ -30925,6 +33688,17 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "selectorStyle": "buttons",
+          "showLabels": true,
+          "showStock": true,
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
         },
         "metaPath": "src\\puck\\components\\product\\ProductVariantSelector\\productvariantselector.meta.ts"
       },
@@ -31086,6 +33860,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showLabel": true,
+          "labelText": "Quantity",
+          "minQuantity": 1,
+          "maxQuantity": 99,
+          "defaultQuantity": 1,
+          "size": "medium",
+          "style": "default",
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
+        },
         "metaPath": "src\\puck\\components\\product\\QuantitySelector\\quantityselector.meta.ts"
       },
       {
@@ -31176,6 +33965,13 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showIcon": true,
+          "showText": true,
+          "showQuantity": true,
+          "lowStockThreshold": 10,
+          "style": "default"
         },
         "metaPath": "src\\puck\\components\\product\\StockIndicator\\stockindicator.meta.ts"
       },
@@ -31290,6 +34086,13 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showLabel": true,
+          "labelText": "Add to Wishlist",
+          "size": "medium",
+          "style": "outline",
+          "iconPosition": "left"
         },
         "metaPath": "src\\puck\\components\\product\\WishlistButton\\wishlistbutton.meta.ts"
       }
@@ -31489,6 +34292,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "containerWidth": "large",
+          "maxHeight": 700,
+          "mobileHeight": 400,
+          "thumbnailsPerView": 5,
+          "thumbnailPosition": "bottom",
+          "thumbnailShape": "rounded",
+          "navigationStyle": "minimal",
+          "enableZoom": true,
+          "maxZoom": 3,
+          "showImageCounter": true,
+          "enableFullscreen": true,
+          "imageFit": "cover",
+          "backgroundColor": "#ffffff"
+        },
         "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryfullscreen.meta.ts"
       },
       {
@@ -31687,6 +34505,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "containerWidth": "large",
+          "maxHeight": 600,
+          "mobileHeight": 400,
+          "aspectRatio": "square",
+          "showNavigation": true,
+          "navigationStyle": "minimal",
+          "showPagination": true,
+          "paginationStyle": "dots",
+          "loop": true,
+          "autoHeight": false,
+          "spacing": 16,
+          "imageFit": "cover",
+          "backgroundColor": "#ffffff"
+        },
         "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryminimal.meta.ts"
       },
       {
@@ -31880,6 +34713,21 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "containerWidth": "large",
+          "maxHeight": 600,
+          "mobileHeight": 400,
+          "maxZoom": 3,
+          "showThumbnails": true,
+          "thumbnailsPerView": 4,
+          "thumbnailShape": "rounded",
+          "aspectRatio": "square",
+          "enableDoubleClickZoom": true,
+          "spacing": 16,
+          "navigationStyle": "minimal",
+          "imageFit": "cover",
+          "backgroundColor": "#ffffff"
         },
         "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryzoom.meta.ts"
       }
@@ -32143,6 +34991,26 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "slideHeight": "lg",
+          "contentWidth": "contained",
+          "contentPosition": "center",
+          "effect": "fade",
+          "showNavigation": true,
+          "navigationColor": "#ffffff",
+          "navigationPosition": "center",
+          "showPagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#ffffff",
+          "enableAutoplay": true,
+          "autoplayDelay": 5000,
+          "pauseOnHover": true,
+          "loop": true,
+          "speed": 600,
+          "enableOverlay": true,
+          "overlayColor": "#000000",
+          "overlayOpacity": 40
         },
         "metaPath": "src\\puck\\components\\swiper\\ContentSlider\\contentslider.meta.ts"
       },
@@ -32450,6 +35318,32 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "containerWidth": "large",
+          "customWidth": 800,
+          "maxHeight": 500,
+          "layout": "thumbnails",
+          "mainImageAspectRatio": "landscape",
+          "showThumbnails": true,
+          "thumbnailPosition": "bottom",
+          "thumbnailsPerView": 5,
+          "thumbnailSpacing": 12,
+          "showNavigation": true,
+          "navigationColor": "#000000",
+          "navigationSize": "md",
+          "showPagination": false,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "enableZoom": true,
+          "maxZoomScale": 3,
+          "loop": true,
+          "autoHeight": false,
+          "spaceBetween": 10,
+          "borderRadius": "md",
+          "showBorder": true,
+          "borderColor": "#e5e5e5",
+          "backgroundColor": "#f9fafb"
+        },
         "metaPath": "src\\puck\\components\\swiper\\ImageGallery\\imagegallery.meta.ts"
       },
       {
@@ -32653,6 +35547,26 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "logosPerView": 6,
+          "logosPerViewTablet": 4,
+          "logosPerViewMobile": 2,
+          "enableAutoplay": true,
+          "autoplaySpeed": 2000,
+          "freeMode": true,
+          "loop": true,
+          "spaceBetween": 40,
+          "grayscale": true,
+          "grayscaleHover": true,
+          "logoMaxHeight": 60,
+          "backgroundColor": "#ffffff",
+          "logoBackgroundColor": "transparent",
+          "showBorder": false,
+          "borderColor": "#e5e5e5",
+          "borderRadius": "none",
+          "paddingY": 60,
+          "paddingX": 20
         },
         "metaPath": "src\\puck\\components\\swiper\\LogoCarousel\\logocarousel.meta.ts"
       },
@@ -33023,6 +35937,41 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Popular Products",
+          "showTitle": true,
+          "productSource": "featured",
+          "productIds": "",
+          "collectionId": "",
+          "categoryId": "",
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 24,
+          "effect": "slide",
+          "speed": 600,
+          "navigation": true,
+          "navigationColor": "#000000",
+          "pagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "pauseOnHover": true,
+          "loop": true,
+          "centeredSlides": false,
+          "freeMode": false,
+          "showProductImage": true,
+          "showProductTitle": true,
+          "showProductPrice": true,
+          "showAddToCart": true,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#ffffff",
+          "cardBackground": "#ffffff",
+          "cardBorderRadius": "lg",
+          "cardShadow": true
+        },
         "metaPath": "src\\puck\\components\\swiper\\ProductCarousel\\productcarousel.meta.ts"
       },
       {
@@ -33332,6 +36281,35 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "layout": "card",
+          "cardsPerView": 3,
+          "cardsPerViewTablet": 2,
+          "cardsPerViewMobile": 1,
+          "effect": "slide",
+          "showNavigation": true,
+          "navigationColor": "#1f2937",
+          "showPagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "enableAutoplay": true,
+          "autoplayDelay": 5000,
+          "pauseOnHover": true,
+          "loop": true,
+          "spaceBetween": 24,
+          "centeredSlides": false,
+          "showAvatar": true,
+          "showRating": true,
+          "showRole": true,
+          "backgroundColor": "#f9fafb",
+          "cardBackground": "#ffffff",
+          "textColor": "#1f2937",
+          "accentColor": "#f59e0b",
+          "borderRadius": "lg",
+          "cardShadow": "md",
+          "paddingY": 80,
+          "paddingX": 20
+        },
         "metaPath": "src\\puck\\components\\swiper\\TestimonialCarousel\\testimonialcarousel.meta.ts"
       }
     ]
@@ -33470,6 +36448,19 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "two-column",
+          "showAvatar": true,
+          "showPersonalInfo": true,
+          "showContactInfo": true,
+          "showPreferences": true,
+          "allowEditing": true,
+          "editButtonText": "Edit Profile",
+          "saveButtonText": "Save Changes",
+          "cancelButtonText": "Cancel",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827"
         },
         "metaPath": "src\\puck\\components\\account\\accountprofile.meta.ts"
       },
@@ -33626,6 +36617,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "layout": "grid",
+          "showAddButton": true,
+          "showTypeLabels": true,
+          "maxAddresses": 10,
+          "backgroundColor": "#f9fafb",
+          "cardBackgroundColor": "#ffffff",
+          "textColor": "#111827",
+          "addButtonText": "Add New Address",
+          "editButtonText": "Edit",
+          "deleteButtonText": "Delete",
+          "setDefaultText": "Set as Default",
+          "defaultBadgeText": "Default",
+          "emptyStateText": "No addresses saved"
+        },
         "metaPath": "src\\puck\\components\\account\\addressbook.meta.ts"
       },
       {
@@ -33775,6 +36781,19 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "list",
+          "showSearch": true,
+          "showFilters": true,
+          "defaultStatus": "all",
+          "showImages": true,
+          "showItemCount": true,
+          "ordersPerPage": 10,
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827",
+          "emptyStateText": "No orders found",
+          "viewDetailsText": "View Details"
         },
         "metaPath": "src\\puck\\components\\account\\orderhistory.meta.ts"
       },
@@ -33928,6 +36947,22 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "title": "My Wishlist",
+          "showTitle": true,
+          "showEmptyMessage": true,
+          "emptyTitle": "Your wishlist is empty",
+          "emptyMessage": "Save items you love and come back to them anytime.",
+          "showAddToCart": true,
+          "addToCartLabel": "Add to Cart",
+          "removeLabel": "Remove",
+          "backgroundColor": "#ffffff",
+          "cardBackgroundColor": "#ffffff",
+          "textColor": "#111827",
+          "borderRadius": "8px",
+          "padding": "0px",
+          "shadow": false
+        },
         "metaPath": "src\\puck\\components\\account\\wishlistitems.meta.ts"
       },
       {
@@ -34001,6 +37036,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "title": "Already have an account?",
+          "message": "Sign in for a better experience.",
+          "signInLinkText": "Sign in",
+          "signUpLinkText": "Join us",
+          "showDivider": true
         },
         "metaPath": "src\\puck\\components\\cart\\signinprompt.meta.ts"
       },
@@ -34128,6 +37170,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "avatar-1",
+          "src": "",
+          "name": "John Doe",
+          "size": "md",
+          "shape": "circle",
+          "backgroundColor": "#6366f1",
+          "textColor": "#ffffff",
+          "showName": false,
+          "namePosition": "right"
         },
         "metaPath": "src\\puck\\components\\generic\\Avatar\\avatar.meta.ts"
       },
@@ -34266,6 +37319,18 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showLabel": false,
+          "label": "Account",
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "style": "minimal",
+          "linkTo": "/account",
+          "signedInLink": "/account",
+          "showWhenSignedOut": true,
+          "showWhenSignedIn": true
         },
         "metaPath": "src\\puck\\components\\navigation\\AccountButton\\accountbutton.meta.ts"
       }
@@ -34404,6 +37469,19 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "layout": "two-column",
+          "showAvatar": true,
+          "showPersonalInfo": true,
+          "showContactInfo": true,
+          "showPreferences": true,
+          "allowEditing": true,
+          "editButtonText": "Edit Profile",
+          "saveButtonText": "Save Changes",
+          "cancelButtonText": "Cancel",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827"
+        },
         "metaPath": "src\\puck\\components\\account\\accountprofile.meta.ts"
       },
       {
@@ -34530,6 +37608,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "avatar-1",
+          "src": "",
+          "name": "John Doe",
+          "size": "md",
+          "shape": "circle",
+          "backgroundColor": "#6366f1",
+          "textColor": "#ffffff",
+          "showName": false,
+          "namePosition": "right"
         },
         "metaPath": "src\\puck\\components\\generic\\Avatar\\avatar.meta.ts"
       },
@@ -34669,6 +37758,18 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showLabel": false,
+          "label": "Account",
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "style": "minimal",
+          "linkTo": "/account",
+          "signedInLink": "/account",
+          "showWhenSignedOut": true,
+          "showWhenSignedIn": true
+        },
         "metaPath": "src\\puck\\components\\navigation\\AccountButton\\accountbutton.meta.ts"
       }
     ],
@@ -34805,6 +37906,19 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "two-column",
+          "showAvatar": true,
+          "showPersonalInfo": true,
+          "showContactInfo": true,
+          "showPreferences": true,
+          "allowEditing": true,
+          "editButtonText": "Edit Profile",
+          "saveButtonText": "Save Changes",
+          "cancelButtonText": "Cancel",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827"
         },
         "metaPath": "src\\puck\\components\\account\\accountprofile.meta.ts"
       }
@@ -34963,6 +38077,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "layout": "grid",
+          "showAddButton": true,
+          "showTypeLabels": true,
+          "maxAddresses": 10,
+          "backgroundColor": "#f9fafb",
+          "cardBackgroundColor": "#ffffff",
+          "textColor": "#111827",
+          "addButtonText": "Add New Address",
+          "editButtonText": "Edit",
+          "deleteButtonText": "Delete",
+          "setDefaultText": "Set as Default",
+          "defaultBadgeText": "Default",
+          "emptyStateText": "No addresses saved"
+        },
         "metaPath": "src\\puck\\components\\account\\addressbook.meta.ts"
       },
       {
@@ -35066,6 +38195,16 @@ export const registry: CompiledRegistry = {
               "two-column"
             ]
           }
+        },
+        "defaultProps": {
+          "showBillingAddress": true,
+          "requirePhone": false,
+          "showCompanyField": false,
+          "showAddress2Field": true,
+          "showProvinceField": true,
+          "enableAddressAutocomplete": true,
+          "defaultSameAsBilling": true,
+          "layout": "two-column"
         },
         "metaPath": "src\\puck\\components\\checkout\\shippingaddress.meta.ts"
       },
@@ -35241,6 +38380,22 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showAddress": true,
+          "address": "123 Main Street\nCity, State 12345\nCountry",
+          "showPhone": true,
+          "phone": "+1 (555) 123-4567",
+          "showEmail": true,
+          "email": "contact@example.com",
+          "showHours": true,
+          "hours": "Mon-Fri: 9:00 AM - 6:00 PM\nSat-Sun: 10:00 AM - 4:00 PM",
+          "showIcons": true,
+          "layout": "stacked",
+          "textColor": "#6b7280",
+          "iconColor": "#9ca3af",
+          "fontSize": "sm",
+          "gap": "md"
+        },
         "metaPath": "src\\puck\\components\\footer\\ContactInfo\\contactinfo.meta.ts"
       }
     ],
@@ -35398,6 +38553,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "layout": "grid",
+          "showAddButton": true,
+          "showTypeLabels": true,
+          "maxAddresses": 10,
+          "backgroundColor": "#f9fafb",
+          "cardBackgroundColor": "#ffffff",
+          "textColor": "#111827",
+          "addButtonText": "Add New Address",
+          "editButtonText": "Edit",
+          "deleteButtonText": "Delete",
+          "setDefaultText": "Set as Default",
+          "defaultBadgeText": "Default",
+          "emptyStateText": "No addresses saved"
+        },
         "metaPath": "src\\puck\\components\\account\\addressbook.meta.ts"
       },
       {
@@ -35492,6 +38662,14 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showStepIndicators": true,
+          "enableGuestCheckout": true,
+          "requirePhoneNumber": false,
+          "showSaveAddressCheckbox": true,
+          "defaultCountry": "US",
+          "showOrderNotes": true
         },
         "metaPath": "src\\puck\\components\\cart\\checkoutform.meta.ts"
       },
@@ -35597,6 +38775,16 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showBillingAddress": true,
+          "requirePhone": false,
+          "showCompanyField": false,
+          "showAddress2Field": true,
+          "showProvinceField": true,
+          "enableAddressAutocomplete": true,
+          "defaultSameAsBilling": true,
+          "layout": "two-column"
+        },
         "metaPath": "src\\puck\\components\\checkout\\shippingaddress.meta.ts"
       },
       {
@@ -35669,6 +38857,12 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "list",
+          "showDeliveryTime": true,
+          "showDeliveryDescription": false,
+          "showPickupOption": false
         },
         "metaPath": "src\\puck\\components\\checkout\\shippingmethod.meta.ts"
       },
@@ -35834,6 +39028,48 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Why Shop With Us",
+          "subtitle": "",
+          "layout": "horizontal",
+          "columns": "4",
+          "alignment": "center",
+          "badges": [
+            {
+              "id": "1",
+              "icon": "truck",
+              "title": "Free Shipping",
+              "description": "On orders over $50",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "2",
+              "icon": "shield",
+              "title": "Secure Checkout",
+              "description": "100% secure payment",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "3",
+              "icon": "refresh",
+              "title": "Easy Returns",
+              "description": "30-day return policy",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "4",
+              "icon": "support",
+              "title": "24/7 Support",
+              "description": "Here when you need us",
+              "iconColor": "#3b82f6"
+            }
+          ],
+          "backgroundColor": "#ffffff",
+          "textColor": "#1f2937",
+          "spacing": "normal",
+          "showBorder": true,
+          "borderRadius": "none"
+        },
         "metaPath": "src\\puck\\components\\homepage\\TrustBadges\\trustbadges.meta.ts"
       }
     ],
@@ -35991,6 +39227,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "layout": "grid",
+          "showAddButton": true,
+          "showTypeLabels": true,
+          "maxAddresses": 10,
+          "backgroundColor": "#f9fafb",
+          "cardBackgroundColor": "#ffffff",
+          "textColor": "#111827",
+          "addButtonText": "Add New Address",
+          "editButtonText": "Edit",
+          "deleteButtonText": "Delete",
+          "setDefaultText": "Set as Default",
+          "defaultBadgeText": "Default",
+          "emptyStateText": "No addresses saved"
+        },
         "metaPath": "src\\puck\\components\\account\\addressbook.meta.ts"
       }
     ],
@@ -36143,6 +39394,19 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "layout": "list",
+          "showSearch": true,
+          "showFilters": true,
+          "defaultStatus": "all",
+          "showImages": true,
+          "showItemCount": true,
+          "ordersPerPage": 10,
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827",
+          "emptyStateText": "No orders found",
+          "viewDetailsText": "View Details"
+        },
         "metaPath": "src\\puck\\components\\account\\orderhistory.meta.ts"
       }
     ],
@@ -36294,6 +39558,19 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "list",
+          "showSearch": true,
+          "showFilters": true,
+          "defaultStatus": "all",
+          "showImages": true,
+          "showItemCount": true,
+          "ordersPerPage": 10,
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827",
+          "emptyStateText": "No orders found",
+          "viewDetailsText": "View Details"
         },
         "metaPath": "src\\puck\\components\\account\\orderhistory.meta.ts"
       }
@@ -36449,6 +39726,22 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "title": "My Wishlist",
+          "showTitle": true,
+          "showEmptyMessage": true,
+          "emptyTitle": "Your wishlist is empty",
+          "emptyMessage": "Save items you love and come back to them anytime.",
+          "showAddToCart": true,
+          "addToCartLabel": "Add to Cart",
+          "removeLabel": "Remove",
+          "backgroundColor": "#ffffff",
+          "cardBackgroundColor": "#ffffff",
+          "textColor": "#111827",
+          "borderRadius": "8px",
+          "padding": "0px",
+          "shadow": false
+        },
         "metaPath": "src\\puck\\components\\account\\wishlistitems.meta.ts"
       },
       {
@@ -36562,6 +39855,13 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showLabel": true,
+          "labelText": "Add to Wishlist",
+          "size": "medium",
+          "style": "outline",
+          "iconPosition": "left"
         },
         "metaPath": "src\\puck\\components\\product\\WishlistButton\\wishlistbutton.meta.ts"
       }
@@ -36717,6 +40017,22 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "title": "My Wishlist",
+          "showTitle": true,
+          "showEmptyMessage": true,
+          "emptyTitle": "Your wishlist is empty",
+          "emptyMessage": "Save items you love and come back to them anytime.",
+          "showAddToCart": true,
+          "addToCartLabel": "Add to Cart",
+          "removeLabel": "Remove",
+          "backgroundColor": "#ffffff",
+          "cardBackgroundColor": "#ffffff",
+          "textColor": "#111827",
+          "borderRadius": "8px",
+          "padding": "0px",
+          "shadow": false
+        },
         "metaPath": "src\\puck\\components\\account\\wishlistitems.meta.ts"
       }
     ],
@@ -36838,6 +40154,16 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "table",
+          "showImages": true,
+          "showVariantInfo": true,
+          "showQuantitySelector": true,
+          "showDeleteButton": true,
+          "imageSize": "md",
+          "maxQuantity": 10,
+          "emptyMessage": "Your cart is empty"
         },
         "metaPath": "src\\puck\\components\\cart\\cartitems.meta.ts"
       },
@@ -36966,6 +40292,18 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showSubtotal": true,
+          "showShipping": true,
+          "showTax": true,
+          "showDiscount": true,
+          "showCouponInput": true,
+          "showCheckoutButton": true,
+          "checkoutButtonText": "Proceed to Checkout",
+          "freeShippingThreshold": 50,
+          "position": "sidebar",
+          "showTrustBadges": true
+        },
         "metaPath": "src\\puck\\components\\cart\\cartsummary.meta.ts"
       },
       {
@@ -37041,6 +40379,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "title": "Cart",
+          "message": "You don't have anything in your cart. Let's change that, use the link below to start browsing our products.",
+          "linkText": "Explore products",
+          "linkUrl": "/store",
+          "showOnlyWhenEmpty": true
         },
         "metaPath": "src\\puck\\components\\cart\\emptycart.meta.ts"
       },
@@ -37129,6 +40474,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showImages": true,
+          "showQuantity": true,
+          "showVariantInfo": true,
+          "imageSize": "md",
+          "layout": "list"
+        },
         "metaPath": "src\\puck\\components\\checkout\\cartitemspreview.meta.ts"
       },
       {
@@ -37201,6 +40553,12 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "inline",
+          "showAppliedDiscounts": true,
+          "buttonText": "Apply",
+          "placeholder": "Enter discount code"
         },
         "metaPath": "src\\puck\\components\\checkout\\discountcode.meta.ts"
       },
@@ -37355,6 +40713,18 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showLabel": false,
+          "label": "Cart",
+          "showBadge": true,
+          "badgePosition": "top-right",
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "badgeBackgroundColor": "#ef4444",
+          "badgeTextColor": "#ffffff",
+          "style": "minimal"
         },
         "metaPath": "src\\puck\\components\\navigation\\CartButton\\cartbutton.meta.ts"
       },
@@ -37585,6 +40955,28 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Add to Cart",
+          "preorderText": "Pre-order",
+          "variant": "primary",
+          "size": "md",
+          "fullWidth": false,
+          "showIcon": true,
+          "disabled": false,
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "hoverBackgroundColor": "#1f2937",
+          "hoverTextColor": "#ffffff",
+          "borderColor": "#000000",
+          "useThemeColors": false,
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-6",
+          "paddingY": "py-3",
+          "borderRadius": "rounded-lg"
+        },
         "metaPath": "src\\puck\\components\\product\\AddToCart\\addtocart.meta.ts"
       }
     ],
@@ -37706,6 +41098,16 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "table",
+          "showImages": true,
+          "showVariantInfo": true,
+          "showQuantitySelector": true,
+          "showDeleteButton": true,
+          "imageSize": "md",
+          "maxQuantity": 10,
+          "emptyMessage": "Your cart is empty"
         },
         "metaPath": "src\\puck\\components\\cart\\cartitems.meta.ts"
       }
@@ -37829,6 +41231,16 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "layout": "table",
+          "showImages": true,
+          "showVariantInfo": true,
+          "showQuantitySelector": true,
+          "showDeleteButton": true,
+          "imageSize": "md",
+          "maxQuantity": 10,
+          "emptyMessage": "Your cart is empty"
+        },
         "metaPath": "src\\puck\\components\\cart\\cartitems.meta.ts"
       }
     ],
@@ -37951,6 +41363,16 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "layout": "table",
+          "showImages": true,
+          "showVariantInfo": true,
+          "showQuantitySelector": true,
+          "showDeleteButton": true,
+          "imageSize": "md",
+          "maxQuantity": 10,
+          "emptyMessage": "Your cart is empty"
+        },
         "metaPath": "src\\puck\\components\\cart\\cartitems.meta.ts"
       }
     ],
@@ -38072,6 +41494,16 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "table",
+          "showImages": true,
+          "showVariantInfo": true,
+          "showQuantitySelector": true,
+          "showDeleteButton": true,
+          "imageSize": "md",
+          "maxQuantity": 10,
+          "emptyMessage": "Your cart is empty"
         },
         "metaPath": "src\\puck\\components\\cart\\cartitems.meta.ts"
       }
@@ -38202,6 +41634,18 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showSubtotal": true,
+          "showShipping": true,
+          "showTax": true,
+          "showDiscount": true,
+          "showCouponInput": true,
+          "showCheckoutButton": true,
+          "checkoutButtonText": "Proceed to Checkout",
+          "freeShippingThreshold": 50,
+          "position": "sidebar",
+          "showTrustBadges": true
+        },
         "metaPath": "src\\puck\\components\\cart\\cartsummary.meta.ts"
       },
       {
@@ -38322,6 +41766,18 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "position": "sidebar",
+          "showItemImages": true,
+          "showItemQuantity": true,
+          "showItemPrice": true,
+          "showSubtotal": true,
+          "showShipping": true,
+          "showTax": true,
+          "showDiscount": true,
+          "showTotal": true,
+          "compactView": false
         },
         "metaPath": "src\\puck\\components\\cart\\ordersummary.meta.ts"
       },
@@ -38475,6 +41931,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "fontSize": "base",
+          "color": "gray",
+          "alignment": "left",
+          "lineHeight": "relaxed",
+          "maxWidth": "full",
+          "marginBottom": "2rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryDescription\\categorydescription.meta.ts"
       },
       {
@@ -38568,6 +42033,15 @@ export const registry: CompiledRegistry = {
               "compact"
             ]
           }
+        },
+        "defaultProps": {
+          "showSubtotal": true,
+          "showShipping": true,
+          "showTax": true,
+          "showDiscount": true,
+          "showTotal": true,
+          "highlightTotal": true,
+          "layout": "default"
         },
         "metaPath": "src\\puck\\components\\checkout\\ordertotals.meta.ts"
       },
@@ -38693,6 +42167,13 @@ export const registry: CompiledRegistry = {
               "max-w-4xl"
             ]
           }
+        },
+        "defaultProps": {
+          "fontSize": "text-base",
+          "textAlign": "left",
+          "textColor": "text-gray-600",
+          "marginBottom": "mb-6",
+          "maxWidth": "max-w-3xl"
         },
         "metaPath": "src\\puck\\components\\collection\\collectiondescription.meta.ts"
       }
@@ -38823,6 +42304,18 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showSubtotal": true,
+          "showShipping": true,
+          "showTax": true,
+          "showDiscount": true,
+          "showCouponInput": true,
+          "showCheckoutButton": true,
+          "checkoutButtonText": "Proceed to Checkout",
+          "freeShippingThreshold": 50,
+          "position": "sidebar",
+          "showTrustBadges": true
+        },
         "metaPath": "src\\puck\\components\\cart\\cartsummary.meta.ts"
       },
       {
@@ -38916,6 +42409,15 @@ export const registry: CompiledRegistry = {
               "compact"
             ]
           }
+        },
+        "defaultProps": {
+          "showSubtotal": true,
+          "showShipping": true,
+          "showTax": true,
+          "showDiscount": true,
+          "showTotal": true,
+          "highlightTotal": true,
+          "layout": "default"
         },
         "metaPath": "src\\puck\\components\\checkout\\ordertotals.meta.ts"
       }
@@ -39046,6 +42548,18 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showSubtotal": true,
+          "showShipping": true,
+          "showTax": true,
+          "showDiscount": true,
+          "showCouponInput": true,
+          "showCheckoutButton": true,
+          "checkoutButtonText": "Proceed to Checkout",
+          "freeShippingThreshold": 50,
+          "position": "sidebar",
+          "showTrustBadges": true
+        },
         "metaPath": "src\\puck\\components\\cart\\cartsummary.meta.ts"
       },
       {
@@ -39118,6 +42632,12 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "inline",
+          "showAppliedDiscounts": true,
+          "buttonText": "Apply",
+          "placeholder": "Enter discount code"
         },
         "metaPath": "src\\puck\\components\\checkout\\discountcode.meta.ts"
       }
@@ -39248,6 +42768,18 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showSubtotal": true,
+          "showShipping": true,
+          "showTax": true,
+          "showDiscount": true,
+          "showCouponInput": true,
+          "showCheckoutButton": true,
+          "checkoutButtonText": "Proceed to Checkout",
+          "freeShippingThreshold": 50,
+          "position": "sidebar",
+          "showTrustBadges": true
+        },
         "metaPath": "src\\puck\\components\\cart\\cartsummary.meta.ts"
       }
     ],
@@ -39344,6 +42876,14 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showStepIndicators": true,
+          "enableGuestCheckout": true,
+          "requirePhoneNumber": false,
+          "showSaveAddressCheckbox": true,
+          "defaultCountry": "US",
+          "showOrderNotes": true
         },
         "metaPath": "src\\puck\\components\\cart\\checkoutform.meta.ts"
       },
@@ -39466,6 +43006,18 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "position": "sidebar",
+          "showItemImages": true,
+          "showItemQuantity": true,
+          "showItemPrice": true,
+          "showSubtotal": true,
+          "showShipping": true,
+          "showTax": true,
+          "showDiscount": true,
+          "showTotal": true,
+          "compactView": false
+        },
         "metaPath": "src\\puck\\components\\cart\\ordersummary.meta.ts"
       },
       {
@@ -39541,6 +43093,12 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "list",
+          "showPaymentIcons": true,
+          "showSecurityBadges": true,
+          "enableSaveCard": true
         },
         "metaPath": "src\\puck\\components\\checkout\\paymentmethod.meta.ts"
       },
@@ -39646,6 +43204,16 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showBillingAddress": true,
+          "requirePhone": false,
+          "showCompanyField": false,
+          "showAddress2Field": true,
+          "showProvinceField": true,
+          "enableAddressAutocomplete": true,
+          "defaultSameAsBilling": true,
+          "layout": "two-column"
+        },
         "metaPath": "src\\puck\\components\\checkout\\shippingaddress.meta.ts"
       },
       {
@@ -39718,6 +43286,12 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "list",
+          "showDeliveryTime": true,
+          "showDeliveryDescription": false,
+          "showPickupOption": false
         },
         "metaPath": "src\\puck\\components\\checkout\\shippingmethod.meta.ts"
       },
@@ -39948,6 +43522,28 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Add to Cart",
+          "preorderText": "Pre-order",
+          "variant": "primary",
+          "size": "md",
+          "fullWidth": false,
+          "showIcon": true,
+          "disabled": false,
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "hoverBackgroundColor": "#1f2937",
+          "hoverTextColor": "#ffffff",
+          "borderColor": "#000000",
+          "useThemeColors": false,
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-6",
+          "paddingY": "py-3",
+          "borderRadius": "rounded-lg"
+        },
         "metaPath": "src\\puck\\components\\product\\AddToCart\\addtocart.meta.ts"
       }
     ],
@@ -40044,6 +43640,14 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showStepIndicators": true,
+          "enableGuestCheckout": true,
+          "requirePhoneNumber": false,
+          "showSaveAddressCheckbox": true,
+          "defaultCountry": "US",
+          "showOrderNotes": true
         },
         "metaPath": "src\\puck\\components\\cart\\checkoutform.meta.ts"
       },
@@ -40149,6 +43753,16 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showBillingAddress": true,
+          "requirePhone": false,
+          "showCompanyField": false,
+          "showAddress2Field": true,
+          "showProvinceField": true,
+          "enableAddressAutocomplete": true,
+          "defaultSameAsBilling": true,
+          "layout": "two-column"
+        },
         "metaPath": "src\\puck\\components\\checkout\\shippingaddress.meta.ts"
       },
       {
@@ -40240,6 +43854,22 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "choiceType": "radio",
+          "label": "Choose one",
+          "helpText": "",
+          "required": false,
+          "options": [
+            {
+              "label": "Option 1"
+            },
+            {
+              "label": "Option 2"
+            }
+          ],
+          "labelColor": "text.primary",
+          "accentColor": "brand.primary"
         },
         "metaPath": "src\\puck\\components\\form\\formchoicefield.meta.ts"
       },
@@ -40380,6 +44010,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "formName": "Contact Form",
+          "submitButtonText": "Submit",
+          "successMessage": "Thank you! Your message has been sent.",
+          "padding": "lg",
+          "backgroundColor": "ui.background",
+          "borderRadius": "md",
+          "maxWidth": "lg"
+        },
         "metaPath": "src\\puck\\components\\form\\formcontainer.meta.ts"
       },
       {
@@ -40456,6 +44095,11 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "spacingTop": "sm",
+          "spacingBottom": "sm",
+          "color": "ui.border"
+        },
         "metaPath": "src\\puck\\components\\form\\formdivider.meta.ts"
       },
       {
@@ -40527,6 +44171,13 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "formId": "",
+          "padding": "24px",
+          "maxWidth": "640px",
+          "backgroundColor": "",
+          "borderRadius": "16px"
         },
         "metaPath": "src\\puck\\components\\form\\formembed.meta.ts"
       },
@@ -40655,6 +44306,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "fieldType": "text",
+          "label": "Field Label",
+          "placeholder": "",
+          "helpText": "",
+          "required": false,
+          "rows": 4,
+          "labelColor": "text.primary",
+          "inputBackground": "ui.surface",
+          "borderColor": "ui.border"
+        },
         "metaPath": "src\\puck\\components\\form\\formfield.meta.ts"
       },
       {
@@ -40743,6 +44405,12 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "text": "Section heading or instruction text",
+          "size": "md",
+          "color": "text.primary",
+          "marginBottom": "sm"
         },
         "metaPath": "src\\puck\\components\\form\\formheading.meta.ts"
       },
@@ -40835,6 +44503,23 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "label": "Select an option",
+          "placeholder": "Choose...",
+          "helpText": "",
+          "required": false,
+          "options": [
+            {
+              "label": "Option 1"
+            },
+            {
+              "label": "Option 2"
+            }
+          ],
+          "labelColor": "text.primary",
+          "inputBackground": "ui.surface",
+          "borderColor": "ui.border"
+        },
         "metaPath": "src\\puck\\components\\form\\formselectfield.meta.ts"
       },
       {
@@ -40920,6 +44605,13 @@ export const registry: CompiledRegistry = {
               "full"
             ]
           }
+        },
+        "defaultProps": {
+          "label": "Submit",
+          "backgroundColor": "brand.primary",
+          "textColor": "text.inverse",
+          "fullWidth": true,
+          "borderRadius": "md"
         },
         "metaPath": "src\\puck\\components\\form\\formsubmitbutton.meta.ts"
       }
@@ -41018,6 +44710,14 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showStepIndicators": true,
+          "enableGuestCheckout": true,
+          "requirePhoneNumber": false,
+          "showSaveAddressCheckbox": true,
+          "defaultCountry": "US",
+          "showOrderNotes": true
+        },
         "metaPath": "src\\puck\\components\\cart\\checkoutform.meta.ts"
       },
       {
@@ -41093,6 +44793,12 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "list",
+          "showPaymentIcons": true,
+          "showSecurityBadges": true,
+          "enableSaveCard": true
         },
         "metaPath": "src\\puck\\components\\checkout\\paymentmethod.meta.ts"
       }
@@ -41191,6 +44897,14 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showStepIndicators": true,
+          "enableGuestCheckout": true,
+          "requirePhoneNumber": false,
+          "showSaveAddressCheckbox": true,
+          "defaultCountry": "US",
+          "showOrderNotes": true
+        },
         "metaPath": "src\\puck\\components\\cart\\checkoutform.meta.ts"
       }
     ],
@@ -41268,6 +44982,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "title": "Cart",
+          "message": "You don't have anything in your cart. Let's change that, use the link below to start browsing our products.",
+          "linkText": "Explore products",
+          "linkUrl": "/store",
+          "showOnlyWhenEmpty": true
         },
         "metaPath": "src\\puck\\components\\cart\\emptycart.meta.ts"
       }
@@ -41347,6 +45068,13 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "title": "Cart",
+          "message": "You don't have anything in your cart. Let's change that, use the link below to start browsing our products.",
+          "linkText": "Explore products",
+          "linkUrl": "/store",
+          "showOnlyWhenEmpty": true
+        },
         "metaPath": "src\\puck\\components\\cart\\emptycart.meta.ts"
       }
     ],
@@ -41425,6 +45153,13 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "title": "Cart",
+          "message": "You don't have anything in your cart. Let's change that, use the link below to start browsing our products.",
+          "linkText": "Explore products",
+          "linkUrl": "/store",
+          "showOnlyWhenEmpty": true
+        },
         "metaPath": "src\\puck\\components\\cart\\emptycart.meta.ts"
       },
       {
@@ -41498,6 +45233,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "title": "Already have an account?",
+          "message": "Sign in for a better experience.",
+          "signInLinkText": "Sign in",
+          "signUpLinkText": "Join us",
+          "showDivider": true
         },
         "metaPath": "src\\puck\\components\\cart\\signinprompt.meta.ts"
       },
@@ -41736,6 +45478,26 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Click Me",
+          "url": "#",
+          "openInNewTab": false,
+          "variant": "primary",
+          "size": "md",
+          "fullWidth": false,
+          "backgroundColor": "#3b82f6",
+          "textColor": "#ffffff",
+          "borderColor": "#3b82f6",
+          "hoverBackgroundColor": "#2563eb",
+          "hoverTextColor": "#ffffff",
+          "showIcon": false,
+          "iconPosition": "right",
+          "borderRadius": "md",
+          "shadow": "md",
+          "alignment": "left",
+          "marginTop": 0,
+          "marginBottom": 16
+        },
         "metaPath": "src\\puck\\components\\content\\Button\\button.meta.ts"
       },
       {
@@ -41860,6 +45622,16 @@ export const registry: CompiledRegistry = {
               "none"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "link-1",
+          "text": "Click here",
+          "href": "#",
+          "target": "_self",
+          "color": "brand.primary",
+          "fontSize": "base",
+          "fontWeight": "normal",
+          "underline": "hover"
         },
         "metaPath": "src\\puck\\components\\content\\Link\\link.meta.ts"
       },
@@ -41998,6 +45770,39 @@ export const registry: CompiledRegistry = {
           "minHeight": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "title": "",
+          "subtitle": "",
+          "layout": "2-column",
+          "spacing": "md",
+          "banners": [
+            {
+              "id": "1",
+              "title": "New Collection",
+              "subtitle": "Shop the latest styles",
+              "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=400&fit=crop",
+              "ctaText": "Shop Now",
+              "ctaLink": "/store",
+              "overlayOpacity": 40,
+              "textColor": "#ffffff",
+              "textPosition": "bottom-left"
+            },
+            {
+              "id": "2",
+              "title": "Best Sellers",
+              "subtitle": "Top-rated products",
+              "imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+              "ctaText": "Explore",
+              "ctaLink": "/store",
+              "overlayOpacity": 40,
+              "textColor": "#ffffff",
+              "textPosition": "bottom-left"
+            }
+          ],
+          "borderRadius": "md",
+          "hoverEffect": "zoom",
+          "minHeight": "300px"
         },
         "metaPath": "src\\puck\\components\\homepage\\PromotionalBannerGrid\\promotionalbannergrid.meta.ts"
       },
@@ -42228,6 +46033,28 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Add to Cart",
+          "preorderText": "Pre-order",
+          "variant": "primary",
+          "size": "md",
+          "fullWidth": false,
+          "showIcon": true,
+          "disabled": false,
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "hoverBackgroundColor": "#1f2937",
+          "hoverTextColor": "#ffffff",
+          "borderColor": "#000000",
+          "useThemeColors": false,
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-6",
+          "paddingY": "py-3",
+          "borderRadius": "rounded-lg"
+        },
         "metaPath": "src\\puck\\components\\product\\AddToCart\\addtocart.meta.ts"
       }
     ],
@@ -42351,6 +46178,18 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "position": "sidebar",
+          "showItemImages": true,
+          "showItemQuantity": true,
+          "showItemPrice": true,
+          "showSubtotal": true,
+          "showShipping": true,
+          "showTax": true,
+          "showDiscount": true,
+          "showTotal": true,
+          "compactView": false
+        },
         "metaPath": "src\\puck\\components\\cart\\ordersummary.meta.ts"
       },
       {
@@ -42432,6 +46271,13 @@ export const registry: CompiledRegistry = {
               "large"
             ]
           }
+        },
+        "defaultProps": {
+          "showTermsCheckbox": true,
+          "showPolicies": true,
+          "showSecurityBadge": true,
+          "buttonText": "Place Order",
+          "buttonSize": "large"
         },
         "metaPath": "src\\puck\\components\\checkout\\orderreview.meta.ts"
       },
@@ -42526,6 +46372,15 @@ export const registry: CompiledRegistry = {
               "compact"
             ]
           }
+        },
+        "defaultProps": {
+          "showSubtotal": true,
+          "showShipping": true,
+          "showTax": true,
+          "showDiscount": true,
+          "showTotal": true,
+          "highlightTotal": true,
+          "layout": "default"
         },
         "metaPath": "src\\puck\\components\\checkout\\ordertotals.meta.ts"
       },
@@ -42636,6 +46491,15 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showDownloadInvoice": true,
+          "showTrackShipment": true,
+          "showContactSupport": true,
+          "showReorder": true,
+          "showReturnRequest": false,
+          "layout": "buttons",
+          "buttonStyle": "outlined"
+        },
         "metaPath": "src\\puck\\components\\order\\orderactions.meta.ts"
       },
       {
@@ -42734,6 +46598,15 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showCheckmark": true,
+          "titleText": "Order Confirmed!",
+          "messageText": "Thank you for your order. We've received your order and will begin processing it right away.",
+          "showOrderNumber": true,
+          "showEmailConfirmation": true,
+          "showContinueShopping": true,
+          "style": "success"
         },
         "metaPath": "src\\puck\\components\\order\\orderconfirmation.meta.ts"
       },
@@ -42838,6 +46711,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showItemImages": true,
+          "showItemQuantity": true,
+          "showItemPrice": true,
+          "showShippingAddress": true,
+          "showBillingAddress": true,
+          "showPaymentMethod": true,
+          "showShippingMethod": true,
+          "showPricingBreakdown": true,
+          "compactView": false
+        },
         "metaPath": "src\\puck\\components\\order\\orderdetails.meta.ts"
       },
       {
@@ -42927,6 +46811,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showIcons": true,
+          "showTimestamps": true,
+          "showTrackingNumber": true,
+          "orientation": "vertical",
+          "style": "default"
         },
         "metaPath": "src\\puck\\components\\order\\ordertimeline.meta.ts"
       }
@@ -43051,6 +46942,18 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "position": "sidebar",
+          "showItemImages": true,
+          "showItemQuantity": true,
+          "showItemPrice": true,
+          "showSubtotal": true,
+          "showShipping": true,
+          "showTax": true,
+          "showDiscount": true,
+          "showTotal": true,
+          "compactView": false
+        },
         "metaPath": "src\\puck\\components\\cart\\ordersummary.meta.ts"
       },
       {
@@ -43138,6 +47041,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showImages": true,
+          "showQuantity": true,
+          "showVariantInfo": true,
+          "imageSize": "md",
+          "layout": "list"
+        },
         "metaPath": "src\\puck\\components\\checkout\\cartitemspreview.meta.ts"
       },
       {
@@ -43219,6 +47129,13 @@ export const registry: CompiledRegistry = {
               "large"
             ]
           }
+        },
+        "defaultProps": {
+          "showTermsCheckbox": true,
+          "showPolicies": true,
+          "showSecurityBadge": true,
+          "buttonText": "Place Order",
+          "buttonSize": "large"
         },
         "metaPath": "src\\puck\\components\\checkout\\orderreview.meta.ts"
       },
@@ -43529,6 +47446,35 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "layout": "card",
+          "cardsPerView": 3,
+          "cardsPerViewTablet": 2,
+          "cardsPerViewMobile": 1,
+          "effect": "slide",
+          "showNavigation": true,
+          "navigationColor": "#1f2937",
+          "showPagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "enableAutoplay": true,
+          "autoplayDelay": 5000,
+          "pauseOnHover": true,
+          "loop": true,
+          "spaceBetween": 24,
+          "centeredSlides": false,
+          "showAvatar": true,
+          "showRating": true,
+          "showRole": true,
+          "backgroundColor": "#f9fafb",
+          "cardBackground": "#ffffff",
+          "textColor": "#1f2937",
+          "accentColor": "#f59e0b",
+          "borderRadius": "lg",
+          "cardShadow": "md",
+          "paddingY": 80,
+          "paddingX": 20
+        },
         "metaPath": "src\\puck\\components\\swiper\\TestimonialCarousel\\testimonialcarousel.meta.ts"
       }
     ],
@@ -43604,6 +47550,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "title": "Already have an account?",
+          "message": "Sign in for a better experience.",
+          "signInLinkText": "Sign in",
+          "signUpLinkText": "Join us",
+          "showDivider": true
         },
         "metaPath": "src\\puck\\components\\cart\\signinprompt.meta.ts"
       },
@@ -43743,6 +47696,18 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showLabel": false,
+          "label": "Account",
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "style": "minimal",
+          "linkTo": "/account",
+          "signedInLink": "/account",
+          "showWhenSignedOut": true,
+          "showWhenSignedIn": true
+        },
         "metaPath": "src\\puck\\components\\navigation\\AccountButton\\accountbutton.meta.ts"
       }
     ],
@@ -43818,6 +47783,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "title": "Already have an account?",
+          "message": "Sign in for a better experience.",
+          "signInLinkText": "Sign in",
+          "signUpLinkText": "Join us",
+          "showDivider": true
         },
         "metaPath": "src\\puck\\components\\cart\\signinprompt.meta.ts"
       }
@@ -43936,6 +47908,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "separator": "/",
+          "showHome": true,
+          "homeText": "Home",
+          "fontSize": "0.875rem",
+          "textColor": "#666666",
+          "activeColor": "#000000",
+          "hoverColor": "#333333",
+          "marginBottom": "1.5rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryBreadcrumbs\\categorybreadcrumbs.meta.ts"
       },
       {
@@ -44043,6 +48026,13 @@ export const registry: CompiledRegistry = {
               "mb-6"
             ]
           }
+        },
+        "defaultProps": {
+          "showHomeIcon": true,
+          "separator": "chevron",
+          "textSize": "text-sm",
+          "textColor": "text-gray-500",
+          "marginBottom": "mb-4"
         },
         "metaPath": "src\\puck\\components\\collection\\collectionbreadcrumbs.meta.ts"
       }
@@ -44161,6 +48151,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "separator": "/",
+          "showHome": true,
+          "homeText": "Home",
+          "fontSize": "0.875rem",
+          "textColor": "#666666",
+          "activeColor": "#000000",
+          "hoverColor": "#333333",
+          "marginBottom": "1.5rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryBreadcrumbs\\categorybreadcrumbs.meta.ts"
       },
       {
@@ -44269,6 +48270,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showHomeIcon": true,
+          "separator": "chevron",
+          "textSize": "text-sm",
+          "textColor": "text-gray-500",
+          "marginBottom": "mb-4"
+        },
         "metaPath": "src\\puck\\components\\collection\\collectionbreadcrumbs.meta.ts"
       },
       {
@@ -44358,6 +48366,13 @@ export const registry: CompiledRegistry = {
               "right"
             ]
           }
+        },
+        "defaultProps": {
+          "showPageNumbers": true,
+          "showFirstLast": true,
+          "maxPageNumbers": 7,
+          "style": "numbered",
+          "alignment": "center"
         },
         "metaPath": "src\\puck\\components\\collection\\pagination.meta.ts"
       },
@@ -44483,6 +48498,16 @@ export const registry: CompiledRegistry = {
               "none"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "link-1",
+          "text": "Click here",
+          "href": "#",
+          "target": "_self",
+          "color": "brand.primary",
+          "fontSize": "base",
+          "fontWeight": "normal",
+          "underline": "hover"
         },
         "metaPath": "src\\puck\\components\\content\\Link\\link.meta.ts"
       },
@@ -44760,6 +48785,34 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "layout": "left-center-right",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "sticky": true,
+          "shadow": true,
+          "transparent": false,
+          "logoPosition": "left",
+          "logoMaxWidth": "150px",
+          "logoUrl": "/logo.svg",
+          "logoAlt": "Store Logo",
+          "menuPosition": "center",
+          "menuStyle": "horizontal",
+          "menuHoverColor": "#3b82f6",
+          "actions": [
+            "search",
+            "account",
+            "cart"
+          ],
+          "actionsPosition": "right",
+          "showCartBadge": true,
+          "showLabels": false,
+          "cartBadgeCount": 0,
+          "menuLoading": false,
+          "menuError": false,
+          "mobileBreakpoint": "md",
+          "mobileMenuStyle": "drawer"
+        },
         "metaPath": "src\\puck\\components\\layout\\Header\\header.meta.ts"
       },
       {
@@ -44915,6 +48968,19 @@ export const registry: CompiledRegistry = {
               "bold"
             ]
           }
+        },
+        "defaultProps": {
+          "imageUrl": "",
+          "altText": "Store Logo",
+          "linkTo": "/",
+          "maxWidth": "150px",
+          "maxHeight": "60px",
+          "showText": true,
+          "text": "My Store",
+          "textPosition": "right",
+          "textSize": "xl",
+          "textColor": "#000000",
+          "textWeight": "bold"
         },
         "metaPath": "src\\puck\\components\\navigation\\Logo\\logo.meta.ts"
       },
@@ -45183,6 +49249,24 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "menuHandle": "default",
+          "layout": "horizontal",
+          "alignment": "center",
+          "hoverEffect": "underline",
+          "textColor": "#111827",
+          "hoverColor": "#3b82f6",
+          "fontSize": "base",
+          "fontWeight": "medium",
+          "showDropdownArrows": true,
+          "dropdownStyle": "default",
+          "maxDepth": "3",
+          "menuData": [],
+          "dropdownBackground": "#ffffff",
+          "dropdownBorder": "#e5e7eb",
+          "dropdownShadow": "lg",
+          "dropdownRadius": "md"
+        },
         "metaPath": "src\\puck\\components\\navigation\\MenuNavigation\\menunavigation.meta.ts"
       },
       {
@@ -45362,6 +49446,11 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "showHomeIcon": true,
+          "separator": "arrow",
+          "textTransform": "none"
+        },
         "metaPath": "src\\puck\\components\\product\\ProductBreadcrumbs\\productbreadcrumbs.meta.ts"
       }
     ],
@@ -45479,6 +49568,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "separator": "/",
+          "showHome": true,
+          "homeText": "Home",
+          "fontSize": "0.875rem",
+          "textColor": "#666666",
+          "activeColor": "#000000",
+          "hoverColor": "#333333",
+          "marginBottom": "1.5rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryBreadcrumbs\\categorybreadcrumbs.meta.ts"
       },
       {
@@ -45586,6 +49686,13 @@ export const registry: CompiledRegistry = {
               "mb-6"
             ]
           }
+        },
+        "defaultProps": {
+          "showHomeIcon": true,
+          "separator": "chevron",
+          "textSize": "text-sm",
+          "textColor": "text-gray-500",
+          "marginBottom": "mb-4"
         },
         "metaPath": "src\\puck\\components\\collection\\collectionbreadcrumbs.meta.ts"
       }
@@ -45704,6 +49811,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "separator": "/",
+          "showHome": true,
+          "homeText": "Home",
+          "fontSize": "0.875rem",
+          "textColor": "#666666",
+          "activeColor": "#000000",
+          "hoverColor": "#333333",
+          "marginBottom": "1.5rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryBreadcrumbs\\categorybreadcrumbs.meta.ts"
       },
       {
@@ -45787,6 +49905,11 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showHomeIcon": true,
+          "separator": "arrow",
+          "textTransform": "none"
         },
         "metaPath": "src\\puck\\components\\product\\ProductBreadcrumbs\\productbreadcrumbs.meta.ts"
       }
@@ -45904,6 +50027,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "separator": "/",
+          "showHome": true,
+          "homeText": "Home",
+          "fontSize": "0.875rem",
+          "textColor": "#666666",
+          "activeColor": "#000000",
+          "hoverColor": "#333333",
+          "marginBottom": "1.5rem",
+          "className": ""
         },
         "metaPath": "src\\puck\\components\\category\\CategoryBreadcrumbs\\categorybreadcrumbs.meta.ts"
       }
@@ -46059,6 +50193,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "fontSize": "base",
+          "color": "gray",
+          "alignment": "left",
+          "lineHeight": "relaxed",
+          "maxWidth": "full",
+          "marginBottom": "2rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryDescription\\categorydescription.meta.ts"
       },
       {
@@ -46183,6 +50326,13 @@ export const registry: CompiledRegistry = {
               "max-w-4xl"
             ]
           }
+        },
+        "defaultProps": {
+          "fontSize": "text-base",
+          "textAlign": "left",
+          "textColor": "text-gray-600",
+          "marginBottom": "mb-6",
+          "maxWidth": "max-w-3xl"
         },
         "metaPath": "src\\puck\\components\\collection\\collectiondescription.meta.ts"
       },
@@ -46327,6 +50477,16 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "fontSize": "base",
+          "color": "gray",
+          "lineHeight": "normal",
+          "maxWidth": "prose",
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
         },
         "metaPath": "src\\puck\\components\\product\\ProductDescription\\productdescription.meta.ts"
       }
@@ -46482,6 +50642,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "fontSize": "base",
+          "color": "gray",
+          "alignment": "left",
+          "lineHeight": "relaxed",
+          "maxWidth": "full",
+          "marginBottom": "2rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryDescription\\categorydescription.meta.ts"
       }
     ],
@@ -46635,6 +50804,15 @@ export const registry: CompiledRegistry = {
               "full"
             ]
           }
+        },
+        "defaultProps": {
+          "fontSize": "base",
+          "color": "gray",
+          "alignment": "left",
+          "lineHeight": "relaxed",
+          "maxWidth": "full",
+          "marginBottom": "2rem",
+          "className": ""
         },
         "metaPath": "src\\puck\\components\\category\\CategoryDescription\\categorydescription.meta.ts"
       }
@@ -46790,6 +50968,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "fontSize": "base",
+          "color": "gray",
+          "alignment": "left",
+          "lineHeight": "relaxed",
+          "maxWidth": "full",
+          "marginBottom": "2rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryDescription\\categorydescription.meta.ts"
       }
     ],
@@ -46908,6 +51095,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showHandle": false,
+          "showProductCount": true,
+          "showUpdatedDate": false,
+          "layout": "horizontal",
+          "fontSize": "0.875rem",
+          "textColor": "#666666",
+          "iconColor": "#999999",
+          "spacing": "1rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryMetadata\\categorymetadata.meta.ts"
       },
       {
@@ -46997,6 +51195,13 @@ export const registry: CompiledRegistry = {
               "text-gray-600"
             ]
           }
+        },
+        "defaultProps": {
+          "showHandle": false,
+          "showCreatedDate": false,
+          "showUpdatedDate": false,
+          "fontSize": "text-sm",
+          "textColor": "text-gray-500"
         },
         "metaPath": "src\\puck\\components\\collection\\collectionmetadata.meta.ts"
       },
@@ -47106,6 +51311,15 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showTitle": true,
+          "titleText": "Product Details",
+          "showSku": true,
+          "showWeight": true,
+          "showDimensions": true,
+          "showOrigin": true,
+          "layout": "list"
         },
         "metaPath": "src\\puck\\components\\product\\ProductMetadata\\productmetadata.meta.ts"
       }
@@ -47225,6 +51439,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showHandle": false,
+          "showProductCount": true,
+          "showUpdatedDate": false,
+          "layout": "horizontal",
+          "fontSize": "0.875rem",
+          "textColor": "#666666",
+          "iconColor": "#999999",
+          "spacing": "1rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryMetadata\\categorymetadata.meta.ts"
       },
       {
@@ -47312,6 +51537,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "alert-1",
+          "type": "info",
+          "message": "This is an alert message",
+          "showIcon": true,
+          "dismissible": false
         },
         "metaPath": "src\\puck\\components\\generic\\Alert\\alert.meta.ts"
       }
@@ -47431,6 +51663,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showHandle": false,
+          "showProductCount": true,
+          "showUpdatedDate": false,
+          "layout": "horizontal",
+          "fontSize": "0.875rem",
+          "textColor": "#666666",
+          "iconColor": "#999999",
+          "spacing": "1rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryMetadata\\categorymetadata.meta.ts"
       }
     ],
@@ -47549,6 +51792,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showHandle": false,
+          "showProductCount": true,
+          "showUpdatedDate": false,
+          "layout": "horizontal",
+          "fontSize": "0.875rem",
+          "textColor": "#666666",
+          "iconColor": "#999999",
+          "spacing": "1rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryMetadata\\categorymetadata.meta.ts"
       }
     ],
@@ -47666,6 +51920,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showHandle": false,
+          "showProductCount": true,
+          "showUpdatedDate": false,
+          "layout": "horizontal",
+          "fontSize": "0.875rem",
+          "textColor": "#666666",
+          "iconColor": "#999999",
+          "spacing": "1rem",
+          "className": ""
         },
         "metaPath": "src\\puck\\components\\category\\CategoryMetadata\\categorymetadata.meta.ts"
       }
@@ -47872,6 +52137,22 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showTitle": false,
+          "title": "Products",
+          "titleAlignment": "left",
+          "columns": "4",
+          "gap": "md",
+          "gridLocation": "center",
+          "showSortFilter": true,
+          "sortPosition": "top-right",
+          "showPagination": true,
+          "paginationPosition": "bottom-center",
+          "showProductsPerPageDropdown": false,
+          "productsPerPageOptions": "12,24,36,48",
+          "productsPerPage": 12,
+          "className": ""
         },
         "metaPath": "src\\puck\\components\\category\\categoryproductsgrid.meta.ts"
       },
@@ -48218,6 +52499,41 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Discover our curated collection",
+          "showTitle": true,
+          "categoryId": "",
+          "categoryName": "",
+          "displayMode": "grid",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 20,
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "loop": false,
+          "navigation": true,
+          "pagination": true,
+          "imageAspectRatio": "square",
+          "showPrice": true,
+          "showAddToCart": true,
+          "showRating": false,
+          "showBadges": true,
+          "showViewAllButton": true,
+          "viewAllButtonText": "View All Products",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827",
+          "cardStyle": "shadow",
+          "borderRadius": "md",
+          "buttonColor": "#000000",
+          "buttonTextColor": "#ffffff",
+          "buttonRadius": "medium",
+          "loading": false,
+          "error": ""
+        },
         "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
       }
     ],
@@ -48424,6 +52740,22 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showTitle": false,
+          "title": "Products",
+          "titleAlignment": "left",
+          "columns": "4",
+          "gap": "md",
+          "gridLocation": "center",
+          "showSortFilter": true,
+          "sortPosition": "top-right",
+          "showPagination": true,
+          "paginationPosition": "bottom-center",
+          "showProductsPerPageDropdown": false,
+          "productsPerPageOptions": "12,24,36,48",
+          "productsPerPage": 12,
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\categoryproductsgrid.meta.ts"
       },
       {
@@ -48555,6 +52887,16 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "layout": "grid",
+          "columns": "3",
+          "showQuickView": true,
+          "showWishlist": true,
+          "showCompare": false,
+          "imageAspectRatio": "square",
+          "showBadges": true,
+          "gap": "md"
         },
         "metaPath": "src\\puck\\components\\collection\\productgrid.meta.ts"
       },
@@ -48900,6 +53242,41 @@ export const registry: CompiledRegistry = {
               "none"
             ]
           }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Discover our curated collection",
+          "showTitle": true,
+          "categoryId": "",
+          "categoryName": "",
+          "displayMode": "grid",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 20,
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "loop": false,
+          "navigation": true,
+          "pagination": true,
+          "imageAspectRatio": "square",
+          "showPrice": true,
+          "showAddToCart": true,
+          "showRating": false,
+          "showBadges": true,
+          "showViewAllButton": true,
+          "viewAllButtonText": "View All Products",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827",
+          "cardStyle": "shadow",
+          "borderRadius": "md",
+          "buttonColor": "#000000",
+          "buttonTextColor": "#ffffff",
+          "buttonRadius": "medium",
+          "loading": false,
+          "error": ""
         },
         "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
       },
@@ -49186,6 +53563,35 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Featured Products",
+          "sectionSubtitle": "Check out our most popular items",
+          "showTitle": true,
+          "displayMode": "carousel",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 24,
+          "autoplay": true,
+          "autoplayDelay": 3000,
+          "loop": true,
+          "navigation": true,
+          "pagination": true,
+          "paginationStyle": "dots",
+          "productSource": "featured",
+          "categoryId": "",
+          "productIds": "",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "showPrice": true,
+          "showAddToCart": true,
+          "buttonText": "Add to Cart",
+          "loading": false,
+          "error": ""
+        },
         "metaPath": "src\\puck\\components\\homepage\\FeaturedProducts\\featuredproducts.meta.ts"
       }
     ],
@@ -49392,6 +53798,22 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showTitle": false,
+          "title": "Products",
+          "titleAlignment": "left",
+          "columns": "4",
+          "gap": "md",
+          "gridLocation": "center",
+          "showSortFilter": true,
+          "sortPosition": "top-right",
+          "showPagination": true,
+          "paginationPosition": "bottom-center",
+          "showProductsPerPageDropdown": false,
+          "productsPerPageOptions": "12,24,36,48",
+          "productsPerPage": 12,
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\categoryproductsgrid.meta.ts"
       },
       {
@@ -49524,6 +53946,16 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "layout": "grid",
+          "columns": "3",
+          "showQuickView": true,
+          "showWishlist": true,
+          "showCompare": false,
+          "imageAspectRatio": "square",
+          "showBadges": true,
+          "gap": "md"
+        },
         "metaPath": "src\\puck\\components\\collection\\productgrid.meta.ts"
       },
       {
@@ -49638,6 +54070,13 @@ export const registry: CompiledRegistry = {
               "xl"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "grid-1",
+          "columns": "3",
+          "tabletColumns": "2",
+          "mobileColumns": "1",
+          "gap": "md"
         },
         "metaPath": "src\\puck\\components\\generic\\Grid\\grid.meta.ts"
       },
@@ -49899,6 +54338,28 @@ export const registry: CompiledRegistry = {
           "error": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Browse our popular categories",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCategoryImage": true,
+          "showCategoryName": true,
+          "showProductCount": true,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "categorySource": "all",
+          "selectedCategoryIds": [],
+          "loading": false,
+          "error": ""
         },
         "metaPath": "src\\puck\\components\\homepage\\CategoriesGrid\\categoriesgrid.meta.ts"
       },
@@ -50245,6 +54706,41 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Discover our curated collection",
+          "showTitle": true,
+          "categoryId": "",
+          "categoryName": "",
+          "displayMode": "grid",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 20,
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "loop": false,
+          "navigation": true,
+          "pagination": true,
+          "imageAspectRatio": "square",
+          "showPrice": true,
+          "showAddToCart": true,
+          "showRating": false,
+          "showBadges": true,
+          "showViewAllButton": true,
+          "viewAllButtonText": "View All Products",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827",
+          "cardStyle": "shadow",
+          "borderRadius": "md",
+          "buttonColor": "#000000",
+          "buttonTextColor": "#ffffff",
+          "buttonRadius": "medium",
+          "loading": false,
+          "error": ""
+        },
         "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
       },
       {
@@ -50530,6 +55026,35 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Featured Products",
+          "sectionSubtitle": "Check out our most popular items",
+          "showTitle": true,
+          "displayMode": "carousel",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 24,
+          "autoplay": true,
+          "autoplayDelay": 3000,
+          "loop": true,
+          "navigation": true,
+          "pagination": true,
+          "paginationStyle": "dots",
+          "productSource": "featured",
+          "categoryId": "",
+          "productIds": "",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "showPrice": true,
+          "showAddToCart": true,
+          "buttonText": "Add to Cart",
+          "loading": false,
+          "error": ""
+        },
         "metaPath": "src\\puck\\components\\homepage\\FeaturedProducts\\featuredproducts.meta.ts"
       },
       {
@@ -50647,6 +55172,13 @@ export const registry: CompiledRegistry = {
               "stretch"
             ]
           }
+        },
+        "defaultProps": {
+          "columns": "2",
+          "layout": "50-50",
+          "gap": "lg",
+          "mobileStack": true,
+          "alignItems": "start"
         },
         "metaPath": "src\\puck\\components\\layout\\Columns\\columns.meta.ts"
       }
@@ -50798,6 +55330,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "tag": "h1",
+          "fontSize": "2xl",
+          "color": "black",
+          "alignment": "left",
+          "fontWeight": "bold",
+          "marginBottom": "1rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryTitle\\categorytitle.meta.ts"
       },
       {
@@ -50935,6 +55476,14 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "tag": "h1",
+          "fontSize": "text-3xl",
+          "textAlign": "left",
+          "fontWeight": "bold",
+          "marginBottom": "mb-4",
+          "showProductCount": true
         },
         "metaPath": "src\\puck\\components\\collection\\collectiontitle.meta.ts"
       },
@@ -51168,6 +55717,20 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Your Heading Here",
+          "level": "h2",
+          "fontWeight": "bold",
+          "textAlign": "left",
+          "color": "#1f2937",
+          "fontSize": "",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "marginTop": 0,
+          "marginBottom": 16,
+          "animation": "none",
+          "animationDelay": 0
+        },
         "metaPath": "src\\puck\\components\\content\\Heading\\heading.meta.ts"
       },
       {
@@ -51340,6 +55903,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "tag": "h1",
+          "fontSize": "2xl",
+          "color": "black",
+          "alignment": "left",
+          "fontWeight": "bold",
+          "marginTop": "mt-0",
+          "marginBottom": "mb-4",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
+        },
         "metaPath": "src\\puck\\components\\product\\ProductTitle\\producttitle.meta.ts"
       }
     ],
@@ -51489,6 +56063,15 @@ export const registry: CompiledRegistry = {
               "bold"
             ]
           }
+        },
+        "defaultProps": {
+          "tag": "h1",
+          "fontSize": "2xl",
+          "color": "black",
+          "alignment": "left",
+          "fontWeight": "bold",
+          "marginBottom": "1rem",
+          "className": ""
         },
         "metaPath": "src\\puck\\components\\category\\CategoryTitle\\categorytitle.meta.ts"
       }
@@ -51640,6 +56223,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "tag": "h1",
+          "fontSize": "2xl",
+          "color": "black",
+          "alignment": "left",
+          "fontWeight": "bold",
+          "marginBottom": "1rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryTitle\\categorytitle.meta.ts"
       }
     ],
@@ -51790,6 +56382,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "tag": "h1",
+          "fontSize": "2xl",
+          "color": "black",
+          "alignment": "left",
+          "fontWeight": "bold",
+          "marginBottom": "1rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryTitle\\categorytitle.meta.ts"
       },
       {
@@ -51905,6 +56506,15 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "showTitle": true,
+          "showDescription": true,
+          "showBanner": true,
+          "showProductCount": true,
+          "titleSize": "3xl",
+          "alignment": "center",
+          "bannerHeight": "md"
         },
         "metaPath": "src\\puck\\components\\collection\\collectionheader.meta.ts"
       },
@@ -52137,6 +56747,20 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "text": "Your Heading Here",
+          "level": "h2",
+          "fontWeight": "bold",
+          "textAlign": "left",
+          "color": "#1f2937",
+          "fontSize": "",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "marginTop": 0,
+          "marginBottom": 16,
+          "animation": "none",
+          "animationDelay": 0
         },
         "metaPath": "src\\puck\\components\\content\\Heading\\heading.meta.ts"
       },
@@ -52414,6 +57038,34 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "layout": "left-center-right",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "sticky": true,
+          "shadow": true,
+          "transparent": false,
+          "logoPosition": "left",
+          "logoMaxWidth": "150px",
+          "logoUrl": "/logo.svg",
+          "logoAlt": "Store Logo",
+          "menuPosition": "center",
+          "menuStyle": "horizontal",
+          "menuHoverColor": "#3b82f6",
+          "actions": [
+            "search",
+            "account",
+            "cart"
+          ],
+          "actionsPosition": "right",
+          "showCartBadge": true,
+          "showLabels": false,
+          "cartBadgeCount": 0,
+          "menuLoading": false,
+          "menuError": false,
+          "mobileBreakpoint": "md",
+          "mobileMenuStyle": "drawer"
+        },
         "metaPath": "src\\puck\\components\\layout\\Header\\header.meta.ts"
       },
       {
@@ -52569,6 +57221,19 @@ export const registry: CompiledRegistry = {
               "bold"
             ]
           }
+        },
+        "defaultProps": {
+          "imageUrl": "",
+          "altText": "Store Logo",
+          "linkTo": "/",
+          "maxWidth": "150px",
+          "maxHeight": "60px",
+          "showText": true,
+          "text": "My Store",
+          "textPosition": "right",
+          "textSize": "xl",
+          "textColor": "#000000",
+          "textWeight": "bold"
         },
         "metaPath": "src\\puck\\components\\navigation\\Logo\\logo.meta.ts"
       },
@@ -52837,6 +57502,24 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "menuHandle": "default",
+          "layout": "horizontal",
+          "alignment": "center",
+          "hoverEffect": "underline",
+          "textColor": "#111827",
+          "hoverColor": "#3b82f6",
+          "fontSize": "base",
+          "fontWeight": "medium",
+          "showDropdownArrows": true,
+          "dropdownStyle": "default",
+          "maxDepth": "3",
+          "menuData": [],
+          "dropdownBackground": "#ffffff",
+          "dropdownBorder": "#e5e7eb",
+          "dropdownShadow": "lg",
+          "dropdownRadius": "md"
+        },
         "metaPath": "src\\puck\\components\\navigation\\MenuNavigation\\menunavigation.meta.ts"
       },
       {
@@ -53082,6 +57765,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "tag": "h1",
+          "fontSize": "2xl",
+          "color": "black",
+          "alignment": "left",
+          "fontWeight": "bold",
+          "marginBottom": "1rem",
+          "className": ""
+        },
         "metaPath": "src\\puck\\components\\category\\CategoryTitle\\categorytitle.meta.ts"
       }
     ],
@@ -53171,6 +57863,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showImages": true,
+          "showQuantity": true,
+          "showVariantInfo": true,
+          "imageSize": "md",
+          "layout": "list"
+        },
         "metaPath": "src\\puck\\components\\checkout\\cartitemspreview.meta.ts"
       }
     ],
@@ -53245,6 +57944,12 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "inline",
+          "showAppliedDiscounts": true,
+          "buttonText": "Apply",
+          "placeholder": "Enter discount code"
         },
         "metaPath": "src\\puck\\components\\checkout\\discountcode.meta.ts"
       }
@@ -53330,6 +58035,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showTermsCheckbox": true,
+          "showPolicies": true,
+          "showSecurityBadge": true,
+          "buttonText": "Place Order",
+          "buttonSize": "large"
+        },
         "metaPath": "src\\puck\\components\\checkout\\orderreview.meta.ts"
       }
     ],
@@ -53414,6 +58126,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showTermsCheckbox": true,
+          "showPolicies": true,
+          "showSecurityBadge": true,
+          "buttonText": "Place Order",
+          "buttonSize": "large"
+        },
         "metaPath": "src\\puck\\components\\checkout\\orderreview.meta.ts"
       }
     ],
@@ -53491,6 +58210,12 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "list",
+          "showPaymentIcons": true,
+          "showSecurityBadges": true,
+          "enableSaveCard": true
         },
         "metaPath": "src\\puck\\components\\checkout\\paymentmethod.meta.ts"
       },
@@ -53618,6 +58343,15 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "card-1",
+          "padding": "lg",
+          "shadow": "md",
+          "border": true,
+          "rounded": "lg",
+          "backgroundColor": "#ffffff",
+          "hoverEffect": true
         },
         "metaPath": "src\\puck\\components\\generic\\Card\\card.meta.ts"
       },
@@ -54060,6 +58794,40 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "layout": "vertical",
+          "enableSwiper": true,
+          "aspectRatio": "square",
+          "borderRadius": "md",
+          "showShadow": true,
+          "hoverZoom": true,
+          "showTitle": true,
+          "titleSize": "lg",
+          "titleWeight": "semibold",
+          "titleAlign": "left",
+          "showPrice": true,
+          "priceSize": "lg",
+          "priceColor": "#000000",
+          "showCompareAtPrice": true,
+          "showSavingsBadge": true,
+          "showBadges": true,
+          "showSaleBadge": true,
+          "showNewBadge": true,
+          "showLowStockBadge": true,
+          "badgePosition": "top-right",
+          "showAddToCart": true,
+          "buttonText": "Add to Cart",
+          "buttonStyle": "filled",
+          "buttonSize": "md",
+          "showCartIcon": true,
+          "cardRadius": "lg",
+          "cardBorder": "sm",
+          "cardShadow": true,
+          "cardBackground": "#ffffff",
+          "accentColor": "#000000",
+          "fontFamily": "inherit",
+          "productId": ""
+        },
         "metaPath": "src\\puck\\components\\product\\ProductCard\\productcard.meta.ts"
       }
     ],
@@ -54134,6 +58902,12 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "list",
+          "showDeliveryTime": true,
+          "showDeliveryDescription": false,
+          "showPickupOption": false
         },
         "metaPath": "src\\puck\\components\\checkout\\shippingmethod.meta.ts"
       }
@@ -54262,6 +59036,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "fontSize": "text-base",
+          "textAlign": "left",
+          "textColor": "text-gray-600",
+          "marginBottom": "mb-6",
+          "maxWidth": "max-w-3xl"
+        },
         "metaPath": "src\\puck\\components\\collection\\collectiondescription.meta.ts"
       },
       {
@@ -54378,6 +59159,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showTitle": true,
+          "showDescription": true,
+          "showBanner": true,
+          "showProductCount": true,
+          "titleSize": "3xl",
+          "alignment": "center",
+          "bannerHeight": "md"
+        },
         "metaPath": "src\\puck\\components\\collection\\collectionheader.meta.ts"
       },
       {
@@ -54467,6 +59257,13 @@ export const registry: CompiledRegistry = {
               "text-gray-600"
             ]
           }
+        },
+        "defaultProps": {
+          "showHandle": false,
+          "showCreatedDate": false,
+          "showUpdatedDate": false,
+          "fontSize": "text-sm",
+          "textColor": "text-gray-500"
         },
         "metaPath": "src\\puck\\components\\collection\\collectionmetadata.meta.ts"
       },
@@ -54606,6 +59403,14 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "tag": "h1",
+          "fontSize": "text-3xl",
+          "textAlign": "left",
+          "fontWeight": "bold",
+          "marginBottom": "mb-4",
+          "showProductCount": true
+        },
         "metaPath": "src\\puck\\components\\collection\\collectiontitle.meta.ts"
       },
       {
@@ -54744,6 +59549,39 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "title": "",
+          "subtitle": "",
+          "layout": "2-column",
+          "spacing": "md",
+          "banners": [
+            {
+              "id": "1",
+              "title": "New Collection",
+              "subtitle": "Shop the latest styles",
+              "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=400&fit=crop",
+              "ctaText": "Shop Now",
+              "ctaLink": "/store",
+              "overlayOpacity": 40,
+              "textColor": "#ffffff",
+              "textPosition": "bottom-left"
+            },
+            {
+              "id": "2",
+              "title": "Best Sellers",
+              "subtitle": "Top-rated products",
+              "imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+              "ctaText": "Explore",
+              "ctaLink": "/store",
+              "overlayOpacity": 40,
+              "textColor": "#ffffff",
+              "textPosition": "bottom-left"
+            }
+          ],
+          "borderRadius": "md",
+          "hoverEffect": "zoom",
+          "minHeight": "300px"
+        },
         "metaPath": "src\\puck\\components\\homepage\\PromotionalBannerGrid\\promotionalbannergrid.meta.ts"
       }
     ],
@@ -54861,6 +59699,15 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "showTitle": true,
+          "showDescription": true,
+          "showBanner": true,
+          "showProductCount": true,
+          "titleSize": "3xl",
+          "alignment": "center",
+          "bannerHeight": "md"
         },
         "metaPath": "src\\puck\\components\\collection\\collectionheader.meta.ts"
       },
@@ -55155,6 +60002,29 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "src": "https://via.placeholder.com/800x600",
+          "alt": "Image description",
+          "aspectRatio": "auto",
+          "objectFit": "cover",
+          "width": "full",
+          "customWidth": "600px",
+          "showCaption": false,
+          "caption": "Image caption goes here",
+          "captionPosition": "bottom",
+          "captionAlign": "center",
+          "linkUrl": "",
+          "openInNewTab": false,
+          "borderRadius": "md",
+          "shadow": "md",
+          "showBorder": false,
+          "borderColor": "#e5e5e5",
+          "borderWidth": 2,
+          "hoverEffect": "none",
+          "alignment": "center",
+          "marginTop": 0,
+          "marginBottom": 16
+        },
         "metaPath": "src\\puck\\components\\content\\Image\\image.meta.ts"
       },
       {
@@ -55242,6 +60112,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "alert-1",
+          "type": "info",
+          "message": "This is an alert message",
+          "showIcon": true,
+          "dismissible": false
         },
         "metaPath": "src\\puck\\components\\generic\\Alert\\alert.meta.ts"
       },
@@ -55504,6 +60381,26 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "slideHeight": "lg",
+          "contentWidth": "contained",
+          "contentPosition": "center",
+          "effect": "fade",
+          "showNavigation": true,
+          "navigationColor": "#ffffff",
+          "navigationPosition": "center",
+          "showPagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#ffffff",
+          "enableAutoplay": true,
+          "autoplayDelay": 5000,
+          "pauseOnHover": true,
+          "loop": true,
+          "speed": 600,
+          "enableOverlay": true,
+          "overlayColor": "#000000",
+          "overlayOpacity": 40
+        },
         "metaPath": "src\\puck\\components\\swiper\\ContentSlider\\contentslider.meta.ts"
       }
     ],
@@ -55595,6 +60492,13 @@ export const registry: CompiledRegistry = {
               "text-gray-600"
             ]
           }
+        },
+        "defaultProps": {
+          "showHandle": false,
+          "showCreatedDate": false,
+          "showUpdatedDate": false,
+          "fontSize": "text-sm",
+          "textColor": "text-gray-500"
         },
         "metaPath": "src\\puck\\components\\collection\\collectionmetadata.meta.ts"
       }
@@ -55735,6 +60639,14 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "tag": "h1",
+          "fontSize": "text-3xl",
+          "textAlign": "left",
+          "fontWeight": "bold",
+          "marginBottom": "mb-4",
+          "showProductCount": true
         },
         "metaPath": "src\\puck\\components\\collection\\collectiontitle.meta.ts"
       },
@@ -55968,6 +60880,20 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Your Heading Here",
+          "level": "h2",
+          "fontWeight": "bold",
+          "textAlign": "left",
+          "color": "#1f2937",
+          "fontSize": "",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "marginTop": 0,
+          "marginBottom": 16,
+          "animation": "none",
+          "animationDelay": 0
+        },
         "metaPath": "src\\puck\\components\\content\\Heading\\heading.meta.ts"
       },
       {
@@ -56056,6 +60982,12 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "text": "Section heading or instruction text",
+          "size": "md",
+          "color": "text.primary",
+          "marginBottom": "sm"
         },
         "metaPath": "src\\puck\\components\\form\\formheading.meta.ts"
       },
@@ -56229,6 +61161,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "tag": "h1",
+          "fontSize": "2xl",
+          "color": "black",
+          "alignment": "left",
+          "fontWeight": "bold",
+          "marginTop": "mt-0",
+          "marginBottom": "mb-4",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
+        },
         "metaPath": "src\\puck\\components\\product\\ProductTitle\\producttitle.meta.ts"
       }
     ],
@@ -56321,6 +61264,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showPageNumbers": true,
+          "showFirstLast": true,
+          "maxPageNumbers": 7,
+          "style": "numbered",
+          "alignment": "center"
+        },
         "metaPath": "src\\puck\\components\\collection\\pagination.meta.ts"
       }
     ],
@@ -56412,6 +61362,13 @@ export const registry: CompiledRegistry = {
               "right"
             ]
           }
+        },
+        "defaultProps": {
+          "showPageNumbers": true,
+          "showFirstLast": true,
+          "maxPageNumbers": 7,
+          "style": "numbered",
+          "alignment": "center"
         },
         "metaPath": "src\\puck\\components\\collection\\pagination.meta.ts"
       }
@@ -56519,6 +61476,16 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showPriceFilter": true,
+          "showCategoryFilter": true,
+          "showBrandFilter": true,
+          "showColorFilter": true,
+          "showSizeFilter": true,
+          "showRatingFilter": true,
+          "layout": "sidebar",
+          "defaultExpanded": true
+        },
         "metaPath": "src\\puck\\components\\collection\\productfilters.meta.ts"
       }
     ],
@@ -56625,6 +61592,16 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showPriceFilter": true,
+          "showCategoryFilter": true,
+          "showBrandFilter": true,
+          "showColorFilter": true,
+          "showSizeFilter": true,
+          "showRatingFilter": true,
+          "layout": "sidebar",
+          "defaultExpanded": true
+        },
         "metaPath": "src\\puck\\components\\collection\\productfilters.meta.ts"
       }
     ],
@@ -56730,6 +61707,16 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showPriceFilter": true,
+          "showCategoryFilter": true,
+          "showBrandFilter": true,
+          "showColorFilter": true,
+          "showSizeFilter": true,
+          "showRatingFilter": true,
+          "layout": "sidebar",
+          "defaultExpanded": true
         },
         "metaPath": "src\\puck\\components\\collection\\productfilters.meta.ts"
       },
@@ -56923,6 +61910,22 @@ export const registry: CompiledRegistry = {
             "items": "$item"
           }
         },
+        "defaultProps": {
+          "placeholder": "Search products...",
+          "style": "outlined",
+          "size": "md",
+          "showIcon": true,
+          "iconPosition": "left",
+          "fullWidth": false,
+          "maxWidth": "400px",
+          "borderRadius": "md",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "borderColor": "#e5e7eb",
+          "focusBorderColor": "#3b82f6",
+          "showPopularSearches": false,
+          "popularSearches": []
+        },
         "metaPath": "src\\puck\\components\\navigation\\SearchBar\\searchbar.meta.ts"
       },
       {
@@ -57018,6 +62021,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "style": "minimal",
+          "openSearchOnClick": true
         },
         "metaPath": "src\\puck\\components\\navigation\\SearchIcon\\searchicon.meta.ts"
       }
@@ -57153,6 +62163,16 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "layout": "grid",
+          "columns": "3",
+          "showQuickView": true,
+          "showWishlist": true,
+          "showCompare": false,
+          "imageAspectRatio": "square",
+          "showBadges": true,
+          "gap": "md"
+        },
         "metaPath": "src\\puck\\components\\collection\\productgrid.meta.ts"
       },
       {
@@ -57263,6 +62283,24 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "list-1",
+          "items": [
+            {
+              "text": "First item"
+            },
+            {
+              "text": "Second item"
+            },
+            {
+              "text": "Third item"
+            }
+          ],
+          "type": "bullet",
+          "spacing": "normal",
+          "fontSize": "base",
+          "color": "#374151"
+        },
         "metaPath": "src\\puck\\components\\generic\\List\\list.meta.ts"
       }
     ],
@@ -57354,6 +62392,12 @@ export const registry: CompiledRegistry = {
               "right"
             ]
           }
+        },
+        "defaultProps": {
+          "defaultSort": "featured",
+          "showResultCount": true,
+          "showViewToggle": true,
+          "position": "right"
         },
         "metaPath": "src\\puck\\components\\collection\\productsort.meta.ts"
       }
@@ -57447,6 +62491,12 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "defaultSort": "featured",
+          "showResultCount": true,
+          "showViewToggle": true,
+          "position": "right"
+        },
         "metaPath": "src\\puck\\components\\collection\\productsort.meta.ts"
       }
     ],
@@ -57538,6 +62588,12 @@ export const registry: CompiledRegistry = {
               "right"
             ]
           }
+        },
+        "defaultProps": {
+          "defaultSort": "featured",
+          "showResultCount": true,
+          "showViewToggle": true,
+          "position": "right"
         },
         "metaPath": "src\\puck\\components\\collection\\productsort.meta.ts"
       }
@@ -57778,6 +62834,26 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Click Me",
+          "url": "#",
+          "openInNewTab": false,
+          "variant": "primary",
+          "size": "md",
+          "fullWidth": false,
+          "backgroundColor": "#3b82f6",
+          "textColor": "#ffffff",
+          "borderColor": "#3b82f6",
+          "hoverBackgroundColor": "#2563eb",
+          "hoverTextColor": "#ffffff",
+          "showIcon": false,
+          "iconPosition": "right",
+          "borderRadius": "md",
+          "shadow": "md",
+          "alignment": "left",
+          "marginTop": 0,
+          "marginBottom": 16
+        },
         "metaPath": "src\\puck\\components\\content\\Button\\button.meta.ts"
       },
       {
@@ -57863,6 +62939,13 @@ export const registry: CompiledRegistry = {
               "full"
             ]
           }
+        },
+        "defaultProps": {
+          "label": "Submit",
+          "backgroundColor": "brand.primary",
+          "textColor": "text.inverse",
+          "fullWidth": true,
+          "borderRadius": "md"
         },
         "metaPath": "src\\puck\\components\\form\\formsubmitbutton.meta.ts"
       }
@@ -58103,6 +63186,26 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Click Me",
+          "url": "#",
+          "openInNewTab": false,
+          "variant": "primary",
+          "size": "md",
+          "fullWidth": false,
+          "backgroundColor": "#3b82f6",
+          "textColor": "#ffffff",
+          "borderColor": "#3b82f6",
+          "hoverBackgroundColor": "#2563eb",
+          "hoverTextColor": "#ffffff",
+          "showIcon": false,
+          "iconPosition": "right",
+          "borderRadius": "md",
+          "shadow": "md",
+          "alignment": "left",
+          "marginTop": 0,
+          "marginBottom": 16
+        },
         "metaPath": "src\\puck\\components\\content\\Button\\button.meta.ts"
       }
     ],
@@ -58341,6 +63444,26 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "text": "Click Me",
+          "url": "#",
+          "openInNewTab": false,
+          "variant": "primary",
+          "size": "md",
+          "fullWidth": false,
+          "backgroundColor": "#3b82f6",
+          "textColor": "#ffffff",
+          "borderColor": "#3b82f6",
+          "hoverBackgroundColor": "#2563eb",
+          "hoverTextColor": "#ffffff",
+          "showIcon": false,
+          "iconPosition": "right",
+          "borderRadius": "md",
+          "shadow": "md",
+          "alignment": "left",
+          "marginTop": 0,
+          "marginBottom": 16
         },
         "metaPath": "src\\puck\\components\\content\\Button\\button.meta.ts"
       }
@@ -58581,6 +63704,26 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Click Me",
+          "url": "#",
+          "openInNewTab": false,
+          "variant": "primary",
+          "size": "md",
+          "fullWidth": false,
+          "backgroundColor": "#3b82f6",
+          "textColor": "#ffffff",
+          "borderColor": "#3b82f6",
+          "hoverBackgroundColor": "#2563eb",
+          "hoverTextColor": "#ffffff",
+          "showIcon": false,
+          "iconPosition": "right",
+          "borderRadius": "md",
+          "shadow": "md",
+          "alignment": "left",
+          "marginTop": 0,
+          "marginBottom": 16
+        },
         "metaPath": "src\\puck\\components\\content\\Button\\button.meta.ts"
       },
       {
@@ -58705,6 +63848,16 @@ export const registry: CompiledRegistry = {
               "none"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "link-1",
+          "text": "Click here",
+          "href": "#",
+          "target": "_self",
+          "color": "brand.primary",
+          "fontSize": "base",
+          "fontWeight": "normal",
+          "underline": "hover"
         },
         "metaPath": "src\\puck\\components\\content\\Link\\link.meta.ts"
       }
@@ -58945,6 +64098,26 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Click Me",
+          "url": "#",
+          "openInNewTab": false,
+          "variant": "primary",
+          "size": "md",
+          "fullWidth": false,
+          "backgroundColor": "#3b82f6",
+          "textColor": "#ffffff",
+          "borderColor": "#3b82f6",
+          "hoverBackgroundColor": "#2563eb",
+          "hoverTextColor": "#ffffff",
+          "showIcon": false,
+          "iconPosition": "right",
+          "borderRadius": "md",
+          "shadow": "md",
+          "alignment": "left",
+          "marginTop": 0,
+          "marginBottom": 16
+        },
         "metaPath": "src\\puck\\components\\content\\Button\\button.meta.ts"
       },
       {
@@ -59030,6 +64203,13 @@ export const registry: CompiledRegistry = {
               "full"
             ]
           }
+        },
+        "defaultProps": {
+          "label": "Submit",
+          "backgroundColor": "brand.primary",
+          "textColor": "text.inverse",
+          "fullWidth": true,
+          "borderRadius": "md"
         },
         "metaPath": "src\\puck\\components\\form\\formsubmitbutton.meta.ts"
       }
@@ -59265,6 +64445,20 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Your Heading Here",
+          "level": "h2",
+          "fontWeight": "bold",
+          "textAlign": "left",
+          "color": "#1f2937",
+          "fontSize": "",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "marginTop": 0,
+          "marginBottom": 16,
+          "animation": "none",
+          "animationDelay": 0
+        },
         "metaPath": "src\\puck\\components\\content\\Heading\\heading.meta.ts"
       }
     ],
@@ -59499,6 +64693,20 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Your Heading Here",
+          "level": "h2",
+          "fontWeight": "bold",
+          "textAlign": "left",
+          "color": "#1f2937",
+          "fontSize": "",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "marginTop": 0,
+          "marginBottom": 16,
+          "animation": "none",
+          "animationDelay": 0
+        },
         "metaPath": "src\\puck\\components\\content\\Heading\\heading.meta.ts"
       }
     ],
@@ -59732,6 +64940,20 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "text": "Your Heading Here",
+          "level": "h2",
+          "fontWeight": "bold",
+          "textAlign": "left",
+          "color": "#1f2937",
+          "fontSize": "",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "marginTop": 0,
+          "marginBottom": 16,
+          "animation": "none",
+          "animationDelay": 0
         },
         "metaPath": "src\\puck\\components\\content\\Heading\\heading.meta.ts"
       }
@@ -60027,6 +65249,29 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "src": "https://via.placeholder.com/800x600",
+          "alt": "Image description",
+          "aspectRatio": "auto",
+          "objectFit": "cover",
+          "width": "full",
+          "customWidth": "600px",
+          "showCaption": false,
+          "caption": "Image caption goes here",
+          "captionPosition": "bottom",
+          "captionAlign": "center",
+          "linkUrl": "",
+          "openInNewTab": false,
+          "borderRadius": "md",
+          "shadow": "md",
+          "showBorder": false,
+          "borderColor": "#e5e5e5",
+          "borderWidth": 2,
+          "hoverEffect": "none",
+          "alignment": "center",
+          "marginTop": 0,
+          "marginBottom": 16
         },
         "metaPath": "src\\puck\\components\\content\\Image\\image.meta.ts"
       },
@@ -60334,6 +65579,32 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "containerWidth": "large",
+          "customWidth": 800,
+          "maxHeight": 500,
+          "layout": "thumbnails",
+          "mainImageAspectRatio": "landscape",
+          "showThumbnails": true,
+          "thumbnailPosition": "bottom",
+          "thumbnailsPerView": 5,
+          "thumbnailSpacing": 12,
+          "showNavigation": true,
+          "navigationColor": "#000000",
+          "navigationSize": "md",
+          "showPagination": false,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "enableZoom": true,
+          "maxZoomScale": 3,
+          "loop": true,
+          "autoHeight": false,
+          "spaceBetween": 10,
+          "borderRadius": "md",
+          "showBorder": true,
+          "borderColor": "#e5e5e5",
+          "backgroundColor": "#f9fafb"
+        },
         "metaPath": "src\\puck\\components\\swiper\\ImageGallery\\imagegallery.meta.ts"
       }
     ],
@@ -60628,6 +65899,29 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "src": "https://via.placeholder.com/800x600",
+          "alt": "Image description",
+          "aspectRatio": "auto",
+          "objectFit": "cover",
+          "width": "full",
+          "customWidth": "600px",
+          "showCaption": false,
+          "caption": "Image caption goes here",
+          "captionPosition": "bottom",
+          "captionAlign": "center",
+          "linkUrl": "",
+          "openInNewTab": false,
+          "borderRadius": "md",
+          "shadow": "md",
+          "showBorder": false,
+          "borderColor": "#e5e5e5",
+          "borderWidth": 2,
+          "hoverEffect": "none",
+          "alignment": "center",
+          "marginTop": 0,
+          "marginBottom": 16
         },
         "metaPath": "src\\puck\\components\\content\\Image\\image.meta.ts"
       }
@@ -60924,6 +66218,29 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "src": "https://via.placeholder.com/800x600",
+          "alt": "Image description",
+          "aspectRatio": "auto",
+          "objectFit": "cover",
+          "width": "full",
+          "customWidth": "600px",
+          "showCaption": false,
+          "caption": "Image caption goes here",
+          "captionPosition": "bottom",
+          "captionAlign": "center",
+          "linkUrl": "",
+          "openInNewTab": false,
+          "borderRadius": "md",
+          "shadow": "md",
+          "showBorder": false,
+          "borderColor": "#e5e5e5",
+          "borderWidth": 2,
+          "hoverEffect": "none",
+          "alignment": "center",
+          "marginTop": 0,
+          "marginBottom": 16
+        },
         "metaPath": "src\\puck\\components\\content\\Image\\image.meta.ts"
       }
     ],
@@ -61219,6 +66536,29 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "src": "https://via.placeholder.com/800x600",
+          "alt": "Image description",
+          "aspectRatio": "auto",
+          "objectFit": "cover",
+          "width": "full",
+          "customWidth": "600px",
+          "showCaption": false,
+          "caption": "Image caption goes here",
+          "captionPosition": "bottom",
+          "captionAlign": "center",
+          "linkUrl": "",
+          "openInNewTab": false,
+          "borderRadius": "md",
+          "shadow": "md",
+          "showBorder": false,
+          "borderColor": "#e5e5e5",
+          "borderWidth": 2,
+          "hoverEffect": "none",
+          "alignment": "center",
+          "marginTop": 0,
+          "marginBottom": 16
+        },
         "metaPath": "src\\puck\\components\\content\\Image\\image.meta.ts"
       }
     ],
@@ -61345,6 +66685,16 @@ export const registry: CompiledRegistry = {
               "none"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "link-1",
+          "text": "Click here",
+          "href": "#",
+          "target": "_self",
+          "color": "brand.primary",
+          "fontSize": "base",
+          "fontWeight": "normal",
+          "underline": "hover"
         },
         "metaPath": "src\\puck\\components\\content\\Link\\link.meta.ts"
       }
@@ -61473,6 +66823,16 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "link-1",
+          "text": "Click here",
+          "href": "#",
+          "target": "_self",
+          "color": "brand.primary",
+          "fontSize": "base",
+          "fontWeight": "normal",
+          "underline": "hover"
+        },
         "metaPath": "src\\puck\\components\\content\\Link\\link.meta.ts"
       }
     ],
@@ -61551,6 +66911,11 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "content": "",
+          "maxWidth": "max-w-3xl",
+          "padding": "py-12"
+        },
         "metaPath": "src\\puck\\components\\content\\RichTextContent\\richtext.meta.ts"
       }
     ],
@@ -61628,6 +66993,11 @@ export const registry: CompiledRegistry = {
               "py-20"
             ]
           }
+        },
+        "defaultProps": {
+          "content": "",
+          "maxWidth": "max-w-3xl",
+          "padding": "py-12"
         },
         "metaPath": "src\\puck\\components\\content\\RichTextContent\\richtext.meta.ts"
       },
@@ -61773,6 +67143,16 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "fontSize": "base",
+          "color": "gray",
+          "lineHeight": "normal",
+          "maxWidth": "prose",
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
+        },
         "metaPath": "src\\puck\\components\\product\\ProductDescription\\productdescription.meta.ts"
       }
     ],
@@ -61850,6 +67230,11 @@ export const registry: CompiledRegistry = {
               "py-20"
             ]
           }
+        },
+        "defaultProps": {
+          "content": "",
+          "maxWidth": "max-w-3xl",
+          "padding": "py-12"
         },
         "metaPath": "src\\puck\\components\\content\\RichTextContent\\richtext.meta.ts"
       }
@@ -61929,6 +67314,11 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "content": "",
+          "maxWidth": "max-w-3xl",
+          "padding": "py-12"
+        },
         "metaPath": "src\\puck\\components\\content\\RichTextContent\\richtext.meta.ts"
       }
     ],
@@ -62006,6 +67396,11 @@ export const registry: CompiledRegistry = {
               "py-20"
             ]
           }
+        },
+        "defaultProps": {
+          "content": "",
+          "maxWidth": "max-w-3xl",
+          "padding": "py-12"
         },
         "metaPath": "src\\puck\\components\\content\\RichTextContent\\richtext.meta.ts"
       }
@@ -62186,6 +67581,20 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Add your text content here. You can write multiple paragraphs, include line breaks, and format your content as needed.",
+          "richText": false,
+          "fontSize": "base",
+          "fontWeight": "normal",
+          "lineHeight": "relaxed",
+          "textAlign": "left",
+          "color": "#374151",
+          "maxWidth": "",
+          "marginTop": 0,
+          "marginBottom": 16,
+          "paddingX": 0,
+          "paddingY": 0
+        },
         "metaPath": "src\\puck\\components\\content\\Text\\text.meta.ts"
       }
     ],
@@ -62364,6 +67773,20 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "text": "Add your text content here. You can write multiple paragraphs, include line breaks, and format your content as needed.",
+          "richText": false,
+          "fontSize": "base",
+          "fontWeight": "normal",
+          "lineHeight": "relaxed",
+          "textAlign": "left",
+          "color": "#374151",
+          "maxWidth": "",
+          "marginTop": 0,
+          "marginBottom": 16,
+          "paddingX": 0,
+          "paddingY": 0
         },
         "metaPath": "src\\puck\\components\\content\\Text\\text.meta.ts"
       }
@@ -62544,6 +67967,20 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Add your text content here. You can write multiple paragraphs, include line breaks, and format your content as needed.",
+          "richText": false,
+          "fontSize": "base",
+          "fontWeight": "normal",
+          "lineHeight": "relaxed",
+          "textAlign": "left",
+          "color": "#374151",
+          "maxWidth": "",
+          "marginTop": 0,
+          "marginBottom": 16,
+          "paddingX": 0,
+          "paddingY": 0
+        },
         "metaPath": "src\\puck\\components\\content\\Text\\text.meta.ts"
       }
     ],
@@ -62722,6 +68159,20 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "text": "Add your text content here. You can write multiple paragraphs, include line breaks, and format your content as needed.",
+          "richText": false,
+          "fontSize": "base",
+          "fontWeight": "normal",
+          "lineHeight": "relaxed",
+          "textAlign": "left",
+          "color": "#374151",
+          "maxWidth": "",
+          "marginTop": 0,
+          "marginBottom": 16,
+          "paddingX": 0,
+          "paddingY": 0
         },
         "metaPath": "src\\puck\\components\\content\\Text\\text.meta.ts"
       }
@@ -62902,6 +68353,20 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Add your text content here. You can write multiple paragraphs, include line breaks, and format your content as needed.",
+          "richText": false,
+          "fontSize": "base",
+          "fontWeight": "normal",
+          "lineHeight": "relaxed",
+          "textAlign": "left",
+          "color": "#374151",
+          "maxWidth": "",
+          "marginTop": 0,
+          "marginBottom": 16,
+          "paddingX": 0,
+          "paddingY": 0
+        },
         "metaPath": "src\\puck\\components\\content\\Text\\text.meta.ts"
       }
     ],
@@ -63074,6 +68539,19 @@ export const registry: CompiledRegistry = {
           "caption": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "videoType": "youtube",
+          "videoUrl": "",
+          "autoplay": false,
+          "loop": false,
+          "muted": true,
+          "controls": true,
+          "aspectRatio": "16:9",
+          "alignment": "center",
+          "borderRadius": "md",
+          "shadow": "md",
+          "caption": ""
         },
         "metaPath": "src\\puck\\components\\content\\Video\\video.meta.ts"
       }
@@ -63248,6 +68726,19 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "videoType": "youtube",
+          "videoUrl": "",
+          "autoplay": false,
+          "loop": false,
+          "muted": true,
+          "controls": true,
+          "aspectRatio": "16:9",
+          "alignment": "center",
+          "borderRadius": "md",
+          "shadow": "md",
+          "caption": ""
+        },
         "metaPath": "src\\puck\\components\\content\\Video\\video.meta.ts"
       },
       {
@@ -63319,6 +68810,13 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "formId": "",
+          "padding": "24px",
+          "maxWidth": "640px",
+          "backgroundColor": "",
+          "borderRadius": "16px"
         },
         "metaPath": "src\\puck\\components\\form\\formembed.meta.ts"
       },
@@ -63463,6 +68961,19 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "htmlContent": "<div class=\"custom-section\">\n  <h2>Custom HTML Section</h2>\n  <p>Add your custom HTML content here. You can include any HTML tags, inline styles, and even JavaScript.</p>\n  <button class=\"custom-btn\">Click Me</button>\n</div>",
+          "cssContent": ".custom-section {\n  text-align: center;\n}\n\n.custom-btn {\n  background-color: #3b82f6;\n  color: white;\n  padding: 12px 24px;\n  border: none;\n  border-radius: 8px;\n  cursor: pointer;\n  font-weight: 600;\n}\n\n.custom-btn:hover {\n  background-color: #2563eb;\n}",
+          "useContainer": true,
+          "maxWidth": "lg",
+          "paddingTop": 64,
+          "paddingBottom": 64,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "backgroundColor": "#ffffff",
+          "backgroundImage": "",
+          "sanitizeHTML": true
         },
         "metaPath": "src\\puck\\components\\homepage\\CustomHTML\\customhtml.meta.ts"
       }
@@ -63637,6 +69148,19 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "videoType": "youtube",
+          "videoUrl": "",
+          "autoplay": false,
+          "loop": false,
+          "muted": true,
+          "controls": true,
+          "aspectRatio": "16:9",
+          "alignment": "center",
+          "borderRadius": "md",
+          "shadow": "md",
+          "caption": ""
+        },
         "metaPath": "src\\puck\\components\\content\\Video\\video.meta.ts"
       }
     ],
@@ -63809,6 +69333,19 @@ export const registry: CompiledRegistry = {
           "caption": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "videoType": "youtube",
+          "videoUrl": "",
+          "autoplay": false,
+          "loop": false,
+          "muted": true,
+          "controls": true,
+          "aspectRatio": "16:9",
+          "alignment": "center",
+          "borderRadius": "md",
+          "shadow": "md",
+          "caption": ""
         },
         "metaPath": "src\\puck\\components\\content\\Video\\video.meta.ts"
       }
@@ -63983,6 +69520,19 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "videoType": "youtube",
+          "videoUrl": "",
+          "autoplay": false,
+          "loop": false,
+          "muted": true,
+          "controls": true,
+          "aspectRatio": "16:9",
+          "alignment": "center",
+          "borderRadius": "md",
+          "shadow": "md",
+          "caption": ""
+        },
         "metaPath": "src\\puck\\components\\content\\Video\\video.meta.ts"
       }
     ],
@@ -64041,6 +69591,11 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "saved-block-1",
+          "blockId": "",
+          "blockName": ""
+        },
         "metaPath": "src\\puck\\components\\custom\\savedblock.meta.ts"
       }
     ],
@@ -64098,6 +69653,11 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "saved-block-1",
+          "blockId": "",
+          "blockName": ""
         },
         "metaPath": "src\\puck\\components\\custom\\savedblock.meta.ts"
       },
@@ -64171,6 +69731,13 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "formId": "",
+          "padding": "24px",
+          "maxWidth": "640px",
+          "backgroundColor": "",
+          "borderRadius": "16px"
+        },
         "metaPath": "src\\puck\\components\\form\\formembed.meta.ts"
       }
     ],
@@ -64228,6 +69795,11 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "saved-block-1",
+          "blockId": "",
+          "blockName": ""
         },
         "metaPath": "src\\puck\\components\\custom\\savedblock.meta.ts"
       }
@@ -64405,6 +69977,22 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showAddress": true,
+          "address": "123 Main Street\nCity, State 12345\nCountry",
+          "showPhone": true,
+          "phone": "+1 (555) 123-4567",
+          "showEmail": true,
+          "email": "contact@example.com",
+          "showHours": true,
+          "hours": "Mon-Fri: 9:00 AM - 6:00 PM\nSat-Sun: 10:00 AM - 4:00 PM",
+          "showIcons": true,
+          "layout": "stacked",
+          "textColor": "#6b7280",
+          "iconColor": "#9ca3af",
+          "fontSize": "sm",
+          "gap": "md"
+        },
         "metaPath": "src\\puck\\components\\footer\\ContactInfo\\contactinfo.meta.ts"
       }
     ],
@@ -64580,6 +70168,22 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "showAddress": true,
+          "address": "123 Main Street\nCity, State 12345\nCountry",
+          "showPhone": true,
+          "phone": "+1 (555) 123-4567",
+          "showEmail": true,
+          "email": "contact@example.com",
+          "showHours": true,
+          "hours": "Mon-Fri: 9:00 AM - 6:00 PM\nSat-Sun: 10:00 AM - 4:00 PM",
+          "showIcons": true,
+          "layout": "stacked",
+          "textColor": "#6b7280",
+          "iconColor": "#9ca3af",
+          "fontSize": "sm",
+          "gap": "md"
         },
         "metaPath": "src\\puck\\components\\footer\\ContactInfo\\contactinfo.meta.ts"
       }
@@ -64757,6 +70361,22 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showAddress": true,
+          "address": "123 Main Street\nCity, State 12345\nCountry",
+          "showPhone": true,
+          "phone": "+1 (555) 123-4567",
+          "showEmail": true,
+          "email": "contact@example.com",
+          "showHours": true,
+          "hours": "Mon-Fri: 9:00 AM - 6:00 PM\nSat-Sun: 10:00 AM - 4:00 PM",
+          "showIcons": true,
+          "layout": "stacked",
+          "textColor": "#6b7280",
+          "iconColor": "#9ca3af",
+          "fontSize": "sm",
+          "gap": "md"
+        },
         "metaPath": "src\\puck\\components\\footer\\ContactInfo\\contactinfo.meta.ts"
       }
     ],
@@ -64932,6 +70552,22 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "showAddress": true,
+          "address": "123 Main Street\nCity, State 12345\nCountry",
+          "showPhone": true,
+          "phone": "+1 (555) 123-4567",
+          "showEmail": true,
+          "email": "contact@example.com",
+          "showHours": true,
+          "hours": "Mon-Fri: 9:00 AM - 6:00 PM\nSat-Sun: 10:00 AM - 4:00 PM",
+          "showIcons": true,
+          "layout": "stacked",
+          "textColor": "#6b7280",
+          "iconColor": "#9ca3af",
+          "fontSize": "sm",
+          "gap": "md"
         },
         "metaPath": "src\\puck\\components\\footer\\ContactInfo\\contactinfo.meta.ts"
       }
@@ -65109,6 +70745,22 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showAddress": true,
+          "address": "123 Main Street\nCity, State 12345\nCountry",
+          "showPhone": true,
+          "phone": "+1 (555) 123-4567",
+          "showEmail": true,
+          "email": "contact@example.com",
+          "showHours": true,
+          "hours": "Mon-Fri: 9:00 AM - 6:00 PM\nSat-Sun: 10:00 AM - 4:00 PM",
+          "showIcons": true,
+          "layout": "stacked",
+          "textColor": "#6b7280",
+          "iconColor": "#9ca3af",
+          "fontSize": "sm",
+          "gap": "md"
+        },
         "metaPath": "src\\puck\\components\\footer\\ContactInfo\\contactinfo.meta.ts"
       }
     ],
@@ -65285,6 +70937,22 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showAddress": true,
+          "address": "123 Main Street\nCity, State 12345\nCountry",
+          "showPhone": true,
+          "phone": "+1 (555) 123-4567",
+          "showEmail": true,
+          "email": "contact@example.com",
+          "showHours": true,
+          "hours": "Mon-Fri: 9:00 AM - 6:00 PM\nSat-Sun: 10:00 AM - 4:00 PM",
+          "showIcons": true,
+          "layout": "stacked",
+          "textColor": "#6b7280",
+          "iconColor": "#9ca3af",
+          "fontSize": "sm",
+          "gap": "md"
+        },
         "metaPath": "src\\puck\\components\\footer\\ContactInfo\\contactinfo.meta.ts"
       }
     ],
@@ -65413,6 +71081,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "text": "All rights reserved.",
+          "showYear": true,
+          "alignment": "center",
+          "fontSize": "sm",
+          "textColor": "#6b7280",
+          "showDivider": true,
+          "dividerColor": "#e5e7eb",
+          "paddingTop": "1.5rem",
+          "paddingBottom": "1.5rem"
         },
         "metaPath": "src\\puck\\components\\footer\\Copyright\\copyright.meta.ts"
       },
@@ -65561,6 +71240,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "columns": "4",
+          "backgroundColor": "#1f2937",
+          "textColor": "#ffffff",
+          "linkHoverColor": "#3b82f6",
+          "menuConfigs": [],
+          "paddingTop": "3rem",
+          "paddingBottom": "2rem",
+          "menuLoading": false,
+          "menuError": false
+        },
         "metaPath": "src\\puck\\components\\layout\\Footer\\footer.meta.ts"
       }
     ],
@@ -65689,6 +71379,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "text": "All rights reserved.",
+          "showYear": true,
+          "alignment": "center",
+          "fontSize": "sm",
+          "textColor": "#6b7280",
+          "showDivider": true,
+          "dividerColor": "#e5e7eb",
+          "paddingTop": "1.5rem",
+          "paddingBottom": "1.5rem"
         },
         "metaPath": "src\\puck\\components\\footer\\Copyright\\copyright.meta.ts"
       }
@@ -65819,6 +71520,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "All rights reserved.",
+          "showYear": true,
+          "alignment": "center",
+          "fontSize": "sm",
+          "textColor": "#6b7280",
+          "showDivider": true,
+          "dividerColor": "#e5e7eb",
+          "paddingTop": "1.5rem",
+          "paddingBottom": "1.5rem"
+        },
         "metaPath": "src\\puck\\components\\footer\\Copyright\\copyright.meta.ts"
       }
     ],
@@ -65947,6 +71659,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "text": "All rights reserved.",
+          "showYear": true,
+          "alignment": "center",
+          "fontSize": "sm",
+          "textColor": "#6b7280",
+          "showDivider": true,
+          "dividerColor": "#e5e7eb",
+          "paddingTop": "1.5rem",
+          "paddingBottom": "1.5rem"
         },
         "metaPath": "src\\puck\\components\\footer\\Copyright\\copyright.meta.ts"
       }
@@ -66103,6 +71826,30 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "links": [
+            {
+              "platform": "facebook",
+              "url": "https://facebook.com"
+            },
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com"
+            },
+            {
+              "platform": "twitter",
+              "url": "https://twitter.com"
+            }
+          ],
+          "size": "md",
+          "style": "circle",
+          "color": "#ffffff",
+          "hoverColor": "#3b82f6",
+          "backgroundColor": "#374151",
+          "hoverBackgroundColor": "#1f2937",
+          "gap": "md",
+          "alignment": "center"
+        },
         "metaPath": "src\\puck\\components\\footer\\SocialIcons\\socialicons.meta.ts"
       },
       {
@@ -66249,6 +71996,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "columns": "4",
+          "backgroundColor": "#1f2937",
+          "textColor": "#ffffff",
+          "linkHoverColor": "#3b82f6",
+          "menuConfigs": [],
+          "paddingTop": "3rem",
+          "paddingBottom": "2rem",
+          "menuLoading": false,
+          "menuError": false
         },
         "metaPath": "src\\puck\\components\\layout\\Footer\\footer.meta.ts"
       }
@@ -66405,6 +72163,30 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "links": [
+            {
+              "platform": "facebook",
+              "url": "https://facebook.com"
+            },
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com"
+            },
+            {
+              "platform": "twitter",
+              "url": "https://twitter.com"
+            }
+          ],
+          "size": "md",
+          "style": "circle",
+          "color": "#ffffff",
+          "hoverColor": "#3b82f6",
+          "backgroundColor": "#374151",
+          "hoverBackgroundColor": "#1f2937",
+          "gap": "md",
+          "alignment": "center"
+        },
         "metaPath": "src\\puck\\components\\footer\\SocialIcons\\socialicons.meta.ts"
       }
     ],
@@ -66559,6 +72341,30 @@ export const registry: CompiledRegistry = {
               "right"
             ]
           }
+        },
+        "defaultProps": {
+          "links": [
+            {
+              "platform": "facebook",
+              "url": "https://facebook.com"
+            },
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com"
+            },
+            {
+              "platform": "twitter",
+              "url": "https://twitter.com"
+            }
+          ],
+          "size": "md",
+          "style": "circle",
+          "color": "#ffffff",
+          "hoverColor": "#3b82f6",
+          "backgroundColor": "#374151",
+          "hoverBackgroundColor": "#1f2937",
+          "gap": "md",
+          "alignment": "center"
         },
         "metaPath": "src\\puck\\components\\footer\\SocialIcons\\socialicons.meta.ts"
       }
@@ -66715,6 +72521,30 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "links": [
+            {
+              "platform": "facebook",
+              "url": "https://facebook.com"
+            },
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com"
+            },
+            {
+              "platform": "twitter",
+              "url": "https://twitter.com"
+            }
+          ],
+          "size": "md",
+          "style": "circle",
+          "color": "#ffffff",
+          "hoverColor": "#3b82f6",
+          "backgroundColor": "#374151",
+          "hoverBackgroundColor": "#1f2937",
+          "gap": "md",
+          "alignment": "center"
+        },
         "metaPath": "src\\puck\\components\\footer\\SocialIcons\\socialicons.meta.ts"
       }
     ],
@@ -66870,6 +72700,30 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "links": [
+            {
+              "platform": "facebook",
+              "url": "https://facebook.com"
+            },
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com"
+            },
+            {
+              "platform": "twitter",
+              "url": "https://twitter.com"
+            }
+          ],
+          "size": "md",
+          "style": "circle",
+          "color": "#ffffff",
+          "hoverColor": "#3b82f6",
+          "backgroundColor": "#374151",
+          "hoverBackgroundColor": "#1f2937",
+          "gap": "md",
+          "alignment": "center"
+        },
         "metaPath": "src\\puck\\components\\footer\\SocialIcons\\socialicons.meta.ts"
       }
     ],
@@ -66963,6 +72817,22 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "choiceType": "radio",
+          "label": "Choose one",
+          "helpText": "",
+          "required": false,
+          "options": [
+            {
+              "label": "Option 1"
+            },
+            {
+              "label": "Option 2"
+            }
+          ],
+          "labelColor": "text.primary",
+          "accentColor": "brand.primary"
         },
         "metaPath": "src\\puck\\components\\form\\formchoicefield.meta.ts"
       }
@@ -67058,6 +72928,22 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "choiceType": "radio",
+          "label": "Choose one",
+          "helpText": "",
+          "required": false,
+          "options": [
+            {
+              "label": "Option 1"
+            },
+            {
+              "label": "Option 2"
+            }
+          ],
+          "labelColor": "text.primary",
+          "accentColor": "brand.primary"
+        },
         "metaPath": "src\\puck\\components\\form\\formchoicefield.meta.ts"
       }
     ],
@@ -67151,6 +73037,22 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "choiceType": "radio",
+          "label": "Choose one",
+          "helpText": "",
+          "required": false,
+          "options": [
+            {
+              "label": "Option 1"
+            },
+            {
+              "label": "Option 2"
+            }
+          ],
+          "labelColor": "text.primary",
+          "accentColor": "brand.primary"
         },
         "metaPath": "src\\puck\\components\\form\\formchoicefield.meta.ts"
       }
@@ -67293,6 +73195,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "formName": "Contact Form",
+          "submitButtonText": "Submit",
+          "successMessage": "Thank you! Your message has been sent.",
+          "padding": "lg",
+          "backgroundColor": "ui.background",
+          "borderRadius": "md",
+          "maxWidth": "lg"
+        },
         "metaPath": "src\\puck\\components\\form\\formcontainer.meta.ts"
       },
       {
@@ -67420,6 +73331,15 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "card-1",
+          "padding": "lg",
+          "shadow": "md",
+          "border": true,
+          "rounded": "lg",
+          "backgroundColor": "#ffffff",
+          "hoverEffect": true
+        },
         "metaPath": "src\\puck\\components\\generic\\Card\\card.meta.ts"
       },
       {
@@ -67490,6 +73410,10 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "maxWidth": "xl",
+          "padding": "md"
         },
         "metaPath": "src\\puck\\components\\layout\\Container\\container.meta.ts"
       }
@@ -67568,6 +73492,11 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "spacingTop": "sm",
+          "spacingBottom": "sm",
+          "color": "ui.border"
         },
         "metaPath": "src\\puck\\components\\form\\formdivider.meta.ts"
       },
@@ -67705,6 +73634,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "divider-1",
+          "style": "solid",
+          "thickness": "1",
+          "color": "#e5e7eb",
+          "width": "full",
+          "marginTop": "md",
+          "marginBottom": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Divider\\divider.meta.ts"
       },
       {
@@ -67796,6 +73734,13 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "spacer-1",
+          "height": "md",
+          "showDivider": false,
+          "dividerStyle": "solid",
+          "dividerColor": "#e5e7eb"
         },
         "metaPath": "src\\puck\\components\\generic\\Spacer\\spacer.meta.ts"
       }
@@ -67926,6 +73871,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "fieldType": "text",
+          "label": "Field Label",
+          "placeholder": "",
+          "helpText": "",
+          "required": false,
+          "rows": 4,
+          "labelColor": "text.primary",
+          "inputBackground": "ui.surface",
+          "borderColor": "ui.border"
+        },
         "metaPath": "src\\puck\\components\\form\\formfield.meta.ts"
       }
     ],
@@ -68055,6 +74011,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "fieldType": "text",
+          "label": "Field Label",
+          "placeholder": "",
+          "helpText": "",
+          "required": false,
+          "rows": 4,
+          "labelColor": "text.primary",
+          "inputBackground": "ui.surface",
+          "borderColor": "ui.border"
+        },
         "metaPath": "src\\puck\\components\\form\\formfield.meta.ts"
       }
     ],
@@ -68145,6 +74112,12 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "text": "Section heading or instruction text",
+          "size": "md",
+          "color": "text.primary",
+          "marginBottom": "sm"
         },
         "metaPath": "src\\puck\\components\\form\\formheading.meta.ts"
       }
@@ -68239,6 +74212,23 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "label": "Select an option",
+          "placeholder": "Choose...",
+          "helpText": "",
+          "required": false,
+          "options": [
+            {
+              "label": "Option 1"
+            },
+            {
+              "label": "Option 2"
+            }
+          ],
+          "labelColor": "text.primary",
+          "inputBackground": "ui.surface",
+          "borderColor": "ui.border"
+        },
         "metaPath": "src\\puck\\components\\form\\formselectfield.meta.ts"
       }
     ],
@@ -68331,6 +74321,23 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "label": "Select an option",
+          "placeholder": "Choose...",
+          "helpText": "",
+          "required": false,
+          "options": [
+            {
+              "label": "Option 1"
+            },
+            {
+              "label": "Option 2"
+            }
+          ],
+          "labelColor": "text.primary",
+          "inputBackground": "ui.surface",
+          "borderColor": "ui.border"
         },
         "metaPath": "src\\puck\\components\\form\\formselectfield.meta.ts"
       },
@@ -68599,6 +74606,24 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "menuHandle": "default",
+          "layout": "horizontal",
+          "alignment": "center",
+          "hoverEffect": "underline",
+          "textColor": "#111827",
+          "hoverColor": "#3b82f6",
+          "fontSize": "base",
+          "fontWeight": "medium",
+          "showDropdownArrows": true,
+          "dropdownStyle": "default",
+          "maxDepth": "3",
+          "menuData": [],
+          "dropdownBackground": "#ffffff",
+          "dropdownBorder": "#e5e7eb",
+          "dropdownShadow": "lg",
+          "dropdownRadius": "md"
+        },
         "metaPath": "src\\puck\\components\\navigation\\MenuNavigation\\menunavigation.meta.ts"
       }
     ],
@@ -68680,6 +74705,29 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "accordion-1",
+          "items": [
+            {
+              "id": "item-1",
+              "title": "What is your return policy?",
+              "content": "We offer a 30-day return policy on all items."
+            },
+            {
+              "id": "item-2",
+              "title": "How long does shipping take?",
+              "content": "Standard shipping takes 5-7 business days."
+            },
+            {
+              "id": "item-3",
+              "title": "Do you ship internationally?",
+              "content": "Yes, we ship to over 100 countries worldwide."
+            }
+          ],
+          "allowMultiple": false,
+          "bordered": true,
+          "rounded": "md"
         },
         "metaPath": "src\\puck\\components\\generic\\Accordion\\accordion.meta.ts"
       },
@@ -68771,6 +74819,31 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "sections": [
+            {
+              "id": "description",
+              "title": "Product Details",
+              "contentType": "description",
+              "customContent": ""
+            },
+            {
+              "id": "material",
+              "title": "Material & Care",
+              "contentType": "material",
+              "customContent": ""
+            },
+            {
+              "id": "shipping",
+              "title": "Shipping & Returns",
+              "contentType": "shipping",
+              "customContent": "<p>Free shipping on orders over $50. Returns accepted within 30 days.</p>"
+            }
+          ],
+          "allowMultiple": false,
+          "defaultOpen": "description",
+          "borderStyle": "top"
         },
         "metaPath": "src\\puck\\components\\product\\ProductAccordion\\productaccordion.meta.ts"
       }
@@ -68854,6 +74927,29 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "accordion-1",
+          "items": [
+            {
+              "id": "item-1",
+              "title": "What is your return policy?",
+              "content": "We offer a 30-day return policy on all items."
+            },
+            {
+              "id": "item-2",
+              "title": "How long does shipping take?",
+              "content": "Standard shipping takes 5-7 business days."
+            },
+            {
+              "id": "item-3",
+              "title": "Do you ship internationally?",
+              "content": "Yes, we ship to over 100 countries worldwide."
+            }
+          ],
+          "allowMultiple": false,
+          "bordered": true,
+          "rounded": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Accordion\\accordion.meta.ts"
       },
       {
@@ -68945,6 +75041,31 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "sections": [
+            {
+              "id": "description",
+              "title": "Product Details",
+              "contentType": "description",
+              "customContent": ""
+            },
+            {
+              "id": "material",
+              "title": "Material & Care",
+              "contentType": "material",
+              "customContent": ""
+            },
+            {
+              "id": "shipping",
+              "title": "Shipping & Returns",
+              "contentType": "shipping",
+              "customContent": "<p>Free shipping on orders over $50. Returns accepted within 30 days.</p>"
+            }
+          ],
+          "allowMultiple": false,
+          "defaultOpen": "description",
+          "borderStyle": "top"
+        },
         "metaPath": "src\\puck\\components\\product\\ProductAccordion\\productaccordion.meta.ts"
       }
     ],
@@ -69026,6 +75147,29 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "accordion-1",
+          "items": [
+            {
+              "id": "item-1",
+              "title": "What is your return policy?",
+              "content": "We offer a 30-day return policy on all items."
+            },
+            {
+              "id": "item-2",
+              "title": "How long does shipping take?",
+              "content": "Standard shipping takes 5-7 business days."
+            },
+            {
+              "id": "item-3",
+              "title": "Do you ship internationally?",
+              "content": "Yes, we ship to over 100 countries worldwide."
+            }
+          ],
+          "allowMultiple": false,
+          "bordered": true,
+          "rounded": "md"
         },
         "metaPath": "src\\puck\\components\\generic\\Accordion\\accordion.meta.ts"
       }
@@ -69109,6 +75253,29 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "accordion-1",
+          "items": [
+            {
+              "id": "item-1",
+              "title": "What is your return policy?",
+              "content": "We offer a 30-day return policy on all items."
+            },
+            {
+              "id": "item-2",
+              "title": "How long does shipping take?",
+              "content": "Standard shipping takes 5-7 business days."
+            },
+            {
+              "id": "item-3",
+              "title": "Do you ship internationally?",
+              "content": "Yes, we ship to over 100 countries worldwide."
+            }
+          ],
+          "allowMultiple": false,
+          "bordered": true,
+          "rounded": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Accordion\\accordion.meta.ts"
       }
     ],
@@ -69191,6 +75358,29 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "accordion-1",
+          "items": [
+            {
+              "id": "item-1",
+              "title": "What is your return policy?",
+              "content": "We offer a 30-day return policy on all items."
+            },
+            {
+              "id": "item-2",
+              "title": "How long does shipping take?",
+              "content": "Standard shipping takes 5-7 business days."
+            },
+            {
+              "id": "item-3",
+              "title": "Do you ship internationally?",
+              "content": "Yes, we ship to over 100 countries worldwide."
+            }
+          ],
+          "allowMultiple": false,
+          "bordered": true,
+          "rounded": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Accordion\\accordion.meta.ts"
       }
     ],
@@ -69272,6 +75462,29 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "accordion-1",
+          "items": [
+            {
+              "id": "item-1",
+              "title": "What is your return policy?",
+              "content": "We offer a 30-day return policy on all items."
+            },
+            {
+              "id": "item-2",
+              "title": "How long does shipping take?",
+              "content": "Standard shipping takes 5-7 business days."
+            },
+            {
+              "id": "item-3",
+              "title": "Do you ship internationally?",
+              "content": "Yes, we ship to over 100 countries worldwide."
+            }
+          ],
+          "allowMultiple": false,
+          "bordered": true,
+          "rounded": "md"
         },
         "metaPath": "src\\puck\\components\\generic\\Accordion\\accordion.meta.ts"
       }
@@ -69363,6 +75576,13 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "alert-1",
+          "type": "info",
+          "message": "This is an alert message",
+          "showIcon": true,
+          "dismissible": false
+        },
         "metaPath": "src\\puck\\components\\generic\\Alert\\alert.meta.ts"
       }
     ],
@@ -69452,6 +75672,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "alert-1",
+          "type": "info",
+          "message": "This is an alert message",
+          "showIcon": true,
+          "dismissible": false
         },
         "metaPath": "src\\puck\\components\\generic\\Alert\\alert.meta.ts"
       }
@@ -69543,6 +75770,13 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "alert-1",
+          "type": "info",
+          "message": "This is an alert message",
+          "showIcon": true,
+          "dismissible": false
+        },
         "metaPath": "src\\puck\\components\\generic\\Alert\\alert.meta.ts"
       }
     ],
@@ -69632,6 +75866,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "alert-1",
+          "type": "info",
+          "message": "This is an alert message",
+          "showIcon": true,
+          "dismissible": false
         },
         "metaPath": "src\\puck\\components\\generic\\Alert\\alert.meta.ts"
       }
@@ -69762,6 +76003,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "avatar-1",
+          "src": "",
+          "name": "John Doe",
+          "size": "md",
+          "shape": "circle",
+          "backgroundColor": "#6366f1",
+          "textColor": "#ffffff",
+          "showName": false,
+          "namePosition": "right"
+        },
         "metaPath": "src\\puck\\components\\generic\\Avatar\\avatar.meta.ts"
       }
     ],
@@ -69890,6 +76142,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "avatar-1",
+          "src": "",
+          "name": "John Doe",
+          "size": "md",
+          "shape": "circle",
+          "backgroundColor": "#6366f1",
+          "textColor": "#ffffff",
+          "showName": false,
+          "namePosition": "right"
         },
         "metaPath": "src\\puck\\components\\generic\\Avatar\\avatar.meta.ts"
       }
@@ -70020,6 +76283,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "avatar-1",
+          "src": "",
+          "name": "John Doe",
+          "size": "md",
+          "shape": "circle",
+          "backgroundColor": "#6366f1",
+          "textColor": "#ffffff",
+          "showName": false,
+          "namePosition": "right"
+        },
         "metaPath": "src\\puck\\components\\generic\\Avatar\\avatar.meta.ts"
       }
     ],
@@ -70142,6 +76416,13 @@ export const registry: CompiledRegistry = {
           "customTextColor": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "id": "badge-1",
+          "text": "Badge",
+          "variant": "default",
+          "size": "md",
+          "rounded": "md"
         },
         "metaPath": "src\\puck\\components\\generic\\Badge\\badge.meta.ts"
       }
@@ -70266,6 +76547,13 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "id": "badge-1",
+          "text": "Badge",
+          "variant": "default",
+          "size": "md",
+          "rounded": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Badge\\badge.meta.ts"
       }
     ],
@@ -70388,6 +76676,13 @@ export const registry: CompiledRegistry = {
           "customTextColor": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "id": "badge-1",
+          "text": "Badge",
+          "variant": "default",
+          "size": "md",
+          "rounded": "md"
         },
         "metaPath": "src\\puck\\components\\generic\\Badge\\badge.meta.ts"
       }
@@ -70512,6 +76807,13 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "id": "badge-1",
+          "text": "Badge",
+          "variant": "default",
+          "size": "md",
+          "rounded": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Badge\\badge.meta.ts"
       }
     ],
@@ -70634,6 +76936,13 @@ export const registry: CompiledRegistry = {
           "customTextColor": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "id": "badge-1",
+          "text": "Badge",
+          "variant": "default",
+          "size": "md",
+          "rounded": "md"
         },
         "metaPath": "src\\puck\\components\\generic\\Badge\\badge.meta.ts"
       }
@@ -70758,6 +77067,13 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "id": "badge-1",
+          "text": "Badge",
+          "variant": "default",
+          "size": "md",
+          "rounded": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Badge\\badge.meta.ts"
       },
       {
@@ -70847,6 +77163,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showIcons": true,
+          "showTimestamps": true,
+          "showTrackingNumber": true,
+          "orientation": "vertical",
+          "style": "default"
         },
         "metaPath": "src\\puck\\components\\order\\ordertimeline.meta.ts"
       }
@@ -70977,6 +77300,15 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "card-1",
+          "padding": "lg",
+          "shadow": "md",
+          "border": true,
+          "rounded": "lg",
+          "backgroundColor": "#ffffff",
+          "hoverEffect": true
+        },
         "metaPath": "src\\puck\\components\\generic\\Card\\card.meta.ts"
       },
       {
@@ -71060,6 +77392,29 @@ export const registry: CompiledRegistry = {
               "bordered"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "tabs-1",
+          "tabs": [
+            {
+              "id": "tab-1",
+              "label": "Tab 1",
+              "content": "Content for tab 1"
+            },
+            {
+              "id": "tab-2",
+              "label": "Tab 2",
+              "content": "Content for tab 2"
+            },
+            {
+              "id": "tab-3",
+              "label": "Tab 3",
+              "content": "Content for tab 3"
+            }
+          ],
+          "defaultTab": 0,
+          "alignment": "left",
+          "tabStyle": "underline"
         },
         "metaPath": "src\\puck\\components\\generic\\Tabs\\tabs.meta.ts"
       }
@@ -71190,6 +77545,15 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "card-1",
+          "padding": "lg",
+          "shadow": "md",
+          "border": true,
+          "rounded": "lg",
+          "backgroundColor": "#ffffff",
+          "hoverEffect": true
+        },
         "metaPath": "src\\puck\\components\\generic\\Card\\card.meta.ts"
       }
     ],
@@ -71318,6 +77682,15 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "card-1",
+          "padding": "lg",
+          "shadow": "md",
+          "border": true,
+          "rounded": "lg",
+          "backgroundColor": "#ffffff",
+          "hoverEffect": true
         },
         "metaPath": "src\\puck\\components\\generic\\Card\\card.meta.ts"
       }
@@ -71457,6 +77830,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "divider-1",
+          "style": "solid",
+          "thickness": "1",
+          "color": "#e5e7eb",
+          "width": "full",
+          "marginTop": "md",
+          "marginBottom": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Divider\\divider.meta.ts"
       }
     ],
@@ -71595,6 +77977,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "divider-1",
+          "style": "solid",
+          "thickness": "1",
+          "color": "#e5e7eb",
+          "width": "full",
+          "marginTop": "md",
+          "marginBottom": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Divider\\divider.meta.ts"
       },
       {
@@ -71686,6 +78077,13 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "spacer-1",
+          "height": "md",
+          "showDivider": false,
+          "dividerStyle": "solid",
+          "dividerColor": "#e5e7eb"
         },
         "metaPath": "src\\puck\\components\\generic\\Spacer\\spacer.meta.ts"
       }
@@ -71825,6 +78223,15 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "divider-1",
+          "style": "solid",
+          "thickness": "1",
+          "color": "#e5e7eb",
+          "width": "full",
+          "marginTop": "md",
+          "marginBottom": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Divider\\divider.meta.ts"
       }
     ],
@@ -71941,6 +78348,13 @@ export const registry: CompiledRegistry = {
               "xl"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "grid-1",
+          "columns": "3",
+          "tabletColumns": "2",
+          "mobileColumns": "1",
+          "gap": "md"
         },
         "metaPath": "src\\puck\\components\\generic\\Grid\\grid.meta.ts"
       }
@@ -72059,6 +78473,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "grid-1",
+          "columns": "3",
+          "tabletColumns": "2",
+          "mobileColumns": "1",
+          "gap": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Grid\\grid.meta.ts"
       }
     ],
@@ -72175,6 +78596,13 @@ export const registry: CompiledRegistry = {
               "xl"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "grid-1",
+          "columns": "3",
+          "tabletColumns": "2",
+          "mobileColumns": "1",
+          "gap": "md"
         },
         "metaPath": "src\\puck\\components\\generic\\Grid\\grid.meta.ts"
       },
@@ -72294,6 +78722,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "columns": "2",
+          "layout": "50-50",
+          "gap": "lg",
+          "mobileStack": true,
+          "alignItems": "start"
+        },
         "metaPath": "src\\puck\\components\\layout\\Columns\\columns.meta.ts"
       }
     ],
@@ -72411,6 +78846,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "grid-1",
+          "columns": "3",
+          "tabletColumns": "2",
+          "mobileColumns": "1",
+          "gap": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Grid\\grid.meta.ts"
       }
     ],
@@ -72527,6 +78969,13 @@ export const registry: CompiledRegistry = {
               "xl"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "grid-1",
+          "columns": "3",
+          "tabletColumns": "2",
+          "mobileColumns": "1",
+          "gap": "md"
         },
         "metaPath": "src\\puck\\components\\generic\\Grid\\grid.meta.ts"
       },
@@ -72672,6 +79121,19 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "htmlContent": "<div class=\"custom-section\">\n  <h2>Custom HTML Section</h2>\n  <p>Add your custom HTML content here. You can include any HTML tags, inline styles, and even JavaScript.</p>\n  <button class=\"custom-btn\">Click Me</button>\n</div>",
+          "cssContent": ".custom-section {\n  text-align: center;\n}\n\n.custom-btn {\n  background-color: #3b82f6;\n  color: white;\n  padding: 12px 24px;\n  border: none;\n  border-radius: 8px;\n  cursor: pointer;\n  font-weight: 600;\n}\n\n.custom-btn:hover {\n  background-color: #2563eb;\n}",
+          "useContainer": true,
+          "maxWidth": "lg",
+          "paddingTop": 64,
+          "paddingBottom": 64,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "backgroundColor": "#ffffff",
+          "backgroundImage": "",
+          "sanitizeHTML": true
+        },
         "metaPath": "src\\puck\\components\\homepage\\CustomHTML\\customhtml.meta.ts"
       },
       {
@@ -72789,6 +79251,13 @@ export const registry: CompiledRegistry = {
               "stretch"
             ]
           }
+        },
+        "defaultProps": {
+          "columns": "2",
+          "layout": "50-50",
+          "gap": "lg",
+          "mobileStack": true,
+          "alignItems": "start"
         },
         "metaPath": "src\\puck\\components\\layout\\Columns\\columns.meta.ts"
       },
@@ -72918,6 +79387,16 @@ export const registry: CompiledRegistry = {
           "borderRadius": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "justifyContent": "start",
+          "alignItems": "start",
+          "gap": "md",
+          "fullHeight": false,
+          "minHeight": "auto",
+          "padding": "0",
+          "backgroundColor": "transparent",
+          "borderRadius": "0"
         },
         "metaPath": "src\\puck\\components\\layout\\FlexColumn\\flexcolumn.meta.ts"
       },
@@ -73065,6 +79544,17 @@ export const registry: CompiledRegistry = {
           "borderRadius": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "justifyContent": "space-between",
+          "alignItems": "center",
+          "gap": "md",
+          "wrap": "nowrap",
+          "fullWidth": true,
+          "maxWidth": "100%",
+          "padding": "0",
+          "backgroundColor": "transparent",
+          "borderRadius": "0"
         },
         "metaPath": "src\\puck\\components\\layout\\FlexRow\\flexrow.meta.ts"
       }
@@ -73298,6 +79788,14 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "icon-1",
+          "size": "md",
+          "strokeWidth": "2",
+          "alignment": "center",
+          "marginTop": "none",
+          "marginBottom": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Icon\\icon.meta.ts"
       }
     ],
@@ -73529,6 +80027,14 @@ export const registry: CompiledRegistry = {
               "xl"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "icon-1",
+          "size": "md",
+          "strokeWidth": "2",
+          "alignment": "center",
+          "marginTop": "none",
+          "marginBottom": "md"
         },
         "metaPath": "src\\puck\\components\\generic\\Icon\\icon.meta.ts"
       }
@@ -73762,6 +80268,14 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "icon-1",
+          "size": "md",
+          "strokeWidth": "2",
+          "alignment": "center",
+          "marginTop": "none",
+          "marginBottom": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Icon\\icon.meta.ts"
       }
     ],
@@ -73993,6 +80507,14 @@ export const registry: CompiledRegistry = {
               "xl"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "icon-1",
+          "size": "md",
+          "strokeWidth": "2",
+          "alignment": "center",
+          "marginTop": "none",
+          "marginBottom": "md"
         },
         "metaPath": "src\\puck\\components\\generic\\Icon\\icon.meta.ts"
       }
@@ -74226,6 +80748,14 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "icon-1",
+          "size": "md",
+          "strokeWidth": "2",
+          "alignment": "center",
+          "marginTop": "none",
+          "marginBottom": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Icon\\icon.meta.ts"
       }
     ],
@@ -74458,6 +80988,14 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "icon-1",
+          "size": "md",
+          "strokeWidth": "2",
+          "alignment": "center",
+          "marginTop": "none",
+          "marginBottom": "md"
+        },
         "metaPath": "src\\puck\\components\\generic\\Icon\\icon.meta.ts"
       }
     ],
@@ -74569,6 +81107,24 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "list-1",
+          "items": [
+            {
+              "text": "First item"
+            },
+            {
+              "text": "Second item"
+            },
+            {
+              "text": "Third item"
+            }
+          ],
+          "type": "bullet",
+          "spacing": "normal",
+          "fontSize": "base",
+          "color": "#374151"
         },
         "metaPath": "src\\puck\\components\\generic\\List\\list.meta.ts"
       }
@@ -74682,6 +81238,24 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "list-1",
+          "items": [
+            {
+              "text": "First item"
+            },
+            {
+              "text": "Second item"
+            },
+            {
+              "text": "Third item"
+            }
+          ],
+          "type": "bullet",
+          "spacing": "normal",
+          "fontSize": "base",
+          "color": "#374151"
+        },
         "metaPath": "src\\puck\\components\\generic\\List\\list.meta.ts"
       }
     ],
@@ -74793,6 +81367,24 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "list-1",
+          "items": [
+            {
+              "text": "First item"
+            },
+            {
+              "text": "Second item"
+            },
+            {
+              "text": "Third item"
+            }
+          ],
+          "type": "bullet",
+          "spacing": "normal",
+          "fontSize": "base",
+          "color": "#374151"
         },
         "metaPath": "src\\puck\\components\\generic\\List\\list.meta.ts"
       }
@@ -74906,6 +81498,24 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "list-1",
+          "items": [
+            {
+              "text": "First item"
+            },
+            {
+              "text": "Second item"
+            },
+            {
+              "text": "Third item"
+            }
+          ],
+          "type": "bullet",
+          "spacing": "normal",
+          "fontSize": "base",
+          "color": "#374151"
+        },
         "metaPath": "src\\puck\\components\\generic\\List\\list.meta.ts"
       }
     ],
@@ -75018,6 +81628,24 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "list-1",
+          "items": [
+            {
+              "text": "First item"
+            },
+            {
+              "text": "Second item"
+            },
+            {
+              "text": "Third item"
+            }
+          ],
+          "type": "bullet",
+          "spacing": "normal",
+          "fontSize": "base",
+          "color": "#374151"
+        },
         "metaPath": "src\\puck\\components\\generic\\List\\list.meta.ts"
       }
     ],
@@ -75111,6 +81739,13 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "id": "spacer-1",
+          "height": "md",
+          "showDivider": false,
+          "dividerStyle": "solid",
+          "dividerColor": "#e5e7eb"
         },
         "metaPath": "src\\puck\\components\\generic\\Spacer\\spacer.meta.ts"
       }
@@ -75206,6 +81841,13 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "spacer-1",
+          "height": "md",
+          "showDivider": false,
+          "dividerStyle": "solid",
+          "dividerColor": "#e5e7eb"
+        },
         "metaPath": "src\\puck\\components\\generic\\Spacer\\spacer.meta.ts"
       }
     ],
@@ -75300,6 +81942,13 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "id": "spacer-1",
+          "height": "md",
+          "showDivider": false,
+          "dividerStyle": "solid",
+          "dividerColor": "#e5e7eb"
+        },
         "metaPath": "src\\puck\\components\\generic\\Spacer\\spacer.meta.ts"
       }
     ],
@@ -75385,6 +82034,29 @@ export const registry: CompiledRegistry = {
               "bordered"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "tabs-1",
+          "tabs": [
+            {
+              "id": "tab-1",
+              "label": "Tab 1",
+              "content": "Content for tab 1"
+            },
+            {
+              "id": "tab-2",
+              "label": "Tab 2",
+              "content": "Content for tab 2"
+            },
+            {
+              "id": "tab-3",
+              "label": "Tab 3",
+              "content": "Content for tab 3"
+            }
+          ],
+          "defaultTab": 0,
+          "alignment": "left",
+          "tabStyle": "underline"
         },
         "metaPath": "src\\puck\\components\\generic\\Tabs\\tabs.meta.ts"
       }
@@ -75472,6 +82144,29 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "tabs-1",
+          "tabs": [
+            {
+              "id": "tab-1",
+              "label": "Tab 1",
+              "content": "Content for tab 1"
+            },
+            {
+              "id": "tab-2",
+              "label": "Tab 2",
+              "content": "Content for tab 2"
+            },
+            {
+              "id": "tab-3",
+              "label": "Tab 3",
+              "content": "Content for tab 3"
+            }
+          ],
+          "defaultTab": 0,
+          "alignment": "left",
+          "tabStyle": "underline"
+        },
         "metaPath": "src\\puck\\components\\generic\\Tabs\\tabs.meta.ts"
       }
     ],
@@ -75558,6 +82253,29 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "id": "tabs-1",
+          "tabs": [
+            {
+              "id": "tab-1",
+              "label": "Tab 1",
+              "content": "Content for tab 1"
+            },
+            {
+              "id": "tab-2",
+              "label": "Tab 2",
+              "content": "Content for tab 2"
+            },
+            {
+              "id": "tab-3",
+              "label": "Tab 3",
+              "content": "Content for tab 3"
+            }
+          ],
+          "defaultTab": 0,
+          "alignment": "left",
+          "tabStyle": "underline"
+        },
         "metaPath": "src\\puck\\components\\generic\\Tabs\\tabs.meta.ts"
       }
     ],
@@ -75643,6 +82361,29 @@ export const registry: CompiledRegistry = {
               "bordered"
             ]
           }
+        },
+        "defaultProps": {
+          "id": "tabs-1",
+          "tabs": [
+            {
+              "id": "tab-1",
+              "label": "Tab 1",
+              "content": "Content for tab 1"
+            },
+            {
+              "id": "tab-2",
+              "label": "Tab 2",
+              "content": "Content for tab 2"
+            },
+            {
+              "id": "tab-3",
+              "label": "Tab 3",
+              "content": "Content for tab 3"
+            }
+          ],
+          "defaultTab": 0,
+          "alignment": "left",
+          "tabStyle": "underline"
         },
         "metaPath": "src\\puck\\components\\generic\\Tabs\\tabs.meta.ts"
       }
@@ -75907,6 +82648,28 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Browse our popular categories",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCategoryImage": true,
+          "showCategoryName": true,
+          "showProductCount": true,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "categorySource": "all",
+          "selectedCategoryIds": [],
+          "loading": false,
+          "error": ""
+        },
         "metaPath": "src\\puck\\components\\homepage\\CategoriesGrid\\categoriesgrid.meta.ts"
       }
     ],
@@ -76170,6 +82933,28 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Browse our popular categories",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCategoryImage": true,
+          "showCategoryName": true,
+          "showProductCount": true,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "categorySource": "all",
+          "selectedCategoryIds": [],
+          "loading": false,
+          "error": ""
+        },
         "metaPath": "src\\puck\\components\\homepage\\CategoriesGrid\\categoriesgrid.meta.ts"
       }
     ],
@@ -76432,6 +83217,28 @@ export const registry: CompiledRegistry = {
           "error": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Browse our popular categories",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCategoryImage": true,
+          "showCategoryName": true,
+          "showProductCount": true,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "categorySource": "all",
+          "selectedCategoryIds": [],
+          "loading": false,
+          "error": ""
         },
         "metaPath": "src\\puck\\components\\homepage\\CategoriesGrid\\categoriesgrid.meta.ts"
       },
@@ -76778,6 +83585,41 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Discover our curated collection",
+          "showTitle": true,
+          "categoryId": "",
+          "categoryName": "",
+          "displayMode": "grid",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 20,
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "loop": false,
+          "navigation": true,
+          "pagination": true,
+          "imageAspectRatio": "square",
+          "showPrice": true,
+          "showAddToCart": true,
+          "showRating": false,
+          "showBadges": true,
+          "showViewAllButton": true,
+          "viewAllButtonText": "View All Products",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827",
+          "cardStyle": "shadow",
+          "borderRadius": "md",
+          "buttonColor": "#000000",
+          "buttonTextColor": "#ffffff",
+          "buttonRadius": "medium",
+          "loading": false,
+          "error": ""
+        },
         "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
       }
     ],
@@ -77041,6 +83883,28 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Browse our popular categories",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCategoryImage": true,
+          "showCategoryName": true,
+          "showProductCount": true,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "categorySource": "all",
+          "selectedCategoryIds": [],
+          "loading": false,
+          "error": ""
+        },
         "metaPath": "src\\puck\\components\\homepage\\CategoriesGrid\\categoriesgrid.meta.ts"
       }
     ],
@@ -77303,6 +84167,28 @@ export const registry: CompiledRegistry = {
           "error": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Browse our popular categories",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCategoryImage": true,
+          "showCategoryName": true,
+          "showProductCount": true,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "categorySource": "all",
+          "selectedCategoryIds": [],
+          "loading": false,
+          "error": ""
         },
         "metaPath": "src\\puck\\components\\homepage\\CategoriesGrid\\categoriesgrid.meta.ts"
       }
@@ -77651,6 +84537,41 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Discover our curated collection",
+          "showTitle": true,
+          "categoryId": "",
+          "categoryName": "",
+          "displayMode": "grid",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 20,
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "loop": false,
+          "navigation": true,
+          "pagination": true,
+          "imageAspectRatio": "square",
+          "showPrice": true,
+          "showAddToCart": true,
+          "showRating": false,
+          "showBadges": true,
+          "showViewAllButton": true,
+          "viewAllButtonText": "View All Products",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827",
+          "cardStyle": "shadow",
+          "borderRadius": "md",
+          "buttonColor": "#000000",
+          "buttonTextColor": "#ffffff",
+          "buttonRadius": "medium",
+          "loading": false,
+          "error": ""
+        },
         "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
       },
       {
@@ -77936,6 +84857,35 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Featured Products",
+          "sectionSubtitle": "Check out our most popular items",
+          "showTitle": true,
+          "displayMode": "carousel",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 24,
+          "autoplay": true,
+          "autoplayDelay": 3000,
+          "loop": true,
+          "navigation": true,
+          "pagination": true,
+          "paginationStyle": "dots",
+          "productSource": "featured",
+          "categoryId": "",
+          "productIds": "",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "showPrice": true,
+          "showAddToCart": true,
+          "buttonText": "Add to Cart",
+          "loading": false,
+          "error": ""
+        },
         "metaPath": "src\\puck\\components\\homepage\\FeaturedProducts\\featuredproducts.meta.ts"
       },
       {
@@ -78196,6 +85146,26 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "slideHeight": "lg",
+          "contentWidth": "contained",
+          "contentPosition": "center",
+          "effect": "fade",
+          "showNavigation": true,
+          "navigationColor": "#ffffff",
+          "navigationPosition": "center",
+          "showPagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#ffffff",
+          "enableAutoplay": true,
+          "autoplayDelay": 5000,
+          "pauseOnHover": true,
+          "loop": true,
+          "speed": 600,
+          "enableOverlay": true,
+          "overlayColor": "#000000",
+          "overlayOpacity": 40
         },
         "metaPath": "src\\puck\\components\\swiper\\ContentSlider\\contentslider.meta.ts"
       },
@@ -78502,6 +85472,32 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "containerWidth": "large",
+          "customWidth": 800,
+          "maxHeight": 500,
+          "layout": "thumbnails",
+          "mainImageAspectRatio": "landscape",
+          "showThumbnails": true,
+          "thumbnailPosition": "bottom",
+          "thumbnailsPerView": 5,
+          "thumbnailSpacing": 12,
+          "showNavigation": true,
+          "navigationColor": "#000000",
+          "navigationSize": "md",
+          "showPagination": false,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "enableZoom": true,
+          "maxZoomScale": 3,
+          "loop": true,
+          "autoHeight": false,
+          "spaceBetween": 10,
+          "borderRadius": "md",
+          "showBorder": true,
+          "borderColor": "#e5e5e5",
+          "backgroundColor": "#f9fafb"
         },
         "metaPath": "src\\puck\\components\\swiper\\ImageGallery\\imagegallery.meta.ts"
       },
@@ -78872,6 +85868,41 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Popular Products",
+          "showTitle": true,
+          "productSource": "featured",
+          "productIds": "",
+          "collectionId": "",
+          "categoryId": "",
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 24,
+          "effect": "slide",
+          "speed": 600,
+          "navigation": true,
+          "navigationColor": "#000000",
+          "pagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "pauseOnHover": true,
+          "loop": true,
+          "centeredSlides": false,
+          "freeMode": false,
+          "showProductImage": true,
+          "showProductTitle": true,
+          "showProductPrice": true,
+          "showAddToCart": true,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#ffffff",
+          "cardBackground": "#ffffff",
+          "cardBorderRadius": "lg",
+          "cardShadow": true
+        },
         "metaPath": "src\\puck\\components\\swiper\\ProductCarousel\\productcarousel.meta.ts"
       }
     ],
@@ -79219,6 +86250,41 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Discover our curated collection",
+          "showTitle": true,
+          "categoryId": "",
+          "categoryName": "",
+          "displayMode": "grid",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 20,
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "loop": false,
+          "navigation": true,
+          "pagination": true,
+          "imageAspectRatio": "square",
+          "showPrice": true,
+          "showAddToCart": true,
+          "showRating": false,
+          "showBadges": true,
+          "showViewAllButton": true,
+          "viewAllButtonText": "View All Products",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827",
+          "cardStyle": "shadow",
+          "borderRadius": "md",
+          "buttonColor": "#000000",
+          "buttonTextColor": "#ffffff",
+          "buttonRadius": "medium",
+          "loading": false,
+          "error": ""
+        },
         "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
       }
     ],
@@ -79405,6 +86471,24 @@ export const registry: CompiledRegistry = {
               "live"
             ]
           }
+        },
+        "defaultProps": {
+          "title": "Limited Time Offer",
+          "subtitle": "Sale ends soon",
+          "timerStyle": "boxes",
+          "showDays": true,
+          "showHours": true,
+          "showMinutes": true,
+          "showSeconds": true,
+          "showCTA": true,
+          "ctaText": "Shop Now",
+          "ctaLink": "/sale",
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "timerColor": "#ffffff",
+          "accentColor": "#3b82f6",
+          "spacing": "normal",
+          "mode": "live"
         },
         "metaPath": "src\\puck\\components\\homepage\\CountdownTimer\\countdowntimer.meta.ts"
       }
@@ -79593,6 +86677,24 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Limited Time Offer",
+          "subtitle": "Sale ends soon",
+          "timerStyle": "boxes",
+          "showDays": true,
+          "showHours": true,
+          "showMinutes": true,
+          "showSeconds": true,
+          "showCTA": true,
+          "ctaText": "Shop Now",
+          "ctaLink": "/sale",
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "timerColor": "#ffffff",
+          "accentColor": "#3b82f6",
+          "spacing": "normal",
+          "mode": "live"
+        },
         "metaPath": "src\\puck\\components\\homepage\\CountdownTimer\\countdowntimer.meta.ts"
       }
     ],
@@ -79780,6 +86882,24 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Limited Time Offer",
+          "subtitle": "Sale ends soon",
+          "timerStyle": "boxes",
+          "showDays": true,
+          "showHours": true,
+          "showMinutes": true,
+          "showSeconds": true,
+          "showCTA": true,
+          "ctaText": "Shop Now",
+          "ctaLink": "/sale",
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "timerColor": "#ffffff",
+          "accentColor": "#3b82f6",
+          "spacing": "normal",
+          "mode": "live"
+        },
         "metaPath": "src\\puck\\components\\homepage\\CountdownTimer\\countdowntimer.meta.ts"
       },
       {
@@ -79916,6 +87036,14 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "fontSize": "xl",
+          "color": "black",
+          "showComparePrice": true,
+          "layout": "horizontal",
+          "fontWeight": "semibold",
+          "showSavingsPercentage": true
         },
         "metaPath": "src\\puck\\components\\product\\ProductPrice\\productprice.meta.ts"
       }
@@ -80104,6 +87232,24 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Limited Time Offer",
+          "subtitle": "Sale ends soon",
+          "timerStyle": "boxes",
+          "showDays": true,
+          "showHours": true,
+          "showMinutes": true,
+          "showSeconds": true,
+          "showCTA": true,
+          "ctaText": "Shop Now",
+          "ctaLink": "/sale",
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "timerColor": "#ffffff",
+          "accentColor": "#3b82f6",
+          "spacing": "normal",
+          "mode": "live"
+        },
         "metaPath": "src\\puck\\components\\homepage\\CountdownTimer\\countdowntimer.meta.ts"
       }
     ],
@@ -80290,6 +87436,24 @@ export const registry: CompiledRegistry = {
               "live"
             ]
           }
+        },
+        "defaultProps": {
+          "title": "Limited Time Offer",
+          "subtitle": "Sale ends soon",
+          "timerStyle": "boxes",
+          "showDays": true,
+          "showHours": true,
+          "showMinutes": true,
+          "showSeconds": true,
+          "showCTA": true,
+          "ctaText": "Shop Now",
+          "ctaLink": "/sale",
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "timerColor": "#ffffff",
+          "accentColor": "#3b82f6",
+          "spacing": "normal",
+          "mode": "live"
         },
         "metaPath": "src\\puck\\components\\homepage\\CountdownTimer\\countdowntimer.meta.ts"
       }
@@ -80478,6 +87642,24 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Limited Time Offer",
+          "subtitle": "Sale ends soon",
+          "timerStyle": "boxes",
+          "showDays": true,
+          "showHours": true,
+          "showMinutes": true,
+          "showSeconds": true,
+          "showCTA": true,
+          "ctaText": "Shop Now",
+          "ctaLink": "/sale",
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "timerColor": "#ffffff",
+          "accentColor": "#3b82f6",
+          "spacing": "normal",
+          "mode": "live"
+        },
         "metaPath": "src\\puck\\components\\homepage\\CountdownTimer\\countdowntimer.meta.ts"
       }
     ],
@@ -80623,6 +87805,19 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "htmlContent": "<div class=\"custom-section\">\n  <h2>Custom HTML Section</h2>\n  <p>Add your custom HTML content here. You can include any HTML tags, inline styles, and even JavaScript.</p>\n  <button class=\"custom-btn\">Click Me</button>\n</div>",
+          "cssContent": ".custom-section {\n  text-align: center;\n}\n\n.custom-btn {\n  background-color: #3b82f6;\n  color: white;\n  padding: 12px 24px;\n  border: none;\n  border-radius: 8px;\n  cursor: pointer;\n  font-weight: 600;\n}\n\n.custom-btn:hover {\n  background-color: #2563eb;\n}",
+          "useContainer": true,
+          "maxWidth": "lg",
+          "paddingTop": 64,
+          "paddingBottom": 64,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "backgroundColor": "#ffffff",
+          "backgroundImage": "",
+          "sanitizeHTML": true
         },
         "metaPath": "src\\puck\\components\\homepage\\CustomHTML\\customhtml.meta.ts"
       }
@@ -80770,6 +87965,19 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "htmlContent": "<div class=\"custom-section\">\n  <h2>Custom HTML Section</h2>\n  <p>Add your custom HTML content here. You can include any HTML tags, inline styles, and even JavaScript.</p>\n  <button class=\"custom-btn\">Click Me</button>\n</div>",
+          "cssContent": ".custom-section {\n  text-align: center;\n}\n\n.custom-btn {\n  background-color: #3b82f6;\n  color: white;\n  padding: 12px 24px;\n  border: none;\n  border-radius: 8px;\n  cursor: pointer;\n  font-weight: 600;\n}\n\n.custom-btn:hover {\n  background-color: #2563eb;\n}",
+          "useContainer": true,
+          "maxWidth": "lg",
+          "paddingTop": 64,
+          "paddingBottom": 64,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "backgroundColor": "#ffffff",
+          "backgroundImage": "",
+          "sanitizeHTML": true
+        },
         "metaPath": "src\\puck\\components\\homepage\\CustomHTML\\customhtml.meta.ts"
       }
     ],
@@ -80915,6 +88123,19 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "htmlContent": "<div class=\"custom-section\">\n  <h2>Custom HTML Section</h2>\n  <p>Add your custom HTML content here. You can include any HTML tags, inline styles, and even JavaScript.</p>\n  <button class=\"custom-btn\">Click Me</button>\n</div>",
+          "cssContent": ".custom-section {\n  text-align: center;\n}\n\n.custom-btn {\n  background-color: #3b82f6;\n  color: white;\n  padding: 12px 24px;\n  border: none;\n  border-radius: 8px;\n  cursor: pointer;\n  font-weight: 600;\n}\n\n.custom-btn:hover {\n  background-color: #2563eb;\n}",
+          "useContainer": true,
+          "maxWidth": "lg",
+          "paddingTop": 64,
+          "paddingBottom": 64,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "backgroundColor": "#ffffff",
+          "backgroundImage": "",
+          "sanitizeHTML": true
         },
         "metaPath": "src\\puck\\components\\homepage\\CustomHTML\\customhtml.meta.ts"
       }
@@ -81203,6 +88424,35 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Featured Products",
+          "sectionSubtitle": "Check out our most popular items",
+          "showTitle": true,
+          "displayMode": "carousel",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 24,
+          "autoplay": true,
+          "autoplayDelay": 3000,
+          "loop": true,
+          "navigation": true,
+          "pagination": true,
+          "paginationStyle": "dots",
+          "productSource": "featured",
+          "categoryId": "",
+          "productIds": "",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "showPrice": true,
+          "showAddToCart": true,
+          "buttonText": "Add to Cart",
+          "loading": false,
+          "error": ""
+        },
         "metaPath": "src\\puck\\components\\homepage\\FeaturedProducts\\featuredproducts.meta.ts"
       },
       {
@@ -81340,6 +88590,39 @@ export const registry: CompiledRegistry = {
           "minHeight": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "title": "",
+          "subtitle": "",
+          "layout": "2-column",
+          "spacing": "md",
+          "banners": [
+            {
+              "id": "1",
+              "title": "New Collection",
+              "subtitle": "Shop the latest styles",
+              "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=400&fit=crop",
+              "ctaText": "Shop Now",
+              "ctaLink": "/store",
+              "overlayOpacity": 40,
+              "textColor": "#ffffff",
+              "textPosition": "bottom-left"
+            },
+            {
+              "id": "2",
+              "title": "Best Sellers",
+              "subtitle": "Top-rated products",
+              "imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+              "ctaText": "Explore",
+              "ctaLink": "/store",
+              "overlayOpacity": 40,
+              "textColor": "#ffffff",
+              "textPosition": "bottom-left"
+            }
+          ],
+          "borderRadius": "md",
+          "hoverEffect": "zoom",
+          "minHeight": "300px"
         },
         "metaPath": "src\\puck\\components\\homepage\\PromotionalBannerGrid\\promotionalbannergrid.meta.ts"
       },
@@ -81710,6 +88993,41 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Popular Products",
+          "showTitle": true,
+          "productSource": "featured",
+          "productIds": "",
+          "collectionId": "",
+          "categoryId": "",
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 24,
+          "effect": "slide",
+          "speed": 600,
+          "navigation": true,
+          "navigationColor": "#000000",
+          "pagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "pauseOnHover": true,
+          "loop": true,
+          "centeredSlides": false,
+          "freeMode": false,
+          "showProductImage": true,
+          "showProductTitle": true,
+          "showProductPrice": true,
+          "showAddToCart": true,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#ffffff",
+          "cardBackground": "#ffffff",
+          "cardBorderRadius": "lg",
+          "cardShadow": true
+        },
         "metaPath": "src\\puck\\components\\swiper\\ProductCarousel\\productcarousel.meta.ts"
       }
     ],
@@ -81997,6 +89315,35 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Featured Products",
+          "sectionSubtitle": "Check out our most popular items",
+          "showTitle": true,
+          "displayMode": "carousel",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 24,
+          "autoplay": true,
+          "autoplayDelay": 3000,
+          "loop": true,
+          "navigation": true,
+          "pagination": true,
+          "paginationStyle": "dots",
+          "productSource": "featured",
+          "categoryId": "",
+          "productIds": "",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "showPrice": true,
+          "showAddToCart": true,
+          "buttonText": "Add to Cart",
+          "loading": false,
+          "error": ""
+        },
         "metaPath": "src\\puck\\components\\homepage\\FeaturedProducts\\featuredproducts.meta.ts"
       }
     ],
@@ -82283,6 +89630,35 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "sectionTitle": "Featured Products",
+          "sectionSubtitle": "Check out our most popular items",
+          "showTitle": true,
+          "displayMode": "carousel",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 24,
+          "autoplay": true,
+          "autoplayDelay": 3000,
+          "loop": true,
+          "navigation": true,
+          "pagination": true,
+          "paginationStyle": "dots",
+          "productSource": "featured",
+          "categoryId": "",
+          "productIds": "",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "showPrice": true,
+          "showAddToCart": true,
+          "buttonText": "Add to Cart",
+          "loading": false,
+          "error": ""
         },
         "metaPath": "src\\puck\\components\\homepage\\FeaturedProducts\\featuredproducts.meta.ts"
       }
@@ -82902,6 +90278,39 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "title": "",
+          "subtitle": "",
+          "layout": "2-column",
+          "spacing": "md",
+          "banners": [
+            {
+              "id": "1",
+              "title": "New Collection",
+              "subtitle": "Shop the latest styles",
+              "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=400&fit=crop",
+              "ctaText": "Shop Now",
+              "ctaLink": "/store",
+              "overlayOpacity": 40,
+              "textColor": "#ffffff",
+              "textPosition": "bottom-left"
+            },
+            {
+              "id": "2",
+              "title": "Best Sellers",
+              "subtitle": "Top-rated products",
+              "imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+              "ctaText": "Explore",
+              "ctaLink": "/store",
+              "overlayOpacity": 40,
+              "textColor": "#ffffff",
+              "textPosition": "bottom-left"
+            }
+          ],
+          "borderRadius": "md",
+          "hoverEffect": "zoom",
+          "minHeight": "300px"
+        },
         "metaPath": "src\\puck\\components\\homepage\\PromotionalBannerGrid\\promotionalbannergrid.meta.ts"
       }
     ],
@@ -83279,6 +90688,39 @@ export const registry: CompiledRegistry = {
           "minHeight": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "title": "",
+          "subtitle": "",
+          "layout": "2-column",
+          "spacing": "md",
+          "banners": [
+            {
+              "id": "1",
+              "title": "New Collection",
+              "subtitle": "Shop the latest styles",
+              "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=400&fit=crop",
+              "ctaText": "Shop Now",
+              "ctaLink": "/store",
+              "overlayOpacity": 40,
+              "textColor": "#ffffff",
+              "textPosition": "bottom-left"
+            },
+            {
+              "id": "2",
+              "title": "Best Sellers",
+              "subtitle": "Top-rated products",
+              "imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+              "ctaText": "Explore",
+              "ctaLink": "/store",
+              "overlayOpacity": 40,
+              "textColor": "#ffffff",
+              "textPosition": "bottom-left"
+            }
+          ],
+          "borderRadius": "md",
+          "hoverEffect": "zoom",
+          "minHeight": "300px"
         },
         "metaPath": "src\\puck\\components\\homepage\\PromotionalBannerGrid\\promotionalbannergrid.meta.ts"
       }
@@ -83721,6 +91163,28 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Join Our Newsletter",
+          "subtitle": "Stay Updated",
+          "description": "Get the latest updates on new products, exclusive deals, and special offers delivered straight to your inbox.",
+          "placeholderText": "Enter your email address",
+          "buttonText": "Subscribe",
+          "showPrivacyText": true,
+          "privacyText": "We respect your privacy. Unsubscribe at any time.",
+          "layout": "centered",
+          "showImage": true,
+          "imageUrl": "https://via.placeholder.com/600x400?text=Newsletter+Image",
+          "collectName": false,
+          "nameRequired": false,
+          "successMessage": "Thanks for subscribing! Check your email to confirm.",
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "inputBackground": "#ffffff",
+          "inputBorder": "#e5e5e5",
+          "buttonBackground": "#3b82f6",
+          "buttonTextColor": "#ffffff",
+          "borderRadius": "md"
+        },
         "metaPath": "src\\puck\\components\\homepage\\Newsletter\\newsletter.meta.ts"
       }
     ],
@@ -83921,6 +91385,28 @@ export const registry: CompiledRegistry = {
               "full"
             ]
           }
+        },
+        "defaultProps": {
+          "title": "Join Our Newsletter",
+          "subtitle": "Stay Updated",
+          "description": "Get the latest updates on new products, exclusive deals, and special offers delivered straight to your inbox.",
+          "placeholderText": "Enter your email address",
+          "buttonText": "Subscribe",
+          "showPrivacyText": true,
+          "privacyText": "We respect your privacy. Unsubscribe at any time.",
+          "layout": "centered",
+          "showImage": true,
+          "imageUrl": "https://via.placeholder.com/600x400?text=Newsletter+Image",
+          "collectName": false,
+          "nameRequired": false,
+          "successMessage": "Thanks for subscribing! Check your email to confirm.",
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "inputBackground": "#ffffff",
+          "inputBorder": "#e5e5e5",
+          "buttonBackground": "#3b82f6",
+          "buttonTextColor": "#ffffff",
+          "borderRadius": "md"
         },
         "metaPath": "src\\puck\\components\\homepage\\Newsletter\\newsletter.meta.ts"
       }
@@ -84123,6 +91609,28 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Join Our Newsletter",
+          "subtitle": "Stay Updated",
+          "description": "Get the latest updates on new products, exclusive deals, and special offers delivered straight to your inbox.",
+          "placeholderText": "Enter your email address",
+          "buttonText": "Subscribe",
+          "showPrivacyText": true,
+          "privacyText": "We respect your privacy. Unsubscribe at any time.",
+          "layout": "centered",
+          "showImage": true,
+          "imageUrl": "https://via.placeholder.com/600x400?text=Newsletter+Image",
+          "collectName": false,
+          "nameRequired": false,
+          "successMessage": "Thanks for subscribing! Check your email to confirm.",
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "inputBackground": "#ffffff",
+          "inputBorder": "#e5e5e5",
+          "buttonBackground": "#3b82f6",
+          "buttonTextColor": "#ffffff",
+          "borderRadius": "md"
+        },
         "metaPath": "src\\puck\\components\\homepage\\Newsletter\\newsletter.meta.ts"
       }
     ],
@@ -84323,6 +91831,28 @@ export const registry: CompiledRegistry = {
               "full"
             ]
           }
+        },
+        "defaultProps": {
+          "title": "Join Our Newsletter",
+          "subtitle": "Stay Updated",
+          "description": "Get the latest updates on new products, exclusive deals, and special offers delivered straight to your inbox.",
+          "placeholderText": "Enter your email address",
+          "buttonText": "Subscribe",
+          "showPrivacyText": true,
+          "privacyText": "We respect your privacy. Unsubscribe at any time.",
+          "layout": "centered",
+          "showImage": true,
+          "imageUrl": "https://via.placeholder.com/600x400?text=Newsletter+Image",
+          "collectName": false,
+          "nameRequired": false,
+          "successMessage": "Thanks for subscribing! Check your email to confirm.",
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "inputBackground": "#ffffff",
+          "inputBorder": "#e5e5e5",
+          "buttonBackground": "#3b82f6",
+          "buttonTextColor": "#ffffff",
+          "borderRadius": "md"
         },
         "metaPath": "src\\puck\\components\\homepage\\Newsletter\\newsletter.meta.ts"
       }
@@ -84525,6 +92055,28 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Join Our Newsletter",
+          "subtitle": "Stay Updated",
+          "description": "Get the latest updates on new products, exclusive deals, and special offers delivered straight to your inbox.",
+          "placeholderText": "Enter your email address",
+          "buttonText": "Subscribe",
+          "showPrivacyText": true,
+          "privacyText": "We respect your privacy. Unsubscribe at any time.",
+          "layout": "centered",
+          "showImage": true,
+          "imageUrl": "https://via.placeholder.com/600x400?text=Newsletter+Image",
+          "collectName": false,
+          "nameRequired": false,
+          "successMessage": "Thanks for subscribing! Check your email to confirm.",
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "inputBackground": "#ffffff",
+          "inputBorder": "#e5e5e5",
+          "buttonBackground": "#3b82f6",
+          "buttonTextColor": "#ffffff",
+          "borderRadius": "md"
+        },
         "metaPath": "src\\puck\\components\\homepage\\Newsletter\\newsletter.meta.ts"
       }
     ],
@@ -84664,6 +92216,39 @@ export const registry: CompiledRegistry = {
           "minHeight": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "title": "",
+          "subtitle": "",
+          "layout": "2-column",
+          "spacing": "md",
+          "banners": [
+            {
+              "id": "1",
+              "title": "New Collection",
+              "subtitle": "Shop the latest styles",
+              "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=400&fit=crop",
+              "ctaText": "Shop Now",
+              "ctaLink": "/store",
+              "overlayOpacity": 40,
+              "textColor": "#ffffff",
+              "textPosition": "bottom-left"
+            },
+            {
+              "id": "2",
+              "title": "Best Sellers",
+              "subtitle": "Top-rated products",
+              "imageUrl": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+              "ctaText": "Explore",
+              "ctaLink": "/store",
+              "overlayOpacity": 40,
+              "textColor": "#ffffff",
+              "textPosition": "bottom-left"
+            }
+          ],
+          "borderRadius": "md",
+          "hoverEffect": "zoom",
+          "minHeight": "300px"
         },
         "metaPath": "src\\puck\\components\\homepage\\PromotionalBannerGrid\\promotionalbannergrid.meta.ts"
       }
@@ -84819,6 +92404,48 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "title": "Our Impact",
+          "subtitle": "Trusted by thousands",
+          "columns": "4",
+          "alignment": "center",
+          "stats": [
+            {
+              "id": "1",
+              "number": "10K+",
+              "label": "Happy Customers",
+              "icon": "people",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "2",
+              "number": "500+",
+              "label": "Products",
+              "icon": "package",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "3",
+              "number": "50+",
+              "label": "Countries",
+              "icon": "globe",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "4",
+              "number": "99%",
+              "label": "Satisfaction",
+              "icon": "star",
+              "iconColor": "#3b82f6"
+            }
+          ],
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "numberColor": "#3b82f6",
+          "spacing": "normal",
+          "showDividers": true,
+          "borderRadius": "md"
         },
         "metaPath": "src\\puck\\components\\homepage\\StatsSection\\statssection.meta.ts"
       },
@@ -85116,6 +92743,35 @@ export const registry: CompiledRegistry = {
               "xl"
             ]
           }
+        },
+        "defaultProps": {
+          "sectionTitle": "What Our Customers Say",
+          "sectionSubtitle": "Real reviews from real customers",
+          "showTitle": true,
+          "displayMode": "carousel",
+          "layout": "card",
+          "columns": 3,
+          "maxTestimonials": 6,
+          "slidesPerView": 2,
+          "slidesPerViewTablet": 1,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 32,
+          "autoplay": true,
+          "autoplayDelay": 5000,
+          "loop": true,
+          "navigation": true,
+          "pagination": true,
+          "effect": "slide",
+          "showAvatar": true,
+          "showName": true,
+          "showRole": true,
+          "showRating": true,
+          "showDate": false,
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardBackground": "#ffffff",
+          "accentColor": "#3b82f6",
+          "borderRadius": "lg"
         },
         "metaPath": "src\\puck\\components\\homepage\\Testimonials\\testimonials.meta.ts"
       },
@@ -85281,6 +92937,48 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Why Shop With Us",
+          "subtitle": "",
+          "layout": "horizontal",
+          "columns": "4",
+          "alignment": "center",
+          "badges": [
+            {
+              "id": "1",
+              "icon": "truck",
+              "title": "Free Shipping",
+              "description": "On orders over $50",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "2",
+              "icon": "shield",
+              "title": "Secure Checkout",
+              "description": "100% secure payment",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "3",
+              "icon": "refresh",
+              "title": "Easy Returns",
+              "description": "30-day return policy",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "4",
+              "icon": "support",
+              "title": "24/7 Support",
+              "description": "Here when you need us",
+              "iconColor": "#3b82f6"
+            }
+          ],
+          "backgroundColor": "#ffffff",
+          "textColor": "#1f2937",
+          "spacing": "normal",
+          "showBorder": true,
+          "borderRadius": "none"
+        },
         "metaPath": "src\\puck\\components\\homepage\\TrustBadges\\trustbadges.meta.ts"
       }
     ],
@@ -85436,6 +93134,48 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Our Impact",
+          "subtitle": "Trusted by thousands",
+          "columns": "4",
+          "alignment": "center",
+          "stats": [
+            {
+              "id": "1",
+              "number": "10K+",
+              "label": "Happy Customers",
+              "icon": "people",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "2",
+              "number": "500+",
+              "label": "Products",
+              "icon": "package",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "3",
+              "number": "50+",
+              "label": "Countries",
+              "icon": "globe",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "4",
+              "number": "99%",
+              "label": "Satisfaction",
+              "icon": "star",
+              "iconColor": "#3b82f6"
+            }
+          ],
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "numberColor": "#3b82f6",
+          "spacing": "normal",
+          "showDividers": true,
+          "borderRadius": "md"
+        },
         "metaPath": "src\\puck\\components\\homepage\\StatsSection\\statssection.meta.ts"
       }
     ],
@@ -85590,6 +93330,48 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "title": "Our Impact",
+          "subtitle": "Trusted by thousands",
+          "columns": "4",
+          "alignment": "center",
+          "stats": [
+            {
+              "id": "1",
+              "number": "10K+",
+              "label": "Happy Customers",
+              "icon": "people",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "2",
+              "number": "500+",
+              "label": "Products",
+              "icon": "package",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "3",
+              "number": "50+",
+              "label": "Countries",
+              "icon": "globe",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "4",
+              "number": "99%",
+              "label": "Satisfaction",
+              "icon": "star",
+              "iconColor": "#3b82f6"
+            }
+          ],
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "numberColor": "#3b82f6",
+          "spacing": "normal",
+          "showDividers": true,
+          "borderRadius": "md"
         },
         "metaPath": "src\\puck\\components\\homepage\\StatsSection\\statssection.meta.ts"
       },
@@ -85888,6 +93670,35 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "sectionTitle": "What Our Customers Say",
+          "sectionSubtitle": "Real reviews from real customers",
+          "showTitle": true,
+          "displayMode": "carousel",
+          "layout": "card",
+          "columns": 3,
+          "maxTestimonials": 6,
+          "slidesPerView": 2,
+          "slidesPerViewTablet": 1,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 32,
+          "autoplay": true,
+          "autoplayDelay": 5000,
+          "loop": true,
+          "navigation": true,
+          "pagination": true,
+          "effect": "slide",
+          "showAvatar": true,
+          "showName": true,
+          "showRole": true,
+          "showRating": true,
+          "showDate": false,
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardBackground": "#ffffff",
+          "accentColor": "#3b82f6",
+          "borderRadius": "lg"
+        },
         "metaPath": "src\\puck\\components\\homepage\\Testimonials\\testimonials.meta.ts"
       },
       {
@@ -85981,6 +93792,12 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showRatingsSummary": true,
+          "showVerifiedBadge": true,
+          "sortBy": "recent",
+          "reviewsPerPage": 5
         },
         "metaPath": "src\\puck\\components\\product\\ProductReviews\\productreviews.meta.ts"
       },
@@ -86291,6 +94108,35 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "layout": "card",
+          "cardsPerView": 3,
+          "cardsPerViewTablet": 2,
+          "cardsPerViewMobile": 1,
+          "effect": "slide",
+          "showNavigation": true,
+          "navigationColor": "#1f2937",
+          "showPagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "enableAutoplay": true,
+          "autoplayDelay": 5000,
+          "pauseOnHover": true,
+          "loop": true,
+          "spaceBetween": 24,
+          "centeredSlides": false,
+          "showAvatar": true,
+          "showRating": true,
+          "showRole": true,
+          "backgroundColor": "#f9fafb",
+          "cardBackground": "#ffffff",
+          "textColor": "#1f2937",
+          "accentColor": "#f59e0b",
+          "borderRadius": "lg",
+          "cardShadow": "md",
+          "paddingY": 80,
+          "paddingX": 20
+        },
         "metaPath": "src\\puck\\components\\swiper\\TestimonialCarousel\\testimonialcarousel.meta.ts"
       }
     ],
@@ -86446,6 +94292,48 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Our Impact",
+          "subtitle": "Trusted by thousands",
+          "columns": "4",
+          "alignment": "center",
+          "stats": [
+            {
+              "id": "1",
+              "number": "10K+",
+              "label": "Happy Customers",
+              "icon": "people",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "2",
+              "number": "500+",
+              "label": "Products",
+              "icon": "package",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "3",
+              "number": "50+",
+              "label": "Countries",
+              "icon": "globe",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "4",
+              "number": "99%",
+              "label": "Satisfaction",
+              "icon": "star",
+              "iconColor": "#3b82f6"
+            }
+          ],
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "numberColor": "#3b82f6",
+          "spacing": "normal",
+          "showDividers": true,
+          "borderRadius": "md"
+        },
         "metaPath": "src\\puck\\components\\homepage\\StatsSection\\statssection.meta.ts"
       }
     ],
@@ -86600,6 +94488,48 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "title": "Our Impact",
+          "subtitle": "Trusted by thousands",
+          "columns": "4",
+          "alignment": "center",
+          "stats": [
+            {
+              "id": "1",
+              "number": "10K+",
+              "label": "Happy Customers",
+              "icon": "people",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "2",
+              "number": "500+",
+              "label": "Products",
+              "icon": "package",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "3",
+              "number": "50+",
+              "label": "Countries",
+              "icon": "globe",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "4",
+              "number": "99%",
+              "label": "Satisfaction",
+              "icon": "star",
+              "iconColor": "#3b82f6"
+            }
+          ],
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "numberColor": "#3b82f6",
+          "spacing": "normal",
+          "showDividers": true,
+          "borderRadius": "md"
         },
         "metaPath": "src\\puck\\components\\homepage\\StatsSection\\statssection.meta.ts"
       }
@@ -86900,6 +94830,35 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "sectionTitle": "What Our Customers Say",
+          "sectionSubtitle": "Real reviews from real customers",
+          "showTitle": true,
+          "displayMode": "carousel",
+          "layout": "card",
+          "columns": 3,
+          "maxTestimonials": 6,
+          "slidesPerView": 2,
+          "slidesPerViewTablet": 1,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 32,
+          "autoplay": true,
+          "autoplayDelay": 5000,
+          "loop": true,
+          "navigation": true,
+          "pagination": true,
+          "effect": "slide",
+          "showAvatar": true,
+          "showName": true,
+          "showRole": true,
+          "showRating": true,
+          "showDate": false,
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardBackground": "#ffffff",
+          "accentColor": "#3b82f6",
+          "borderRadius": "lg"
+        },
         "metaPath": "src\\puck\\components\\homepage\\Testimonials\\testimonials.meta.ts"
       },
       {
@@ -86993,6 +94952,12 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showRatingsSummary": true,
+          "showVerifiedBadge": true,
+          "sortBy": "recent",
+          "reviewsPerPage": 5
         },
         "metaPath": "src\\puck\\components\\product\\ProductReviews\\productreviews.meta.ts"
       }
@@ -87293,6 +95258,35 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "sectionTitle": "What Our Customers Say",
+          "sectionSubtitle": "Real reviews from real customers",
+          "showTitle": true,
+          "displayMode": "carousel",
+          "layout": "card",
+          "columns": 3,
+          "maxTestimonials": 6,
+          "slidesPerView": 2,
+          "slidesPerViewTablet": 1,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 32,
+          "autoplay": true,
+          "autoplayDelay": 5000,
+          "loop": true,
+          "navigation": true,
+          "pagination": true,
+          "effect": "slide",
+          "showAvatar": true,
+          "showName": true,
+          "showRole": true,
+          "showRating": true,
+          "showDate": false,
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardBackground": "#ffffff",
+          "accentColor": "#3b82f6",
+          "borderRadius": "lg"
+        },
         "metaPath": "src\\puck\\components\\homepage\\Testimonials\\testimonials.meta.ts"
       }
     ],
@@ -87591,6 +95585,35 @@ export const registry: CompiledRegistry = {
               "xl"
             ]
           }
+        },
+        "defaultProps": {
+          "sectionTitle": "What Our Customers Say",
+          "sectionSubtitle": "Real reviews from real customers",
+          "showTitle": true,
+          "displayMode": "carousel",
+          "layout": "card",
+          "columns": 3,
+          "maxTestimonials": 6,
+          "slidesPerView": 2,
+          "slidesPerViewTablet": 1,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 32,
+          "autoplay": true,
+          "autoplayDelay": 5000,
+          "loop": true,
+          "navigation": true,
+          "pagination": true,
+          "effect": "slide",
+          "showAvatar": true,
+          "showName": true,
+          "showRole": true,
+          "showRating": true,
+          "showDate": false,
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardBackground": "#ffffff",
+          "accentColor": "#3b82f6",
+          "borderRadius": "lg"
         },
         "metaPath": "src\\puck\\components\\homepage\\Testimonials\\testimonials.meta.ts"
       }
@@ -87891,6 +95914,35 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "sectionTitle": "What Our Customers Say",
+          "sectionSubtitle": "Real reviews from real customers",
+          "showTitle": true,
+          "displayMode": "carousel",
+          "layout": "card",
+          "columns": 3,
+          "maxTestimonials": 6,
+          "slidesPerView": 2,
+          "slidesPerViewTablet": 1,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 32,
+          "autoplay": true,
+          "autoplayDelay": 5000,
+          "loop": true,
+          "navigation": true,
+          "pagination": true,
+          "effect": "slide",
+          "showAvatar": true,
+          "showName": true,
+          "showRole": true,
+          "showRating": true,
+          "showDate": false,
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardBackground": "#ffffff",
+          "accentColor": "#3b82f6",
+          "borderRadius": "lg"
+        },
         "metaPath": "src\\puck\\components\\homepage\\Testimonials\\testimonials.meta.ts"
       },
       {
@@ -87984,6 +96036,12 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showRatingsSummary": true,
+          "showVerifiedBadge": true,
+          "sortBy": "recent",
+          "reviewsPerPage": 5
         },
         "metaPath": "src\\puck\\components\\product\\ProductReviews\\productreviews.meta.ts"
       }
@@ -88151,6 +96209,48 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Why Shop With Us",
+          "subtitle": "",
+          "layout": "horizontal",
+          "columns": "4",
+          "alignment": "center",
+          "badges": [
+            {
+              "id": "1",
+              "icon": "truck",
+              "title": "Free Shipping",
+              "description": "On orders over $50",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "2",
+              "icon": "shield",
+              "title": "Secure Checkout",
+              "description": "100% secure payment",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "3",
+              "icon": "refresh",
+              "title": "Easy Returns",
+              "description": "30-day return policy",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "4",
+              "icon": "support",
+              "title": "24/7 Support",
+              "description": "Here when you need us",
+              "iconColor": "#3b82f6"
+            }
+          ],
+          "backgroundColor": "#ffffff",
+          "textColor": "#1f2937",
+          "spacing": "normal",
+          "showBorder": true,
+          "borderRadius": "none"
+        },
         "metaPath": "src\\puck\\components\\homepage\\TrustBadges\\trustbadges.meta.ts"
       }
     ],
@@ -88316,6 +96416,48 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "title": "Why Shop With Us",
+          "subtitle": "",
+          "layout": "horizontal",
+          "columns": "4",
+          "alignment": "center",
+          "badges": [
+            {
+              "id": "1",
+              "icon": "truck",
+              "title": "Free Shipping",
+              "description": "On orders over $50",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "2",
+              "icon": "shield",
+              "title": "Secure Checkout",
+              "description": "100% secure payment",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "3",
+              "icon": "refresh",
+              "title": "Easy Returns",
+              "description": "30-day return policy",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "4",
+              "icon": "support",
+              "title": "24/7 Support",
+              "description": "Here when you need us",
+              "iconColor": "#3b82f6"
+            }
+          ],
+          "backgroundColor": "#ffffff",
+          "textColor": "#1f2937",
+          "spacing": "normal",
+          "showBorder": true,
+          "borderRadius": "none"
         },
         "metaPath": "src\\puck\\components\\homepage\\TrustBadges\\trustbadges.meta.ts"
       }
@@ -88483,6 +96625,48 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "title": "Why Shop With Us",
+          "subtitle": "",
+          "layout": "horizontal",
+          "columns": "4",
+          "alignment": "center",
+          "badges": [
+            {
+              "id": "1",
+              "icon": "truck",
+              "title": "Free Shipping",
+              "description": "On orders over $50",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "2",
+              "icon": "shield",
+              "title": "Secure Checkout",
+              "description": "100% secure payment",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "3",
+              "icon": "refresh",
+              "title": "Easy Returns",
+              "description": "30-day return policy",
+              "iconColor": "#3b82f6"
+            },
+            {
+              "id": "4",
+              "icon": "support",
+              "title": "24/7 Support",
+              "description": "Here when you need us",
+              "iconColor": "#3b82f6"
+            }
+          ],
+          "backgroundColor": "#ffffff",
+          "textColor": "#1f2937",
+          "spacing": "normal",
+          "showBorder": true,
+          "borderRadius": "none"
+        },
         "metaPath": "src\\puck\\components\\homepage\\TrustBadges\\trustbadges.meta.ts"
       }
     ],
@@ -88603,6 +96787,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "columns": "2",
+          "layout": "50-50",
+          "gap": "lg",
+          "mobileStack": true,
+          "alignItems": "start"
+        },
         "metaPath": "src\\puck\\components\\layout\\Columns\\columns.meta.ts"
       }
     ],
@@ -88722,6 +96913,13 @@ export const registry: CompiledRegistry = {
               "stretch"
             ]
           }
+        },
+        "defaultProps": {
+          "columns": "2",
+          "layout": "50-50",
+          "gap": "lg",
+          "mobileStack": true,
+          "alignItems": "start"
         },
         "metaPath": "src\\puck\\components\\layout\\Columns\\columns.meta.ts"
       },
@@ -88870,6 +97068,17 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "justifyContent": "space-between",
+          "alignItems": "center",
+          "gap": "md",
+          "wrap": "nowrap",
+          "fullWidth": true,
+          "maxWidth": "100%",
+          "padding": "0",
+          "backgroundColor": "transparent",
+          "borderRadius": "0"
+        },
         "metaPath": "src\\puck\\components\\layout\\FlexRow\\flexrow.meta.ts"
       }
     ],
@@ -88942,6 +97151,10 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "maxWidth": "xl",
+          "padding": "md"
         },
         "metaPath": "src\\puck\\components\\layout\\Container\\container.meta.ts"
       }
@@ -89016,6 +97229,10 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "maxWidth": "xl",
+          "padding": "md"
+        },
         "metaPath": "src\\puck\\components\\layout\\Container\\container.meta.ts"
       }
     ],
@@ -89088,6 +97305,10 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "maxWidth": "xl",
+          "padding": "md"
         },
         "metaPath": "src\\puck\\components\\layout\\Container\\container.meta.ts"
       }
@@ -89220,6 +97441,16 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "justifyContent": "start",
+          "alignItems": "start",
+          "gap": "md",
+          "fullHeight": false,
+          "minHeight": "auto",
+          "padding": "0",
+          "backgroundColor": "transparent",
+          "borderRadius": "0"
+        },
         "metaPath": "src\\puck\\components\\layout\\FlexColumn\\flexcolumn.meta.ts"
       },
       {
@@ -89367,6 +97598,17 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "justifyContent": "space-between",
+          "alignItems": "center",
+          "gap": "md",
+          "wrap": "nowrap",
+          "fullWidth": true,
+          "maxWidth": "100%",
+          "padding": "0",
+          "backgroundColor": "transparent",
+          "borderRadius": "0"
+        },
         "metaPath": "src\\puck\\components\\layout\\FlexRow\\flexrow.meta.ts"
       }
     ],
@@ -89497,6 +97739,16 @@ export const registry: CompiledRegistry = {
           "borderRadius": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "justifyContent": "start",
+          "alignItems": "start",
+          "gap": "md",
+          "fullHeight": false,
+          "minHeight": "auto",
+          "padding": "0",
+          "backgroundColor": "transparent",
+          "borderRadius": "0"
         },
         "metaPath": "src\\puck\\components\\layout\\FlexColumn\\flexcolumn.meta.ts"
       }
@@ -89629,6 +97881,16 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "justifyContent": "start",
+          "alignItems": "start",
+          "gap": "md",
+          "fullHeight": false,
+          "minHeight": "auto",
+          "padding": "0",
+          "backgroundColor": "transparent",
+          "borderRadius": "0"
+        },
         "metaPath": "src\\puck\\components\\layout\\FlexColumn\\flexcolumn.meta.ts"
       }
     ],
@@ -89759,6 +98021,16 @@ export const registry: CompiledRegistry = {
           "borderRadius": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "justifyContent": "start",
+          "alignItems": "start",
+          "gap": "md",
+          "fullHeight": false,
+          "minHeight": "auto",
+          "padding": "0",
+          "backgroundColor": "transparent",
+          "borderRadius": "0"
         },
         "metaPath": "src\\puck\\components\\layout\\FlexColumn\\flexcolumn.meta.ts"
       }
@@ -89909,6 +98181,17 @@ export const registry: CompiledRegistry = {
             "type": "string"
           }
         },
+        "defaultProps": {
+          "justifyContent": "space-between",
+          "alignItems": "center",
+          "gap": "md",
+          "wrap": "nowrap",
+          "fullWidth": true,
+          "maxWidth": "100%",
+          "padding": "0",
+          "backgroundColor": "transparent",
+          "borderRadius": "0"
+        },
         "metaPath": "src\\puck\\components\\layout\\FlexRow\\flexrow.meta.ts"
       }
     ],
@@ -90057,6 +98340,17 @@ export const registry: CompiledRegistry = {
           "borderRadius": {
             "type": "string"
           }
+        },
+        "defaultProps": {
+          "justifyContent": "space-between",
+          "alignItems": "center",
+          "gap": "md",
+          "wrap": "nowrap",
+          "fullWidth": true,
+          "maxWidth": "100%",
+          "padding": "0",
+          "backgroundColor": "transparent",
+          "borderRadius": "0"
         },
         "metaPath": "src\\puck\\components\\layout\\FlexRow\\flexrow.meta.ts"
       }
@@ -90207,6 +98501,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "columns": "4",
+          "backgroundColor": "#1f2937",
+          "textColor": "#ffffff",
+          "linkHoverColor": "#3b82f6",
+          "menuConfigs": [],
+          "paddingTop": "3rem",
+          "paddingBottom": "2rem",
+          "menuLoading": false,
+          "menuError": false
+        },
         "metaPath": "src\\puck\\components\\layout\\Footer\\footer.meta.ts"
       }
     ],
@@ -90355,6 +98660,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "columns": "4",
+          "backgroundColor": "#1f2937",
+          "textColor": "#ffffff",
+          "linkHoverColor": "#3b82f6",
+          "menuConfigs": [],
+          "paddingTop": "3rem",
+          "paddingBottom": "2rem",
+          "menuLoading": false,
+          "menuError": false
         },
         "metaPath": "src\\puck\\components\\layout\\Footer\\footer.meta.ts"
       }
@@ -90505,6 +98821,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "columns": "4",
+          "backgroundColor": "#1f2937",
+          "textColor": "#ffffff",
+          "linkHoverColor": "#3b82f6",
+          "menuConfigs": [],
+          "paddingTop": "3rem",
+          "paddingBottom": "2rem",
+          "menuLoading": false,
+          "menuError": false
+        },
         "metaPath": "src\\puck\\components\\layout\\Footer\\footer.meta.ts"
       }
     ],
@@ -90653,6 +98980,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "columns": "4",
+          "backgroundColor": "#1f2937",
+          "textColor": "#ffffff",
+          "linkHoverColor": "#3b82f6",
+          "menuConfigs": [],
+          "paddingTop": "3rem",
+          "paddingBottom": "2rem",
+          "menuLoading": false,
+          "menuError": false
         },
         "metaPath": "src\\puck\\components\\layout\\Footer\\footer.meta.ts"
       },
@@ -90930,6 +99268,34 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "layout": "left-center-right",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "sticky": true,
+          "shadow": true,
+          "transparent": false,
+          "logoPosition": "left",
+          "logoMaxWidth": "150px",
+          "logoUrl": "/logo.svg",
+          "logoAlt": "Store Logo",
+          "menuPosition": "center",
+          "menuStyle": "horizontal",
+          "menuHoverColor": "#3b82f6",
+          "actions": [
+            "search",
+            "account",
+            "cart"
+          ],
+          "actionsPosition": "right",
+          "showCartBadge": true,
+          "showLabels": false,
+          "cartBadgeCount": 0,
+          "menuLoading": false,
+          "menuError": false,
+          "mobileBreakpoint": "md",
+          "mobileMenuStyle": "drawer"
+        },
         "metaPath": "src\\puck\\components\\layout\\Header\\header.meta.ts"
       },
       {
@@ -91197,6 +99563,24 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "menuHandle": "default",
+          "layout": "horizontal",
+          "alignment": "center",
+          "hoverEffect": "underline",
+          "textColor": "#111827",
+          "hoverColor": "#3b82f6",
+          "fontSize": "base",
+          "fontWeight": "medium",
+          "showDropdownArrows": true,
+          "dropdownStyle": "default",
+          "maxDepth": "3",
+          "menuData": [],
+          "dropdownBackground": "#ffffff",
+          "dropdownBorder": "#e5e7eb",
+          "dropdownShadow": "lg",
+          "dropdownRadius": "md"
+        },
         "metaPath": "src\\puck\\components\\navigation\\MenuNavigation\\menunavigation.meta.ts"
       },
       {
@@ -91383,6 +99767,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "items": [],
+          "theme": {},
+          "isOpen": false,
+          "drawerMaxWidth": "400px",
+          "animationDirection": "left"
+        },
         "metaPath": "src\\puck\\components\\navigation\\MobileMenu\\mobilemenu.meta.ts"
       }
     ],
@@ -91531,6 +99922,17 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "columns": "4",
+          "backgroundColor": "#1f2937",
+          "textColor": "#ffffff",
+          "linkHoverColor": "#3b82f6",
+          "menuConfigs": [],
+          "paddingTop": "3rem",
+          "paddingBottom": "2rem",
+          "menuLoading": false,
+          "menuError": false
         },
         "metaPath": "src\\puck\\components\\layout\\Footer\\footer.meta.ts"
       }
@@ -91810,6 +100212,34 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "layout": "left-center-right",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "sticky": true,
+          "shadow": true,
+          "transparent": false,
+          "logoPosition": "left",
+          "logoMaxWidth": "150px",
+          "logoUrl": "/logo.svg",
+          "logoAlt": "Store Logo",
+          "menuPosition": "center",
+          "menuStyle": "horizontal",
+          "menuHoverColor": "#3b82f6",
+          "actions": [
+            "search",
+            "account",
+            "cart"
+          ],
+          "actionsPosition": "right",
+          "showCartBadge": true,
+          "showLabels": false,
+          "cartBadgeCount": 0,
+          "menuLoading": false,
+          "menuError": false,
+          "mobileBreakpoint": "md",
+          "mobileMenuStyle": "drawer"
+        },
         "metaPath": "src\\puck\\components\\layout\\Header\\header.meta.ts"
       },
       {
@@ -92076,6 +100506,24 @@ export const registry: CompiledRegistry = {
               "xl"
             ]
           }
+        },
+        "defaultProps": {
+          "menuHandle": "default",
+          "layout": "horizontal",
+          "alignment": "center",
+          "hoverEffect": "underline",
+          "textColor": "#111827",
+          "hoverColor": "#3b82f6",
+          "fontSize": "base",
+          "fontWeight": "medium",
+          "showDropdownArrows": true,
+          "dropdownStyle": "default",
+          "maxDepth": "3",
+          "menuData": [],
+          "dropdownBackground": "#ffffff",
+          "dropdownBorder": "#e5e7eb",
+          "dropdownShadow": "lg",
+          "dropdownRadius": "md"
         },
         "metaPath": "src\\puck\\components\\navigation\\MenuNavigation\\menunavigation.meta.ts"
       },
@@ -92450,6 +100898,34 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "layout": "left-center-right",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "sticky": true,
+          "shadow": true,
+          "transparent": false,
+          "logoPosition": "left",
+          "logoMaxWidth": "150px",
+          "logoUrl": "/logo.svg",
+          "logoAlt": "Store Logo",
+          "menuPosition": "center",
+          "menuStyle": "horizontal",
+          "menuHoverColor": "#3b82f6",
+          "actions": [
+            "search",
+            "account",
+            "cart"
+          ],
+          "actionsPosition": "right",
+          "showCartBadge": true,
+          "showLabels": false,
+          "cartBadgeCount": 0,
+          "menuLoading": false,
+          "menuError": false,
+          "mobileBreakpoint": "md",
+          "mobileMenuStyle": "drawer"
+        },
         "metaPath": "src\\puck\\components\\layout\\Header\\header.meta.ts"
       }
     ],
@@ -92727,6 +101203,34 @@ export const registry: CompiledRegistry = {
               "fullscreen"
             ]
           }
+        },
+        "defaultProps": {
+          "layout": "left-center-right",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "sticky": true,
+          "shadow": true,
+          "transparent": false,
+          "logoPosition": "left",
+          "logoMaxWidth": "150px",
+          "logoUrl": "/logo.svg",
+          "logoAlt": "Store Logo",
+          "menuPosition": "center",
+          "menuStyle": "horizontal",
+          "menuHoverColor": "#3b82f6",
+          "actions": [
+            "search",
+            "account",
+            "cart"
+          ],
+          "actionsPosition": "right",
+          "showCartBadge": true,
+          "showLabels": false,
+          "cartBadgeCount": 0,
+          "menuLoading": false,
+          "menuError": false,
+          "mobileBreakpoint": "md",
+          "mobileMenuStyle": "drawer"
         },
         "metaPath": "src\\puck\\components\\layout\\Header\\header.meta.ts"
       }
@@ -93006,6 +101510,34 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "layout": "left-center-right",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "sticky": true,
+          "shadow": true,
+          "transparent": false,
+          "logoPosition": "left",
+          "logoMaxWidth": "150px",
+          "logoUrl": "/logo.svg",
+          "logoAlt": "Store Logo",
+          "menuPosition": "center",
+          "menuStyle": "horizontal",
+          "menuHoverColor": "#3b82f6",
+          "actions": [
+            "search",
+            "account",
+            "cart"
+          ],
+          "actionsPosition": "right",
+          "showCartBadge": true,
+          "showLabels": false,
+          "cartBadgeCount": 0,
+          "menuLoading": false,
+          "menuError": false,
+          "mobileBreakpoint": "md",
+          "mobileMenuStyle": "drawer"
+        },
         "metaPath": "src\\puck\\components\\layout\\Header\\header.meta.ts"
       }
     ],
@@ -93077,6 +101609,10 @@ export const registry: CompiledRegistry = {
               "primary"
             ]
           }
+        },
+        "defaultProps": {
+          "paddingY": "md",
+          "backgroundColor": "transparent"
         },
         "metaPath": "src\\puck\\components\\layout\\Section\\section.meta.ts"
       }
@@ -93150,6 +101686,10 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "paddingY": "md",
+          "backgroundColor": "transparent"
+        },
         "metaPath": "src\\puck\\components\\layout\\Section\\section.meta.ts"
       }
     ],
@@ -93221,6 +101761,10 @@ export const registry: CompiledRegistry = {
               "primary"
             ]
           }
+        },
+        "defaultProps": {
+          "paddingY": "md",
+          "backgroundColor": "transparent"
         },
         "metaPath": "src\\puck\\components\\layout\\Section\\section.meta.ts"
       }
@@ -93294,6 +101838,10 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "paddingY": "md",
+          "backgroundColor": "transparent"
+        },
         "metaPath": "src\\puck\\components\\layout\\Section\\section.meta.ts"
       }
     ],
@@ -93365,6 +101913,10 @@ export const registry: CompiledRegistry = {
               "primary"
             ]
           }
+        },
+        "defaultProps": {
+          "paddingY": "md",
+          "backgroundColor": "transparent"
         },
         "metaPath": "src\\puck\\components\\layout\\Section\\section.meta.ts"
       }
@@ -93506,6 +102058,18 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showLabel": false,
+          "label": "Account",
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "style": "minimal",
+          "linkTo": "/account",
+          "signedInLink": "/account",
+          "showWhenSignedOut": true,
+          "showWhenSignedIn": true
+        },
         "metaPath": "src\\puck\\components\\navigation\\AccountButton\\accountbutton.meta.ts"
       }
     ],
@@ -93646,6 +102210,18 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showLabel": false,
+          "label": "Account",
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "style": "minimal",
+          "linkTo": "/account",
+          "signedInLink": "/account",
+          "showWhenSignedOut": true,
+          "showWhenSignedIn": true
+        },
         "metaPath": "src\\puck\\components\\navigation\\AccountButton\\accountbutton.meta.ts"
       }
     ],
@@ -93785,6 +102361,18 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showLabel": false,
+          "label": "Account",
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "style": "minimal",
+          "linkTo": "/account",
+          "signedInLink": "/account",
+          "showWhenSignedOut": true,
+          "showWhenSignedIn": true
         },
         "metaPath": "src\\puck\\components\\navigation\\AccountButton\\accountbutton.meta.ts"
       }
@@ -93942,6 +102530,18 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "showLabel": false,
+          "label": "Cart",
+          "showBadge": true,
+          "badgePosition": "top-right",
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "badgeBackgroundColor": "#ef4444",
+          "badgeTextColor": "#ffffff",
+          "style": "minimal"
+        },
         "metaPath": "src\\puck\\components\\navigation\\CartButton\\cartbutton.meta.ts"
       }
     ],
@@ -94097,6 +102697,18 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showLabel": false,
+          "label": "Cart",
+          "showBadge": true,
+          "badgePosition": "top-right",
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "badgeBackgroundColor": "#ef4444",
+          "badgeTextColor": "#ffffff",
+          "style": "minimal"
         },
         "metaPath": "src\\puck\\components\\navigation\\CartButton\\cartbutton.meta.ts"
       }
@@ -94639,6 +103251,19 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "imageUrl": "",
+          "altText": "Store Logo",
+          "linkTo": "/",
+          "maxWidth": "150px",
+          "maxHeight": "60px",
+          "showText": true,
+          "text": "My Store",
+          "textPosition": "right",
+          "textSize": "xl",
+          "textColor": "#000000",
+          "textWeight": "bold"
+        },
         "metaPath": "src\\puck\\components\\navigation\\Logo\\logo.meta.ts"
       },
       {
@@ -94842,6 +103467,26 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "logosPerView": 6,
+          "logosPerViewTablet": 4,
+          "logosPerViewMobile": 2,
+          "enableAutoplay": true,
+          "autoplaySpeed": 2000,
+          "freeMode": true,
+          "loop": true,
+          "spaceBetween": 40,
+          "grayscale": true,
+          "grayscaleHover": true,
+          "logoMaxHeight": 60,
+          "backgroundColor": "#ffffff",
+          "logoBackgroundColor": "transparent",
+          "showBorder": false,
+          "borderColor": "#e5e5e5",
+          "borderRadius": "none",
+          "paddingY": 60,
+          "paddingX": 20
         },
         "metaPath": "src\\puck\\components\\swiper\\LogoCarousel\\logocarousel.meta.ts"
       }
@@ -95001,6 +103646,19 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "imageUrl": "",
+          "altText": "Store Logo",
+          "linkTo": "/",
+          "maxWidth": "150px",
+          "maxHeight": "60px",
+          "showText": true,
+          "text": "My Store",
+          "textPosition": "right",
+          "textSize": "xl",
+          "textColor": "#000000",
+          "textWeight": "bold"
+        },
         "metaPath": "src\\puck\\components\\navigation\\Logo\\logo.meta.ts"
       },
       {
@@ -95205,6 +103863,26 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "logosPerView": 6,
+          "logosPerViewTablet": 4,
+          "logosPerViewMobile": 2,
+          "enableAutoplay": true,
+          "autoplaySpeed": 2000,
+          "freeMode": true,
+          "loop": true,
+          "spaceBetween": 40,
+          "grayscale": true,
+          "grayscaleHover": true,
+          "logoMaxHeight": 60,
+          "backgroundColor": "#ffffff",
+          "logoBackgroundColor": "transparent",
+          "showBorder": false,
+          "borderColor": "#e5e5e5",
+          "borderRadius": "none",
+          "paddingY": 60,
+          "paddingX": 20
+        },
         "metaPath": "src\\puck\\components\\swiper\\LogoCarousel\\logocarousel.meta.ts"
       }
     ],
@@ -95362,6 +104040,19 @@ export const registry: CompiledRegistry = {
               "bold"
             ]
           }
+        },
+        "defaultProps": {
+          "imageUrl": "",
+          "altText": "Store Logo",
+          "linkTo": "/",
+          "maxWidth": "150px",
+          "maxHeight": "60px",
+          "showText": true,
+          "text": "My Store",
+          "textPosition": "right",
+          "textSize": "xl",
+          "textColor": "#000000",
+          "textWeight": "bold"
         },
         "metaPath": "src\\puck\\components\\navigation\\Logo\\logo.meta.ts"
       }
@@ -95521,6 +104212,19 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "imageUrl": "",
+          "altText": "Store Logo",
+          "linkTo": "/",
+          "maxWidth": "150px",
+          "maxHeight": "60px",
+          "showText": true,
+          "text": "My Store",
+          "textPosition": "right",
+          "textSize": "xl",
+          "textColor": "#000000",
+          "textWeight": "bold"
+        },
         "metaPath": "src\\puck\\components\\navigation\\Logo\\logo.meta.ts"
       }
     ],
@@ -95613,6 +104317,13 @@ export const registry: CompiledRegistry = {
               "right"
             ]
           }
+        },
+        "defaultProps": {
+          "items": [],
+          "theme": {},
+          "isOpen": false,
+          "drawerMaxWidth": "400px",
+          "animationDirection": "left"
         },
         "metaPath": "src\\puck\\components\\navigation\\MobileMenu\\mobilemenu.meta.ts"
       }
@@ -95707,6 +104418,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "items": [],
+          "theme": {},
+          "isOpen": false,
+          "drawerMaxWidth": "400px",
+          "animationDirection": "left"
+        },
         "metaPath": "src\\puck\\components\\navigation\\MobileMenu\\mobilemenu.meta.ts"
       }
     ],
@@ -95800,6 +104518,13 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "items": [],
+          "theme": {},
+          "isOpen": false,
+          "drawerMaxWidth": "400px",
+          "animationDirection": "left"
+        },
         "metaPath": "src\\puck\\components\\navigation\\MobileMenu\\mobilemenu.meta.ts"
       }
     ],
@@ -95892,6 +104617,13 @@ export const registry: CompiledRegistry = {
               "right"
             ]
           }
+        },
+        "defaultProps": {
+          "items": [],
+          "theme": {},
+          "isOpen": false,
+          "drawerMaxWidth": "400px",
+          "animationDirection": "left"
         },
         "metaPath": "src\\puck\\components\\navigation\\MobileMenu\\mobilemenu.meta.ts"
       }
@@ -96087,6 +104819,22 @@ export const registry: CompiledRegistry = {
             "items": "$item"
           }
         },
+        "defaultProps": {
+          "placeholder": "Search products...",
+          "style": "outlined",
+          "size": "md",
+          "showIcon": true,
+          "iconPosition": "left",
+          "fullWidth": false,
+          "maxWidth": "400px",
+          "borderRadius": "md",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "borderColor": "#e5e7eb",
+          "focusBorderColor": "#3b82f6",
+          "showPopularSearches": false,
+          "popularSearches": []
+        },
         "metaPath": "src\\puck\\components\\navigation\\SearchBar\\searchbar.meta.ts"
       },
       {
@@ -96182,6 +104930,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "style": "minimal",
+          "openSearchOnClick": true
         },
         "metaPath": "src\\puck\\components\\navigation\\SearchIcon\\searchicon.meta.ts"
       }
@@ -96377,6 +105132,22 @@ export const registry: CompiledRegistry = {
             "items": "$item"
           }
         },
+        "defaultProps": {
+          "placeholder": "Search products...",
+          "style": "outlined",
+          "size": "md",
+          "showIcon": true,
+          "iconPosition": "left",
+          "fullWidth": false,
+          "maxWidth": "400px",
+          "borderRadius": "md",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "borderColor": "#e5e7eb",
+          "focusBorderColor": "#3b82f6",
+          "showPopularSearches": false,
+          "popularSearches": []
+        },
         "metaPath": "src\\puck\\components\\navigation\\SearchBar\\searchbar.meta.ts"
       }
     ],
@@ -96571,6 +105342,22 @@ export const registry: CompiledRegistry = {
             "items": "$item"
           }
         },
+        "defaultProps": {
+          "placeholder": "Search products...",
+          "style": "outlined",
+          "size": "md",
+          "showIcon": true,
+          "iconPosition": "left",
+          "fullWidth": false,
+          "maxWidth": "400px",
+          "borderRadius": "md",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "borderColor": "#e5e7eb",
+          "focusBorderColor": "#3b82f6",
+          "showPopularSearches": false,
+          "popularSearches": []
+        },
         "metaPath": "src\\puck\\components\\navigation\\SearchBar\\searchbar.meta.ts"
       },
       {
@@ -96666,6 +105453,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "style": "minimal",
+          "openSearchOnClick": true
         },
         "metaPath": "src\\puck\\components\\navigation\\SearchIcon\\searchicon.meta.ts"
       }
@@ -96765,6 +105559,13 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "style": "minimal",
+          "openSearchOnClick": true
+        },
         "metaPath": "src\\puck\\components\\navigation\\SearchIcon\\searchicon.meta.ts"
       }
     ],
@@ -96863,6 +105664,13 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "style": "minimal",
+          "openSearchOnClick": true
+        },
         "metaPath": "src\\puck\\components\\navigation\\SearchIcon\\searchicon.meta.ts"
       }
     ],
@@ -96960,6 +105768,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "iconSize": "md",
+          "iconColor": "#000000",
+          "hoverColor": "#3b82f6",
+          "style": "minimal",
+          "openSearchOnClick": true
         },
         "metaPath": "src\\puck\\components\\navigation\\SearchIcon\\searchicon.meta.ts"
       }
@@ -97072,6 +105887,15 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showDownloadInvoice": true,
+          "showTrackShipment": true,
+          "showContactSupport": true,
+          "showReorder": true,
+          "showReturnRequest": false,
+          "layout": "buttons",
+          "buttonStyle": "outlined"
+        },
         "metaPath": "src\\puck\\components\\order\\orderactions.meta.ts"
       }
     ],
@@ -97183,6 +106007,15 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showDownloadInvoice": true,
+          "showTrackShipment": true,
+          "showContactSupport": true,
+          "showReorder": true,
+          "showReturnRequest": false,
+          "layout": "buttons",
+          "buttonStyle": "outlined"
+        },
         "metaPath": "src\\puck\\components\\order\\orderactions.meta.ts"
       }
     ],
@@ -97284,6 +106117,15 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showCheckmark": true,
+          "titleText": "Order Confirmed!",
+          "messageText": "Thank you for your order. We've received your order and will begin processing it right away.",
+          "showOrderNumber": true,
+          "showEmailConfirmation": true,
+          "showContinueShopping": true,
+          "style": "success"
+        },
         "metaPath": "src\\puck\\components\\order\\orderconfirmation.meta.ts"
       }
     ],
@@ -97384,6 +106226,15 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showCheckmark": true,
+          "titleText": "Order Confirmed!",
+          "messageText": "Thank you for your order. We've received your order and will begin processing it right away.",
+          "showOrderNumber": true,
+          "showEmailConfirmation": true,
+          "showContinueShopping": true,
+          "style": "success"
         },
         "metaPath": "src\\puck\\components\\order\\orderconfirmation.meta.ts"
       }
@@ -97490,6 +106341,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showItemImages": true,
+          "showItemQuantity": true,
+          "showItemPrice": true,
+          "showShippingAddress": true,
+          "showBillingAddress": true,
+          "showPaymentMethod": true,
+          "showShippingMethod": true,
+          "showPricingBreakdown": true,
+          "compactView": false
+        },
         "metaPath": "src\\puck\\components\\order\\orderdetails.meta.ts"
       },
       {
@@ -97580,6 +106442,31 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "sections": [
+            {
+              "id": "description",
+              "title": "Product Details",
+              "contentType": "description",
+              "customContent": ""
+            },
+            {
+              "id": "material",
+              "title": "Material & Care",
+              "contentType": "material",
+              "customContent": ""
+            },
+            {
+              "id": "shipping",
+              "title": "Shipping & Returns",
+              "contentType": "shipping",
+              "customContent": "<p>Free shipping on orders over $50. Returns accepted within 30 days.</p>"
+            }
+          ],
+          "allowMultiple": false,
+          "defaultOpen": "description",
+          "borderStyle": "top"
         },
         "metaPath": "src\\puck\\components\\product\\ProductAccordion\\productaccordion.meta.ts"
       }
@@ -97686,6 +106573,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showItemImages": true,
+          "showItemQuantity": true,
+          "showItemPrice": true,
+          "showShippingAddress": true,
+          "showBillingAddress": true,
+          "showPaymentMethod": true,
+          "showShippingMethod": true,
+          "showPricingBreakdown": true,
+          "compactView": false
+        },
         "metaPath": "src\\puck\\components\\order\\orderdetails.meta.ts"
       }
     ],
@@ -97778,6 +106676,13 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showIcons": true,
+          "showTimestamps": true,
+          "showTrackingNumber": true,
+          "orientation": "vertical",
+          "style": "default"
+        },
         "metaPath": "src\\puck\\components\\order\\ordertimeline.meta.ts"
       }
     ],
@@ -97869,6 +106774,13 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showIcons": true,
+          "showTimestamps": true,
+          "showTrackingNumber": true,
+          "orientation": "vertical",
+          "style": "default"
         },
         "metaPath": "src\\puck\\components\\order\\ordertimeline.meta.ts"
       }
@@ -98101,6 +107013,28 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Add to Cart",
+          "preorderText": "Pre-order",
+          "variant": "primary",
+          "size": "md",
+          "fullWidth": false,
+          "showIcon": true,
+          "disabled": false,
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "hoverBackgroundColor": "#1f2937",
+          "hoverTextColor": "#ffffff",
+          "borderColor": "#000000",
+          "useThemeColors": false,
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-6",
+          "paddingY": "py-3",
+          "borderRadius": "rounded-lg"
+        },
         "metaPath": "src\\puck\\components\\product\\AddToCart\\addtocart.meta.ts"
       }
     ],
@@ -98332,6 +107266,28 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "text": "Add to Cart",
+          "preorderText": "Pre-order",
+          "variant": "primary",
+          "size": "md",
+          "fullWidth": false,
+          "showIcon": true,
+          "disabled": false,
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "hoverBackgroundColor": "#1f2937",
+          "hoverTextColor": "#ffffff",
+          "borderColor": "#000000",
+          "useThemeColors": false,
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-6",
+          "paddingY": "py-3",
+          "borderRadius": "rounded-lg"
+        },
         "metaPath": "src\\puck\\components\\product\\AddToCart\\addtocart.meta.ts"
       }
     ],
@@ -98408,6 +107364,12 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showSavingsBadge": true,
+          "showItemImages": true,
+          "buttonText": "Add Bundle to Cart",
+          "bundleIdOverride": ""
         },
         "metaPath": "src\\puck\\components\\product\\BundledProductDetail\\bundledproductdetail.meta.ts"
       },
@@ -98500,6 +107462,31 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "sections": [
+            {
+              "id": "description",
+              "title": "Product Details",
+              "contentType": "description",
+              "customContent": ""
+            },
+            {
+              "id": "material",
+              "title": "Material & Care",
+              "contentType": "material",
+              "customContent": ""
+            },
+            {
+              "id": "shipping",
+              "title": "Shipping & Returns",
+              "contentType": "shipping",
+              "customContent": "<p>Free shipping on orders over $50. Returns accepted within 30 days.</p>"
+            }
+          ],
+          "allowMultiple": false,
+          "defaultOpen": "description",
+          "borderStyle": "top"
+        },
         "metaPath": "src\\puck\\components\\product\\ProductAccordion\\productaccordion.meta.ts"
       },
       {
@@ -98583,6 +107570,11 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showHomeIcon": true,
+          "separator": "arrow",
+          "textTransform": "none"
         },
         "metaPath": "src\\puck\\components\\product\\ProductBreadcrumbs\\productbreadcrumbs.meta.ts"
       },
@@ -99025,6 +108017,40 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "layout": "vertical",
+          "enableSwiper": true,
+          "aspectRatio": "square",
+          "borderRadius": "md",
+          "showShadow": true,
+          "hoverZoom": true,
+          "showTitle": true,
+          "titleSize": "lg",
+          "titleWeight": "semibold",
+          "titleAlign": "left",
+          "showPrice": true,
+          "priceSize": "lg",
+          "priceColor": "#000000",
+          "showCompareAtPrice": true,
+          "showSavingsBadge": true,
+          "showBadges": true,
+          "showSaleBadge": true,
+          "showNewBadge": true,
+          "showLowStockBadge": true,
+          "badgePosition": "top-right",
+          "showAddToCart": true,
+          "buttonText": "Add to Cart",
+          "buttonStyle": "filled",
+          "buttonSize": "md",
+          "showCartIcon": true,
+          "cardRadius": "lg",
+          "cardBorder": "sm",
+          "cardShadow": true,
+          "cardBackground": "#ffffff",
+          "accentColor": "#000000",
+          "fontFamily": "inherit",
+          "productId": ""
+        },
         "metaPath": "src\\puck\\components\\product\\ProductCard\\productcard.meta.ts"
       },
       {
@@ -99169,6 +108195,16 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "fontSize": "base",
+          "color": "gray",
+          "lineHeight": "normal",
+          "maxWidth": "prose",
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
+        },
         "metaPath": "src\\puck\\components\\product\\ProductDescription\\productdescription.meta.ts"
       },
       {
@@ -99277,6 +108313,15 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showTitle": true,
+          "titleText": "Product Details",
+          "showSku": true,
+          "showWeight": true,
+          "showDimensions": true,
+          "showOrigin": true,
+          "layout": "list"
         },
         "metaPath": "src\\puck\\components\\product\\ProductMetadata\\productmetadata.meta.ts"
       },
@@ -99415,6 +108460,14 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "fontSize": "xl",
+          "color": "black",
+          "showComparePrice": true,
+          "layout": "horizontal",
+          "fontWeight": "semibold",
+          "showSavingsPercentage": true
+        },
         "metaPath": "src\\puck\\components\\product\\ProductPrice\\productprice.meta.ts"
       },
       {
@@ -99473,6 +108526,10 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "showCount": true,
+          "size": "md"
         },
         "metaPath": "src\\puck\\components\\product\\ProductRating\\productrating.meta.ts"
       },
@@ -99567,6 +108624,12 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showRatingsSummary": true,
+          "showVerifiedBadge": true,
+          "sortBy": "recent",
+          "reviewsPerPage": 5
         },
         "metaPath": "src\\puck\\components\\product\\ProductReviews\\productreviews.meta.ts"
       },
@@ -99740,6 +108803,17 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "tag": "h1",
+          "fontSize": "2xl",
+          "color": "black",
+          "alignment": "left",
+          "fontWeight": "bold",
+          "marginTop": "mt-0",
+          "marginBottom": "mb-4",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
+        },
         "metaPath": "src\\puck\\components\\product\\ProductTitle\\producttitle.meta.ts"
       },
       {
@@ -99880,6 +108954,17 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "selectorStyle": "buttons",
+          "showLabels": true,
+          "showStock": true,
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
         },
         "metaPath": "src\\puck\\components\\product\\ProductVariantSelector\\productvariantselector.meta.ts"
       },
@@ -100041,6 +109126,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showLabel": true,
+          "labelText": "Quantity",
+          "minQuantity": 1,
+          "maxQuantity": 99,
+          "defaultQuantity": 1,
+          "size": "medium",
+          "style": "default",
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
+        },
         "metaPath": "src\\puck\\components\\product\\QuantitySelector\\quantityselector.meta.ts"
       },
       {
@@ -100131,6 +109231,13 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showIcon": true,
+          "showText": true,
+          "showQuantity": true,
+          "lowStockThreshold": 10,
+          "style": "default"
         },
         "metaPath": "src\\puck\\components\\product\\StockIndicator\\stockindicator.meta.ts"
       },
@@ -100245,6 +109352,13 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showLabel": true,
+          "labelText": "Add to Wishlist",
+          "size": "medium",
+          "style": "outline",
+          "iconPosition": "left"
         },
         "metaPath": "src\\puck\\components\\product\\WishlistButton\\wishlistbutton.meta.ts"
       },
@@ -100615,6 +109729,41 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Popular Products",
+          "showTitle": true,
+          "productSource": "featured",
+          "productIds": "",
+          "collectionId": "",
+          "categoryId": "",
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 24,
+          "effect": "slide",
+          "speed": 600,
+          "navigation": true,
+          "navigationColor": "#000000",
+          "pagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "pauseOnHover": true,
+          "loop": true,
+          "centeredSlides": false,
+          "freeMode": false,
+          "showProductImage": true,
+          "showProductTitle": true,
+          "showProductPrice": true,
+          "showAddToCart": true,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#ffffff",
+          "cardBackground": "#ffffff",
+          "cardBorderRadius": "lg",
+          "cardShadow": true
+        },
         "metaPath": "src\\puck\\components\\swiper\\ProductCarousel\\productcarousel.meta.ts"
       }
     ],
@@ -100691,6 +109840,12 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showSavingsBadge": true,
+          "showItemImages": true,
+          "buttonText": "Add Bundle to Cart",
+          "bundleIdOverride": ""
         },
         "metaPath": "src\\puck\\components\\product\\BundledProductDetail\\bundledproductdetail.meta.ts"
       }
@@ -100769,6 +109924,12 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "showSavingsBadge": true,
+          "showItemImages": true,
+          "buttonText": "Add Bundle to Cart",
+          "bundleIdOverride": ""
+        },
         "metaPath": "src\\puck\\components\\product\\BundledProductDetail\\bundledproductdetail.meta.ts"
       }
     ],
@@ -100845,6 +110006,12 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showSavingsBadge": true,
+          "showItemImages": true,
+          "buttonText": "Add Bundle to Cart",
+          "bundleIdOverride": ""
         },
         "metaPath": "src\\puck\\components\\product\\BundledProductDetail\\bundledproductdetail.meta.ts"
       }
@@ -100938,6 +110105,31 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "sections": [
+            {
+              "id": "description",
+              "title": "Product Details",
+              "contentType": "description",
+              "customContent": ""
+            },
+            {
+              "id": "material",
+              "title": "Material & Care",
+              "contentType": "material",
+              "customContent": ""
+            },
+            {
+              "id": "shipping",
+              "title": "Shipping & Returns",
+              "contentType": "shipping",
+              "customContent": "<p>Free shipping on orders over $50. Returns accepted within 30 days.</p>"
+            }
+          ],
+          "allowMultiple": false,
+          "defaultOpen": "description",
+          "borderStyle": "top"
         },
         "metaPath": "src\\puck\\components\\product\\ProductAccordion\\productaccordion.meta.ts"
       },
@@ -101048,6 +110240,15 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "showTitle": true,
+          "titleText": "Product Details",
+          "showSku": true,
+          "showWeight": true,
+          "showDimensions": true,
+          "showOrigin": true,
+          "layout": "list"
+        },
         "metaPath": "src\\puck\\components\\product\\ProductMetadata\\productmetadata.meta.ts"
       }
     ],
@@ -101133,6 +110334,11 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showHomeIcon": true,
+          "separator": "arrow",
+          "textTransform": "none"
         },
         "metaPath": "src\\puck\\components\\product\\ProductBreadcrumbs\\productbreadcrumbs.meta.ts"
       }
@@ -101577,6 +110783,40 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "layout": "vertical",
+          "enableSwiper": true,
+          "aspectRatio": "square",
+          "borderRadius": "md",
+          "showShadow": true,
+          "hoverZoom": true,
+          "showTitle": true,
+          "titleSize": "lg",
+          "titleWeight": "semibold",
+          "titleAlign": "left",
+          "showPrice": true,
+          "priceSize": "lg",
+          "priceColor": "#000000",
+          "showCompareAtPrice": true,
+          "showSavingsBadge": true,
+          "showBadges": true,
+          "showSaleBadge": true,
+          "showNewBadge": true,
+          "showLowStockBadge": true,
+          "badgePosition": "top-right",
+          "showAddToCart": true,
+          "buttonText": "Add to Cart",
+          "buttonStyle": "filled",
+          "buttonSize": "md",
+          "showCartIcon": true,
+          "cardRadius": "lg",
+          "cardBorder": "sm",
+          "cardShadow": true,
+          "cardBackground": "#ffffff",
+          "accentColor": "#000000",
+          "fontFamily": "inherit",
+          "productId": ""
+        },
         "metaPath": "src\\puck\\components\\product\\ProductCard\\productcard.meta.ts"
       }
     ],
@@ -102019,6 +111259,40 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": false
           }
+        },
+        "defaultProps": {
+          "layout": "vertical",
+          "enableSwiper": true,
+          "aspectRatio": "square",
+          "borderRadius": "md",
+          "showShadow": true,
+          "hoverZoom": true,
+          "showTitle": true,
+          "titleSize": "lg",
+          "titleWeight": "semibold",
+          "titleAlign": "left",
+          "showPrice": true,
+          "priceSize": "lg",
+          "priceColor": "#000000",
+          "showCompareAtPrice": true,
+          "showSavingsBadge": true,
+          "showBadges": true,
+          "showSaleBadge": true,
+          "showNewBadge": true,
+          "showLowStockBadge": true,
+          "badgePosition": "top-right",
+          "showAddToCart": true,
+          "buttonText": "Add to Cart",
+          "buttonStyle": "filled",
+          "buttonSize": "md",
+          "showCartIcon": true,
+          "cardRadius": "lg",
+          "cardBorder": "sm",
+          "cardShadow": true,
+          "cardBackground": "#ffffff",
+          "accentColor": "#000000",
+          "fontFamily": "inherit",
+          "productId": ""
         },
         "metaPath": "src\\puck\\components\\product\\ProductCard\\productcard.meta.ts"
       }
@@ -102463,6 +111737,40 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "layout": "vertical",
+          "enableSwiper": true,
+          "aspectRatio": "square",
+          "borderRadius": "md",
+          "showShadow": true,
+          "hoverZoom": true,
+          "showTitle": true,
+          "titleSize": "lg",
+          "titleWeight": "semibold",
+          "titleAlign": "left",
+          "showPrice": true,
+          "priceSize": "lg",
+          "priceColor": "#000000",
+          "showCompareAtPrice": true,
+          "showSavingsBadge": true,
+          "showBadges": true,
+          "showSaleBadge": true,
+          "showNewBadge": true,
+          "showLowStockBadge": true,
+          "badgePosition": "top-right",
+          "showAddToCart": true,
+          "buttonText": "Add to Cart",
+          "buttonStyle": "filled",
+          "buttonSize": "md",
+          "showCartIcon": true,
+          "cardRadius": "lg",
+          "cardBorder": "sm",
+          "cardShadow": true,
+          "cardBackground": "#ffffff",
+          "accentColor": "#000000",
+          "fontFamily": "inherit",
+          "productId": ""
+        },
         "metaPath": "src\\puck\\components\\product\\ProductCard\\productcard.meta.ts"
       }
     ],
@@ -102573,6 +111881,15 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showTitle": true,
+          "titleText": "Product Details",
+          "showSku": true,
+          "showWeight": true,
+          "showDimensions": true,
+          "showOrigin": true,
+          "layout": "list"
         },
         "metaPath": "src\\puck\\components\\product\\ProductMetadata\\productmetadata.meta.ts"
       }
@@ -102713,6 +112030,14 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "fontSize": "xl",
+          "color": "black",
+          "showComparePrice": true,
+          "layout": "horizontal",
+          "fontWeight": "semibold",
+          "showSavingsPercentage": true
+        },
         "metaPath": "src\\puck\\components\\product\\ProductPrice\\productprice.meta.ts"
       }
     ],
@@ -102852,6 +112177,14 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "fontSize": "xl",
+          "color": "black",
+          "showComparePrice": true,
+          "layout": "horizontal",
+          "fontWeight": "semibold",
+          "showSavingsPercentage": true
+        },
         "metaPath": "src\\puck\\components\\product\\ProductPrice\\productprice.meta.ts"
       }
     ],
@@ -102912,6 +112245,10 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "showCount": true,
+          "size": "md"
         },
         "metaPath": "src\\puck\\components\\product\\ProductRating\\productrating.meta.ts"
       }
@@ -102974,6 +112311,10 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
+        "defaultProps": {
+          "showCount": true,
+          "size": "md"
+        },
         "metaPath": "src\\puck\\components\\product\\ProductRating\\productrating.meta.ts"
       }
     ],
@@ -103034,6 +112375,10 @@ export const registry: CompiledRegistry = {
               "lg"
             ]
           }
+        },
+        "defaultProps": {
+          "showCount": true,
+          "size": "md"
         },
         "metaPath": "src\\puck\\components\\product\\ProductRating\\productrating.meta.ts"
       }
@@ -103130,6 +112475,12 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showRatingsSummary": true,
+          "showVerifiedBadge": true,
+          "sortBy": "recent",
+          "reviewsPerPage": 5
         },
         "metaPath": "src\\puck\\components\\product\\ProductReviews\\productreviews.meta.ts"
       }
@@ -103274,6 +112625,17 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "selectorStyle": "buttons",
+          "showLabels": true,
+          "showStock": true,
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
+        },
         "metaPath": "src\\puck\\components\\product\\ProductVariantSelector\\productvariantselector.meta.ts"
       }
     ],
@@ -103416,6 +112778,17 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "selectorStyle": "buttons",
+          "showLabels": true,
+          "showStock": true,
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
         },
         "metaPath": "src\\puck\\components\\product\\ProductVariantSelector\\productvariantselector.meta.ts"
       }
@@ -103560,6 +112933,17 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "selectorStyle": "buttons",
+          "showLabels": true,
+          "showStock": true,
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
+        },
         "metaPath": "src\\puck\\components\\product\\ProductVariantSelector\\productvariantselector.meta.ts"
       }
     ],
@@ -103702,6 +113086,17 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "selectorStyle": "buttons",
+          "showLabels": true,
+          "showStock": true,
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
         },
         "metaPath": "src\\puck\\components\\product\\ProductVariantSelector\\productvariantselector.meta.ts"
       }
@@ -103865,6 +113260,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showLabel": true,
+          "labelText": "Quantity",
+          "minQuantity": 1,
+          "maxQuantity": 99,
+          "defaultQuantity": 1,
+          "size": "medium",
+          "style": "default",
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
+        },
         "metaPath": "src\\puck\\components\\product\\QuantitySelector\\quantityselector.meta.ts"
       }
     ],
@@ -104026,6 +113436,21 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "showLabel": true,
+          "labelText": "Quantity",
+          "minQuantity": 1,
+          "maxQuantity": 99,
+          "defaultQuantity": 1,
+          "size": "medium",
+          "style": "default",
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
         },
         "metaPath": "src\\puck\\components\\product\\QuantitySelector\\quantityselector.meta.ts"
       }
@@ -104189,6 +113614,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "showLabel": true,
+          "labelText": "Quantity",
+          "minQuantity": 1,
+          "maxQuantity": 99,
+          "defaultQuantity": 1,
+          "size": "medium",
+          "style": "default",
+          "marginTop": "mt-4",
+          "marginBottom": "mb-4",
+          "marginLeft": "ml-0",
+          "marginRight": "mr-0",
+          "paddingX": "px-0",
+          "paddingY": "py-0"
+        },
         "metaPath": "src\\puck\\components\\product\\QuantitySelector\\quantityselector.meta.ts"
       }
     ],
@@ -104281,6 +113721,13 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showIcon": true,
+          "showText": true,
+          "showQuantity": true,
+          "lowStockThreshold": 10,
+          "style": "default"
         },
         "metaPath": "src\\puck\\components\\product\\StockIndicator\\stockindicator.meta.ts"
       }
@@ -104375,6 +113822,13 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "showIcon": true,
+          "showText": true,
+          "showQuantity": true,
+          "lowStockThreshold": 10,
+          "style": "default"
+        },
         "metaPath": "src\\puck\\components\\product\\StockIndicator\\stockindicator.meta.ts"
       }
     ],
@@ -104468,6 +113922,13 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "showIcon": true,
+          "showText": true,
+          "showQuantity": true,
+          "lowStockThreshold": 10,
+          "style": "default"
+        },
         "metaPath": "src\\puck\\components\\product\\StockIndicator\\stockindicator.meta.ts"
       }
     ],
@@ -104560,6 +114021,13 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showIcon": true,
+          "showText": true,
+          "showQuantity": true,
+          "lowStockThreshold": 10,
+          "style": "default"
         },
         "metaPath": "src\\puck\\components\\product\\StockIndicator\\stockindicator.meta.ts"
       }
@@ -104677,6 +114145,13 @@ export const registry: CompiledRegistry = {
             "required": false
           }
         },
+        "defaultProps": {
+          "showLabel": true,
+          "labelText": "Add to Wishlist",
+          "size": "medium",
+          "style": "outline",
+          "iconPosition": "left"
+        },
         "metaPath": "src\\puck\\components\\product\\WishlistButton\\wishlistbutton.meta.ts"
       }
     ],
@@ -104792,6 +114267,13 @@ export const registry: CompiledRegistry = {
             "type": "object",
             "required": false
           }
+        },
+        "defaultProps": {
+          "showLabel": true,
+          "labelText": "Add to Wishlist",
+          "size": "medium",
+          "style": "outline",
+          "iconPosition": "left"
         },
         "metaPath": "src\\puck\\components\\product\\WishlistButton\\wishlistbutton.meta.ts"
       }
@@ -104991,6 +114473,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "containerWidth": "large",
+          "maxHeight": 700,
+          "mobileHeight": 400,
+          "thumbnailsPerView": 5,
+          "thumbnailPosition": "bottom",
+          "thumbnailShape": "rounded",
+          "navigationStyle": "minimal",
+          "enableZoom": true,
+          "maxZoom": 3,
+          "showImageCounter": true,
+          "enableFullscreen": true,
+          "imageFit": "cover",
+          "backgroundColor": "#ffffff"
+        },
         "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryfullscreen.meta.ts"
       },
       {
@@ -105189,6 +114686,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "containerWidth": "large",
+          "maxHeight": 600,
+          "mobileHeight": 400,
+          "aspectRatio": "square",
+          "showNavigation": true,
+          "navigationStyle": "minimal",
+          "showPagination": true,
+          "paginationStyle": "dots",
+          "loop": true,
+          "autoHeight": false,
+          "spacing": 16,
+          "imageFit": "cover",
+          "backgroundColor": "#ffffff"
+        },
         "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryminimal.meta.ts"
       },
       {
@@ -105382,6 +114894,21 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "containerWidth": "large",
+          "maxHeight": 600,
+          "mobileHeight": 400,
+          "maxZoom": 3,
+          "showThumbnails": true,
+          "thumbnailsPerView": 4,
+          "thumbnailShape": "rounded",
+          "aspectRatio": "square",
+          "enableDoubleClickZoom": true,
+          "spacing": 16,
+          "navigationStyle": "minimal",
+          "imageFit": "cover",
+          "backgroundColor": "#ffffff"
         },
         "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryzoom.meta.ts"
       }
@@ -105581,6 +115108,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "containerWidth": "large",
+          "maxHeight": 700,
+          "mobileHeight": 400,
+          "thumbnailsPerView": 5,
+          "thumbnailPosition": "bottom",
+          "thumbnailShape": "rounded",
+          "navigationStyle": "minimal",
+          "enableZoom": true,
+          "maxZoom": 3,
+          "showImageCounter": true,
+          "enableFullscreen": true,
+          "imageFit": "cover",
+          "backgroundColor": "#ffffff"
+        },
         "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryfullscreen.meta.ts"
       }
     ],
@@ -105778,6 +115320,21 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "containerWidth": "large",
+          "maxHeight": 700,
+          "mobileHeight": 400,
+          "thumbnailsPerView": 5,
+          "thumbnailPosition": "bottom",
+          "thumbnailShape": "rounded",
+          "navigationStyle": "minimal",
+          "enableZoom": true,
+          "maxZoom": 3,
+          "showImageCounter": true,
+          "enableFullscreen": true,
+          "imageFit": "cover",
+          "backgroundColor": "#ffffff"
         },
         "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryfullscreen.meta.ts"
       }
@@ -105977,6 +115534,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "containerWidth": "large",
+          "maxHeight": 700,
+          "mobileHeight": 400,
+          "thumbnailsPerView": 5,
+          "thumbnailPosition": "bottom",
+          "thumbnailShape": "rounded",
+          "navigationStyle": "minimal",
+          "enableZoom": true,
+          "maxZoom": 3,
+          "showImageCounter": true,
+          "enableFullscreen": true,
+          "imageFit": "cover",
+          "backgroundColor": "#ffffff"
+        },
         "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryfullscreen.meta.ts"
       },
       {
@@ -106175,6 +115747,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "containerWidth": "large",
+          "maxHeight": 600,
+          "mobileHeight": 400,
+          "aspectRatio": "square",
+          "showNavigation": true,
+          "navigationStyle": "minimal",
+          "showPagination": true,
+          "paginationStyle": "dots",
+          "loop": true,
+          "autoHeight": false,
+          "spacing": 16,
+          "imageFit": "cover",
+          "backgroundColor": "#ffffff"
+        },
         "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryminimal.meta.ts"
       },
       {
@@ -106368,6 +115955,21 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "containerWidth": "large",
+          "maxHeight": 600,
+          "mobileHeight": 400,
+          "maxZoom": 3,
+          "showThumbnails": true,
+          "thumbnailsPerView": 4,
+          "thumbnailShape": "rounded",
+          "aspectRatio": "square",
+          "enableDoubleClickZoom": true,
+          "spacing": 16,
+          "navigationStyle": "minimal",
+          "imageFit": "cover",
+          "backgroundColor": "#ffffff"
         },
         "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryzoom.meta.ts"
       },
@@ -106630,6 +116232,26 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "slideHeight": "lg",
+          "contentWidth": "contained",
+          "contentPosition": "center",
+          "effect": "fade",
+          "showNavigation": true,
+          "navigationColor": "#ffffff",
+          "navigationPosition": "center",
+          "showPagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#ffffff",
+          "enableAutoplay": true,
+          "autoplayDelay": 5000,
+          "pauseOnHover": true,
+          "loop": true,
+          "speed": 600,
+          "enableOverlay": true,
+          "overlayColor": "#000000",
+          "overlayOpacity": 40
+        },
         "metaPath": "src\\puck\\components\\swiper\\ContentSlider\\contentslider.meta.ts"
       }
     ],
@@ -106830,6 +116452,21 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "containerWidth": "large",
+          "maxHeight": 600,
+          "mobileHeight": 400,
+          "aspectRatio": "square",
+          "showNavigation": true,
+          "navigationStyle": "minimal",
+          "showPagination": true,
+          "paginationStyle": "dots",
+          "loop": true,
+          "autoHeight": false,
+          "spacing": 16,
+          "imageFit": "cover",
+          "backgroundColor": "#ffffff"
+        },
         "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryminimal.meta.ts"
       }
     ],
@@ -107025,6 +116662,21 @@ export const registry: CompiledRegistry = {
             "type": "string",
             "required": true
           }
+        },
+        "defaultProps": {
+          "containerWidth": "large",
+          "maxHeight": 600,
+          "mobileHeight": 400,
+          "maxZoom": 3,
+          "showThumbnails": true,
+          "thumbnailsPerView": 4,
+          "thumbnailShape": "rounded",
+          "aspectRatio": "square",
+          "enableDoubleClickZoom": true,
+          "spacing": 16,
+          "navigationStyle": "minimal",
+          "imageFit": "cover",
+          "backgroundColor": "#ffffff"
         },
         "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryzoom.meta.ts"
       }
@@ -107289,6 +116941,26 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "slideHeight": "lg",
+          "contentWidth": "contained",
+          "contentPosition": "center",
+          "effect": "fade",
+          "showNavigation": true,
+          "navigationColor": "#ffffff",
+          "navigationPosition": "center",
+          "showPagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#ffffff",
+          "enableAutoplay": true,
+          "autoplayDelay": 5000,
+          "pauseOnHover": true,
+          "loop": true,
+          "speed": 600,
+          "enableOverlay": true,
+          "overlayColor": "#000000",
+          "overlayOpacity": 40
+        },
         "metaPath": "src\\puck\\components\\swiper\\ContentSlider\\contentslider.meta.ts"
       }
     ],
@@ -107551,6 +117223,26 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "slideHeight": "lg",
+          "contentWidth": "contained",
+          "contentPosition": "center",
+          "effect": "fade",
+          "showNavigation": true,
+          "navigationColor": "#ffffff",
+          "navigationPosition": "center",
+          "showPagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#ffffff",
+          "enableAutoplay": true,
+          "autoplayDelay": 5000,
+          "pauseOnHover": true,
+          "loop": true,
+          "speed": 600,
+          "enableOverlay": true,
+          "overlayColor": "#000000",
+          "overlayOpacity": 40
         },
         "metaPath": "src\\puck\\components\\swiper\\ContentSlider\\contentslider.meta.ts"
       }
@@ -107860,6 +117552,32 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "containerWidth": "large",
+          "customWidth": 800,
+          "maxHeight": 500,
+          "layout": "thumbnails",
+          "mainImageAspectRatio": "landscape",
+          "showThumbnails": true,
+          "thumbnailPosition": "bottom",
+          "thumbnailsPerView": 5,
+          "thumbnailSpacing": 12,
+          "showNavigation": true,
+          "navigationColor": "#000000",
+          "navigationSize": "md",
+          "showPagination": false,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "enableZoom": true,
+          "maxZoomScale": 3,
+          "loop": true,
+          "autoHeight": false,
+          "spaceBetween": 10,
+          "borderRadius": "md",
+          "showBorder": true,
+          "borderColor": "#e5e5e5",
+          "backgroundColor": "#f9fafb"
+        },
         "metaPath": "src\\puck\\components\\swiper\\ImageGallery\\imagegallery.meta.ts"
       }
     ],
@@ -108168,6 +117886,32 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "containerWidth": "large",
+          "customWidth": 800,
+          "maxHeight": 500,
+          "layout": "thumbnails",
+          "mainImageAspectRatio": "landscape",
+          "showThumbnails": true,
+          "thumbnailPosition": "bottom",
+          "thumbnailsPerView": 5,
+          "thumbnailSpacing": 12,
+          "showNavigation": true,
+          "navigationColor": "#000000",
+          "navigationSize": "md",
+          "showPagination": false,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "enableZoom": true,
+          "maxZoomScale": 3,
+          "loop": true,
+          "autoHeight": false,
+          "spaceBetween": 10,
+          "borderRadius": "md",
+          "showBorder": true,
+          "borderColor": "#e5e5e5",
+          "backgroundColor": "#f9fafb"
+        },
         "metaPath": "src\\puck\\components\\swiper\\ImageGallery\\imagegallery.meta.ts"
       }
     ],
@@ -108374,6 +118118,26 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "logosPerView": 6,
+          "logosPerViewTablet": 4,
+          "logosPerViewMobile": 2,
+          "enableAutoplay": true,
+          "autoplaySpeed": 2000,
+          "freeMode": true,
+          "loop": true,
+          "spaceBetween": 40,
+          "grayscale": true,
+          "grayscaleHover": true,
+          "logoMaxHeight": 60,
+          "backgroundColor": "#ffffff",
+          "logoBackgroundColor": "transparent",
+          "showBorder": false,
+          "borderColor": "#e5e5e5",
+          "borderRadius": "none",
+          "paddingY": 60,
+          "paddingX": 20
+        },
         "metaPath": "src\\puck\\components\\swiper\\LogoCarousel\\logocarousel.meta.ts"
       }
     ],
@@ -108579,6 +118343,26 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "logosPerView": 6,
+          "logosPerViewTablet": 4,
+          "logosPerViewMobile": 2,
+          "enableAutoplay": true,
+          "autoplaySpeed": 2000,
+          "freeMode": true,
+          "loop": true,
+          "spaceBetween": 40,
+          "grayscale": true,
+          "grayscaleHover": true,
+          "logoMaxHeight": 60,
+          "backgroundColor": "#ffffff",
+          "logoBackgroundColor": "transparent",
+          "showBorder": false,
+          "borderColor": "#e5e5e5",
+          "borderRadius": "none",
+          "paddingY": 60,
+          "paddingX": 20
         },
         "metaPath": "src\\puck\\components\\swiper\\LogoCarousel\\logocarousel.meta.ts"
       }
@@ -108951,6 +118735,41 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Popular Products",
+          "showTitle": true,
+          "productSource": "featured",
+          "productIds": "",
+          "collectionId": "",
+          "categoryId": "",
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 24,
+          "effect": "slide",
+          "speed": 600,
+          "navigation": true,
+          "navigationColor": "#000000",
+          "pagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "pauseOnHover": true,
+          "loop": true,
+          "centeredSlides": false,
+          "freeMode": false,
+          "showProductImage": true,
+          "showProductTitle": true,
+          "showProductPrice": true,
+          "showAddToCart": true,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#ffffff",
+          "cardBackground": "#ffffff",
+          "cardBorderRadius": "lg",
+          "cardShadow": true
+        },
         "metaPath": "src\\puck\\components\\swiper\\ProductCarousel\\productcarousel.meta.ts"
       }
     ],
@@ -109322,6 +119141,41 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "sectionTitle": "Popular Products",
+          "showTitle": true,
+          "productSource": "featured",
+          "productIds": "",
+          "collectionId": "",
+          "categoryId": "",
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 24,
+          "effect": "slide",
+          "speed": 600,
+          "navigation": true,
+          "navigationColor": "#000000",
+          "pagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "pauseOnHover": true,
+          "loop": true,
+          "centeredSlides": false,
+          "freeMode": false,
+          "showProductImage": true,
+          "showProductTitle": true,
+          "showProductPrice": true,
+          "showAddToCart": true,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#ffffff",
+          "cardBackground": "#ffffff",
+          "cardBorderRadius": "lg",
+          "cardShadow": true
+        },
         "metaPath": "src\\puck\\components\\swiper\\ProductCarousel\\productcarousel.meta.ts"
       }
     ],
@@ -109633,6 +119487,35 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
+        "defaultProps": {
+          "layout": "card",
+          "cardsPerView": 3,
+          "cardsPerViewTablet": 2,
+          "cardsPerViewMobile": 1,
+          "effect": "slide",
+          "showNavigation": true,
+          "navigationColor": "#1f2937",
+          "showPagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "enableAutoplay": true,
+          "autoplayDelay": 5000,
+          "pauseOnHover": true,
+          "loop": true,
+          "spaceBetween": 24,
+          "centeredSlides": false,
+          "showAvatar": true,
+          "showRating": true,
+          "showRole": true,
+          "backgroundColor": "#f9fafb",
+          "cardBackground": "#ffffff",
+          "textColor": "#1f2937",
+          "accentColor": "#f59e0b",
+          "borderRadius": "lg",
+          "cardShadow": "md",
+          "paddingY": 80,
+          "paddingX": 20
+        },
         "metaPath": "src\\puck\\components\\swiper\\TestimonialCarousel\\testimonialcarousel.meta.ts"
       }
     ],
@@ -109943,6 +119826,35 @@ export const registry: CompiledRegistry = {
             "type": "number",
             "required": true
           }
+        },
+        "defaultProps": {
+          "layout": "card",
+          "cardsPerView": 3,
+          "cardsPerViewTablet": 2,
+          "cardsPerViewMobile": 1,
+          "effect": "slide",
+          "showNavigation": true,
+          "navigationColor": "#1f2937",
+          "showPagination": true,
+          "paginationType": "bullets",
+          "paginationColor": "#3b82f6",
+          "enableAutoplay": true,
+          "autoplayDelay": 5000,
+          "pauseOnHover": true,
+          "loop": true,
+          "spaceBetween": 24,
+          "centeredSlides": false,
+          "showAvatar": true,
+          "showRating": true,
+          "showRole": true,
+          "backgroundColor": "#f9fafb",
+          "cardBackground": "#ffffff",
+          "textColor": "#1f2937",
+          "accentColor": "#f59e0b",
+          "borderRadius": "lg",
+          "cardShadow": "md",
+          "paddingY": 80,
+          "paddingX": 20
         },
         "metaPath": "src\\puck\\components\\swiper\\TestimonialCarousel\\testimonialcarousel.meta.ts"
       }

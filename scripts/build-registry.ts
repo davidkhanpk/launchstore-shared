@@ -21,6 +21,7 @@ import { writeFileSync, mkdirSync, existsSync, readdirSync, statSync, readFileSy
 import { join, dirname, relative, sep } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { z } from 'zod';
+import ts from 'typescript';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -88,6 +89,8 @@ interface CompiledEntry {
   propSchema: Record<string, z.infer<typeof PropDefSchema>>;
   /** Map of prop name → JSON Schema (for the procedural judge's T-016 validator) */
   jsonSchema: Record<string, unknown>;
+  /** Real default props from the component's ComponentConfig (fills AI inserts). */
+  defaultProps?: Record<string, unknown>;
   /** Absolute path of the meta.ts source, for debugging */
   metaPath: string;
 }
@@ -147,8 +150,105 @@ async function compileOne(metaPath: string): Promise<CompiledEntry> {
     searchTags: m.searchTags,
     propSchema: m.props,
     jsonSchema: zodPropsToJsonSchema(m.props),
+    defaultProps: loadDefaultProps(metaPath, m.name),
     metaPath: relative(PKG_ROOT, metaPath),
   };
+}
+
+/**
+ * Extract the component's ComponentConfig `defaultProps` so the backend AI can
+ * fill inserted nodes with a complete, renderable prop set.
+ *
+ * Uses static TypeScript AST parsing rather than importing the module: many
+ * components do side-effect imports (e.g. `import 'swiper/css'`) that a Node
+ * build script cannot execute. Parsing the source avoids running any component
+ * code. Best-effort: object literals with non-literal values (spreads, computed
+ * refs) skip those keys.
+ */
+function loadDefaultProps(
+  metaPath: string,
+  name: string,
+): Record<string, unknown> | undefined {
+  const dir = dirname(metaPath);
+  const candidates = [join(dir, `${name}.tsx`), join(dir, `${name}.ts`)];
+  for (const file of candidates) {
+    if (!existsSync(file)) continue;
+    try {
+      const src = readFileSync(file, 'utf-8');
+      const sf = ts.createSourceFile(file, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+      const dp = findDefaultPropsObject(sf);
+      if (dp) return dp;
+    } catch (err: any) {
+      console.warn(`[build-registry] could not parse defaultProps for ${name} from ${file}: ${err.message}`);
+    }
+  }
+  return undefined;
+}
+
+/** Find the ComponentConfig object literal (has both `render` + `defaultProps`) and return its defaults. */
+function findDefaultPropsObject(sf: ts.SourceFile): Record<string, unknown> | undefined {
+  let found: Record<string, unknown> | undefined;
+  const visit = (node: ts.Node): void => {
+    if (found) return;
+    if (ts.isObjectLiteralExpression(node)) {
+      const hasRender = node.properties.some(
+        (p) => (ts.isPropertyAssignment(p) || ts.isMethodDeclaration(p)) && p.name?.getText(sf) === 'render',
+      );
+      const dpProp = node.properties.find(
+        (p) => ts.isPropertyAssignment(p) && p.name?.getText(sf) === 'defaultProps',
+      );
+      if (
+        hasRender &&
+        dpProp &&
+        ts.isPropertyAssignment(dpProp) &&
+        ts.isObjectLiteralExpression(dpProp.initializer)
+      ) {
+        found = objectLiteralToValue(dpProp.initializer, sf);
+        return;
+      }
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(sf);
+  return found;
+}
+
+function objectLiteralToValue(
+  obj: ts.ObjectLiteralExpression,
+  sf: ts.SourceFile,
+): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  for (const prop of obj.properties) {
+    if (!ts.isPropertyAssignment(prop) || !prop.name) continue;
+    const key = ts.isStringLiteralLike(prop.name)
+      ? prop.name.text
+      : ts.isIdentifier(prop.name)
+        ? prop.name.text
+        : prop.name.getText(sf);
+    const value = literalToValue(prop.initializer, sf);
+    if (value !== SKIP) out[key] = value;
+  }
+  return out;
+}
+
+const SKIP = Symbol('skip');
+
+function literalToValue(node: ts.Expression, sf: ts.SourceFile): unknown {
+  if (ts.isStringLiteralLike(node)) return node.text;
+  if (ts.isNumericLiteral(node)) return Number(node.text);
+  if (node.kind === ts.SyntaxKind.TrueKeyword) return true;
+  if (node.kind === ts.SyntaxKind.FalseKeyword) return false;
+  if (node.kind === ts.SyntaxKind.NullKeyword) return null;
+  if (ts.isPrefixUnaryExpression(node) && node.operator === ts.SyntaxKind.MinusToken) {
+    const inner = literalToValue(node.operand, sf);
+    return typeof inner === 'number' ? -inner : SKIP;
+  }
+  if (ts.isArrayLiteralExpression(node)) {
+    return node.elements.map((el) => literalToValue(el, sf)).filter((v) => v !== SKIP);
+  }
+  if (ts.isObjectLiteralExpression(node)) return objectLiteralToValue(node, sf);
+  // Identifiers, computed refs, template expressions with substitutions, etc.
+  return SKIP;
 }
 
 function zodPropsToJsonSchema(props: Record<string, z.infer<typeof PropDefSchema>>): Record<string, unknown> {

@@ -91,6 +91,12 @@ interface CompiledEntry {
   jsonSchema: Record<string, unknown>;
   /** Real default props from the component's ComponentConfig (fills AI inserts). */
   defaultProps?: Record<string, unknown>;
+  /** True if the component renders one or more Puck <DropZone>s (can hold children). */
+  isContainer: boolean;
+  /** Literal drop-zone names the component renders (e.g. ["content"], ["column-1","column-2"]). */
+  zones: string[];
+  /** For components with dynamic zones (e.g. Columns renders column-1, column-2, ...), the static prefix, e.g. "column-". */
+  dynamicZonePrefix?: string;
   /** Absolute path of the meta.ts source, for debugging */
   metaPath: string;
 }
@@ -151,9 +157,200 @@ async function compileOne(metaPath: string): Promise<CompiledEntry> {
     propSchema: m.props,
     jsonSchema: zodPropsToJsonSchema(m.props),
     defaultProps: loadDefaultProps(metaPath, m.name),
+    ...loadZones(metaPath, m.name),
     metaPath: relative(PKG_ROOT, metaPath),
   };
 }
+
+/**
+ * Extract the Puck drop-zone names a component renders (`<DropZone zone="..."/>`)
+ * via static AST parsing. This is the ground-truth structural metadata the AI
+ * needs so it never has to guess zone names. Returns isContainer + literal zone
+ * names, plus a dynamicZonePrefix for components that render zones from a
+ * template literal (e.g. Columns renders column-1, column-2, ... -> prefix "column-").
+ */
+function loadZones(
+  metaPath: string,
+  name: string,
+): { isContainer: boolean; zones: string[]; dynamicZonePrefix?: string } {
+  const dir = dirname(metaPath);
+  const candidates = [join(dir, `${name}.tsx`), join(dir, `${name}.ts`)];
+  for (const file of candidates) {
+    if (!existsSync(file)) continue;
+    try {
+      const src = readFileSync(file, 'utf-8');
+      const sf = ts.createSourceFile(file, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+      return extractZonesFromSource(sf);
+    } catch (err: any) {
+      console.warn(`[build-registry] could not parse zones for ${name} from ${file}: ${err.message}`);
+    }
+  }
+  return { isContainer: false, zones: [] };
+}
+
+/** Core DropZone extraction from an already-parsed source file. */
+function extractZonesFromSource(
+  sf: ts.SourceFile,
+): { isContainer: boolean; zones: string[]; dynamicZonePrefix?: string } {
+  const zones = new Set<string>();
+  let dynamicZonePrefix: string | undefined;
+  let hasDropZone = false;
+
+  const visit = (node: ts.Node): void => {
+    let attrs: ts.JsxAttributes | undefined;
+    if (ts.isJsxSelfClosingElement(node) && node.tagName.getText(sf) === 'DropZone') {
+      attrs = node.attributes;
+    } else if (ts.isJsxOpeningElement(node) && node.tagName.getText(sf) === 'DropZone') {
+      attrs = node.attributes;
+    }
+    if (attrs) {
+      hasDropZone = true;
+      for (const a of attrs.properties) {
+        if (!ts.isJsxAttribute(a) || a.name.getText(sf) !== 'zone' || !a.initializer) continue;
+        const init = a.initializer;
+        if (ts.isStringLiteralLike(init)) {
+          zones.add(init.text);
+        } else if (ts.isJsxExpression(init) && init.expression) {
+          const e = init.expression;
+          if (ts.isStringLiteralLike(e)) zones.add(e.text);
+          else if (ts.isTemplateExpression(e)) dynamicZonePrefix = e.head.text;
+        }
+      }
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(sf);
+
+  if (hasDropZone) {
+    return {
+      isContainer: true,
+      zones: [...zones].sort(),
+      ...(dynamicZonePrefix ? { dynamicZonePrefix } : {}),
+    };
+  }
+  return { isContainer: false, zones: [] };
+}
+
+/**
+ * Auto-derive a registry entry for a component that has a ComponentConfig .tsx
+ * but no .meta.ts. Keeps every renderable component first-class in the AI
+ * registry (name, category, defaultProps, zones, and a prop schema derived from
+ * the default values) without hand-maintaining a meta file. A real .meta.ts,
+ * when present, always takes precedence (richer description/intent).
+ */
+function deriveEntryFromComponent(tsxPath: string): CompiledEntry | null {
+  let src: string;
+  try {
+    src = readFileSync(tsxPath, 'utf-8');
+  } catch {
+    return null;
+  }
+  const sf = ts.createSourceFile(tsxPath, src, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+
+  let cfg: { name: string; label: string; defaultProps: Record<string, unknown> } | null = null;
+  const visit = (node: ts.Node): void => {
+    if (cfg) return;
+    if (
+      ts.isVariableStatement(node) &&
+      node.modifiers?.some((m) => m.kind === ts.SyntaxKind.ExportKeyword)
+    ) {
+      for (const decl of node.declarationList.declarations) {
+        if (
+          ts.isIdentifier(decl.name) &&
+          decl.initializer &&
+          ts.isObjectLiteralExpression(decl.initializer)
+        ) {
+          const obj = decl.initializer;
+          const hasRender = obj.properties.some(
+            (p) => (ts.isPropertyAssignment(p) || ts.isMethodDeclaration(p)) && p.name?.getText(sf) === 'render',
+          );
+          if (!hasRender) continue;
+          const labelProp = obj.properties.find(
+            (p) => ts.isPropertyAssignment(p) && p.name?.getText(sf) === 'label',
+          );
+          const label =
+            labelProp && ts.isPropertyAssignment(labelProp) && ts.isStringLiteralLike(labelProp.initializer)
+              ? labelProp.initializer.text
+              : decl.name.text;
+          const dpProp = obj.properties.find(
+            (p) => ts.isPropertyAssignment(p) && p.name?.getText(sf) === 'defaultProps',
+          );
+          const defaultProps =
+            dpProp && ts.isPropertyAssignment(dpProp) && ts.isObjectLiteralExpression(dpProp.initializer)
+              ? objectLiteralToValue(dpProp.initializer, sf)
+              : {};
+          cfg = { name: decl.name.text, label, defaultProps };
+          return;
+        }
+      }
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(sf);
+  if (!cfg) return null;
+  const c = cfg as { name: string; label: string; defaultProps: Record<string, unknown> };
+
+  const zoneInfo = extractZonesFromSource(sf);
+  const propSchema = derivePropSchema(c.defaultProps);
+  const words = c.name.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase().split(/\s+/).filter(Boolean);
+
+  return {
+    name: c.name,
+    label: c.label,
+    description: `${c.label} component (auto-derived).`,
+    category: categoryFromPath(tsxPath),
+    intent: words,
+    dataDeps: [],
+    copyFields: [],
+    themeable: [],
+    a11yRisk: 'low',
+    searchTags: words,
+    propSchema,
+    jsonSchema: zodPropsToJsonSchema(propSchema),
+    defaultProps: c.defaultProps,
+    isContainer: zoneInfo.isContainer,
+    zones: zoneInfo.zones,
+    ...(zoneInfo.dynamicZonePrefix ? { dynamicZonePrefix: zoneInfo.dynamicZonePrefix } : {}),
+    metaPath: `${relative(PKG_ROOT, tsxPath)} (auto-derived)`,
+  };
+}
+
+/** Derive a prop schema from default-prop value types (best-effort). */
+function derivePropSchema(
+  defaultProps: Record<string, unknown>,
+): Record<string, z.infer<typeof PropDefSchema>> {
+  const out: Record<string, z.infer<typeof PropDefSchema>> = {};
+  for (const [k, v] of Object.entries(defaultProps ?? {})) {
+    let type: z.infer<typeof PropDefSchema>['type'] = 'string';
+    if (typeof v === 'number') type = 'number';
+    else if (typeof v === 'boolean') type = 'boolean';
+    else if (Array.isArray(v)) type = 'array';
+    else if (v && typeof v === 'object') type = 'object';
+    else if (typeof v === 'string' && /^#(?:[0-9a-f]{3,8})$/i.test(v)) type = 'color';
+    out[k] = { type } as z.infer<typeof PropDefSchema>;
+  }
+  return out;
+}
+
+/** Category = the path segment immediately under components/. */
+function categoryFromPath(fp: string): string {
+  const norm = fp.replace(/\\/g, '/');
+  const m = norm.match(/\/components\/([^/]+)\//);
+  return m ? m[1] : 'misc';
+}
+
+/** Walk for component .tsx files (potential ComponentConfig exports). */
+function walkComponentFiles(dir: string, acc: string[] = []): string[] {
+  if (!existsSync(dir)) return acc;
+  for (const entry of readdirSync(dir)) {
+    const full = join(dir, entry);
+    const stat = statSync(full);
+    if (stat.isDirectory()) walkComponentFiles(full, acc);
+    else if (entry.endsWith('.tsx')) acc.push(full);
+  }
+  return acc;
+}
+
 
 /**
  * Extract the component's ComponentConfig `defaultProps` so the backend AI can
@@ -277,6 +474,23 @@ async function main() {
       console.error(`[build-registry] ${err.message}`);
       process.exit(1);
     }
+  }
+
+  // Auto-derive entries for components that render (have a ComponentConfig .tsx)
+  // but have NO .meta.ts, so every renderable component is first-class in the AI
+  // registry. A real meta always wins.
+  const covered = new Set(entries.map((e) => e.name));
+  let derivedCount = 0;
+  for (const tsxPath of walkComponentFiles(COMPONENTS_DIR)) {
+    const entry = deriveEntryFromComponent(tsxPath);
+    if (entry && !covered.has(entry.name)) {
+      entries.push(entry);
+      covered.add(entry.name);
+      derivedCount++;
+    }
+  }
+  if (derivedCount > 0) {
+    console.log(`[build-registry] auto-derived ${derivedCount} meta-less component(s)`);
   }
 
   // Validate uniqueness

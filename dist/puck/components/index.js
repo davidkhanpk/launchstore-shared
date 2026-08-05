@@ -61,12 +61,16 @@ export * from './navigation/Logo';
 export * from './navigation/SearchIcon';
 export * from './navigation/MobileMenu';
 export * from './navigation/CategoryMegaMenu';
-export * from './navigation/MenuNavigationRenderer';
+// MenuNavigationRenderer deleted (NAV-C2). Its types (SharedEnrichedMenuItem,
+// SharedMenuNavTheme, MenuLayout, MenuAlignment) moved into MenuNavigation's
+// types file. Its render logic (real mega-menu via CategoryMegaMenu) will be
+// wired into MenuNavigation itself.
 export * from './navigation/MenuNavigation';
 export * from './navigation/AnnouncementBar';
 export * from './navigation/HeaderActions';
 export * from './navigation/QuickLinks';
-export * from './navigation/CategoryNav';
+// CategoryNav removed — consolidated into the single MenuNavigation component.
+// The Menu editor is the single source of truth; designers no longer hand-author links.
 export * from './navigation/SearchBar';
 export * from './navigation/AccountButton';
 export * from './navigation/CartButton';

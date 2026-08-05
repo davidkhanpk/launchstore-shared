@@ -36,8 +36,8 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-08-04T04:45:02.353Z",
-  "total": 139,
+  "generatedAt": "2026-08-05T18:16:06.193Z",
+  "total": 138,
   "entries": [
     {
       "name": "AccountContent",
@@ -13134,7 +13134,7 @@ export const registry: CompiledRegistry = {
     {
       "name": "CategoryMegaMenu",
       "label": "Category Mega Menu",
-      "description": "Sub-renderer used inside MenuNavigationRenderer. Renders a category with subcategories in a configurable-column grid, with optional banner image, \"View All\" heading, and per-subcategory description snippet. Styled via theme tokens (heading/linking colors, font sizes, padding, border-radius, box-shadow).",
+      "description": "Mega-menu panel rendered inside MenuNavigation when dropdownStyle is \"mega\". Renders a category with subcategories in a configurable-column grid, with optional banner image, \"View All\" heading, and per-subcategory description snippet. Styled via theme tokens (heading/linking colors, font sizes, padding, border-radius, box-shadow).",
       "category": "navigation",
       "intent": [
         "mega-menu",
@@ -13785,7 +13785,7 @@ export const registry: CompiledRegistry = {
         }
       },
       "defaultProps": {
-        "menuHandle": "default",
+        "menuHandle": "",
         "layout": "horizontal",
         "alignment": "center",
         "hoverEffect": "underline",
@@ -13800,108 +13800,13 @@ export const registry: CompiledRegistry = {
         "dropdownBackground": "#ffffff",
         "dropdownBorder": "#e5e7eb",
         "dropdownShadow": "lg",
-        "dropdownRadius": "md"
+        "dropdownRadius": "md",
+        "mobileBreakpoint": 768,
+        "mobileSearchPlaceholder": "Search products…"
       },
       "isContainer": false,
       "zones": [],
       "metaPath": "src\\puck\\components\\navigation\\MenuNavigation\\menunavigation.meta.ts"
-    },
-    {
-      "name": "MenuNavigationRenderer",
-      "label": "Menu Navigation Renderer",
-      "description": "Live renderer for the storefront navigation menu. Replaces the @headlessui/react Popover-based MegaMenu UX with stateful CSS hover behavior, keeping the same UI. Items with megaMenu.enabled + enriched category data surface a CategoryMegaMenu popover; items with plain children surface a SimpleDropdown. Styled via theme tokens (navigation + megaMenu). Used by HeaderRenderer and storefront layout.tsx data injection.",
-      "category": "navigation",
-      "intent": [
-        "nav",
-        "navigation",
-        "menu",
-        "mega-menu",
-        "header"
-      ],
-      "visualRole": "block",
-      "dataDeps": [
-        "items",
-        "theme"
-      ],
-      "copyFields": [],
-      "themeable": [
-        "navigation.background",
-        "navigation.border",
-        "navigation.text",
-        "navigation.textHover",
-        "megaMenu.background",
-        "megaMenu.linkText"
-      ],
-      "a11yRisk": "medium",
-      "mobileBehavior": "responsive",
-      "searchTags": [
-        "nav",
-        "navigation",
-        "menu",
-        "mega-menu",
-        "header",
-        "popover",
-        "dropdown"
-      ],
-      "propSchema": {
-        "items": {
-          "type": "array",
-          "required": true,
-          "items": "$item"
-        },
-        "theme": {
-          "type": "object",
-          "required": true
-        },
-        "layout": {
-          "type": "enum",
-          "required": false,
-          "options": [
-            "horizontal",
-            "vertical"
-          ]
-        },
-        "alignment": {
-          "type": "enum",
-          "required": false,
-          "options": [
-            "left",
-            "center",
-            "right"
-          ]
-        }
-      },
-      "jsonSchema": {
-        "items": {
-          "type": "array",
-          "required": true,
-          "items": "$item"
-        },
-        "theme": {
-          "type": "object",
-          "required": true
-        },
-        "layout": {
-          "type": "enum",
-          "required": false,
-          "options": [
-            "horizontal",
-            "vertical"
-          ]
-        },
-        "alignment": {
-          "type": "enum",
-          "required": false,
-          "options": [
-            "left",
-            "center",
-            "right"
-          ]
-        }
-      },
-      "isContainer": false,
-      "zones": [],
-      "metaPath": "src\\puck\\components\\navigation\\MenuNavigationRenderer\\menunavigationrenderer.meta.ts"
     },
     {
       "name": "MobileMenu",
@@ -33182,7 +33087,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "CategoryMegaMenu",
         "label": "Category Mega Menu",
-        "description": "Sub-renderer used inside MenuNavigationRenderer. Renders a category with subcategories in a configurable-column grid, with optional banner image, \"View All\" heading, and per-subcategory description snippet. Styled via theme tokens (heading/linking colors, font sizes, padding, border-radius, box-shadow).",
+        "description": "Mega-menu panel rendered inside MenuNavigation when dropdownStyle is \"mega\". Renders a category with subcategories in a configurable-column grid, with optional banner image, \"View All\" heading, and per-subcategory description snippet. Styled via theme tokens (heading/linking colors, font sizes, padding, border-radius, box-shadow).",
         "category": "navigation",
         "intent": [
           "mega-menu",
@@ -33833,7 +33738,7 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "menuHandle": "default",
+          "menuHandle": "",
           "layout": "horizontal",
           "alignment": "center",
           "hoverEffect": "underline",
@@ -33848,108 +33753,13 @@ export const registry: CompiledRegistry = {
           "dropdownBackground": "#ffffff",
           "dropdownBorder": "#e5e7eb",
           "dropdownShadow": "lg",
-          "dropdownRadius": "md"
+          "dropdownRadius": "md",
+          "mobileBreakpoint": 768,
+          "mobileSearchPlaceholder": "Search products…"
         },
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\navigation\\MenuNavigation\\menunavigation.meta.ts"
-      },
-      {
-        "name": "MenuNavigationRenderer",
-        "label": "Menu Navigation Renderer",
-        "description": "Live renderer for the storefront navigation menu. Replaces the @headlessui/react Popover-based MegaMenu UX with stateful CSS hover behavior, keeping the same UI. Items with megaMenu.enabled + enriched category data surface a CategoryMegaMenu popover; items with plain children surface a SimpleDropdown. Styled via theme tokens (navigation + megaMenu). Used by HeaderRenderer and storefront layout.tsx data injection.",
-        "category": "navigation",
-        "intent": [
-          "nav",
-          "navigation",
-          "menu",
-          "mega-menu",
-          "header"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "items",
-          "theme"
-        ],
-        "copyFields": [],
-        "themeable": [
-          "navigation.background",
-          "navigation.border",
-          "navigation.text",
-          "navigation.textHover",
-          "megaMenu.background",
-          "megaMenu.linkText"
-        ],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "nav",
-          "navigation",
-          "menu",
-          "mega-menu",
-          "header",
-          "popover",
-          "dropdown"
-        ],
-        "propSchema": {
-          "items": {
-            "type": "array",
-            "required": true,
-            "items": "$item"
-          },
-          "theme": {
-            "type": "object",
-            "required": true
-          },
-          "layout": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "horizontal",
-              "vertical"
-            ]
-          },
-          "alignment": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "items": {
-            "type": "array",
-            "required": true,
-            "items": "$item"
-          },
-          "theme": {
-            "type": "object",
-            "required": true
-          },
-          "layout": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "horizontal",
-              "vertical"
-            ]
-          },
-          "alignment": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          }
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\MenuNavigationRenderer\\menunavigationrenderer.meta.ts"
       },
       {
         "name": "MobileMenu",
@@ -54030,7 +53840,7 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "menuHandle": "default",
+          "menuHandle": "",
           "layout": "horizontal",
           "alignment": "center",
           "hoverEffect": "underline",
@@ -54045,108 +53855,13 @@ export const registry: CompiledRegistry = {
           "dropdownBackground": "#ffffff",
           "dropdownBorder": "#e5e7eb",
           "dropdownShadow": "lg",
-          "dropdownRadius": "md"
+          "dropdownRadius": "md",
+          "mobileBreakpoint": 768,
+          "mobileSearchPlaceholder": "Search products…"
         },
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\navigation\\MenuNavigation\\menunavigation.meta.ts"
-      },
-      {
-        "name": "MenuNavigationRenderer",
-        "label": "Menu Navigation Renderer",
-        "description": "Live renderer for the storefront navigation menu. Replaces the @headlessui/react Popover-based MegaMenu UX with stateful CSS hover behavior, keeping the same UI. Items with megaMenu.enabled + enriched category data surface a CategoryMegaMenu popover; items with plain children surface a SimpleDropdown. Styled via theme tokens (navigation + megaMenu). Used by HeaderRenderer and storefront layout.tsx data injection.",
-        "category": "navigation",
-        "intent": [
-          "nav",
-          "navigation",
-          "menu",
-          "mega-menu",
-          "header"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "items",
-          "theme"
-        ],
-        "copyFields": [],
-        "themeable": [
-          "navigation.background",
-          "navigation.border",
-          "navigation.text",
-          "navigation.textHover",
-          "megaMenu.background",
-          "megaMenu.linkText"
-        ],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "nav",
-          "navigation",
-          "menu",
-          "mega-menu",
-          "header",
-          "popover",
-          "dropdown"
-        ],
-        "propSchema": {
-          "items": {
-            "type": "array",
-            "required": true,
-            "items": "$item"
-          },
-          "theme": {
-            "type": "object",
-            "required": true
-          },
-          "layout": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "horizontal",
-              "vertical"
-            ]
-          },
-          "alignment": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "items": {
-            "type": "array",
-            "required": true,
-            "items": "$item"
-          },
-          "theme": {
-            "type": "object",
-            "required": true
-          },
-          "layout": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "horizontal",
-              "vertical"
-            ]
-          },
-          "alignment": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          }
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\MenuNavigationRenderer\\menunavigationrenderer.meta.ts"
       },
       {
         "name": "ProductBreadcrumbs",
@@ -63418,7 +63133,7 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "menuHandle": "default",
+          "menuHandle": "",
           "layout": "horizontal",
           "alignment": "center",
           "hoverEffect": "underline",
@@ -63433,108 +63148,13 @@ export const registry: CompiledRegistry = {
           "dropdownBackground": "#ffffff",
           "dropdownBorder": "#e5e7eb",
           "dropdownShadow": "lg",
-          "dropdownRadius": "md"
+          "dropdownRadius": "md",
+          "mobileBreakpoint": 768,
+          "mobileSearchPlaceholder": "Search products…"
         },
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\navigation\\MenuNavigation\\menunavigation.meta.ts"
-      },
-      {
-        "name": "MenuNavigationRenderer",
-        "label": "Menu Navigation Renderer",
-        "description": "Live renderer for the storefront navigation menu. Replaces the @headlessui/react Popover-based MegaMenu UX with stateful CSS hover behavior, keeping the same UI. Items with megaMenu.enabled + enriched category data surface a CategoryMegaMenu popover; items with plain children surface a SimpleDropdown. Styled via theme tokens (navigation + megaMenu). Used by HeaderRenderer and storefront layout.tsx data injection.",
-        "category": "navigation",
-        "intent": [
-          "nav",
-          "navigation",
-          "menu",
-          "mega-menu",
-          "header"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "items",
-          "theme"
-        ],
-        "copyFields": [],
-        "themeable": [
-          "navigation.background",
-          "navigation.border",
-          "navigation.text",
-          "navigation.textHover",
-          "megaMenu.background",
-          "megaMenu.linkText"
-        ],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "nav",
-          "navigation",
-          "menu",
-          "mega-menu",
-          "header",
-          "popover",
-          "dropdown"
-        ],
-        "propSchema": {
-          "items": {
-            "type": "array",
-            "required": true,
-            "items": "$item"
-          },
-          "theme": {
-            "type": "object",
-            "required": true
-          },
-          "layout": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "horizontal",
-              "vertical"
-            ]
-          },
-          "alignment": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "items": {
-            "type": "array",
-            "required": true,
-            "items": "$item"
-          },
-          "theme": {
-            "type": "object",
-            "required": true
-          },
-          "layout": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "horizontal",
-              "vertical"
-            ]
-          },
-          "alignment": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          }
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\MenuNavigationRenderer\\menunavigationrenderer.meta.ts"
       }
     ],
     "name": [
@@ -64424,7 +64044,7 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "menuHandle": "default",
+          "menuHandle": "",
           "layout": "horizontal",
           "alignment": "center",
           "hoverEffect": "underline",
@@ -64439,108 +64059,13 @@ export const registry: CompiledRegistry = {
           "dropdownBackground": "#ffffff",
           "dropdownBorder": "#e5e7eb",
           "dropdownShadow": "lg",
-          "dropdownRadius": "md"
+          "dropdownRadius": "md",
+          "mobileBreakpoint": 768,
+          "mobileSearchPlaceholder": "Search products…"
         },
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\navigation\\MenuNavigation\\menunavigation.meta.ts"
-      },
-      {
-        "name": "MenuNavigationRenderer",
-        "label": "Menu Navigation Renderer",
-        "description": "Live renderer for the storefront navigation menu. Replaces the @headlessui/react Popover-based MegaMenu UX with stateful CSS hover behavior, keeping the same UI. Items with megaMenu.enabled + enriched category data surface a CategoryMegaMenu popover; items with plain children surface a SimpleDropdown. Styled via theme tokens (navigation + megaMenu). Used by HeaderRenderer and storefront layout.tsx data injection.",
-        "category": "navigation",
-        "intent": [
-          "nav",
-          "navigation",
-          "menu",
-          "mega-menu",
-          "header"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "items",
-          "theme"
-        ],
-        "copyFields": [],
-        "themeable": [
-          "navigation.background",
-          "navigation.border",
-          "navigation.text",
-          "navigation.textHover",
-          "megaMenu.background",
-          "megaMenu.linkText"
-        ],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "nav",
-          "navigation",
-          "menu",
-          "mega-menu",
-          "header",
-          "popover",
-          "dropdown"
-        ],
-        "propSchema": {
-          "items": {
-            "type": "array",
-            "required": true,
-            "items": "$item"
-          },
-          "theme": {
-            "type": "object",
-            "required": true
-          },
-          "layout": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "horizontal",
-              "vertical"
-            ]
-          },
-          "alignment": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "items": {
-            "type": "array",
-            "required": true,
-            "items": "$item"
-          },
-          "theme": {
-            "type": "object",
-            "required": true
-          },
-          "layout": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "horizontal",
-              "vertical"
-            ]
-          },
-          "alignment": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          }
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\MenuNavigationRenderer\\menunavigationrenderer.meta.ts"
       }
     ],
     "preview": [
@@ -81963,7 +81488,7 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "menuHandle": "default",
+          "menuHandle": "",
           "layout": "horizontal",
           "alignment": "center",
           "hoverEffect": "underline",
@@ -81978,7 +81503,9 @@ export const registry: CompiledRegistry = {
           "dropdownBackground": "#ffffff",
           "dropdownBorder": "#e5e7eb",
           "dropdownShadow": "lg",
-          "dropdownRadius": "md"
+          "dropdownRadius": "md",
+          "mobileBreakpoint": 768,
+          "mobileSearchPlaceholder": "Search products…"
         },
         "isContainer": false,
         "zones": [],
@@ -107383,7 +106910,7 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "menuHandle": "default",
+          "menuHandle": "",
           "layout": "horizontal",
           "alignment": "center",
           "hoverEffect": "underline",
@@ -107398,108 +106925,13 @@ export const registry: CompiledRegistry = {
           "dropdownBackground": "#ffffff",
           "dropdownBorder": "#e5e7eb",
           "dropdownShadow": "lg",
-          "dropdownRadius": "md"
+          "dropdownRadius": "md",
+          "mobileBreakpoint": 768,
+          "mobileSearchPlaceholder": "Search products…"
         },
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\navigation\\MenuNavigation\\menunavigation.meta.ts"
-      },
-      {
-        "name": "MenuNavigationRenderer",
-        "label": "Menu Navigation Renderer",
-        "description": "Live renderer for the storefront navigation menu. Replaces the @headlessui/react Popover-based MegaMenu UX with stateful CSS hover behavior, keeping the same UI. Items with megaMenu.enabled + enriched category data surface a CategoryMegaMenu popover; items with plain children surface a SimpleDropdown. Styled via theme tokens (navigation + megaMenu). Used by HeaderRenderer and storefront layout.tsx data injection.",
-        "category": "navigation",
-        "intent": [
-          "nav",
-          "navigation",
-          "menu",
-          "mega-menu",
-          "header"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "items",
-          "theme"
-        ],
-        "copyFields": [],
-        "themeable": [
-          "navigation.background",
-          "navigation.border",
-          "navigation.text",
-          "navigation.textHover",
-          "megaMenu.background",
-          "megaMenu.linkText"
-        ],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "nav",
-          "navigation",
-          "menu",
-          "mega-menu",
-          "header",
-          "popover",
-          "dropdown"
-        ],
-        "propSchema": {
-          "items": {
-            "type": "array",
-            "required": true,
-            "items": "$item"
-          },
-          "theme": {
-            "type": "object",
-            "required": true
-          },
-          "layout": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "horizontal",
-              "vertical"
-            ]
-          },
-          "alignment": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "items": {
-            "type": "array",
-            "required": true,
-            "items": "$item"
-          },
-          "theme": {
-            "type": "object",
-            "required": true
-          },
-          "layout": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "horizontal",
-              "vertical"
-            ]
-          },
-          "alignment": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          }
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\MenuNavigationRenderer\\menunavigationrenderer.meta.ts"
       },
       {
         "name": "MobileMenu",
@@ -110347,7 +109779,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "CategoryMegaMenu",
         "label": "Category Mega Menu",
-        "description": "Sub-renderer used inside MenuNavigationRenderer. Renders a category with subcategories in a configurable-column grid, with optional banner image, \"View All\" heading, and per-subcategory description snippet. Styled via theme tokens (heading/linking colors, font sizes, padding, border-radius, box-shadow).",
+        "description": "Mega-menu panel rendered inside MenuNavigation when dropdownStyle is \"mega\". Renders a category with subcategories in a configurable-column grid, with optional banner image, \"View All\" heading, and per-subcategory description snippet. Styled via theme tokens (heading/linking colors, font sizes, padding, border-radius, box-shadow).",
         "category": "navigation",
         "intent": [
           "mega-menu",
@@ -110415,110 +109847,13 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\navigation\\CategoryMegaMenu\\categorymegamenu.meta.ts"
-      },
-      {
-        "name": "MenuNavigationRenderer",
-        "label": "Menu Navigation Renderer",
-        "description": "Live renderer for the storefront navigation menu. Replaces the @headlessui/react Popover-based MegaMenu UX with stateful CSS hover behavior, keeping the same UI. Items with megaMenu.enabled + enriched category data surface a CategoryMegaMenu popover; items with plain children surface a SimpleDropdown. Styled via theme tokens (navigation + megaMenu). Used by HeaderRenderer and storefront layout.tsx data injection.",
-        "category": "navigation",
-        "intent": [
-          "nav",
-          "navigation",
-          "menu",
-          "mega-menu",
-          "header"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "items",
-          "theme"
-        ],
-        "copyFields": [],
-        "themeable": [
-          "navigation.background",
-          "navigation.border",
-          "navigation.text",
-          "navigation.textHover",
-          "megaMenu.background",
-          "megaMenu.linkText"
-        ],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "nav",
-          "navigation",
-          "menu",
-          "mega-menu",
-          "header",
-          "popover",
-          "dropdown"
-        ],
-        "propSchema": {
-          "items": {
-            "type": "array",
-            "required": true,
-            "items": "$item"
-          },
-          "theme": {
-            "type": "object",
-            "required": true
-          },
-          "layout": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "horizontal",
-              "vertical"
-            ]
-          },
-          "alignment": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "items": {
-            "type": "array",
-            "required": true,
-            "items": "$item"
-          },
-          "theme": {
-            "type": "object",
-            "required": true
-          },
-          "layout": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "horizontal",
-              "vertical"
-            ]
-          },
-          "alignment": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          }
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\MenuNavigationRenderer\\menunavigationrenderer.meta.ts"
       }
     ],
     "mega": [
       {
         "name": "CategoryMegaMenu",
         "label": "Category Mega Menu",
-        "description": "Sub-renderer used inside MenuNavigationRenderer. Renders a category with subcategories in a configurable-column grid, with optional banner image, \"View All\" heading, and per-subcategory description snippet. Styled via theme tokens (heading/linking colors, font sizes, padding, border-radius, box-shadow).",
+        "description": "Mega-menu panel rendered inside MenuNavigation when dropdownStyle is \"mega\". Renders a category with subcategories in a configurable-column grid, with optional banner image, \"View All\" heading, and per-subcategory description snippet. Styled via theme tokens (heading/linking colors, font sizes, padding, border-radius, box-shadow).",
         "category": "navigation",
         "intent": [
           "mega-menu",
@@ -110592,7 +109927,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "CategoryMegaMenu",
         "label": "Category Mega Menu",
-        "description": "Sub-renderer used inside MenuNavigationRenderer. Renders a category with subcategories in a configurable-column grid, with optional banner image, \"View All\" heading, and per-subcategory description snippet. Styled via theme tokens (heading/linking colors, font sizes, padding, border-radius, box-shadow).",
+        "description": "Mega-menu panel rendered inside MenuNavigation when dropdownStyle is \"mega\". Renders a category with subcategories in a configurable-column grid, with optional banner image, \"View All\" heading, and per-subcategory description snippet. Styled via theme tokens (heading/linking colors, font sizes, padding, border-radius, box-shadow).",
         "category": "navigation",
         "intent": [
           "mega-menu",
@@ -110666,7 +110001,7 @@ export const registry: CompiledRegistry = {
       {
         "name": "CategoryMegaMenu",
         "label": "Category Mega Menu",
-        "description": "Sub-renderer used inside MenuNavigationRenderer. Renders a category with subcategories in a configurable-column grid, with optional banner image, \"View All\" heading, and per-subcategory description snippet. Styled via theme tokens (heading/linking colors, font sizes, padding, border-radius, box-shadow).",
+        "description": "Mega-menu panel rendered inside MenuNavigation when dropdownStyle is \"mega\". Renders a category with subcategories in a configurable-column grid, with optional banner image, \"View All\" heading, and per-subcategory description snippet. Styled via theme tokens (heading/linking colors, font sizes, padding, border-radius, box-shadow).",
         "category": "navigation",
         "intent": [
           "mega-menu",

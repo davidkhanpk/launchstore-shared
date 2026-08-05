@@ -86,4 +86,6 @@ export const menuNavigationFields = {
       { label: 'Extra Large', value: 'xl' },
     ],
   },
+  mobileBreakpoint: { type: 'number', label: 'Mobile Breakpoint (px)' },
+  mobileSearchPlaceholder: { type: 'text', label: 'Mobile Search Placeholder (empty hides search)' },
 } as Record<string, Field>;

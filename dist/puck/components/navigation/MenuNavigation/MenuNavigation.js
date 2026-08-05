@@ -104,9 +104,26 @@ const DropdownItem = ({ item, resolvedTextColor, fontSize, dropdownBg, dropdownB
     if (visibleChildren.length === 0) {
         return _jsx(DropdownLeaf, { item: item, resolvedTextColor: resolvedTextColor, fontSize: fontSize, onLinkClick: onLinkClick });
     }
-    return (_jsxs("div", { className: "relative", onMouseEnter: () => { if (openTimer.current)
-            clearTimeout(openTimer.current); openTimer.current = setTimeout(() => setOpen(true), 300); }, onMouseLeave: () => { if (closeTimer.current)
-            clearTimeout(closeTimer.current); closeTimer.current = setTimeout(() => setOpen(false), 300); }, children: [_jsxs("div", { className: "flex items-center justify-between", style: { color: resolvedTextColor, fontSize, cursor: 'pointer', padding: '4px 8px' }, children: [_jsx("span", { children: getLabel(item) }), _jsx(ChevronDown, { size: 12 })] }), open && (_jsx("div", { className: "absolute z-50 top-0 left-full", style: { backgroundColor: dropdownBg, border: `1px solid ${dropdownBorder}`, boxShadow: shadow, borderRadius: radius, minWidth: '180px', padding: '4px 0' }, children: visibleChildren.map((child) => (_jsx(DropdownItem, { item: child, resolvedTextColor: resolvedTextColor, fontSize: fontSize, dropdownBg: dropdownBg, dropdownBorder: dropdownBorder, shadow: shadow, radius: radius, onLinkClick: onLinkClick }, child.id))) }))] }));
+    const cancelTimers = () => {
+        if (openTimer.current)
+            clearTimeout(openTimer.current);
+        if (closeTimer.current)
+            clearTimeout(closeTimer.current);
+    };
+    const scheduleOpen = () => { cancelTimers(); openTimer.current = setTimeout(() => setOpen(true), 300); };
+    const scheduleClose = () => { cancelTimers(); closeTimer.current = setTimeout(() => setOpen(false), 300); };
+    return (_jsxs("div", { className: "relative", onMouseEnter: scheduleOpen, onMouseLeave: scheduleClose, children: [_jsxs("div", { className: "flex items-center justify-between", style: { color: resolvedTextColor, fontSize, cursor: 'pointer', padding: '4px 8px' }, children: [_jsx("span", { children: getLabel(item) }), _jsx(ChevronDown, { size: 12 })] }), open && (_jsx("div", { className: "absolute z-50 top-0 left-full", onMouseEnter: cancelTimers, onMouseLeave: scheduleClose, style: {
+                    backgroundColor: dropdownBg,
+                    border: `1px solid ${dropdownBorder}`,
+                    boxShadow: shadow,
+                    borderRadius: radius,
+                    minWidth: '180px',
+                    padding: '4px 0',
+                    // Overlap the parent row + pad so diagonal travel to the flyout
+                    // never crosses dead space (same flicker fix as TopLevelItem).
+                    marginLeft: '-4px',
+                    paddingLeft: '8px',
+                }, children: visibleChildren.map((child) => (_jsx(DropdownItem, { item: child, resolvedTextColor: resolvedTextColor, fontSize: fontSize, dropdownBg: dropdownBg, dropdownBorder: dropdownBorder, shadow: shadow, radius: radius, onLinkClick: onLinkClick }, child.id))) }))] }));
 };
 /**
  * Top-level desktop item. Uses Headless UI Popover for hover + keyboard.
@@ -198,17 +215,28 @@ const TopLevelItem = ({ item, resolvedTextColor, resolvedHoverColor, fontSize, f
                 e.currentTarget.style.color = resolvedHoverColor; }, onMouseLeave: (e) => { if (hoverEffect === 'color')
                 e.currentTarget.style.color = resolvedTextColor; }, children: getLabel(item) }));
     }
-    return (_jsxs("div", { className: "relative", onMouseEnter: scheduleOpen, onMouseLeave: scheduleClose, children: [_jsxs("button", { ref: triggerRef, type: "button", className: hoverClass(hoverEffect), style: triggerStyle, "aria-expanded": isOpen, "aria-haspopup": megaProps ? 'dialog' : 'menu', onClick: () => setIsOpen((v) => !v), onMouseEnter: (e) => { if (hoverEffect === 'color')
+    return (_jsxs("div", { className: "relative", onMouseEnter: scheduleOpen, onMouseLeave: scheduleClose, children: [_jsxs("button", { ref: triggerRef, type: "button", className: hoverClass(hoverEffect), style: triggerStyle, "aria-expanded": isOpen, "aria-haspopup": megaProps ? 'dialog' : 'menu', onClick: () => setIsOpen((v) => !v), onMouseEnter: (e) => { cancelTimers(); if (hoverEffect === 'color')
                     e.currentTarget.style.color = resolvedHoverColor; }, onMouseLeave: (e) => { if (hoverEffect === 'color')
-                    e.currentTarget.style.color = resolvedTextColor; }, children: [getLabel(item), showArrow && _jsx(ChevronDown, {})] }), isOpen && (_jsx("div", { ref: panelRef, className: "absolute z-50 top-full", style: {
+                    e.currentTarget.style.color = resolvedTextColor; }, children: [getLabel(item), showArrow && _jsx(ChevronDown, {})] }), isOpen && (_jsx("div", { ref: panelRef, className: "absolute z-50 top-full", onMouseEnter: cancelTimers, onMouseLeave: scheduleClose, style: {
                     ...panelPositionStyle,
-                    backgroundColor: dropdownBg,
-                    border: `1px solid ${dropdownBorder}`,
-                    boxShadow: shadow,
-                    borderRadius: radius,
-                    // Flush under the trigger (no gap) — kills diagonal-flicker.
-                    marginTop: megaProps ? '0' : '4px',
-                    padding: megaProps ? 0 : '8px',
+                    // For the default dropdown, this div IS the visible panel
+                    // (background/border/shadow + inner padding). For the mega panel,
+                    // CategoryMegaMenu renders its own visible panel, so this wrapper
+                    // is transparent and just provides the hover bridge + positioning.
+                    ...(megaProps ? {} : {
+                        backgroundColor: dropdownBg,
+                        border: `1px solid ${dropdownBorder}`,
+                        boxShadow: shadow,
+                        borderRadius: radius,
+                        padding: '8px',
+                    }),
+                    // Overlap the trigger by pulling the panel up a few px, and add
+                    // transparent top padding. This guarantees the panel's hoverable
+                    // box touches+overlaps the button so diagonal mouse travel from
+                    // trigger → child never crosses dead space (kills the
+                    // disappear-on-way-to-child flicker bug).
+                    marginTop: '-4px',
+                    paddingTop: '12px',
                     minWidth: megaProps ? 'auto' : '220px',
                 }, children: megaProps ? (_jsx(CategoryMegaMenu, { ...megaProps })) : (visibleChildren.map((child) => (_jsx(DropdownItem, { item: child, resolvedTextColor: resolvedTextColor, fontSize: fontSize, dropdownBg: dropdownBg, dropdownBorder: dropdownBorder, shadow: shadow, radius: radius, onLinkClick: onLinkClick }, child.id)))) }))] }));
 };

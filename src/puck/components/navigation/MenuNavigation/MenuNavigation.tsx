@@ -166,11 +166,18 @@ const DropdownItem: React.FC<{
   if (visibleChildren.length === 0) {
     return <DropdownLeaf item={item} resolvedTextColor={resolvedTextColor} fontSize={fontSize} onLinkClick={onLinkClick} />;
   }
+  const cancelTimers = () => {
+    if (openTimer.current) clearTimeout(openTimer.current);
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+  };
+  const scheduleOpen = () => { cancelTimers(); openTimer.current = setTimeout(() => setOpen(true), 300); };
+  const scheduleClose = () => { cancelTimers(); closeTimer.current = setTimeout(() => setOpen(false), 300); };
+
   return (
     <div
       className="relative"
-      onMouseEnter={() => { if (openTimer.current) clearTimeout(openTimer.current); openTimer.current = setTimeout(() => setOpen(true), 300); }}
-      onMouseLeave={() => { if (closeTimer.current) clearTimeout(closeTimer.current); closeTimer.current = setTimeout(() => setOpen(false), 300); }}
+      onMouseEnter={scheduleOpen}
+      onMouseLeave={scheduleClose}
     >
       <div className="flex items-center justify-between" style={{ color: resolvedTextColor, fontSize, cursor: 'pointer', padding: '4px 8px' }}>
         <span>{getLabel(item)}</span>
@@ -179,7 +186,20 @@ const DropdownItem: React.FC<{
       {open && (
         <div
           className="absolute z-50 top-0 left-full"
-          style={{ backgroundColor: dropdownBg, border: `1px solid ${dropdownBorder}`, boxShadow: shadow, borderRadius: radius, minWidth: '180px', padding: '4px 0' }}
+          onMouseEnter={cancelTimers}
+          onMouseLeave={scheduleClose}
+          style={{
+            backgroundColor: dropdownBg,
+            border: `1px solid ${dropdownBorder}`,
+            boxShadow: shadow,
+            borderRadius: radius,
+            minWidth: '180px',
+            padding: '4px 0',
+            // Overlap the parent row + pad so diagonal travel to the flyout
+            // never crosses dead space (same flicker fix as TopLevelItem).
+            marginLeft: '-4px',
+            paddingLeft: '8px',
+          }}
         >
           {visibleChildren.map((child) => (
             <DropdownItem
@@ -327,7 +347,7 @@ const TopLevelItem: React.FC<{
         aria-expanded={isOpen}
         aria-haspopup={megaProps ? 'dialog' : 'menu'}
         onClick={() => setIsOpen((v) => !v)}
-        onMouseEnter={(e) => { if (hoverEffect === 'color') e.currentTarget.style.color = resolvedHoverColor; }}
+        onMouseEnter={(e) => { cancelTimers(); if (hoverEffect === 'color') e.currentTarget.style.color = resolvedHoverColor; }}
         onMouseLeave={(e) => { if (hoverEffect === 'color') e.currentTarget.style.color = resolvedTextColor; }}
       >
         {getLabel(item)}
@@ -337,15 +357,28 @@ const TopLevelItem: React.FC<{
         <div
           ref={panelRef}
           className="absolute z-50 top-full"
+          onMouseEnter={cancelTimers}
+          onMouseLeave={scheduleClose}
           style={{
             ...panelPositionStyle,
-            backgroundColor: dropdownBg,
-            border: `1px solid ${dropdownBorder}`,
-            boxShadow: shadow,
-            borderRadius: radius,
-            // Flush under the trigger (no gap) — kills diagonal-flicker.
-            marginTop: megaProps ? '0' : '4px',
-            padding: megaProps ? 0 : '8px',
+            // For the default dropdown, this div IS the visible panel
+            // (background/border/shadow + inner padding). For the mega panel,
+            // CategoryMegaMenu renders its own visible panel, so this wrapper
+            // is transparent and just provides the hover bridge + positioning.
+            ...(megaProps ? {} : {
+              backgroundColor: dropdownBg,
+              border: `1px solid ${dropdownBorder}`,
+              boxShadow: shadow,
+              borderRadius: radius,
+              padding: '8px',
+            }),
+            // Overlap the trigger by pulling the panel up a few px, and add
+            // transparent top padding. This guarantees the panel's hoverable
+            // box touches+overlaps the button so diagonal mouse travel from
+            // trigger → child never crosses dead space (kills the
+            // disappear-on-way-to-child flicker bug).
+            marginTop: '-4px',
+            paddingTop: '12px',
             minWidth: megaProps ? 'auto' : '220px',
           }}
         >

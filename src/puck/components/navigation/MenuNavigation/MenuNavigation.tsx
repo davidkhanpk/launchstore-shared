@@ -19,6 +19,12 @@ const ChevronDown = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
+const ChevronRight = ({ size = 12 }: { size?: number }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+    <polyline points="9 18 15 12 9 6" />
+  </svg>
+);
+
 const Hamburger = ({ size = 24 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
     <line x1="3" y1="6" x2="21" y2="6" />
@@ -238,15 +244,33 @@ const DropdownItem: React.FC<{
       onMouseEnter={scheduleOpen}
       onMouseLeave={scheduleClose}
     >
-      {/* Parent row — the trigger + the anchor for flyout positioning. */}
+      {/* Parent row — label is a LINK (navigates), arrow is a BUTTON (toggles).
+          In hover mode the dropdown opens on hover, so clicking the label
+          navigates; the arrow is a visual indicator. In click mode, clicking
+          the label navigates AND clicking the arrow toggles the flyout. */}
       <div
         ref={rowRef}
-        onClick={isClick ? toggle : undefined}
         className="flex items-center justify-between"
-        style={{ color: resolvedTextColor, fontSize, cursor: 'pointer', padding: '4px 8px', backgroundColor: dropdownBg }}
+        style={{ backgroundColor: dropdownBg }}
       >
-        <span>{getLabel(item)}</span>
-        <ChevronDown size={12} />
+        <a
+          href={item.url || '#'}
+          target={item.openInNewTab ? '_blank' : undefined}
+          rel={item.openInNewTab ? 'noopener noreferrer' : undefined}
+          onClick={onLinkClick}
+          style={{ flex: 1, color: resolvedTextColor, fontSize, textDecoration: 'none', padding: '4px 8px' }}
+        >
+          {getLabel(item)}
+        </a>
+        <button
+          type="button"
+          onClick={isClick ? toggle : undefined}
+          aria-expanded={open}
+          aria-label={open ? `Collapse ${getLabel(item)}` : `Expand ${getLabel(item)}`}
+          style={{ background: 'none', border: 'none', cursor: isClick ? 'pointer' : 'default', padding: '4px 8px', color: resolvedTextColor, display: 'flex', alignItems: 'center' }}
+        >
+          <ChevronRight size={12} />
+        </button>
       </div>
       {open && (
         <div
@@ -318,7 +342,7 @@ const TopLevelItem: React.FC<{
   const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   // Panel alignment: 'center' | 'left' | 'right'. Starts centered; the layout
   // effect flips it when the centered panel would overflow the viewport edge.
@@ -421,20 +445,35 @@ const TopLevelItem: React.FC<{
       onMouseEnter={scheduleOpen}
       onMouseLeave={scheduleClose}
     >
-      <button
-        ref={triggerRef}
-        type="button"
-        className={hoverClass(hoverEffect)}
-        style={triggerStyle}
-        aria-expanded={isOpen}
-        aria-haspopup={megaProps ? 'dialog' : 'menu'}
-        onClick={() => setIsOpen((v) => !v)}
-        onMouseEnter={(e) => { cancelTimers(); if (hoverEffect === 'color') e.currentTarget.style.color = resolvedHoverColor; }}
-        onMouseLeave={(e) => { if (hoverEffect === 'color') e.currentTarget.style.color = resolvedTextColor; }}
-      >
-        {getLabel(item)}
-        {showArrow && <ChevronDown />}
-      </button>
+      {/* Label is a LINK (navigates), arrow is a BUTTON (toggles dropdown).
+          Hover mode: dropdown opens on hover, clicking the label navigates.
+          Click mode: clicking the label navigates, clicking the arrow toggles. */}
+      <div ref={triggerRef} style={{ display: 'flex', alignItems: 'center', gap: '0' }}>
+        <a
+          href={item.url || '#'}
+          target={item.openInNewTab ? '_blank' : undefined}
+          rel={item.openInNewTab ? 'noopener noreferrer' : undefined}
+          onClick={onLinkClick}
+          className={hoverClass(hoverEffect)}
+          style={{ ...triggerStyle, textDecoration: 'none' }}
+          onMouseEnter={(e) => { cancelTimers(); if (hoverEffect === 'color') e.currentTarget.style.color = resolvedHoverColor; }}
+          onMouseLeave={(e) => { if (hoverEffect === 'color') e.currentTarget.style.color = resolvedTextColor; }}
+        >
+          {getLabel(item)}
+        </a>
+        {showArrow && (
+          <button
+            type="button"
+            aria-expanded={isOpen}
+            aria-haspopup={megaProps ? 'dialog' : 'menu'}
+            aria-label={isOpen ? `Collapse ${getLabel(item)}` : `Expand ${getLabel(item)}`}
+            onClick={() => setIsOpen((v) => !v)}
+            style={{ ...triggerStyle, padding: '8px 4px', cursor: 'pointer' }}
+          >
+            <ChevronDown size={14} />
+          </button>
+        )}
+      </div>
       {isOpen && (
         <div
           ref={panelRef}

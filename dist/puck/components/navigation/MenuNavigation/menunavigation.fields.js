@@ -55,6 +55,13 @@ export const menuNavigationFields = {
             { label: 'Mega Menu', value: 'mega' },
         ],
     },
+    triggerMode: {
+        type: 'select', label: 'Open On',
+        options: [
+            { label: 'Hover', value: 'hover' },
+            { label: 'Click', value: 'click' },
+        ],
+    },
     maxDepth: {
         type: 'select', label: 'Maximum Nesting Depth',
         options: [

@@ -152,11 +152,14 @@ const DropdownItem: React.FC<{
   dropdownBorder: string;
   shadow: string;
   radius: string;
+  triggerMode: MenuNavigationProps['triggerMode'];
   onLinkClick?: () => void;
-}> = ({ item, resolvedTextColor, fontSize, dropdownBg, dropdownBorder, shadow, radius, onLinkClick }) => {
+}> = ({ item, resolvedTextColor, fontSize, dropdownBg, dropdownBorder, shadow, radius, triggerMode, onLinkClick }) => {
   const [open, setOpen] = useState(false);
   const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const itemRef = useRef<HTMLDivElement>(null);
+  const isClick = triggerMode === 'click';
   useEffect(() => () => {
     if (openTimer.current) clearTimeout(openTimer.current);
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -170,16 +173,36 @@ const DropdownItem: React.FC<{
     if (openTimer.current) clearTimeout(openTimer.current);
     if (closeTimer.current) clearTimeout(closeTimer.current);
   };
-  const scheduleOpen = () => { cancelTimers(); openTimer.current = setTimeout(() => setOpen(true), 300); };
-  const scheduleClose = () => { cancelTimers(); closeTimer.current = setTimeout(() => setOpen(false), 300); };
+  // No-ops in click mode; hover-intent only in hover mode.
+  const scheduleOpen = () => { if (isClick) return; cancelTimers(); openTimer.current = setTimeout(() => setOpen(true), 300); };
+  const scheduleClose = () => { if (isClick) return; cancelTimers(); closeTimer.current = setTimeout(() => setOpen(false), 300); };
+
+  // Click mode: close on outside-click.
+  useEffect(() => {
+    if (!isClick || !open) return;
+    const onDown = (e: MouseEvent) => {
+      if (itemRef.current && !itemRef.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener('mousedown', onDown);
+    return () => document.removeEventListener('mousedown', onDown);
+  }, [isClick, open]);
+
+  const toggle = () => setOpen((v) => !v);
 
   return (
     <div
+      ref={itemRef}
       className="relative"
       onMouseEnter={scheduleOpen}
       onMouseLeave={scheduleClose}
     >
-      <div className="flex items-center justify-between" style={{ color: resolvedTextColor, fontSize, cursor: 'pointer', padding: '4px 8px' }}>
+      {/* Parent row: solid background so the grandchild flyout can't visually
+          bleed through it (fixes issue 1 — grandchild covering parent). */}
+      <div
+        onClick={isClick ? toggle : undefined}
+        className="flex items-center justify-between"
+        style={{ color: resolvedTextColor, fontSize, cursor: 'pointer', padding: '4px 8px', backgroundColor: dropdownBg }}
+      >
         <span>{getLabel(item)}</span>
         <ChevronDown size={12} />
       </div>
@@ -211,6 +234,7 @@ const DropdownItem: React.FC<{
               dropdownBorder={dropdownBorder}
               shadow={shadow}
               radius={radius}
+              triggerMode={triggerMode}
               onLinkClick={onLinkClick}
             />
           ))}
@@ -241,30 +265,46 @@ const TopLevelItem: React.FC<{
   hoverEffect: MenuNavigationHoverEffect;
   showArrow: boolean;
   dropdownStyle: MenuNavigationProps['dropdownStyle'];
+  triggerMode: MenuNavigationProps['triggerMode'];
   dropdownBg: string;
   dropdownBorder: string;
   shadow: string;
   radius: string;
   megaTheme?: SharedMegaMenuTheme;
   onLinkClick?: () => void;
-}> = ({ item, resolvedTextColor, resolvedHoverColor, fontSize, fontWeight, hoverEffect, showArrow, dropdownStyle, dropdownBg, dropdownBorder, shadow, radius, megaTheme, onLinkClick }) => {
+}> = ({ item, resolvedTextColor, resolvedHoverColor, fontSize, fontWeight, hoverEffect, showArrow, dropdownStyle, triggerMode, dropdownBg, dropdownBorder, shadow, radius, megaTheme, onLinkClick }) => {
   const [isOpen, setIsOpen] = useState(false);
   const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   // Panel alignment: 'center' | 'left' | 'right'. Starts centered; the layout
   // effect flips it when the centered panel would overflow the viewport edge.
   const [panelAlign, setPanelAlign] = useState<'center' | 'left' | 'right'>('center');
+  const isClick = triggerMode === 'click';
 
   const cancelTimers = () => {
     if (openTimer.current) { clearTimeout(openTimer.current); openTimer.current = null; }
     if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = null; }
   };
   // Hover-intent: 300ms open delay, 300ms close delay (forgiving).
-  const scheduleOpen = () => { cancelTimers(); openTimer.current = setTimeout(() => setIsOpen(true), 300); };
-  const scheduleClose = () => { cancelTimers(); closeTimer.current = setTimeout(() => setIsOpen(false), 300); };
+  // Only used in hover mode; in click mode these are no-ops.
+  const scheduleOpen = () => { if (isClick) return; cancelTimers(); openTimer.current = setTimeout(() => setIsOpen(true), 300); };
+  const scheduleClose = () => { if (isClick) return; cancelTimers(); closeTimer.current = setTimeout(() => setIsOpen(false), 300); };
   useEffect(() => () => cancelTimers(), []);
+
+  // Click mode: close on outside-click + Escape.
+  useEffect(() => {
+    if (!isClick || !isOpen) return;
+    const onDown = (e: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) setIsOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setIsOpen(false); };
+    document.addEventListener('mousedown', onDown);
+    document.addEventListener('keydown', onKey);
+    return () => { document.removeEventListener('mousedown', onDown); document.removeEventListener('keydown', onKey); };
+  }, [isClick, isOpen]);
 
   const megaProps = (dropdownStyle === 'mega' && item.megaMenu?.enabled)
     ? toMegaMenuProps(item, megaTheme, onLinkClick)
@@ -335,6 +375,7 @@ const TopLevelItem: React.FC<{
 
   return (
     <div
+      ref={wrapperRef}
       className="relative"
       onMouseEnter={scheduleOpen}
       onMouseLeave={scheduleClose}
@@ -395,6 +436,7 @@ const TopLevelItem: React.FC<{
                 dropdownBorder={dropdownBorder}
                 shadow={shadow}
                 radius={radius}
+                triggerMode={triggerMode}
                 onLinkClick={onLinkClick}
               />
             ))
@@ -564,6 +606,7 @@ export const MenuNavigation: ComponentConfig<MenuNavigationProps> = {
     fontWeight: 'medium',
     showDropdownArrows: true,
     dropdownStyle: 'default',
+    triggerMode: 'hover',
     maxDepth: '3',
     menuData: [],
     dropdownBackground: '#ffffff',
@@ -576,7 +619,7 @@ export const MenuNavigation: ComponentConfig<MenuNavigationProps> = {
   render: (rawProps: any) => {
     const {
       menuData, layout, alignment, hoverEffect, textColor, hoverColor,
-      fontSize, fontWeight, showDropdownArrows, dropdownStyle,
+      fontSize, fontWeight, showDropdownArrows, dropdownStyle, triggerMode,
       dropdownBackground, dropdownBorder, dropdownShadow, dropdownRadius,
       mobileBreakpoint, mobileSearchPlaceholder, theme,
     } = rawProps as MenuNavigationProps;
@@ -647,6 +690,7 @@ export const MenuNavigation: ComponentConfig<MenuNavigationProps> = {
               hoverEffect={hoverEffect || 'underline'}
               showArrow={!!showDropdownArrows}
               dropdownStyle={dropdownStyle || 'default'}
+              triggerMode={triggerMode || 'hover'}
               dropdownBg={resolvedDropdownBg}
               dropdownBorder={resolvedDropdownBorder}
               shadow={shadow}

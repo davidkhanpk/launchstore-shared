@@ -90,10 +90,12 @@ const DropdownLeaf = ({ item, resolvedTextColor, fontSize, onLinkClick }) => (_j
  * (manual hover-intent, matching TopLevelItem's pattern). Items without
  * get a leaf.
  */
-const DropdownItem = ({ item, resolvedTextColor, fontSize, dropdownBg, dropdownBorder, shadow, radius, onLinkClick }) => {
+const DropdownItem = ({ item, resolvedTextColor, fontSize, dropdownBg, dropdownBorder, shadow, radius, triggerMode, onLinkClick }) => {
     const [open, setOpen] = useState(false);
     const openTimer = useRef(null);
     const closeTimer = useRef(null);
+    const itemRef = useRef(null);
+    const isClick = triggerMode === 'click';
     useEffect(() => () => {
         if (openTimer.current)
             clearTimeout(openTimer.current);
@@ -110,9 +112,24 @@ const DropdownItem = ({ item, resolvedTextColor, fontSize, dropdownBg, dropdownB
         if (closeTimer.current)
             clearTimeout(closeTimer.current);
     };
-    const scheduleOpen = () => { cancelTimers(); openTimer.current = setTimeout(() => setOpen(true), 300); };
-    const scheduleClose = () => { cancelTimers(); closeTimer.current = setTimeout(() => setOpen(false), 300); };
-    return (_jsxs("div", { className: "relative", onMouseEnter: scheduleOpen, onMouseLeave: scheduleClose, children: [_jsxs("div", { className: "flex items-center justify-between", style: { color: resolvedTextColor, fontSize, cursor: 'pointer', padding: '4px 8px' }, children: [_jsx("span", { children: getLabel(item) }), _jsx(ChevronDown, { size: 12 })] }), open && (_jsx("div", { className: "absolute z-50 top-0 left-full", onMouseEnter: cancelTimers, onMouseLeave: scheduleClose, style: {
+    // No-ops in click mode; hover-intent only in hover mode.
+    const scheduleOpen = () => { if (isClick)
+        return; cancelTimers(); openTimer.current = setTimeout(() => setOpen(true), 300); };
+    const scheduleClose = () => { if (isClick)
+        return; cancelTimers(); closeTimer.current = setTimeout(() => setOpen(false), 300); };
+    // Click mode: close on outside-click.
+    useEffect(() => {
+        if (!isClick || !open)
+            return;
+        const onDown = (e) => {
+            if (itemRef.current && !itemRef.current.contains(e.target))
+                setOpen(false);
+        };
+        document.addEventListener('mousedown', onDown);
+        return () => document.removeEventListener('mousedown', onDown);
+    }, [isClick, open]);
+    const toggle = () => setOpen((v) => !v);
+    return (_jsxs("div", { ref: itemRef, className: "relative", onMouseEnter: scheduleOpen, onMouseLeave: scheduleClose, children: [_jsxs("div", { onClick: isClick ? toggle : undefined, className: "flex items-center justify-between", style: { color: resolvedTextColor, fontSize, cursor: 'pointer', padding: '4px 8px', backgroundColor: dropdownBg }, children: [_jsx("span", { children: getLabel(item) }), _jsx(ChevronDown, { size: 12 })] }), open && (_jsx("div", { className: "absolute z-50 top-0 left-full", onMouseEnter: cancelTimers, onMouseLeave: scheduleClose, style: {
                     backgroundColor: dropdownBg,
                     border: `1px solid ${dropdownBorder}`,
                     boxShadow: shadow,
@@ -123,7 +140,7 @@ const DropdownItem = ({ item, resolvedTextColor, fontSize, dropdownBg, dropdownB
                     // never crosses dead space (same flicker fix as TopLevelItem).
                     marginLeft: '-4px',
                     paddingLeft: '8px',
-                }, children: visibleChildren.map((child) => (_jsx(DropdownItem, { item: child, resolvedTextColor: resolvedTextColor, fontSize: fontSize, dropdownBg: dropdownBg, dropdownBorder: dropdownBorder, shadow: shadow, radius: radius, onLinkClick: onLinkClick }, child.id))) }))] }));
+                }, children: visibleChildren.map((child) => (_jsx(DropdownItem, { item: child, resolvedTextColor: resolvedTextColor, fontSize: fontSize, dropdownBg: dropdownBg, dropdownBorder: dropdownBorder, shadow: shadow, radius: radius, triggerMode: triggerMode, onLinkClick: onLinkClick }, child.id))) }))] }));
 };
 /**
  * Top-level desktop item. Uses Headless UI Popover for hover + keyboard.
@@ -137,15 +154,17 @@ const DropdownItem = ({ item, resolvedTextColor, fontSize, dropdownBg, dropdownB
  * Keyboard: PopoverButton is a real focusable <button> with aria-expanded;
  * Enter/Space/Down opens, Escape closes (all via Headless UI defaults).
  */
-const TopLevelItem = ({ item, resolvedTextColor, resolvedHoverColor, fontSize, fontWeight, hoverEffect, showArrow, dropdownStyle, dropdownBg, dropdownBorder, shadow, radius, megaTheme, onLinkClick }) => {
+const TopLevelItem = ({ item, resolvedTextColor, resolvedHoverColor, fontSize, fontWeight, hoverEffect, showArrow, dropdownStyle, triggerMode, dropdownBg, dropdownBorder, shadow, radius, megaTheme, onLinkClick }) => {
     const [isOpen, setIsOpen] = useState(false);
     const openTimer = useRef(null);
     const closeTimer = useRef(null);
     const panelRef = useRef(null);
     const triggerRef = useRef(null);
+    const wrapperRef = useRef(null);
     // Panel alignment: 'center' | 'left' | 'right'. Starts centered; the layout
     // effect flips it when the centered panel would overflow the viewport edge.
     const [panelAlign, setPanelAlign] = useState('center');
+    const isClick = triggerMode === 'click';
     const cancelTimers = () => {
         if (openTimer.current) {
             clearTimeout(openTimer.current);
@@ -157,9 +176,26 @@ const TopLevelItem = ({ item, resolvedTextColor, resolvedHoverColor, fontSize, f
         }
     };
     // Hover-intent: 300ms open delay, 300ms close delay (forgiving).
-    const scheduleOpen = () => { cancelTimers(); openTimer.current = setTimeout(() => setIsOpen(true), 300); };
-    const scheduleClose = () => { cancelTimers(); closeTimer.current = setTimeout(() => setIsOpen(false), 300); };
+    // Only used in hover mode; in click mode these are no-ops.
+    const scheduleOpen = () => { if (isClick)
+        return; cancelTimers(); openTimer.current = setTimeout(() => setIsOpen(true), 300); };
+    const scheduleClose = () => { if (isClick)
+        return; cancelTimers(); closeTimer.current = setTimeout(() => setIsOpen(false), 300); };
     useEffect(() => () => cancelTimers(), []);
+    // Click mode: close on outside-click + Escape.
+    useEffect(() => {
+        if (!isClick || !isOpen)
+            return;
+        const onDown = (e) => {
+            if (wrapperRef.current && !wrapperRef.current.contains(e.target))
+                setIsOpen(false);
+        };
+        const onKey = (e) => { if (e.key === 'Escape')
+            setIsOpen(false); };
+        document.addEventListener('mousedown', onDown);
+        document.addEventListener('keydown', onKey);
+        return () => { document.removeEventListener('mousedown', onDown); document.removeEventListener('keydown', onKey); };
+    }, [isClick, isOpen]);
     const megaProps = (dropdownStyle === 'mega' && item.megaMenu?.enabled)
         ? toMegaMenuProps(item, megaTheme, onLinkClick)
         : null;
@@ -215,7 +251,7 @@ const TopLevelItem = ({ item, resolvedTextColor, resolvedHoverColor, fontSize, f
                 e.currentTarget.style.color = resolvedHoverColor; }, onMouseLeave: (e) => { if (hoverEffect === 'color')
                 e.currentTarget.style.color = resolvedTextColor; }, children: getLabel(item) }));
     }
-    return (_jsxs("div", { className: "relative", onMouseEnter: scheduleOpen, onMouseLeave: scheduleClose, children: [_jsxs("button", { ref: triggerRef, type: "button", className: hoverClass(hoverEffect), style: triggerStyle, "aria-expanded": isOpen, "aria-haspopup": megaProps ? 'dialog' : 'menu', onClick: () => setIsOpen((v) => !v), onMouseEnter: (e) => { cancelTimers(); if (hoverEffect === 'color')
+    return (_jsxs("div", { ref: wrapperRef, className: "relative", onMouseEnter: scheduleOpen, onMouseLeave: scheduleClose, children: [_jsxs("button", { ref: triggerRef, type: "button", className: hoverClass(hoverEffect), style: triggerStyle, "aria-expanded": isOpen, "aria-haspopup": megaProps ? 'dialog' : 'menu', onClick: () => setIsOpen((v) => !v), onMouseEnter: (e) => { cancelTimers(); if (hoverEffect === 'color')
                     e.currentTarget.style.color = resolvedHoverColor; }, onMouseLeave: (e) => { if (hoverEffect === 'color')
                     e.currentTarget.style.color = resolvedTextColor; }, children: [getLabel(item), showArrow && _jsx(ChevronDown, {})] }), isOpen && (_jsx("div", { ref: panelRef, className: "absolute z-50 top-full", onMouseEnter: cancelTimers, onMouseLeave: scheduleClose, style: {
                     ...panelPositionStyle,
@@ -238,7 +274,7 @@ const TopLevelItem = ({ item, resolvedTextColor, resolvedHoverColor, fontSize, f
                     marginTop: '-4px',
                     paddingTop: '12px',
                     minWidth: megaProps ? 'auto' : '220px',
-                }, children: megaProps ? (_jsx(CategoryMegaMenu, { ...megaProps })) : (visibleChildren.map((child) => (_jsx(DropdownItem, { item: child, resolvedTextColor: resolvedTextColor, fontSize: fontSize, dropdownBg: dropdownBg, dropdownBorder: dropdownBorder, shadow: shadow, radius: radius, onLinkClick: onLinkClick }, child.id)))) }))] }));
+                }, children: megaProps ? (_jsx(CategoryMegaMenu, { ...megaProps })) : (visibleChildren.map((child) => (_jsx(DropdownItem, { item: child, resolvedTextColor: resolvedTextColor, fontSize: fontSize, dropdownBg: dropdownBg, dropdownBorder: dropdownBorder, shadow: shadow, radius: radius, triggerMode: triggerMode, onLinkClick: onLinkClick }, child.id)))) }))] }));
 };
 /**
  * Mobile drawer — Headless UI Dialog (focus trap, Escape, scroll-lock, portal).
@@ -292,6 +328,7 @@ export const MenuNavigation = {
         fontWeight: 'medium',
         showDropdownArrows: true,
         dropdownStyle: 'default',
+        triggerMode: 'hover',
         maxDepth: '3',
         menuData: [],
         dropdownBackground: '#ffffff',
@@ -302,7 +339,7 @@ export const MenuNavigation = {
         mobileSearchPlaceholder: 'Search products…',
     },
     render: (rawProps) => {
-        const { menuData, layout, alignment, hoverEffect, textColor, hoverColor, fontSize, fontWeight, showDropdownArrows, dropdownStyle, dropdownBackground, dropdownBorder, dropdownShadow, dropdownRadius, mobileBreakpoint, mobileSearchPlaceholder, theme, } = rawProps;
+        const { menuData, layout, alignment, hoverEffect, textColor, hoverColor, fontSize, fontWeight, showDropdownArrows, dropdownStyle, triggerMode, dropdownBackground, dropdownBorder, dropdownShadow, dropdownRadius, mobileBreakpoint, mobileSearchPlaceholder, theme, } = rawProps;
         const items = menuData || [];
         const visibleTopLevel = items
             .filter((it) => it.isVisible && (!('parentId' in it) || !it.parentId))
@@ -330,7 +367,7 @@ export const MenuNavigation = {
             return (_jsxs(_Fragment, { children: [_jsx("button", { type: "button", "aria-label": "Open menu", "aria-expanded": drawerOpen, onClick: () => setDrawerOpen(true), style: { background: 'none', border: 'none', cursor: 'pointer', padding: '8px', color: resolvedTextColor }, children: _jsx(Hamburger, { size: 24 }) }), _jsx(MobileMenuDrawer, { isOpen: drawerOpen, onClose: () => setDrawerOpen(false), items: items, resolvedTextColor: resolvedTextColor, dropdownBg: resolvedDropdownBg, dropdownBorder: resolvedDropdownBorder, searchPlaceholder: mobileSearchPlaceholder })] }));
         }
         // Desktop: nav bar.
-        return (_jsx("nav", { "aria-label": "Main", className: `flex ${LAYOUT[layout || 'horizontal']} ${ALIGN[alignment || 'center']}`, children: _jsx("div", { className: `flex ${LAYOUT[layout || 'horizontal']} gap-2`, children: visibleTopLevel.map((item) => (_jsx(TopLevelItem, { item: item, resolvedTextColor: resolvedTextColor, resolvedHoverColor: resolvedHoverColor, fontSize: fs, fontWeight: fw, hoverEffect: hoverEffect || 'underline', showArrow: !!showDropdownArrows, dropdownStyle: dropdownStyle || 'default', dropdownBg: resolvedDropdownBg, dropdownBorder: resolvedDropdownBorder, shadow: shadow, radius: radius, megaTheme: megaTheme }, item.id))) }) }));
+        return (_jsx("nav", { "aria-label": "Main", className: `flex ${LAYOUT[layout || 'horizontal']} ${ALIGN[alignment || 'center']}`, children: _jsx("div", { className: `flex ${LAYOUT[layout || 'horizontal']} gap-2`, children: visibleTopLevel.map((item) => (_jsx(TopLevelItem, { item: item, resolvedTextColor: resolvedTextColor, resolvedHoverColor: resolvedHoverColor, fontSize: fs, fontWeight: fw, hoverEffect: hoverEffect || 'underline', showArrow: !!showDropdownArrows, dropdownStyle: dropdownStyle || 'default', triggerMode: triggerMode || 'hover', dropdownBg: resolvedDropdownBg, dropdownBorder: resolvedDropdownBorder, shadow: shadow, radius: radius, megaTheme: megaTheme }, item.id))) }) }));
     },
 };
 export default MenuNavigation;

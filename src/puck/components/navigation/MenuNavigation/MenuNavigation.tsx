@@ -153,12 +153,17 @@ const DropdownItem: React.FC<{
   shadow: string;
   radius: string;
   triggerMode: MenuNavigationProps['triggerMode'];
+  subMenuPosition: MenuNavigationProps['subMenuPosition'];
   onLinkClick?: () => void;
-}> = ({ item, resolvedTextColor, fontSize, dropdownBg, dropdownBorder, shadow, radius, triggerMode, onLinkClick }) => {
+}> = ({ item, resolvedTextColor, fontSize, dropdownBg, dropdownBorder, shadow, radius, triggerMode, subMenuPosition, onLinkClick }) => {
   const [open, setOpen] = useState(false);
   const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const itemRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const rowRef = useRef<HTMLDivElement>(null);
+  // Measured row dimensions — used to position the flyout precisely so it
+  // never overlaps the parent row, regardless of font size / padding / theme.
+  const [rowRect, setRowRect] = useState<{ top: number; left: number; width: number; height: number } | null>(null);
   const isClick = triggerMode === 'click';
   useEffect(() => () => {
     if (openTimer.current) clearTimeout(openTimer.current);
@@ -173,7 +178,6 @@ const DropdownItem: React.FC<{
     if (openTimer.current) clearTimeout(openTimer.current);
     if (closeTimer.current) clearTimeout(closeTimer.current);
   };
-  // No-ops in click mode; hover-intent only in hover mode.
   const scheduleOpen = () => { if (isClick) return; cancelTimers(); openTimer.current = setTimeout(() => setOpen(true), 300); };
   const scheduleClose = () => { if (isClick) return; cancelTimers(); closeTimer.current = setTimeout(() => setOpen(false), 300); };
 
@@ -181,24 +185,62 @@ const DropdownItem: React.FC<{
   useEffect(() => {
     if (!isClick || !open) return;
     const onDown = (e: MouseEvent) => {
-      if (itemRef.current && !itemRef.current.contains(e.target as Node)) setOpen(false);
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) setOpen(false);
     };
     document.addEventListener('mousedown', onDown);
     return () => document.removeEventListener('mousedown', onDown);
   }, [isClick, open]);
 
+  // When the flyout opens, measure the parent ROW element relative to the
+  // wrapper. This gives us exact pixel coordinates so we can position the
+  // flyout flush against the row's edge — no overlap, no dead space, no magic
+  // numbers. Works for any font size, padding, or theme.
+  useLayoutEffect(() => {
+    if (!open || !rowRef.current || !wrapperRef.current) return;
+    const row = rowRef.current.getBoundingClientRect();
+    const wrapper = wrapperRef.current.getBoundingClientRect();
+    setRowRect({
+      top: row.top - wrapper.top,
+      left: row.left - wrapper.left,
+      width: row.width,
+      height: row.height,
+    });
+  }, [open]);
+
   const toggle = () => setOpen((v) => !v);
+
+  // Build flyout position from measured rowRect. Falls back to CSS-only
+  // positioning on first paint before measurement completes.
+  let flyoutStyle: React.CSSProperties;
+  if (rowRect) {
+    if (subMenuPosition === 'left') {
+      flyoutStyle = { top: rowRect.top, left: 'auto', right: `calc(100% - ${rowRect.left}px)` };
+    } else if (subMenuPosition === 'bottom') {
+      flyoutStyle = { top: rowRect.top + rowRect.height, left: rowRect.left, right: 'auto' };
+    } else {
+      // right (default): flush to the row's right edge, top-aligned to the row.
+      flyoutStyle = { top: rowRect.top, left: rowRect.left + rowRect.width, right: 'auto' };
+    }
+  } else {
+    // Pre-measurement fallback (first frame only).
+    flyoutStyle =
+      subMenuPosition === 'left'
+        ? { top: 0, right: '100%', left: 'auto' }
+        : subMenuPosition === 'bottom'
+          ? { top: '100%', left: 0, right: 'auto' }
+          : { top: 0, left: '100%', right: 'auto' };
+  }
 
   return (
     <div
-      ref={itemRef}
+      ref={wrapperRef}
       className="relative"
       onMouseEnter={scheduleOpen}
       onMouseLeave={scheduleClose}
     >
-      {/* Parent row: solid background so the grandchild flyout can't visually
-          bleed through it (fixes issue 1 — grandchild covering parent). */}
+      {/* Parent row — the trigger + the anchor for flyout positioning. */}
       <div
+        ref={rowRef}
         onClick={isClick ? toggle : undefined}
         className="flex items-center justify-between"
         style={{ color: resolvedTextColor, fontSize, cursor: 'pointer', padding: '4px 8px', backgroundColor: dropdownBg }}
@@ -208,20 +250,17 @@ const DropdownItem: React.FC<{
       </div>
       {open && (
         <div
-          className="absolute z-50 top-0 left-full"
+          className="absolute z-50"
           onMouseEnter={cancelTimers}
           onMouseLeave={scheduleClose}
           style={{
+            ...flyoutStyle,
             backgroundColor: dropdownBg,
             border: `1px solid ${dropdownBorder}`,
             boxShadow: shadow,
             borderRadius: radius,
             minWidth: '180px',
             padding: '4px 0',
-            // Overlap the parent row + pad so diagonal travel to the flyout
-            // never crosses dead space (same flicker fix as TopLevelItem).
-            marginLeft: '-4px',
-            paddingLeft: '8px',
           }}
         >
           {visibleChildren.map((child) => (
@@ -235,6 +274,7 @@ const DropdownItem: React.FC<{
               shadow={shadow}
               radius={radius}
               triggerMode={triggerMode}
+              subMenuPosition={subMenuPosition}
               onLinkClick={onLinkClick}
             />
           ))}
@@ -266,13 +306,14 @@ const TopLevelItem: React.FC<{
   showArrow: boolean;
   dropdownStyle: MenuNavigationProps['dropdownStyle'];
   triggerMode: MenuNavigationProps['triggerMode'];
+  subMenuPosition: MenuNavigationProps['subMenuPosition'];
   dropdownBg: string;
   dropdownBorder: string;
   shadow: string;
   radius: string;
   megaTheme?: SharedMegaMenuTheme;
   onLinkClick?: () => void;
-}> = ({ item, resolvedTextColor, resolvedHoverColor, fontSize, fontWeight, hoverEffect, showArrow, dropdownStyle, triggerMode, dropdownBg, dropdownBorder, shadow, radius, megaTheme, onLinkClick }) => {
+}> = ({ item, resolvedTextColor, resolvedHoverColor, fontSize, fontWeight, hoverEffect, showArrow, dropdownStyle, triggerMode, subMenuPosition, dropdownBg, dropdownBorder, shadow, radius, megaTheme, onLinkClick }) => {
   const [isOpen, setIsOpen] = useState(false);
   const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -405,7 +446,7 @@ const TopLevelItem: React.FC<{
             // For the default dropdown, this div IS the visible panel
             // (background/border/shadow + inner padding). For the mega panel,
             // CategoryMegaMenu renders its own visible panel, so this wrapper
-            // is transparent and just provides the hover bridge + positioning.
+            // is transparent and just provides positioning.
             ...(megaProps ? {} : {
               backgroundColor: dropdownBg,
               border: `1px solid ${dropdownBorder}`,
@@ -413,13 +454,10 @@ const TopLevelItem: React.FC<{
               borderRadius: radius,
               padding: '8px',
             }),
-            // Overlap the trigger by pulling the panel up a few px, and add
-            // transparent top padding. This guarantees the panel's hoverable
-            // box touches+overlaps the button so diagonal mouse travel from
-            // trigger → child never crosses dead space (kills the
-            // disappear-on-way-to-child flicker bug).
-            marginTop: '-4px',
-            paddingTop: '12px',
+            // top-full (from className) places the panel flush below the
+            // trigger. No margin/padding hacks needed — the panel's
+            // hoverable area starts exactly at the trigger's bottom edge,
+            // so there's no dead space to cause flicker.
             minWidth: megaProps ? 'auto' : '220px',
           }}
         >
@@ -437,6 +475,7 @@ const TopLevelItem: React.FC<{
                 shadow={shadow}
                 radius={radius}
                 triggerMode={triggerMode}
+                subMenuPosition={subMenuPosition}
                 onLinkClick={onLinkClick}
               />
             ))
@@ -607,6 +646,7 @@ export const MenuNavigation: ComponentConfig<MenuNavigationProps> = {
     showDropdownArrows: true,
     dropdownStyle: 'default',
     triggerMode: 'hover',
+    subMenuPosition: 'right',
     maxDepth: '3',
     menuData: [],
     dropdownBackground: '#ffffff',
@@ -620,6 +660,7 @@ export const MenuNavigation: ComponentConfig<MenuNavigationProps> = {
     const {
       menuData, layout, alignment, hoverEffect, textColor, hoverColor,
       fontSize, fontWeight, showDropdownArrows, dropdownStyle, triggerMode,
+      subMenuPosition,
       dropdownBackground, dropdownBorder, dropdownShadow, dropdownRadius,
       mobileBreakpoint, mobileSearchPlaceholder, theme,
     } = rawProps as MenuNavigationProps;
@@ -691,6 +732,7 @@ export const MenuNavigation: ComponentConfig<MenuNavigationProps> = {
               showArrow={!!showDropdownArrows}
               dropdownStyle={dropdownStyle || 'default'}
               triggerMode={triggerMode || 'hover'}
+              subMenuPosition={subMenuPosition || 'right'}
               dropdownBg={resolvedDropdownBg}
               dropdownBorder={resolvedDropdownBorder}
               shadow={shadow}

@@ -65,6 +65,14 @@ export const menuNavigationFields = {
       { label: 'Click', value: 'click' },
     ],
   },
+  subMenuPosition: {
+    type: 'select', label: 'Sub-menu Position',
+    options: [
+      { label: 'Right (side flyout)', value: 'right' },
+      { label: 'Left (side flyout)', value: 'left' },
+      { label: 'Bottom (dropdown)', value: 'bottom' },
+    ],
+  },
   maxDepth: {
     type: 'select', label: 'Maximum Nesting Depth',
     options: [

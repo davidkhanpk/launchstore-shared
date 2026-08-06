@@ -90,11 +90,15 @@ const DropdownLeaf = ({ item, resolvedTextColor, fontSize, onLinkClick }) => (_j
  * (manual hover-intent, matching TopLevelItem's pattern). Items without
  * get a leaf.
  */
-const DropdownItem = ({ item, resolvedTextColor, fontSize, dropdownBg, dropdownBorder, shadow, radius, triggerMode, onLinkClick }) => {
+const DropdownItem = ({ item, resolvedTextColor, fontSize, dropdownBg, dropdownBorder, shadow, radius, triggerMode, subMenuPosition, onLinkClick }) => {
     const [open, setOpen] = useState(false);
     const openTimer = useRef(null);
     const closeTimer = useRef(null);
-    const itemRef = useRef(null);
+    const wrapperRef = useRef(null);
+    const rowRef = useRef(null);
+    // Measured row dimensions — used to position the flyout precisely so it
+    // never overlaps the parent row, regardless of font size / padding / theme.
+    const [rowRect, setRowRect] = useState(null);
     const isClick = triggerMode === 'click';
     useEffect(() => () => {
         if (openTimer.current)
@@ -112,7 +116,6 @@ const DropdownItem = ({ item, resolvedTextColor, fontSize, dropdownBg, dropdownB
         if (closeTimer.current)
             clearTimeout(closeTimer.current);
     };
-    // No-ops in click mode; hover-intent only in hover mode.
     const scheduleOpen = () => { if (isClick)
         return; cancelTimers(); openTimer.current = setTimeout(() => setOpen(true), 300); };
     const scheduleClose = () => { if (isClick)
@@ -122,25 +125,62 @@ const DropdownItem = ({ item, resolvedTextColor, fontSize, dropdownBg, dropdownB
         if (!isClick || !open)
             return;
         const onDown = (e) => {
-            if (itemRef.current && !itemRef.current.contains(e.target))
+            if (wrapperRef.current && !wrapperRef.current.contains(e.target))
                 setOpen(false);
         };
         document.addEventListener('mousedown', onDown);
         return () => document.removeEventListener('mousedown', onDown);
     }, [isClick, open]);
+    // When the flyout opens, measure the parent ROW element relative to the
+    // wrapper. This gives us exact pixel coordinates so we can position the
+    // flyout flush against the row's edge — no overlap, no dead space, no magic
+    // numbers. Works for any font size, padding, or theme.
+    useLayoutEffect(() => {
+        if (!open || !rowRef.current || !wrapperRef.current)
+            return;
+        const row = rowRef.current.getBoundingClientRect();
+        const wrapper = wrapperRef.current.getBoundingClientRect();
+        setRowRect({
+            top: row.top - wrapper.top,
+            left: row.left - wrapper.left,
+            width: row.width,
+            height: row.height,
+        });
+    }, [open]);
     const toggle = () => setOpen((v) => !v);
-    return (_jsxs("div", { ref: itemRef, className: "relative", onMouseEnter: scheduleOpen, onMouseLeave: scheduleClose, children: [_jsxs("div", { onClick: isClick ? toggle : undefined, className: "flex items-center justify-between", style: { color: resolvedTextColor, fontSize, cursor: 'pointer', padding: '4px 8px', backgroundColor: dropdownBg }, children: [_jsx("span", { children: getLabel(item) }), _jsx(ChevronDown, { size: 12 })] }), open && (_jsx("div", { className: "absolute z-50 top-0 left-full", onMouseEnter: cancelTimers, onMouseLeave: scheduleClose, style: {
+    // Build flyout position from measured rowRect. Falls back to CSS-only
+    // positioning on first paint before measurement completes.
+    let flyoutStyle;
+    if (rowRect) {
+        if (subMenuPosition === 'left') {
+            flyoutStyle = { top: rowRect.top, left: 'auto', right: `calc(100% - ${rowRect.left}px)` };
+        }
+        else if (subMenuPosition === 'bottom') {
+            flyoutStyle = { top: rowRect.top + rowRect.height, left: rowRect.left, right: 'auto' };
+        }
+        else {
+            // right (default): flush to the row's right edge, top-aligned to the row.
+            flyoutStyle = { top: rowRect.top, left: rowRect.left + rowRect.width, right: 'auto' };
+        }
+    }
+    else {
+        // Pre-measurement fallback (first frame only).
+        flyoutStyle =
+            subMenuPosition === 'left'
+                ? { top: 0, right: '100%', left: 'auto' }
+                : subMenuPosition === 'bottom'
+                    ? { top: '100%', left: 0, right: 'auto' }
+                    : { top: 0, left: '100%', right: 'auto' };
+    }
+    return (_jsxs("div", { ref: wrapperRef, className: "relative", onMouseEnter: scheduleOpen, onMouseLeave: scheduleClose, children: [_jsxs("div", { ref: rowRef, onClick: isClick ? toggle : undefined, className: "flex items-center justify-between", style: { color: resolvedTextColor, fontSize, cursor: 'pointer', padding: '4px 8px', backgroundColor: dropdownBg }, children: [_jsx("span", { children: getLabel(item) }), _jsx(ChevronDown, { size: 12 })] }), open && (_jsx("div", { className: "absolute z-50", onMouseEnter: cancelTimers, onMouseLeave: scheduleClose, style: {
+                    ...flyoutStyle,
                     backgroundColor: dropdownBg,
                     border: `1px solid ${dropdownBorder}`,
                     boxShadow: shadow,
                     borderRadius: radius,
                     minWidth: '180px',
                     padding: '4px 0',
-                    // Overlap the parent row + pad so diagonal travel to the flyout
-                    // never crosses dead space (same flicker fix as TopLevelItem).
-                    marginLeft: '-4px',
-                    paddingLeft: '8px',
-                }, children: visibleChildren.map((child) => (_jsx(DropdownItem, { item: child, resolvedTextColor: resolvedTextColor, fontSize: fontSize, dropdownBg: dropdownBg, dropdownBorder: dropdownBorder, shadow: shadow, radius: radius, triggerMode: triggerMode, onLinkClick: onLinkClick }, child.id))) }))] }));
+                }, children: visibleChildren.map((child) => (_jsx(DropdownItem, { item: child, resolvedTextColor: resolvedTextColor, fontSize: fontSize, dropdownBg: dropdownBg, dropdownBorder: dropdownBorder, shadow: shadow, radius: radius, triggerMode: triggerMode, subMenuPosition: subMenuPosition, onLinkClick: onLinkClick }, child.id))) }))] }));
 };
 /**
  * Top-level desktop item. Uses Headless UI Popover for hover + keyboard.
@@ -154,7 +194,7 @@ const DropdownItem = ({ item, resolvedTextColor, fontSize, dropdownBg, dropdownB
  * Keyboard: PopoverButton is a real focusable <button> with aria-expanded;
  * Enter/Space/Down opens, Escape closes (all via Headless UI defaults).
  */
-const TopLevelItem = ({ item, resolvedTextColor, resolvedHoverColor, fontSize, fontWeight, hoverEffect, showArrow, dropdownStyle, triggerMode, dropdownBg, dropdownBorder, shadow, radius, megaTheme, onLinkClick }) => {
+const TopLevelItem = ({ item, resolvedTextColor, resolvedHoverColor, fontSize, fontWeight, hoverEffect, showArrow, dropdownStyle, triggerMode, subMenuPosition, dropdownBg, dropdownBorder, shadow, radius, megaTheme, onLinkClick }) => {
     const [isOpen, setIsOpen] = useState(false);
     const openTimer = useRef(null);
     const closeTimer = useRef(null);
@@ -258,7 +298,7 @@ const TopLevelItem = ({ item, resolvedTextColor, resolvedHoverColor, fontSize, f
                     // For the default dropdown, this div IS the visible panel
                     // (background/border/shadow + inner padding). For the mega panel,
                     // CategoryMegaMenu renders its own visible panel, so this wrapper
-                    // is transparent and just provides the hover bridge + positioning.
+                    // is transparent and just provides positioning.
                     ...(megaProps ? {} : {
                         backgroundColor: dropdownBg,
                         border: `1px solid ${dropdownBorder}`,
@@ -266,15 +306,12 @@ const TopLevelItem = ({ item, resolvedTextColor, resolvedHoverColor, fontSize, f
                         borderRadius: radius,
                         padding: '8px',
                     }),
-                    // Overlap the trigger by pulling the panel up a few px, and add
-                    // transparent top padding. This guarantees the panel's hoverable
-                    // box touches+overlaps the button so diagonal mouse travel from
-                    // trigger → child never crosses dead space (kills the
-                    // disappear-on-way-to-child flicker bug).
-                    marginTop: '-4px',
-                    paddingTop: '12px',
+                    // top-full (from className) places the panel flush below the
+                    // trigger. No margin/padding hacks needed — the panel's
+                    // hoverable area starts exactly at the trigger's bottom edge,
+                    // so there's no dead space to cause flicker.
                     minWidth: megaProps ? 'auto' : '220px',
-                }, children: megaProps ? (_jsx(CategoryMegaMenu, { ...megaProps })) : (visibleChildren.map((child) => (_jsx(DropdownItem, { item: child, resolvedTextColor: resolvedTextColor, fontSize: fontSize, dropdownBg: dropdownBg, dropdownBorder: dropdownBorder, shadow: shadow, radius: radius, triggerMode: triggerMode, onLinkClick: onLinkClick }, child.id)))) }))] }));
+                }, children: megaProps ? (_jsx(CategoryMegaMenu, { ...megaProps })) : (visibleChildren.map((child) => (_jsx(DropdownItem, { item: child, resolvedTextColor: resolvedTextColor, fontSize: fontSize, dropdownBg: dropdownBg, dropdownBorder: dropdownBorder, shadow: shadow, radius: radius, triggerMode: triggerMode, subMenuPosition: subMenuPosition, onLinkClick: onLinkClick }, child.id)))) }))] }));
 };
 /**
  * Mobile drawer — Headless UI Dialog (focus trap, Escape, scroll-lock, portal).
@@ -329,6 +366,7 @@ export const MenuNavigation = {
         showDropdownArrows: true,
         dropdownStyle: 'default',
         triggerMode: 'hover',
+        subMenuPosition: 'right',
         maxDepth: '3',
         menuData: [],
         dropdownBackground: '#ffffff',
@@ -339,7 +377,7 @@ export const MenuNavigation = {
         mobileSearchPlaceholder: 'Search products…',
     },
     render: (rawProps) => {
-        const { menuData, layout, alignment, hoverEffect, textColor, hoverColor, fontSize, fontWeight, showDropdownArrows, dropdownStyle, triggerMode, dropdownBackground, dropdownBorder, dropdownShadow, dropdownRadius, mobileBreakpoint, mobileSearchPlaceholder, theme, } = rawProps;
+        const { menuData, layout, alignment, hoverEffect, textColor, hoverColor, fontSize, fontWeight, showDropdownArrows, dropdownStyle, triggerMode, subMenuPosition, dropdownBackground, dropdownBorder, dropdownShadow, dropdownRadius, mobileBreakpoint, mobileSearchPlaceholder, theme, } = rawProps;
         const items = menuData || [];
         const visibleTopLevel = items
             .filter((it) => it.isVisible && (!('parentId' in it) || !it.parentId))
@@ -367,7 +405,7 @@ export const MenuNavigation = {
             return (_jsxs(_Fragment, { children: [_jsx("button", { type: "button", "aria-label": "Open menu", "aria-expanded": drawerOpen, onClick: () => setDrawerOpen(true), style: { background: 'none', border: 'none', cursor: 'pointer', padding: '8px', color: resolvedTextColor }, children: _jsx(Hamburger, { size: 24 }) }), _jsx(MobileMenuDrawer, { isOpen: drawerOpen, onClose: () => setDrawerOpen(false), items: items, resolvedTextColor: resolvedTextColor, dropdownBg: resolvedDropdownBg, dropdownBorder: resolvedDropdownBorder, searchPlaceholder: mobileSearchPlaceholder })] }));
         }
         // Desktop: nav bar.
-        return (_jsx("nav", { "aria-label": "Main", className: `flex ${LAYOUT[layout || 'horizontal']} ${ALIGN[alignment || 'center']}`, children: _jsx("div", { className: `flex ${LAYOUT[layout || 'horizontal']} gap-2`, children: visibleTopLevel.map((item) => (_jsx(TopLevelItem, { item: item, resolvedTextColor: resolvedTextColor, resolvedHoverColor: resolvedHoverColor, fontSize: fs, fontWeight: fw, hoverEffect: hoverEffect || 'underline', showArrow: !!showDropdownArrows, dropdownStyle: dropdownStyle || 'default', triggerMode: triggerMode || 'hover', dropdownBg: resolvedDropdownBg, dropdownBorder: resolvedDropdownBorder, shadow: shadow, radius: radius, megaTheme: megaTheme }, item.id))) }) }));
+        return (_jsx("nav", { "aria-label": "Main", className: `flex ${LAYOUT[layout || 'horizontal']} ${ALIGN[alignment || 'center']}`, children: _jsx("div", { className: `flex ${LAYOUT[layout || 'horizontal']} gap-2`, children: visibleTopLevel.map((item) => (_jsx(TopLevelItem, { item: item, resolvedTextColor: resolvedTextColor, resolvedHoverColor: resolvedHoverColor, fontSize: fs, fontWeight: fw, hoverEffect: hoverEffect || 'underline', showArrow: !!showDropdownArrows, dropdownStyle: dropdownStyle || 'default', triggerMode: triggerMode || 'hover', subMenuPosition: subMenuPosition || 'right', dropdownBg: resolvedDropdownBg, dropdownBorder: resolvedDropdownBorder, shadow: shadow, radius: radius, megaTheme: megaTheme }, item.id))) }) }));
     },
 };
 export default MenuNavigation;

@@ -7,6 +7,8 @@ export type MenuNavigationFontSize = 'sm' | 'base' | 'lg';
 export type MenuNavigationFontWeight = 'normal' | 'medium' | 'semibold' | 'bold';
 export type MenuNavigationDropdownStyle = 'default' | 'mega';
 export type MenuNavigationTriggerMode = 'hover' | 'click';
+/** Where nested sub-menus open relative to their parent row. */
+export type MenuNavigationSubMenuPosition = 'right' | 'left' | 'bottom';
 /**
  * Base shape for a menu item as authored in the Menu editor.
  * Carries only the fields needed for default dropdowns.
@@ -117,6 +119,8 @@ export interface MenuNavigationProps {
     dropdownStyle: MenuNavigationDropdownStyle;
     /** How dropdowns open — 'hover' (default) or 'click'. Applies to all levels. */
     triggerMode?: MenuNavigationTriggerMode;
+    /** Where nested sub-menus open relative to their parent row. */
+    subMenuPosition?: MenuNavigationSubMenuPosition;
     maxDepth: '1' | '2' | '3';
     /** Authored + Medusa-enriched menu items, injected by the storefront layout. */
     menuData?: SharedEnrichedMenuItem[];

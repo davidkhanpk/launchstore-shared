@@ -40,7 +40,12 @@ export const CategoryGrid = {
     },
     render: ({ columns, gap, showImages, showCounts, showDescriptions, cardStyle, categories }) => {
         const items = categories && categories.length > 0 ? categories : PLACEHOLDER;
-        return (_jsx("div", { className: `grid ${COLS[columns] || COLS[4]} ${GAP[gap] || 'gap-6'}`, children: items.map((cat) => (_jsxs("a", { href: "#", className: `no-underline text-inherit ${CARD[cardStyle] || CARD.standard}`, children: [showImages && (_jsx("div", { className: "aspect-square bg-gray-100 flex items-center justify-center text-gray-400 text-sm", children: cat.image ? _jsx("img", { src: cat.image, alt: cat.name, className: "w-full h-full object-cover" }) : 'Image' })), _jsxs("div", { className: "p-3 text-center", children: [_jsx("div", { className: "font-medium text-gray-900", children: cat.name }), showCounts && typeof cat.count === 'number' && _jsxs("div", { className: "text-xs text-gray-500 mt-1", children: [cat.count, " products"] }), showDescriptions && cat.description && _jsx("div", { className: "text-xs text-gray-500 mt-1", children: cat.description })] })] }, cat.id))) }));
+        const makePlaceholder = (name) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect width="400" height="400" fill="#f3f4f6"/><text x="50%" y="50%" font-size="48" fill="#d1d5db" text-anchor="middle" dy=".35em" font-family="sans-serif">${(name || '?')[0]}</text></svg>`)}`;
+        return (_jsx("div", { className: `grid ${COLS[columns] || COLS[4]} ${GAP[gap] || 'gap-6'}`, children: items.map((cat) => {
+                const placeholder = makePlaceholder(cat.name);
+                const imageSrc = cat.image || placeholder;
+                return (_jsxs("a", { href: "#", className: `no-underline text-inherit ${CARD[cardStyle] || CARD.standard}`, children: [showImages && (_jsx("div", { className: "aspect-square bg-gray-100 overflow-hidden", children: _jsx("img", { src: imageSrc, alt: cat.name, className: "w-full h-full object-cover", onError: (e) => { e.currentTarget.src = placeholder; } }) })), _jsxs("div", { className: "p-3 text-center", children: [_jsx("div", { className: "font-medium text-gray-900", children: cat.name }), showCounts && typeof cat.count === 'number' && _jsxs("div", { className: "text-xs text-gray-500 mt-1", children: [cat.count, " products"] }), showDescriptions && cat.description && _jsx("div", { className: "text-xs text-gray-500 mt-1", children: cat.description })] })] }, cat.id));
+            }) }));
     },
 };
 export default CategoryGrid;

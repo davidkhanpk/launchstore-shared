@@ -56,22 +56,37 @@ export const CategoryGrid: ComponentConfig<CategoryGridProps> = {
   },
   render: ({ columns, gap, showImages, showCounts, showDescriptions, cardStyle, categories }) => {
     const items = categories && categories.length > 0 ? categories : PLACEHOLDER;
+
+    const makePlaceholder = (name: string) =>
+      `data:image/svg+xml,${encodeURIComponent(
+        `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect width="400" height="400" fill="#f3f4f6"/><text x="50%" y="50%" font-size="48" fill="#d1d5db" text-anchor="middle" dy=".35em" font-family="sans-serif">${(name || '?')[0]}</text></svg>`
+      )}`;
+
     return (
       <div className={`grid ${COLS[columns] || COLS[4]} ${GAP[gap] || 'gap-6'}`}>
-        {items.map((cat) => (
-          <a key={cat.id} href="#" className={`no-underline text-inherit ${CARD[cardStyle] || CARD.standard}`}>
-            {showImages && (
-              <div className="aspect-square bg-gray-100 flex items-center justify-center text-gray-400 text-sm">
-                {cat.image ? <img src={cat.image} alt={cat.name} className="w-full h-full object-cover" /> : 'Image'}
+        {items.map((cat) => {
+          const placeholder = makePlaceholder(cat.name);
+          const imageSrc = cat.image || placeholder;
+          return (
+            <a key={cat.id} href="#" className={`no-underline text-inherit ${CARD[cardStyle] || CARD.standard}`}>
+              {showImages && (
+                <div className="aspect-square bg-gray-100 overflow-hidden">
+                  <img
+                    src={imageSrc}
+                    alt={cat.name}
+                    className="w-full h-full object-cover"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = placeholder; }}
+                  />
+                </div>
+              )}
+              <div className="p-3 text-center">
+                <div className="font-medium text-gray-900">{cat.name}</div>
+                {showCounts && typeof cat.count === 'number' && <div className="text-xs text-gray-500 mt-1">{cat.count} products</div>}
+                {showDescriptions && cat.description && <div className="text-xs text-gray-500 mt-1">{cat.description}</div>}
               </div>
-            )}
-            <div className="p-3 text-center">
-              <div className="font-medium text-gray-900">{cat.name}</div>
-              {showCounts && typeof cat.count === 'number' && <div className="text-xs text-gray-500 mt-1">{cat.count} products</div>}
-              {showDescriptions && cat.description && <div className="text-xs text-gray-500 mt-1">{cat.description}</div>}
-            </div>
-          </a>
-        ))}
+            </a>
+          );
+        })}
       </div>
     );
   },

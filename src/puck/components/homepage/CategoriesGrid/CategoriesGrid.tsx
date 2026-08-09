@@ -126,7 +126,12 @@ export const CategoriesGrid: ComponentConfig<CategoriesGridProps> = {
           {Header}
           <div className="grid" style={gridStyle}>
             {visible.map((category) => {
-              const imageSrc = category.image || `https://via.placeholder.com/400x400?text=${encodeURIComponent(category.name)}`;
+              // Inline SVG placeholder — no external dependency, never breaks.
+              // Shows the category initial on a gray background.
+              const placeholder = `data:image/svg+xml,${encodeURIComponent(
+                `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect width="400" height="400" fill="#f3f4f6"/><text x="50%" y="50%" font-size="48" fill="#d1d5db" text-anchor="middle" dy=".35em" font-family="sans-serif">${(category.name || '?')[0]}</text></svg>`
+              )}`;
+              const imageSrc = category.image || placeholder;
               return (
                 <a
                   key={category.id}
@@ -134,8 +139,13 @@ export const CategoriesGrid: ComponentConfig<CategoriesGridProps> = {
                   className={`category-card ${CARD_STYLE[cardStyle]} ${RADIUS[borderRadius]} ${HOVER[hoverEffect]} transition-all duration-300 overflow-hidden group cursor-pointer`}
                 >
                   {showCategoryImage && (
-                    <div className={`${ASPECT[imageAspectRatio]} overflow-hidden`}>
-                      <img src={imageSrc} alt={category.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    <div className={`${ASPECT[imageAspectRatio]} overflow-hidden bg-gray-100`}>
+                      <img
+                        src={imageSrc}
+                        alt={category.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).src = placeholder; }}
+                      />
                       {cardStyle === 'overlay' && <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />}
                     </div>
                   )}

@@ -97,4 +97,5 @@ export * from './generic/Icon';
 export * from './generic/List';
 export * from './generic/Tabs';
 export * from './generic/Accordion';
+export * from './storefront';
 //# sourceMappingURL=index.d.ts.map

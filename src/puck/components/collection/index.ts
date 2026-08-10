@@ -8,25 +8,16 @@ export { CollectionMetadata } from './CollectionMetadata';
 export type { CollectionMetadataProps, CollectionMetadataWithData } from './CollectionMetadata';
 export { CollectionTitle } from './CollectionTitle';
 export type { CollectionTitleProps, CollectionTitleWithData } from './CollectionTitle';
-export { Pagination } from './Pagination';
-export type { PaginationProps, PaginationWithData } from './Pagination';
-export { ProductSort } from './ProductSort';
-export type { ProductSortProps, ProductSortWithData } from './ProductSort';
+// Pagination, ProductSort, ProductFilters, FilterGroup deleted (Phase 6) —
+// replaced by the unified FilterBar + PaginationBar in storefront/.
 export { ProductGrid } from './ProductGrid';
 export type { CollectionProductGridProps, ProductGridWithData } from './ProductGrid';
-export { ProductFilters } from './ProductFilters';
-export type { ProductFiltersProps, ProductFiltersWithData } from './ProductFilters';
 export { CollectionHero } from './CollectionHero';
 export type { CollectionHeroProps } from './CollectionHero';
-export { FilterGroup } from './FilterGroup';
-export type { FilterGroupProps, FilterOption } from './FilterGroup';
 
 export { collectionBreadcrumbsMeta, type CollectionBreadcrumbsMeta } from './collectionbreadcrumbs.meta';
 export { collectionDescriptionMeta, type CollectionDescriptionMeta } from './collectiondescription.meta';
 export { collectionHeaderMeta, type CollectionHeaderMeta } from './collectionheader.meta';
 export { collectionMetadataMeta, type CollectionMetadataMeta } from './collectionmetadata.meta';
 export { collectionTitleMeta, type CollectionTitleMeta } from './collectiontitle.meta';
-export { paginationMeta, type PaginationMeta } from './pagination.meta';
-export { productSortMeta, type ProductSortMeta } from './productsort.meta';
 export { productGridMeta, type ProductGridMeta } from './productgrid.meta';
-export { productFiltersMeta, type ProductFiltersMeta } from './productfilters.meta';

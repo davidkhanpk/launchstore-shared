@@ -1,3 +1,4 @@
+import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 export interface CollectionProductGridProps {
     layout: 'grid' | 'list';
@@ -19,6 +20,8 @@ export interface ProductGridWithData extends CollectionProductGridProps {
         compareAtPrice?: string;
         badge?: string;
     }>;
+    /** When provided, used instead of the default card for each product. */
+    renderProduct?: (product: any) => React.ReactNode;
     onQuickView?: (id: string) => void;
     onAddToWishlist?: (id: string) => void;
     onCompare?: (id: string) => void;

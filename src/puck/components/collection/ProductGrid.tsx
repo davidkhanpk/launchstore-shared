@@ -31,6 +31,8 @@ export interface CollectionProductGridProps {
 
 export interface ProductGridWithData extends CollectionProductGridProps {
   products?: Array<{ id: string; title: string; handle: string; thumbnail: string; price: string; compareAtPrice?: string; badge?: string; }>;
+  /** When provided, used instead of the default card for each product. */
+  renderProduct?: (product: any) => React.ReactNode;
   onQuickView?: (id: string) => void;
   onAddToWishlist?: (id: string) => void;
   onCompare?: (id: string) => void;
@@ -53,9 +55,22 @@ export const ProductGrid: ComponentConfig<ProductGridWithData> = {
   render: (raw: any) => {
     const { layout = 'grid', columns = '3', showQuickView, showWishlist, showCompare, imageAspectRatio = 'square', showBadges, gap = 'md'   } = raw as CollectionProductGridProps;
     const products: Array<{ id: string; title: string; handle: string; thumbnail: string; price: string; compareAtPrice?: string; badge?: string; }> = (raw as any).products ?? [];
+    const renderProduct = (raw as any).renderProduct;
     const onQuickView = (id: string) => (raw as any).onQuickView?.(id);
     const onAddToWishlist = (id: string) => (raw as any).onAddToWishlist?.(id);
     const onCompare = (id: string) => (raw as any).onCompare?.(id);
+
+    // When renderProduct is provided (storefront), use it for each product.
+    // This lets the storefront render full TemplateProductCard cards.
+    if (renderProduct) {
+      return (
+        <div className={`grid grid-cols-2 ${colsMap[columns as '2' | '3' | '4'] || colsMap['3']} ${gapMap[gap] || gapMap.md}`}>
+          {products.map((p: any) => (
+            <div key={p.id}>{renderProduct(p)}</div>
+          ))}
+        </div>
+      );
+    }
 
     if (products.length === 0) {
       return (

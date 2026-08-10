@@ -26,9 +26,15 @@ export const ProductGrid = {
     render: (raw) => {
         const { layout = 'grid', columns = '3', showQuickView, showWishlist, showCompare, imageAspectRatio = 'square', showBadges, gap = 'md' } = raw;
         const products = raw.products ?? [];
+        const renderProduct = raw.renderProduct;
         const onQuickView = (id) => raw.onQuickView?.(id);
         const onAddToWishlist = (id) => raw.onAddToWishlist?.(id);
         const onCompare = (id) => raw.onCompare?.(id);
+        // When renderProduct is provided (storefront), use it for each product.
+        // This lets the storefront render full TemplateProductCard cards.
+        if (renderProduct) {
+            return (_jsx("div", { className: `grid grid-cols-2 ${colsMap[columns] || colsMap['3']} ${gapMap[gap] || gapMap.md}`, children: products.map((p) => (_jsx("div", { children: renderProduct(p) }, p.id))) }));
+        }
         if (products.length === 0) {
             return (_jsx("div", { className: `p-8 bg-gray-50 border border-dashed border-gray-300 rounded-lg text-center text-gray-500`, children: _jsx("p", { children: "No products to display." }) }));
         }

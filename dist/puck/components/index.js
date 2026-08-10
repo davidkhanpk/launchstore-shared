@@ -103,4 +103,6 @@ export * from './generic/Icon';
 export * from './generic/List';
 export * from './generic/Tabs';
 export * from './generic/Accordion';
+// Unified storefront components (FilterBar, PaginationBar)
+export * from './storefront';
 //# sourceMappingURL=index.js.map

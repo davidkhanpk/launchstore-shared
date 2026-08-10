@@ -36,8 +36,8 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-08-09T19:05:40.758Z",
-  "total": 138,
+  "generatedAt": "2026-08-10T07:30:26.557Z",
+  "total": 139,
   "entries": [
     {
       "name": "AccountContent",
@@ -2330,14 +2330,6 @@ export const registry: CompiledRegistry = {
         "titleAlignment": "left",
         "columns": "4",
         "gap": "md",
-        "gridLocation": "center",
-        "showSortFilter": true,
-        "sortPosition": "top-right",
-        "showPagination": true,
-        "paginationPosition": "bottom-center",
-        "showProductsPerPageDropdown": false,
-        "productsPerPageOptions": "12,24,36,48",
-        "productsPerPage": 12,
         "className": ""
       },
       "isContainer": false,
@@ -3914,89 +3906,6 @@ export const registry: CompiledRegistry = {
       "metaPath": "src\\puck\\components\\collection\\collectiontitle.meta.ts"
     },
     {
-      "name": "FilterGroup",
-      "label": "Filter Group",
-      "description": "Filter Group component (auto-derived).",
-      "category": "collection",
-      "intent": [
-        "filter",
-        "group"
-      ],
-      "dataDeps": [],
-      "copyFields": [],
-      "themeable": [],
-      "a11yRisk": "low",
-      "searchTags": [
-        "filter",
-        "group"
-      ],
-      "propSchema": {
-        "title": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "min": {
-          "type": "number"
-        },
-        "max": {
-          "type": "number"
-        },
-        "options": {
-          "type": "array"
-        },
-        "collapsible": {
-          "type": "boolean"
-        },
-        "defaultExpanded": {
-          "type": "boolean"
-        },
-        "style": {
-          "type": "string"
-        }
-      },
-      "jsonSchema": {
-        "title": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "min": {
-          "type": "number"
-        },
-        "max": {
-          "type": "number"
-        },
-        "options": {
-          "type": "array"
-        },
-        "collapsible": {
-          "type": "boolean"
-        },
-        "defaultExpanded": {
-          "type": "boolean"
-        },
-        "style": {
-          "type": "string"
-        }
-      },
-      "defaultProps": {
-        "title": "Filter",
-        "type": "checkbox",
-        "min": 0,
-        "max": 1000,
-        "options": [],
-        "collapsible": true,
-        "defaultExpanded": true,
-        "style": "standard"
-      },
-      "isContainer": false,
-      "zones": [],
-      "metaPath": "src\\puck\\components\\collection\\FilterGroup\\FilterGroup.tsx (auto-derived)"
-    },
-    {
       "name": "Pagination",
       "label": "Pagination",
       "description": "Pagination with 3 styles (simple/numbered/load-more), 3 alignments, optional first/last buttons, and configurable max page numbers. Cart-library-agnostic: takes currentPage, totalPages, onPageChange, loadMoreText. Heroicons ChevronLeft/Right replaced with inline SVG.",
@@ -4083,13 +3992,6 @@ export const registry: CompiledRegistry = {
             "right"
           ]
         }
-      },
-      "defaultProps": {
-        "showPageNumbers": true,
-        "showFirstLast": true,
-        "maxPageNumbers": 7,
-        "style": "numbered",
-        "alignment": "center"
       },
       "isContainer": false,
       "zones": [],
@@ -4196,16 +4098,6 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": true
         }
-      },
-      "defaultProps": {
-        "showPriceFilter": true,
-        "showCategoryFilter": true,
-        "showBrandFilter": true,
-        "showColorFilter": true,
-        "showSizeFilter": true,
-        "showRatingFilter": true,
-        "layout": "sidebar",
-        "defaultExpanded": true
       },
       "isContainer": false,
       "zones": [],
@@ -4442,12 +4334,6 @@ export const registry: CompiledRegistry = {
             "right"
           ]
         }
-      },
-      "defaultProps": {
-        "defaultSort": "featured",
-        "showResultCount": true,
-        "showViewToggle": true,
-        "position": "right"
       },
       "isContainer": false,
       "zones": [],
@@ -18379,6 +18265,130 @@ export const registry: CompiledRegistry = {
       "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryzoom.meta.ts"
     },
     {
+      "name": "FilterBar",
+      "label": "Filter Bar",
+      "description": "Filter Bar component (auto-derived).",
+      "category": "storefront",
+      "intent": [
+        "filter",
+        "bar"
+      ],
+      "dataDeps": [],
+      "copyFields": [],
+      "themeable": [],
+      "a11yRisk": "low",
+      "searchTags": [
+        "filter",
+        "bar"
+      ],
+      "propSchema": {
+        "filterLayout": {
+          "type": "string"
+        },
+        "showSort": {
+          "type": "boolean"
+        },
+        "showCount": {
+          "type": "boolean"
+        },
+        "showClearAll": {
+          "type": "boolean"
+        },
+        "showFilters": {
+          "type": "boolean"
+        }
+      },
+      "jsonSchema": {
+        "filterLayout": {
+          "type": "string"
+        },
+        "showSort": {
+          "type": "boolean"
+        },
+        "showCount": {
+          "type": "boolean"
+        },
+        "showClearAll": {
+          "type": "boolean"
+        },
+        "showFilters": {
+          "type": "boolean"
+        }
+      },
+      "defaultProps": {
+        "filterLayout": "sidebar",
+        "showSort": true,
+        "showCount": true,
+        "showClearAll": true,
+        "showFilters": true
+      },
+      "isContainer": false,
+      "zones": [],
+      "metaPath": "src\\puck\\components\\storefront\\FilterBar.tsx (auto-derived)"
+    },
+    {
+      "name": "PaginationBar",
+      "label": "Pagination Bar",
+      "description": "Pagination Bar component (auto-derived).",
+      "category": "storefront",
+      "intent": [
+        "pagination",
+        "bar"
+      ],
+      "dataDeps": [],
+      "copyFields": [],
+      "themeable": [],
+      "a11yRisk": "low",
+      "searchTags": [
+        "pagination",
+        "bar"
+      ],
+      "propSchema": {
+        "currentPage": {
+          "type": "number"
+        },
+        "totalPages": {
+          "type": "number"
+        },
+        "style": {
+          "type": "string"
+        },
+        "alignment": {
+          "type": "string"
+        },
+        "maxPageNumbers": {
+          "type": "number"
+        }
+      },
+      "jsonSchema": {
+        "currentPage": {
+          "type": "number"
+        },
+        "totalPages": {
+          "type": "number"
+        },
+        "style": {
+          "type": "string"
+        },
+        "alignment": {
+          "type": "string"
+        },
+        "maxPageNumbers": {
+          "type": "number"
+        }
+      },
+      "defaultProps": {
+        "currentPage": 1,
+        "totalPages": 1,
+        "style": "numbered",
+        "alignment": "center",
+        "maxPageNumbers": 7
+      },
+      "isContainer": false,
+      "zones": [],
+      "metaPath": "src\\puck\\components\\storefront\\PaginationBar.tsx (auto-derived)"
+    },
+    {
       "name": "ContentSlider",
       "label": "Content Slider (Swiper)",
       "description": "Full-bleed content slider for hero banners, promos, and announcements. Each slide has title/description/button/background. Optional custom HTML per slide. Falls back to 3 mock slides. Uses SwiperBase for shared config.",
@@ -22265,14 +22275,6 @@ export const registry: CompiledRegistry = {
           "titleAlignment": "left",
           "columns": "4",
           "gap": "md",
-          "gridLocation": "center",
-          "showSortFilter": true,
-          "sortPosition": "top-right",
-          "showPagination": true,
-          "paginationPosition": "bottom-center",
-          "showProductsPerPageDropdown": false,
-          "productsPerPageOptions": "12,24,36,48",
-          "productsPerPage": 12,
           "className": ""
         },
         "isContainer": false,
@@ -23853,89 +23855,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\collection\\collectiontitle.meta.ts"
       },
       {
-        "name": "FilterGroup",
-        "label": "Filter Group",
-        "description": "Filter Group component (auto-derived).",
-        "category": "collection",
-        "intent": [
-          "filter",
-          "group"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "filter",
-          "group"
-        ],
-        "propSchema": {
-          "title": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "min": {
-            "type": "number"
-          },
-          "max": {
-            "type": "number"
-          },
-          "options": {
-            "type": "array"
-          },
-          "collapsible": {
-            "type": "boolean"
-          },
-          "defaultExpanded": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "title": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "min": {
-            "type": "number"
-          },
-          "max": {
-            "type": "number"
-          },
-          "options": {
-            "type": "array"
-          },
-          "collapsible": {
-            "type": "boolean"
-          },
-          "defaultExpanded": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "title": "Filter",
-          "type": "checkbox",
-          "min": 0,
-          "max": 1000,
-          "options": [],
-          "collapsible": true,
-          "defaultExpanded": true,
-          "style": "standard"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\collection\\FilterGroup\\FilterGroup.tsx (auto-derived)"
-      },
-      {
         "name": "Pagination",
         "label": "Pagination",
         "description": "Pagination with 3 styles (simple/numbered/load-more), 3 alignments, optional first/last buttons, and configurable max page numbers. Cart-library-agnostic: takes currentPage, totalPages, onPageChange, loadMoreText. Heroicons ChevronLeft/Right replaced with inline SVG.",
@@ -24022,13 +23941,6 @@ export const registry: CompiledRegistry = {
               "right"
             ]
           }
-        },
-        "defaultProps": {
-          "showPageNumbers": true,
-          "showFirstLast": true,
-          "maxPageNumbers": 7,
-          "style": "numbered",
-          "alignment": "center"
         },
         "isContainer": false,
         "zones": [],
@@ -24135,16 +24047,6 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
-        },
-        "defaultProps": {
-          "showPriceFilter": true,
-          "showCategoryFilter": true,
-          "showBrandFilter": true,
-          "showColorFilter": true,
-          "showSizeFilter": true,
-          "showRatingFilter": true,
-          "layout": "sidebar",
-          "defaultExpanded": true
         },
         "isContainer": false,
         "zones": [],
@@ -24381,12 +24283,6 @@ export const registry: CompiledRegistry = {
               "right"
             ]
           }
-        },
-        "defaultProps": {
-          "defaultSort": "featured",
-          "showResultCount": true,
-          "showViewToggle": true,
-          "position": "right"
         },
         "isContainer": false,
         "zones": [],
@@ -38338,6 +38234,132 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryzoom.meta.ts"
+      }
+    ],
+    "storefront": [
+      {
+        "name": "FilterBar",
+        "label": "Filter Bar",
+        "description": "Filter Bar component (auto-derived).",
+        "category": "storefront",
+        "intent": [
+          "filter",
+          "bar"
+        ],
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "searchTags": [
+          "filter",
+          "bar"
+        ],
+        "propSchema": {
+          "filterLayout": {
+            "type": "string"
+          },
+          "showSort": {
+            "type": "boolean"
+          },
+          "showCount": {
+            "type": "boolean"
+          },
+          "showClearAll": {
+            "type": "boolean"
+          },
+          "showFilters": {
+            "type": "boolean"
+          }
+        },
+        "jsonSchema": {
+          "filterLayout": {
+            "type": "string"
+          },
+          "showSort": {
+            "type": "boolean"
+          },
+          "showCount": {
+            "type": "boolean"
+          },
+          "showClearAll": {
+            "type": "boolean"
+          },
+          "showFilters": {
+            "type": "boolean"
+          }
+        },
+        "defaultProps": {
+          "filterLayout": "sidebar",
+          "showSort": true,
+          "showCount": true,
+          "showClearAll": true,
+          "showFilters": true
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\storefront\\FilterBar.tsx (auto-derived)"
+      },
+      {
+        "name": "PaginationBar",
+        "label": "Pagination Bar",
+        "description": "Pagination Bar component (auto-derived).",
+        "category": "storefront",
+        "intent": [
+          "pagination",
+          "bar"
+        ],
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "searchTags": [
+          "pagination",
+          "bar"
+        ],
+        "propSchema": {
+          "currentPage": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "style": {
+            "type": "string"
+          },
+          "alignment": {
+            "type": "string"
+          },
+          "maxPageNumbers": {
+            "type": "number"
+          }
+        },
+        "jsonSchema": {
+          "currentPage": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "style": {
+            "type": "string"
+          },
+          "alignment": {
+            "type": "string"
+          },
+          "maxPageNumbers": {
+            "type": "number"
+          }
+        },
+        "defaultProps": {
+          "currentPage": 1,
+          "totalPages": 1,
+          "style": "numbered",
+          "alignment": "center",
+          "maxPageNumbers": 7
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\storefront\\PaginationBar.tsx (auto-derived)"
       }
     ],
     "swiper": [
@@ -52953,13 +52975,6 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
-        "defaultProps": {
-          "showPageNumbers": true,
-          "showFirstLast": true,
-          "maxPageNumbers": 7,
-          "style": "numbered",
-          "alignment": "center"
-        },
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\collection\\pagination.meta.ts"
@@ -55870,14 +55885,6 @@ export const registry: CompiledRegistry = {
           "titleAlignment": "left",
           "columns": "4",
           "gap": "md",
-          "gridLocation": "center",
-          "showSortFilter": true,
-          "sortPosition": "top-right",
-          "showPagination": true,
-          "paginationPosition": "bottom-center",
-          "showProductsPerPageDropdown": false,
-          "productsPerPageOptions": "12,24,36,48",
-          "productsPerPage": 12,
           "className": ""
         },
         "isContainer": false,
@@ -56600,14 +56607,6 @@ export const registry: CompiledRegistry = {
           "titleAlignment": "left",
           "columns": "4",
           "gap": "md",
-          "gridLocation": "center",
-          "showSortFilter": true,
-          "sortPosition": "top-right",
-          "showPagination": true,
-          "paginationPosition": "bottom-center",
-          "showProductsPerPageDropdown": false,
-          "productsPerPageOptions": "12,24,36,48",
-          "productsPerPage": 12,
           "className": ""
         },
         "isContainer": false,
@@ -59689,14 +59688,6 @@ export const registry: CompiledRegistry = {
           "titleAlignment": "left",
           "columns": "4",
           "gap": "md",
-          "gridLocation": "center",
-          "showSortFilter": true,
-          "sortPosition": "top-right",
-          "showPagination": true,
-          "paginationPosition": "bottom-center",
-          "showProductsPerPageDropdown": false,
-          "productsPerPageOptions": "12,24,36,48",
-          "productsPerPage": 12,
           "className": ""
         },
         "isContainer": false,
@@ -67695,274 +67686,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\product\\ProductTitle\\producttitle.meta.ts"
       }
     ],
-    "filter": [
-      {
-        "name": "FilterGroup",
-        "label": "Filter Group",
-        "description": "Filter Group component (auto-derived).",
-        "category": "collection",
-        "intent": [
-          "filter",
-          "group"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "filter",
-          "group"
-        ],
-        "propSchema": {
-          "title": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "min": {
-            "type": "number"
-          },
-          "max": {
-            "type": "number"
-          },
-          "options": {
-            "type": "array"
-          },
-          "collapsible": {
-            "type": "boolean"
-          },
-          "defaultExpanded": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "title": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "min": {
-            "type": "number"
-          },
-          "max": {
-            "type": "number"
-          },
-          "options": {
-            "type": "array"
-          },
-          "collapsible": {
-            "type": "boolean"
-          },
-          "defaultExpanded": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "title": "Filter",
-          "type": "checkbox",
-          "min": 0,
-          "max": 1000,
-          "options": [],
-          "collapsible": true,
-          "defaultExpanded": true,
-          "style": "standard"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\collection\\FilterGroup\\FilterGroup.tsx (auto-derived)"
-      },
-      {
-        "name": "ProductSort",
-        "label": "Product Sort",
-        "description": "Product sort dropdown with 7 default options + custom options, optional result count, optional grid/list view toggle, 3 positions. Cart-library-agnostic: takes sortOptions, totalCount, showingCount, onSortChange, onViewChange. Heroicons Squares2X2/Bars3 replaced with inline SVG.",
-        "category": "collection",
-        "intent": [
-          "sort",
-          "filter",
-          "view"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "totalCount/showingCount (consumer)"
-        ],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "sort",
-          "filter",
-          "view",
-          "products"
-        ],
-        "propSchema": {
-          "defaultSort": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "featured",
-              "price_asc",
-              "price_desc",
-              "created_desc",
-              "sales_desc",
-              "title_asc",
-              "title_desc"
-            ]
-          },
-          "showResultCount": {
-            "type": "boolean",
-            "required": true
-          },
-          "showViewToggle": {
-            "type": "boolean",
-            "required": true
-          },
-          "position": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "defaultSort": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "featured",
-              "price_asc",
-              "price_desc",
-              "created_desc",
-              "sales_desc",
-              "title_asc",
-              "title_desc"
-            ]
-          },
-          "showResultCount": {
-            "type": "boolean",
-            "required": true
-          },
-          "showViewToggle": {
-            "type": "boolean",
-            "required": true
-          },
-          "position": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          }
-        },
-        "defaultProps": {
-          "defaultSort": "featured",
-          "showResultCount": true,
-          "showViewToggle": true,
-          "position": "right"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\collection\\productsort.meta.ts"
-      }
-    ],
-    "group": [
-      {
-        "name": "FilterGroup",
-        "label": "Filter Group",
-        "description": "Filter Group component (auto-derived).",
-        "category": "collection",
-        "intent": [
-          "filter",
-          "group"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "filter",
-          "group"
-        ],
-        "propSchema": {
-          "title": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "min": {
-            "type": "number"
-          },
-          "max": {
-            "type": "number"
-          },
-          "options": {
-            "type": "array"
-          },
-          "collapsible": {
-            "type": "boolean"
-          },
-          "defaultExpanded": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "title": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "min": {
-            "type": "number"
-          },
-          "max": {
-            "type": "number"
-          },
-          "options": {
-            "type": "array"
-          },
-          "collapsible": {
-            "type": "boolean"
-          },
-          "defaultExpanded": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "title": "Filter",
-          "type": "checkbox",
-          "min": 0,
-          "max": 1000,
-          "options": [],
-          "collapsible": true,
-          "defaultExpanded": true,
-          "style": "standard"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\collection\\FilterGroup\\FilterGroup.tsx (auto-derived)"
-      }
-    ],
     "pagination": [
       {
         "name": "Pagination",
@@ -68052,16 +67775,71 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
-        "defaultProps": {
-          "showPageNumbers": true,
-          "showFirstLast": true,
-          "maxPageNumbers": 7,
-          "style": "numbered",
-          "alignment": "center"
-        },
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\collection\\pagination.meta.ts"
+      },
+      {
+        "name": "PaginationBar",
+        "label": "Pagination Bar",
+        "description": "Pagination Bar component (auto-derived).",
+        "category": "storefront",
+        "intent": [
+          "pagination",
+          "bar"
+        ],
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "searchTags": [
+          "pagination",
+          "bar"
+        ],
+        "propSchema": {
+          "currentPage": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "style": {
+            "type": "string"
+          },
+          "alignment": {
+            "type": "string"
+          },
+          "maxPageNumbers": {
+            "type": "number"
+          }
+        },
+        "jsonSchema": {
+          "currentPage": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "style": {
+            "type": "string"
+          },
+          "alignment": {
+            "type": "string"
+          },
+          "maxPageNumbers": {
+            "type": "number"
+          }
+        },
+        "defaultProps": {
+          "currentPage": 1,
+          "totalPages": 1,
+          "style": "numbered",
+          "alignment": "center",
+          "maxPageNumbers": 7
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\storefront\\PaginationBar.tsx (auto-derived)"
       }
     ],
     "pages": [
@@ -68152,13 +67930,6 @@ export const registry: CompiledRegistry = {
               "right"
             ]
           }
-        },
-        "defaultProps": {
-          "showPageNumbers": true,
-          "showFirstLast": true,
-          "maxPageNumbers": 7,
-          "style": "numbered",
-          "alignment": "center"
         },
         "isContainer": false,
         "zones": [],
@@ -68268,16 +68039,6 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
-        "defaultProps": {
-          "showPriceFilter": true,
-          "showCategoryFilter": true,
-          "showBrandFilter": true,
-          "showColorFilter": true,
-          "showSizeFilter": true,
-          "showRatingFilter": true,
-          "layout": "sidebar",
-          "defaultExpanded": true
-        },
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\collection\\productfilters.meta.ts"
@@ -68386,16 +68147,6 @@ export const registry: CompiledRegistry = {
             "required": true
           }
         },
-        "defaultProps": {
-          "showPriceFilter": true,
-          "showCategoryFilter": true,
-          "showBrandFilter": true,
-          "showColorFilter": true,
-          "showSizeFilter": true,
-          "showRatingFilter": true,
-          "layout": "sidebar",
-          "defaultExpanded": true
-        },
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\collection\\productfilters.meta.ts"
@@ -68503,16 +68254,6 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           }
-        },
-        "defaultProps": {
-          "showPriceFilter": true,
-          "showCategoryFilter": true,
-          "showBrandFilter": true,
-          "showColorFilter": true,
-          "showSizeFilter": true,
-          "showRatingFilter": true,
-          "layout": "sidebar",
-          "defaultExpanded": true
         },
         "isContainer": false,
         "zones": [],
@@ -69281,15 +69022,165 @@ export const registry: CompiledRegistry = {
             ]
           }
         },
-        "defaultProps": {
-          "defaultSort": "featured",
-          "showResultCount": true,
-          "showViewToggle": true,
-          "position": "right"
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\collection\\productsort.meta.ts"
+      }
+    ],
+    "filter": [
+      {
+        "name": "ProductSort",
+        "label": "Product Sort",
+        "description": "Product sort dropdown with 7 default options + custom options, optional result count, optional grid/list view toggle, 3 positions. Cart-library-agnostic: takes sortOptions, totalCount, showingCount, onSortChange, onViewChange. Heroicons Squares2X2/Bars3 replaced with inline SVG.",
+        "category": "collection",
+        "intent": [
+          "sort",
+          "filter",
+          "view"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "totalCount/showingCount (consumer)"
+        ],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "sort",
+          "filter",
+          "view",
+          "products"
+        ],
+        "propSchema": {
+          "defaultSort": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "featured",
+              "price_asc",
+              "price_desc",
+              "created_desc",
+              "sales_desc",
+              "title_asc",
+              "title_desc"
+            ]
+          },
+          "showResultCount": {
+            "type": "boolean",
+            "required": true
+          },
+          "showViewToggle": {
+            "type": "boolean",
+            "required": true
+          },
+          "position": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "defaultSort": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "featured",
+              "price_asc",
+              "price_desc",
+              "created_desc",
+              "sales_desc",
+              "title_asc",
+              "title_desc"
+            ]
+          },
+          "showResultCount": {
+            "type": "boolean",
+            "required": true
+          },
+          "showViewToggle": {
+            "type": "boolean",
+            "required": true
+          },
+          "position": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          }
         },
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\collection\\productsort.meta.ts"
+      },
+      {
+        "name": "FilterBar",
+        "label": "Filter Bar",
+        "description": "Filter Bar component (auto-derived).",
+        "category": "storefront",
+        "intent": [
+          "filter",
+          "bar"
+        ],
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "searchTags": [
+          "filter",
+          "bar"
+        ],
+        "propSchema": {
+          "filterLayout": {
+            "type": "string"
+          },
+          "showSort": {
+            "type": "boolean"
+          },
+          "showCount": {
+            "type": "boolean"
+          },
+          "showClearAll": {
+            "type": "boolean"
+          },
+          "showFilters": {
+            "type": "boolean"
+          }
+        },
+        "jsonSchema": {
+          "filterLayout": {
+            "type": "string"
+          },
+          "showSort": {
+            "type": "boolean"
+          },
+          "showCount": {
+            "type": "boolean"
+          },
+          "showClearAll": {
+            "type": "boolean"
+          },
+          "showFilters": {
+            "type": "boolean"
+          }
+        },
+        "defaultProps": {
+          "filterLayout": "sidebar",
+          "showSort": true,
+          "showCount": true,
+          "showClearAll": true,
+          "showFilters": true
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\storefront\\FilterBar.tsx (auto-derived)"
       }
     ],
     "view": [
@@ -69380,12 +69271,6 @@ export const registry: CompiledRegistry = {
               "right"
             ]
           }
-        },
-        "defaultProps": {
-          "defaultSort": "featured",
-          "showResultCount": true,
-          "showViewToggle": true,
-          "position": "right"
         },
         "isContainer": false,
         "zones": [],
@@ -109447,6 +109332,130 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\navigation\\AnnouncementBar\\AnnouncementBar.tsx (auto-derived)"
+      },
+      {
+        "name": "FilterBar",
+        "label": "Filter Bar",
+        "description": "Filter Bar component (auto-derived).",
+        "category": "storefront",
+        "intent": [
+          "filter",
+          "bar"
+        ],
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "searchTags": [
+          "filter",
+          "bar"
+        ],
+        "propSchema": {
+          "filterLayout": {
+            "type": "string"
+          },
+          "showSort": {
+            "type": "boolean"
+          },
+          "showCount": {
+            "type": "boolean"
+          },
+          "showClearAll": {
+            "type": "boolean"
+          },
+          "showFilters": {
+            "type": "boolean"
+          }
+        },
+        "jsonSchema": {
+          "filterLayout": {
+            "type": "string"
+          },
+          "showSort": {
+            "type": "boolean"
+          },
+          "showCount": {
+            "type": "boolean"
+          },
+          "showClearAll": {
+            "type": "boolean"
+          },
+          "showFilters": {
+            "type": "boolean"
+          }
+        },
+        "defaultProps": {
+          "filterLayout": "sidebar",
+          "showSort": true,
+          "showCount": true,
+          "showClearAll": true,
+          "showFilters": true
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\storefront\\FilterBar.tsx (auto-derived)"
+      },
+      {
+        "name": "PaginationBar",
+        "label": "Pagination Bar",
+        "description": "Pagination Bar component (auto-derived).",
+        "category": "storefront",
+        "intent": [
+          "pagination",
+          "bar"
+        ],
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "searchTags": [
+          "pagination",
+          "bar"
+        ],
+        "propSchema": {
+          "currentPage": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "style": {
+            "type": "string"
+          },
+          "alignment": {
+            "type": "string"
+          },
+          "maxPageNumbers": {
+            "type": "number"
+          }
+        },
+        "jsonSchema": {
+          "currentPage": {
+            "type": "number"
+          },
+          "totalPages": {
+            "type": "number"
+          },
+          "style": {
+            "type": "string"
+          },
+          "alignment": {
+            "type": "string"
+          },
+          "maxPageNumbers": {
+            "type": "number"
+          }
+        },
+        "defaultProps": {
+          "currentPage": 1,
+          "totalPages": 1,
+          "style": "numbered",
+          "alignment": "center",
+          "maxPageNumbers": 7
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\storefront\\PaginationBar.tsx (auto-derived)"
       }
     ],
     "basket": [

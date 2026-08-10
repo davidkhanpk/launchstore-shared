@@ -22,7 +22,6 @@ export * from './category/CategoryBreadcrumbs';
 export * from './category/CategoryTitle';
 export * from './category/CategoryDescription';
 export * from './category/CategoryMetadata';
-export * from './category/CategoryProductsGrid';
 export * from './category/CategoryGrid';
 export * from './category/CategoryHero';
 export * from './category/SubcategoryNav';

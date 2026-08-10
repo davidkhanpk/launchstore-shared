@@ -36,8 +36,8 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-08-10T07:30:26.557Z",
-  "total": 139,
+  "generatedAt": "2026-08-10T18:17:57.542Z",
+  "total": 138,
   "entries": [
     {
       "name": "AccountContent",
@@ -2123,220 +2123,6 @@ export const registry: CompiledRegistry = {
       "metaPath": "src\\puck\\components\\category\\CategoryMetadata\\categorymetadata.meta.ts"
     },
     {
-      "name": "CategoryProductsGrid",
-      "label": "Category Products Grid",
-      "description": "Category page product grid with title, 5 column options, 4 gap sizes, optional sort+filter bar (uses shared ProductSort), pagination (uses shared Pagination), and per-page dropdown. Cart-library-agnostic: takes products[], totalCount, sortOptions, onSortChange, onPageChange, renderProduct (render-prop escape hatch for consumer-specific product card).",
-      "category": "category",
-      "intent": [
-        "category",
-        "products",
-        "grid"
-      ],
-      "visualRole": "block",
-      "dataDeps": [
-        "products (consumer)",
-        "renderProduct (consumer)"
-      ],
-      "copyFields": [
-        "title"
-      ],
-      "themeable": [],
-      "a11yRisk": "medium",
-      "mobileBehavior": "responsive",
-      "searchTags": [
-        "category",
-        "products",
-        "grid",
-        "pagination",
-        "sort"
-      ],
-      "propSchema": {
-        "showTitle": {
-          "type": "boolean",
-          "required": true
-        },
-        "title": {
-          "type": "string",
-          "required": true
-        },
-        "titleAlignment": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "left",
-            "center",
-            "right"
-          ]
-        },
-        "columns": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "2",
-            "3",
-            "4",
-            "5",
-            "6"
-          ]
-        },
-        "gap": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "sm",
-            "md",
-            "lg",
-            "xl"
-          ]
-        },
-        "gridLocation": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "left",
-            "center",
-            "right"
-          ]
-        },
-        "showSortFilter": {
-          "type": "boolean",
-          "required": true
-        },
-        "sortPosition": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "top-left",
-            "top-center",
-            "top-right"
-          ]
-        },
-        "showPagination": {
-          "type": "boolean",
-          "required": true
-        },
-        "paginationPosition": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "bottom-left",
-            "bottom-center",
-            "bottom-right"
-          ]
-        },
-        "showProductsPerPageDropdown": {
-          "type": "boolean",
-          "required": true
-        },
-        "productsPerPageOptions": {
-          "type": "string",
-          "required": true
-        },
-        "productsPerPage": {
-          "type": "number",
-          "required": true
-        }
-      },
-      "jsonSchema": {
-        "showTitle": {
-          "type": "boolean",
-          "required": true
-        },
-        "title": {
-          "type": "string",
-          "required": true
-        },
-        "titleAlignment": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "left",
-            "center",
-            "right"
-          ]
-        },
-        "columns": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "2",
-            "3",
-            "4",
-            "5",
-            "6"
-          ]
-        },
-        "gap": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "sm",
-            "md",
-            "lg",
-            "xl"
-          ]
-        },
-        "gridLocation": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "left",
-            "center",
-            "right"
-          ]
-        },
-        "showSortFilter": {
-          "type": "boolean",
-          "required": true
-        },
-        "sortPosition": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "top-left",
-            "top-center",
-            "top-right"
-          ]
-        },
-        "showPagination": {
-          "type": "boolean",
-          "required": true
-        },
-        "paginationPosition": {
-          "type": "enum",
-          "required": true,
-          "options": [
-            "bottom-left",
-            "bottom-center",
-            "bottom-right"
-          ]
-        },
-        "showProductsPerPageDropdown": {
-          "type": "boolean",
-          "required": true
-        },
-        "productsPerPageOptions": {
-          "type": "string",
-          "required": true
-        },
-        "productsPerPage": {
-          "type": "number",
-          "required": true
-        }
-      },
-      "defaultProps": {
-        "showTitle": false,
-        "title": "Products",
-        "titleAlignment": "left",
-        "columns": "4",
-        "gap": "md",
-        "className": ""
-      },
-      "isContainer": false,
-      "zones": [],
-      "metaPath": "src\\puck\\components\\category\\categoryproductsgrid.meta.ts"
-    },
-    {
       "name": "CategoryTitle",
       "label": "Category Title",
       "description": "Category page title (h1-h4) with typography controls. Reads category.name from injected category prop. Renders placeholder when no category is set.",
@@ -4234,14 +4020,16 @@ export const registry: CompiledRegistry = {
         }
       },
       "defaultProps": {
+        "showTitle": false,
+        "title": "Products",
+        "titleAlignment": "left",
         "layout": "grid",
-        "columns": "3",
-        "showQuickView": true,
-        "showWishlist": true,
-        "showCompare": false,
+        "columns": "4",
+        "gap": "md",
         "imageAspectRatio": "square",
         "showBadges": true,
-        "gap": "md"
+        "showQuickView": false,
+        "showWishlist": false
       },
       "isContainer": false,
       "zones": [],
@@ -22068,220 +21856,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\category\\CategoryMetadata\\categorymetadata.meta.ts"
       },
       {
-        "name": "CategoryProductsGrid",
-        "label": "Category Products Grid",
-        "description": "Category page product grid with title, 5 column options, 4 gap sizes, optional sort+filter bar (uses shared ProductSort), pagination (uses shared Pagination), and per-page dropdown. Cart-library-agnostic: takes products[], totalCount, sortOptions, onSortChange, onPageChange, renderProduct (render-prop escape hatch for consumer-specific product card).",
-        "category": "category",
-        "intent": [
-          "category",
-          "products",
-          "grid"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "products (consumer)",
-          "renderProduct (consumer)"
-        ],
-        "copyFields": [
-          "title"
-        ],
-        "themeable": [],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "category",
-          "products",
-          "grid",
-          "pagination",
-          "sort"
-        ],
-        "propSchema": {
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "title": {
-            "type": "string",
-            "required": true
-          },
-          "titleAlignment": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "2",
-              "3",
-              "4",
-              "5",
-              "6"
-            ]
-          },
-          "gap": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "gridLocation": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "showSortFilter": {
-            "type": "boolean",
-            "required": true
-          },
-          "sortPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top-left",
-              "top-center",
-              "top-right"
-            ]
-          },
-          "showPagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "bottom-left",
-              "bottom-center",
-              "bottom-right"
-            ]
-          },
-          "showProductsPerPageDropdown": {
-            "type": "boolean",
-            "required": true
-          },
-          "productsPerPageOptions": {
-            "type": "string",
-            "required": true
-          },
-          "productsPerPage": {
-            "type": "number",
-            "required": true
-          }
-        },
-        "jsonSchema": {
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "title": {
-            "type": "string",
-            "required": true
-          },
-          "titleAlignment": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "2",
-              "3",
-              "4",
-              "5",
-              "6"
-            ]
-          },
-          "gap": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "gridLocation": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "showSortFilter": {
-            "type": "boolean",
-            "required": true
-          },
-          "sortPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top-left",
-              "top-center",
-              "top-right"
-            ]
-          },
-          "showPagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "bottom-left",
-              "bottom-center",
-              "bottom-right"
-            ]
-          },
-          "showProductsPerPageDropdown": {
-            "type": "boolean",
-            "required": true
-          },
-          "productsPerPageOptions": {
-            "type": "string",
-            "required": true
-          },
-          "productsPerPage": {
-            "type": "number",
-            "required": true
-          }
-        },
-        "defaultProps": {
-          "showTitle": false,
-          "title": "Products",
-          "titleAlignment": "left",
-          "columns": "4",
-          "gap": "md",
-          "className": ""
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\category\\categoryproductsgrid.meta.ts"
-      },
-      {
         "name": "CategoryTitle",
         "label": "Category Title",
         "description": "Category page title (h1-h4) with typography controls. Reads category.name from injected category prop. Renders placeholder when no category is set.",
@@ -24183,14 +23757,16 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
+          "showTitle": false,
+          "title": "Products",
+          "titleAlignment": "left",
           "layout": "grid",
-          "columns": "3",
-          "showQuickView": true,
-          "showWishlist": true,
-          "showCompare": false,
+          "columns": "4",
+          "gap": "md",
           "imageAspectRatio": "square",
           "showBadges": true,
-          "gap": "md"
+          "showQuickView": false,
+          "showWishlist": false
         },
         "isContainer": false,
         "zones": [],
@@ -55678,220 +55254,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\category\\CategoryHero\\CategoryHero.tsx (auto-derived)"
       },
       {
-        "name": "CategoryProductsGrid",
-        "label": "Category Products Grid",
-        "description": "Category page product grid with title, 5 column options, 4 gap sizes, optional sort+filter bar (uses shared ProductSort), pagination (uses shared Pagination), and per-page dropdown. Cart-library-agnostic: takes products[], totalCount, sortOptions, onSortChange, onPageChange, renderProduct (render-prop escape hatch for consumer-specific product card).",
-        "category": "category",
-        "intent": [
-          "category",
-          "products",
-          "grid"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "products (consumer)",
-          "renderProduct (consumer)"
-        ],
-        "copyFields": [
-          "title"
-        ],
-        "themeable": [],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "category",
-          "products",
-          "grid",
-          "pagination",
-          "sort"
-        ],
-        "propSchema": {
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "title": {
-            "type": "string",
-            "required": true
-          },
-          "titleAlignment": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "2",
-              "3",
-              "4",
-              "5",
-              "6"
-            ]
-          },
-          "gap": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "gridLocation": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "showSortFilter": {
-            "type": "boolean",
-            "required": true
-          },
-          "sortPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top-left",
-              "top-center",
-              "top-right"
-            ]
-          },
-          "showPagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "bottom-left",
-              "bottom-center",
-              "bottom-right"
-            ]
-          },
-          "showProductsPerPageDropdown": {
-            "type": "boolean",
-            "required": true
-          },
-          "productsPerPageOptions": {
-            "type": "string",
-            "required": true
-          },
-          "productsPerPage": {
-            "type": "number",
-            "required": true
-          }
-        },
-        "jsonSchema": {
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "title": {
-            "type": "string",
-            "required": true
-          },
-          "titleAlignment": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "2",
-              "3",
-              "4",
-              "5",
-              "6"
-            ]
-          },
-          "gap": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "gridLocation": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "showSortFilter": {
-            "type": "boolean",
-            "required": true
-          },
-          "sortPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top-left",
-              "top-center",
-              "top-right"
-            ]
-          },
-          "showPagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "bottom-left",
-              "bottom-center",
-              "bottom-right"
-            ]
-          },
-          "showProductsPerPageDropdown": {
-            "type": "boolean",
-            "required": true
-          },
-          "productsPerPageOptions": {
-            "type": "string",
-            "required": true
-          },
-          "productsPerPage": {
-            "type": "number",
-            "required": true
-          }
-        },
-        "defaultProps": {
-          "showTitle": false,
-          "title": "Products",
-          "titleAlignment": "left",
-          "columns": "4",
-          "gap": "md",
-          "className": ""
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\category\\categoryproductsgrid.meta.ts"
-      },
-      {
         "name": "CategoryProducts",
         "label": "Category Products",
         "description": "Products-from-a-specific-category section. Grid or carousel (Swiper) display modes. Each card can show image with optional Sale/New badges, rating, price (with compare-at-price), and Add to Cart. Bottom View All button. Consumer fetches via category_id (or override via renderProduct — D-1 escape hatch).",
@@ -56400,220 +55762,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\category\\CategoryGrid\\CategoryGrid.tsx (auto-derived)"
       },
       {
-        "name": "CategoryProductsGrid",
-        "label": "Category Products Grid",
-        "description": "Category page product grid with title, 5 column options, 4 gap sizes, optional sort+filter bar (uses shared ProductSort), pagination (uses shared Pagination), and per-page dropdown. Cart-library-agnostic: takes products[], totalCount, sortOptions, onSortChange, onPageChange, renderProduct (render-prop escape hatch for consumer-specific product card).",
-        "category": "category",
-        "intent": [
-          "category",
-          "products",
-          "grid"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "products (consumer)",
-          "renderProduct (consumer)"
-        ],
-        "copyFields": [
-          "title"
-        ],
-        "themeable": [],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "category",
-          "products",
-          "grid",
-          "pagination",
-          "sort"
-        ],
-        "propSchema": {
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "title": {
-            "type": "string",
-            "required": true
-          },
-          "titleAlignment": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "2",
-              "3",
-              "4",
-              "5",
-              "6"
-            ]
-          },
-          "gap": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "gridLocation": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "showSortFilter": {
-            "type": "boolean",
-            "required": true
-          },
-          "sortPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top-left",
-              "top-center",
-              "top-right"
-            ]
-          },
-          "showPagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "bottom-left",
-              "bottom-center",
-              "bottom-right"
-            ]
-          },
-          "showProductsPerPageDropdown": {
-            "type": "boolean",
-            "required": true
-          },
-          "productsPerPageOptions": {
-            "type": "string",
-            "required": true
-          },
-          "productsPerPage": {
-            "type": "number",
-            "required": true
-          }
-        },
-        "jsonSchema": {
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "title": {
-            "type": "string",
-            "required": true
-          },
-          "titleAlignment": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "2",
-              "3",
-              "4",
-              "5",
-              "6"
-            ]
-          },
-          "gap": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "gridLocation": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "showSortFilter": {
-            "type": "boolean",
-            "required": true
-          },
-          "sortPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top-left",
-              "top-center",
-              "top-right"
-            ]
-          },
-          "showPagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "bottom-left",
-              "bottom-center",
-              "bottom-right"
-            ]
-          },
-          "showProductsPerPageDropdown": {
-            "type": "boolean",
-            "required": true
-          },
-          "productsPerPageOptions": {
-            "type": "string",
-            "required": true
-          },
-          "productsPerPage": {
-            "type": "number",
-            "required": true
-          }
-        },
-        "defaultProps": {
-          "showTitle": false,
-          "title": "Products",
-          "titleAlignment": "left",
-          "columns": "4",
-          "gap": "md",
-          "className": ""
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\category\\categoryproductsgrid.meta.ts"
-      },
-      {
         "name": "ProductGrid",
         "label": "Product Grid",
         "description": "Product grid/list with 3 column counts, 3 image aspect ratios, optional quick view/wishlist/compare buttons, optional badges, 3 gap sizes. Cart-library-agnostic: takes products[], onQuickView, onAddToWishlist, onCompare. Lucide Heart/Eye replaced with inline SVG.",
@@ -56744,14 +55892,16 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
+          "showTitle": false,
+          "title": "Products",
+          "titleAlignment": "left",
           "layout": "grid",
-          "columns": "3",
-          "showQuickView": true,
-          "showWishlist": true,
-          "showCompare": false,
+          "columns": "4",
+          "gap": "md",
           "imageAspectRatio": "square",
           "showBadges": true,
-          "gap": "md"
+          "showQuickView": false,
+          "showWishlist": false
         },
         "isContainer": false,
         "zones": [],
@@ -59477,1225 +58627,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\category\\CategoryMetadata\\categorymetadata.meta.ts"
-      }
-    ],
-    "products": [
-      {
-        "name": "CategoryProductsGrid",
-        "label": "Category Products Grid",
-        "description": "Category page product grid with title, 5 column options, 4 gap sizes, optional sort+filter bar (uses shared ProductSort), pagination (uses shared Pagination), and per-page dropdown. Cart-library-agnostic: takes products[], totalCount, sortOptions, onSortChange, onPageChange, renderProduct (render-prop escape hatch for consumer-specific product card).",
-        "category": "category",
-        "intent": [
-          "category",
-          "products",
-          "grid"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "products (consumer)",
-          "renderProduct (consumer)"
-        ],
-        "copyFields": [
-          "title"
-        ],
-        "themeable": [],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "category",
-          "products",
-          "grid",
-          "pagination",
-          "sort"
-        ],
-        "propSchema": {
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "title": {
-            "type": "string",
-            "required": true
-          },
-          "titleAlignment": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "2",
-              "3",
-              "4",
-              "5",
-              "6"
-            ]
-          },
-          "gap": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "gridLocation": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "showSortFilter": {
-            "type": "boolean",
-            "required": true
-          },
-          "sortPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top-left",
-              "top-center",
-              "top-right"
-            ]
-          },
-          "showPagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "bottom-left",
-              "bottom-center",
-              "bottom-right"
-            ]
-          },
-          "showProductsPerPageDropdown": {
-            "type": "boolean",
-            "required": true
-          },
-          "productsPerPageOptions": {
-            "type": "string",
-            "required": true
-          },
-          "productsPerPage": {
-            "type": "number",
-            "required": true
-          }
-        },
-        "jsonSchema": {
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "title": {
-            "type": "string",
-            "required": true
-          },
-          "titleAlignment": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "2",
-              "3",
-              "4",
-              "5",
-              "6"
-            ]
-          },
-          "gap": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "gridLocation": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "showSortFilter": {
-            "type": "boolean",
-            "required": true
-          },
-          "sortPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "top-left",
-              "top-center",
-              "top-right"
-            ]
-          },
-          "showPagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "bottom-left",
-              "bottom-center",
-              "bottom-right"
-            ]
-          },
-          "showProductsPerPageDropdown": {
-            "type": "boolean",
-            "required": true
-          },
-          "productsPerPageOptions": {
-            "type": "string",
-            "required": true
-          },
-          "productsPerPage": {
-            "type": "number",
-            "required": true
-          }
-        },
-        "defaultProps": {
-          "showTitle": false,
-          "title": "Products",
-          "titleAlignment": "left",
-          "columns": "4",
-          "gap": "md",
-          "className": ""
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\category\\categoryproductsgrid.meta.ts"
-      },
-      {
-        "name": "ProductGrid",
-        "label": "Product Grid",
-        "description": "Product grid/list with 3 column counts, 3 image aspect ratios, optional quick view/wishlist/compare buttons, optional badges, 3 gap sizes. Cart-library-agnostic: takes products[], onQuickView, onAddToWishlist, onCompare. Lucide Heart/Eye replaced with inline SVG.",
-        "category": "collection",
-        "intent": [
-          "products",
-          "grid",
-          "list"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "products (consumer)"
-        ],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "products",
-          "grid",
-          "list",
-          "shop"
-        ],
-        "propSchema": {
-          "layout": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "grid",
-              "list"
-            ]
-          },
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "2",
-              "3",
-              "4"
-            ]
-          },
-          "showQuickView": {
-            "type": "boolean",
-            "required": true
-          },
-          "showWishlist": {
-            "type": "boolean",
-            "required": true
-          },
-          "showCompare": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageAspectRatio": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "square",
-              "portrait",
-              "landscape"
-            ]
-          },
-          "showBadges": {
-            "type": "boolean",
-            "required": true
-          },
-          "gap": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "md",
-              "lg"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "layout": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "grid",
-              "list"
-            ]
-          },
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "2",
-              "3",
-              "4"
-            ]
-          },
-          "showQuickView": {
-            "type": "boolean",
-            "required": true
-          },
-          "showWishlist": {
-            "type": "boolean",
-            "required": true
-          },
-          "showCompare": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageAspectRatio": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "square",
-              "portrait",
-              "landscape"
-            ]
-          },
-          "showBadges": {
-            "type": "boolean",
-            "required": true
-          },
-          "gap": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "md",
-              "lg"
-            ]
-          }
-        },
-        "defaultProps": {
-          "layout": "grid",
-          "columns": "3",
-          "showQuickView": true,
-          "showWishlist": true,
-          "showCompare": false,
-          "imageAspectRatio": "square",
-          "showBadges": true,
-          "gap": "md"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\collection\\productgrid.meta.ts"
-      },
-      {
-        "name": "CategoryProducts",
-        "label": "Category Products",
-        "description": "Products-from-a-specific-category section. Grid or carousel (Swiper) display modes. Each card can show image with optional Sale/New badges, rating, price (with compare-at-price), and Add to Cart. Bottom View All button. Consumer fetches via category_id (or override via renderProduct — D-1 escape hatch).",
-        "category": "homepage",
-        "intent": [
-          "products",
-          "category",
-          "shop-by-category",
-          "grid",
-          "carousel",
-          "department-products"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "products (consumer-injected, keyed by categoryId)",
-          "loading flag",
-          "error string"
-        ],
-        "copyFields": [
-          "sectionTitle",
-          "sectionSubtitle",
-          "viewAllButtonText",
-          "categoryName"
-        ],
-        "themeable": [
-          "backgroundColor",
-          "textColor",
-          "buttonColor",
-          "buttonTextColor"
-        ],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "products",
-          "category",
-          "shop",
-          "department",
-          "carousel",
-          "grid"
-        ],
-        "propSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "categoryId": {
-            "type": "string",
-            "required": true
-          },
-          "categoryName": {
-            "type": "string",
-            "required": true
-          },
-          "displayMode": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "grid",
-              "carousel"
-            ]
-          },
-          "productsPerRow": {
-            "type": "number",
-            "required": true
-          },
-          "maxProducts": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerView": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewTablet": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewMobile": {
-            "type": "number",
-            "required": true
-          },
-          "spaceBetween": {
-            "type": "number",
-            "required": true
-          },
-          "autoplay": {
-            "type": "boolean",
-            "required": true
-          },
-          "autoplayDelay": {
-            "type": "number",
-            "required": true
-          },
-          "loop": {
-            "type": "boolean",
-            "required": true
-          },
-          "navigation": {
-            "type": "boolean",
-            "required": true
-          },
-          "pagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageAspectRatio": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "square",
-              "portrait",
-              "landscape"
-            ]
-          },
-          "showPrice": {
-            "type": "boolean",
-            "required": true
-          },
-          "showAddToCart": {
-            "type": "boolean",
-            "required": true
-          },
-          "showRating": {
-            "type": "boolean",
-            "required": true
-          },
-          "showBadges": {
-            "type": "boolean",
-            "required": true
-          },
-          "showViewAllButton": {
-            "type": "boolean",
-            "required": true
-          },
-          "viewAllButtonText": {
-            "type": "string",
-            "required": true
-          },
-          "backgroundColor": {
-            "type": "string",
-            "required": true
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "cardStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "minimal",
-              "bordered",
-              "shadow"
-            ]
-          },
-          "borderRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg"
-            ]
-          },
-          "buttonColor": {
-            "type": "string",
-            "required": true
-          },
-          "buttonTextColor": {
-            "type": "string",
-            "required": true
-          },
-          "buttonRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "medium",
-              "small",
-              "large",
-              "none"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "categoryId": {
-            "type": "string",
-            "required": true
-          },
-          "categoryName": {
-            "type": "string",
-            "required": true
-          },
-          "displayMode": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "grid",
-              "carousel"
-            ]
-          },
-          "productsPerRow": {
-            "type": "number",
-            "required": true
-          },
-          "maxProducts": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerView": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewTablet": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewMobile": {
-            "type": "number",
-            "required": true
-          },
-          "spaceBetween": {
-            "type": "number",
-            "required": true
-          },
-          "autoplay": {
-            "type": "boolean",
-            "required": true
-          },
-          "autoplayDelay": {
-            "type": "number",
-            "required": true
-          },
-          "loop": {
-            "type": "boolean",
-            "required": true
-          },
-          "navigation": {
-            "type": "boolean",
-            "required": true
-          },
-          "pagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageAspectRatio": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "square",
-              "portrait",
-              "landscape"
-            ]
-          },
-          "showPrice": {
-            "type": "boolean",
-            "required": true
-          },
-          "showAddToCart": {
-            "type": "boolean",
-            "required": true
-          },
-          "showRating": {
-            "type": "boolean",
-            "required": true
-          },
-          "showBadges": {
-            "type": "boolean",
-            "required": true
-          },
-          "showViewAllButton": {
-            "type": "boolean",
-            "required": true
-          },
-          "viewAllButtonText": {
-            "type": "string",
-            "required": true
-          },
-          "backgroundColor": {
-            "type": "string",
-            "required": true
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "cardStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "minimal",
-              "bordered",
-              "shadow"
-            ]
-          },
-          "borderRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg"
-            ]
-          },
-          "buttonColor": {
-            "type": "string",
-            "required": true
-          },
-          "buttonTextColor": {
-            "type": "string",
-            "required": true
-          },
-          "buttonRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "medium",
-              "small",
-              "large",
-              "none"
-            ]
-          }
-        },
-        "defaultProps": {
-          "sectionTitle": "Shop by Category",
-          "sectionSubtitle": "Discover our curated collection",
-          "showTitle": true,
-          "categoryId": "",
-          "categoryName": "",
-          "displayMode": "grid",
-          "productsPerRow": 4,
-          "maxProducts": 12,
-          "slidesPerView": 4,
-          "slidesPerViewTablet": 3,
-          "slidesPerViewMobile": 1,
-          "spaceBetween": 20,
-          "autoplay": false,
-          "autoplayDelay": 3000,
-          "loop": false,
-          "navigation": true,
-          "pagination": true,
-          "imageAspectRatio": "square",
-          "showPrice": true,
-          "showAddToCart": true,
-          "showRating": false,
-          "showBadges": true,
-          "showViewAllButton": true,
-          "viewAllButtonText": "View All Products",
-          "backgroundColor": "#f9fafb",
-          "textColor": "#111827",
-          "cardStyle": "shadow",
-          "borderRadius": "md",
-          "buttonColor": "#000000",
-          "buttonTextColor": "#ffffff",
-          "buttonRadius": "medium",
-          "loading": false,
-          "error": ""
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
-      },
-      {
-        "name": "FeaturedProducts",
-        "label": "Featured Products",
-        "description": "Section header + product grid (grid or Swiper carousel) with loading/error/empty/success states. Consumer injects products data via prop plus an optional renderProduct callback (D-1 escape hatch) — storefront passes its own <ProductPreview> via the renderProduct prop. Defaults to a simple image+title+price card when renderProduct is omitted.",
-        "category": "homepage",
-        "intent": [
-          "products",
-          "featured",
-          "grid",
-          "carousel",
-          "hero-products",
-          "picks"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "products (consumer-injected)",
-          "loading flag",
-          "error string"
-        ],
-        "copyFields": [
-          "sectionTitle",
-          "sectionSubtitle",
-          "buttonText"
-        ],
-        "themeable": [
-          "backgroundColor",
-          "textColor"
-        ],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "products",
-          "featured",
-          "grid",
-          "carousel",
-          "hero",
-          "picks",
-          "swiper"
-        ],
-        "propSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "displayMode": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "grid",
-              "carousel"
-            ]
-          },
-          "productsPerRow": {
-            "type": "number",
-            "required": true
-          },
-          "maxProducts": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerView": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewTablet": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewMobile": {
-            "type": "number",
-            "required": true
-          },
-          "spaceBetween": {
-            "type": "number",
-            "required": true
-          },
-          "autoplay": {
-            "type": "boolean",
-            "required": true
-          },
-          "autoplayDelay": {
-            "type": "number",
-            "required": true
-          },
-          "loop": {
-            "type": "boolean",
-            "required": true
-          },
-          "navigation": {
-            "type": "boolean",
-            "required": true
-          },
-          "pagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "dots",
-              "fraction",
-              "progressbar"
-            ]
-          },
-          "productSource": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "featured",
-              "bestsellers",
-              "new",
-              "category",
-              "manual"
-            ]
-          },
-          "categoryId": {
-            "type": "string",
-            "required": true
-          },
-          "productIds": {
-            "type": "string",
-            "required": true
-          },
-          "backgroundColor": {
-            "type": "string",
-            "required": true
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "cardStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "minimal",
-              "bordered",
-              "shadow"
-            ]
-          },
-          "showPrice": {
-            "type": "boolean",
-            "required": true
-          },
-          "showAddToCart": {
-            "type": "boolean",
-            "required": true
-          },
-          "buttonText": {
-            "type": "string",
-            "required": true
-          }
-        },
-        "jsonSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "displayMode": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "grid",
-              "carousel"
-            ]
-          },
-          "productsPerRow": {
-            "type": "number",
-            "required": true
-          },
-          "maxProducts": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerView": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewTablet": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewMobile": {
-            "type": "number",
-            "required": true
-          },
-          "spaceBetween": {
-            "type": "number",
-            "required": true
-          },
-          "autoplay": {
-            "type": "boolean",
-            "required": true
-          },
-          "autoplayDelay": {
-            "type": "number",
-            "required": true
-          },
-          "loop": {
-            "type": "boolean",
-            "required": true
-          },
-          "navigation": {
-            "type": "boolean",
-            "required": true
-          },
-          "pagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "dots",
-              "fraction",
-              "progressbar"
-            ]
-          },
-          "productSource": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "featured",
-              "bestsellers",
-              "new",
-              "category",
-              "manual"
-            ]
-          },
-          "categoryId": {
-            "type": "string",
-            "required": true
-          },
-          "productIds": {
-            "type": "string",
-            "required": true
-          },
-          "backgroundColor": {
-            "type": "string",
-            "required": true
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "cardStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "minimal",
-              "bordered",
-              "shadow"
-            ]
-          },
-          "showPrice": {
-            "type": "boolean",
-            "required": true
-          },
-          "showAddToCart": {
-            "type": "boolean",
-            "required": true
-          },
-          "buttonText": {
-            "type": "string",
-            "required": true
-          }
-        },
-        "defaultProps": {
-          "sectionTitle": "Featured Products",
-          "sectionSubtitle": "Check out our most popular items",
-          "showTitle": true,
-          "displayMode": "carousel",
-          "productsPerRow": 4,
-          "maxProducts": 12,
-          "slidesPerView": 4,
-          "slidesPerViewTablet": 3,
-          "slidesPerViewMobile": 1,
-          "spaceBetween": 24,
-          "autoplay": true,
-          "autoplayDelay": 3000,
-          "loop": true,
-          "navigation": true,
-          "pagination": true,
-          "paginationStyle": "dots",
-          "productSource": "featured",
-          "categoryId": "",
-          "productIds": "",
-          "backgroundColor": "#ffffff",
-          "textColor": "#000000",
-          "cardStyle": "shadow",
-          "showPrice": true,
-          "showAddToCart": true,
-          "buttonText": "Add to Cart",
-          "loading": false,
-          "error": ""
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\FeaturedProducts\\featuredproducts.meta.ts"
-      },
-      {
-        "name": "RecentlyViewedProducts",
-        "label": "Recently Viewed Products",
-        "description": "Recently Viewed Products component (auto-derived).",
-        "category": "product",
-        "intent": [
-          "recently",
-          "viewed",
-          "products"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "recently",
-          "viewed",
-          "products"
-        ],
-        "propSchema": {
-          "showTitle": {
-            "type": "boolean"
-          },
-          "title": {
-            "type": "string"
-          },
-          "displayStyle": {
-            "type": "string"
-          },
-          "maxProducts": {
-            "type": "number"
-          },
-          "containerPadding": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "showTitle": {
-            "type": "boolean"
-          },
-          "title": {
-            "type": "string"
-          },
-          "displayStyle": {
-            "type": "string"
-          },
-          "maxProducts": {
-            "type": "number"
-          },
-          "containerPadding": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "showTitle": true,
-          "title": "Recently Viewed",
-          "displayStyle": "carousel",
-          "maxProducts": 8,
-          "containerPadding": "md"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\product\\RecentlyViewedProducts\\RecentlyViewedProducts.tsx (auto-derived)"
-      },
-      {
-        "name": "RelatedProducts",
-        "label": "Related Products",
-        "description": "Related Products component (auto-derived).",
-        "category": "product",
-        "intent": [
-          "related",
-          "products"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "related",
-          "products"
-        ],
-        "propSchema": {
-          "showTitle": {
-            "type": "boolean"
-          },
-          "title": {
-            "type": "string"
-          },
-          "showTagline": {
-            "type": "boolean"
-          },
-          "tagline": {
-            "type": "string"
-          },
-          "relatedBy": {
-            "type": "string"
-          },
-          "displayStyle": {
-            "type": "string"
-          },
-          "maxProducts": {
-            "type": "number"
-          },
-          "productCardTemplateId": {
-            "type": "string"
-          },
-          "gridColumns": {
-            "type": "string"
-          },
-          "containerPadding": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "showTitle": {
-            "type": "boolean"
-          },
-          "title": {
-            "type": "string"
-          },
-          "showTagline": {
-            "type": "boolean"
-          },
-          "tagline": {
-            "type": "string"
-          },
-          "relatedBy": {
-            "type": "string"
-          },
-          "displayStyle": {
-            "type": "string"
-          },
-          "maxProducts": {
-            "type": "number"
-          },
-          "productCardTemplateId": {
-            "type": "string"
-          },
-          "gridColumns": {
-            "type": "string"
-          },
-          "containerPadding": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "showTitle": true,
-          "title": "You Might Also Like",
-          "showTagline": true,
-          "tagline": "Check out these related products",
-          "relatedBy": "collection",
-          "displayStyle": "grid",
-          "maxProducts": 8,
-          "productCardTemplateId": "",
-          "gridColumns": "4",
-          "containerPadding": "md"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\product\\RelatedProducts\\RelatedProducts.tsx (auto-derived)"
       }
     ],
     "title": [
@@ -68575,6 +66506,1013 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\navigation\\SearchIcon\\searchicon.meta.ts"
       }
     ],
+    "products": [
+      {
+        "name": "ProductGrid",
+        "label": "Product Grid",
+        "description": "Product grid/list with 3 column counts, 3 image aspect ratios, optional quick view/wishlist/compare buttons, optional badges, 3 gap sizes. Cart-library-agnostic: takes products[], onQuickView, onAddToWishlist, onCompare. Lucide Heart/Eye replaced with inline SVG.",
+        "category": "collection",
+        "intent": [
+          "products",
+          "grid",
+          "list"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "products (consumer)"
+        ],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "products",
+          "grid",
+          "list",
+          "shop"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "grid",
+              "list"
+            ]
+          },
+          "columns": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "showQuickView": {
+            "type": "boolean",
+            "required": true
+          },
+          "showWishlist": {
+            "type": "boolean",
+            "required": true
+          },
+          "showCompare": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageAspectRatio": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "square",
+              "portrait",
+              "landscape"
+            ]
+          },
+          "showBadges": {
+            "type": "boolean",
+            "required": true
+          },
+          "gap": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "grid",
+              "list"
+            ]
+          },
+          "columns": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "showQuickView": {
+            "type": "boolean",
+            "required": true
+          },
+          "showWishlist": {
+            "type": "boolean",
+            "required": true
+          },
+          "showCompare": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageAspectRatio": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "square",
+              "portrait",
+              "landscape"
+            ]
+          },
+          "showBadges": {
+            "type": "boolean",
+            "required": true
+          },
+          "gap": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          }
+        },
+        "defaultProps": {
+          "showTitle": false,
+          "title": "Products",
+          "titleAlignment": "left",
+          "layout": "grid",
+          "columns": "4",
+          "gap": "md",
+          "imageAspectRatio": "square",
+          "showBadges": true,
+          "showQuickView": false,
+          "showWishlist": false
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\collection\\productgrid.meta.ts"
+      },
+      {
+        "name": "CategoryProducts",
+        "label": "Category Products",
+        "description": "Products-from-a-specific-category section. Grid or carousel (Swiper) display modes. Each card can show image with optional Sale/New badges, rating, price (with compare-at-price), and Add to Cart. Bottom View All button. Consumer fetches via category_id (or override via renderProduct — D-1 escape hatch).",
+        "category": "homepage",
+        "intent": [
+          "products",
+          "category",
+          "shop-by-category",
+          "grid",
+          "carousel",
+          "department-products"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "products (consumer-injected, keyed by categoryId)",
+          "loading flag",
+          "error string"
+        ],
+        "copyFields": [
+          "sectionTitle",
+          "sectionSubtitle",
+          "viewAllButtonText",
+          "categoryName"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor",
+          "buttonColor",
+          "buttonTextColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "products",
+          "category",
+          "shop",
+          "department",
+          "carousel",
+          "grid"
+        ],
+        "propSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true
+          },
+          "categoryId": {
+            "type": "string",
+            "required": true
+          },
+          "categoryName": {
+            "type": "string",
+            "required": true
+          },
+          "displayMode": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productsPerRow": {
+            "type": "number",
+            "required": true
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerView": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewTablet": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewMobile": {
+            "type": "number",
+            "required": true
+          },
+          "spaceBetween": {
+            "type": "number",
+            "required": true
+          },
+          "autoplay": {
+            "type": "boolean",
+            "required": true
+          },
+          "autoplayDelay": {
+            "type": "number",
+            "required": true
+          },
+          "loop": {
+            "type": "boolean",
+            "required": true
+          },
+          "navigation": {
+            "type": "boolean",
+            "required": true
+          },
+          "pagination": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageAspectRatio": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "square",
+              "portrait",
+              "landscape"
+            ]
+          },
+          "showPrice": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddToCart": {
+            "type": "boolean",
+            "required": true
+          },
+          "showRating": {
+            "type": "boolean",
+            "required": true
+          },
+          "showBadges": {
+            "type": "boolean",
+            "required": true
+          },
+          "showViewAllButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "viewAllButtonText": {
+            "type": "string",
+            "required": true
+          },
+          "backgroundColor": {
+            "type": "string",
+            "required": true
+          },
+          "textColor": {
+            "type": "string",
+            "required": true
+          },
+          "cardStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "minimal",
+              "bordered",
+              "shadow"
+            ]
+          },
+          "borderRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "buttonColor": {
+            "type": "string",
+            "required": true
+          },
+          "buttonTextColor": {
+            "type": "string",
+            "required": true
+          },
+          "buttonRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "medium",
+              "small",
+              "large",
+              "none"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true
+          },
+          "categoryId": {
+            "type": "string",
+            "required": true
+          },
+          "categoryName": {
+            "type": "string",
+            "required": true
+          },
+          "displayMode": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productsPerRow": {
+            "type": "number",
+            "required": true
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerView": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewTablet": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewMobile": {
+            "type": "number",
+            "required": true
+          },
+          "spaceBetween": {
+            "type": "number",
+            "required": true
+          },
+          "autoplay": {
+            "type": "boolean",
+            "required": true
+          },
+          "autoplayDelay": {
+            "type": "number",
+            "required": true
+          },
+          "loop": {
+            "type": "boolean",
+            "required": true
+          },
+          "navigation": {
+            "type": "boolean",
+            "required": true
+          },
+          "pagination": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageAspectRatio": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "square",
+              "portrait",
+              "landscape"
+            ]
+          },
+          "showPrice": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddToCart": {
+            "type": "boolean",
+            "required": true
+          },
+          "showRating": {
+            "type": "boolean",
+            "required": true
+          },
+          "showBadges": {
+            "type": "boolean",
+            "required": true
+          },
+          "showViewAllButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "viewAllButtonText": {
+            "type": "string",
+            "required": true
+          },
+          "backgroundColor": {
+            "type": "string",
+            "required": true
+          },
+          "textColor": {
+            "type": "string",
+            "required": true
+          },
+          "cardStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "minimal",
+              "bordered",
+              "shadow"
+            ]
+          },
+          "borderRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "buttonColor": {
+            "type": "string",
+            "required": true
+          },
+          "buttonTextColor": {
+            "type": "string",
+            "required": true
+          },
+          "buttonRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "medium",
+              "small",
+              "large",
+              "none"
+            ]
+          }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Discover our curated collection",
+          "showTitle": true,
+          "categoryId": "",
+          "categoryName": "",
+          "displayMode": "grid",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 20,
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "loop": false,
+          "navigation": true,
+          "pagination": true,
+          "imageAspectRatio": "square",
+          "showPrice": true,
+          "showAddToCart": true,
+          "showRating": false,
+          "showBadges": true,
+          "showViewAllButton": true,
+          "viewAllButtonText": "View All Products",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827",
+          "cardStyle": "shadow",
+          "borderRadius": "md",
+          "buttonColor": "#000000",
+          "buttonTextColor": "#ffffff",
+          "buttonRadius": "medium",
+          "loading": false,
+          "error": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
+      },
+      {
+        "name": "FeaturedProducts",
+        "label": "Featured Products",
+        "description": "Section header + product grid (grid or Swiper carousel) with loading/error/empty/success states. Consumer injects products data via prop plus an optional renderProduct callback (D-1 escape hatch) — storefront passes its own <ProductPreview> via the renderProduct prop. Defaults to a simple image+title+price card when renderProduct is omitted.",
+        "category": "homepage",
+        "intent": [
+          "products",
+          "featured",
+          "grid",
+          "carousel",
+          "hero-products",
+          "picks"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "products (consumer-injected)",
+          "loading flag",
+          "error string"
+        ],
+        "copyFields": [
+          "sectionTitle",
+          "sectionSubtitle",
+          "buttonText"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "products",
+          "featured",
+          "grid",
+          "carousel",
+          "hero",
+          "picks",
+          "swiper"
+        ],
+        "propSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true
+          },
+          "displayMode": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productsPerRow": {
+            "type": "number",
+            "required": true
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerView": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewTablet": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewMobile": {
+            "type": "number",
+            "required": true
+          },
+          "spaceBetween": {
+            "type": "number",
+            "required": true
+          },
+          "autoplay": {
+            "type": "boolean",
+            "required": true
+          },
+          "autoplayDelay": {
+            "type": "number",
+            "required": true
+          },
+          "loop": {
+            "type": "boolean",
+            "required": true
+          },
+          "navigation": {
+            "type": "boolean",
+            "required": true
+          },
+          "pagination": {
+            "type": "boolean",
+            "required": true
+          },
+          "paginationStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "dots",
+              "fraction",
+              "progressbar"
+            ]
+          },
+          "productSource": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "featured",
+              "bestsellers",
+              "new",
+              "category",
+              "manual"
+            ]
+          },
+          "categoryId": {
+            "type": "string",
+            "required": true
+          },
+          "productIds": {
+            "type": "string",
+            "required": true
+          },
+          "backgroundColor": {
+            "type": "string",
+            "required": true
+          },
+          "textColor": {
+            "type": "string",
+            "required": true
+          },
+          "cardStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "minimal",
+              "bordered",
+              "shadow"
+            ]
+          },
+          "showPrice": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddToCart": {
+            "type": "boolean",
+            "required": true
+          },
+          "buttonText": {
+            "type": "string",
+            "required": true
+          }
+        },
+        "jsonSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true
+          },
+          "displayMode": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productsPerRow": {
+            "type": "number",
+            "required": true
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerView": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewTablet": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewMobile": {
+            "type": "number",
+            "required": true
+          },
+          "spaceBetween": {
+            "type": "number",
+            "required": true
+          },
+          "autoplay": {
+            "type": "boolean",
+            "required": true
+          },
+          "autoplayDelay": {
+            "type": "number",
+            "required": true
+          },
+          "loop": {
+            "type": "boolean",
+            "required": true
+          },
+          "navigation": {
+            "type": "boolean",
+            "required": true
+          },
+          "pagination": {
+            "type": "boolean",
+            "required": true
+          },
+          "paginationStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "dots",
+              "fraction",
+              "progressbar"
+            ]
+          },
+          "productSource": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "featured",
+              "bestsellers",
+              "new",
+              "category",
+              "manual"
+            ]
+          },
+          "categoryId": {
+            "type": "string",
+            "required": true
+          },
+          "productIds": {
+            "type": "string",
+            "required": true
+          },
+          "backgroundColor": {
+            "type": "string",
+            "required": true
+          },
+          "textColor": {
+            "type": "string",
+            "required": true
+          },
+          "cardStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "minimal",
+              "bordered",
+              "shadow"
+            ]
+          },
+          "showPrice": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddToCart": {
+            "type": "boolean",
+            "required": true
+          },
+          "buttonText": {
+            "type": "string",
+            "required": true
+          }
+        },
+        "defaultProps": {
+          "sectionTitle": "Featured Products",
+          "sectionSubtitle": "Check out our most popular items",
+          "showTitle": true,
+          "displayMode": "carousel",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 24,
+          "autoplay": true,
+          "autoplayDelay": 3000,
+          "loop": true,
+          "navigation": true,
+          "pagination": true,
+          "paginationStyle": "dots",
+          "productSource": "featured",
+          "categoryId": "",
+          "productIds": "",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "showPrice": true,
+          "showAddToCart": true,
+          "buttonText": "Add to Cart",
+          "loading": false,
+          "error": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\FeaturedProducts\\featuredproducts.meta.ts"
+      },
+      {
+        "name": "RecentlyViewedProducts",
+        "label": "Recently Viewed Products",
+        "description": "Recently Viewed Products component (auto-derived).",
+        "category": "product",
+        "intent": [
+          "recently",
+          "viewed",
+          "products"
+        ],
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "searchTags": [
+          "recently",
+          "viewed",
+          "products"
+        ],
+        "propSchema": {
+          "showTitle": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          },
+          "displayStyle": {
+            "type": "string"
+          },
+          "maxProducts": {
+            "type": "number"
+          },
+          "containerPadding": {
+            "type": "string"
+          }
+        },
+        "jsonSchema": {
+          "showTitle": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          },
+          "displayStyle": {
+            "type": "string"
+          },
+          "maxProducts": {
+            "type": "number"
+          },
+          "containerPadding": {
+            "type": "string"
+          }
+        },
+        "defaultProps": {
+          "showTitle": true,
+          "title": "Recently Viewed",
+          "displayStyle": "carousel",
+          "maxProducts": 8,
+          "containerPadding": "md"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\product\\RecentlyViewedProducts\\RecentlyViewedProducts.tsx (auto-derived)"
+      },
+      {
+        "name": "RelatedProducts",
+        "label": "Related Products",
+        "description": "Related Products component (auto-derived).",
+        "category": "product",
+        "intent": [
+          "related",
+          "products"
+        ],
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "searchTags": [
+          "related",
+          "products"
+        ],
+        "propSchema": {
+          "showTitle": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          },
+          "showTagline": {
+            "type": "boolean"
+          },
+          "tagline": {
+            "type": "string"
+          },
+          "relatedBy": {
+            "type": "string"
+          },
+          "displayStyle": {
+            "type": "string"
+          },
+          "maxProducts": {
+            "type": "number"
+          },
+          "productCardTemplateId": {
+            "type": "string"
+          },
+          "gridColumns": {
+            "type": "string"
+          },
+          "containerPadding": {
+            "type": "string"
+          }
+        },
+        "jsonSchema": {
+          "showTitle": {
+            "type": "boolean"
+          },
+          "title": {
+            "type": "string"
+          },
+          "showTagline": {
+            "type": "boolean"
+          },
+          "tagline": {
+            "type": "string"
+          },
+          "relatedBy": {
+            "type": "string"
+          },
+          "displayStyle": {
+            "type": "string"
+          },
+          "maxProducts": {
+            "type": "number"
+          },
+          "productCardTemplateId": {
+            "type": "string"
+          },
+          "gridColumns": {
+            "type": "string"
+          },
+          "containerPadding": {
+            "type": "string"
+          }
+        },
+        "defaultProps": {
+          "showTitle": true,
+          "title": "You Might Also Like",
+          "showTagline": true,
+          "tagline": "Check out these related products",
+          "relatedBy": "collection",
+          "displayStyle": "grid",
+          "maxProducts": 8,
+          "productCardTemplateId": "",
+          "gridColumns": "4",
+          "containerPadding": "md"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\product\\RelatedProducts\\RelatedProducts.tsx (auto-derived)"
+      }
+    ],
     "list": [
       {
         "name": "ProductGrid",
@@ -68707,14 +67645,16 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
+          "showTitle": false,
+          "title": "Products",
+          "titleAlignment": "left",
           "layout": "grid",
-          "columns": "3",
-          "showQuickView": true,
-          "showWishlist": true,
-          "showCompare": false,
+          "columns": "4",
+          "gap": "md",
           "imageAspectRatio": "square",
           "showBadges": true,
-          "gap": "md"
+          "showQuickView": false,
+          "showWishlist": false
         },
         "isContainer": false,
         "zones": [],

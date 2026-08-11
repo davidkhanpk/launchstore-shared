@@ -24,6 +24,8 @@ const paginationBarFields = {
     ],
   },
   maxPageNumbers: { type: 'number', label: 'Max visible page numbers' },
+  showPerPageSelector: { type: 'radio', label: 'Show Per-Page Selector', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  perPageOptions: { type: 'text', label: 'Per-Page Options (comma-separated)' },
 } as Record<string, any>;
 
 export const PaginationBar: ComponentConfig<PaginationBarProps> = {
@@ -35,31 +37,49 @@ export const PaginationBar: ComponentConfig<PaginationBarProps> = {
     style: 'numbered',
     alignment: 'center',
     maxPageNumbers: 7,
+    showPerPageSelector: true,
+    perPageOptions: [12, 24, 48],
+    perPage: 12,
   },
   render: (rawProps: any) => {
     const {
       currentPage = 1,
       totalPages = 5,
+      totalCount,
       style = 'numbered',
       alignment = 'center',
       maxPageNumbers = 7,
+      perPage = 12,
+      perPageOptions = [12, 24, 48],
+      showPerPageSelector = true,
       onPageChange,
+      onPerPageChange,
     } = rawProps as PaginationBarProps;
 
-    // Debug logging
-    console.log('[PaginationBar]', { currentPage, totalPages, style, alignment, hasOnPageChange: !!onPageChange });
-
-    // In the editor (no onPageChange), always show a preview so the designer
-    // can see the component. On the storefront, hide when only 1 page.
     const isEditor = !onPageChange;
-    if (totalPages <= 1 && !isEditor) return <></>;
-
     const justify = ALIGN[alignment] || ALIGN.center;
+
+    // Parse perPageOptions (can come as comma-separated string from Puck text field)
+    const rawOpts: any = perPageOptions;
+    const ppOptions: number[] = typeof rawOpts === 'string'
+      ? rawOpts.split(',').map((n: string) => parseInt(n.trim(), 10)).filter((n: number) => !isNaN(n))
+      : (Array.isArray(rawOpts) ? rawOpts : [12, 24, 48]);
+
     const goTo = (page: number) => {
       const clamped = Math.max(1, Math.min(totalPages, page));
       onPageChange?.(clamped);
     };
 
+    const handlePerPageChange = (val: string) => {
+      const n = parseInt(val, 10);
+      if (!isNaN(n) && n > 0) onPerPageChange?.(n);
+    };
+
+    // Shared styles
+    const rowStyle: React.CSSProperties = {
+      display: 'flex', alignItems: 'center', justifyContent: justify,
+      gap: '0.5rem', padding: '1.5rem 0', flexWrap: 'wrap',
+    };
     const btnStyle: React.CSSProperties = {
       padding: '0.5rem 0.75rem', border: '1px solid #d1d5db', borderRadius: '0.5rem',
       fontSize: '0.875rem', background: '#fff', cursor: 'pointer',
@@ -74,15 +94,42 @@ export const PaginationBar: ComponentConfig<PaginationBarProps> = {
       fontSize: '0.875rem', fontWeight: 500, background: '#fff', color: '#111827',
       border: '1px solid #d1d5db', cursor: 'pointer',
     };
+    const selectStyle: React.CSSProperties = {
+      padding: '0.375rem 0.5rem', border: '1px solid #d1d5db', borderRadius: '0.375rem',
+      fontSize: '0.875rem', background: '#fff', cursor: 'pointer',
+    };
+
+    // ── Per-page selector (always shown when enabled) ──────────────────
+    const perPageSelector = showPerPageSelector && (
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginLeft: 'auto' }}>
+        <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>Show:</span>
+        <select value={perPage} onChange={(e) => handlePerPageChange(e.target.value)} style={selectStyle}>
+          {ppOptions.map((n: number) => (
+            <option key={n} value={n}>{n}</option>
+          ))}
+        </select>
+      </div>
+    );
+
+    // ── Result count text ──────────────────────────────────────────────
+    const countText = typeof totalCount === 'number' && (
+      <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>
+        {Math.min((currentPage - 1) * perPage + 1, totalCount)}–{Math.min(currentPage * perPage, totalCount)} of {totalCount}
+      </span>
+    );
 
     // "load-more" style
     if (style === 'load-more') {
-      if (currentPage >= totalPages && !isEditor) return <></>;
+      const showButton = isEditor || currentPage < totalPages;
       return (
-        <div style={{ display: 'flex', justifyContent: justify, padding: '2rem 0' }}>
-          <button onClick={() => goTo(currentPage + 1)} style={{ padding: '0.75rem 1.5rem', border: '1px solid #d1d5db', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: 500, background: '#fff', cursor: 'pointer' }}>
-            Load More
-          </button>
+        <div style={rowStyle}>
+          {countText}
+          {showButton && (
+            <button onClick={() => goTo(currentPage + 1)} style={{ ...btnStyle, padding: '0.75rem 1.5rem', fontWeight: 500 }}>
+              Load More
+            </button>
+          )}
+          {perPageSelector}
         </div>
       );
     }
@@ -90,14 +137,12 @@ export const PaginationBar: ComponentConfig<PaginationBarProps> = {
     // "simple" style (prev/next only)
     if (style === 'simple') {
       return (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: justify, padding: '1.5rem 0' }}>
-          <button onClick={() => goTo(currentPage - 1)} disabled={currentPage === 1} style={{ ...btnStyle, opacity: currentPage === 1 ? 0.4 : 1 }}>
-            ← Previous
-          </button>
+        <div style={rowStyle}>
+          {countText}
+          <button onClick={() => goTo(currentPage - 1)} disabled={currentPage === 1} style={{ ...btnStyle, opacity: currentPage === 1 ? 0.4 : 1 }}>←</button>
           <span style={{ fontSize: '0.875rem', color: '#4b5563' }}>Page {currentPage} of {totalPages}</span>
-          <button onClick={() => goTo(currentPage + 1)} disabled={currentPage === totalPages} style={{ ...btnStyle, opacity: currentPage === totalPages ? 0.4 : 1 }}>
-            Next →
-          </button>
+          <button onClick={() => goTo(currentPage + 1)} disabled={currentPage === totalPages} style={{ ...btnStyle, opacity: currentPage === totalPages ? 0.4 : 1 }}>→</button>
+          {perPageSelector}
         </div>
       );
     }
@@ -106,36 +151,29 @@ export const PaginationBar: ComponentConfig<PaginationBarProps> = {
     const max = Math.min(maxPageNumbers, totalPages);
     let startPage = Math.max(1, currentPage - Math.floor(max / 2));
     let endPage = startPage + max - 1;
-    if (endPage > totalPages) {
-      endPage = totalPages;
-      startPage = Math.max(1, endPage - max + 1);
-    }
+    if (endPage > totalPages) { endPage = totalPages; startPage = Math.max(1, endPage - max + 1); }
     const pages: (number | '...')[] = [];
     if (startPage > 1) { pages.push(1); if (startPage > 2) pages.push('...'); }
     for (let i = startPage; i <= endPage; i++) pages.push(i);
     if (endPage < totalPages) { if (endPage < totalPages - 1) pages.push('...'); pages.push(totalPages); }
 
     return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', justifyContent: justify, padding: '1.5rem 0' }}>
-        <button onClick={() => goTo(currentPage - 1)} disabled={currentPage === 1} style={{ ...btnStyle, opacity: currentPage === 1 ? 0.4 : 1 }}>
-          ←
-        </button>
-        {pages.map((p, i) =>
-          p === '...' ? (
-            <span key={`ellipsis-${i}`} style={{ padding: '0 0.5rem', color: '#9ca3af' }}>…</span>
-          ) : (
-            <button
-              key={p}
-              onClick={() => goTo(p)}
-              style={p === currentPage ? activeBtnStyle : inactiveBtnStyle}
-            >
-              {p}
-            </button>
-          )
-        )}
-        <button onClick={() => goTo(currentPage + 1)} disabled={currentPage === totalPages} style={{ ...btnStyle, opacity: currentPage === totalPages ? 0.4 : 1 }}>
-          →
-        </button>
+      <div style={rowStyle}>
+        {countText}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+          <button onClick={() => goTo(currentPage - 1)} disabled={currentPage === 1} style={{ ...btnStyle, opacity: currentPage === 1 ? 0.4 : 1 }}>←</button>
+          {pages.map((p, i) =>
+            p === '...' ? (
+              <span key={`ellipsis-${i}`} style={{ padding: '0 0.5rem', color: '#9ca3af' }}>…</span>
+            ) : (
+              <button key={p} onClick={() => goTo(p)} style={p === currentPage ? activeBtnStyle : inactiveBtnStyle}>
+                {p}
+              </button>
+            )
+          )}
+          <button onClick={() => goTo(currentPage + 1)} disabled={currentPage === totalPages} style={{ ...btnStyle, opacity: currentPage === totalPages ? 0.4 : 1 }}>→</button>
+        </div>
+        {perPageSelector}
       </div>
     );
   },

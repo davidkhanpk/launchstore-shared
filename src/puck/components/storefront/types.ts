@@ -95,7 +95,14 @@ export interface PaginationBarProps {
   style: PaginationStyle;
   alignment: 'left' | 'center' | 'right';
   maxPageNumbers?: number;
+  /** Current products-per-page value. */
+  perPage?: number;
+  /** Available per-page options shown in the dropdown. */
+  perPageOptions?: number[];
+  /** Whether to show the per-page selector dropdown. */
+  showPerPageSelector?: boolean;
   onPageChange?: (page: number) => void;
+  onPerPageChange?: (perPage: number) => void;
 }
 
 // ── ProductGrid Props (simplified — pure presentation) ─────────────────────

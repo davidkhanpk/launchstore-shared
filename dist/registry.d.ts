@@ -36,7 +36,7 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-08-11T07:17:16.101Z",
+  "generatedAt": "2026-08-11T10:28:54.375Z",
   "total": 138,
   "entries": [
     {
@@ -18146,6 +18146,15 @@ export const registry: CompiledRegistry = {
         },
         "maxPageNumbers": {
           "type": "number"
+        },
+        "showPerPageSelector": {
+          "type": "boolean"
+        },
+        "perPageOptions": {
+          "type": "array"
+        },
+        "perPage": {
+          "type": "number"
         }
       },
       "jsonSchema": {
@@ -18163,6 +18172,15 @@ export const registry: CompiledRegistry = {
         },
         "maxPageNumbers": {
           "type": "number"
+        },
+        "showPerPageSelector": {
+          "type": "boolean"
+        },
+        "perPageOptions": {
+          "type": "array"
+        },
+        "perPage": {
+          "type": "number"
         }
       },
       "defaultProps": {
@@ -18170,7 +18188,14 @@ export const registry: CompiledRegistry = {
         "totalPages": 5,
         "style": "numbered",
         "alignment": "center",
-        "maxPageNumbers": 7
+        "maxPageNumbers": 7,
+        "showPerPageSelector": true,
+        "perPageOptions": [
+          12,
+          24,
+          48
+        ],
+        "perPage": 12
       },
       "isContainer": false,
       "zones": [],
@@ -37907,6 +37932,15 @@ export const registry: CompiledRegistry = {
           },
           "maxPageNumbers": {
             "type": "number"
+          },
+          "showPerPageSelector": {
+            "type": "boolean"
+          },
+          "perPageOptions": {
+            "type": "array"
+          },
+          "perPage": {
+            "type": "number"
           }
         },
         "jsonSchema": {
@@ -37924,6 +37958,15 @@ export const registry: CompiledRegistry = {
           },
           "maxPageNumbers": {
             "type": "number"
+          },
+          "showPerPageSelector": {
+            "type": "boolean"
+          },
+          "perPageOptions": {
+            "type": "array"
+          },
+          "perPage": {
+            "type": "number"
           }
         },
         "defaultProps": {
@@ -37931,7 +37974,14 @@ export const registry: CompiledRegistry = {
           "totalPages": 5,
           "style": "numbered",
           "alignment": "center",
-          "maxPageNumbers": 7
+          "maxPageNumbers": 7,
+          "showPerPageSelector": true,
+          "perPageOptions": [
+            12,
+            24,
+            48
+          ],
+          "perPage": 12
         },
         "isContainer": false,
         "zones": [],
@@ -65742,6 +65792,15 @@ export const registry: CompiledRegistry = {
           },
           "maxPageNumbers": {
             "type": "number"
+          },
+          "showPerPageSelector": {
+            "type": "boolean"
+          },
+          "perPageOptions": {
+            "type": "array"
+          },
+          "perPage": {
+            "type": "number"
           }
         },
         "jsonSchema": {
@@ -65759,6 +65818,15 @@ export const registry: CompiledRegistry = {
           },
           "maxPageNumbers": {
             "type": "number"
+          },
+          "showPerPageSelector": {
+            "type": "boolean"
+          },
+          "perPageOptions": {
+            "type": "array"
+          },
+          "perPage": {
+            "type": "number"
           }
         },
         "defaultProps": {
@@ -65766,7 +65834,14 @@ export const registry: CompiledRegistry = {
           "totalPages": 5,
           "style": "numbered",
           "alignment": "center",
-          "maxPageNumbers": 7
+          "maxPageNumbers": 7,
+          "showPerPageSelector": true,
+          "perPageOptions": [
+            12,
+            24,
+            48
+          ],
+          "perPage": 12
         },
         "isContainer": false,
         "zones": [],
@@ -108367,6 +108442,15 @@ export const registry: CompiledRegistry = {
           },
           "maxPageNumbers": {
             "type": "number"
+          },
+          "showPerPageSelector": {
+            "type": "boolean"
+          },
+          "perPageOptions": {
+            "type": "array"
+          },
+          "perPage": {
+            "type": "number"
           }
         },
         "jsonSchema": {
@@ -108384,6 +108468,15 @@ export const registry: CompiledRegistry = {
           },
           "maxPageNumbers": {
             "type": "number"
+          },
+          "showPerPageSelector": {
+            "type": "boolean"
+          },
+          "perPageOptions": {
+            "type": "array"
+          },
+          "perPage": {
+            "type": "number"
           }
         },
         "defaultProps": {
@@ -108391,7 +108484,14 @@ export const registry: CompiledRegistry = {
           "totalPages": 5,
           "style": "numbered",
           "alignment": "center",
-          "maxPageNumbers": 7
+          "maxPageNumbers": 7,
+          "showPerPageSelector": true,
+          "perPageOptions": [
+            12,
+            24,
+            48
+          ],
+          "perPage": 12
         },
         "isContainer": false,
         "zones": [],

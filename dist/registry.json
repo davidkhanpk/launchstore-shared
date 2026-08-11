@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-08-11T07:17:16.101Z",
+  "generatedAt": "2026-08-11T10:28:54.375Z",
   "total": 138,
   "entries": [
     {
@@ -18110,6 +18110,15 @@
         },
         "maxPageNumbers": {
           "type": "number"
+        },
+        "showPerPageSelector": {
+          "type": "boolean"
+        },
+        "perPageOptions": {
+          "type": "array"
+        },
+        "perPage": {
+          "type": "number"
         }
       },
       "jsonSchema": {
@@ -18127,6 +18136,15 @@
         },
         "maxPageNumbers": {
           "type": "number"
+        },
+        "showPerPageSelector": {
+          "type": "boolean"
+        },
+        "perPageOptions": {
+          "type": "array"
+        },
+        "perPage": {
+          "type": "number"
         }
       },
       "defaultProps": {
@@ -18134,7 +18152,14 @@
         "totalPages": 5,
         "style": "numbered",
         "alignment": "center",
-        "maxPageNumbers": 7
+        "maxPageNumbers": 7,
+        "showPerPageSelector": true,
+        "perPageOptions": [
+          12,
+          24,
+          48
+        ],
+        "perPage": 12
       },
       "isContainer": false,
       "zones": [],
@@ -37871,6 +37896,15 @@
           },
           "maxPageNumbers": {
             "type": "number"
+          },
+          "showPerPageSelector": {
+            "type": "boolean"
+          },
+          "perPageOptions": {
+            "type": "array"
+          },
+          "perPage": {
+            "type": "number"
           }
         },
         "jsonSchema": {
@@ -37888,6 +37922,15 @@
           },
           "maxPageNumbers": {
             "type": "number"
+          },
+          "showPerPageSelector": {
+            "type": "boolean"
+          },
+          "perPageOptions": {
+            "type": "array"
+          },
+          "perPage": {
+            "type": "number"
           }
         },
         "defaultProps": {
@@ -37895,7 +37938,14 @@
           "totalPages": 5,
           "style": "numbered",
           "alignment": "center",
-          "maxPageNumbers": 7
+          "maxPageNumbers": 7,
+          "showPerPageSelector": true,
+          "perPageOptions": [
+            12,
+            24,
+            48
+          ],
+          "perPage": 12
         },
         "isContainer": false,
         "zones": [],
@@ -65706,6 +65756,15 @@
           },
           "maxPageNumbers": {
             "type": "number"
+          },
+          "showPerPageSelector": {
+            "type": "boolean"
+          },
+          "perPageOptions": {
+            "type": "array"
+          },
+          "perPage": {
+            "type": "number"
           }
         },
         "jsonSchema": {
@@ -65723,6 +65782,15 @@
           },
           "maxPageNumbers": {
             "type": "number"
+          },
+          "showPerPageSelector": {
+            "type": "boolean"
+          },
+          "perPageOptions": {
+            "type": "array"
+          },
+          "perPage": {
+            "type": "number"
           }
         },
         "defaultProps": {
@@ -65730,7 +65798,14 @@
           "totalPages": 5,
           "style": "numbered",
           "alignment": "center",
-          "maxPageNumbers": 7
+          "maxPageNumbers": 7,
+          "showPerPageSelector": true,
+          "perPageOptions": [
+            12,
+            24,
+            48
+          ],
+          "perPage": 12
         },
         "isContainer": false,
         "zones": [],
@@ -108331,6 +108406,15 @@
           },
           "maxPageNumbers": {
             "type": "number"
+          },
+          "showPerPageSelector": {
+            "type": "boolean"
+          },
+          "perPageOptions": {
+            "type": "array"
+          },
+          "perPage": {
+            "type": "number"
           }
         },
         "jsonSchema": {
@@ -108348,6 +108432,15 @@
           },
           "maxPageNumbers": {
             "type": "number"
+          },
+          "showPerPageSelector": {
+            "type": "boolean"
+          },
+          "perPageOptions": {
+            "type": "array"
+          },
+          "perPage": {
+            "type": "number"
           }
         },
         "defaultProps": {
@@ -108355,7 +108448,14 @@
           "totalPages": 5,
           "style": "numbered",
           "alignment": "center",
-          "maxPageNumbers": 7
+          "maxPageNumbers": 7,
+          "showPerPageSelector": true,
+          "perPageOptions": [
+            12,
+            24,
+            48
+          ],
+          "perPage": 12
         },
         "isContainer": false,
         "zones": [],

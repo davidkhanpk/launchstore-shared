@@ -17,6 +17,15 @@ const ICON_EMOJI: Record<string, string> = {
   support: '🎧',
 };
 
+// Static lookup for responsive column classes so Tailwind can see them
+// at build time (dynamic `md:grid-cols-${n}` template literals are purged).
+const COLS: Record<string, string> = {
+  '2': 'md:grid-cols-2',
+  '3': 'md:grid-cols-3',
+  '4': 'md:grid-cols-4',
+  '5': 'md:grid-cols-5',
+};
+
 const SPACING_CLASSES: Record<TrustBadgesProps['spacing'], string> = {
   compact: 'py-4 px-4',
   normal: 'py-8 px-6',
@@ -71,9 +80,9 @@ export const TrustBadges: ComponentConfig<TrustBadgesProps> = {
         <div
           className={`grid gap-6 ${
             layout === 'horizontal'
-              ? `grid-cols-1 md:grid-cols-${columns}`
+              ? `grid-cols-1 ${COLS[columns as string] || COLS['4']}`
               : layout === 'grid'
-              ? `grid-cols-2 md:grid-cols-${columns}`
+              ? `grid-cols-2 ${COLS[columns as string] || COLS['4']}`
               : 'grid-cols-1 max-w-md mx-auto'
           }`}
         >

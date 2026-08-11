@@ -12,6 +12,14 @@ const ICON_EMOJI = {
     globe: '🌍', lightning: '⚡', shield: '🛡️', refresh: '🔄',
     support: '🎧',
 };
+// Static lookup for responsive column classes so Tailwind can see them
+// at build time (dynamic `md:grid-cols-${n}` template literals are purged).
+const COLS = {
+    '2': 'md:grid-cols-2',
+    '3': 'md:grid-cols-3',
+    '4': 'md:grid-cols-4',
+    '5': 'md:grid-cols-5',
+};
 const SPACING_CLASSES = {
     compact: 'py-4 px-4',
     normal: 'py-8 px-6',
@@ -45,9 +53,9 @@ export const TrustBadges = {
         borderRadius: 'none',
     },
     render: ({ title, subtitle, layout, columns, alignment, badges, backgroundColor, textColor, spacing, showBorder, borderRadius, }) => (_jsx("div", { style: { backgroundColor }, className: `w-full ${SPACING_CLASSES[spacing] || 'py-8 px-6'} ${showBorder ? 'border-t border-b border-gray-200' : ''}`, children: _jsxs("div", { className: "max-w-7xl mx-auto px-4", children: [(title || subtitle) && (_jsxs("div", { className: `mb-8 ${ALIGNMENT_CLASSES[alignment] || 'text-center'}`, children: [title && _jsx("h2", { className: "text-2xl font-bold mb-2", style: { color: textColor }, children: title }), subtitle && _jsx("p", { className: "text-base opacity-75", style: { color: textColor }, children: subtitle })] })), _jsx("div", { className: `grid gap-6 ${layout === 'horizontal'
-                        ? `grid-cols-1 md:grid-cols-${columns}`
+                        ? `grid-cols-1 ${COLS[columns] || COLS['4']}`
                         : layout === 'grid'
-                            ? `grid-cols-2 md:grid-cols-${columns}`
+                            ? `grid-cols-2 ${COLS[columns] || COLS['4']}`
                             : 'grid-cols-1 max-w-md mx-auto'}`, children: (badges || []).map((badge) => (_jsxs("div", { className: `flex ${layout === 'stacked' ? 'flex-row items-center' : 'flex-col items-center'} ${ALIGNMENT_CLASSES[alignment] || 'text-center'} ${RADIUS_CLASSES[borderRadius] || 'rounded-none'} p-4 transition-transform hover:scale-105`, children: [_jsx("div", { className: `text-4xl ${layout === 'stacked' ? 'mr-4' : 'mb-3'}`, style: { color: badge.iconColor }, children: ICON_EMOJI[badge.icon] || '✓' }), _jsxs("div", { className: layout === 'stacked' ? 'flex-1' : '', children: [_jsx("h3", { className: "font-semibold text-base mb-1", style: { color: textColor }, children: badge.title }), _jsx("p", { className: "text-sm opacity-75", style: { color: textColor }, children: badge.description })] })] }, badge.id))) })] }) })),
 };
 export default TrustBadges;

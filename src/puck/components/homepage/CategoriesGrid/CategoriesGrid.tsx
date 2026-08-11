@@ -52,7 +52,7 @@ export const CategoriesGrid: ComponentConfig<CategoriesGridProps> = {
   },
   render: ({
     sectionTitle, sectionSubtitle, showTitle,
-    columns, gap,
+    columns, columnsTablet, columnsMobile, gap,
     showCategoryImage, showCategoryName, showProductCount, imageAspectRatio,
     backgroundColor, textColor, cardStyle, borderRadius, hoverEffect,
     categorySource, selectedCategoryIds,
@@ -78,10 +78,24 @@ export const CategoriesGrid: ComponentConfig<CategoriesGridProps> = {
       </div>
     ) : null;
 
+    // Responsive grid: uses columnsMobile on phones, columnsTablet on tablets,
+    // columns on desktop. Implemented via inline CSS media queries so it
+    // works regardless of the consumer's Tailwind breakpoint config.
+    const mobileCols = columnsMobile || 2;
+    const tabletCols = columnsTablet || 3;
+    const desktopCols = columns || 4;
+    const gridId = `catgrid-${desktopCols}-${tabletCols}-${mobileCols}`;
     const gridStyle: React.CSSProperties = {
-      gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+      display: 'grid',
+      gridTemplateColumns: `repeat(${mobileCols}, minmax(0, 1fr))`,
       gap: `${gap}px`,
     };
+    const responsiveStyle = (
+      <style>{`
+        @media (min-width: 768px) { .${gridId} { grid-template-columns: repeat(${tabletCols}, minmax(0, 1fr)) !important; } }
+        @media (min-width: 1024px) { .${gridId} { grid-template-columns: repeat(${desktopCols}, minmax(0, 1fr)) !important; } }
+      `}</style>
+    );
 
     if (errMsg) {
       return (
@@ -99,7 +113,7 @@ export const CategoriesGrid: ComponentConfig<CategoriesGridProps> = {
         <div className="categories-grid-section py-16" style={sectionStyle}>
           <div className="container mx-auto px-4">
             {Header}
-            <div className="grid" style={gridStyle}>
+            <div className={`grid ${gridId}`} style={gridStyle}>
               {[...Array(columns * 2)].map((_, i) => (
                 <div key={i} className="bg-gray-200 animate-pulse h-64 rounded-lg" />
               ))}
@@ -122,9 +136,10 @@ export const CategoriesGrid: ComponentConfig<CategoriesGridProps> = {
 
     return (
       <div className="categories-grid-section py-16" style={sectionStyle}>
+        {responsiveStyle}
         <div className="container mx-auto px-4">
           {Header}
-          <div className="grid" style={gridStyle}>
+          <div className={`grid ${gridId}`} style={gridStyle}>
             {visible.map((category) => {
               // Inline SVG placeholder — no external dependency, never breaks.
               // Shows the category initial on a gray background.

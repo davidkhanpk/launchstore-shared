@@ -3,7 +3,7 @@ import type { ComponentConfig } from '@puckeditor/core';
 import type { PaginationBarProps } from './types';
 
 const ALIGN: Record<string, string> = {
-  left: 'justify-start', center: 'justify-center', right: 'justify-end',
+  left: 'flex-start', center: 'center', right: 'flex-end',
 };
 
 const paginationBarFields = {
@@ -31,7 +31,7 @@ export const PaginationBar: ComponentConfig<PaginationBarProps> = {
   fields: paginationBarFields as ComponentConfig<PaginationBarProps>['fields'],
   defaultProps: {
     currentPage: 1,
-    totalPages: 1,
+    totalPages: 5,
     style: 'numbered',
     alignment: 'center',
     maxPageNumbers: 7,
@@ -39,30 +39,48 @@ export const PaginationBar: ComponentConfig<PaginationBarProps> = {
   render: (rawProps: any) => {
     const {
       currentPage = 1,
-      totalPages = 1,
+      totalPages = 5,
       style = 'numbered',
       alignment = 'center',
       maxPageNumbers = 7,
       onPageChange,
     } = rawProps as PaginationBarProps;
 
-    if (totalPages <= 1) return <></>;
+    // Debug logging
+    console.log('[PaginationBar]', { currentPage, totalPages, style, alignment, hasOnPageChange: !!onPageChange });
 
-    const alignClass = ALIGN[alignment] || ALIGN.center;
+    // In the editor (no onPageChange), always show a preview so the designer
+    // can see the component. On the storefront, hide when only 1 page.
+    const isEditor = !onPageChange;
+    if (totalPages <= 1 && !isEditor) return <></>;
+
+    const justify = ALIGN[alignment] || ALIGN.center;
     const goTo = (page: number) => {
       const clamped = Math.max(1, Math.min(totalPages, page));
       onPageChange?.(clamped);
     };
 
+    const btnStyle: React.CSSProperties = {
+      padding: '0.5rem 0.75rem', border: '1px solid #d1d5db', borderRadius: '0.5rem',
+      fontSize: '0.875rem', background: '#fff', cursor: 'pointer',
+    };
+    const activeBtnStyle: React.CSSProperties = {
+      minWidth: '36px', padding: '0.5rem 0.75rem', borderRadius: '0.5rem',
+      fontSize: '0.875rem', fontWeight: 500, background: '#111827', color: '#fff',
+      border: 'none', cursor: 'pointer',
+    };
+    const inactiveBtnStyle: React.CSSProperties = {
+      minWidth: '36px', padding: '0.5rem 0.75rem', borderRadius: '0.5rem',
+      fontSize: '0.875rem', fontWeight: 500, background: '#fff', color: '#111827',
+      border: '1px solid #d1d5db', cursor: 'pointer',
+    };
+
     // "load-more" style
     if (style === 'load-more') {
-      if (currentPage >= totalPages) return <></>;
+      if (currentPage >= totalPages && !isEditor) return <></>;
       return (
-        <div className={`flex ${alignClass} py-8`}>
-          <button
-            onClick={() => goTo(currentPage + 1)}
-            className="px-6 py-3 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
-          >
+        <div style={{ display: 'flex', justifyContent: justify, padding: '2rem 0' }}>
+          <button onClick={() => goTo(currentPage + 1)} style={{ padding: '0.75rem 1.5rem', border: '1px solid #d1d5db', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: 500, background: '#fff', cursor: 'pointer' }}>
             Load More
           </button>
         </div>
@@ -72,20 +90,12 @@ export const PaginationBar: ComponentConfig<PaginationBarProps> = {
     // "simple" style (prev/next only)
     if (style === 'simple') {
       return (
-        <div className={`flex items-center gap-3 py-6 ${alignClass}`}>
-          <button
-            onClick={() => goTo(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="px-4 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-40 hover:bg-gray-50"
-          >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', justifyContent: justify, padding: '1.5rem 0' }}>
+          <button onClick={() => goTo(currentPage - 1)} disabled={currentPage === 1} style={{ ...btnStyle, opacity: currentPage === 1 ? 0.4 : 1 }}>
             ← Previous
           </button>
-          <span className="text-sm text-gray-600">Page {currentPage} of {totalPages}</span>
-          <button
-            onClick={() => goTo(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className="px-4 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-40 hover:bg-gray-50"
-          >
+          <span style={{ fontSize: '0.875rem', color: '#4b5563' }}>Page {currentPage} of {totalPages}</span>
+          <button onClick={() => goTo(currentPage + 1)} disabled={currentPage === totalPages} style={{ ...btnStyle, opacity: currentPage === totalPages ? 0.4 : 1 }}>
             Next →
           </button>
         </div>
@@ -106,36 +116,24 @@ export const PaginationBar: ComponentConfig<PaginationBarProps> = {
     if (endPage < totalPages) { if (endPage < totalPages - 1) pages.push('...'); pages.push(totalPages); }
 
     return (
-      <div className={`flex items-center gap-1.5 py-6 ${alignClass}`}>
-        <button
-          onClick={() => goTo(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-40 hover:bg-gray-50"
-        >
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', justifyContent: justify, padding: '1.5rem 0' }}>
+        <button onClick={() => goTo(currentPage - 1)} disabled={currentPage === 1} style={{ ...btnStyle, opacity: currentPage === 1 ? 0.4 : 1 }}>
           ←
         </button>
         {pages.map((p, i) =>
           p === '...' ? (
-            <span key={`ellipsis-${i}`} className="px-2 text-gray-400">…</span>
+            <span key={`ellipsis-${i}`} style={{ padding: '0 0.5rem', color: '#9ca3af' }}>…</span>
           ) : (
             <button
               key={p}
               onClick={() => goTo(p)}
-              className={`min-w-[36px] px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                p === currentPage
-                  ? 'bg-gray-900 text-white'
-                  : 'border border-gray-300 hover:bg-gray-50'
-              }`}
+              style={p === currentPage ? activeBtnStyle : inactiveBtnStyle}
             >
               {p}
             </button>
           )
         )}
-        <button
-          onClick={() => goTo(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-40 hover:bg-gray-50"
-        >
+        <button onClick={() => goTo(currentPage + 1)} disabled={currentPage === totalPages} style={{ ...btnStyle, opacity: currentPage === totalPages ? 0.4 : 1 }}>
           →
         </button>
       </div>

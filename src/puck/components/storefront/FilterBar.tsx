@@ -188,18 +188,29 @@ export const FilterBar: ComponentConfig<FilterBarProps> = {
     if (layout === 'topbar') {
       return (
         <>
-          {/* Desktop topbar */}
-          <div className="hidden md:flex items-center justify-between gap-4 py-4 border-b border-gray-200">
-            <div className="flex items-center gap-4">
+          {/* Desktop topbar — shown via inline media query (NOT Tailwind md:) */}
+          <div
+            className="filterbar-desktop"
+            style={{
+              display: 'none',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '1rem',
+              padding: '1rem 0',
+              borderBottom: '1px solid #e5e7eb',
+            }}
+          >
+            <style>{`@media (min-width: 768px) { .filterbar-desktop { display: flex !important; } .filterbar-mobile { display: none !important; } }`}</style>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               {props.showCount && typeof props.totalCount === 'number' && (
-                <span className="text-sm text-gray-500">{props.totalCount} products</span>
+                <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>{props.totalCount} products</span>
               )}
               {props.showFilters && (props.filterGroups || []).map((group) => (
                 <select
                   key={group.name}
                   defaultValue=""
                   onChange={(e) => e.target.value && onFilterChange(group.name, e.target.value)}
-                  className="px-3 py-1.5 border border-gray-300 rounded-lg text-sm bg-white"
+                  style={{ padding: '0.375rem 0.75rem', border: '1px solid #d1d5db', borderRadius: '0.5rem', fontSize: '0.875rem', background: '#fff' }}
                 >
                   <option value="">{group.label || group.name}</option>
                   {group.values?.map((v: any) => (
@@ -207,13 +218,13 @@ export const FilterBar: ComponentConfig<FilterBarProps> = {
                   ))}
                 </select>
               ))}
-              {props.showClearAll && <button onClick={onClearAll} className="text-sm text-gray-500 hover:text-gray-900">Clear</button>}
+              {props.showClearAll && <button onClick={onClearAll} style={{ fontSize: '0.875rem', color: '#6b7280', background: 'none', border: 'none', cursor: 'pointer' }}>Clear</button>}
             </div>
             {props.showSort && (
               <select
                 value={props.currentSort || 'created_desc'}
                 onChange={(e) => onSortChange(e.target.value)}
-                className="px-3 py-1.5 border border-gray-300 rounded-lg text-sm bg-white"
+                style={{ padding: '0.375rem 0.75rem', border: '1px solid #d1d5db', borderRadius: '0.5rem', fontSize: '0.875rem', background: '#fff' }}
               >
                 {SORT_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -223,12 +234,12 @@ export const FilterBar: ComponentConfig<FilterBarProps> = {
           </div>
 
           {/* Mobile — sort inline + Filters button → drawer */}
-          <div className="flex md:hidden items-center justify-between gap-4 py-3">
+          <div className="filterbar-mobile" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', padding: '0.75rem 0' }}>
             {props.showSort && (
               <select
                 value={props.currentSort || 'created_desc'}
                 onChange={(e) => onSortChange(e.target.value)}
-                className="px-3 py-1.5 border border-gray-300 rounded-lg text-sm bg-white flex-1"
+                style={{ padding: '0.375rem 0.75rem', border: '1px solid #d1d5db', borderRadius: '0.5rem', fontSize: '0.875rem', background: '#fff', flex: 1 }}
               >
                 {SORT_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -238,7 +249,7 @@ export const FilterBar: ComponentConfig<FilterBarProps> = {
             {props.showFilters && (
               <button
                 onClick={() => setMobileOpen(true)}
-                className="px-4 py-1.5 border border-gray-300 rounded-lg text-sm font-medium flex items-center gap-2"
+                style={{ padding: '0.375rem 1rem', border: '1px solid #d1d5db', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: 500, background: '#fff', cursor: 'pointer' }}
               >
                 Filters
               </button>
@@ -262,8 +273,9 @@ export const FilterBar: ComponentConfig<FilterBarProps> = {
     return (
       <>
         {/* Desktop sidebar */}
-        <div className="hidden md:block w-64 flex-shrink-0">
-          <div className="sticky top-4">
+        <div className="filterbar-desktop" style={{ display: 'none' }}>
+          <style>{`@media (min-width: 768px) { .filterbar-desktop { display: block !important; width: 16rem; flex-shrink: 0; } .filterbar-mobile { display: none !important; } }`}</style>
+          <div style={{ position: 'sticky', top: '1rem' }}>
             <FilterContent
               props={props}
               onSortChange={onSortChange}
@@ -274,12 +286,12 @@ export const FilterBar: ComponentConfig<FilterBarProps> = {
         </div>
 
         {/* Mobile — sort + Filters button */}
-        <div className="flex md:hidden items-center justify-between gap-4 py-3">
+        <div className="filterbar-mobile" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', padding: '0.75rem 0' }}>
           {props.showSort && (
             <select
               value={props.currentSort || 'created_desc'}
               onChange={(e) => onSortChange(e.target.value)}
-              className="px-3 py-1.5 border border-gray-300 rounded-lg text-sm bg-white flex-1"
+              style={{ padding: '0.375rem 0.75rem', border: '1px solid #d1d5db', borderRadius: '0.5rem', fontSize: '0.875rem', background: '#fff', flex: 1 }}
             >
               {SORT_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -289,7 +301,7 @@ export const FilterBar: ComponentConfig<FilterBarProps> = {
           {props.showFilters && (
             <button
               onClick={() => setMobileOpen(true)}
-              className="px-4 py-1.5 border border-gray-300 rounded-lg text-sm font-medium"
+              style={{ padding: '0.375rem 1rem', border: '1px solid #d1d5db', borderRadius: '0.5rem', fontSize: '0.875rem', fontWeight: 500, background: '#fff', cursor: 'pointer' }}
             >
               Filters
             </button>

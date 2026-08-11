@@ -36,7 +36,7 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-08-10T18:17:57.542Z",
+  "generatedAt": "2026-08-11T07:17:16.101Z",
   "total": 138,
   "entries": [
     {
@@ -18167,7 +18167,7 @@ export const registry: CompiledRegistry = {
       },
       "defaultProps": {
         "currentPage": 1,
-        "totalPages": 1,
+        "totalPages": 5,
         "style": "numbered",
         "alignment": "center",
         "maxPageNumbers": 7
@@ -37928,7 +37928,7 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "currentPage": 1,
-          "totalPages": 1,
+          "totalPages": 5,
           "style": "numbered",
           "alignment": "center",
           "maxPageNumbers": 7
@@ -65763,7 +65763,7 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "currentPage": 1,
-          "totalPages": 1,
+          "totalPages": 5,
           "style": "numbered",
           "alignment": "center",
           "maxPageNumbers": 7
@@ -108388,7 +108388,7 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "currentPage": 1,
-          "totalPages": 1,
+          "totalPages": 5,
           "style": "numbered",
           "alignment": "center",
           "maxPageNumbers": 7

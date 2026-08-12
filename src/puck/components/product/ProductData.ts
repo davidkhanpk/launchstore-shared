@@ -33,6 +33,8 @@ export interface ProductDataVariant {
   inventory_quantity?: number | null;
   /** When true, variant is sold by enabling pre-order even if quantity=0. */
   allow_backorder?: boolean;
+  /** When false, Medusa does NOT track inventory → always in stock. */
+  manage_inventory?: boolean | null;
   options?: ProductDataVariantOption[];
 }
 

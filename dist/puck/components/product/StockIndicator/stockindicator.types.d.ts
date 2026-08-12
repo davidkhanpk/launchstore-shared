@@ -17,5 +17,11 @@ export interface StockIndicatorResolved {
     quantity: number;
     isPreOrder: boolean;
 }
-export declare const evaluateStock: (product: ProductData | null | undefined, threshold: number) => StockIndicatorResolved;
+/**
+ * Evaluate stock status for a product.
+ *
+ * Evaluates the SELECTED variant if provided, else the first variant
+ * (matching the AddToCart wrapper's behavior). No longer sums all variants.
+ */
+export declare const evaluateStock: (product: ProductData | null | undefined, threshold: number, selectedVariantId?: string) => StockIndicatorResolved;
 //# sourceMappingURL=stockindicator.types.d.ts.map

@@ -36,8 +36,8 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-08-11T17:27:48.511Z",
-  "total": 138,
+  "generatedAt": "2026-08-12T09:43:23.294Z",
+  "total": 139,
   "entries": [
     {
       "name": "AccountContent",
@@ -9206,6 +9206,180 @@ export const registry: CompiledRegistry = {
       "isContainer": false,
       "zones": [],
       "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
+    },
+    {
+      "name": "CollectionsGrid",
+      "label": "Collections Grid",
+      "description": "Collections Grid component (auto-derived).",
+      "category": "homepage",
+      "intent": [
+        "collections",
+        "grid"
+      ],
+      "dataDeps": [],
+      "copyFields": [],
+      "themeable": [],
+      "a11yRisk": "low",
+      "searchTags": [
+        "collections",
+        "grid"
+      ],
+      "propSchema": {
+        "sectionTitle": {
+          "type": "string"
+        },
+        "sectionSubtitle": {
+          "type": "string"
+        },
+        "showTitle": {
+          "type": "boolean"
+        },
+        "columns": {
+          "type": "number"
+        },
+        "columnsTablet": {
+          "type": "number"
+        },
+        "columnsMobile": {
+          "type": "number"
+        },
+        "gap": {
+          "type": "number"
+        },
+        "showCollectionImage": {
+          "type": "boolean"
+        },
+        "showCollectionTitle": {
+          "type": "boolean"
+        },
+        "showProductCount": {
+          "type": "boolean"
+        },
+        "showDescription": {
+          "type": "boolean"
+        },
+        "imageAspectRatio": {
+          "type": "string"
+        },
+        "backgroundColor": {
+          "type": "color"
+        },
+        "textColor": {
+          "type": "color"
+        },
+        "cardStyle": {
+          "type": "string"
+        },
+        "borderRadius": {
+          "type": "string"
+        },
+        "hoverEffect": {
+          "type": "string"
+        },
+        "collectionSource": {
+          "type": "string"
+        },
+        "selectedCollectionIds": {
+          "type": "array"
+        },
+        "loading": {
+          "type": "boolean"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "jsonSchema": {
+        "sectionTitle": {
+          "type": "string"
+        },
+        "sectionSubtitle": {
+          "type": "string"
+        },
+        "showTitle": {
+          "type": "boolean"
+        },
+        "columns": {
+          "type": "number"
+        },
+        "columnsTablet": {
+          "type": "number"
+        },
+        "columnsMobile": {
+          "type": "number"
+        },
+        "gap": {
+          "type": "number"
+        },
+        "showCollectionImage": {
+          "type": "boolean"
+        },
+        "showCollectionTitle": {
+          "type": "boolean"
+        },
+        "showProductCount": {
+          "type": "boolean"
+        },
+        "showDescription": {
+          "type": "boolean"
+        },
+        "imageAspectRatio": {
+          "type": "string"
+        },
+        "backgroundColor": {
+          "type": "color"
+        },
+        "textColor": {
+          "type": "color"
+        },
+        "cardStyle": {
+          "type": "string"
+        },
+        "borderRadius": {
+          "type": "string"
+        },
+        "hoverEffect": {
+          "type": "string"
+        },
+        "collectionSource": {
+          "type": "string"
+        },
+        "selectedCollectionIds": {
+          "type": "array"
+        },
+        "loading": {
+          "type": "boolean"
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "defaultProps": {
+        "sectionTitle": "Shop by Collection",
+        "sectionSubtitle": "Browse our curated collections",
+        "showTitle": true,
+        "columns": 4,
+        "columnsTablet": 3,
+        "columnsMobile": 2,
+        "gap": 24,
+        "showCollectionImage": true,
+        "showCollectionTitle": true,
+        "showProductCount": true,
+        "showDescription": false,
+        "imageAspectRatio": "square",
+        "backgroundColor": "#f9fafb",
+        "textColor": "#000000",
+        "cardStyle": "shadow",
+        "borderRadius": "lg",
+        "hoverEffect": "scale",
+        "collectionSource": "all",
+        "selectedCollectionIds": [],
+        "loading": false,
+        "error": ""
+      },
+      "isContainer": false,
+      "zones": [],
+      "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\CollectionsGrid.tsx (auto-derived)"
     },
     {
       "name": "CountdownTimer",
@@ -28980,6 +29154,180 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
+      },
+      {
+        "name": "CollectionsGrid",
+        "label": "Collections Grid",
+        "description": "Collections Grid component (auto-derived).",
+        "category": "homepage",
+        "intent": [
+          "collections",
+          "grid"
+        ],
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "searchTags": [
+          "collections",
+          "grid"
+        ],
+        "propSchema": {
+          "sectionTitle": {
+            "type": "string"
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean"
+          },
+          "columns": {
+            "type": "number"
+          },
+          "columnsTablet": {
+            "type": "number"
+          },
+          "columnsMobile": {
+            "type": "number"
+          },
+          "gap": {
+            "type": "number"
+          },
+          "showCollectionImage": {
+            "type": "boolean"
+          },
+          "showCollectionTitle": {
+            "type": "boolean"
+          },
+          "showProductCount": {
+            "type": "boolean"
+          },
+          "showDescription": {
+            "type": "boolean"
+          },
+          "imageAspectRatio": {
+            "type": "string"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "textColor": {
+            "type": "color"
+          },
+          "cardStyle": {
+            "type": "string"
+          },
+          "borderRadius": {
+            "type": "string"
+          },
+          "hoverEffect": {
+            "type": "string"
+          },
+          "collectionSource": {
+            "type": "string"
+          },
+          "selectedCollectionIds": {
+            "type": "array"
+          },
+          "loading": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "jsonSchema": {
+          "sectionTitle": {
+            "type": "string"
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean"
+          },
+          "columns": {
+            "type": "number"
+          },
+          "columnsTablet": {
+            "type": "number"
+          },
+          "columnsMobile": {
+            "type": "number"
+          },
+          "gap": {
+            "type": "number"
+          },
+          "showCollectionImage": {
+            "type": "boolean"
+          },
+          "showCollectionTitle": {
+            "type": "boolean"
+          },
+          "showProductCount": {
+            "type": "boolean"
+          },
+          "showDescription": {
+            "type": "boolean"
+          },
+          "imageAspectRatio": {
+            "type": "string"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "textColor": {
+            "type": "color"
+          },
+          "cardStyle": {
+            "type": "string"
+          },
+          "borderRadius": {
+            "type": "string"
+          },
+          "hoverEffect": {
+            "type": "string"
+          },
+          "collectionSource": {
+            "type": "string"
+          },
+          "selectedCollectionIds": {
+            "type": "array"
+          },
+          "loading": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Collection",
+          "sectionSubtitle": "Browse our curated collections",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCollectionImage": true,
+          "showCollectionTitle": true,
+          "showProductCount": true,
+          "showDescription": false,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "collectionSource": "all",
+          "selectedCollectionIds": [],
+          "loading": false,
+          "error": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\CollectionsGrid.tsx (auto-derived)"
       },
       {
         "name": "CountdownTimer",
@@ -56749,6 +57097,180 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
+      },
+      {
+        "name": "CollectionsGrid",
+        "label": "Collections Grid",
+        "description": "Collections Grid component (auto-derived).",
+        "category": "homepage",
+        "intent": [
+          "collections",
+          "grid"
+        ],
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "searchTags": [
+          "collections",
+          "grid"
+        ],
+        "propSchema": {
+          "sectionTitle": {
+            "type": "string"
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean"
+          },
+          "columns": {
+            "type": "number"
+          },
+          "columnsTablet": {
+            "type": "number"
+          },
+          "columnsMobile": {
+            "type": "number"
+          },
+          "gap": {
+            "type": "number"
+          },
+          "showCollectionImage": {
+            "type": "boolean"
+          },
+          "showCollectionTitle": {
+            "type": "boolean"
+          },
+          "showProductCount": {
+            "type": "boolean"
+          },
+          "showDescription": {
+            "type": "boolean"
+          },
+          "imageAspectRatio": {
+            "type": "string"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "textColor": {
+            "type": "color"
+          },
+          "cardStyle": {
+            "type": "string"
+          },
+          "borderRadius": {
+            "type": "string"
+          },
+          "hoverEffect": {
+            "type": "string"
+          },
+          "collectionSource": {
+            "type": "string"
+          },
+          "selectedCollectionIds": {
+            "type": "array"
+          },
+          "loading": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "jsonSchema": {
+          "sectionTitle": {
+            "type": "string"
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean"
+          },
+          "columns": {
+            "type": "number"
+          },
+          "columnsTablet": {
+            "type": "number"
+          },
+          "columnsMobile": {
+            "type": "number"
+          },
+          "gap": {
+            "type": "number"
+          },
+          "showCollectionImage": {
+            "type": "boolean"
+          },
+          "showCollectionTitle": {
+            "type": "boolean"
+          },
+          "showProductCount": {
+            "type": "boolean"
+          },
+          "showDescription": {
+            "type": "boolean"
+          },
+          "imageAspectRatio": {
+            "type": "string"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "textColor": {
+            "type": "color"
+          },
+          "cardStyle": {
+            "type": "string"
+          },
+          "borderRadius": {
+            "type": "string"
+          },
+          "hoverEffect": {
+            "type": "string"
+          },
+          "collectionSource": {
+            "type": "string"
+          },
+          "selectedCollectionIds": {
+            "type": "array"
+          },
+          "loading": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Collection",
+          "sectionSubtitle": "Browse our curated collections",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCollectionImage": true,
+          "showCollectionTitle": true,
+          "showProductCount": true,
+          "showDescription": false,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "collectionSource": "all",
+          "selectedCollectionIds": [],
+          "loading": false,
+          "error": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\CollectionsGrid.tsx (auto-derived)"
       },
       {
         "name": "FeaturedProducts",
@@ -92300,6 +92822,182 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
+      }
+    ],
+    "collections": [
+      {
+        "name": "CollectionsGrid",
+        "label": "Collections Grid",
+        "description": "Collections Grid component (auto-derived).",
+        "category": "homepage",
+        "intent": [
+          "collections",
+          "grid"
+        ],
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "searchTags": [
+          "collections",
+          "grid"
+        ],
+        "propSchema": {
+          "sectionTitle": {
+            "type": "string"
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean"
+          },
+          "columns": {
+            "type": "number"
+          },
+          "columnsTablet": {
+            "type": "number"
+          },
+          "columnsMobile": {
+            "type": "number"
+          },
+          "gap": {
+            "type": "number"
+          },
+          "showCollectionImage": {
+            "type": "boolean"
+          },
+          "showCollectionTitle": {
+            "type": "boolean"
+          },
+          "showProductCount": {
+            "type": "boolean"
+          },
+          "showDescription": {
+            "type": "boolean"
+          },
+          "imageAspectRatio": {
+            "type": "string"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "textColor": {
+            "type": "color"
+          },
+          "cardStyle": {
+            "type": "string"
+          },
+          "borderRadius": {
+            "type": "string"
+          },
+          "hoverEffect": {
+            "type": "string"
+          },
+          "collectionSource": {
+            "type": "string"
+          },
+          "selectedCollectionIds": {
+            "type": "array"
+          },
+          "loading": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "jsonSchema": {
+          "sectionTitle": {
+            "type": "string"
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean"
+          },
+          "columns": {
+            "type": "number"
+          },
+          "columnsTablet": {
+            "type": "number"
+          },
+          "columnsMobile": {
+            "type": "number"
+          },
+          "gap": {
+            "type": "number"
+          },
+          "showCollectionImage": {
+            "type": "boolean"
+          },
+          "showCollectionTitle": {
+            "type": "boolean"
+          },
+          "showProductCount": {
+            "type": "boolean"
+          },
+          "showDescription": {
+            "type": "boolean"
+          },
+          "imageAspectRatio": {
+            "type": "string"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "textColor": {
+            "type": "color"
+          },
+          "cardStyle": {
+            "type": "string"
+          },
+          "borderRadius": {
+            "type": "string"
+          },
+          "hoverEffect": {
+            "type": "string"
+          },
+          "collectionSource": {
+            "type": "string"
+          },
+          "selectedCollectionIds": {
+            "type": "array"
+          },
+          "loading": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Collection",
+          "sectionSubtitle": "Browse our curated collections",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCollectionImage": true,
+          "showCollectionTitle": true,
+          "showProductCount": true,
+          "showDescription": false,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "collectionSource": "all",
+          "selectedCollectionIds": [],
+          "loading": false,
+          "error": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\CollectionsGrid.tsx (auto-derived)"
       }
     ],
     "countdown": [

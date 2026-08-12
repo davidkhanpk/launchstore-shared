@@ -11,14 +11,18 @@ export const RichTextContent: ComponentConfig<RichTextContentProps> = {
     maxWidth: 'max-w-3xl',
     padding: 'py-12',
   },
-  render: ({ content, maxWidth, padding }) => (
-    <div className={`mx-auto px-4 sm:px-6 ${maxWidth} ${padding}`}>
-      <div
-        className="prose prose-gray prose-lg max-w-none"
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
-    </div>
-  ),
+  render: ({ content, maxWidth, padding }) => {
+    // Guard against null/undefined/object content — prevents [object Object]
+    const html = typeof content === 'string' ? content : '';
+    return (
+      <div className={`mx-auto px-4 sm:px-6 ${maxWidth} ${padding}`}>
+        <div
+          className="prose prose-gray prose-lg max-w-none"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      </div>
+    );
+  },
 };
 
 export default RichTextContent;

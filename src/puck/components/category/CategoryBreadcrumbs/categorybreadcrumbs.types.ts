@@ -14,10 +14,21 @@ export interface CategoryBreadcrumbsProps {
   separator: string;
   showHome: boolean;
   homeText: string;
-  fontSize: string;
-  textColor: string;
   activeColor: string;
   hoverColor: string;
-  marginBottom: string;
   className?: string;
+  // Shared typography
+  fontSize?: string;
+  fontWeight?: string;
+  textAlign?: string;
+  textColor?: string;
+  lineHeight?: string;
+  // Shared layout
+  marginTop?: string;
+  marginBottom?: string;
+  paddingX?: string;
+  paddingY?: string;
+  // Shared color
+  backgroundColor?: string;
+  borderRadius?: string;
 }

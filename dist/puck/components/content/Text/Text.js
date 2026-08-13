@@ -1,45 +1,64 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { textFields } from './text.fields';
-const FONT_SIZE = {
-    xs: 'text-xs', sm: 'text-sm', base: 'text-base', lg: 'text-lg', xl: 'text-xl', '2xl': 'text-2xl',
+import { createAccordionFields, sharedTypographyFields, sharedLayoutFields, buildTypographyClasses, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
+// ── Content fields (component-specific) ─────────────────────────────────────
+const contentFields = {
+    text: { type: 'textarea', label: 'Text' },
+    richText: { type: 'radio', label: 'Rich Text', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+    maxWidth: { type: 'text', label: 'Max Width (CSS value, e.g. 600px)' },
 };
-const WEIGHT = {
-    light: 'font-light', normal: 'font-normal', medium: 'font-medium', semibold: 'font-semibold', bold: 'font-bold',
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    ...contentFields,
+    ...sharedTypographyFields,
+    ...sharedLayoutFields,
 };
-const LINE_HEIGHT = {
-    tight: 'leading-tight', snug: 'leading-snug', normal: 'leading-normal', relaxed: 'leading-relaxed', loose: 'leading-loose',
-};
-const ALIGN = {
-    left: 'text-left', center: 'text-center', right: 'text-right', justify: 'text-justify',
-};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Content',
+            defaultOpen: true,
+            fieldKeys: ['text', 'richText', 'maxWidth'],
+        },
+        {
+            label: 'Typography',
+            fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
+        },
+        {
+            label: 'Layout',
+            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
+        },
+    ],
+    allFields,
+});
+// ── Component ───────────────────────────────────────────────────────────────
 export const Text = {
     label: 'Text',
-    fields: textFields,
+    fields: accordionFields,
     defaultProps: {
         text: 'Add your text content here. You can write multiple paragraphs, include line breaks, and format your content as needed.',
         richText: false,
-        fontSize: 'base',
-        fontWeight: 'normal',
-        lineHeight: 'relaxed',
-        textAlign: 'left',
-        color: '#374151',
         maxWidth: '',
-        marginTop: 0,
-        marginBottom: 16,
-        paddingX: 0,
-        paddingY: 0,
+        ...defaultTypographyProps,
+        lineHeight: 'relaxed',
+        textColor: '#374151',
+        ...defaultLayoutProps,
+        marginBottom: 'md',
     },
-    render: ({ text, richText, fontSize, fontWeight, lineHeight, textAlign, color, maxWidth, marginTop, marginBottom, paddingX, paddingY, }) => (_jsx("div", { className: `text-component ${FONT_SIZE[fontSize] || 'text-base'} ${WEIGHT[fontWeight] || 'font-normal'} ${LINE_HEIGHT[lineHeight] || 'leading-relaxed'} ${ALIGN[textAlign] || 'text-left'}`, style: {
-            color: resolveColor(color),
+    render: (rawProps) => {
+        const { text, richText, maxWidth, fontSize, fontWeight, lineHeight, textAlign, textColor, marginTop, marginBottom, paddingX, paddingY, } = rawProps;
+        const className = [
+            buildTypographyClasses(rawProps),
+            buildLayoutClasses(rawProps),
+        ].filter(Boolean).join(' ');
+        const style = {
+            color: resolveColor(textColor) || '#374151',
             maxWidth: maxWidth || undefined,
-            marginTop: marginTop != null ? `${marginTop}px` : '0px',
-            marginBottom: marginBottom != null ? `${marginBottom}px` : '16px',
-            paddingLeft: paddingX != null ? `${paddingX}px` : '0px',
-            paddingRight: paddingX != null ? `${paddingX}px` : '0px',
-            paddingTop: paddingY != null ? `${paddingY}px` : '0px',
-            paddingBottom: paddingY != null ? `${paddingY}px` : '0px',
-        }, children: richText ? (_jsx("div", { className: "prose prose-gray max-w-none", dangerouslySetInnerHTML: { __html: text.replace(/\n/g, '<br />') } })) : (_jsx("p", { className: "whitespace-pre-wrap", children: text })) })),
+        };
+        const html = typeof text === 'string' ? text.replace(/\n/g, '<br />') : '';
+        return (_jsx("div", { className: className, style: style, children: richText ? (_jsx("div", { className: "prose prose-gray max-w-none", dangerouslySetInnerHTML: { __html: html } })) : (_jsx("p", { style: { whiteSpace: 'pre-wrap' }, children: text })) }));
+    },
 };
 export default Text;
 //# sourceMappingURL=Text.js.map

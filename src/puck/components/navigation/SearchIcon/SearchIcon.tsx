@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
-import { searchIconFields } from './searchicon.fields';
 import type { SearchIconProps } from './searchicon.types';
+import {
+  createAccordionFields,
+} from '../../../design-system';
 
 const SearchIconSvg = ({ size }: { size: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -17,20 +19,56 @@ const XIconSvg = ({ size }: { size: number }) => (
   </svg>
 );
 
-const SIZE_MAP: Record<SearchIconProps['iconSize'], number> = { sm: 20, md: 24, lg: 28 };
-const STYLE: Record<SearchIconProps['style'], string> = {
+const SIZE_MAP: Record<NonNullable<SearchIconProps['iconSize']>, number> = { sm: 20, md: 24, lg: 28 };
+const STYLE: Record<NonNullable<SearchIconProps['style']>, string> = {
   minimal: 'p-2 rounded-full hover:bg-gray-100',
   outlined: 'p-2 border-2 rounded-full hover:bg-gray-100',
   filled: 'p-2 rounded-full',
 };
 
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  iconSize: {
+    type: 'select' as const, label: 'Icon Size',
+    options: [{ label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }],
+  },
+  iconColor: { type: 'text' as const, label: 'Icon Color (hex or theme token)' },
+  hoverColor: { type: 'text' as const, label: 'Hover Color (hex or theme token)' },
+  style: {
+    type: 'select' as const, label: 'Button Style',
+    options: [{ label: 'Minimal', value: 'minimal' }, { label: 'Outlined', value: 'outlined' }, { label: 'Filled', value: 'filled' }],
+  },
+  openSearchOnClick: {
+    type: 'radio' as const, label: 'Open Search Modal on Click',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Appearance',
+      defaultOpen: true,
+      fieldKeys: ['iconSize', 'style', 'iconColor', 'hoverColor'],
+    },
+    {
+      label: 'Behavior',
+      fieldKeys: ['openSearchOnClick'],
+    },
+  ],
+  allFields,
+});
+
 export const SearchIcon: ComponentConfig<SearchIconProps> = {
   label: 'Search Icon',
-  fields: searchIconFields as ComponentConfig<SearchIconProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     iconSize: 'md', iconColor: '#000000', hoverColor: '#3b82f6',
     style: 'minimal', openSearchOnClick: true,
-  },
+  } as SearchIconProps,
   render: (rawProps: any) => {
     const { iconSize, iconColor, hoverColor, style, openSearchOnClick, onSearchSubmit, onClose } = rawProps as SearchIconProps;
     const [isHovered, setIsHovered] = useState(false);
@@ -38,8 +76,8 @@ export const SearchIcon: ComponentConfig<SearchIconProps> = {
     const [query, setQuery] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const sz = SIZE_MAP[iconSize] || 24;
-    const cls = STYLE[style] || STYLE.minimal;
+    const sz = SIZE_MAP[iconSize || 'md'];
+    const cls = STYLE[style || 'minimal'];
 
     const handleClick = () => {
       if (openSearchOnClick) { setSearchOpen(true); setQuery(''); }

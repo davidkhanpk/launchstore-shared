@@ -12,10 +12,12 @@ export type IconName =
 export interface IconProps {
   id?: string;
   iconName: IconName;
-  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
-  color?: string;
-  strokeWidth: '1' | '1.5' | '2' | '2.5';
-  alignment: 'left' | 'center' | 'right';
-  marginTop?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
-  marginBottom?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  textColor?: string;
+  strokeWidth?: '1' | '1.5' | '2' | '2.5';
+  alignment?: 'left' | 'center' | 'right';
+  marginTop?: string;
+  marginBottom?: string;
+  paddingX?: string;
+  paddingY?: string;
 }

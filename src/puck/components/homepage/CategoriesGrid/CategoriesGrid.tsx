@@ -1,7 +1,110 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { categoriesGridFields } from './categoriesgrid.fields';
+import { resolveColor } from '../../../../theme/resolveColor';
 import type { CategoriesGridProps, SharedCategory } from './categoriesgrid.types';
+import {
+  createAccordionFields,
+} from '../../../design-system';
+
+// ── Flat field definitions (referenced by key inside the accordion) ─────────
+
+const categoriesGridFields = {
+  sectionTitle: { type: 'text', label: 'Section Title' },
+  sectionSubtitle: { type: 'text', label: 'Section Subtitle' },
+  showTitle: { type: 'radio', label: 'Show Section Title', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  columns: { type: 'number', label: 'Columns (Desktop)', min: 2, max: 6 },
+  columnsTablet: { type: 'number', label: 'Columns (Tablet)', min: 2, max: 4 },
+  columnsMobile: { type: 'number', label: 'Columns (Mobile)', min: 1, max: 2 },
+  gap: { type: 'number', label: 'Gap Between Items (px)', min: 0, max: 64 },
+  showCategoryImage: { type: 'radio', label: 'Show Category Image', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  showCategoryName: { type: 'radio', label: 'Show Category Name', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  showProductCount: { type: 'radio', label: 'Show Product Count', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  imageAspectRatio: {
+    type: 'select', label: 'Image Aspect Ratio',
+    options: [
+      { label: 'Square (1:1)', value: 'square' },
+      { label: 'Portrait (3:4)', value: 'portrait' },
+      { label: 'Landscape (4:3)', value: 'landscape' },
+      { label: 'Wide (16:9)', value: 'wide' },
+    ],
+  },
+  backgroundColor: { type: 'text', label: 'Background Color (hex or theme token)' },
+  textColor: { type: 'text', label: 'Text Color (hex or theme token)' },
+  cardStyle: {
+    type: 'select', label: 'Card Style',
+    options: [
+      { label: 'Minimal', value: 'minimal' },
+      { label: 'Bordered', value: 'bordered' },
+      { label: 'Shadow', value: 'shadow' },
+      { label: 'Image Overlay', value: 'overlay' },
+    ],
+  },
+  borderRadius: {
+    type: 'select', label: 'Border Radius',
+    options: [
+      { label: 'None', value: 'none' },
+      { label: 'Small', value: 'sm' },
+      { label: 'Medium', value: 'md' },
+      { label: 'Large', value: 'lg' },
+      { label: 'Extra Large', value: 'xl' },
+    ],
+  },
+  hoverEffect: {
+    type: 'select', label: 'Hover Effect',
+    options: [
+      { label: 'None', value: 'none' },
+      { label: 'Scale Up', value: 'scale' },
+      { label: 'Shadow', value: 'shadow' },
+      { label: 'Lift', value: 'lift' },
+    ],
+  },
+  categorySource: {
+    type: 'select', label: 'Category Source',
+    options: [
+      { label: 'All Categories', value: 'all' },
+      { label: 'Featured Categories', value: 'featured' },
+      { label: 'Manual Selection', value: 'manual' },
+    ],
+  },
+  // array-of-strings selector; consumers may wrap with a richer picker if desired
+  selectedCategoryIds: {
+    type: 'array',
+    label: 'Manual Category IDs (when Source = Manual)',
+    arrayFields: {
+      id: { type: 'text', label: 'Category ID' },
+    },
+    defaultItemProps: { id: '' },
+  } as any,
+} as Record<string, any>;
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Section',
+      defaultOpen: true,
+      fieldKeys: ['sectionTitle', 'sectionSubtitle', 'showTitle'],
+    },
+    {
+      label: 'Grid',
+      fieldKeys: ['columns', 'columnsTablet', 'columnsMobile', 'gap'],
+    },
+    {
+      label: 'Category Display',
+      fieldKeys: ['showCategoryImage', 'showCategoryName', 'showProductCount', 'imageAspectRatio'],
+    },
+    {
+      label: 'Styling',
+      fieldKeys: ['backgroundColor', 'textColor', 'cardStyle', 'borderRadius', 'hoverEffect'],
+    },
+    {
+      label: 'Category Source',
+      fieldKeys: ['categorySource', 'selectedCategoryIds'],
+    },
+  ],
+  allFields: categoriesGridFields,
+});
 
 const ASPECT: Record<CategoriesGridProps['imageAspectRatio'], string> = {
   square: 'aspect-square', portrait: 'aspect-[3/4]', landscape: 'aspect-[4/3]', wide: 'aspect-[16/9]',
@@ -27,7 +130,7 @@ function applyManualFilter(all: SharedCategory[], ids: string[]) {
 
 export const CategoriesGrid: ComponentConfig<CategoriesGridProps> = {
   label: 'Categories Grid',
-  fields: categoriesGridFields as ComponentConfig<CategoriesGridProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     sectionTitle: 'Shop by Category',
     sectionSubtitle: 'Browse our popular categories',
@@ -68,7 +171,7 @@ export const CategoriesGrid: ComponentConfig<CategoriesGridProps> = {
       visible = applyManualFilter(visible, selectedCategoryIds.map((x: any) => typeof x === 'string' ? x : x?.id).filter(Boolean));
     }
 
-    const sectionStyle: React.CSSProperties = { backgroundColor };
+    const sectionStyle: React.CSSProperties = { backgroundColor: resolveColor(backgroundColor) || backgroundColor };
 
     // Section header JSX (used in 3 of 4 branches)
     const Header = showTitle ? (

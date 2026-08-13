@@ -9,8 +9,12 @@ export interface ContactInfoProps {
   hours?: string;
   showIcons: boolean;
   layout: 'stacked' | 'grid';
-  textColor: string;
-  iconColor: string;
-  fontSize: 'sm' | 'base';
-  gap: 'sm' | 'md' | 'lg';
+  textColor?: string;
+  iconColor?: string;
+  fontSize?: string;
+  gap?: string;
+  marginTop?: string;
+  marginBottom?: string;
+  paddingX?: string;
+  paddingY?: string;
 }

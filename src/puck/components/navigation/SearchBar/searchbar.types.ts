@@ -1,5 +1,3 @@
-import type { Field } from '@puckeditor/core';
-
 export type SearchBarSize = 'sm' | 'md' | 'lg';
 export type SearchBarStyle = 'minimal' | 'outlined' | 'filled';
 export type SearchBarRadius = 'none' | 'sm' | 'md' | 'lg' | 'full';
@@ -18,10 +16,10 @@ export interface SearchBarProps {
   fullWidth: boolean;
   maxWidth?: string;
   borderRadius: SearchBarRadius;
-  backgroundColor: string;
-  textColor: string;
-  borderColor: string;
-  focusBorderColor: string;
+  backgroundColor?: string;
+  textColor?: string;
+  borderColor?: string;
+  focusBorderColor?: string;
   showPopularSearches: boolean;
   popularSearches?: SearchBarPopularItem[];
   /**

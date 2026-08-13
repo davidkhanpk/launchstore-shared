@@ -5,7 +5,12 @@ export interface FlexRowProps {
     wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
     fullWidth?: boolean;
     maxWidth?: string;
-    padding?: string;
+    /** Layout preset */
+    marginTop?: string;
+    marginBottom?: string;
+    paddingX?: string;
+    paddingY?: string;
+    /** Color preset */
     backgroundColor?: string;
     borderRadius?: string;
 }

@@ -1,7 +1,7 @@
 'use client';
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from 'react';
-import { countdownTimerFields } from './countdowntimer.fields';
+import { createAccordionFields } from '../../../design-system';
 const SPACING_CLASSES = {
     compact: 'py-6 px-4',
     normal: 'py-10 px-6',
@@ -29,9 +29,96 @@ function TimerUnit({ value, label, timerColor, backgroundColor, accentColor, tex
     // minimal
     return (_jsxs("div", { className: "flex flex-col items-center", children: [_jsx("div", { className: "text-3xl md:text-5xl font-bold", style: { color: timerColor }, children: String(value).padStart(2, '0') }), _jsx("div", { className: "text-xs md:text-sm mt-1 font-medium", style: { color: textColor }, children: label })] }));
 }
+// ── Content fields ──────────────────────────────────────────────────────────
+const contentFields = {
+    title: { type: 'text', label: 'Title' },
+    subtitle: { type: 'text', label: 'Subtitle' },
+    endDate: { type: 'text', label: 'End Date (ISO 8601)' },
+    timerStyle: {
+        type: 'select', label: 'Timer Style',
+        options: [
+            { label: 'Boxes', value: 'boxes' },
+            { label: 'Minimal', value: 'minimal' },
+            { label: 'Circle', value: 'circle' },
+        ],
+    },
+    showDays: {
+        type: 'radio', label: 'Show Days',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    showHours: {
+        type: 'radio', label: 'Show Hours',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    showMinutes: {
+        type: 'radio', label: 'Show Minutes',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    showSeconds: {
+        type: 'radio', label: 'Show Seconds',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    showCTA: {
+        type: 'radio', label: 'Show CTA',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    ctaText: { type: 'text', label: 'CTA Text' },
+    ctaLink: { type: 'text', label: 'CTA Link' },
+};
+// ── Layout fields ───────────────────────────────────────────────────────────
+const layoutFields = {
+    spacing: {
+        type: 'select', label: 'Spacing',
+        options: [
+            { label: 'Compact', value: 'compact' },
+            { label: 'Normal', value: 'normal' },
+            { label: 'Spacious', value: 'spacious' },
+        ],
+    },
+    mode: {
+        type: 'select', label: 'Mode',
+        options: [
+            { label: 'Live (real countdown)', value: 'live' },
+            { label: 'Preview (static, no tick)', value: 'preview' },
+        ],
+    },
+};
+// ── Color fields ────────────────────────────────────────────────────────────
+const colorFields = {
+    backgroundColor: { type: 'text', label: 'Background Color (hex or theme token)' },
+    textColor: { type: 'text', label: 'Text Color (hex or theme token)' },
+    timerColor: { type: 'text', label: 'Timer Color (hex or theme token)' },
+    accentColor: { type: 'text', label: 'Accent Color (hex or theme token)' },
+};
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    ...contentFields,
+    ...layoutFields,
+    ...colorFields,
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Content',
+            defaultOpen: true,
+            fieldKeys: ['title', 'subtitle', 'endDate', 'timerStyle', 'showDays', 'showHours', 'showMinutes', 'showSeconds', 'showCTA', 'ctaText', 'ctaLink'],
+        },
+        {
+            label: 'Layout',
+            fieldKeys: ['spacing', 'mode'],
+        },
+        {
+            label: 'Colors',
+            fieldKeys: ['backgroundColor', 'textColor', 'timerColor', 'accentColor'],
+        },
+    ],
+    allFields,
+});
+// ── Component ───────────────────────────────────────────────────────────────
 export const CountdownTimer = {
     label: 'Countdown Timer',
-    fields: countdownTimerFields,
+    fields: accordionFields,
     defaultProps: {
         title: 'Limited Time Offer',
         subtitle: 'Sale ends soon',

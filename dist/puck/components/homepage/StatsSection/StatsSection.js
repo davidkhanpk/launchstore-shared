@@ -1,13 +1,25 @@
 'use client';
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useRef } from 'react';
-import { statsSectionFields } from './statssection.fields';
+import { createAccordionFields } from '../../../design-system';
 /** Emoji icon dictionary for StatsSection icons. */
 const ICON_EMOJI = {
     people: '👥', star: '⭐', trophy: '🏆', briefcase: '💼',
     globe: '🌍', package: '📦', target: '🎯', diamond: '💎',
     rocket: '🚀', check: '✓',
 };
+const ICON_OPTIONS = [
+    { label: '👥 People', value: 'people' },
+    { label: '⭐ Star', value: 'star' },
+    { label: '🏆 Trophy', value: 'trophy' },
+    { label: '💼 Briefcase', value: 'briefcase' },
+    { label: '🌍 Globe', value: 'globe' },
+    { label: '📦 Package', value: 'package' },
+    { label: '🎯 Target', value: 'target' },
+    { label: '💎 Diamond', value: 'diamond' },
+    { label: '🚀 Rocket', value: 'rocket' },
+    { label: '✓ Check', value: 'check' },
+];
 const SPACING_CLASSES = {
     compact: 'py-6 px-4',
     normal: 'py-12 px-6',
@@ -19,9 +31,116 @@ const RADIUS_CLASSES = {
 const ALIGNMENT_CLASSES = {
     left: 'text-left', center: 'text-center', right: 'text-right',
 };
+// ── Stats array field (custom render — Puck array field) ────────────────────
+const STATS_ARRAY_FIELDS = {
+    number: { type: 'text', label: 'Number' },
+    label: { type: 'text', label: 'Label' },
+    description: { type: 'text', label: 'Description' },
+    icon: { type: 'select', label: 'Icon', options: ICON_OPTIONS },
+    iconColor: { type: 'text', label: 'Icon Color' },
+};
+/**
+ * Custom array field renderer for `stats`. Minimal list editor that covers
+ * add/remove/edit. The frontend editor may override this field with a richer
+ * widget.
+ */
+function renderStatsArray({ value, onChange }) {
+    const items = Array.isArray(value) ? value : [];
+    const update = (index, key, v) => {
+        const next = items.map((it, i) => (i === index ? { ...it, [key]: v } : it));
+        onChange(next);
+    };
+    const remove = (index) => onChange(items.filter((_, i) => i !== index));
+    const add = () => onChange([
+        ...items,
+        { id: String(Date.now()), number: '100+', label: 'New Stat', description: '', icon: 'star', iconColor: '#3b82f6' },
+    ]);
+    return (_jsxs("div", { style: { marginBottom: '12px' }, children: [_jsx("label", { style: { display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px', color: '#374151' }, children: "Stats" }), items.map((item, index) => (_jsxs("div", { style: { border: '1px solid #e5e7eb', borderRadius: '6px', padding: '8px', marginBottom: '8px' }, children: [_jsxs("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }, children: [_jsxs("span", { style: { fontSize: '12px', fontWeight: 600, color: '#6b7280' }, children: ["Stat ", index + 1] }), _jsx("button", { type: "button", onClick: () => remove(index), style: { background: 'none', border: 'none', color: '#dc2626', cursor: 'pointer', fontSize: '12px' }, children: "Remove" })] }), _jsx("input", { type: "text", placeholder: "Number", value: item.number || '', onChange: (e) => update(index, 'number', e.target.value), style: { width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' } }), _jsx("input", { type: "text", placeholder: "Label", value: item.label || '', onChange: (e) => update(index, 'label', e.target.value), style: { width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' } }), _jsx("input", { type: "text", placeholder: "Description", value: item.description || '', onChange: (e) => update(index, 'description', e.target.value), style: { width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' } }), _jsx("select", { value: item.icon || '', onChange: (e) => update(index, 'icon', e.target.value), style: { width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' }, children: ICON_OPTIONS.map((opt) => _jsx("option", { value: opt.value, children: opt.label }, opt.value)) }), _jsx("input", { type: "text", placeholder: "Icon Color", value: item.iconColor || '', onChange: (e) => update(index, 'iconColor', e.target.value), style: { width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '13px' } })] }, item.id || index))), _jsx("button", { type: "button", onClick: add, style: { padding: '6px 12px', border: '1px dashed #9ca3af', borderRadius: '6px', background: '#f9fafb', cursor: 'pointer', fontSize: '13px', width: '100%' }, children: "+ Add Stat" })] }));
+}
+// ── Content fields ──────────────────────────────────────────────────────────
+const contentFields = {
+    title: { type: 'text', label: 'Title' },
+    subtitle: { type: 'text', label: 'Subtitle' },
+    stats: { type: 'custom', label: '', render: renderStatsArray, arrayFields: STATS_ARRAY_FIELDS },
+};
+// ── Layout fields ───────────────────────────────────────────────────────────
+const layoutFields = {
+    columns: {
+        type: 'select', label: 'Columns',
+        options: [
+            { label: '2', value: '2' },
+            { label: '3', value: '3' },
+            { label: '4', value: '4' },
+        ],
+    },
+    alignment: {
+        type: 'select', label: 'Alignment',
+        options: [
+            { label: 'Left', value: 'left' },
+            { label: 'Center', value: 'center' },
+            { label: 'Right', value: 'right' },
+        ],
+    },
+    spacing: {
+        type: 'select', label: 'Spacing',
+        options: [
+            { label: 'Compact', value: 'compact' },
+            { label: 'Normal', value: 'normal' },
+            { label: 'Spacious', value: 'spacious' },
+        ],
+    },
+    showDividers: {
+        type: 'radio', label: 'Show Dividers',
+        options: [
+            { label: 'Yes', value: true },
+            { label: 'No', value: false },
+        ],
+    },
+};
+// ── Color fields ────────────────────────────────────────────────────────────
+const colorFields = {
+    backgroundColor: { type: 'text', label: 'Background Color (hex or theme token)' },
+    textColor: { type: 'text', label: 'Text Color (hex or theme token)' },
+    numberColor: { type: 'text', label: 'Number Color (hex or theme token)' },
+    borderRadius: {
+        type: 'select', label: 'Border Radius',
+        options: [
+            { label: 'None', value: 'none' },
+            { label: 'Small', value: 'sm' },
+            { label: 'Medium', value: 'md' },
+            { label: 'Large', value: 'lg' },
+        ],
+    },
+};
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    ...contentFields,
+    ...layoutFields,
+    ...colorFields,
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Content',
+            defaultOpen: true,
+            fieldKeys: ['title', 'subtitle', 'stats'],
+        },
+        {
+            label: 'Layout',
+            fieldKeys: ['columns', 'alignment', 'spacing', 'showDividers'],
+        },
+        {
+            label: 'Colors',
+            fieldKeys: ['backgroundColor', 'textColor', 'numberColor', 'borderRadius'],
+        },
+    ],
+    allFields,
+});
+// ── Component ───────────────────────────────────────────────────────────────
 export const StatsSection = {
     label: 'Stats Section',
-    fields: statsSectionFields,
+    fields: accordionFields,
     defaultProps: {
         title: 'Our Impact',
         subtitle: 'Trusted by thousands',

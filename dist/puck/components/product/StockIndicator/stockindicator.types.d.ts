@@ -1,4 +1,4 @@
-import type { ProductData } from '../ProductData';
+export type { ProductData, ProductDataVariant } from '../ProductData';
 export type StockIndicatorStyle = 'default' | 'badge' | 'minimal';
 export type StockStatus = 'in-stock' | 'low-stock' | 'out-of-stock' | 'pre-order';
 export interface StockIndicatorProps {
@@ -23,5 +23,5 @@ export interface StockIndicatorResolved {
  * Evaluates the SELECTED variant if provided, else the first variant
  * (matching the AddToCart wrapper's behavior). No longer sums all variants.
  */
-export declare const evaluateStock: (product: ProductData | null | undefined, threshold: number, selectedVariantId?: string) => StockIndicatorResolved;
+export declare const evaluateStock: (product: import("../ProductData").ProductData | null | undefined, threshold: number, selectedVariantId?: string) => StockIndicatorResolved;
 //# sourceMappingURL=stockindicator.types.d.ts.map

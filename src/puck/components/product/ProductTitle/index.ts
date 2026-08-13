@@ -1,5 +1,4 @@
 export { ProductTitle } from './ProductTitle';
 export type { ProductTitleWithProduct } from './ProductTitle';
-export type { ProductTitleProps, ProductTitleTag, ProductTitleSize, ProductTitleColor, ProductTitleAlignment, ProductTitleWeight } from './producttitle.types';
-export { productTitleFields } from './producttitle.fields';
+export type { ProductTitleProps, ProductTitleTag } from './producttitle.types';
 export { productTitleMeta, type ProductTitleMeta } from './producttitle.meta';

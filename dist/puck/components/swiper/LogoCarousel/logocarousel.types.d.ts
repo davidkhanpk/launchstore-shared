@@ -17,7 +17,9 @@ export interface LogoCarouselProps {
     showBorder: boolean;
     borderColor: string;
     borderRadius: LogoRadius;
-    paddingY: number;
-    paddingX: number;
+    paddingY?: string;
+    paddingX?: string;
+    marginTop?: string;
+    marginBottom?: string;
 }
 //# sourceMappingURL=logocarousel.types.d.ts.map

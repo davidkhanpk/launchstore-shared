@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { countdownTimerFields } from './countdowntimer.fields';
 import type { CountdownTimerProps } from './countdowntimer.types';
+import { createAccordionFields } from '../../../design-system';
 
 const SPACING_CLASSES: Record<CountdownTimerProps['spacing'], string> = {
   compact: 'py-6 px-4',
@@ -85,9 +85,107 @@ function TimerUnit({
   );
 }
 
+// ── Content fields ──────────────────────────────────────────────────────────
+
+const contentFields = {
+  title: { type: 'text' as const, label: 'Title' },
+  subtitle: { type: 'text' as const, label: 'Subtitle' },
+  endDate: { type: 'text' as const, label: 'End Date (ISO 8601)' },
+  timerStyle: {
+    type: 'select' as const, label: 'Timer Style',
+    options: [
+      { label: 'Boxes', value: 'boxes' },
+      { label: 'Minimal', value: 'minimal' },
+      { label: 'Circle', value: 'circle' },
+    ],
+  },
+  showDays: {
+    type: 'radio' as const, label: 'Show Days',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showHours: {
+    type: 'radio' as const, label: 'Show Hours',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showMinutes: {
+    type: 'radio' as const, label: 'Show Minutes',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showSeconds: {
+    type: 'radio' as const, label: 'Show Seconds',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showCTA: {
+    type: 'radio' as const, label: 'Show CTA',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  ctaText: { type: 'text' as const, label: 'CTA Text' },
+  ctaLink: { type: 'text' as const, label: 'CTA Link' },
+};
+
+// ── Layout fields ───────────────────────────────────────────────────────────
+
+const layoutFields = {
+  spacing: {
+    type: 'select' as const, label: 'Spacing',
+    options: [
+      { label: 'Compact', value: 'compact' },
+      { label: 'Normal', value: 'normal' },
+      { label: 'Spacious', value: 'spacious' },
+    ],
+  },
+  mode: {
+    type: 'select' as const, label: 'Mode',
+    options: [
+      { label: 'Live (real countdown)', value: 'live' },
+      { label: 'Preview (static, no tick)', value: 'preview' },
+    ],
+  },
+};
+
+// ── Color fields ────────────────────────────────────────────────────────────
+
+const colorFields = {
+  backgroundColor: { type: 'text' as const, label: 'Background Color (hex or theme token)' },
+  textColor: { type: 'text' as const, label: 'Text Color (hex or theme token)' },
+  timerColor: { type: 'text' as const, label: 'Timer Color (hex or theme token)' },
+  accentColor: { type: 'text' as const, label: 'Accent Color (hex or theme token)' },
+};
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...layoutFields,
+  ...colorFields,
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['title', 'subtitle', 'endDate', 'timerStyle', 'showDays', 'showHours', 'showMinutes', 'showSeconds', 'showCTA', 'ctaText', 'ctaLink'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['spacing', 'mode'],
+    },
+    {
+      label: 'Colors',
+      fieldKeys: ['backgroundColor', 'textColor', 'timerColor', 'accentColor'],
+    },
+  ],
+  allFields,
+});
+
+// ── Component ───────────────────────────────────────────────────────────────
+
 export const CountdownTimer: ComponentConfig<CountdownTimerProps> = {
   label: 'Countdown Timer',
-  fields: countdownTimerFields as ComponentConfig<CountdownTimerProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     title: 'Limited Time Offer',
     subtitle: 'Sale ends soon',
@@ -106,7 +204,7 @@ export const CountdownTimer: ComponentConfig<CountdownTimerProps> = {
     accentColor: '#3b82f6',
     spacing: 'normal',
     mode: 'live',
-  },
+  } as CountdownTimerProps,
   render: ({
     title, subtitle, endDate, timerStyle, showDays, showHours, showMinutes,
     showSeconds, showCTA, ctaText, ctaLink, backgroundColor, textColor,

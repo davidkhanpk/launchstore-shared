@@ -1,5 +1,3 @@
-import type { Field } from '@puckeditor/core';
-
 export type ProductAccordionContentType = 'description' | 'material' | 'dimensions' | 'shipping' | 'custom';
 export type ProductAccordionBorderStyle = 'none' | 'top' | 'full';
 

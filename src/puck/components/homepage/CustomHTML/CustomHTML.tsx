@@ -1,8 +1,8 @@
 /**
- * CustomHTML Puck component — render + fields + defaultProps.
+ * CustomHTML Puck component — render + inline accordion fields + defaultProps.
  *
  * Both consumers import `CustomHTML` from here:
- *   - launchstore-frontend (Puck editor) — extends `fields` with custom widgets
+ *   - launchstore-frontend (Puck editor) — extends fields with custom widgets
  *   - launchstore-storefront (renderer) — uses the base fields as-is
  *
  * The component renders user-supplied HTML/CSS inside a styled container. A
@@ -13,8 +13,8 @@
  */
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { customHtmlFields } from './customhtml.fields';
 import type { CustomHTMLProps } from './customhtml.types';
+import { createAccordionFields } from '../../../design-system';
 
 const MAX_WIDTH_CLASSES: Record<CustomHTMLProps['maxWidth'], string> = {
   sm: 'max-w-screen-sm',
@@ -37,9 +37,82 @@ function sanitizeHTML(html: string): string {
     .replace(/javascript:/gi, '');
 }
 
+// ── Content fields (component-specific) ─────────────────────────────────────
+
+const contentFields = {
+  htmlContent: { type: 'textarea' as const, label: 'HTML Content' },
+  cssContent: { type: 'textarea' as const, label: 'Custom CSS (optional)' },
+  sanitizeHTML: {
+    type: 'radio' as const, label: 'Sanitize HTML (recommended)',
+    options: [
+      { label: 'Yes (Safe)', value: true },
+      { label: 'No (Trust Content)', value: false },
+    ],
+  },
+};
+
+// ── Layout fields (component-specific) ──────────────────────────────────────
+
+const layoutFields = {
+  useContainer: {
+    type: 'radio' as const, label: 'Use Container',
+    options: [
+      { label: 'Yes', value: true },
+      { label: 'No (Full Width)', value: false },
+    ],
+  },
+  maxWidth: {
+    type: 'select' as const, label: 'Max Width',
+    options: [
+      { label: 'Small (640px)', value: 'sm' },
+      { label: 'Medium (768px)', value: 'md' },
+      { label: 'Large (1024px)', value: 'lg' },
+      { label: 'Extra Large (1280px)', value: 'xl' },
+      { label: '2X Large (1536px)', value: '2xl' },
+      { label: 'Full Width', value: 'full' },
+    ],
+  },
+  paddingTop: { type: 'number' as const, label: 'Padding Top (px)', min: 0, max: 200 },
+  paddingBottom: { type: 'number' as const, label: 'Padding Bottom (px)', min: 0, max: 200 },
+  paddingLeft: { type: 'number' as const, label: 'Padding Left (px)', min: 0, max: 200 },
+  paddingRight: { type: 'number' as const, label: 'Padding Right (px)', min: 0, max: 200 },
+  backgroundColor: { type: 'text' as const, label: 'Background Color (hex or theme token)' },
+  backgroundImage: { type: 'text' as const, label: 'Background Image URL' },
+};
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...layoutFields,
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['htmlContent', 'cssContent', 'sanitizeHTML'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: [
+        'useContainer', 'maxWidth',
+        'paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight',
+        'backgroundColor', 'backgroundImage',
+      ],
+    },
+  ],
+  allFields,
+});
+
+// ── Component ───────────────────────────────────────────────────────────────
+
 export const CustomHTML: ComponentConfig<CustomHTMLProps> = {
   label: 'Custom HTML',
-  fields: customHtmlFields as ComponentConfig<CustomHTMLProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     htmlContent: `<div class="custom-section">
   <h2>Custom HTML Section</h2>
@@ -72,7 +145,7 @@ export const CustomHTML: ComponentConfig<CustomHTMLProps> = {
     backgroundColor: '#ffffff',
     backgroundImage: '',
     sanitizeHTML: true,
-  },
+  } as CustomHTMLProps,
   render: (props) => {
     const containerClass = props.useContainer
       ? `${MAX_WIDTH_CLASSES[props.maxWidth]} mx-auto px-4`

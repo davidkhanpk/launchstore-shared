@@ -1,5 +1,3 @@
-import type { Field } from '@puckeditor/core';
-
 export type ProductBreadcrumbsSeparator = 'arrow' | 'slash' | 'dot';
 export type ProductBreadcrumbsTransform = 'none' | 'uppercase' | 'capitalize';
 

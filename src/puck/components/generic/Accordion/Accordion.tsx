@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { accordionFields } from './accordion.fields';
 import type { AccordionProps } from './accordion.types';
+import {
+  createAccordionFields,
+  sharedLayoutFields,
+  buildLayoutClasses,
+  defaultLayoutProps,
+} from '../../../design-system';
 
-const ROUND: Record<AccordionProps['rounded'], string> = { none: 'rounded-none', sm: 'rounded-sm', md: 'rounded-md', lg: 'rounded-lg' };
+const ROUND_CLASS: Record<string, string> = { none: 'rounded-none', sm: 'rounded-sm', md: 'rounded-md', lg: 'rounded-lg' };
 
 const Chevron = ({ open }: { open: boolean }) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" className={`w-5 h-5 transition-transform ${open ? 'transform rotate-180' : ''}`}>
@@ -11,9 +16,53 @@ const Chevron = ({ open }: { open: boolean }) => (
   </svg>
 );
 
+// ── Content fields (component-specific) ─────────────────────────────────────
+
+const contentFields = {
+  id: { type: 'text' as const, label: 'ID' },
+  items: {
+    type: 'array' as const, label: 'Accordion Items',
+    arrayFields: {
+      id: { type: 'text' as const, label: 'Item ID' },
+      title: { type: 'text' as const, label: 'Title' },
+      content: { type: 'textarea' as const, label: 'Content' },
+    },
+    defaultItemProps: { id: 'item-1', title: 'Accordion Item', content: 'Accordion content goes here' },
+  } as any,
+  allowMultiple: { type: 'radio' as const, label: 'Allow Multiple Open', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  bordered: { type: 'radio' as const, label: 'Show Borders', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  rounded: { type: 'radio' as const, label: 'Corner Radius', options: [{ label: 'None', value: 'none' }, { label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }] },
+};
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...sharedLayoutFields,
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const inspectorFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['id', 'items', 'allowMultiple', 'bordered', 'rounded'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
+    },
+  ],
+  allFields,
+});
+
+// ── Component ───────────────────────────────────────────────────────────────
+
 export const Accordion: ComponentConfig<AccordionProps> = {
   label: 'Accordion',
-  fields: accordionFields as ComponentConfig<AccordionProps>['fields'],
+  fields: inspectorFields as any,
   defaultProps: {
     id: 'accordion-1',
     items: [
@@ -24,19 +73,24 @@ export const Accordion: ComponentConfig<AccordionProps> = {
     allowMultiple: false,
     bordered: true,
     rounded: 'md',
-  },
-  render: ({ id, items, allowMultiple, bordered, rounded }) => {
+    ...defaultLayoutProps,
+  } as AccordionProps,
+  render: (rawProps: any) => {
+    const { id, items, allowMultiple, bordered, rounded, marginTop, marginBottom, paddingX, paddingY } = rawProps;
     const [open, setOpen] = useState<number[]>([]);
     const toggle = (i: number) => {
       if (allowMultiple) setOpen((p) => (p.includes(i) ? p.filter((x) => x !== i) : [...p, i]));
       else setOpen((p) => (p.includes(i) ? [] : [i]));
     };
+
+    const layoutClasses = buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY });
+
     return (
-      <div id={id} className="w-full space-y-2">
-        {(items || []).map((item, i) => {
+      <div id={id} className={`w-full space-y-2 ${layoutClasses}`}>
+        {(items || []).map((item: any, i: number) => {
           const isOpen = open.includes(i);
           return (
-            <div key={item.id} className={`${bordered ? 'border border-gray-200 dark:border-gray-700' : ''} ${ROUND[rounded] || 'rounded-md'} overflow-hidden`}>
+            <div key={item.id} className={`${bordered ? 'border border-gray-200 dark:border-gray-700' : ''} ${ROUND_CLASS[rounded || 'md'] || 'rounded-md'} overflow-hidden`}>
               <button
                 onClick={() => toggle(i)}
                 className={`w-full flex items-center justify-between p-4 text-left font-medium text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ${isOpen && !bordered ? 'bg-gray-50 dark:bg-gray-800' : ''}`}

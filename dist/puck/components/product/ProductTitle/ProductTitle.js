@@ -1,36 +1,84 @@
 import React from 'react';
-import { productTitleFields } from './producttitle.fields';
-const SIZE = {
-    default: 'text-3xl', sm: 'text-sm', md: 'text-base', lg: 'text-lg', xl: 'text-xl', '2xl': 'text-2xl', '3xl': 'text-3xl',
+import { resolveColor } from '../../../../theme/resolveColor';
+import { createAccordionFields, sharedTypographyFields, sharedLayoutFields, buildTypographyClasses, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
+// ── Content fields (component-specific) ─────────────────────────────────────
+const contentFields = {
+    tag: {
+        type: 'select', label: 'HTML Tag',
+        options: [
+            { label: 'H1', value: 'h1' },
+            { label: 'H2', value: 'h2' },
+            { label: 'H3', value: 'h3' },
+            { label: 'H4', value: 'h4' },
+        ],
+    },
+    level: {
+        type: 'select', label: 'Heading Level',
+        options: [
+            { label: 'H1', value: 'h1' },
+            { label: 'H2', value: 'h2' },
+            { label: 'H3', value: 'h3' },
+            { label: 'H4', value: 'h4' },
+            { label: 'H5', value: 'h5' },
+            { label: 'H6', value: 'h6' },
+        ],
+    },
 };
-const COLOR = {
-    default: 'text-gray-900', black: 'text-black', gray: 'text-gray-700', primary: 'text-blue-600', white: 'text-white',
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    ...contentFields,
+    ...sharedTypographyFields,
+    ...sharedLayoutFields,
 };
-const ALIGN = { left: 'text-left', center: 'text-center', right: 'text-right' };
-const WEIGHT = {
-    normal: 'font-normal', medium: 'font-medium', semibold: 'font-semibold', bold: 'font-bold',
-};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Content',
+            defaultOpen: true,
+            fieldKeys: ['tag', 'level'],
+        },
+        {
+            label: 'Typography',
+            fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor'],
+        },
+        {
+            label: 'Layout',
+            fieldKeys: ['marginTop', 'marginBottom'],
+        },
+    ],
+    allFields,
+});
+// ── Component ───────────────────────────────────────────────────────────────
 export const ProductTitle = {
     label: 'Product Title',
-    fields: productTitleFields,
+    fields: accordionFields,
     defaultProps: {
-        tag: 'h1', fontSize: '2xl', color: 'black', alignment: 'left', fontWeight: 'bold',
-        marginTop: 'mt-0', marginBottom: 'mb-4', paddingX: 'px-0', paddingY: 'py-0',
+        tag: 'h1',
+        level: 'h1',
+        ...defaultTypographyProps,
+        fontWeight: 'bold',
+        textColor: '#111827',
+        textAlign: 'left',
+        ...defaultLayoutProps,
+        marginBottom: 'md',
     },
     render: (rawProps) => {
-        const { tag = 'h1', fontSize = '2xl', color = 'black', alignment = 'left', fontWeight = 'bold', marginTop = 'mt-0', marginBottom = 'mb-4', paddingX = 'px-0', paddingY = 'py-0', product, } = rawProps;
-        const className = `
-      ${SIZE[fontSize || 'default'] || 'text-2xl'}
-      ${COLOR[color || 'black'] || 'text-black'}
-      ${ALIGN[alignment || 'left'] || 'text-left'}
-      ${WEIGHT[fontWeight || 'bold'] || 'font-bold'}
-      ${marginTop || ''} ${marginBottom || ''}
-      ${paddingX || ''} ${paddingY || ''}
-      ${!product ? 'text-gray-400 italic' : ''}
-    `;
+        const { tag, fontSize, fontWeight, textAlign, textColor, marginTop, marginBottom, product, } = rawProps;
+        const hasProduct = !!product;
         const content = product?.title || 'Product Title Will Appear Here';
         const Tag = tag || 'h1';
-        return React.createElement(Tag, { className: className.trim() }, content);
+        const className = [
+            buildTypographyClasses({ fontSize, fontWeight, textAlign }),
+            buildLayoutClasses({ marginTop, marginBottom }),
+            hasProduct ? '' : 'italic',
+        ].filter(Boolean).join(' ');
+        const style = {
+            color: hasProduct
+                ? (resolveColor(textColor) || '#111827')
+                : '#9ca3af',
+        };
+        return React.createElement(Tag, { className, style }, content);
     },
 };
 export default ProductTitle;

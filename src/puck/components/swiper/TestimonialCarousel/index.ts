@@ -4,5 +4,4 @@ export type {
   TestimonialCarouselProps, TestimonialItem, TestimonialLayout,
   TestimonialEffect, TestimonialRadius, TestimonialShadow,
 } from './testimonialcarousel.types';
-export { testimonialCarouselFields } from './testimonialcarousel.fields';
 export { testimonialCarouselMeta, type TestimonialCarouselMeta } from './testimonialcarousel.meta';

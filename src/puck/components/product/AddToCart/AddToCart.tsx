@@ -1,8 +1,111 @@
 import React, { useState } from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { addToCartFields } from './addtocart.fields';
 import type { AddToCartProps, AddToCartVariant, AddToCartSize, AddToCartFn } from './addtocart.types';
 import { resolveColor } from '../../../../theme/resolveColor';
+import {
+  createAccordionFields,
+} from '../../../design-system';
+
+const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  text: { type: 'text' as const, label: 'Button Text' },
+  preorderText: { type: 'text' as const, label: 'Pre-order Button Text' },
+  variant: {
+    type: 'select' as const, label: 'Style',
+    options: [
+      { label: 'Primary', value: 'primary' },
+      { label: 'Secondary', value: 'secondary' },
+      { label: 'Outline', value: 'outline' },
+      { label: 'Ghost', value: 'ghost' },
+      { label: 'Custom Colors', value: 'custom' },
+    ],
+  },
+  useThemeColors: { type: 'radio' as const, label: 'Use Theme Colors', options: RADIO_YES_NO },
+  backgroundColor: { type: 'text' as const, label: 'Background Color (hex, rgb, or theme token)' },
+  textColor: { type: 'text' as const, label: 'Text Color (hex, rgb, or theme token)' },
+  hoverBackgroundColor: { type: 'text' as const, label: 'Hover Background Color' },
+  hoverTextColor: { type: 'text' as const, label: 'Hover Text Color' },
+  borderColor: { type: 'text' as const, label: 'Border Color (for outline variant)' },
+  size: {
+    type: 'select' as const, label: 'Size',
+    options: [{ label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }],
+  },
+  fullWidth: { type: 'radio' as const, label: 'Full Width', options: RADIO_YES_NO },
+  showIcon: { type: 'radio' as const, label: 'Show Cart Icon', options: RADIO_YES_NO },
+  borderRadius: {
+    type: 'select' as const, label: 'Border Radius',
+    options: [
+      { label: 'None', value: 'rounded-none' }, { label: 'Small', value: 'rounded-sm' },
+      { label: 'Medium', value: 'rounded-md' }, { label: 'Large', value: 'rounded-lg' },
+      { label: 'Extra Large', value: 'rounded-xl' }, { label: 'Full', value: 'rounded-full' },
+    ],
+  },
+  marginTop: {
+    type: 'select' as const, label: 'Margin Top',
+    options: [
+      { label: 'None', value: 'mt-0' }, { label: 'Small (0.5rem)', value: 'mt-2' },
+      { label: 'Medium (1rem)', value: 'mt-4' }, { label: 'Large (1.5rem)', value: 'mt-6' }, { label: 'X-Large (2rem)', value: 'mt-8' },
+    ],
+  },
+  marginBottom: {
+    type: 'select' as const, label: 'Margin Bottom',
+    options: [
+      { label: 'None', value: 'mb-0' }, { label: 'Small (0.5rem)', value: 'mb-2' },
+      { label: 'Medium (1rem)', value: 'mb-4' }, { label: 'Large (1.5rem)', value: 'mb-6' }, { label: 'X-Large (2rem)', value: 'mb-8' },
+    ],
+  },
+  marginLeft: {
+    type: 'select' as const, label: 'Margin Left',
+    options: [
+      { label: 'None', value: 'ml-0' }, { label: 'Auto', value: 'ml-auto' },
+      { label: 'Small', value: 'ml-2' }, { label: 'Medium', value: 'ml-4' },
+    ],
+  },
+  marginRight: {
+    type: 'select' as const, label: 'Margin Right',
+    options: [
+      { label: 'None', value: 'mr-0' }, { label: 'Auto', value: 'mr-auto' },
+      { label: 'Small', value: 'mr-2' }, { label: 'Medium', value: 'mr-4' },
+    ],
+  },
+  paddingX: {
+    type: 'select' as const, label: 'Horizontal Padding',
+    options: [{ label: 'Small', value: 'px-4' }, { label: 'Medium', value: 'px-6' }, { label: 'Large', value: 'px-8' }, { label: 'X-Large', value: 'px-10' }],
+  },
+  paddingY: {
+    type: 'select' as const, label: 'Vertical Padding',
+    options: [{ label: 'Small', value: 'py-2' }, { label: 'Medium', value: 'py-3' }, { label: 'Large', value: 'py-4' }, { label: 'X-Large', value: 'py-5' }],
+  },
+  disabled: { type: 'radio' as const, label: 'Disabled State (Preview)', options: RADIO_YES_NO },
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['text', 'preorderText', 'showIcon'],
+    },
+    {
+      label: 'Style',
+      fieldKeys: ['variant', 'size', 'fullWidth', 'borderRadius', 'disabled'],
+    },
+    {
+      label: 'Colors',
+      fieldKeys: ['useThemeColors', 'backgroundColor', 'textColor', 'hoverBackgroundColor', 'hoverTextColor', 'borderColor'],
+    },
+    {
+      label: 'Spacing',
+      fieldKeys: ['marginTop', 'marginBottom', 'marginLeft', 'marginRight', 'paddingX', 'paddingY'],
+    },
+  ],
+  allFields,
+});
 
 const CartSvg = ({ size = 20 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" /></svg>
@@ -52,7 +155,7 @@ const noopAdd: AddToCartFn = async () => {};
 
 export const AddToCart: ComponentConfig<AddToCartWithData> = {
   label: 'Add to Cart Button',
-  fields: addToCartFields as ComponentConfig<AddToCartWithData>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     text: 'Add to Cart', preorderText: 'Pre-order',
     variant: 'primary', size: 'md', fullWidth: false, showIcon: true, disabled: false,

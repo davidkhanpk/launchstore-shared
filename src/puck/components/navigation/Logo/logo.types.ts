@@ -8,6 +8,6 @@ export interface LogoProps {
   text: string;
   textPosition: 'right' | 'below';
   textSize: 'sm' | 'base' | 'lg' | 'xl';
-  textColor: string;
+  textColor?: string;
   textWeight: 'normal' | 'medium' | 'semibold' | 'bold';
 }

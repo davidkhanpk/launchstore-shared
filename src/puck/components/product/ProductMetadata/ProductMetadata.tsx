@@ -1,8 +1,57 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { productMetadataFields } from './productmetadata.fields';
 import type { ProductMetadataProps, ProductMetadataLayout } from './productmetadata.types';
 import type { ProductData } from '../ProductData';
+import {
+  createAccordionFields,
+} from '../../../design-system';
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  showTitle: {
+    type: 'radio' as const, label: 'Show Title',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  titleText: { type: 'text' as const, label: 'Title Text' },
+  showSku: {
+    type: 'radio' as const, label: 'Show SKU',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showWeight: {
+    type: 'radio' as const, label: 'Show Weight',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showDimensions: {
+    type: 'radio' as const, label: 'Show Dimensions',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showOrigin: {
+    type: 'radio' as const, label: 'Show Origin Country',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  layout: {
+    type: 'select' as const, label: 'Layout',
+    options: [{ label: 'List', value: 'list' }, { label: 'Grid', value: 'grid' }, { label: 'Table', value: 'table' }],
+  },
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['showTitle', 'titleText', 'showSku', 'showWeight', 'showDimensions', 'showOrigin'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['layout'],
+    },
+  ],
+  allFields,
+});
 
 const PackageSvg = ({ size = 20 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" className="text-gray-500">
@@ -31,7 +80,7 @@ export interface ProductMetadataWithProduct extends ProductMetadataProps {
 
 export const ProductMetadata: ComponentConfig<ProductMetadataWithProduct> = {
   label: 'Product Metadata',
-  fields: productMetadataFields as ComponentConfig<ProductMetadataWithProduct>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     showTitle: true, titleText: 'Product Details',
     showSku: true, showWeight: true, showDimensions: true, showOrigin: true,

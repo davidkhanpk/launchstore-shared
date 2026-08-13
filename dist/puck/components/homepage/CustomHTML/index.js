@@ -5,6 +5,5 @@
  * The renderer (launchstore-storefront) imports `CustomHTML` as-is.
  */
 export { CustomHTML } from './CustomHTML';
-export { customHtmlFields } from './customhtml.fields';
 export { customHtmlMeta } from './customhtml.meta';
 //# sourceMappingURL=index.js.map

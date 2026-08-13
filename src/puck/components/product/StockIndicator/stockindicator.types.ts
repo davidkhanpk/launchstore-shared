@@ -1,5 +1,4 @@
-import type { Field } from '@puckeditor/core';
-import type { ProductData, ProductDataVariant } from '../ProductData';
+export type { ProductData, ProductDataVariant } from '../ProductData';
 
 export type StockIndicatorStyle = 'default' | 'badge' | 'minimal';
 export type StockStatus = 'in-stock' | 'low-stock' | 'out-of-stock' | 'pre-order';
@@ -32,7 +31,7 @@ export interface StockIndicatorResolved {
  * Uses `=== false` for manage_inventory so null/undefined is treated as
  * "managed" (defensive — falls through to the quantity check).
  */
-function isVariantInStock(variant: ProductDataVariant): boolean {
+function isVariantInStock(variant: import('../ProductData').ProductDataVariant): boolean {
   if (variant.manage_inventory === false) return true;
   if (variant.allow_backorder === true) return true;
   return (variant.inventory_quantity ?? 0) > 0;
@@ -45,7 +44,7 @@ function isVariantInStock(variant: ProductDataVariant): boolean {
  * (matching the AddToCart wrapper's behavior). No longer sums all variants.
  */
 export const evaluateStock = (
-  product: ProductData | null | undefined,
+  product: import('../ProductData').ProductData | null | undefined,
   threshold: number,
   selectedVariantId?: string,
 ): StockIndicatorResolved => {

@@ -1,8 +1,10 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { stockIndicatorFields } from './stockindicator.fields';
 import type { StockIndicatorProps, StockIndicatorStyle, StockStatus } from './stockindicator.types';
 import { evaluateStock } from './stockindicator.types';
+import {
+  createAccordionFields,
+} from '../../../design-system';
 
 const StockIcon = ({ status, size = 20 }: { status: StockStatus; size?: number }) => {
   if (status === 'in-stock') return (
@@ -24,13 +26,52 @@ export interface StockIndicatorWithProduct extends StockIndicatorProps {
   product?: ProductData | null;
 }
 
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  showIcon: {
+    type: 'radio' as const, label: 'Show Icon',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showText: {
+    type: 'radio' as const, label: 'Show Text',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showQuantity: {
+    type: 'radio' as const, label: 'Show Quantity Available',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  lowStockThreshold: { type: 'number' as const, label: 'Low Stock Threshold' },
+  style: {
+    type: 'select' as const, label: 'Style',
+    options: [{ label: 'Default', value: 'default' }, { label: 'Badge', value: 'badge' }, { label: 'Minimal', value: 'minimal' }],
+  },
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['showIcon', 'showText', 'showQuantity', 'lowStockThreshold'],
+    },
+    {
+      label: 'Appearance',
+      fieldKeys: ['style'],
+    },
+  ],
+  allFields,
+});
+
 export const StockIndicator: ComponentConfig<StockIndicatorWithProduct> = {
   label: 'Stock Indicator',
-  fields: stockIndicatorFields as ComponentConfig<StockIndicatorWithProduct>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     showIcon: true, showText: true, showQuantity: true,
     lowStockThreshold: 10, style: 'default',
-  },
+  } as StockIndicatorProps,
   render: (rawProps: any) => {
     const { showIcon, showText, showQuantity, lowStockThreshold = 10, style = 'default', product } = rawProps as StockIndicatorWithProduct;
     if (!product) return <></>;

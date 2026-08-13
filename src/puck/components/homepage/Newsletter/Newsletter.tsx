@@ -1,5 +1,5 @@
 /**
- * Newsletter Puck component — render + fields + defaultProps.
+ * Newsletter Puck component — render + inline accordion fields + defaultProps.
  *
  * Both consumers import `Newsletter` from here:
  *   - launchstore-frontend (Puck editor) — extends color/image fields with
@@ -14,8 +14,8 @@
  */
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { newsletterFields } from './newsletter.fields';
 import type { NewsletterProps } from './newsletter.types';
+import { createAccordionFields } from '../../../design-system';
 
 const RADIUS_CLASSES: Record<NewsletterProps['borderRadius'], string> = {
   none: 'rounded-none',
@@ -31,9 +31,125 @@ const LAYOUT_CLASSES: Record<NewsletterProps['layout'], string> = {
   inline: 'flex items-center justify-between',
 };
 
+// ── Content fields (text + email + privacy) ─────────────────────────────────
+
+const contentFields = {
+  title: { type: 'text' as const, label: 'Title' },
+  subtitle: { type: 'text' as const, label: 'Subtitle' },
+  description: { type: 'textarea' as const, label: 'Description' },
+  placeholderText: { type: 'text' as const, label: 'Email Placeholder' },
+  buttonText: { type: 'text' as const, label: 'Button Text' },
+  showPrivacyText: {
+    type: 'radio' as const, label: 'Show Privacy Text',
+    options: [
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
+    ],
+  },
+  privacyText: { type: 'textarea' as const, label: 'Privacy Text' },
+};
+
+// ── Email / form fields ─────────────────────────────────────────────────────
+
+const emailFields = {
+  collectName: {
+    type: 'radio' as const, label: 'Collect Name',
+    options: [
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
+    ],
+  },
+  nameRequired: {
+    type: 'radio' as const, label: 'Name Required',
+    options: [
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
+    ],
+  },
+  successMessage: { type: 'text' as const, label: 'Success Message' },
+};
+
+// ── Layout fields ───────────────────────────────────────────────────────────
+
+const layoutFields = {
+  layout: {
+    type: 'select' as const, label: 'Layout Style',
+    options: [
+      { label: 'Centered', value: 'centered' },
+      { label: 'Split (Text + Image)', value: 'split' },
+      { label: 'Inline', value: 'inline' },
+    ],
+  },
+  showImage: {
+    type: 'radio' as const, label: 'Show Image (for split layout)',
+    options: [
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
+    ],
+  },
+  imageUrl: { type: 'text' as const, label: 'Image URL' },
+};
+
+// ── Color / style fields (component-specific — more than shared) ────────────
+
+const styleFields = {
+  backgroundColor: { type: 'text' as const, label: 'Background Color (hex or theme token)' },
+  textColor: { type: 'text' as const, label: 'Text Color (hex or theme token)' },
+  inputBackground: { type: 'text' as const, label: 'Input Background (hex or theme token)' },
+  inputBorder: { type: 'text' as const, label: 'Input Border (hex or theme token)' },
+  buttonBackground: { type: 'text' as const, label: 'Button Background (hex or theme token)' },
+  buttonTextColor: { type: 'text' as const, label: 'Button Text Color (hex or theme token)' },
+  borderRadius: {
+    type: 'select' as const, label: 'Border Radius',
+    options: [
+      { label: 'None', value: 'none' },
+      { label: 'Small', value: 'sm' },
+      { label: 'Medium', value: 'md' },
+      { label: 'Large', value: 'lg' },
+      { label: 'Full (Pills)', value: 'full' },
+    ],
+  },
+};
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...emailFields,
+  ...layoutFields,
+  ...styleFields,
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['title', 'subtitle', 'description', 'placeholderText', 'buttonText', 'showPrivacyText', 'privacyText'],
+    },
+    {
+      label: 'Email Form',
+      fieldKeys: ['collectName', 'nameRequired', 'successMessage'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['layout', 'showImage', 'imageUrl'],
+    },
+    {
+      label: 'Colors',
+      fieldKeys: ['backgroundColor', 'textColor', 'inputBackground', 'inputBorder', 'buttonBackground', 'buttonTextColor', 'borderRadius'],
+    },
+  ],
+  allFields,
+});
+
+// ── Component ───────────────────────────────────────────────────────────────
+
 export const Newsletter: ComponentConfig<NewsletterProps> = {
   label: 'Newsletter',
-  fields: newsletterFields as ComponentConfig<NewsletterProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     title: 'Join Our Newsletter',
     subtitle: 'Stay Updated',
@@ -55,7 +171,7 @@ export const Newsletter: ComponentConfig<NewsletterProps> = {
     buttonBackground: '#3b82f6',
     buttonTextColor: '#ffffff',
     borderRadius: 'md',
-  },
+  } as NewsletterProps,
   render: (props) => (
     <div className="newsletter-section py-16" style={{ backgroundColor: props.backgroundColor }}>
       <div className="container mx-auto px-4">

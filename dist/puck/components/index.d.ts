@@ -98,4 +98,5 @@ export * from './generic/List';
 export * from './generic/Tabs';
 export * from './generic/Accordion';
 export * from './storefront';
+export * from '../design-system';
 //# sourceMappingURL=index.d.ts.map

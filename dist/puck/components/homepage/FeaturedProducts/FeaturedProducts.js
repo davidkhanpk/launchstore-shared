@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { featuredProductsFields } from './featuredproducts.fields';
+import { createAccordionFields } from '../../../design-system';
 const CARD_STYLE = {
     minimal: 'bg-transparent',
     bordered: 'border border-gray-200 bg-white',
@@ -13,9 +13,116 @@ const defaultCard = (product, props) => {
     const imgSrc = product.thumbnail || `https://via.placeholder.com/400x400?text=${encodeURIComponent(product.title)}`;
     return (_jsxs("div", { className: `product-card ${CARD_STYLE[props.cardStyle]} p-4 rounded-lg overflow-hidden`, children: [_jsx("img", { src: imgSrc, alt: product.title, className: "w-full h-64 object-cover rounded-lg mb-4" }), _jsx("h3", { className: "text-lg font-semibold mb-2", style: { color: props.textColor }, children: product.title }), props.showPrice && product.price != null && (_jsxs("p", { className: "text-xl font-bold mb-3", style: { color: props.textColor }, children: ["$", Number(product.price).toFixed(2)] })), props.showAddToCart && (_jsx("button", { className: "w-full px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition", children: props.buttonText }))] }));
 };
+// ── Content fields (header + display toggles + product source) ──────────────
+const contentFields = {
+    sectionTitle: { type: 'text', label: 'Section Title' },
+    sectionSubtitle: { type: 'text', label: 'Section Subtitle' },
+    showTitle: {
+        type: 'radio', label: 'Show Section Title',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    productSource: {
+        type: 'select', label: 'Product Source',
+        options: [
+            { label: 'Featured Products', value: 'featured' },
+            { label: 'Best Sellers', value: 'bestsellers' },
+            { label: 'New Arrivals', value: 'new' },
+            { label: 'From Category', value: 'category' },
+            { label: 'Manual Selection', value: 'manual' },
+        ],
+    },
+    categoryId: { type: 'text', label: 'Category ID (for category source)' },
+    productIds: { type: 'textarea', label: 'Product IDs (comma-separated, for manual)' },
+    showPrice: {
+        type: 'radio', label: 'Show Price',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    showAddToCart: {
+        type: 'radio', label: 'Show Add to Cart Button',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    buttonText: { type: 'text', label: 'Button Text' },
+};
+// ── Layout fields (display mode + grid + carousel) ──────────────────────────
+const layoutFields = {
+    displayMode: {
+        type: 'select', label: 'Display Mode',
+        options: [{ label: 'Grid', value: 'grid' }, { label: 'Carousel (Swiper)', value: 'carousel' }],
+    },
+    productsPerRow: { type: 'number', label: 'Products Per Row (Grid)', min: 2, max: 6 },
+    maxProducts: { type: 'number', label: 'Maximum Products', min: 1, max: 50 },
+    slidesPerView: { type: 'number', label: 'Slides Per View (Desktop)', min: 1, max: 6 },
+    slidesPerViewTablet: { type: 'number', label: 'Slides Per View (Tablet)', min: 1, max: 4 },
+    slidesPerViewMobile: { type: 'number', label: 'Slides Per View (Mobile)', min: 1, max: 2 },
+    spaceBetween: { type: 'number', label: 'Space Between Slides (px)', min: 0, max: 100 },
+    autoplay: {
+        type: 'radio', label: 'Auto-play Carousel',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    autoplayDelay: { type: 'number', label: 'Auto-play Delay (ms)', min: 1000, max: 10000 },
+    loop: {
+        type: 'radio', label: 'Loop Carousel',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    navigation: {
+        type: 'radio', label: 'Show Navigation Arrows',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    pagination: {
+        type: 'radio', label: 'Show Pagination',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    paginationStyle: {
+        type: 'select', label: 'Pagination Style',
+        options: [
+            { label: 'Dots', value: 'dots' },
+            { label: 'Fraction (1/10)', value: 'fraction' },
+            { label: 'Progress Bar', value: 'progressbar' },
+        ],
+    },
+};
+// ── Color fields ────────────────────────────────────────────────────────────
+const colorFields = {
+    backgroundColor: { type: 'text', label: 'Background Color (hex or theme token)' },
+    textColor: { type: 'text', label: 'Text Color (hex or theme token)' },
+    cardStyle: {
+        type: 'select', label: 'Card Style',
+        options: [
+            { label: 'Minimal', value: 'minimal' },
+            { label: 'Bordered', value: 'bordered' },
+            { label: 'Shadow', value: 'shadow' },
+        ],
+    },
+};
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    ...contentFields,
+    ...layoutFields,
+    ...colorFields,
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Content',
+            defaultOpen: true,
+            fieldKeys: ['sectionTitle', 'sectionSubtitle', 'showTitle', 'productSource', 'categoryId', 'productIds', 'showPrice', 'showAddToCart', 'buttonText'],
+        },
+        {
+            label: 'Layout',
+            fieldKeys: ['displayMode', 'productsPerRow', 'maxProducts', 'slidesPerView', 'slidesPerViewTablet', 'slidesPerViewMobile', 'spaceBetween', 'autoplay', 'autoplayDelay', 'loop', 'navigation', 'pagination', 'paginationStyle'],
+        },
+        {
+            label: 'Colors',
+            fieldKeys: ['backgroundColor', 'textColor', 'cardStyle'],
+        },
+    ],
+    allFields,
+});
+// ── Component ───────────────────────────────────────────────────────────────
 export const FeaturedProducts = {
     label: 'Featured Products',
-    fields: featuredProductsFields,
+    fields: accordionFields,
     defaultProps: {
         sectionTitle: 'Featured Products',
         sectionSubtitle: 'Check out our most popular items',

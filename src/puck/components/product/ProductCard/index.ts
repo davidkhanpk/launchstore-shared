@@ -7,5 +7,4 @@ export type {
   ProductCardTitleAlign, ProductCardPriceSize, ProductCardBadgePosition,
   ProductCardButtonStyle, ProductCardButtonSize,
 } from './productcard.types';
-export { productCardFields } from './productcard.fields';
 export { productCardMeta, type ProductCardMeta } from './productcard.meta';

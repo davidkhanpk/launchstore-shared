@@ -1,4 +1,10 @@
 export interface SectionProps {
-  paddingY: 'none' | 'sm' | 'md' | 'lg' | 'xl';
-  backgroundColor: 'transparent' | 'white' | 'gray' | 'primary';
+  /** Layout preset */
+  marginTop?: string;
+  marginBottom?: string;
+  paddingX?: string;
+  paddingY?: string;
+  /** Color preset */
+  backgroundColor?: string;
+  borderRadius?: string;
 }

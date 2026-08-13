@@ -1,5 +1,3 @@
-import type { Field } from '@puckeditor/core';
-
 export type LogoRadius = 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
 export interface LogoCarouselProps {
@@ -20,6 +18,8 @@ export interface LogoCarouselProps {
   showBorder: boolean;
   borderColor: string;
   borderRadius: LogoRadius;
-  paddingY: number;
-  paddingX: number;
+  paddingY?: string;
+  paddingX?: string;
+  marginTop?: string;
+  marginBottom?: string;
 }

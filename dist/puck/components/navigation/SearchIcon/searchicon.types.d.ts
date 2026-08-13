@@ -6,11 +6,11 @@
  * `useRouter` lives in the consumer wrapper).
  */
 export interface SearchIconProps {
-    iconSize: 'sm' | 'md' | 'lg';
-    iconColor: string;
-    hoverColor: string;
-    style: 'minimal' | 'outlined' | 'filled';
-    openSearchOnClick: boolean;
+    iconSize?: 'sm' | 'md' | 'lg';
+    iconColor?: string;
+    hoverColor?: string;
+    style?: 'minimal' | 'outlined' | 'filled';
+    openSearchOnClick?: boolean;
     /** Called when the user submits the search form with a query. */
     onSearchSubmit?: (query: string) => void;
     /** Called when the user dismisses the modal. */

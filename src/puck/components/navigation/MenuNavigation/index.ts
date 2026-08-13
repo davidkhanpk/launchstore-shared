@@ -13,5 +13,4 @@ export type {
   SharedEnrichedMenuItem,
   SharedMenuNavTheme,
 } from './menunavigation.types';
-export { menuNavigationFields } from './menunavigation.fields';
 export { menuNavigationMeta, type MenuNavigationMeta } from './menunavigation.meta';

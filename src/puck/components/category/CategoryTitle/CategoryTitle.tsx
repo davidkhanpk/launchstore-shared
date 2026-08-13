@@ -1,46 +1,117 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { categoryTitleFields } from './categorytitle.fields';
+import { resolveColor } from '../../../../theme/resolveColor';
 import type { CategoryTitleProps } from './categorytitle.types';
+import {
+  createAccordionFields,
+  sharedTypographyFields,
+  sharedLayoutFields,
+  sharedColorFields,
+  buildTypographyClasses,
+  buildLayoutClasses,
+  buildColorClasses,
+  defaultTypographyProps,
+  defaultLayoutProps,
+  defaultColorProps,
+} from '../../../design-system';
 
-const SIZE: Record<NonNullable<CategoryTitleProps['fontSize']>, string> = {
-  default: 'text-2xl', sm: 'text-lg', md: 'text-xl', lg: 'text-3xl',
-  xl: 'text-4xl', '2xl': 'text-5xl', '3xl': 'text-6xl',
+// ── Content fields (component-specific) ─────────────────────────────────────
+
+const contentFields = {
+  tag: {
+    type: 'select' as const, label: 'HTML Tag',
+    options: [
+      { label: 'H1', value: 'h1' },
+      { label: 'H2', value: 'h2' },
+      { label: 'H3', value: 'h3' },
+      { label: 'H4', value: 'h4' },
+    ],
+  },
+  className: { type: 'text' as const, label: 'Custom CSS Classes' },
 };
-const COLOR: Record<NonNullable<CategoryTitleProps['color']>, string> = {
-  default: 'text-gray-900', black: 'text-black', gray: 'text-gray-600', primary: 'text-brand-primary', white: 'text-white',
+
+// CategoryTitle shares fontSize/fontWeight/textAlign/textColor/lineHeight from
+// the shared typography fields (no need to redeclare them here).
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...sharedTypographyFields,
+  ...sharedLayoutFields,
+  ...sharedColorFields,
 };
-const WEIGHT: Record<CategoryTitleProps['fontWeight'], string> = {
-  normal: 'font-normal', medium: 'font-medium', semibold: 'font-semibold', bold: 'font-bold',
-};
-const ALIGN: Record<CategoryTitleProps['alignment'], string> = {
-  left: 'text-left', center: 'text-center', right: 'text-right',
-};
+
+// ── Accordion config ─────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['tag', 'className'],
+    },
+    {
+      label: 'Typography',
+      fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
+    },
+    {
+      label: 'Colors',
+      fieldKeys: ['backgroundColor', 'borderRadius'],
+    },
+  ],
+  allFields,
+});
+
+// ── Component ───────────────────────────────────────────────────────────────
 
 export const CategoryTitle: ComponentConfig<CategoryTitleProps> = {
   label: 'Category Title',
-  fields: categoryTitleFields as ComponentConfig<CategoryTitleProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
-    tag: 'h1', fontSize: '2xl', color: 'black', alignment: 'left', fontWeight: 'bold', marginBottom: '1rem', className: '',
-  },
+    tag: 'h1',
+    className: '',
+    ...defaultTypographyProps,
+    fontSize: '2xl',
+    fontWeight: 'bold',
+    textColor: '#000000',
+    textAlign: 'left',
+    ...defaultLayoutProps,
+    marginBottom: 'sm',
+    ...defaultColorProps,
+  } as CategoryTitleProps,
   render: (rawProps: any) => {
-    const { category, tag = 'h1', fontSize, color, alignment, fontWeight, marginBottom, className } = rawProps as CategoryTitleProps;
-    const fs = fontSize || '2xl';
-    const c = color || 'black';
-    const fw = fontWeight || 'bold';
-    const a = alignment || 'left';
+    const {
+      category, tag = 'h1', className,
+      fontSize, fontWeight, textColor, textAlign, lineHeight,
+      marginTop, marginBottom, paddingX, paddingY,
+      backgroundColor, borderRadius,
+    } = rawProps as CategoryTitleProps;
+
     if (!category) {
-      return <div className="text-gray-400 italic">Category title will appear here</div>;
+      return <div style={{ color: '#9ca3af', fontStyle: 'italic' }}>Category title will appear here</div>;
     }
+
     const Tag: any = tag;
-    return (
-      <Tag
-        className={`${ALIGN[a]} ${WEIGHT[fw]} ${SIZE[fs]} ${COLOR[c]} ${className || ''}`.trim()}
-        style={{ marginBottom: marginBottom || '1rem' }}
-      >
-        {category.name}
-      </Tag>
-    );
+    const composedClassName = [
+      className,
+      buildTypographyClasses(rawProps),
+      buildLayoutClasses(rawProps),
+      buildColorClasses(rawProps),
+    ].filter(Boolean).join(' ');
+
+    const style: React.CSSProperties = {
+      color: resolveColor(textColor) || '#000000',
+      backgroundColor: backgroundColor && backgroundColor !== 'transparent'
+        ? (resolveColor(backgroundColor) || backgroundColor)
+        : undefined,
+    };
+
+    return <Tag className={composedClassName} style={style}>{category.name}</Tag>;
   },
 };
 

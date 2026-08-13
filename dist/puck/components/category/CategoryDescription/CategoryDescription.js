@@ -1,38 +1,96 @@
 import { Fragment as _Fragment, jsx as _jsx } from "react/jsx-runtime";
-import { categoryDescriptionFields } from './categorydescription.fields';
-const SIZE = {
-    sm: 'text-sm', base: 'text-base', md: 'text-md', lg: 'text-lg', xl: 'text-xl',
+import { resolveColor } from '../../../../theme/resolveColor';
+import { createAccordionFields, sharedTypographyFields, sharedLayoutFields, sharedColorFields, buildTypographyClasses, buildLayoutClasses, buildColorClasses, defaultTypographyProps, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
+const MAX_WIDTH_MAP = {
+    none: 'none',
+    sm: '384px',
+    md: '448px',
+    lg: '512px',
+    xl: '576px',
+    '2xl': '672px',
+    full: '100%',
 };
-const COLOR = {
-    default: 'text-gray-600', black: 'text-black', gray: 'text-gray-600',
-    muted: 'text-gray-500', white: 'text-white',
+// ── Content fields (component-specific) ─────────────────────────────────────
+const contentFields = {
+    maxWidth: {
+        type: 'select', label: 'Max Width',
+        options: [
+            { label: 'None', value: 'none' },
+            { label: 'Small', value: 'sm' },
+            { label: 'Medium', value: 'md' },
+            { label: 'Large', value: 'lg' },
+            { label: 'X-Large', value: 'xl' },
+            { label: '2X-Large', value: '2xl' },
+            { label: 'Full', value: 'full' },
+        ],
+    },
+    className: { type: 'text', label: 'Custom CSS Classes' },
 };
-const ALIGN = {
-    left: 'text-left', center: 'text-center', right: 'text-right', justify: 'text-justify',
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    ...contentFields,
+    ...sharedTypographyFields,
+    ...sharedLayoutFields,
+    ...sharedColorFields,
 };
-const LH = {
-    tight: 'leading-tight', normal: 'leading-normal', relaxed: 'leading-relaxed', loose: 'leading-loose',
-};
-const MW = {
-    none: '', sm: 'max-w-sm', md: 'max-w-md', lg: 'max-w-lg', xl: 'max-w-xl', '2xl': 'max-w-2xl', full: 'max-w-full',
-};
+// ── Accordion config ─────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Content',
+            defaultOpen: true,
+            fieldKeys: ['maxWidth', 'className'],
+        },
+        {
+            label: 'Typography',
+            fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
+        },
+        {
+            label: 'Layout',
+            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
+        },
+        {
+            label: 'Colors',
+            fieldKeys: ['backgroundColor', 'borderRadius'],
+        },
+    ],
+    allFields,
+});
+// ── Component ───────────────────────────────────────────────────────────────
 export const CategoryDescription = {
     label: 'Category Description',
-    fields: categoryDescriptionFields,
+    fields: accordionFields,
     defaultProps: {
-        fontSize: 'base', color: 'gray', alignment: 'left', lineHeight: 'relaxed', maxWidth: 'full',
-        marginBottom: '2rem', className: '',
+        maxWidth: 'full',
+        className: '',
+        ...defaultTypographyProps,
+        fontSize: 'base',
+        lineHeight: 'relaxed',
+        textColor: '#6b7280',
+        textAlign: 'left',
+        ...defaultLayoutProps,
+        marginBottom: 'md',
+        ...defaultColorProps,
     },
     render: (rawProps) => {
-        const { category, fontSize, color, alignment, lineHeight, maxWidth, marginBottom, className } = rawProps;
+        const { category, maxWidth, className, fontSize, fontWeight, textAlign, textColor, lineHeight, marginTop, marginBottom, paddingX, paddingY, backgroundColor, borderRadius, } = rawProps;
         if (!category || !category.description)
             return _jsx(_Fragment, {});
-        const fs = fontSize || 'base';
-        const c = color || 'gray';
-        const a = alignment || 'left';
-        const lh = lineHeight || 'relaxed';
-        const mw = maxWidth || 'full';
-        return (_jsx("div", { className: `${ALIGN[a]} ${SIZE[fs]} ${COLOR[c]} ${LH[lh]} ${MW[mw]} ${className || ''}`.trim(), style: { marginBottom: marginBottom || '2rem' }, children: _jsx("p", { children: category.description }) }));
+        const maxWidthCss = MAX_WIDTH_MAP[maxWidth] ?? 'none';
+        const composedClassName = [
+            className,
+            buildTypographyClasses(rawProps),
+            buildLayoutClasses(rawProps),
+            buildColorClasses(rawProps),
+        ].filter(Boolean).join(' ');
+        const style = {
+            color: resolveColor(textColor) || '#6b7280',
+            maxWidth: maxWidthCss,
+            backgroundColor: backgroundColor && backgroundColor !== 'transparent'
+                ? (resolveColor(backgroundColor) || backgroundColor)
+                : undefined,
+        };
+        return (_jsx("div", { className: composedClassName, style: style, children: _jsx("p", { children: category.description }) }));
     },
 };
 export default CategoryDescription;

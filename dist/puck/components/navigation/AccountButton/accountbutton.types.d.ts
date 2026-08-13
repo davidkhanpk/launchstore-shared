@@ -19,8 +19,8 @@ export interface AccountButtonProps {
     showLabel: boolean;
     label: string;
     iconSize: AccountButtonIconSize;
-    iconColor: string;
-    hoverColor: string;
+    iconColor?: string;
+    hoverColor?: string;
     style: AccountButtonStyle;
     linkTo: string;
     signedInLink: string;

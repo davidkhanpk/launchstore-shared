@@ -7,5 +7,4 @@ export type {
   SharedMobileMenuItem,
   SharedMobileMenuTheme,
 } from './mobilemenu.types';
-export { mobileMenuFields } from './mobilemenu.fields';
 export { mobileMenuMeta, type MobileMenuMeta } from './mobilemenu.meta';

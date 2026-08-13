@@ -1,7 +1,11 @@
 export interface SpacerProps {
   id?: string;
-  height: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
-  showDivider: boolean;
+  height?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+  showDivider?: boolean;
   dividerStyle?: 'solid' | 'dashed' | 'dotted';
-  dividerColor: string;
+  dividerColor?: string;
+  marginTop?: string;
+  marginBottom?: string;
+  paddingX?: string;
+  paddingY?: string;
 }

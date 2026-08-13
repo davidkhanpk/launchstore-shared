@@ -6,5 +6,4 @@ export type {
   SharedReviewsCustomer, FetchReviews, CreateReviewFn, VoteOnReview,
   UploadReviewMedia, FetchCustomer,
 } from './productreviews.types';
-export { productReviewsFields } from './productreviews.fields';
 export { productReviewsMeta, type ProductReviewsMeta } from './productreviews.meta';

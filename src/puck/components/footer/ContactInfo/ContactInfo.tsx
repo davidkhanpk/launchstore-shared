@@ -1,8 +1,13 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
-import { contactInfoFields } from './contactinfo.fields';
 import type { ContactInfoProps } from './contactinfo.types';
+import {
+  createAccordionFields,
+  sharedLayoutFields,
+  buildLayoutClasses,
+  defaultLayoutProps,
+} from '../../../design-system';
 
 // Inline SVG icons (replacing lucide-react) — MapPin / Phone / Mail / Clock
 const ICONS = {
@@ -12,15 +17,80 @@ const ICONS = {
   clock: (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>),
 };
 
-const GAP: Record<ContactInfoProps['gap'], string> = { sm: 'gap-2', md: 'gap-4', lg: 'gap-6' };
-const FONT: Record<ContactInfoProps['fontSize'], string> = { sm: 'text-sm', base: 'text-base' };
-const LAYOUT: Record<ContactInfoProps['layout'], string> = {
+const FONT: Record<NonNullable<ContactInfoProps['fontSize']>, string> = { sm: 'text-sm', base: 'text-base' };
+
+// ── Content fields (component-specific) ─────────────────────────────────────
+
+const contentFields = {
+  showAddress: { type: 'radio' as const, label: 'Show Address', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  address: { type: 'textarea' as const, label: 'Address' },
+  showPhone: { type: 'radio' as const, label: 'Show Phone', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  phone: { type: 'text' as const, label: 'Phone Number' },
+  showEmail: { type: 'radio' as const, label: 'Show Email', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  email: { type: 'text' as const, label: 'Email Address' },
+  showHours: { type: 'radio' as const, label: 'Show Business Hours', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  hours: { type: 'textarea' as const, label: 'Business Hours' },
+  showIcons: { type: 'radio' as const, label: 'Show Icons', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  layout: {
+    type: 'select' as const, label: 'Layout',
+    options: [{ label: 'Stacked', value: 'stacked' }, { label: 'Grid', value: 'grid' }],
+  },
+};
+
+// ── Style fields (component-specific colors/sizing) ─────────────────────────
+
+const styleFields = {
+  textColor: { type: 'text' as const, label: 'Text Color (hex or theme token)' },
+  iconColor: { type: 'text' as const, label: 'Icon Color (hex or theme token)' },
+  fontSize: {
+    type: 'select' as const, label: 'Font Size',
+    options: [{ label: 'Small', value: 'sm' }, { label: 'Base', value: 'base' }],
+  },
+  gap: {
+    type: 'select' as const, label: 'Spacing',
+    options: [{ label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }],
+  },
+};
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...styleFields,
+  ...sharedLayoutFields,
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['showAddress', 'address', 'showPhone', 'phone', 'showEmail', 'email', 'showHours', 'hours', 'showIcons', 'layout'],
+    },
+    {
+      label: 'Typography & Color',
+      fieldKeys: ['textColor', 'iconColor', 'fontSize', 'gap'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
+    },
+  ],
+  allFields,
+});
+
+const GAP_CLASS: Record<string, string> = { sm: 'gap-2', md: 'gap-4', lg: 'gap-6' };
+const LAYOUT_CLASS: Record<string, string> = {
   stacked: 'flex flex-col', grid: 'grid grid-cols-1 md:grid-cols-2',
 };
 
+// ── Component ───────────────────────────────────────────────────────────────
+
 export const ContactInfo: ComponentConfig<ContactInfoProps> = {
   label: 'Contact Info',
-  fields: contactInfoFields as ComponentConfig<ContactInfoProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     showAddress: true,
     address: '123 Main Street\nCity, State 12345\nCountry',
@@ -36,19 +106,25 @@ export const ContactInfo: ComponentConfig<ContactInfoProps> = {
     iconColor: '#9ca3af',
     fontSize: 'sm',
     gap: 'md',
-  },
-  render: ({
-    showAddress, address, showPhone, phone, showEmail, email,
-    showHours, hours, showIcons, layout, textColor, iconColor, fontSize, gap,
-  }) => {
+    ...defaultLayoutProps,
+  } as ContactInfoProps,
+  render: (rawProps: any) => {
+    const {
+      showAddress, address, showPhone, phone, showEmail, email,
+      showHours, hours, showIcons, layout, textColor, iconColor, fontSize, gap,
+      marginTop, marginBottom, paddingX, paddingY,
+    } = rawProps;
+
     const items: Array<{ icon: React.ReactNode; content: string; href: string | null }> = [];
     if (showAddress && address) items.push({ icon: ICONS.map, content: address, href: `https://maps.google.com/?q=${encodeURIComponent(address)}` });
     if (showPhone && phone) items.push({ icon: ICONS.phone, content: phone, href: `tel:${phone.replace(/\s/g, '')}` });
     if (showEmail && email) items.push({ icon: ICONS.mail, content: email, href: `mailto:${email}` });
     if (showHours && hours) items.push({ icon: ICONS.clock, content: hours, href: null });
 
+    const layoutClasses = buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY });
+
     return (
-      <div className={`${LAYOUT[layout] || 'flex flex-col'} ${GAP[gap] || 'gap-4'}`}>
+      <div className={`${LAYOUT_CLASS[layout || 'stacked'] || 'flex flex-col'} ${GAP_CLASS[gap || 'md'] || 'gap-4'} ${layoutClasses}`}>
         {items.map((item, i) => {
           const content = (
             <div className="flex items-start gap-3">
@@ -57,7 +133,7 @@ export const ContactInfo: ComponentConfig<ContactInfoProps> = {
                   {item.icon}
                 </span>
               )}
-              <div className={`${FONT[fontSize] || 'text-sm'} whitespace-pre-line`} style={{ color: resolveColor(textColor) }}>
+              <div className={`${FONT[fontSize || 'sm'] || 'text-sm'} whitespace-pre-line`} style={{ color: resolveColor(textColor) }}>
                 {item.content}
               </div>
             </div>

@@ -1,6 +1,62 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useMemo } from 'react';
-import { productAccordionFields } from './productaccordion.fields';
+import { createAccordionFields, } from '../../../design-system';
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    sections: {
+        type: 'array', label: 'Accordion Sections',
+        arrayFields: {
+            id: { type: 'text', label: 'ID (unique)' },
+            title: { type: 'text', label: 'Section Title' },
+            contentType: {
+                type: 'select', label: 'Content Type',
+                options: [
+                    { label: 'Product Description', value: 'description' },
+                    { label: 'Material & Care', value: 'material' },
+                    { label: 'Dimensions', value: 'dimensions' },
+                    { label: 'Shipping Info', value: 'shipping' },
+                    { label: 'Custom HTML', value: 'custom' },
+                ],
+            },
+            customContent: { type: 'textarea', label: 'Custom Content (HTML)' },
+        },
+        defaultItemProps: {
+            id: 'section-1', title: 'Product Details', contentType: 'description', customContent: '',
+        },
+    },
+    allowMultiple: {
+        type: 'radio', label: 'Allow Multiple Open',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    defaultOpen: { type: 'text', label: 'Default Open (comma-separated IDs)' },
+    borderStyle: {
+        type: 'select', label: 'Border Style',
+        options: [
+            { label: 'No Borders', value: 'none' },
+            { label: 'Top Border Only', value: 'top' },
+            { label: 'Full Borders', value: 'full' },
+        ],
+    },
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Sections',
+            defaultOpen: true,
+            fieldKeys: ['sections'],
+        },
+        {
+            label: 'Behavior',
+            fieldKeys: ['allowMultiple', 'defaultOpen'],
+        },
+        {
+            label: 'Appearance',
+            fieldKeys: ['borderStyle'],
+        },
+    ],
+    allFields,
+});
 const ChevronSvg = ({ rotated }) => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: 20, height: 20, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", style: { transform: rotated ? 'rotate(180deg)' : 'none', transition: 'transform 200ms' }, children: _jsx("polyline", { points: "6 9 12 15 18 9" }) }));
 const BORDER = { none: '', top: 'border-t', full: 'border' };
 const getContent = (section, product) => {
@@ -25,7 +81,7 @@ const getContent = (section, product) => {
 };
 export const ProductAccordion = {
     label: 'Product Accordion',
-    fields: productAccordionFields,
+    fields: accordionFields,
     defaultProps: {
         sections: [
             { id: 'description', title: 'Product Details', contentType: 'description', customContent: '' },

@@ -1,5 +1,3 @@
-import type { Field } from '@puckeditor/core';
-
 export type ContentSliderEffect = 'slide' | 'fade' | 'cube' | 'coverflow' | 'flip';
 export type ContentSliderPagination = 'bullets' | 'fraction' | 'progressbar';
 
@@ -35,4 +33,8 @@ export interface ContentSliderProps {
   enableOverlay: boolean;
   overlayColor: string;
   overlayOpacity: number;
+  marginTop?: string;
+  marginBottom?: string;
+  paddingX?: string;
+  paddingY?: string;
 }

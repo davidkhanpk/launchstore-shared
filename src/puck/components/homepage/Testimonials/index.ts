@@ -6,5 +6,4 @@
  */
 export { Testimonials } from './Testimonials';
 export type { TestimonialsProps } from './testimonials.types';
-export { testimonialsFields } from './testimonials.fields';
 export { testimonialsMeta, type TestimonialsMeta } from './testimonials.meta';

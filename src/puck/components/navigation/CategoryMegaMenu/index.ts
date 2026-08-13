@@ -6,5 +6,4 @@ export type {
   SharedCategoryMegaMenuConfig,
   SharedMegaMenuTheme,
 } from './categorymegamenu.types';
-export { categoryMegaMenuFields } from './categorymegamenu.fields';
 export { categoryMegaMenuMeta, type CategoryMegaMenuMeta } from './categorymegamenu.meta';

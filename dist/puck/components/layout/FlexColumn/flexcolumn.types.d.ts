@@ -4,7 +4,12 @@ export interface FlexColumnProps {
     gap?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
     fullHeight?: boolean;
     minHeight?: string;
-    padding?: string;
+    /** Layout preset */
+    marginTop?: string;
+    marginBottom?: string;
+    paddingX?: string;
+    paddingY?: string;
+    /** Color preset */
     backgroundColor?: string;
     borderRadius?: string;
 }

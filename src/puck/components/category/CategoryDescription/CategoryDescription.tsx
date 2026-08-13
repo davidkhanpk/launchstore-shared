@@ -1,45 +1,128 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { categoryDescriptionFields } from './categorydescription.fields';
+import { resolveColor } from '../../../../theme/resolveColor';
 import type { CategoryDescriptionProps } from './categorydescription.types';
+import {
+  createAccordionFields,
+  sharedTypographyFields,
+  sharedLayoutFields,
+  sharedColorFields,
+  buildTypographyClasses,
+  buildLayoutClasses,
+  buildColorClasses,
+  defaultTypographyProps,
+  defaultLayoutProps,
+  defaultColorProps,
+} from '../../../design-system';
 
-const SIZE: Record<CategoryDescriptionProps['fontSize'], string> = {
-  sm: 'text-sm', base: 'text-base', md: 'text-md', lg: 'text-lg', xl: 'text-xl',
+const MAX_WIDTH_MAP: Record<string, string> = {
+  none: 'none',
+  sm: '384px',
+  md: '448px',
+  lg: '512px',
+  xl: '576px',
+  '2xl': '672px',
+  full: '100%',
 };
-const COLOR: Record<CategoryDescriptionProps['color'], string> = {
-  default: 'text-gray-600', black: 'text-black', gray: 'text-gray-600',
-  muted: 'text-gray-500', white: 'text-white',
+
+// ── Content fields (component-specific) ─────────────────────────────────────
+
+const contentFields = {
+  maxWidth: {
+    type: 'select' as const, label: 'Max Width',
+    options: [
+      { label: 'None', value: 'none' },
+      { label: 'Small', value: 'sm' },
+      { label: 'Medium', value: 'md' },
+      { label: 'Large', value: 'lg' },
+      { label: 'X-Large', value: 'xl' },
+      { label: '2X-Large', value: '2xl' },
+      { label: 'Full', value: 'full' },
+    ],
+  },
+  className: { type: 'text' as const, label: 'Custom CSS Classes' },
 };
-const ALIGN: Record<CategoryDescriptionProps['alignment'], string> = {
-  left: 'text-left', center: 'text-center', right: 'text-right', justify: 'text-justify',
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...sharedTypographyFields,
+  ...sharedLayoutFields,
+  ...sharedColorFields,
 };
-const LH: Record<CategoryDescriptionProps['lineHeight'], string> = {
-  tight: 'leading-tight', normal: 'leading-normal', relaxed: 'leading-relaxed', loose: 'leading-loose',
-};
-const MW: Record<CategoryDescriptionProps['maxWidth'], string> = {
-  none: '', sm: 'max-w-sm', md: 'max-w-md', lg: 'max-w-lg', xl: 'max-w-xl', '2xl': 'max-w-2xl', full: 'max-w-full',
-};
+
+// ── Accordion config ─────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['maxWidth', 'className'],
+    },
+    {
+      label: 'Typography',
+      fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
+    },
+    {
+      label: 'Colors',
+      fieldKeys: ['backgroundColor', 'borderRadius'],
+    },
+  ],
+  allFields,
+});
+
+// ── Component ───────────────────────────────────────────────────────────────
 
 export const CategoryDescription: ComponentConfig<CategoryDescriptionProps> = {
   label: 'Category Description',
-  fields: categoryDescriptionFields as ComponentConfig<CategoryDescriptionProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
-    fontSize: 'base', color: 'gray', alignment: 'left', lineHeight: 'relaxed', maxWidth: 'full',
-    marginBottom: '2rem', className: '',
-  },
+    maxWidth: 'full',
+    className: '',
+    ...defaultTypographyProps,
+    fontSize: 'base',
+    lineHeight: 'relaxed',
+    textColor: '#6b7280',
+    textAlign: 'left',
+    ...defaultLayoutProps,
+    marginBottom: 'md',
+    ...defaultColorProps,
+  } as CategoryDescriptionProps,
   render: (rawProps: any) => {
-    const { category, fontSize, color, alignment, lineHeight, maxWidth, marginBottom, className } = rawProps as CategoryDescriptionProps;
+    const {
+      category, maxWidth, className,
+      fontSize, fontWeight, textAlign, textColor, lineHeight,
+      marginTop, marginBottom, paddingX, paddingY,
+      backgroundColor, borderRadius,
+    } = rawProps as CategoryDescriptionProps;
+
     if (!category || !category.description) return <></>;
-    const fs = fontSize || 'base';
-    const c = color || 'gray';
-    const a = alignment || 'left';
-    const lh = lineHeight || 'relaxed';
-    const mw = maxWidth || 'full';
+
+    const maxWidthCss = MAX_WIDTH_MAP[maxWidth] ?? 'none';
+
+    const composedClassName = [
+      className,
+      buildTypographyClasses(rawProps),
+      buildLayoutClasses(rawProps),
+      buildColorClasses(rawProps),
+    ].filter(Boolean).join(' ');
+
+    const style: React.CSSProperties = {
+      color: resolveColor(textColor) || '#6b7280',
+      maxWidth: maxWidthCss,
+      backgroundColor: backgroundColor && backgroundColor !== 'transparent'
+        ? (resolveColor(backgroundColor) || backgroundColor)
+        : undefined,
+    };
+
     return (
-      <div
-        className={`${ALIGN[a]} ${SIZE[fs]} ${COLOR[c]} ${LH[lh]} ${MW[mw]} ${className || ''}`.trim()}
-        style={{ marginBottom: marginBottom || '2rem' }}
-      >
+      <div className={composedClassName} style={style}>
         <p>{category.description}</p>
       </div>
     );

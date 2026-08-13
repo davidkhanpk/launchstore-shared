@@ -1,8 +1,10 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { productBreadcrumbsFields } from './productbreadcrumbs.fields';
 import type { ProductBreadcrumbsProps, ProductBreadcrumbsSeparator, ProductBreadcrumbsTransform } from './productbreadcrumbs.types';
 import type { ProductData } from '../ProductData';
+import {
+  createAccordionFields,
+} from '../../../design-system';
 
 const HomeSvg = ({ size = 16 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -18,7 +20,7 @@ const ChevronSvg = ({ size = 16 }: { size?: number }) => (
 const Separator = ({ kind }: { kind: ProductBreadcrumbsSeparator }) => {
   if (kind === 'arrow') return <ChevronSvg />;
   if (kind === 'slash') return <span className="text-gray-400">/</span>;
-  return <span className="text-gray-400">\u2022</span>;
+  return <span className="text-gray-400">{'\u2022'}</span>;
 };
 
 const TRANSFORM: Record<ProductBreadcrumbsTransform, string> = {
@@ -29,10 +31,48 @@ export interface ProductBreadcrumbsWithProduct extends ProductBreadcrumbsProps {
   product?: ProductData | null;
 }
 
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  showHomeIcon: {
+    type: 'radio' as const, label: 'Show Home Icon',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  separator: {
+    type: 'select' as const, label: 'Separator',
+    options: [
+      { label: 'Arrow', value: 'arrow' },
+      { label: 'Slash', value: 'slash' },
+      { label: 'Dot', value: 'dot' },
+    ],
+  },
+  textTransform: {
+    type: 'select' as const, label: 'Text Transform',
+    options: [
+      { label: 'None', value: 'none' },
+      { label: 'Uppercase', value: 'uppercase' },
+      { label: 'Capitalize', value: 'capitalize' },
+    ],
+  },
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Appearance',
+      defaultOpen: true,
+      fieldKeys: ['showHomeIcon', 'separator', 'textTransform'],
+    },
+  ],
+  allFields,
+});
+
 export const ProductBreadcrumbs: ComponentConfig<ProductBreadcrumbsWithProduct> = {
   label: 'Product Breadcrumbs',
-  fields: productBreadcrumbsFields as ComponentConfig<ProductBreadcrumbsWithProduct>['fields'],
-  defaultProps: { showHomeIcon: true, separator: 'arrow', textTransform: 'none' },
+  fields: accordionFields as any,
+  defaultProps: { showHomeIcon: true, separator: 'arrow', textTransform: 'none' } as ProductBreadcrumbsProps,
   render: (rawProps: any) => {
     const { showHomeIcon, separator, textTransform, product } = rawProps as ProductBreadcrumbsWithProduct;
     if (!product) return <></>;

@@ -1,5 +1,3 @@
-import type { Field } from '@puckeditor/core';
-
 export type QuantitySelectorSize = 'small' | 'medium' | 'large';
 export type QuantitySelectorStyle = 'default' | 'minimal' | 'rounded';
 
@@ -11,12 +9,12 @@ export interface QuantitySelectorProps {
   defaultQuantity: number;
   size: QuantitySelectorSize;
   style: QuantitySelectorStyle;
-  marginTop: string;
-  marginBottom: string;
-  marginLeft: string;
-  marginRight: string;
-  paddingX: string;
-  paddingY: string;
+  marginTop?: string;
+  marginBottom?: string;
+  marginLeft?: string;
+  marginRight?: string;
+  paddingX?: string;
+  paddingY?: string;
 }
 
 /**

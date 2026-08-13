@@ -8,19 +8,19 @@ export interface AddToCartProps {
     preorderText: string;
     showIcon: boolean;
     disabled: boolean;
-    backgroundColor: string;
-    textColor: string;
-    hoverBackgroundColor: string;
-    hoverTextColor: string;
-    borderColor: string;
+    backgroundColor?: string;
+    textColor?: string;
+    hoverBackgroundColor?: string;
+    hoverTextColor?: string;
+    borderColor?: string;
     useThemeColors: boolean;
-    marginTop: string;
-    marginBottom: string;
-    marginLeft: string;
-    marginRight: string;
-    paddingX: string;
-    paddingY: string;
-    borderRadius: string;
+    marginTop?: string;
+    marginBottom?: string;
+    marginLeft?: string;
+    marginRight?: string;
+    paddingX?: string;
+    paddingY?: string;
+    borderRadius?: string;
 }
 /**
  * Cart-action contract. The shared component does NOT import

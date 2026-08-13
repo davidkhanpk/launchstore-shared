@@ -1,5 +1,3 @@
-import type { Field } from '@puckeditor/core';
-
 export type AddToCartVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'custom';
 export type AddToCartSize = 'sm' | 'md' | 'lg';
 
@@ -11,19 +9,19 @@ export interface AddToCartProps {
   preorderText: string;
   showIcon: boolean;
   disabled: boolean;
-  backgroundColor: string;
-  textColor: string;
-  hoverBackgroundColor: string;
-  hoverTextColor: string;
-  borderColor: string;
+  backgroundColor?: string;
+  textColor?: string;
+  hoverBackgroundColor?: string;
+  hoverTextColor?: string;
+  borderColor?: string;
   useThemeColors: boolean;
-  marginTop: string;
-  marginBottom: string;
-  marginLeft: string;
-  marginRight: string;
-  paddingX: string;
-  paddingY: string;
-  borderRadius: string;
+  marginTop?: string;
+  marginBottom?: string;
+  marginLeft?: string;
+  marginRight?: string;
+  paddingX?: string;
+  paddingY?: string;
+  borderRadius?: string;
 }
 
 /**

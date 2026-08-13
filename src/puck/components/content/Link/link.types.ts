@@ -3,8 +3,10 @@ export interface LinkProps {
   text: string;
   href: string;
   target: '_self' | '_blank';
-  color: string;
-  fontSize: 'sm' | 'base' | 'lg' | 'xl';
-  fontWeight: 'normal' | 'medium' | 'semibold' | 'bold';
   underline: 'always' | 'hover' | 'none';
+  fontSize?: string;
+  fontWeight?: string;
+  textColor?: string;
+  marginTop?: string;
+  marginBottom?: string;
 }

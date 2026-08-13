@@ -11,6 +11,5 @@
  */
 export { HeroSection } from './Hero';
 export type { HeroSectionProps } from './hero.types';
-export { heroFields } from './hero.fields';
 export { heroMeta, type HeroMeta } from './hero.meta';
 //# sourceMappingURL=index.d.ts.map

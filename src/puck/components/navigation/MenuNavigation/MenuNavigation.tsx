@@ -1,7 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
-import { menuNavigationFields } from './menunavigation.fields';
 import type {
   MenuNavigationProps,
   MenuNavigationLayout,
@@ -12,6 +11,152 @@ import type {
 import { resolveColor } from '../../../../theme/resolveColor';
 import { CategoryMegaMenu } from '../CategoryMegaMenu/CategoryMegaMenu';
 import type { CategoryMegaMenuProps, SharedMegaMenuTheme } from '../CategoryMegaMenu/categorymegamenu.types';
+import {
+  createAccordionFields,
+} from '../../../design-system';
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  menuHandle: { type: 'text' as const, label: 'Menu Handle' },
+  layout: {
+    type: 'select' as const, label: 'Layout',
+    options: [
+      { label: 'Horizontal', value: 'horizontal' },
+      { label: 'Vertical', value: 'vertical' },
+      { label: 'Stacked', value: 'stacked' },
+    ],
+  },
+  alignment: {
+    type: 'select' as const, label: 'Alignment',
+    options: [
+      { label: 'Left', value: 'left' },
+      { label: 'Center', value: 'center' },
+      { label: 'Right', value: 'right' },
+    ],
+  },
+  hoverEffect: {
+    type: 'select' as const, label: 'Hover Effect',
+    options: [
+      { label: 'Underline', value: 'underline' },
+      { label: 'Background', value: 'background' },
+      { label: 'Color Change', value: 'color' },
+      { label: 'None', value: 'none' },
+    ],
+  },
+  textColor: { type: 'text' as const, label: 'Text Color (token or hex)' },
+  hoverColor: { type: 'text' as const, label: 'Hover Color (token or hex)' },
+  fontSize: {
+    type: 'select' as const, label: 'Font Size',
+    options: [
+      { label: 'Small', value: 'sm' },
+      { label: 'Base', value: 'base' },
+      { label: 'Large', value: 'lg' },
+    ],
+  },
+  fontWeight: {
+    type: 'select' as const, label: 'Font Weight',
+    options: [
+      { label: 'Normal', value: 'normal' },
+      { label: 'Medium', value: 'medium' },
+      { label: 'Semibold', value: 'semibold' },
+      { label: 'Bold', value: 'bold' },
+    ],
+  },
+  showDropdownArrows: {
+    type: 'radio' as const, label: 'Show Dropdown Arrows',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  dropdownStyle: {
+    type: 'select' as const, label: 'Dropdown Style',
+    options: [
+      { label: 'Default Dropdown', value: 'default' },
+      { label: 'Mega Menu', value: 'mega' },
+    ],
+  },
+  triggerMode: {
+    type: 'select' as const, label: 'Open On',
+    options: [
+      { label: 'Hover', value: 'hover' },
+      { label: 'Click', value: 'click' },
+    ],
+  },
+  subMenuPosition: {
+    type: 'select' as const, label: 'Sub-menu Position',
+    options: [
+      { label: 'Right (side flyout)', value: 'right' },
+      { label: 'Left (side flyout)', value: 'left' },
+      { label: 'Bottom (dropdown)', value: 'bottom' },
+    ],
+  },
+  maxDepth: {
+    type: 'select' as const, label: 'Maximum Nesting Depth',
+    options: [
+      { label: '1 Level', value: '1' },
+      { label: '2 Levels', value: '2' },
+      { label: '3 Levels', value: '3' },
+    ],
+  },
+  dropdownBackground: { type: 'text' as const, label: 'Dropdown Background (token or color)' },
+  dropdownBorder: { type: 'text' as const, label: 'Dropdown Border (token or color)' },
+  dropdownShadow: {
+    type: 'select' as const, label: 'Dropdown Shadow',
+    options: [
+      { label: 'Small', value: 'sm' },
+      { label: 'Medium', value: 'md' },
+      { label: 'Large', value: 'lg' },
+      { label: 'Extra Large', value: 'xl' },
+    ],
+  },
+  dropdownRadius: {
+    type: 'select' as const, label: 'Dropdown Border Radius',
+    options: [
+      { label: 'Small', value: 'sm' },
+      { label: 'Medium', value: 'md' },
+      { label: 'Large', value: 'lg' },
+      { label: 'Extra Large', value: 'xl' },
+    ],
+  },
+  mobileBreakpoint: { type: 'number' as const, label: 'Mobile Breakpoint (px)' },
+  mobileSearchPlaceholder: { type: 'text' as const, label: 'Mobile Search Placeholder (empty hides search)' },
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Menu Source',
+      defaultOpen: true,
+      fieldKeys: ['menuHandle'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['layout', 'alignment', 'maxDepth'],
+    },
+    {
+      label: 'Typography',
+      fieldKeys: ['fontSize', 'fontWeight', 'textColor', 'hoverColor'],
+    },
+    {
+      label: 'Hover Effect',
+      fieldKeys: ['hoverEffect'],
+    },
+    {
+      label: 'Dropdown',
+      fieldKeys: ['dropdownStyle', 'showDropdownArrows', 'triggerMode', 'subMenuPosition'],
+    },
+    {
+      label: 'Dropdown Appearance',
+      fieldKeys: ['dropdownBackground', 'dropdownBorder', 'dropdownShadow', 'dropdownRadius'],
+    },
+    {
+      label: 'Mobile',
+      fieldKeys: ['mobileBreakpoint', 'mobileSearchPlaceholder'],
+    },
+  ],
+  allFields,
+});
 
 const ChevronDown = ({ size = 16 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
@@ -672,7 +817,7 @@ const MobileAccordionItem: React.FC<{
 
 export const MenuNavigation: ComponentConfig<MenuNavigationProps> = {
   label: 'Menu Navigation',
-  fields: menuNavigationFields as ComponentConfig<MenuNavigationProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     menuHandle: '',
     layout: 'horizontal',

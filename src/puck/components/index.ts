@@ -107,3 +107,6 @@ export * from './generic/Accordion';
 
 // Unified storefront components (FilterBar, PaginationBar)
 export * from './storefront';
+
+// Design system (shared presets, accordion inspector, StyledSection)
+export * from '../design-system';

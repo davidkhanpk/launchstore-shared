@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
-import { productBreadcrumbsFields } from './productbreadcrumbs.fields';
+import { createAccordionFields, } from '../../../design-system';
 const HomeSvg = ({ size = 16 }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("path", { d: "M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" }), _jsx("polyline", { points: "9 22 9 12 15 12 15 22" })] }));
 const ChevronSvg = ({ size = 16 }) => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", className: "text-gray-400", children: _jsx("polyline", { points: "9 18 15 12 9 6" }) }));
 const Separator = ({ kind }) => {
@@ -7,14 +7,48 @@ const Separator = ({ kind }) => {
         return _jsx(ChevronSvg, {});
     if (kind === 'slash')
         return _jsx("span", { className: "text-gray-400", children: "/" });
-    return _jsx("span", { className: "text-gray-400", children: "\\u2022" });
+    return _jsx("span", { className: "text-gray-400", children: '\u2022' });
 };
 const TRANSFORM = {
     none: '', uppercase: 'uppercase', capitalize: 'capitalize',
 };
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    showHomeIcon: {
+        type: 'radio', label: 'Show Home Icon',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    separator: {
+        type: 'select', label: 'Separator',
+        options: [
+            { label: 'Arrow', value: 'arrow' },
+            { label: 'Slash', value: 'slash' },
+            { label: 'Dot', value: 'dot' },
+        ],
+    },
+    textTransform: {
+        type: 'select', label: 'Text Transform',
+        options: [
+            { label: 'None', value: 'none' },
+            { label: 'Uppercase', value: 'uppercase' },
+            { label: 'Capitalize', value: 'capitalize' },
+        ],
+    },
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Appearance',
+            defaultOpen: true,
+            fieldKeys: ['showHomeIcon', 'separator', 'textTransform'],
+        },
+    ],
+    allFields,
+});
 export const ProductBreadcrumbs = {
     label: 'Product Breadcrumbs',
-    fields: productBreadcrumbsFields,
+    fields: accordionFields,
     defaultProps: { showHomeIcon: true, separator: 'arrow', textTransform: 'none' },
     render: (rawProps) => {
         const { showHomeIcon, separator, textTransform, product } = rawProps;

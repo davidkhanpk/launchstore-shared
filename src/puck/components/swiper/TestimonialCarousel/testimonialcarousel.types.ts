@@ -40,6 +40,8 @@ export interface TestimonialCarouselProps {
   accentColor: string;
   borderRadius: TestimonialRadius;
   cardShadow: TestimonialShadow;
-  paddingY: number;
-  paddingX: number;
+  paddingY?: string;
+  paddingX?: string;
+  marginTop?: string;
+  marginBottom?: string;
 }

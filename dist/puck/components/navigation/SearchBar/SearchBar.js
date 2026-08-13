@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useRef } from 'react';
-import { searchBarFields } from './searchbar.fields';
 import { resolveColor } from '../../../../theme/resolveColor';
+import { createAccordionFields, } from '../../../design-system';
 const SearchSvg = ({ size }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("circle", { cx: "11", cy: "11", r: "8" }), _jsx("line", { x1: "21", y1: "21", x2: "16.65", y2: "16.65" })] }));
 const XSvg = ({ size }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("line", { x1: "18", y1: "6", x2: "6", y2: "18" }), _jsx("line", { x1: "6", y1: "6", x2: "18", y2: "18" })] }));
 const SIZE_MAP = {
@@ -16,9 +16,80 @@ const RADIUS = {
 const STYLE = {
     minimal: 'border-0 border-b-2', outlined: 'border', filled: 'border-0',
 };
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    placeholder: { type: 'text', label: 'Placeholder Text' },
+    style: {
+        type: 'select', label: 'Style',
+        options: [{ label: 'Minimal', value: 'minimal' }, { label: 'Outlined', value: 'outlined' }, { label: 'Filled', value: 'filled' }],
+    },
+    size: {
+        type: 'select', label: 'Size',
+        options: [{ label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }],
+    },
+    showIcon: {
+        type: 'radio', label: 'Show Search Icon',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    iconPosition: {
+        type: 'select', label: 'Icon Position',
+        options: [{ label: 'Left', value: 'left' }, { label: 'Right', value: 'right' }],
+    },
+    fullWidth: {
+        type: 'radio', label: 'Full Width',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    maxWidth: { type: 'text', label: 'Max Width (if not full width)' },
+    borderRadius: {
+        type: 'select', label: 'Border Radius',
+        options: [
+            { label: 'None', value: 'none' },
+            { label: 'Small', value: 'sm' },
+            { label: 'Medium', value: 'md' },
+            { label: 'Large', value: 'lg' },
+            { label: 'Full', value: 'full' },
+        ],
+    },
+    backgroundColor: { type: 'text', label: 'Background Color (hex or theme token)' },
+    textColor: { type: 'text', label: 'Text Color (hex or theme token)' },
+    borderColor: { type: 'text', label: 'Border Color (hex or theme token)' },
+    focusBorderColor: { type: 'text', label: 'Focus Border Color (hex or theme token)' },
+    showPopularSearches: {
+        type: 'radio', label: 'Show Popular Searches',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    popularSearches: {
+        type: 'array', label: 'Popular Searches',
+        arrayFields: { search: { type: 'text' } },
+        getItemSummary: ((item) => item?.search || 'Search term'),
+    },
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Content',
+            defaultOpen: true,
+            fieldKeys: ['placeholder', 'showPopularSearches', 'popularSearches'],
+        },
+        {
+            label: 'Appearance',
+            fieldKeys: ['style', 'size', 'borderRadius', 'fullWidth', 'maxWidth'],
+        },
+        {
+            label: 'Icon',
+            fieldKeys: ['showIcon', 'iconPosition'],
+        },
+        {
+            label: 'Colors',
+            fieldKeys: ['backgroundColor', 'textColor', 'borderColor', 'focusBorderColor'],
+        },
+    ],
+    allFields,
+});
 export const SearchBar = {
     label: 'Search Bar',
-    fields: searchBarFields,
+    fields: accordionFields,
     defaultProps: {
         placeholder: 'Search products...', style: 'outlined', size: 'md',
         showIcon: true, iconPosition: 'left', fullWidth: false, maxWidth: '400px',

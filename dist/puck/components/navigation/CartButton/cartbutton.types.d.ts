@@ -22,10 +22,10 @@ export interface CartButtonProps {
     showBadge: boolean;
     badgePosition: CartButtonBadgePosition;
     iconSize: CartButtonIconSize;
-    iconColor: string;
-    hoverColor: string;
-    badgeBackgroundColor: string;
-    badgeTextColor: string;
+    iconColor?: string;
+    hoverColor?: string;
+    badgeBackgroundColor?: string;
+    badgeTextColor?: string;
     style: CartButtonStyle;
     /** Injected at render-time by the consumer wrapper. */
     cartCount?: number;

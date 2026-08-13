@@ -3,12 +3,12 @@ export interface ProductVariantSelectorProps {
     selectorStyle: VariantSelectorStyle;
     showLabels: boolean;
     showStock: boolean;
-    marginTop: string;
-    marginBottom: string;
-    marginLeft: string;
-    marginRight: string;
-    paddingX: string;
-    paddingY: string;
+    marginTop?: string;
+    marginBottom?: string;
+    marginLeft?: string;
+    marginRight?: string;
+    paddingX?: string;
+    paddingY?: string;
 }
 /**
  * Controlled variant state. The shared component receives the

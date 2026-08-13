@@ -13,10 +13,19 @@ export interface CategoryMetadataProps {
     showProductCount: boolean;
     showUpdatedDate: boolean;
     layout: 'horizontal' | 'vertical';
-    fontSize: string;
-    textColor: string;
     iconColor: string;
     spacing: string;
     className?: string;
+    fontSize?: string;
+    fontWeight?: string;
+    textAlign?: string;
+    textColor?: string;
+    lineHeight?: string;
+    marginTop?: string;
+    marginBottom?: string;
+    paddingX?: string;
+    paddingY?: string;
+    backgroundColor?: string;
+    borderRadius?: string;
 }
 //# sourceMappingURL=categorymetadata.types.d.ts.map

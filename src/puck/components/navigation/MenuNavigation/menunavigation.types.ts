@@ -1,4 +1,3 @@
-import type { Field } from '@puckeditor/core';
 // Re-exported from the deleted MenuNavigationRenderer (NAV-C2). These types
 // are the canonical enriched data contract between the storefront (which
 // builds them from Medusa-enriched menu items) and the renderer.

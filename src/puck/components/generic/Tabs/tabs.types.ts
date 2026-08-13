@@ -8,6 +8,10 @@ export interface TabsProps {
   id?: string;
   tabs: TabItem[];
   defaultTab?: number;
-  alignment: 'left' | 'center' | 'right';
-  tabStyle: 'underline' | 'pills' | 'bordered';
+  alignment?: 'left' | 'center' | 'right';
+  tabStyle?: 'underline' | 'pills' | 'bordered';
+  marginTop?: string;
+  marginBottom?: string;
+  paddingX?: string;
+  paddingY?: string;
 }

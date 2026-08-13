@@ -5,5 +5,4 @@ export type {
   SelectedOptions, SetSelectedOptions, SetSelectedVariant,
   ProductVariantSelectorVariantLike,
 } from './productvariantselector.types';
-export { productVariantSelectorFields } from './productvariantselector.fields';
 export { productVariantSelectorMeta, type ProductVariantSelectorMeta } from './productvariantselector.meta';

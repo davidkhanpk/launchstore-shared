@@ -9,8 +9,18 @@ export interface VideoProps {
     aspectRatio: '16:9' | '4:3' | '1:1' | '21:9';
     maxWidth: string;
     alignment: 'left' | 'center' | 'right';
-    borderRadius: 'none' | 'sm' | 'md' | 'lg';
     shadow: 'none' | 'sm' | 'md' | 'lg';
     caption: string;
+    fontSize?: string;
+    fontWeight?: string;
+    textAlign?: string;
+    textColor?: string;
+    lineHeight?: string;
+    marginTop?: string;
+    marginBottom?: string;
+    paddingX?: string;
+    paddingY?: string;
+    backgroundColor?: string;
+    borderRadius?: string;
 }
 //# sourceMappingURL=video.types.d.ts.map

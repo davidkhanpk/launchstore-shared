@@ -1,5 +1,3 @@
-import type { Field } from '@puckeditor/core';
-
 export interface SharedMegaMenuCategory {
   id: string;
   handle: string;

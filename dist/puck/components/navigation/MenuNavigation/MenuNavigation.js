@@ -1,9 +1,148 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
-import { menuNavigationFields } from './menunavigation.fields';
 import { resolveColor } from '../../../../theme/resolveColor';
 import { CategoryMegaMenu } from '../CategoryMegaMenu/CategoryMegaMenu';
+import { createAccordionFields, } from '../../../design-system';
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    menuHandle: { type: 'text', label: 'Menu Handle' },
+    layout: {
+        type: 'select', label: 'Layout',
+        options: [
+            { label: 'Horizontal', value: 'horizontal' },
+            { label: 'Vertical', value: 'vertical' },
+            { label: 'Stacked', value: 'stacked' },
+        ],
+    },
+    alignment: {
+        type: 'select', label: 'Alignment',
+        options: [
+            { label: 'Left', value: 'left' },
+            { label: 'Center', value: 'center' },
+            { label: 'Right', value: 'right' },
+        ],
+    },
+    hoverEffect: {
+        type: 'select', label: 'Hover Effect',
+        options: [
+            { label: 'Underline', value: 'underline' },
+            { label: 'Background', value: 'background' },
+            { label: 'Color Change', value: 'color' },
+            { label: 'None', value: 'none' },
+        ],
+    },
+    textColor: { type: 'text', label: 'Text Color (token or hex)' },
+    hoverColor: { type: 'text', label: 'Hover Color (token or hex)' },
+    fontSize: {
+        type: 'select', label: 'Font Size',
+        options: [
+            { label: 'Small', value: 'sm' },
+            { label: 'Base', value: 'base' },
+            { label: 'Large', value: 'lg' },
+        ],
+    },
+    fontWeight: {
+        type: 'select', label: 'Font Weight',
+        options: [
+            { label: 'Normal', value: 'normal' },
+            { label: 'Medium', value: 'medium' },
+            { label: 'Semibold', value: 'semibold' },
+            { label: 'Bold', value: 'bold' },
+        ],
+    },
+    showDropdownArrows: {
+        type: 'radio', label: 'Show Dropdown Arrows',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    dropdownStyle: {
+        type: 'select', label: 'Dropdown Style',
+        options: [
+            { label: 'Default Dropdown', value: 'default' },
+            { label: 'Mega Menu', value: 'mega' },
+        ],
+    },
+    triggerMode: {
+        type: 'select', label: 'Open On',
+        options: [
+            { label: 'Hover', value: 'hover' },
+            { label: 'Click', value: 'click' },
+        ],
+    },
+    subMenuPosition: {
+        type: 'select', label: 'Sub-menu Position',
+        options: [
+            { label: 'Right (side flyout)', value: 'right' },
+            { label: 'Left (side flyout)', value: 'left' },
+            { label: 'Bottom (dropdown)', value: 'bottom' },
+        ],
+    },
+    maxDepth: {
+        type: 'select', label: 'Maximum Nesting Depth',
+        options: [
+            { label: '1 Level', value: '1' },
+            { label: '2 Levels', value: '2' },
+            { label: '3 Levels', value: '3' },
+        ],
+    },
+    dropdownBackground: { type: 'text', label: 'Dropdown Background (token or color)' },
+    dropdownBorder: { type: 'text', label: 'Dropdown Border (token or color)' },
+    dropdownShadow: {
+        type: 'select', label: 'Dropdown Shadow',
+        options: [
+            { label: 'Small', value: 'sm' },
+            { label: 'Medium', value: 'md' },
+            { label: 'Large', value: 'lg' },
+            { label: 'Extra Large', value: 'xl' },
+        ],
+    },
+    dropdownRadius: {
+        type: 'select', label: 'Dropdown Border Radius',
+        options: [
+            { label: 'Small', value: 'sm' },
+            { label: 'Medium', value: 'md' },
+            { label: 'Large', value: 'lg' },
+            { label: 'Extra Large', value: 'xl' },
+        ],
+    },
+    mobileBreakpoint: { type: 'number', label: 'Mobile Breakpoint (px)' },
+    mobileSearchPlaceholder: { type: 'text', label: 'Mobile Search Placeholder (empty hides search)' },
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Menu Source',
+            defaultOpen: true,
+            fieldKeys: ['menuHandle'],
+        },
+        {
+            label: 'Layout',
+            fieldKeys: ['layout', 'alignment', 'maxDepth'],
+        },
+        {
+            label: 'Typography',
+            fieldKeys: ['fontSize', 'fontWeight', 'textColor', 'hoverColor'],
+        },
+        {
+            label: 'Hover Effect',
+            fieldKeys: ['hoverEffect'],
+        },
+        {
+            label: 'Dropdown',
+            fieldKeys: ['dropdownStyle', 'showDropdownArrows', 'triggerMode', 'subMenuPosition'],
+        },
+        {
+            label: 'Dropdown Appearance',
+            fieldKeys: ['dropdownBackground', 'dropdownBorder', 'dropdownShadow', 'dropdownRadius'],
+        },
+        {
+            label: 'Mobile',
+            fieldKeys: ['mobileBreakpoint', 'mobileSearchPlaceholder'],
+        },
+    ],
+    allFields,
+});
 const ChevronDown = ({ size = 16 }) => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", "aria-hidden": "true", children: _jsx("polyline", { points: "6 9 12 15 18 9" }) }));
 const ChevronRight = ({ size = 12 }) => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", "aria-hidden": "true", children: _jsx("polyline", { points: "9 18 15 12 9 6" }) }));
 const Hamburger = ({ size = 24 }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", "aria-hidden": "true", children: [_jsx("line", { x1: "3", y1: "6", x2: "21", y2: "6" }), _jsx("line", { x1: "3", y1: "12", x2: "21", y2: "12" }), _jsx("line", { x1: "3", y1: "18", x2: "21", y2: "18" })] }));
@@ -354,7 +493,7 @@ const MobileAccordionItem = ({ item, resolvedTextColor, onLinkClick }) => {
 };
 export const MenuNavigation = {
     label: 'Menu Navigation',
-    fields: menuNavigationFields,
+    fields: accordionFields,
     defaultProps: {
         menuHandle: '',
         layout: 'horizontal',

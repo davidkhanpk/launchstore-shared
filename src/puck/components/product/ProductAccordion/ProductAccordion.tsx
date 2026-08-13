@@ -1,8 +1,70 @@
 import React, { useState, useMemo } from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { productAccordionFields } from './productaccordion.fields';
 import type { ProductAccordionProps, ProductAccordionSection, ProductAccordionBorderStyle } from './productaccordion.types';
 import type { ProductData } from '../ProductData';
+import {
+  createAccordionFields,
+} from '../../../design-system';
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  sections: {
+    type: 'array' as const, label: 'Accordion Sections',
+    arrayFields: {
+      id: { type: 'text', label: 'ID (unique)' },
+      title: { type: 'text', label: 'Section Title' },
+      contentType: {
+        type: 'select', label: 'Content Type',
+        options: [
+          { label: 'Product Description', value: 'description' },
+          { label: 'Material & Care', value: 'material' },
+          { label: 'Dimensions', value: 'dimensions' },
+          { label: 'Shipping Info', value: 'shipping' },
+          { label: 'Custom HTML', value: 'custom' },
+        ],
+      },
+      customContent: { type: 'textarea', label: 'Custom Content (HTML)' },
+    },
+    defaultItemProps: {
+      id: 'section-1', title: 'Product Details', contentType: 'description', customContent: '',
+    },
+  } as any,
+  allowMultiple: {
+    type: 'radio' as const, label: 'Allow Multiple Open',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  defaultOpen: { type: 'text' as const, label: 'Default Open (comma-separated IDs)' },
+  borderStyle: {
+    type: 'select' as const, label: 'Border Style',
+    options: [
+      { label: 'No Borders', value: 'none' },
+      { label: 'Top Border Only', value: 'top' },
+      { label: 'Full Borders', value: 'full' },
+    ],
+  },
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Sections',
+      defaultOpen: true,
+      fieldKeys: ['sections'],
+    },
+    {
+      label: 'Behavior',
+      fieldKeys: ['allowMultiple', 'defaultOpen'],
+    },
+    {
+      label: 'Appearance',
+      fieldKeys: ['borderStyle'],
+    },
+  ],
+  allFields,
+});
 
 const ChevronSvg = ({ rotated }: { rotated?: boolean }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" style={{ transform: rotated ? 'rotate(180deg)' : 'none', transition: 'transform 200ms' }}>
@@ -74,7 +136,7 @@ export interface ProductAccordionWithProduct extends ProductAccordionProps {
 
 export const ProductAccordion: ComponentConfig<ProductAccordionWithProduct> = {
   label: 'Product Accordion',
-  fields: productAccordionFields as ComponentConfig<ProductAccordionWithProduct>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     sections: [
       { id: 'description', title: 'Product Details', contentType: 'description', customContent: '' },

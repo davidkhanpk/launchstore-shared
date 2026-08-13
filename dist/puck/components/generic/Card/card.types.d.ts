@@ -1,10 +1,14 @@
 export interface CardProps {
     id?: string;
-    padding: 'none' | 'sm' | 'md' | 'lg' | 'xl';
-    shadow: 'none' | 'sm' | 'md' | 'lg' | 'xl';
-    border: boolean;
-    rounded: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
-    backgroundColor: string;
-    hoverEffect: boolean;
+    padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+    shadow?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+    border?: boolean;
+    rounded?: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+    backgroundColor?: string;
+    hoverEffect?: boolean;
+    marginTop?: string;
+    marginBottom?: string;
+    paddingX?: string;
+    paddingY?: string;
 }
 //# sourceMappingURL=card.types.d.ts.map

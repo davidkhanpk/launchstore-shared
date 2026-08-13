@@ -1,11 +1,16 @@
 import React from 'react';
 import { SwiperSlide } from 'swiper/react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { productCarouselFields } from './productcarousel.fields';
 import type {
   ProductCarouselProps, ProductCarouselAspect, ProductCarouselRadius, ProductCarouselEffect,
 } from './productcarousel.types';
 import { SwiperBase } from '../../shared/SwiperBase';
+import {
+  createAccordionFields,
+  sharedLayoutFields,
+  buildLayoutClasses,
+  defaultLayoutProps,
+} from '../../../design-system';
 
 const ASPECT: Record<ProductCarouselAspect, string> = { square: 'aspect-square', portrait: 'aspect-[3/4]', landscape: 'aspect-[4/3]' };
 const RADII: Record<ProductCarouselRadius, string> = { none: 'rounded-none', sm: 'rounded-sm', md: 'rounded-md', lg: 'rounded-lg', xl: 'rounded-xl' };
@@ -41,9 +46,145 @@ export interface ProductCarouselWithProducts extends ProductCarouselProps {
   onAddToCart?: (productId: string) => void;
 }
 
+const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
+
+// ── Content fields (component-specific) ─────────────────────────────────────
+
+const contentFields = {
+  sectionTitle: { type: 'text' as const, label: 'Section Title' },
+  showTitle: { type: 'radio' as const, label: 'Show Title', options: RADIO_YES_NO },
+  productSource: {
+    type: 'select' as const, label: 'Product Source',
+    options: [
+      { label: 'Manual Selection', value: 'manual' },
+      { label: 'From Collection', value: 'collection' },
+      { label: 'From Category', value: 'category' },
+      { label: 'Featured Products', value: 'featured' },
+      { label: 'Best Sellers', value: 'bestsellers' },
+    ],
+  },
+  productIds: { type: 'textarea' as const, label: 'Product IDs (comma-separated)' },
+  collectionId: { type: 'text' as const, label: 'Collection ID (optional on product pages)' },
+  categoryId: { type: 'text' as const, label: 'Category ID (optional on product pages)' },
+  maxProducts: { type: 'number' as const, label: 'Maximum Products' },
+};
+
+// ── Carousel fields (component-specific) ────────────────────────────────────
+
+const carouselFields = {
+  slidesPerView: { type: 'number' as const, label: 'Slides Per View (Desktop)' },
+  slidesPerViewTablet: { type: 'number' as const, label: 'Slides Per View (Tablet)' },
+  slidesPerViewMobile: { type: 'number' as const, label: 'Slides Per View (Mobile)' },
+  spaceBetween: { type: 'number' as const, label: 'Space Between Slides (px)' },
+  effect: {
+    type: 'select' as const, label: 'Transition Effect',
+    options: [
+      { label: 'Slide', value: 'slide' }, { label: 'Fade', value: 'fade' },
+      { label: 'Cube', value: 'cube' }, { label: 'Coverflow', value: 'coverflow' }, { label: 'Flip', value: 'flip' },
+    ],
+  },
+  speed: { type: 'number' as const, label: 'Transition Speed (ms)' },
+  navigation: { type: 'radio' as const, label: 'Show Navigation Arrows', options: RADIO_YES_NO },
+  navigationColor: { type: 'text' as const, label: 'Navigation Color (hex)' },
+  pagination: { type: 'radio' as const, label: 'Show Pagination', options: RADIO_YES_NO },
+  paginationType: {
+    type: 'select' as const, label: 'Pagination Type',
+    options: [
+      { label: 'Bullets', value: 'bullets' },
+      { label: 'Fraction (1/10)', value: 'fraction' },
+      { label: 'Progress Bar', value: 'progressbar' },
+    ],
+  },
+  paginationColor: { type: 'text' as const, label: 'Pagination Color (hex)' },
+  autoplay: { type: 'radio' as const, label: 'Autoplay', options: RADIO_YES_NO },
+  autoplayDelay: { type: 'number' as const, label: 'Autoplay Delay (ms)' },
+  pauseOnHover: { type: 'radio' as const, label: 'Pause on Hover', options: RADIO_YES_NO },
+  loop: { type: 'radio' as const, label: 'Loop', options: RADIO_YES_NO },
+  centeredSlides: { type: 'radio' as const, label: 'Center Slides', options: RADIO_YES_NO },
+  freeMode: { type: 'radio' as const, label: 'Free Mode (continuous sliding)', options: RADIO_YES_NO },
+};
+
+// ── Card fields (component-specific) ────────────────────────────────────────
+
+const cardFields = {
+  showProductImage: { type: 'radio' as const, label: 'Show Product Image', options: RADIO_YES_NO },
+  showProductTitle: { type: 'radio' as const, label: 'Show Product Title', options: RADIO_YES_NO },
+  showProductPrice: { type: 'radio' as const, label: 'Show Product Price', options: RADIO_YES_NO },
+  showAddToCart: { type: 'radio' as const, label: 'Show Add to Cart', options: RADIO_YES_NO },
+  imageAspectRatio: {
+    type: 'select' as const, label: 'Image Aspect Ratio',
+    options: [
+      { label: 'Square (1:1)', value: 'square' },
+      { label: 'Portrait (3:4)', value: 'portrait' },
+      { label: 'Landscape (4:3)', value: 'landscape' },
+    ],
+  },
+};
+
+// ── Color fields (component-specific) ───────────────────────────────────────
+
+const colorFields = {
+  backgroundColor: { type: 'text' as const, label: 'Background Color (hex)' },
+  cardBackground: { type: 'text' as const, label: 'Card Background (hex)' },
+  cardBorderRadius: {
+    type: 'select' as const, label: 'Card Border Radius',
+    options: [
+      { label: 'None', value: 'none' }, { label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' },
+      { label: 'Large', value: 'lg' }, { label: 'Extra Large', value: 'xl' },
+    ],
+  },
+  cardShadow: { type: 'radio' as const, label: 'Card Shadow', options: RADIO_YES_NO },
+};
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...carouselFields,
+  ...cardFields,
+  ...colorFields,
+  ...sharedLayoutFields,
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['sectionTitle', 'showTitle', 'productSource', 'productIds', 'collectionId', 'categoryId', 'maxProducts'],
+    },
+    {
+      label: 'Carousel',
+      fieldKeys: [
+        'slidesPerView', 'slidesPerViewTablet', 'slidesPerViewMobile', 'spaceBetween',
+        'effect', 'speed',
+        'navigation', 'navigationColor', 'pagination', 'paginationType', 'paginationColor',
+        'autoplay', 'autoplayDelay', 'pauseOnHover', 'loop', 'centeredSlides', 'freeMode',
+      ],
+    },
+    {
+      label: 'Card',
+      fieldKeys: ['showProductImage', 'showProductTitle', 'showProductPrice', 'showAddToCart', 'imageAspectRatio'],
+    },
+    {
+      label: 'Colors',
+      fieldKeys: ['backgroundColor', 'cardBackground', 'cardBorderRadius', 'cardShadow'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
+    },
+  ],
+  allFields,
+});
+
+// ── Component ───────────────────────────────────────────────────────────────
+
 export const ProductCarousel: ComponentConfig<ProductCarouselWithProducts> = {
   label: 'Product Carousel (Swiper)',
-  fields: productCarouselFields as ComponentConfig<ProductCarouselWithProducts>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     sectionTitle: 'Popular Products', showTitle: true,
     productSource: 'featured', productIds: '', collectionId: '', categoryId: '',
@@ -56,16 +197,30 @@ export const ProductCarousel: ComponentConfig<ProductCarouselWithProducts> = {
     showProductImage: true, showProductTitle: true, showProductPrice: true, showAddToCart: true,
     imageAspectRatio: 'square', backgroundColor: '#ffffff', cardBackground: '#ffffff',
     cardBorderRadius: 'lg', cardShadow: true,
-  },
+    ...defaultLayoutProps,
+  } as ProductCarouselWithProducts,
   render: (rawProps: any) => {
     const { products = [], onAddToCart, ...props } = rawProps as ProductCarouselWithProducts;
+    const marginTop = (rawProps as any).marginTop;
+    const marginBottom = (rawProps as any).marginBottom;
+    const paddingX = (rawProps as any).paddingX;
+    const paddingY = (rawProps as any).paddingY;
+
+    const layoutClassName = buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY });
+    const sectionClassName = `product-carousel-section py-8 ${layoutClassName}`.trim();
+    const sectionStyle: React.CSSProperties = { backgroundColor: props.backgroundColor };
+
     if (!products || products.length === 0) {
-      return <div className="product-carousel-section py-8"><div className="container mx-auto px-4 text-center text-gray-400">No products to display</div></div>;
+      return (
+        <div className={sectionClassName} style={sectionStyle}>
+          <div className="container mx-auto px-4 text-center text-gray-400">No products to display</div>
+        </div>
+      );
     }
     const aspectCls = ASPECT[(props.imageAspectRatio as ProductCarouselAspect) || 'square'];
     const radCls = RADII[(props.cardBorderRadius as ProductCarouselRadius) || 'lg'];
     return (
-      <div className="product-carousel-section py-8" style={{ backgroundColor: props.backgroundColor }}>
+      <div className={sectionClassName} style={sectionStyle}>
         <div className="container mx-auto px-4">
           {props.showTitle && <h2 className="text-3xl font-bold mb-6">{props.sectionTitle}</h2>}
           <SwiperBase

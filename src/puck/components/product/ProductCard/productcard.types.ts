@@ -1,5 +1,3 @@
-import type { Field } from '@puckeditor/core';
-
 export type ProductCardLayout = 'vertical' | 'horizontal' | 'compact' | 'spacious';
 export type ProductCardAspectRatio = 'square' | 'portrait' | 'landscape';
 export type ProductCardRadius = 'none' | 'sm' | 'md' | 'lg' | 'full' | 'xl';
@@ -42,7 +40,7 @@ export interface ProductCardProps {
   titleAlign: ProductCardTitleAlign;
   showPrice: boolean;
   priceSize: ProductCardPriceSize;
-  priceColor: string;
+  priceColor?: string;
   showCompareAtPrice: boolean;
   showSavingsBadge: boolean;
   showBadges: boolean;
@@ -58,8 +56,8 @@ export interface ProductCardProps {
   cardRadius: ProductCardRadius;
   cardBorder: ProductCardBorder;
   cardShadow: boolean;
-  cardBackground: string;
-  accentColor: string;
+  cardBackground?: string;
+  accentColor?: string;
   fontFamily: string;
   productId?: string;
 }

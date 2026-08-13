@@ -1,60 +1,131 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { productDescriptionFields } from './productdescription.fields';
-import type {
-  ProductDescriptionProps, ProductDescriptionSize, ProductDescriptionColor,
-  ProductDescriptionLineHeight, ProductDescriptionMaxWidth,
-} from './productdescription.types';
+import { resolveColor } from '../../../../theme/resolveColor';
+import type { ProductDescriptionProps } from './productdescription.types';
 import type { ProductData } from '../ProductData';
-
-const SIZE: Record<ProductDescriptionSize, string> = { sm: 'text-sm', base: 'text-base', lg: 'text-lg' };
-const COLOR: Record<ProductDescriptionColor, string> = { default: 'text-gray-900', gray: 'text-gray-700', black: 'text-black' };
-const LINE: Record<ProductDescriptionLineHeight, string> = { tight: 'leading-tight', normal: 'leading-normal', relaxed: 'leading-relaxed' };
-const MAX_WIDTH: Record<ProductDescriptionMaxWidth, string> = { full: 'max-w-full', prose: 'max-w-prose', narrow: 'max-w-2xl' };
+import {
+  createAccordionFields,
+  sharedTypographyFields,
+  sharedLayoutFields,
+  buildTypographyClasses,
+  buildLayoutClasses,
+  defaultTypographyProps,
+  defaultLayoutProps,
+} from '../../../design-system';
 
 const PLACEHOLDER = (
-  <div className="text-gray-400 italic">
+  <>
     <p>Product description will appear here. This could be a detailed explanation of the product features, materials, sizing information, and care instructions.</p>
-    <p className="mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-  </div>
+    <p style={{ marginTop: '8px' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  </>
 );
+
+// ── Content fields (component-specific) ─────────────────────────────────────
+
+const contentFields = {
+  maxLines: { type: 'number' as const, label: 'Max Lines (0 = unlimited)' },
+};
+
+// ── Typography fields (no textAlign — description is left-aligned block) ─────
+
+const typographyFields = {
+  fontSize: sharedTypographyFields.fontSize,
+  fontWeight: sharedTypographyFields.fontWeight,
+  textColor: sharedTypographyFields.textColor,
+  lineHeight: sharedTypographyFields.lineHeight,
+};
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...typographyFields,
+  ...sharedLayoutFields,
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['maxLines'],
+    },
+    {
+      label: 'Typography',
+      fieldKeys: ['fontSize', 'fontWeight', 'textColor', 'lineHeight'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['marginTop', 'marginBottom'],
+    },
+  ],
+  allFields,
+});
 
 export interface ProductDescriptionWithProduct extends ProductDescriptionProps {
   product?: ProductData | null;
 }
 
+// ── Component ───────────────────────────────────────────────────────────────
+
 export const ProductDescription: ComponentConfig<ProductDescriptionWithProduct> = {
   label: 'Product Description',
-  fields: productDescriptionFields as ComponentConfig<ProductDescriptionWithProduct>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
-    fontSize: 'base', color: 'gray', lineHeight: 'normal', maxWidth: 'prose',
-    marginTop: 'mt-4', marginBottom: 'mb-4', paddingX: 'px-0', paddingY: 'py-0',
-  },
+    maxLines: 0,
+    ...defaultTypographyProps,
+    fontSize: 'base',
+    fontWeight: 'normal',
+    textColor: '#4b5563',
+    lineHeight: 'normal',
+    ...defaultLayoutProps,
+    marginTop: 'md',
+    marginBottom: 'md',
+  } as ProductDescriptionProps,
   render: (rawProps: any) => {
     const {
-      fontSize = 'base', color = 'gray', lineHeight = 'normal', maxWidth = 'prose',
-      marginTop = 'mt-4', marginBottom = 'mb-4', paddingX = 'px-0', paddingY = 'py-0', product,
+      maxLines, fontSize, fontWeight, textColor, lineHeight,
+      marginTop, marginBottom, product,
     } = rawProps as ProductDescriptionWithProduct;
 
-    const sizeCls = SIZE[(fontSize as ProductDescriptionSize) || 'base'] || 'text-base';
-    const colorCls = COLOR[(color as ProductDescriptionColor) || 'gray'] || 'text-gray-700';
-    const lineCls = LINE[(lineHeight as ProductDescriptionLineHeight) || 'normal'] || 'leading-normal';
-    const maxCls = MAX_WIDTH[(maxWidth as ProductDescriptionMaxWidth) || 'prose'] || 'max-w-prose';
-    const spacing = `${marginTop || ''} ${marginBottom || ''} ${paddingX || ''} ${paddingY || ''}`.trim();
+    const className = [
+      buildTypographyClasses({ fontSize, fontWeight, lineHeight }),
+      buildLayoutClasses({ marginTop, marginBottom }),
+    ].filter(Boolean).join(' ');
+
+    const color = resolveColor(textColor) || '#4b5563';
+
+    const lineClamp = typeof maxLines === 'number' && maxLines > 0;
+
+    const contentStyle: React.CSSProperties = lineClamp
+      ? {
+          color,
+          display: '-webkit-box',
+          WebkitBoxOrient: 'vertical',
+          WebkitLineClamp: maxLines,
+          overflow: 'hidden',
+        }
+      : { color };
 
     if (!product || !product.description) {
+      const placeholderStyle: React.CSSProperties = {
+        ...contentStyle,
+        color: '#9ca3af',
+        fontStyle: 'italic',
+      };
       return (
-        <div className={spacing}>
-          <div className={`text-gray-400 italic ${sizeCls} ${lineCls} ${maxCls}`}>
-            {PLACEHOLDER}
-          </div>
+        <div className={className} style={placeholderStyle}>
+          {PLACEHOLDER}
         </div>
       );
     }
 
     return (
       <div
-        className={`${sizeCls} ${colorCls} ${lineCls} ${maxCls} ${spacing} prose prose-gray`}
+        className={className}
+        style={contentStyle}
         dangerouslySetInnerHTML={{ __html: product.description }}
       />
     );

@@ -6,9 +6,13 @@ export interface AccordionItem {
 export interface AccordionProps {
     id?: string;
     items: AccordionItem[];
-    allowMultiple: boolean;
+    allowMultiple?: boolean;
     defaultOpen?: number[];
-    bordered: boolean;
-    rounded: 'none' | 'sm' | 'md' | 'lg';
+    bordered?: boolean;
+    rounded?: 'none' | 'sm' | 'md' | 'lg';
+    marginTop?: string;
+    marginBottom?: string;
+    paddingX?: string;
+    paddingY?: string;
 }
 //# sourceMappingURL=accordion.types.d.ts.map

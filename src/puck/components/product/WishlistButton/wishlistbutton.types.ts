@@ -1,5 +1,3 @@
-import type { Field } from '@puckeditor/core';
-
 export type WishlistButtonSize = 'small' | 'medium' | 'large';
 export type WishlistButtonStyle = 'default' | 'outline' | 'ghost' | 'icon-only';
 export type WishlistIconPosition = 'left' | 'right';

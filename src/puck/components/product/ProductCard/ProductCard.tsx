@@ -1,10 +1,167 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { productCardFields } from './productcard.fields';
 import type {
   ProductCardProps, SharedProductCardProduct, RenderProductCard,
   ProductCardLayout,
 } from './productcard.types';
+import {
+  createAccordionFields,
+} from '../../../design-system';
+
+const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  layout: {
+    type: 'select' as const, label: 'Card Layout',
+    options: [
+      { label: 'Vertical', value: 'vertical' },
+      { label: 'Horizontal', value: 'horizontal' },
+      { label: 'Compact', value: 'compact' },
+      { label: 'Spacious', value: 'spacious' },
+    ],
+  },
+  enableSwiper: {
+    type: 'radio' as const, label: 'Image Gallery Type',
+    options: [
+      { label: 'Single Image', value: false },
+      { label: 'Image Carousel (Swiper)', value: true },
+    ],
+  },
+  aspectRatio: {
+    type: 'select' as const, label: 'Image Aspect Ratio',
+    options: [
+      { label: 'Square (1:1)', value: 'square' },
+      { label: 'Portrait (3:4)', value: 'portrait' },
+      { label: 'Landscape (16:9)', value: 'landscape' },
+    ],
+  },
+  borderRadius: {
+    type: 'select' as const, label: 'Image Border Radius',
+    options: [
+      { label: 'None', value: 'none' },
+      { label: 'Small', value: 'sm' },
+      { label: 'Medium', value: 'md' },
+      { label: 'Large', value: 'lg' },
+      { label: 'Full', value: 'full' },
+    ],
+  },
+  showShadow: { type: 'radio' as const, label: 'Image Shadow', options: RADIO_YES_NO },
+  hoverZoom: { type: 'radio' as const, label: 'Hover Zoom Effect', options: RADIO_YES_NO },
+
+  showTitle: { type: 'radio' as const, label: 'Show Title', options: RADIO_YES_NO },
+  titleSize: {
+    type: 'select' as const, label: 'Title Size',
+    options: [
+      { label: 'Small', value: 'sm' }, { label: 'Base', value: 'base' },
+      { label: 'Large', value: 'lg' }, { label: 'XLarge', value: 'xl' }, { label: '2XLarge', value: '2xl' },
+    ],
+  },
+  titleWeight: {
+    type: 'select' as const, label: 'Title Weight',
+    options: [
+      { label: 'Normal', value: 'normal' }, { label: 'Medium', value: 'medium' },
+      { label: 'Semibold', value: 'semibold' }, { label: 'Bold', value: 'bold' },
+    ],
+  },
+  titleAlign: {
+    type: 'select' as const, label: 'Title Alignment',
+    options: [{ label: 'Left', value: 'left' }, { label: 'Center', value: 'center' }, { label: 'Right', value: 'right' }],
+  },
+
+  showPrice: { type: 'radio' as const, label: 'Show Price', options: RADIO_YES_NO },
+  priceSize: {
+    type: 'select' as const, label: 'Price Size',
+    options: [{ label: 'Small', value: 'sm' }, { label: 'Base', value: 'base' }, { label: 'Large', value: 'lg' }, { label: 'XLarge', value: 'xl' }],
+  },
+  priceColor: { type: 'text' as const, label: 'Price Color (hex or theme token)' },
+  showCompareAtPrice: { type: 'radio' as const, label: 'Show Compare At Price', options: RADIO_YES_NO },
+  showSavingsBadge: { type: 'radio' as const, label: 'Show Savings Badge', options: RADIO_YES_NO },
+
+  showBadges: { type: 'radio' as const, label: 'Enable Badges', options: RADIO_YES_NO },
+  showSaleBadge: { type: 'radio' as const, label: 'Show Sale Badge', options: RADIO_YES_NO },
+  showNewBadge: { type: 'radio' as const, label: 'Show New Badge', options: RADIO_YES_NO },
+  showLowStockBadge: { type: 'radio' as const, label: 'Show Low Stock Badge', options: RADIO_YES_NO },
+  badgePosition: {
+    type: 'select' as const, label: 'Badge Position',
+    options: [
+      { label: 'Top Left', value: 'top-left' }, { label: 'Top Right', value: 'top-right' },
+      { label: 'Bottom Left', value: 'bottom-left' }, { label: 'Bottom Right', value: 'bottom-right' },
+    ],
+  },
+
+  showAddToCart: { type: 'radio' as const, label: 'Show Add to Cart', options: RADIO_YES_NO },
+  buttonText: { type: 'text' as const, label: 'Button Text' },
+  buttonStyle: {
+    type: 'select' as const, label: 'Button Style',
+    options: [{ label: 'Filled', value: 'filled' }, { label: 'Outline', value: 'outline' }, { label: 'Ghost', value: 'ghost' }],
+  },
+  buttonSize: {
+    type: 'select' as const, label: 'Button Size',
+    options: [{ label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }],
+  },
+  showCartIcon: { type: 'radio' as const, label: 'Show Cart Icon', options: RADIO_YES_NO },
+
+  cardRadius: {
+    type: 'select' as const, label: 'Card Border Radius',
+    options: [
+      { label: 'None', value: 'none' }, { label: 'Small', value: 'sm' },
+      { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }, { label: 'XLarge', value: 'xl' },
+    ],
+  },
+  cardBorder: {
+    type: 'select' as const, label: 'Card Border',
+    options: [{ label: 'None', value: 'none' }, { label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }],
+  },
+  cardShadow: { type: 'radio' as const, label: 'Card Shadow', options: RADIO_YES_NO },
+  cardBackground: { type: 'text' as const, label: 'Card Background (hex or theme token)' },
+  accentColor: { type: 'text' as const, label: 'Accent Color (hex or theme token)' },
+  fontFamily: { type: 'text' as const, label: 'Font Family' },
+
+  productId: { type: 'text' as const, label: 'Product ID (optional)' },
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Source',
+      defaultOpen: true,
+      fieldKeys: ['productId'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['layout', 'enableSwiper'],
+    },
+    {
+      label: 'Image',
+      fieldKeys: ['aspectRatio', 'borderRadius', 'showShadow', 'hoverZoom'],
+    },
+    {
+      label: 'Title',
+      fieldKeys: ['showTitle', 'titleSize', 'titleWeight', 'titleAlign'],
+    },
+    {
+      label: 'Price',
+      fieldKeys: ['showPrice', 'priceSize', 'priceColor', 'showCompareAtPrice', 'showSavingsBadge'],
+    },
+    {
+      label: 'Badges',
+      fieldKeys: ['showBadges', 'showSaleBadge', 'showNewBadge', 'showLowStockBadge', 'badgePosition'],
+    },
+    {
+      label: 'Add to Cart Button',
+      fieldKeys: ['showAddToCart', 'buttonText', 'buttonStyle', 'buttonSize', 'showCartIcon'],
+    },
+    {
+      label: 'Card Appearance',
+      fieldKeys: ['cardRadius', 'cardBorder', 'cardShadow', 'cardBackground', 'accentColor', 'fontFamily'],
+    },
+  ],
+  allFields,
+});
 
 const CartSvg = ({ size = 16 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" /></svg>
@@ -106,7 +263,7 @@ export interface ProductCardWithRender extends ProductCardProps {
 
 export const ProductCard: ComponentConfig<ProductCardWithRender> = {
   label: 'Product Card',
-  fields: productCardFields as ComponentConfig<ProductCardWithRender>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     layout: 'vertical', enableSwiper: true, aspectRatio: 'square',
     borderRadius: 'md', showShadow: true, hoverZoom: true,

@@ -1,15 +1,15 @@
 import type { ProductData, ProductDataPrice } from '../ProductData';
 export type ProductPriceSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
-export type ProductPriceColor = 'default' | 'black' | 'gray' | 'primary';
 export type ProductPriceLayout = 'horizontal' | 'vertical';
-export type ProductPriceWeight = 'normal' | 'medium' | 'semibold' | 'bold';
 export interface ProductPriceProps {
-    fontSize: ProductPriceSize;
-    color: ProductPriceColor;
-    showComparePrice: boolean;
-    layout: ProductPriceLayout;
-    fontWeight: ProductPriceWeight;
-    showSavingsPercentage: boolean;
+    size?: ProductPriceSize;
+    showComparePrice?: boolean;
+    showSavingsBadge?: boolean;
+    layout?: ProductPriceLayout;
+    fontWeight?: string;
+    textColor?: string;
+    marginTop?: string;
+    marginBottom?: string;
     /**
      * Optional price-resolution hook. Consumer wrapper provides this
      * for region-aware pricing (e.g., using @lib/util/get-product-price

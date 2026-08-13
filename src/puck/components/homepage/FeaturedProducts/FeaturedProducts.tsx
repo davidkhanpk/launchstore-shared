@@ -2,8 +2,8 @@ import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { featuredProductsFields } from './featuredproducts.fields';
 import type { FeaturedProductsProps, SharedProduct } from './featuredproducts.types';
+import { createAccordionFields } from '../../../design-system';
 
 const CARD_STYLE: Record<FeaturedProductsProps['cardStyle'], string> = {
   minimal: 'bg-transparent',
@@ -31,9 +31,127 @@ const defaultCard = (product: SharedProduct, props: FeaturedProductsProps) => {
   );
 };
 
+// ── Content fields (header + display toggles + product source) ──────────────
+
+const contentFields = {
+  sectionTitle: { type: 'text' as const, label: 'Section Title' },
+  sectionSubtitle: { type: 'text' as const, label: 'Section Subtitle' },
+  showTitle: {
+    type: 'radio' as const, label: 'Show Section Title',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  productSource: {
+    type: 'select' as const, label: 'Product Source',
+    options: [
+      { label: 'Featured Products', value: 'featured' },
+      { label: 'Best Sellers', value: 'bestsellers' },
+      { label: 'New Arrivals', value: 'new' },
+      { label: 'From Category', value: 'category' },
+      { label: 'Manual Selection', value: 'manual' },
+    ],
+  },
+  categoryId: { type: 'text' as const, label: 'Category ID (for category source)' },
+  productIds: { type: 'textarea' as const, label: 'Product IDs (comma-separated, for manual)' },
+  showPrice: {
+    type: 'radio' as const, label: 'Show Price',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showAddToCart: {
+    type: 'radio' as const, label: 'Show Add to Cart Button',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  buttonText: { type: 'text' as const, label: 'Button Text' },
+};
+
+// ── Layout fields (display mode + grid + carousel) ──────────────────────────
+
+const layoutFields = {
+  displayMode: {
+    type: 'select' as const, label: 'Display Mode',
+    options: [{ label: 'Grid', value: 'grid' }, { label: 'Carousel (Swiper)', value: 'carousel' }],
+  },
+  productsPerRow: { type: 'number' as const, label: 'Products Per Row (Grid)', min: 2, max: 6 },
+  maxProducts: { type: 'number' as const, label: 'Maximum Products', min: 1, max: 50 },
+  slidesPerView: { type: 'number' as const, label: 'Slides Per View (Desktop)', min: 1, max: 6 },
+  slidesPerViewTablet: { type: 'number' as const, label: 'Slides Per View (Tablet)', min: 1, max: 4 },
+  slidesPerViewMobile: { type: 'number' as const, label: 'Slides Per View (Mobile)', min: 1, max: 2 },
+  spaceBetween: { type: 'number' as const, label: 'Space Between Slides (px)', min: 0, max: 100 },
+  autoplay: {
+    type: 'radio' as const, label: 'Auto-play Carousel',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  autoplayDelay: { type: 'number' as const, label: 'Auto-play Delay (ms)', min: 1000, max: 10000 },
+  loop: {
+    type: 'radio' as const, label: 'Loop Carousel',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  navigation: {
+    type: 'radio' as const, label: 'Show Navigation Arrows',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  pagination: {
+    type: 'radio' as const, label: 'Show Pagination',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  paginationStyle: {
+    type: 'select' as const, label: 'Pagination Style',
+    options: [
+      { label: 'Dots', value: 'dots' },
+      { label: 'Fraction (1/10)', value: 'fraction' },
+      { label: 'Progress Bar', value: 'progressbar' },
+    ],
+  },
+};
+
+// ── Color fields ────────────────────────────────────────────────────────────
+
+const colorFields = {
+  backgroundColor: { type: 'text' as const, label: 'Background Color (hex or theme token)' },
+  textColor: { type: 'text' as const, label: 'Text Color (hex or theme token)' },
+  cardStyle: {
+    type: 'select' as const, label: 'Card Style',
+    options: [
+      { label: 'Minimal', value: 'minimal' },
+      { label: 'Bordered', value: 'bordered' },
+      { label: 'Shadow', value: 'shadow' },
+    ],
+  },
+};
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...layoutFields,
+  ...colorFields,
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['sectionTitle', 'sectionSubtitle', 'showTitle', 'productSource', 'categoryId', 'productIds', 'showPrice', 'showAddToCart', 'buttonText'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['displayMode', 'productsPerRow', 'maxProducts', 'slidesPerView', 'slidesPerViewTablet', 'slidesPerViewMobile', 'spaceBetween', 'autoplay', 'autoplayDelay', 'loop', 'navigation', 'pagination', 'paginationStyle'],
+    },
+    {
+      label: 'Colors',
+      fieldKeys: ['backgroundColor', 'textColor', 'cardStyle'],
+    },
+  ],
+  allFields,
+});
+
+// ── Component ───────────────────────────────────────────────────────────────
+
 export const FeaturedProducts: ComponentConfig<FeaturedProductsProps> = {
   label: 'Featured Products',
-  fields: featuredProductsFields as ComponentConfig<FeaturedProductsProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     sectionTitle: 'Featured Products',
     sectionSubtitle: 'Check out our most popular items',
@@ -62,7 +180,7 @@ export const FeaturedProducts: ComponentConfig<FeaturedProductsProps> = {
     buttonText: 'Add to Cart',
     loading: false,
     error: '',
-  },
+  } as FeaturedProductsProps,
   render: ({
     sectionTitle, sectionSubtitle, showTitle,
     displayMode, productsPerRow,

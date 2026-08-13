@@ -29,5 +29,9 @@ export interface ImageGalleryProps {
     showBorder: boolean;
     borderColor: string;
     backgroundColor: string;
+    marginTop?: string;
+    marginBottom?: string;
+    paddingX?: string;
+    paddingY?: string;
 }
 //# sourceMappingURL=imagegallery.types.d.ts.map

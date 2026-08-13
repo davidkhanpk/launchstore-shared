@@ -1,28 +1,143 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { videoFields } from './video.fields';
+import { resolveColor } from '../../../../theme/resolveColor';
 import type { VideoProps } from './video.types';
+import {
+  createAccordionFields,
+  sharedTypographyFields,
+  sharedLayoutFields,
+  sharedColorFields,
+  buildLayoutClasses,
+  buildColorClasses,
+  defaultTypographyProps,
+  defaultLayoutProps,
+  defaultColorProps,
+} from '../../../design-system';
 
-const ASPECT_CLASSES: Record<VideoProps['aspectRatio'], string> = {
-  '16:9': 'aspect-video',
-  '4:3': 'aspect-[4/3]',
-  '1:1': 'aspect-square',
-  '21:9': 'aspect-[21/9]',
-};
-const RADIUS_CLASSES: Record<VideoProps['borderRadius'], string> = {
-  none: 'rounded-none', sm: 'rounded-sm', md: 'rounded-md', lg: 'rounded-lg',
-};
-const SHADOW_CLASSES: Record<VideoProps['shadow'], string> = {
-  none: 'shadow-none', sm: 'shadow-sm', md: 'shadow-md', lg: 'shadow-lg',
-};
-const ALIGNMENT_CLASSES: Record<VideoProps['alignment'], string> = {
-  left: 'mr-auto', center: 'mx-auto', right: 'ml-auto',
-};
 const MAX_WIDTH_DEFAULT = '800px';
+
+// ── Static option maps ─────────────────────────────────────────────────────
+
+const ASPECT_RATIO_MAP: Record<string, string> = {
+  '16:9': '16 / 9',
+  '4:3': '4 / 3',
+  '1:1': '1 / 1',
+  '21:9': '21 / 9',
+};
+
+const SHADOW_MAP: Record<string, string> = {
+  none: 'none',
+  sm: '0 1px 2px rgba(0,0,0,0.05)',
+  md: '0 4px 6px rgba(0,0,0,0.1)',
+  lg: '0 10px 15px rgba(0,0,0,0.1)',
+};
+
+const ALIGN_JUSTIFY_MAP: Record<string, string> = {
+  left: 'flex-start',
+  center: 'center',
+  right: 'flex-end',
+};
+
+// ── Content fields (component-specific) ─────────────────────────────────────
+
+const contentFields = {
+  videoType: {
+    type: 'select' as const, label: 'Video Type',
+    options: [
+      { label: 'YouTube', value: 'youtube' },
+      { label: 'Vimeo', value: 'vimeo' },
+      { label: 'Direct MP4', value: 'mp4' },
+    ],
+  },
+  videoUrl: { type: 'text' as const, label: 'Video URL' },
+  autoplay: { type: 'radio' as const, label: 'Autoplay', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  loop: { type: 'radio' as const, label: 'Loop', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  muted: { type: 'radio' as const, label: 'Muted', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  controls: { type: 'radio' as const, label: 'Show Controls', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  aspectRatio: {
+    type: 'select' as const, label: 'Aspect Ratio',
+    options: [
+      { label: '16:9 (Widescreen)', value: '16:9' },
+      { label: '4:3 (Standard)', value: '4:3' },
+      { label: '1:1 (Square)', value: '1:1' },
+      { label: '21:9 (Cinematic)', value: '21:9' },
+    ],
+  },
+  maxWidth: { type: 'text' as const, label: 'Max Width (e.g. 800px)' },
+  alignment: {
+    type: 'select' as const, label: 'Alignment',
+    options: [
+      { label: 'Left', value: 'left' },
+      { label: 'Center', value: 'center' },
+      { label: 'Right', value: 'right' },
+    ],
+  },
+  shadow: {
+    type: 'select' as const, label: 'Shadow',
+    options: [
+      { label: 'None', value: 'none' },
+      { label: 'Small', value: 'sm' },
+      { label: 'Medium', value: 'md' },
+      { label: 'Large', value: 'lg' },
+    ],
+  },
+  caption: { type: 'textarea' as const, label: 'Caption (optional)' },
+};
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...sharedTypographyFields,
+  ...sharedLayoutFields,
+  ...sharedColorFields,
+};
+
+// ── Accordion config ─────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: [
+        'videoType', 'videoUrl', 'autoplay', 'loop', 'muted', 'controls',
+        'caption',
+      ],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['aspectRatio', 'maxWidth', 'alignment', 'marginTop', 'marginBottom', 'paddingX', 'paddingY'],
+    },
+    {
+      label: 'Colors',
+      fieldKeys: ['backgroundColor', 'borderRadius', 'shadow'],
+    },
+    {
+      label: 'Typography',
+      fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
+    },
+  ],
+  allFields,
+});
+
+// ── Helpers ─────────────────────────────────────────────────────────────────
+
+function extractYouTubeId(url: string): string | null {
+  const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+
+function extractVimeoId(url: string): string | null {
+  const m = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  return m ? m[1] : null;
+}
+
+// ── Component ───────────────────────────────────────────────────────────────
 
 export const Video: ComponentConfig<VideoProps> = {
   label: 'Video',
-  fields: videoFields as ComponentConfig<VideoProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     videoType: 'youtube',
     videoUrl: '',
@@ -33,30 +148,66 @@ export const Video: ComponentConfig<VideoProps> = {
     aspectRatio: '16:9',
     maxWidth: MAX_WIDTH_DEFAULT,
     alignment: 'center',
-    borderRadius: 'md',
     shadow: 'md',
     caption: '',
-  },
-  render: ({ videoType, videoUrl, autoplay, loop, muted, controls, aspectRatio, maxWidth, alignment, borderRadius, shadow, caption }) => {
-    const maxWidthPx = maxWidth || MAX_WIDTH_DEFAULT;
+    ...defaultTypographyProps,
+    ...defaultLayoutProps,
+    ...defaultColorProps,
+    borderRadius: 'md',
+  } as VideoProps,
+  render: (rawProps: any) => {
+    const {
+      videoType, videoUrl, autoplay, loop, muted, controls,
+      aspectRatio, maxWidth, alignment,
+      borderRadius, shadow, caption,
+      marginTop, marginBottom, paddingX, paddingY,
+      backgroundColor,
+    } = rawProps;
 
-    if (videoType === 'mp4') {
-      return (
-        <figure className={ALIGNMENT_CLASSES[alignment] || 'mx-auto'} style={{ maxWidth: maxWidthPx }}>
-          <video
-            src={videoUrl}
-            autoPlay={autoplay}
-            loop={loop}
-            muted={muted}
-            controls={controls}
-            className={`${ASPECT_CLASSES[aspectRatio]} w-full ${RADIUS_CLASSES[borderRadius] || 'rounded-md'} ${SHADOW_CLASSES[shadow] || 'shadow-md'}`}
-          />
-          {caption && <figcaption className="text-sm text-center mt-2 opacity-75">{caption}</figcaption>}
-        </figure>
-      );
-    }
+    const maxWidthCss = maxWidth || MAX_WIDTH_DEFAULT;
+    const aspectCss = ASPECT_RATIO_MAP[aspectRatio] ?? '16 / 9';
+    const shadowCss = SHADOW_MAP[shadow] ?? 'none';
+    const justify = ALIGN_JUSTIFY_MAP[alignment] ?? 'center';
 
-    // YouTube/Vimeo embed
+    const wrapperClassName = buildLayoutClasses(rawProps);
+    const frameClassName = buildColorClasses({ borderRadius });
+
+    const wrapperStyle: React.CSSProperties = {
+      display: 'flex',
+      justifyContent: justify,
+    };
+
+    const figureStyle: React.CSSProperties = {
+      maxWidth: maxWidthCss,
+      width: '100%',
+      margin: 0,
+    };
+
+    const frameStyle: React.CSSProperties = {
+      position: 'relative',
+      width: '100%',
+      aspectRatio: aspectCss,
+      overflow: 'hidden',
+      boxShadow: shadowCss,
+      backgroundColor: backgroundColor && backgroundColor !== 'transparent'
+        ? (resolveColor(backgroundColor) || backgroundColor)
+        : undefined,
+    };
+
+    const mediaStyle: React.CSSProperties = {
+      position: 'absolute',
+      inset: 0,
+      width: '100%',
+      height: '100%',
+    };
+
+    const captionStyle: React.CSSProperties = {
+      fontSize: '0.875rem',
+      textAlign: 'center',
+      marginTop: '8px',
+      opacity: 0.75,
+    };
+
     let embedUrl = videoUrl;
     if (videoType === 'youtube') {
       const videoId = extractYouTubeId(videoUrl);
@@ -79,29 +230,34 @@ export const Video: ComponentConfig<VideoProps> = {
     }
 
     return (
-      <figure className={ALIGNMENT_CLASSES[alignment] || 'mx-auto'} style={{ maxWidth: maxWidthPx }}>
-        <div className={`${ASPECT_CLASSES[aspectRatio]} w-full ${RADIUS_CLASSES[borderRadius] || 'rounded-md'} ${SHADOW_CLASSES[shadow] || 'shadow-md'} overflow-hidden`}>
-          <iframe
-            src={embedUrl}
-            className="w-full h-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-        {caption && <figcaption className="text-sm text-center mt-2 opacity-75">{caption}</figcaption>}
-      </figure>
+      <div className={wrapperClassName} style={wrapperStyle}>
+        <figure style={figureStyle}>
+          {videoType === 'mp4' ? (
+            <div className={frameClassName} style={frameStyle}>
+              <video
+                src={videoUrl}
+                autoPlay={autoplay}
+                loop={loop}
+                muted={muted}
+                controls={controls}
+                style={mediaStyle}
+              />
+            </div>
+          ) : (
+            <div className={frameClassName} style={frameStyle}>
+              <iframe
+                src={embedUrl}
+                style={mediaStyle}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          )}
+          {caption && <figcaption style={captionStyle}>{caption}</figcaption>}
+        </figure>
+      </div>
     );
   },
 };
-
-function extractYouTubeId(url: string): string | null {
-  const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-  return m ? m[1] : null;
-}
-
-function extractVimeoId(url: string): string | null {
-  const m = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
-  return m ? m[1] : null;
-}
 
 export default Video;

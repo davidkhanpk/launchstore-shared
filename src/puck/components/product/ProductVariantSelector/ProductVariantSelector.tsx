@@ -1,12 +1,66 @@
 import React, { useEffect, useState } from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { productVariantSelectorFields } from './productvariantselector.fields';
 import type {
   ProductVariantSelectorProps, VariantSelectorStyle,
   SelectedOptions, SetSelectedOptions, SetSelectedVariant,
   ProductVariantSelectorVariantLike,
 } from './productvariantselector.types';
 import type { ProductData, ProductDataOption } from '../ProductData';
+import {
+  createAccordionFields,
+} from '../../../design-system';
+
+const MARGIN_OPTS = (prefix: string) => [
+  { label: 'None', value: `${prefix}-0` },
+  { label: 'Small', value: `${prefix}-2` },
+  { label: 'Medium', value: `${prefix}-4` },
+  { label: 'Large', value: `${prefix}-6` },
+  { label: 'Extra Large', value: `${prefix}-8` },
+];
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  selectorStyle: {
+    type: 'select' as const, label: 'Selector Style',
+    options: [
+      { label: 'Dropdown', value: 'dropdown' },
+      { label: 'Buttons', value: 'buttons' },
+      { label: 'Color Swatches', value: 'color-swatches' },
+    ],
+  },
+  showLabels: {
+    type: 'radio' as const, label: 'Show Option Labels',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showStock: {
+    type: 'radio' as const, label: 'Show Stock Status',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  marginTop: { type: 'select' as const, label: 'Margin Top', options: MARGIN_OPTS('mt') },
+  marginBottom: { type: 'select' as const, label: 'Margin Bottom', options: MARGIN_OPTS('mb') },
+  marginLeft: { type: 'select' as const, label: 'Margin Left', options: MARGIN_OPTS('ml').slice(0, 4) },
+  marginRight: { type: 'select' as const, label: 'Margin Right', options: MARGIN_OPTS('mr').slice(0, 4) },
+  paddingX: { type: 'select' as const, label: 'Padding Horizontal', options: MARGIN_OPTS('px') },
+  paddingY: { type: 'select' as const, label: 'Padding Vertical', options: MARGIN_OPTS('py') },
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Appearance',
+      defaultOpen: true,
+      fieldKeys: ['selectorStyle', 'showLabels', 'showStock'],
+    },
+    {
+      label: 'Spacing',
+      fieldKeys: ['marginTop', 'marginBottom', 'marginLeft', 'marginRight', 'paddingX', 'paddingY'],
+    },
+  ],
+  allFields,
+});
 
 const CheckSvg = ({ size = 16 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
@@ -82,7 +136,7 @@ export interface ProductVariantSelectorWithState extends ProductVariantSelectorP
 
 export const ProductVariantSelector: ComponentConfig<ProductVariantSelectorWithState> = {
   label: 'Product Variant Selector',
-  fields: productVariantSelectorFields as ComponentConfig<ProductVariantSelectorWithState>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     selectorStyle: 'buttons', showLabels: true, showStock: true,
     marginTop: 'mt-4', marginBottom: 'mb-4', marginLeft: 'ml-0', marginRight: 'mr-0',

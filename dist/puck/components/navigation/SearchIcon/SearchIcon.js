@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { useState, useRef } from 'react';
 import { resolveColor } from '../../../../theme/resolveColor';
-import { searchIconFields } from './searchicon.fields';
+import { createAccordionFields, } from '../../../design-system';
 const SearchIconSvg = ({ size }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("circle", { cx: "11", cy: "11", r: "8" }), _jsx("line", { x1: "21", y1: "21", x2: "16.65", y2: "16.65" })] }));
 const XIconSvg = ({ size }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("line", { x1: "18", y1: "6", x2: "6", y2: "18" }), _jsx("line", { x1: "6", y1: "6", x2: "18", y2: "18" })] }));
 const SIZE_MAP = { sm: 20, md: 24, lg: 28 };
@@ -10,9 +10,41 @@ const STYLE = {
     outlined: 'p-2 border-2 rounded-full hover:bg-gray-100',
     filled: 'p-2 rounded-full',
 };
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    iconSize: {
+        type: 'select', label: 'Icon Size',
+        options: [{ label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }],
+    },
+    iconColor: { type: 'text', label: 'Icon Color (hex or theme token)' },
+    hoverColor: { type: 'text', label: 'Hover Color (hex or theme token)' },
+    style: {
+        type: 'select', label: 'Button Style',
+        options: [{ label: 'Minimal', value: 'minimal' }, { label: 'Outlined', value: 'outlined' }, { label: 'Filled', value: 'filled' }],
+    },
+    openSearchOnClick: {
+        type: 'radio', label: 'Open Search Modal on Click',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Appearance',
+            defaultOpen: true,
+            fieldKeys: ['iconSize', 'style', 'iconColor', 'hoverColor'],
+        },
+        {
+            label: 'Behavior',
+            fieldKeys: ['openSearchOnClick'],
+        },
+    ],
+    allFields,
+});
 export const SearchIcon = {
     label: 'Search Icon',
-    fields: searchIconFields,
+    fields: accordionFields,
     defaultProps: {
         iconSize: 'md', iconColor: '#000000', hoverColor: '#3b82f6',
         style: 'minimal', openSearchOnClick: true,
@@ -23,8 +55,8 @@ export const SearchIcon = {
         const [searchOpen, setSearchOpen] = useState(false);
         const [query, setQuery] = useState('');
         const inputRef = useRef(null);
-        const sz = SIZE_MAP[iconSize] || 24;
-        const cls = STYLE[style] || STYLE.minimal;
+        const sz = SIZE_MAP[iconSize || 'md'];
+        const cls = STYLE[style || 'minimal'];
         const handleClick = () => {
             if (openSearchOnClick) {
                 setSearchOpen(true);

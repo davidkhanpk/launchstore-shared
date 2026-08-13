@@ -33,6 +33,10 @@ export interface ImageGalleryProps {
   showBorder: boolean;
   borderColor: string;
   backgroundColor: string;
+  marginTop?: string;
+  marginBottom?: string;
+  paddingX?: string;
+  paddingY?: string;
 }
 
 const RADII: Record<ImageGalleryRadius, string> = { none: 'rounded-none', sm: 'rounded-sm', md: 'rounded-md', lg: 'rounded-lg', xl: 'rounded-xl' };

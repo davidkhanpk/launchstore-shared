@@ -1,6 +1,6 @@
 'use client';
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { promotionalBannerGridFields } from './promotionalbannergrid.fields';
+import { createAccordionFields } from '../../../design-system';
 const SPACING_CLASSES = {
     none: 'gap-0',
     sm: 'gap-2',
@@ -22,6 +22,15 @@ const POSITION_CLASSES = {
     'bottom-center': 'items-end justify-center text-center',
     'bottom-right': 'items-end justify-end text-right',
 };
+const TEXT_POSITION_OPTIONS = [
+    { label: 'Top Left', value: 'top-left' },
+    { label: 'Top Center', value: 'top-center' },
+    { label: 'Top Right', value: 'top-right' },
+    { label: 'Center', value: 'center' },
+    { label: 'Bottom Left', value: 'bottom-left' },
+    { label: 'Bottom Center', value: 'bottom-center' },
+    { label: 'Bottom Right', value: 'bottom-right' },
+];
 const HOVER_EFFECT_CLASSES = {
     zoom: 'group-hover:scale-110',
     overlay: '',
@@ -40,9 +49,123 @@ function getGridClasses(layout) {
             return 'grid-cols-1 md:grid-cols-2';
     }
 }
+// ── Banners array field (custom render — Puck array field) ──────────────────
+const BANNER_ARRAY_FIELDS = {
+    title: { type: 'text', label: 'Title' },
+    subtitle: { type: 'text', label: 'Subtitle' },
+    imageUrl: { type: 'text', label: 'Image URL' },
+    ctaText: { type: 'text', label: 'CTA Text' },
+    ctaLink: { type: 'text', label: 'CTA Link' },
+    overlayOpacity: { type: 'number', label: 'Overlay Opacity', min: 0, max: 100 },
+    textColor: { type: 'text', label: 'Text Color' },
+    textPosition: { type: 'select', label: 'Text Position', options: TEXT_POSITION_OPTIONS },
+};
+/**
+ * Custom array field renderer for `banners`. Minimal list editor that covers
+ * add/remove/edit. The frontend editor may override this field with a richer
+ * widget.
+ */
+function renderBannersArray({ value, onChange }) {
+    const items = Array.isArray(value) ? value : [];
+    const update = (index, key, v) => {
+        const next = items.map((it, i) => (i === index ? { ...it, [key]: v } : it));
+        onChange(next);
+    };
+    const remove = (index) => onChange(items.filter((_, i) => i !== index));
+    const add = () => onChange([
+        ...items,
+        {
+            id: String(Date.now()),
+            title: 'New Banner',
+            subtitle: '',
+            imageUrl: '',
+            ctaText: 'Shop Now',
+            ctaLink: '/store',
+            overlayOpacity: 40,
+            textColor: '#ffffff',
+            textPosition: 'bottom-left',
+        },
+    ]);
+    return (_jsxs("div", { style: { marginBottom: '12px' }, children: [_jsx("label", { style: { display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px', color: '#374151' }, children: "Banners" }), items.map((item, index) => (_jsxs("div", { style: { border: '1px solid #e5e7eb', borderRadius: '6px', padding: '8px', marginBottom: '8px' }, children: [_jsxs("div", { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }, children: [_jsxs("span", { style: { fontSize: '12px', fontWeight: 600, color: '#6b7280' }, children: ["Banner ", index + 1] }), _jsx("button", { type: "button", onClick: () => remove(index), style: { background: 'none', border: 'none', color: '#dc2626', cursor: 'pointer', fontSize: '12px' }, children: "Remove" })] }), _jsx("input", { type: "text", placeholder: "Title", value: item.title || '', onChange: (e) => update(index, 'title', e.target.value), style: { width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' } }), _jsx("input", { type: "text", placeholder: "Subtitle", value: item.subtitle || '', onChange: (e) => update(index, 'subtitle', e.target.value), style: { width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' } }), _jsx("input", { type: "text", placeholder: "Image URL", value: item.imageUrl || '', onChange: (e) => update(index, 'imageUrl', e.target.value), style: { width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' } }), _jsx("input", { type: "text", placeholder: "CTA Text", value: item.ctaText || '', onChange: (e) => update(index, 'ctaText', e.target.value), style: { width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' } }), _jsx("input", { type: "text", placeholder: "CTA Link", value: item.ctaLink || '', onChange: (e) => update(index, 'ctaLink', e.target.value), style: { width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' } }), _jsx("input", { type: "number", placeholder: "Overlay Opacity", value: item.overlayOpacity ?? '', min: 0, max: 100, onChange: (e) => update(index, 'overlayOpacity', e.target.value ? Number(e.target.value) : 0), style: { width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' } }), _jsx("input", { type: "text", placeholder: "Text Color", value: item.textColor || '', onChange: (e) => update(index, 'textColor', e.target.value), style: { width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' } }), _jsx("select", { value: item.textPosition || '', onChange: (e) => update(index, 'textPosition', e.target.value), style: { width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '13px' }, children: TEXT_POSITION_OPTIONS.map((opt) => _jsx("option", { value: opt.value, children: opt.label }, opt.value)) })] }, item.id || index))), _jsx("button", { type: "button", onClick: add, style: { padding: '6px 12px', border: '1px dashed #9ca3af', borderRadius: '6px', background: '#f9fafb', cursor: 'pointer', fontSize: '13px', width: '100%' }, children: "+ Add Banner" })] }));
+}
+// ── Content fields ──────────────────────────────────────────────────────────
+const contentFields = {
+    title: { type: 'text', label: 'Title' },
+    subtitle: { type: 'text', label: 'Subtitle' },
+    banners: { type: 'custom', label: '', render: renderBannersArray, arrayFields: BANNER_ARRAY_FIELDS },
+};
+// ── Layout fields ───────────────────────────────────────────────────────────
+const layoutFields = {
+    layout: {
+        type: 'select', label: 'Layout',
+        options: [
+            { label: '2 Column', value: '2-column' },
+            { label: '3 Column', value: '3-column' },
+            { label: '1-2 Split', value: '1-2-split' },
+            { label: '2-1 Split', value: '2-1-split' },
+        ],
+    },
+    spacing: {
+        type: 'select', label: 'Spacing',
+        options: [
+            { label: 'None', value: 'none' },
+            { label: 'Small', value: 'sm' },
+            { label: 'Medium', value: 'md' },
+            { label: 'Large', value: 'lg' },
+        ],
+    },
+    hoverEffect: {
+        type: 'select', label: 'Hover Effect',
+        options: [
+            { label: 'Zoom', value: 'zoom' },
+            { label: 'Overlay', value: 'overlay' },
+            { label: 'Lift', value: 'lift' },
+            { label: 'None', value: 'none' },
+        ],
+    },
+    minHeight: { type: 'text', label: 'Min Height (e.g. 300px)' },
+};
+// ── Color fields ────────────────────────────────────────────────────────────
+const colorFields = {
+    borderRadius: {
+        type: 'select', label: 'Border Radius',
+        options: [
+            { label: 'None', value: 'none' },
+            { label: 'Small', value: 'sm' },
+            { label: 'Medium', value: 'md' },
+            { label: 'Large', value: 'lg' },
+        ],
+    },
+};
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    ...contentFields,
+    ...layoutFields,
+    ...colorFields,
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Content',
+            defaultOpen: true,
+            fieldKeys: ['title', 'subtitle', 'banners'],
+        },
+        {
+            label: 'Layout',
+            fieldKeys: ['layout', 'spacing', 'hoverEffect', 'minHeight'],
+        },
+        {
+            label: 'Colors',
+            fieldKeys: ['borderRadius'],
+        },
+    ],
+    allFields,
+});
+// ── Component ───────────────────────────────────────────────────────────────
 export const PromotionalBannerGrid = {
     label: 'Promotional Banner Grid',
-    fields: promotionalBannerGridFields,
+    fields: accordionFields,
     defaultProps: {
         title: '',
         subtitle: '',

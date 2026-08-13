@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { customHtmlFields } from './customhtml.fields';
+import { createAccordionFields } from '../../../design-system';
 const MAX_WIDTH_CLASSES = {
     sm: 'max-w-screen-sm',
     md: 'max-w-screen-md',
@@ -19,9 +19,73 @@ function sanitizeHTML(html) {
         .replace(/on\w+\s*=\s*["'][^"']*["']/gi, '')
         .replace(/javascript:/gi, '');
 }
+// ── Content fields (component-specific) ─────────────────────────────────────
+const contentFields = {
+    htmlContent: { type: 'textarea', label: 'HTML Content' },
+    cssContent: { type: 'textarea', label: 'Custom CSS (optional)' },
+    sanitizeHTML: {
+        type: 'radio', label: 'Sanitize HTML (recommended)',
+        options: [
+            { label: 'Yes (Safe)', value: true },
+            { label: 'No (Trust Content)', value: false },
+        ],
+    },
+};
+// ── Layout fields (component-specific) ──────────────────────────────────────
+const layoutFields = {
+    useContainer: {
+        type: 'radio', label: 'Use Container',
+        options: [
+            { label: 'Yes', value: true },
+            { label: 'No (Full Width)', value: false },
+        ],
+    },
+    maxWidth: {
+        type: 'select', label: 'Max Width',
+        options: [
+            { label: 'Small (640px)', value: 'sm' },
+            { label: 'Medium (768px)', value: 'md' },
+            { label: 'Large (1024px)', value: 'lg' },
+            { label: 'Extra Large (1280px)', value: 'xl' },
+            { label: '2X Large (1536px)', value: '2xl' },
+            { label: 'Full Width', value: 'full' },
+        ],
+    },
+    paddingTop: { type: 'number', label: 'Padding Top (px)', min: 0, max: 200 },
+    paddingBottom: { type: 'number', label: 'Padding Bottom (px)', min: 0, max: 200 },
+    paddingLeft: { type: 'number', label: 'Padding Left (px)', min: 0, max: 200 },
+    paddingRight: { type: 'number', label: 'Padding Right (px)', min: 0, max: 200 },
+    backgroundColor: { type: 'text', label: 'Background Color (hex or theme token)' },
+    backgroundImage: { type: 'text', label: 'Background Image URL' },
+};
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    ...contentFields,
+    ...layoutFields,
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Content',
+            defaultOpen: true,
+            fieldKeys: ['htmlContent', 'cssContent', 'sanitizeHTML'],
+        },
+        {
+            label: 'Layout',
+            fieldKeys: [
+                'useContainer', 'maxWidth',
+                'paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight',
+                'backgroundColor', 'backgroundImage',
+            ],
+        },
+    ],
+    allFields,
+});
+// ── Component ───────────────────────────────────────────────────────────────
 export const CustomHTML = {
     label: 'Custom HTML',
-    fields: customHtmlFields,
+    fields: accordionFields,
     defaultProps: {
         htmlContent: `<div class="custom-section">
   <h2>Custom HTML Section</h2>

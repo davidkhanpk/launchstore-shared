@@ -1,23 +1,7 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { headingFields } from './heading.fields';
-const SIZE = {
-    xs: 'text-xs', sm: 'text-sm', base: 'text-base', lg: 'text-lg',
-    xl: 'text-xl', '2xl': 'text-2xl', '3xl': 'text-3xl', '4xl': 'text-4xl', '5xl': 'text-5xl',
-};
-const WEIGHT = {
-    light: 'font-light', normal: 'font-normal', medium: 'font-medium',
-    semibold: 'font-semibold', bold: 'font-bold',
-};
-const ALIGN = { left: 'text-left', center: 'text-center', right: 'text-right' };
-const LINE_HEIGHT = {
-    tight: 'leading-tight', snug: 'leading-snug', normal: 'leading-normal',
-    relaxed: 'leading-relaxed', loose: 'leading-loose',
-};
-const LETTER_SPACING = {
-    tighter: 'tracking-tighter', tight: 'tracking-tight', normal: 'tracking-normal',
-    wide: 'tracking-wide', wider: 'tracking-wider', widest: 'tracking-widest',
-};
+import { createAccordionFields, sharedTypographyFields, sharedLayoutFields, buildTypographyClasses, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
+// ── Animation (component-specific — not shared) ────────────────────────────
 const ANIMATION_CLASS = {
     fadeIn: 'animate-fadeIn', slideUp: 'animate-slideUp',
     slideDown: 'animate-slideDown', none: '',
@@ -30,41 +14,86 @@ const KEYFRAMES = `
 .animate-slideUp { animation: slideUp 0.6s ease-out both; }
 .animate-slideDown { animation: slideDown 0.6s ease-out both; }
 `;
+// ── Content fields (component-specific) ─────────────────────────────────────
+const contentFields = {
+    text: { type: 'text', label: 'Text' },
+    level: {
+        type: 'select', label: 'Heading Level',
+        options: [
+            { label: 'H1', value: 'h1' },
+            { label: 'H2', value: 'h2' },
+            { label: 'H3', value: 'h3' },
+            { label: 'H4', value: 'h4' },
+            { label: 'H5', value: 'h5' },
+            { label: 'H6', value: 'h6' },
+        ],
+    },
+    animation: {
+        type: 'select', label: 'Animation',
+        options: [
+            { label: 'None', value: 'none' },
+            { label: 'Fade In', value: 'fadeIn' },
+            { label: 'Slide Up', value: 'slideUp' },
+            { label: 'Slide Down', value: 'slideDown' },
+        ],
+    },
+    animationDelay: { type: 'number', label: 'Animation Delay (ms)' },
+};
+// ── All flat fields (for the accordion to reference by key) ─────────────────
+const allFields = {
+    ...contentFields,
+    ...sharedTypographyFields,
+    ...sharedLayoutFields,
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Content',
+            defaultOpen: true,
+            fieldKeys: ['text', 'level', 'animation', 'animationDelay'],
+        },
+        {
+            label: 'Typography',
+            fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
+        },
+        {
+            label: 'Layout',
+            fieldKeys: ['marginTop', 'marginBottom'],
+        },
+    ],
+    allFields,
+});
+// ── Component ───────────────────────────────────────────────────────────────
 export const Heading = {
     label: 'Heading',
-    fields: headingFields,
+    fields: accordionFields,
     defaultProps: {
         text: 'Your Heading Here',
         level: 'h2',
-        size: undefined,
-        fontWeight: 'bold',
-        textAlign: 'left',
-        color: '#1f2937',
-        fontSize: '',
-        lineHeight: 'normal',
-        letterSpacing: 'normal',
-        marginTop: 0,
-        marginBottom: 16,
         animation: 'none',
         animationDelay: 0,
+        ...defaultTypographyProps,
+        fontWeight: 'bold',
+        textColor: '#1f2937',
+        textAlign: 'left',
+        ...defaultLayoutProps,
+        marginBottom: 'md',
     },
-    render: ({ text, level, size, fontWeight, textAlign, color, fontSize, lineHeight, letterSpacing, marginTop, marginBottom, animation, animationDelay, }) => {
-        const sizeClass = size ? SIZE[size] : '';
-        const weightClass = WEIGHT[fontWeight || 'semibold'] || 'font-semibold';
-        const alignClass = ALIGN[textAlign || 'left'] || 'text-left';
-        const lineHeightClass = LINE_HEIGHT[lineHeight || 'normal'] || 'leading-normal';
-        const letterSpacingClass = LETTER_SPACING[letterSpacing || 'normal'] || 'tracking-normal';
-        const animationClass = ANIMATION_CLASS[animation || 'none'] || '';
-        const style = {
-            color: color ? resolveColor(color) : undefined,
-            fontSize: !size && fontSize ? fontSize : undefined,
-            marginTop: marginTop !== undefined ? `${marginTop}px` : undefined,
-            marginBottom: marginBottom !== undefined ? `${marginBottom}px` : undefined,
-            animationDelay: animationDelay !== undefined ? `${animationDelay}ms` : undefined,
-        };
-        const className = `${sizeClass} ${weightClass} ${alignClass} ${lineHeightClass} ${letterSpacingClass} ${animationClass}`.trim();
+    render: (rawProps) => {
+        const { text, level, animation, animationDelay, fontSize, fontWeight, textAlign, textColor, lineHeight, marginTop, marginBottom, } = rawProps;
         const Tag = level || 'h2';
-        return (_jsxs(_Fragment, { children: [_jsx(Tag, { className: className, style: style, children: text }), _jsx("style", { dangerouslySetInnerHTML: { __html: KEYFRAMES } })] }));
+        const animationClass = ANIMATION_CLASS[animation || 'none'] || '';
+        const className = [
+            buildTypographyClasses(rawProps),
+            buildLayoutClasses(rawProps),
+            animationClass,
+        ].filter(Boolean).join(' ');
+        const style = {
+            color: resolveColor(textColor) || '#1f2937',
+            animationDelay: animationDelay ? `${animationDelay}ms` : undefined,
+        };
+        return (_jsxs(_Fragment, { children: [_jsx(Tag, { className: className, style: style, children: text || 'Heading' }), animationClass && _jsx("style", { dangerouslySetInnerHTML: { __html: KEYFRAMES } })] }));
     },
 };
 export default Heading;

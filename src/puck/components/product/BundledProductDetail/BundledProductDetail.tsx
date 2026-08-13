@@ -1,10 +1,40 @@
 import React, { useState, useMemo } from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { bundledProductDetailFields } from './bundledproductdetail.fields';
 import type {
   BundledProductDetailProps, BundleItem, BundleData, BundleItemVariant,
   FormatBundlePrice, BundleAddItemsArg,
 } from './bundledproductdetail.types';
+import {
+  createAccordionFields,
+} from '../../../design-system';
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  showSavingsBadge: {
+    type: 'radio' as const, label: 'Show Savings Badge',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showItemImages: {
+    type: 'radio' as const, label: 'Show Item Images',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  buttonText: { type: 'text' as const, label: 'Button Text' },
+  bundleIdOverride: { type: 'text' as const, label: 'Bundle ID Override (optional)' },
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['showSavingsBadge', 'showItemImages', 'buttonText', 'bundleIdOverride'],
+    },
+  ],
+  allFields,
+});
 
 const AlertSvg = ({ size = 20 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
@@ -45,7 +75,7 @@ export interface BundledProductDetailWithData extends BundledProductDetailProps 
 
 export const BundledProductDetail: ComponentConfig<BundledProductDetailWithData> = {
   label: 'Bundled Product Detail',
-  fields: bundledProductDetailFields as ComponentConfig<BundledProductDetailWithData>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     showSavingsBadge: true, showItemImages: true,
     buttonText: 'Add Bundle to Cart', bundleIdOverride: '',

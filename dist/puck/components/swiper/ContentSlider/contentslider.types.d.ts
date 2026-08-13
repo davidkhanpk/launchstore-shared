@@ -31,5 +31,9 @@ export interface ContentSliderProps {
     enableOverlay: boolean;
     overlayColor: string;
     overlayOpacity: number;
+    marginTop?: string;
+    marginBottom?: string;
+    paddingX?: string;
+    paddingY?: string;
 }
 //# sourceMappingURL=contentslider.types.d.ts.map

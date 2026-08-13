@@ -1,5 +1,3 @@
-import type { Field } from '@puckeditor/core';
-
 export type ProductRatingSize = 'sm' | 'md' | 'lg';
 
 export interface ProductRatingSummary {

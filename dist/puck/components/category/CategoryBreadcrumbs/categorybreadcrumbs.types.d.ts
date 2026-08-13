@@ -13,11 +13,19 @@ export interface CategoryBreadcrumbsProps {
     separator: string;
     showHome: boolean;
     homeText: string;
-    fontSize: string;
-    textColor: string;
     activeColor: string;
     hoverColor: string;
-    marginBottom: string;
     className?: string;
+    fontSize?: string;
+    fontWeight?: string;
+    textAlign?: string;
+    textColor?: string;
+    lineHeight?: string;
+    marginTop?: string;
+    marginBottom?: string;
+    paddingX?: string;
+    paddingY?: string;
+    backgroundColor?: string;
+    borderRadius?: string;
 }
 //# sourceMappingURL=categorybreadcrumbs.types.d.ts.map

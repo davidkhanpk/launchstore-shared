@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from 'react';
-import { accountButtonFields } from './accountbutton.fields';
 import { resolveColor } from '../../../../theme/resolveColor';
+import { createAccordionFields, } from '../../../design-system';
 const UserSvg = ({ size }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("path", { d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" }), _jsx("circle", { cx: "12", cy: "7", r: "4" })] }));
 const SIZE_MAP = { sm: 20, md: 24, lg: 28 };
 const STYLE_CLASS = {
@@ -17,9 +17,56 @@ const initialsOf = (customer) => {
         return composed;
     return (customer.email?.[0] ?? '?').toUpperCase();
 };
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    showLabel: {
+        type: 'radio', label: 'Show Label',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    label: { type: 'text', label: 'Button Label' },
+    iconSize: {
+        type: 'select', label: 'Icon Size',
+        options: [{ label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }],
+    },
+    style: {
+        type: 'select', label: 'Button Style',
+        options: [{ label: 'Minimal', value: 'minimal' }, { label: 'Outlined', value: 'outlined' }, { label: 'Filled', value: 'filled' }],
+    },
+    iconColor: { type: 'text', label: 'Icon Color (hex or theme token)' },
+    hoverColor: { type: 'text', label: 'Hover Color (hex or theme token)' },
+    linkTo: { type: 'text', label: 'Link (Signed Out)' },
+    signedInLink: { type: 'text', label: 'Link (Signed In)' },
+    showWhenSignedOut: {
+        type: 'radio', label: 'Show When Signed Out',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    showWhenSignedIn: {
+        type: 'radio', label: 'Show When Signed In',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Content',
+            defaultOpen: true,
+            fieldKeys: ['showLabel', 'label'],
+        },
+        {
+            label: 'Appearance',
+            fieldKeys: ['iconSize', 'style', 'iconColor', 'hoverColor'],
+        },
+        {
+            label: 'Links & Visibility',
+            fieldKeys: ['linkTo', 'signedInLink', 'showWhenSignedOut', 'showWhenSignedIn'],
+        },
+    ],
+    allFields,
+});
 export const AccountButton = {
     label: 'Account Button',
-    fields: accountButtonFields,
+    fields: accordionFields,
     defaultProps: {
         showLabel: false, label: 'Account', iconSize: 'md',
         iconColor: '#000000', hoverColor: '#3b82f6', style: 'minimal',

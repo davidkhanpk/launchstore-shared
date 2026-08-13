@@ -1,7 +1,121 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { useState } from 'react';
 import { resolveColor } from '../../../../theme/resolveColor';
-import { headerFields } from './header.fields';
+import { createAccordionFields, } from '../../../design-system';
+// ── Flat field definitions (referenced by key inside the accordion) ─────────
+const headerFields = {
+    layout: {
+        type: 'select',
+        label: 'Layout',
+        options: [
+            { label: 'Logo Left, Menu Center, Actions Right', value: 'left-center-right' },
+            { label: 'All Centered', value: 'centered' },
+            { label: 'Stacked', value: 'stacked' },
+        ],
+    },
+    // Color: text input accepts hex or token. Frontend wraps with ColorField.
+    backgroundColor: { type: 'text', label: 'Background Color (hex or theme token)' },
+    textColor: { type: 'text', label: 'Text Color (hex or theme token)' },
+    sticky: { type: 'radio', label: 'Sticky', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+    shadow: { type: 'radio', label: 'Shadow', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+    transparent: { type: 'radio', label: 'Transparent', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+    logoPosition: {
+        type: 'select', label: 'Logo Position',
+        options: [{ label: 'Left', value: 'left' }, { label: 'Center', value: 'center' }, { label: 'Right', value: 'right' }],
+    },
+    logoMaxWidth: { type: 'text', label: 'Logo Max Width' },
+    logoUrl: { type: 'text', label: 'Logo URL' },
+    logoAlt: { type: 'text', label: 'Logo Alt Text' },
+    // menuItems: rendered externally; consumers inject via data hooks.
+    menuPosition: {
+        type: 'select', label: 'Menu Position',
+        options: [{ label: 'Left', value: 'left' }, { label: 'Center', value: 'center' }, { label: 'Right', value: 'right' }],
+    },
+    menuStyle: {
+        type: 'select', label: 'Menu Style',
+        options: [{ label: 'Horizontal', value: 'horizontal' }, { label: 'Vertical', value: 'vertical' }],
+    },
+    menuTextColor: { type: 'text', label: 'Menu Text Color (hex or theme token)' },
+    menuHoverColor: { type: 'text', label: 'Menu Hover Color (hex or theme token)' },
+    actions: {
+        type: 'array',
+        arrayFields: {
+            action: {
+                type: 'select',
+                options: [
+                    { label: 'Search', value: 'search' },
+                    { label: 'Wishlist', value: 'wishlist' },
+                    { label: 'Account', value: 'account' },
+                    { label: 'Cart', value: 'cart' },
+                ],
+            },
+        },
+    },
+    actionsPosition: {
+        type: 'select', label: 'Actions Position',
+        options: [{ label: 'Left', value: 'left' }, { label: 'Right', value: 'right' }],
+    },
+    showCartBadge: { type: 'radio', label: 'Show Cart Badge', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+    showLabels: { type: 'radio', label: 'Show Labels', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+    cartBadgeCount: { type: 'number', label: 'Cart Badge Count' },
+    topBar: {
+        type: 'object',
+        objectFields: {
+            enabled: { type: 'radio', label: 'Enabled', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+            backgroundColor: { type: 'text', label: 'Background Color' },
+            textColor: { type: 'text', label: 'Text Color' },
+            leftText: { type: 'text', label: 'Left Text' },
+            centerText: { type: 'text', label: 'Center Text' },
+            rightText: { type: 'text', label: 'Right Text' },
+        },
+    },
+    mobileBreakpoint: {
+        type: 'select', label: 'Mobile Breakpoint',
+        options: [
+            { label: 'Small (640px)', value: 'sm' },
+            { label: 'Medium (768px)', value: 'md' },
+            { label: 'Large (1024px)', value: 'lg' },
+        ],
+    },
+    mobileMenuStyle: {
+        type: 'select', label: 'Mobile Menu Style',
+        options: [
+            { label: 'Drawer (Slide from left)', value: 'drawer' },
+            { label: 'Fullscreen', value: 'fullscreen' },
+        ],
+    },
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Header',
+            defaultOpen: true,
+            fieldKeys: ['layout', 'backgroundColor', 'textColor', 'sticky', 'shadow', 'transparent'],
+        },
+        {
+            label: 'Logo',
+            fieldKeys: ['logoPosition', 'logoMaxWidth', 'logoUrl', 'logoAlt'],
+        },
+        {
+            label: 'Navigation',
+            fieldKeys: ['menuPosition', 'menuStyle', 'menuTextColor', 'menuHoverColor', 'actions', 'actionsPosition'],
+        },
+        {
+            label: 'Actions',
+            fieldKeys: ['showCartBadge', 'showLabels', 'cartBadgeCount'],
+        },
+        {
+            label: 'Top Bar',
+            fieldKeys: ['topBar'],
+        },
+        {
+            label: 'Mobile',
+            fieldKeys: ['mobileBreakpoint', 'mobileMenuStyle'],
+        },
+    ],
+    allFields: headerFields,
+});
 // Inline SVG icons (no external dep). Mirrors lucide-react visual.
 const SearchIcon = () => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("circle", { cx: "11", cy: "11", r: "8" }), _jsx("path", { d: "m21 21-4.3-4.3" })] }));
 const HeartIcon = () => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: _jsx("path", { d: "M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z" }) }));
@@ -11,7 +125,7 @@ const MenuIcon = () => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width
 const XIcon = () => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: _jsx("path", { d: "M18 6 6 18M6 6l12 12" }) }));
 export const Header = {
     label: 'Header',
-    fields: headerFields,
+    fields: accordionFields,
     defaultProps: {
         layout: 'left-center-right',
         backgroundColor: '#ffffff',

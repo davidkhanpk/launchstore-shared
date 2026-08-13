@@ -1,5 +1,5 @@
 /**
- * Hero Puck component — render function + default props.
+ * Hero Puck component — render function + inline accordion fields + default props.
  *
  * Consumed by both:
  *   - launchstore-frontend (editor — extends fields with custom widgets)
@@ -7,8 +7,8 @@
  */
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { heroFields } from './hero.fields';
 import type { HeroSectionProps } from './hero.types';
+import { createAccordionFields } from '../../../design-system';
 
 const HEIGHT_CLASSES: Record<HeroSectionProps['height'], string> = {
   sm: 'h-[400px]',
@@ -48,9 +48,127 @@ const BUTTON_JUSTIFY: Record<HeroSectionProps['contentAlignment'], string> = {
   right: 'justify-end',
 };
 
+// ── Content fields (title, subtitle, description, buttons, image) ───────────
+
+const contentFields = {
+  title: { type: 'text' as const, label: 'Title' },
+  subtitle: { type: 'text' as const, label: 'Subtitle' },
+  description: { type: 'textarea' as const, label: 'Description' },
+
+  showPrimaryButton: {
+    type: 'radio' as const, label: 'Show Primary Button',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  primaryButtonText: { type: 'text' as const, label: 'Primary Button Text' },
+  primaryButtonLink: { type: 'text' as const, label: 'Primary Button Link' },
+
+  showSecondaryButton: {
+    type: 'radio' as const, label: 'Show Secondary Button',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  secondaryButtonText: { type: 'text' as const, label: 'Secondary Button Text' },
+  secondaryButtonLink: { type: 'text' as const, label: 'Secondary Button Link' },
+
+  showImage: {
+    type: 'radio' as const, label: 'Show Image',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  imageUrl: { type: 'text' as const, label: 'Image URL' },
+  imagePosition: {
+    type: 'select' as const, label: 'Image Position',
+    options: [
+      { label: 'Left', value: 'left' },
+      { label: 'Right', value: 'right' },
+      { label: 'Background', value: 'background' },
+    ],
+  },
+  imageAlt: { type: 'text' as const, label: 'Image Alt Text' },
+};
+
+// ── Layout fields (height + alignment) ──────────────────────────────────────
+
+const layoutFields = {
+  height: {
+    type: 'select' as const, label: 'Hero Height',
+    options: [
+      { label: 'Small (400px)', value: 'sm' },
+      { label: 'Medium (500px)', value: 'md' },
+      { label: 'Large (600px)', value: 'lg' },
+      { label: 'Extra Large (700px)', value: 'xl' },
+      { label: 'Full Screen', value: 'full' },
+    ],
+  },
+  contentAlignment: {
+    type: 'select' as const, label: 'Horizontal Alignment',
+    options: [
+      { label: 'Left', value: 'left' },
+      { label: 'Center', value: 'center' },
+      { label: 'Right', value: 'right' },
+    ],
+  },
+  verticalAlignment: {
+    type: 'select' as const, label: 'Vertical Alignment',
+    options: [
+      { label: 'Top', value: 'top' },
+      { label: 'Center', value: 'center' },
+      { label: 'Bottom', value: 'bottom' },
+    ],
+  },
+};
+
+// ── Style / color fields (text color, overlay, background, gradient) ───────
+
+const styleFields = {
+  textColor: { type: 'text' as const, label: 'Text Color (hex or theme token)' },
+  overlayOpacity: { type: 'number' as const, label: 'Overlay Opacity (0-100)', min: 0, max: 100 },
+  backgroundColor: { type: 'text' as const, label: 'Background Color (hex or theme token)' },
+  backgroundGradient: {
+    type: 'radio' as const, label: 'Use Gradient Background',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  gradientFrom: { type: 'text' as const, label: 'Gradient From (hex or theme token)' },
+  gradientTo: { type: 'text' as const, label: 'Gradient To (hex or theme token)' },
+};
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...layoutFields,
+  ...styleFields,
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: [
+        'title', 'subtitle', 'description',
+        'showPrimaryButton', 'primaryButtonText', 'primaryButtonLink',
+        'showSecondaryButton', 'secondaryButtonText', 'secondaryButtonLink',
+        'showImage', 'imageUrl', 'imagePosition', 'imageAlt',
+      ],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['height', 'contentAlignment', 'verticalAlignment'],
+    },
+    {
+      label: 'Style',
+      fieldKeys: ['textColor', 'overlayOpacity', 'backgroundColor', 'backgroundGradient', 'gradientFrom', 'gradientTo'],
+    },
+  ],
+  allFields,
+});
+
+// ── Component ───────────────────────────────────────────────────────────────
+
 export const HeroSection: ComponentConfig<HeroSectionProps> = {
   label: 'Hero Section',
-  fields: heroFields as ComponentConfig<HeroSectionProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     title: 'Welcome to Our Store',
     subtitle: 'Discover Amazing Products',
@@ -74,7 +192,7 @@ export const HeroSection: ComponentConfig<HeroSectionProps> = {
     backgroundGradient: true,
     gradientFrom: '#667eea',
     gradientTo: '#764ba2',
-  },
+  } as HeroSectionProps,
   render: (props) => {
     const {
       height = 'lg',

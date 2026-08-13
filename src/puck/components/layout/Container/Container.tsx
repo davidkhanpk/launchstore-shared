@@ -1,26 +1,108 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import { DropZone } from '@puckeditor/core';
-import { containerFields } from './container.fields';
+import { resolveColor } from '../../../../theme/resolveColor';
 import type { ContainerProps } from './container.types';
+import {
+  createAccordionFields,
+  sharedLayoutFields,
+  sharedColorFields,
+  buildLayoutClasses,
+  buildColorClasses,
+  defaultLayoutProps,
+  defaultColorProps,
+} from '../../../design-system';
 
-const MAX_W: Record<ContainerProps['maxWidth'], string> = {
-  sm: 'max-w-screen-sm', md: 'max-w-screen-md', lg: 'max-w-screen-lg',
-  xl: 'max-w-screen-xl', '2xl': 'max-w-screen-2xl', full: 'max-w-full',
+// ── Component-specific fields ───────────────────────────────────────────────
+
+const MAX_WIDTH_OPTIONS = [
+  { label: 'Small (640px)', value: 'sm' },
+  { label: 'Medium (768px)', value: 'md' },
+  { label: 'Large (1024px)', value: 'lg' },
+  { label: 'X-Large (1280px)', value: 'xl' },
+  { label: '2X-Large (1536px)', value: '2xl' },
+  { label: 'Full Width', value: 'full' },
+];
+
+const MAX_WIDTH_PX: Record<string, string> = {
+  sm: '640px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1280px',
+  '2xl': '1536px',
+  full: '100%',
 };
-const PAD: Record<ContainerProps['padding'], string> = {
-  none: 'px-0', sm: 'px-4', md: 'px-6', lg: 'px-8',
+
+const contentFields = {
+  maxWidth: { type: 'select' as const, label: 'Max Width', options: MAX_WIDTH_OPTIONS },
 };
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...sharedLayoutFields,
+  ...sharedColorFields,
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Container',
+      defaultOpen: true,
+      fieldKeys: ['maxWidth'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
+    },
+    {
+      label: 'Color',
+      fieldKeys: ['backgroundColor', 'borderRadius'],
+    },
+  ],
+  allFields,
+});
+
+// ── Component ───────────────────────────────────────────────────────────────
 
 export const Container: ComponentConfig<ContainerProps> = {
   label: 'Container',
-  fields: containerFields as ComponentConfig<ContainerProps>['fields'],
-  defaultProps: { maxWidth: 'xl', padding: 'md' },
-  render: ({ maxWidth, padding }) => (
-    <div className={`mx-auto ${MAX_W[maxWidth] || 'max-w-screen-xl'} ${PAD[padding] || 'px-6'}`} style={{ minHeight: '80px' }}>
-      <DropZone zone="content" />
-    </div>
-  ),
+  fields: accordionFields as any,
+  defaultProps: {
+    maxWidth: 'xl',
+    ...defaultLayoutProps,
+    paddingX: 'md',
+    ...defaultColorProps,
+  } as ContainerProps,
+  render: (rawProps: any) => {
+    const {
+      maxWidth, marginTop, marginBottom, paddingX, paddingY,
+      backgroundColor, borderRadius,
+    } = rawProps;
+
+    const className = [
+      'mx-auto',
+      buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY }),
+      buildColorClasses({ borderRadius }),
+    ].filter(Boolean).join(' ');
+
+    const style: React.CSSProperties = {
+      maxWidth: MAX_WIDTH_PX[maxWidth] || '1280px',
+      minHeight: '80px',
+    };
+    if (backgroundColor && backgroundColor !== 'transparent') {
+      style.backgroundColor = resolveColor(backgroundColor) || backgroundColor;
+    }
+
+    return (
+      <div className={className} style={style}>
+        <DropZone zone="content" />
+      </div>
+    );
+  },
 };
 
 export default Container;

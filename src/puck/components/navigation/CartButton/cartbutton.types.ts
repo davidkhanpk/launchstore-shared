@@ -1,5 +1,3 @@
-import type { Field } from '@puckeditor/core';
-
 export type CartButtonIconSize = 'sm' | 'md' | 'lg';
 export type CartButtonStyle = 'minimal' | 'outlined' | 'filled';
 export type CartButtonBadgePosition = 'top-right' | 'top-left' | 'bottom-right';
@@ -25,10 +23,10 @@ export interface CartButtonProps {
   showBadge: boolean;
   badgePosition: CartButtonBadgePosition;
   iconSize: CartButtonIconSize;
-  iconColor: string;
-  hoverColor: string;
-  badgeBackgroundColor: string;
-  badgeTextColor: string;
+  iconColor?: string;
+  hoverColor?: string;
+  badgeBackgroundColor?: string;
+  badgeTextColor?: string;
   style: CartButtonStyle;
   /** Injected at render-time by the consumer wrapper. */
   cartCount?: number;

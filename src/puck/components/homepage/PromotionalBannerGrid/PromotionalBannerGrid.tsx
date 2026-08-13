@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * PromotionalBannerGrid Puck component — render + fields + defaultProps.
+ * PromotionalBannerGrid Puck component — render + inline accordion fields + defaultProps.
  *
  * Both consumers import `PromotionalBannerGrid` from here:
  *   - launchstore-frontend (Puck editor) — extends color/image fields with custom widgets
@@ -12,9 +12,9 @@
  * in their renderer.
  */
 import React from 'react';
-import type { ComponentConfig } from '@puckeditor/core';
-import { promotionalBannerGridFields } from './promotionalbannergrid.fields';
+import type { ComponentConfig, Field } from '@puckeditor/core';
 import type { PromotionalBannerGridProps, PromotionalBannerItem } from './promotionalbannergrid.types';
+import { createAccordionFields } from '../../../design-system';
 
 const SPACING_CLASSES: Record<PromotionalBannerGridProps['spacing'], string> = {
   none: 'gap-0',
@@ -40,6 +40,16 @@ const POSITION_CLASSES: Record<PromotionalBannerItem['textPosition'], string> = 
   'bottom-right': 'items-end justify-end text-right',
 };
 
+const TEXT_POSITION_OPTIONS = [
+  { label: 'Top Left', value: 'top-left' },
+  { label: 'Top Center', value: 'top-center' },
+  { label: 'Top Right', value: 'top-right' },
+  { label: 'Center', value: 'center' },
+  { label: 'Bottom Left', value: 'bottom-left' },
+  { label: 'Bottom Center', value: 'bottom-center' },
+  { label: 'Bottom Right', value: 'bottom-right' },
+];
+
 const HOVER_EFFECT_CLASSES = {
   zoom: 'group-hover:scale-110',
   overlay: '',
@@ -60,9 +70,165 @@ function getGridClasses(layout: PromotionalBannerGridProps['layout']) {
   }
 }
 
+// ── Banners array field (custom render — Puck array field) ──────────────────
+
+const BANNER_ARRAY_FIELDS = {
+  title: { type: 'text' as const, label: 'Title' },
+  subtitle: { type: 'text' as const, label: 'Subtitle' },
+  imageUrl: { type: 'text' as const, label: 'Image URL' },
+  ctaText: { type: 'text' as const, label: 'CTA Text' },
+  ctaLink: { type: 'text' as const, label: 'CTA Link' },
+  overlayOpacity: { type: 'number' as const, label: 'Overlay Opacity', min: 0, max: 100 },
+  textColor: { type: 'text' as const, label: 'Text Color' },
+  textPosition: { type: 'select' as const, label: 'Text Position', options: TEXT_POSITION_OPTIONS },
+} as any;
+
+/**
+ * Custom array field renderer for `banners`. Minimal list editor that covers
+ * add/remove/edit. The frontend editor may override this field with a richer
+ * widget.
+ */
+function renderBannersArray({ value, onChange }: { value: any; onChange: (v: any) => void }) {
+  const items: PromotionalBannerItem[] = Array.isArray(value) ? value : [];
+
+  const update = (index: number, key: keyof PromotionalBannerItem, v: any) => {
+    const next = items.map((it, i) => (i === index ? { ...it, [key]: v } : it));
+    onChange(next);
+  };
+  const remove = (index: number) => onChange(items.filter((_, i) => i !== index));
+  const add = () =>
+    onChange([
+      ...items,
+      {
+        id: String(Date.now()),
+        title: 'New Banner',
+        subtitle: '',
+        imageUrl: '',
+        ctaText: 'Shop Now',
+        ctaLink: '/store',
+        overlayOpacity: 40,
+        textColor: '#ffffff',
+        textPosition: 'bottom-left',
+      },
+    ]);
+
+  return (
+    <div style={{ marginBottom: '12px' }}>
+      <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, marginBottom: '4px', color: '#374151' }}>
+        Banners
+      </label>
+      {items.map((item, index) => (
+        <div key={item.id || index} style={{ border: '1px solid #e5e7eb', borderRadius: '6px', padding: '8px', marginBottom: '8px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+            <span style={{ fontSize: '12px', fontWeight: 600, color: '#6b7280' }}>Banner {index + 1}</span>
+            <button type="button" onClick={() => remove(index)} style={{ background: 'none', border: 'none', color: '#dc2626', cursor: 'pointer', fontSize: '12px' }}>Remove</button>
+          </div>
+          <input type="text" placeholder="Title" value={item.title || ''} onChange={(e) => update(index, 'title', e.target.value)} style={{ width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' }} />
+          <input type="text" placeholder="Subtitle" value={item.subtitle || ''} onChange={(e) => update(index, 'subtitle', e.target.value)} style={{ width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' }} />
+          <input type="text" placeholder="Image URL" value={item.imageUrl || ''} onChange={(e) => update(index, 'imageUrl', e.target.value)} style={{ width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' }} />
+          <input type="text" placeholder="CTA Text" value={item.ctaText || ''} onChange={(e) => update(index, 'ctaText', e.target.value)} style={{ width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' }} />
+          <input type="text" placeholder="CTA Link" value={item.ctaLink || ''} onChange={(e) => update(index, 'ctaLink', e.target.value)} style={{ width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' }} />
+          <input type="number" placeholder="Overlay Opacity" value={item.overlayOpacity ?? ''} min={0} max={100} onChange={(e) => update(index, 'overlayOpacity', e.target.value ? Number(e.target.value) : 0)} style={{ width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' }} />
+          <input type="text" placeholder="Text Color" value={item.textColor || ''} onChange={(e) => update(index, 'textColor', e.target.value)} style={{ width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', marginBottom: '6px', fontSize: '13px' }} />
+          <select value={item.textPosition || ''} onChange={(e) => update(index, 'textPosition', e.target.value)} style={{ width: '100%', padding: '6px 8px', border: '1px solid #d1d5db', borderRadius: '6px', fontSize: '13px' }}>
+            {TEXT_POSITION_OPTIONS.map((opt) => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+          </select>
+        </div>
+      ))}
+      <button type="button" onClick={add} style={{ padding: '6px 12px', border: '1px dashed #9ca3af', borderRadius: '6px', background: '#f9fafb', cursor: 'pointer', fontSize: '13px', width: '100%' }}>+ Add Banner</button>
+    </div>
+  );
+}
+
+// ── Content fields ──────────────────────────────────────────────────────────
+
+const contentFields = {
+  title: { type: 'text' as const, label: 'Title' },
+  subtitle: { type: 'text' as const, label: 'Subtitle' },
+  banners: { type: 'custom' as const, label: '', render: renderBannersArray, arrayFields: BANNER_ARRAY_FIELDS } as Field,
+};
+
+// ── Layout fields ───────────────────────────────────────────────────────────
+
+const layoutFields = {
+  layout: {
+    type: 'select' as const, label: 'Layout',
+    options: [
+      { label: '2 Column', value: '2-column' },
+      { label: '3 Column', value: '3-column' },
+      { label: '1-2 Split', value: '1-2-split' },
+      { label: '2-1 Split', value: '2-1-split' },
+    ],
+  },
+  spacing: {
+    type: 'select' as const, label: 'Spacing',
+    options: [
+      { label: 'None', value: 'none' },
+      { label: 'Small', value: 'sm' },
+      { label: 'Medium', value: 'md' },
+      { label: 'Large', value: 'lg' },
+    ],
+  },
+  hoverEffect: {
+    type: 'select' as const, label: 'Hover Effect',
+    options: [
+      { label: 'Zoom', value: 'zoom' },
+      { label: 'Overlay', value: 'overlay' },
+      { label: 'Lift', value: 'lift' },
+      { label: 'None', value: 'none' },
+    ],
+  },
+  minHeight: { type: 'text' as const, label: 'Min Height (e.g. 300px)' },
+};
+
+// ── Color fields ────────────────────────────────────────────────────────────
+
+const colorFields = {
+  borderRadius: {
+    type: 'select' as const, label: 'Border Radius',
+    options: [
+      { label: 'None', value: 'none' },
+      { label: 'Small', value: 'sm' },
+      { label: 'Medium', value: 'md' },
+      { label: 'Large', value: 'lg' },
+    ],
+  },
+};
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...layoutFields,
+  ...colorFields,
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['title', 'subtitle', 'banners'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['layout', 'spacing', 'hoverEffect', 'minHeight'],
+    },
+    {
+      label: 'Colors',
+      fieldKeys: ['borderRadius'],
+    },
+  ],
+  allFields,
+});
+
+// ── Component ───────────────────────────────────────────────────────────────
+
 export const PromotionalBannerGrid: ComponentConfig<PromotionalBannerGridProps> = {
   label: 'Promotional Banner Grid',
-  fields: promotionalBannerGridFields as ComponentConfig<PromotionalBannerGridProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     title: '',
     subtitle: '',
@@ -95,7 +261,7 @@ export const PromotionalBannerGrid: ComponentConfig<PromotionalBannerGridProps> 
     borderRadius: 'md',
     hoverEffect: 'zoom',
     minHeight: '300px',
-  },
+  } as PromotionalBannerGridProps,
   render: ({ title, subtitle, layout, spacing, banners, borderRadius, hoverEffect, minHeight }) => (
     <div className="w-full py-8 px-4">
       <div className="max-w-7xl mx-auto">

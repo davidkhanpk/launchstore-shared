@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { searchBarFields } from './searchbar.fields';
 import type { SearchBarProps, SearchBarSize, SearchBarStyle, SearchBarRadius, SearchBarIconPosition } from './searchbar.types';
 import { resolveColor } from '../../../../theme/resolveColor';
+import {
+  createAccordionFields,
+} from '../../../design-system';
 
 const SearchSvg = ({ size }: { size: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
@@ -24,16 +26,91 @@ const STYLE: Record<SearchBarStyle, string> = {
   minimal: 'border-0 border-b-2', outlined: 'border', filled: 'border-0',
 };
 
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  placeholder: { type: 'text' as const, label: 'Placeholder Text' },
+  style: {
+    type: 'select' as const, label: 'Style',
+    options: [{ label: 'Minimal', value: 'minimal' }, { label: 'Outlined', value: 'outlined' }, { label: 'Filled', value: 'filled' }],
+  },
+  size: {
+    type: 'select' as const, label: 'Size',
+    options: [{ label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }],
+  },
+  showIcon: {
+    type: 'radio' as const, label: 'Show Search Icon',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  iconPosition: {
+    type: 'select' as const, label: 'Icon Position',
+    options: [{ label: 'Left', value: 'left' }, { label: 'Right', value: 'right' }],
+  },
+  fullWidth: {
+    type: 'radio' as const, label: 'Full Width',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  maxWidth: { type: 'text' as const, label: 'Max Width (if not full width)' },
+  borderRadius: {
+    type: 'select' as const, label: 'Border Radius',
+    options: [
+      { label: 'None', value: 'none' },
+      { label: 'Small', value: 'sm' },
+      { label: 'Medium', value: 'md' },
+      { label: 'Large', value: 'lg' },
+      { label: 'Full', value: 'full' },
+    ],
+  },
+  backgroundColor: { type: 'text' as const, label: 'Background Color (hex or theme token)' },
+  textColor: { type: 'text' as const, label: 'Text Color (hex or theme token)' },
+  borderColor: { type: 'text' as const, label: 'Border Color (hex or theme token)' },
+  focusBorderColor: { type: 'text' as const, label: 'Focus Border Color (hex or theme token)' },
+  showPopularSearches: {
+    type: 'radio' as const, label: 'Show Popular Searches',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  popularSearches: {
+    type: 'array' as const, label: 'Popular Searches',
+    arrayFields: { search: { type: 'text' as const } },
+    getItemSummary: ((item: any) => item?.search || 'Search term') as any,
+  } as any,
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['placeholder', 'showPopularSearches', 'popularSearches'],
+    },
+    {
+      label: 'Appearance',
+      fieldKeys: ['style', 'size', 'borderRadius', 'fullWidth', 'maxWidth'],
+    },
+    {
+      label: 'Icon',
+      fieldKeys: ['showIcon', 'iconPosition'],
+    },
+    {
+      label: 'Colors',
+      fieldKeys: ['backgroundColor', 'textColor', 'borderColor', 'focusBorderColor'],
+    },
+  ],
+  allFields,
+});
+
 export const SearchBar: ComponentConfig<SearchBarProps> = {
   label: 'Search Bar',
-  fields: searchBarFields as ComponentConfig<SearchBarProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     placeholder: 'Search products...', style: 'outlined', size: 'md',
     showIcon: true, iconPosition: 'left', fullWidth: false, maxWidth: '400px',
     borderRadius: 'md', backgroundColor: '#ffffff', textColor: '#000000',
     borderColor: '#e5e7eb', focusBorderColor: '#3b82f6',
     showPopularSearches: false, popularSearches: [],
-  },
+  } as SearchBarProps,
   render: (rawProps: any) => {
     const {
       placeholder, style, size, showIcon, iconPosition, fullWidth, maxWidth,

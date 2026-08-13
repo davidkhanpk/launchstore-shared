@@ -1,5 +1,3 @@
-import type { Field } from '@puckeditor/core';
-
 export type ReviewSort = 'recent' | 'helpful' | 'rating_high' | 'rating_low';
 
 export interface SharedReviewMedia {

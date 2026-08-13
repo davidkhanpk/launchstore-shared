@@ -1,5 +1,3 @@
-import type { Field } from '@puckeditor/core';
-
 export type ProductMetadataLayout = 'list' | 'grid' | 'table';
 
 export interface ProductMetadataProps {

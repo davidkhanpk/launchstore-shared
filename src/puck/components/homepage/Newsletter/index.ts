@@ -6,5 +6,4 @@
  */
 export { Newsletter } from './Newsletter';
 export type { NewsletterProps } from './newsletter.types';
-export { newsletterFields } from './newsletter.fields';
 export { newsletterMeta, type NewsletterMeta } from './newsletter.meta';

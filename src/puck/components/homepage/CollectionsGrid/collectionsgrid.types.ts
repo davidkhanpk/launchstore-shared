@@ -1,5 +1,3 @@
-import type { Field } from '@puckeditor/core';
-
 /**
  * Minimal shape of a collection needed by CollectionsGrid render.
  * Consumers fetch the full Medusa type and project into this shape.

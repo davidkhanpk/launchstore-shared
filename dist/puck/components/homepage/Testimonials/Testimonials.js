@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
-import { testimonialsFields } from './testimonials.fields';
+import { createAccordionFields } from '../../../design-system';
 const RADIUS_CLASSES = {
     none: 'rounded-none',
     sm: 'rounded-sm',
@@ -55,9 +55,129 @@ const MOCK_TESTIMONIALS = [
 function renderStars(rating) {
     return (_jsx("div", { className: "flex gap-1", children: Array.from({ length: 5 }).map((_, i) => (_jsx("span", { className: i < rating ? 'text-yellow-400' : 'text-gray-300', children: "\u2605" }, i))) }));
 }
+// ── Content fields (section header + display toggles) ───────────────────────
+const contentFields = {
+    sectionTitle: { type: 'text', label: 'Section Title' },
+    sectionSubtitle: { type: 'text', label: 'Section Subtitle' },
+    showTitle: {
+        type: 'radio', label: 'Show Section Title',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    layout: {
+        type: 'select', label: 'Testimonial Layout',
+        options: [
+            { label: 'Card', value: 'card' },
+            { label: 'Quote', value: 'quote' },
+            { label: 'Minimal', value: 'minimal' },
+        ],
+    },
+    maxTestimonials: { type: 'number', label: 'Maximum Testimonials', min: 1, max: 20 },
+    showAvatar: {
+        type: 'radio', label: 'Show Avatar',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    showName: {
+        type: 'radio', label: 'Show Customer Name',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    showRole: {
+        type: 'radio', label: 'Show Role/Company',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    showRating: {
+        type: 'radio', label: 'Show Star Rating',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    showDate: {
+        type: 'radio', label: 'Show Date',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+};
+// ── Layout fields (display mode + grid + carousel) ──────────────────────────
+const layoutFields = {
+    displayMode: {
+        type: 'select', label: 'Display Mode',
+        options: [
+            { label: 'Grid', value: 'grid' },
+            { label: 'Carousel (Swiper)', value: 'carousel' },
+        ],
+    },
+    columns: { type: 'number', label: 'Columns (Grid)', min: 1, max: 4 },
+    slidesPerView: { type: 'number', label: 'Slides Per View (Desktop)', min: 1, max: 3 },
+    slidesPerViewTablet: { type: 'number', label: 'Slides Per View (Tablet)', min: 1, max: 2 },
+    slidesPerViewMobile: { type: 'number', label: 'Slides Per View (Mobile)', min: 1, max: 1 },
+    spaceBetween: { type: 'number', label: 'Space Between Slides (px)', min: 0, max: 100 },
+    autoplay: {
+        type: 'radio', label: 'Auto-play Carousel',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    autoplayDelay: { type: 'number', label: 'Auto-play Delay (ms)', min: 2000, max: 10000 },
+    loop: {
+        type: 'radio', label: 'Loop Carousel',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    navigation: {
+        type: 'radio', label: 'Show Navigation Arrows',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    pagination: {
+        type: 'radio', label: 'Show Pagination',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    effect: {
+        type: 'select', label: 'Transition Effect',
+        options: [
+            { label: 'Slide', value: 'slide' },
+            { label: 'Fade', value: 'fade' },
+        ],
+    },
+};
+// ── Color fields ────────────────────────────────────────────────────────────
+const colorFields = {
+    backgroundColor: { type: 'text', label: 'Background Color (hex or theme token)' },
+    textColor: { type: 'text', label: 'Text Color (hex or theme token)' },
+    cardBackground: { type: 'text', label: 'Card Background (hex or theme token)' },
+    accentColor: { type: 'text', label: 'Accent Color (hex or theme token)' },
+    borderRadius: {
+        type: 'select', label: 'Border Radius',
+        options: [
+            { label: 'None', value: 'none' },
+            { label: 'Small', value: 'sm' },
+            { label: 'Medium', value: 'md' },
+            { label: 'Large', value: 'lg' },
+            { label: 'Extra Large', value: 'xl' },
+        ],
+    },
+};
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    ...contentFields,
+    ...layoutFields,
+    ...colorFields,
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Content',
+            defaultOpen: true,
+            fieldKeys: ['sectionTitle', 'sectionSubtitle', 'showTitle', 'layout', 'maxTestimonials', 'showAvatar', 'showName', 'showRole', 'showRating', 'showDate'],
+        },
+        {
+            label: 'Layout',
+            fieldKeys: ['displayMode', 'columns', 'slidesPerView', 'slidesPerViewTablet', 'slidesPerViewMobile', 'spaceBetween', 'autoplay', 'autoplayDelay', 'loop', 'navigation', 'pagination', 'effect'],
+        },
+        {
+            label: 'Colors',
+            fieldKeys: ['backgroundColor', 'textColor', 'cardBackground', 'accentColor', 'borderRadius'],
+        },
+    ],
+    allFields,
+});
+// ── Component ───────────────────────────────────────────────────────────────
 export const Testimonials = {
     label: 'Testimonials',
-    fields: testimonialsFields,
+    fields: accordionFields,
     defaultProps: {
         sectionTitle: 'What Our Customers Say',
         sectionSubtitle: 'Real reviews from real customers',

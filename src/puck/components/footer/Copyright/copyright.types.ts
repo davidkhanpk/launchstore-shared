@@ -1,11 +1,13 @@
 export interface CopyrightProps {
-  text: string;
-  showYear: boolean;
-  alignment: 'left' | 'center' | 'right';
-  fontSize: 'xs' | 'sm' | 'base';
-  textColor: string;
-  showDivider: boolean;
-  dividerColor: string;
-  paddingTop: string;
-  paddingBottom: string;
+  text?: string;
+  showYear?: boolean;
+  alignment?: 'left' | 'center' | 'right';
+  fontSize?: string;
+  textColor?: string;
+  showDivider?: boolean;
+  dividerColor?: string;
+  marginTop?: string;
+  marginBottom?: string;
+  paddingX?: string;
+  paddingY?: string;
 }

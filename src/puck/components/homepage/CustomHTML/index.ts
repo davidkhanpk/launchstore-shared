@@ -6,5 +6,4 @@
  */
 export { CustomHTML } from './CustomHTML';
 export type { CustomHTMLProps } from './customhtml.types';
-export { customHtmlFields } from './customhtml.fields';
 export { customHtmlMeta, type CustomHtmlMeta } from './customhtml.meta';

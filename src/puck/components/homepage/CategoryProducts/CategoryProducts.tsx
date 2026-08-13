@@ -2,8 +2,93 @@ import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { categoryProductsFields } from './categoryproducts.fields';
+import { resolveColor } from '../../../../theme/resolveColor';
 import type { CategoryProductsProps, CategoryProduct } from './categoryproducts.types';
+import {
+  createAccordionFields,
+} from '../../../design-system';
+
+// ── Flat field definitions (referenced by key inside the accordion) ─────────
+
+const categoryProductsFields = {
+  sectionTitle: { type: 'text', label: 'Section Title' },
+  sectionSubtitle: { type: 'textarea', label: 'Section Subtitle' },
+  showTitle: { type: 'radio', label: 'Show Section Title', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  categoryId: { type: 'text', label: 'Category ID' },
+  categoryName: { type: 'text', label: 'Category Name (for display)' },
+  displayMode: { type: 'select', label: 'Display Mode', options: [{ label: 'Grid', value: 'grid' }, { label: 'Carousel (Swiper)', value: 'carousel' }] },
+  productsPerRow: { type: 'number', label: 'Products Per Row (Grid)', min: 2, max: 6 },
+  maxProducts: { type: 'number', label: 'Maximum Products', min: 1, max: 50 },
+  slidesPerView: { type: 'number', label: 'Slides Per View (Desktop)', min: 1, max: 6 },
+  slidesPerViewTablet: { type: 'number', label: 'Slides Per View (Tablet)', min: 1, max: 4 },
+  slidesPerViewMobile: { type: 'number', label: 'Slides Per View (Mobile)', min: 1, max: 2 },
+  spaceBetween: { type: 'number', label: 'Space Between Slides (px)', min: 0, max: 100 },
+  autoplay: { type: 'radio', label: 'Auto-play Carousel', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  autoplayDelay: { type: 'number', label: 'Auto-play Delay (ms)', min: 1000, max: 10000 },
+  loop: { type: 'radio', label: 'Loop Carousel', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  navigation: { type: 'radio', label: 'Show Navigation Arrows', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  pagination: { type: 'radio', label: 'Show Pagination Dots', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  imageAspectRatio: { type: 'select', label: 'Image Aspect Ratio', options: [
+    { label: 'Square (1:1)', value: 'square' },
+    { label: 'Portrait (3:4)', value: 'portrait' },
+    { label: 'Landscape (4:3)', value: 'landscape' },
+  ]},
+  showPrice: { type: 'radio', label: 'Show Price', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  showAddToCart: { type: 'radio', label: 'Show Add to Cart', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  showRating: { type: 'radio', label: 'Show Rating', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  showBadges: { type: 'radio', label: 'Show Badges (New/Sale)', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  showViewAllButton: { type: 'radio', label: 'Show View All Button', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
+  viewAllButtonText: { type: 'text', label: 'View All Button Text' },
+  backgroundColor: { type: 'text', label: 'Background Color (hex or theme token)' },
+  textColor: { type: 'text', label: 'Text Color (hex or theme token)' },
+  cardStyle: { type: 'select', label: 'Card Style', options: [
+    { label: 'Minimal', value: 'minimal' }, { label: 'Bordered', value: 'bordered' }, { label: 'Shadow', value: 'shadow' },
+  ]},
+  borderRadius: { type: 'select', label: 'Border Radius', options: [
+    { label: 'None', value: 'none' },
+    { label: 'Small', value: 'sm' },
+    { label: 'Medium', value: 'md' },
+    { label: 'Large', value: 'lg' },
+  ]},
+  buttonColor: { type: 'text', label: 'Button Color (hex or theme token)' },
+  buttonTextColor: { type: 'text', label: 'Button Text Color (hex or theme token)' },
+  buttonRadius: { type: 'select', label: 'Button Radius', options: [
+    { label: 'Small', value: 'small' }, { label: 'Medium', value: 'medium' }, { label: 'Large', value: 'large' }, { label: 'None', value: 'none' },
+  ]},
+} as Record<string, any>;
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Section',
+      defaultOpen: true,
+      fieldKeys: ['sectionTitle', 'sectionSubtitle', 'showTitle', 'categoryId', 'categoryName'],
+    },
+    {
+      label: 'Display',
+      fieldKeys: ['displayMode', 'productsPerRow', 'maxProducts'],
+    },
+    {
+      label: 'Carousel',
+      fieldKeys: ['slidesPerView', 'slidesPerViewTablet', 'slidesPerViewMobile', 'spaceBetween', 'autoplay', 'autoplayDelay', 'loop', 'navigation', 'pagination'],
+    },
+    {
+      label: 'Product Card',
+      fieldKeys: ['imageAspectRatio', 'showPrice', 'showAddToCart', 'showRating', 'showBadges'],
+    },
+    {
+      label: 'View All Button',
+      fieldKeys: ['showViewAllButton', 'viewAllButtonText', 'buttonColor', 'buttonTextColor', 'buttonRadius'],
+    },
+    {
+      label: 'Styling',
+      fieldKeys: ['backgroundColor', 'textColor', 'cardStyle', 'borderRadius'],
+    },
+  ],
+  allFields: categoryProductsFields,
+});
 
 const ASPECT: Record<CategoryProductsProps['imageAspectRatio'], string> = {
   square: 'aspect-square', portrait: 'aspect-[3/4]', landscape: 'aspect-[4/3]',
@@ -68,7 +153,7 @@ const ViewAllButton = ({ props }: { props: CategoryProductsProps }) =>
 
 export const CategoryProducts: ComponentConfig<CategoryProductsProps> = {
   label: 'Category Products',
-  fields: categoryProductsFields as ComponentConfig<CategoryProductsProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     sectionTitle: 'Shop by Category',
     sectionSubtitle: 'Discover our curated collection',
@@ -128,7 +213,7 @@ export const CategoryProducts: ComponentConfig<CategoryProductsProps> = {
       </div>
     ) : null;
 
-    const sectionStyle: React.CSSProperties = { backgroundColor };
+    const sectionStyle: React.CSSProperties = { backgroundColor: resolveColor(backgroundColor) || backgroundColor };
 
     if (errMsg) {
       return <div className="category-products-section py-16" style={sectionStyle}><div className="container mx-auto px-4">{Header}<div className="text-center text-red-500"><p>Error: {errMsg}</p></div></div></div>;

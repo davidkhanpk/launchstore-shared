@@ -9,12 +9,18 @@ export interface SharedCategoryNode {
 }
 export interface CategoryDescriptionProps {
     category?: SharedCategoryNode | null;
-    fontSize: 'sm' | 'base' | 'md' | 'lg' | 'xl';
-    color: 'default' | 'black' | 'gray' | 'muted' | 'white';
-    alignment: 'left' | 'center' | 'right' | 'justify';
-    lineHeight: 'tight' | 'normal' | 'relaxed' | 'loose';
     maxWidth: 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
-    marginBottom?: string;
     className?: string;
+    fontSize?: string;
+    fontWeight?: string;
+    textAlign?: string;
+    textColor?: string;
+    lineHeight?: string;
+    marginTop?: string;
+    marginBottom?: string;
+    paddingX?: string;
+    paddingY?: string;
+    backgroundColor?: string;
+    borderRadius?: string;
 }
 //# sourceMappingURL=categorydescription.types.d.ts.map

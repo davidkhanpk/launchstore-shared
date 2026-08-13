@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { wishlistButtonFields } from './wishlistbutton.fields';
 import type {
   WishlistButtonProps, WishlistButtonSize, WishlistButtonStyle, WishlistIconPosition,
   CheckWishlistAuth, IsVariantWishlisted, ToggleWishlist,
 } from './wishlistbutton.types';
 import type { ProductData } from '../ProductData';
+import {
+  createAccordionFields,
+} from '../../../design-system';
 
 const HeartSvg = ({ size = 20, filled }: { size?: number; filled?: boolean }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill={filled ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -33,13 +35,57 @@ export interface WishlistButtonWithData extends WishlistButtonProps {
   wishlistLoading?: boolean;
 }
 
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  showLabel: {
+    type: 'radio' as const, label: 'Show Label',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  labelText: { type: 'text' as const, label: 'Label Text' },
+  size: {
+    type: 'select' as const, label: 'Size',
+    options: [{ label: 'Small', value: 'small' }, { label: 'Medium', value: 'medium' }, { label: 'Large', value: 'large' }],
+  },
+  style: {
+    type: 'select' as const, label: 'Button Style',
+    options: [
+      { label: 'Default', value: 'default' },
+      { label: 'Outline', value: 'outline' },
+      { label: 'Ghost', value: 'ghost' },
+      { label: 'Icon Only', value: 'icon-only' },
+    ],
+  },
+  iconPosition: {
+    type: 'select' as const, label: 'Icon Position',
+    options: [{ label: 'Left', value: 'left' }, { label: 'Right', value: 'right' }],
+  },
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['showLabel', 'labelText'],
+    },
+    {
+      label: 'Appearance',
+      fieldKeys: ['size', 'style', 'iconPosition'],
+    },
+  ],
+  allFields,
+});
+
 export const WishlistButton: ComponentConfig<WishlistButtonWithData> = {
   label: 'Wishlist Button',
-  fields: wishlistButtonFields as ComponentConfig<WishlistButtonWithData>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     showLabel: true, labelText: 'Add to Wishlist',
     size: 'medium', style: 'outline', iconPosition: 'left',
-  },
+  } as WishlistButtonProps,
   render: (rawProps: any) => {
     const {
       showLabel, labelText, size = 'medium', style = 'outline', iconPosition = 'left',

@@ -40,4 +40,8 @@ export interface ProductCarouselProps {
   cardBackground: string;
   cardBorderRadius: ProductCarouselRadius;
   cardShadow: boolean;
+  marginTop?: string;
+  marginBottom?: string;
+  paddingX?: string;
+  paddingY?: string;
 }

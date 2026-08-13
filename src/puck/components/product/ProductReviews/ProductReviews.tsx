@@ -1,11 +1,53 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { productReviewsFields } from './productreviews.fields';
 import type {
   ProductReviewsProps, ReviewSort, SharedReview, SharedReviewsResponse,
   FetchReviews, CreateReviewFn, VoteOnReview, UploadReviewMedia, FetchCustomer,
 } from './productreviews.types';
 import type { ProductData } from '../ProductData';
+import {
+  createAccordionFields,
+} from '../../../design-system';
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  showRatingsSummary: {
+    type: 'radio' as const, label: 'Show Ratings Summary',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showVerifiedBadge: {
+    type: 'radio' as const, label: 'Show Verified Purchase Badge',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  sortBy: {
+    type: 'select' as const, label: 'Default Sort',
+    options: [
+      { label: 'Most Recent', value: 'recent' },
+      { label: 'Most Helpful', value: 'helpful' },
+      { label: 'Highest Rating', value: 'rating_high' },
+      { label: 'Lowest Rating', value: 'rating_low' },
+    ],
+  },
+  reviewsPerPage: { type: 'number' as const, label: 'Reviews Per Page' },
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Appearance',
+      defaultOpen: true,
+      fieldKeys: ['showRatingsSummary', 'showVerifiedBadge'],
+    },
+    {
+      label: 'Reviews',
+      fieldKeys: ['sortBy', 'reviewsPerPage'],
+    },
+  ],
+  allFields,
+});
 
 // ── Inline SVG icons ─────────────────────────────────────────────────────────
 const StarSvg = ({ size = 20, filled }: { size?: number; filled?: boolean }) => (
@@ -60,7 +102,7 @@ export interface ProductReviewsWithData extends ProductReviewsProps {
 
 export const ProductReviews: ComponentConfig<ProductReviewsWithData> = {
   label: 'Product Reviews',
-  fields: productReviewsFields as ComponentConfig<ProductReviewsWithData>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     showRatingsSummary: true, showVerifiedBadge: true,
     sortBy: 'recent', reviewsPerPage: 5,

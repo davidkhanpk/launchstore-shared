@@ -10,6 +10,5 @@
  * automatically via the build:registry script.
  */
 export { HeroSection } from './Hero';
-export { heroFields } from './hero.fields';
 export { heroMeta } from './hero.meta';
 //# sourceMappingURL=index.js.map

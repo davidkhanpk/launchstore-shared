@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
-import { stockIndicatorFields } from './stockindicator.fields';
 import { evaluateStock } from './stockindicator.types';
+import { createAccordionFields, } from '../../../design-system';
 const StockIcon = ({ status, size = 20 }) => {
     if (status === 'in-stock')
         return (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: _jsx("polyline", { points: "20 6 9 17 4 12" }) }));
@@ -10,9 +10,44 @@ const StockIcon = ({ status, size = 20 }) => {
         return (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("circle", { cx: "12", cy: "12", r: "10" }), _jsx("line", { x1: "15", y1: "9", x2: "9", y2: "15" }), _jsx("line", { x1: "9", y1: "9", x2: "15", y2: "15" })] }));
     return (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("circle", { cx: "12", cy: "12", r: "10" }), _jsx("polyline", { points: "12 6 12 12 16 14" })] }));
 };
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    showIcon: {
+        type: 'radio', label: 'Show Icon',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    showText: {
+        type: 'radio', label: 'Show Text',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    showQuantity: {
+        type: 'radio', label: 'Show Quantity Available',
+        options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+    },
+    lowStockThreshold: { type: 'number', label: 'Low Stock Threshold' },
+    style: {
+        type: 'select', label: 'Style',
+        options: [{ label: 'Default', value: 'default' }, { label: 'Badge', value: 'badge' }, { label: 'Minimal', value: 'minimal' }],
+    },
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Content',
+            defaultOpen: true,
+            fieldKeys: ['showIcon', 'showText', 'showQuantity', 'lowStockThreshold'],
+        },
+        {
+            label: 'Appearance',
+            fieldKeys: ['style'],
+        },
+    ],
+    allFields,
+});
 export const StockIndicator = {
     label: 'Stock Indicator',
-    fields: stockIndicatorFields,
+    fields: accordionFields,
     defaultProps: {
         showIcon: true, showText: true, showQuantity: true,
         lowStockThreshold: 10, style: 'default',

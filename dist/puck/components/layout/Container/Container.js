@@ -1,18 +1,78 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { DropZone } from '@puckeditor/core';
-import { containerFields } from './container.fields';
-const MAX_W = {
-    sm: 'max-w-screen-sm', md: 'max-w-screen-md', lg: 'max-w-screen-lg',
-    xl: 'max-w-screen-xl', '2xl': 'max-w-screen-2xl', full: 'max-w-full',
+import { resolveColor } from '../../../../theme/resolveColor';
+import { createAccordionFields, sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
+// ── Component-specific fields ───────────────────────────────────────────────
+const MAX_WIDTH_OPTIONS = [
+    { label: 'Small (640px)', value: 'sm' },
+    { label: 'Medium (768px)', value: 'md' },
+    { label: 'Large (1024px)', value: 'lg' },
+    { label: 'X-Large (1280px)', value: 'xl' },
+    { label: '2X-Large (1536px)', value: '2xl' },
+    { label: 'Full Width', value: 'full' },
+];
+const MAX_WIDTH_PX = {
+    sm: '640px',
+    md: '768px',
+    lg: '1024px',
+    xl: '1280px',
+    '2xl': '1536px',
+    full: '100%',
 };
-const PAD = {
-    none: 'px-0', sm: 'px-4', md: 'px-6', lg: 'px-8',
+const contentFields = {
+    maxWidth: { type: 'select', label: 'Max Width', options: MAX_WIDTH_OPTIONS },
 };
+// ── All flat fields ─────────────────────────────────────────────────────────
+const allFields = {
+    ...contentFields,
+    ...sharedLayoutFields,
+    ...sharedColorFields,
+};
+// ── Accordion config ────────────────────────────────────────────────────────
+const accordionFields = createAccordionFields({
+    groups: [
+        {
+            label: 'Container',
+            defaultOpen: true,
+            fieldKeys: ['maxWidth'],
+        },
+        {
+            label: 'Layout',
+            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
+        },
+        {
+            label: 'Color',
+            fieldKeys: ['backgroundColor', 'borderRadius'],
+        },
+    ],
+    allFields,
+});
+// ── Component ───────────────────────────────────────────────────────────────
 export const Container = {
     label: 'Container',
-    fields: containerFields,
-    defaultProps: { maxWidth: 'xl', padding: 'md' },
-    render: ({ maxWidth, padding }) => (_jsx("div", { className: `mx-auto ${MAX_W[maxWidth] || 'max-w-screen-xl'} ${PAD[padding] || 'px-6'}`, style: { minHeight: '80px' }, children: _jsx(DropZone, { zone: "content" }) })),
+    fields: accordionFields,
+    defaultProps: {
+        maxWidth: 'xl',
+        ...defaultLayoutProps,
+        paddingX: 'md',
+        ...defaultColorProps,
+    },
+    render: (rawProps) => {
+        const { maxWidth, marginTop, marginBottom, paddingX, paddingY, backgroundColor, borderRadius, } = rawProps;
+        const className = [
+            'mx-auto',
+            buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY }),
+            buildColorClasses({ borderRadius }),
+        ].filter(Boolean).join(' ');
+        const style = {
+            maxWidth: MAX_WIDTH_PX[maxWidth] || '1280px',
+            minHeight: '80px',
+        };
+        if (backgroundColor && backgroundColor !== 'transparent') {
+            style.backgroundColor = resolveColor(backgroundColor) || backgroundColor;
+        }
+        return (_jsx("div", { className: className, style: style, children: _jsx(DropZone, { zone: "content" }) }));
+    },
 };
 export default Container;
 //# sourceMappingURL=Container.js.map

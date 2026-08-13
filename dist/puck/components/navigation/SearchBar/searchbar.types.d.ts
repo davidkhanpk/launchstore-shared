@@ -14,10 +14,10 @@ export interface SearchBarProps {
     fullWidth: boolean;
     maxWidth?: string;
     borderRadius: SearchBarRadius;
-    backgroundColor: string;
-    textColor: string;
-    borderColor: string;
-    focusBorderColor: string;
+    backgroundColor?: string;
+    textColor?: string;
+    borderColor?: string;
+    focusBorderColor?: string;
     showPopularSearches: boolean;
     popularSearches?: SearchBarPopularItem[];
     /**

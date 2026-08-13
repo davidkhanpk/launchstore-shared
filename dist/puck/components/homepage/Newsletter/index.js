@@ -5,6 +5,5 @@
  * The renderer (launchstore-storefront) imports `Newsletter` as-is.
  */
 export { Newsletter } from './Newsletter';
-export { newsletterFields } from './newsletter.fields';
 export { newsletterMeta } from './newsletter.meta';
 //# sourceMappingURL=index.js.map

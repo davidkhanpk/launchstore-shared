@@ -1,11 +1,10 @@
 'use client';
 
 /**
- * Testimonials Puck component — render + fields + defaultProps.
+ * Testimonials Puck component — render + inline accordion fields + defaultProps.
  *
  * Both consumers import `Testimonials` from here:
- *   - launchstore-frontend (Puck editor) — extends `.fields.backgroundColor` /
- *     `.fields.textColor` / `.fields.accentColor` with ColorField widgets
+ *   - launchstore-frontend (Puck editor) — extends color fields with ColorField
  *   - launchstore-storefront (renderer) — uses the base fields as-is
  *
  * KNOWN LIMITATION: neither source version exposes a real `testimonials: T[]`
@@ -22,8 +21,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
-import { testimonialsFields } from './testimonials.fields';
 import type { TestimonialsProps } from './testimonials.types';
+import { createAccordionFields } from '../../../design-system';
 
 const RADIUS_CLASSES: Record<TestimonialsProps['borderRadius'], string> = {
   none: 'rounded-none',
@@ -84,9 +83,140 @@ function renderStars(rating: number) {
   );
 }
 
+// ── Content fields (section header + display toggles) ───────────────────────
+
+const contentFields = {
+  sectionTitle: { type: 'text' as const, label: 'Section Title' },
+  sectionSubtitle: { type: 'text' as const, label: 'Section Subtitle' },
+  showTitle: {
+    type: 'radio' as const, label: 'Show Section Title',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  layout: {
+    type: 'select' as const, label: 'Testimonial Layout',
+    options: [
+      { label: 'Card', value: 'card' },
+      { label: 'Quote', value: 'quote' },
+      { label: 'Minimal', value: 'minimal' },
+    ],
+  },
+  maxTestimonials: { type: 'number' as const, label: 'Maximum Testimonials', min: 1, max: 20 },
+  showAvatar: {
+    type: 'radio' as const, label: 'Show Avatar',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showName: {
+    type: 'radio' as const, label: 'Show Customer Name',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showRole: {
+    type: 'radio' as const, label: 'Show Role/Company',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showRating: {
+    type: 'radio' as const, label: 'Show Star Rating',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  showDate: {
+    type: 'radio' as const, label: 'Show Date',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+};
+
+// ── Layout fields (display mode + grid + carousel) ──────────────────────────
+
+const layoutFields = {
+  displayMode: {
+    type: 'select' as const, label: 'Display Mode',
+    options: [
+      { label: 'Grid', value: 'grid' },
+      { label: 'Carousel (Swiper)', value: 'carousel' },
+    ],
+  },
+  columns: { type: 'number' as const, label: 'Columns (Grid)', min: 1, max: 4 },
+  slidesPerView: { type: 'number' as const, label: 'Slides Per View (Desktop)', min: 1, max: 3 },
+  slidesPerViewTablet: { type: 'number' as const, label: 'Slides Per View (Tablet)', min: 1, max: 2 },
+  slidesPerViewMobile: { type: 'number' as const, label: 'Slides Per View (Mobile)', min: 1, max: 1 },
+  spaceBetween: { type: 'number' as const, label: 'Space Between Slides (px)', min: 0, max: 100 },
+  autoplay: {
+    type: 'radio' as const, label: 'Auto-play Carousel',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  autoplayDelay: { type: 'number' as const, label: 'Auto-play Delay (ms)', min: 2000, max: 10000 },
+  loop: {
+    type: 'radio' as const, label: 'Loop Carousel',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  navigation: {
+    type: 'radio' as const, label: 'Show Navigation Arrows',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  pagination: {
+    type: 'radio' as const, label: 'Show Pagination',
+    options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
+  },
+  effect: {
+    type: 'select' as const, label: 'Transition Effect',
+    options: [
+      { label: 'Slide', value: 'slide' },
+      { label: 'Fade', value: 'fade' },
+    ],
+  },
+};
+
+// ── Color fields ────────────────────────────────────────────────────────────
+
+const colorFields = {
+  backgroundColor: { type: 'text' as const, label: 'Background Color (hex or theme token)' },
+  textColor: { type: 'text' as const, label: 'Text Color (hex or theme token)' },
+  cardBackground: { type: 'text' as const, label: 'Card Background (hex or theme token)' },
+  accentColor: { type: 'text' as const, label: 'Accent Color (hex or theme token)' },
+  borderRadius: {
+    type: 'select' as const, label: 'Border Radius',
+    options: [
+      { label: 'None', value: 'none' },
+      { label: 'Small', value: 'sm' },
+      { label: 'Medium', value: 'md' },
+      { label: 'Large', value: 'lg' },
+      { label: 'Extra Large', value: 'xl' },
+    ],
+  },
+};
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...layoutFields,
+  ...colorFields,
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['sectionTitle', 'sectionSubtitle', 'showTitle', 'layout', 'maxTestimonials', 'showAvatar', 'showName', 'showRole', 'showRating', 'showDate'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['displayMode', 'columns', 'slidesPerView', 'slidesPerViewTablet', 'slidesPerViewMobile', 'spaceBetween', 'autoplay', 'autoplayDelay', 'loop', 'navigation', 'pagination', 'effect'],
+    },
+    {
+      label: 'Colors',
+      fieldKeys: ['backgroundColor', 'textColor', 'cardBackground', 'accentColor', 'borderRadius'],
+    },
+  ],
+  allFields,
+});
+
+// ── Component ───────────────────────────────────────────────────────────────
+
 export const Testimonials: ComponentConfig<TestimonialsProps> = {
   label: 'Testimonials',
-  fields: testimonialsFields as ComponentConfig<TestimonialsProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     sectionTitle: 'What Our Customers Say',
     sectionSubtitle: 'Real reviews from real customers',
@@ -115,7 +245,7 @@ export const Testimonials: ComponentConfig<TestimonialsProps> = {
     cardBackground: '#ffffff',
     accentColor: '#3b82f6',
     borderRadius: 'lg',
-  },
+  } as TestimonialsProps,
   render: (props) => {
     const visibleTestimonials = MOCK_TESTIMONIALS.slice(0, props.maxTestimonials);
 

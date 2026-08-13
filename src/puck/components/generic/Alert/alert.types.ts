@@ -1,8 +1,12 @@
 export interface AlertProps {
   id?: string;
-  type: 'info' | 'success' | 'warning' | 'error';
+  type?: 'info' | 'success' | 'warning' | 'error';
   title?: string;
-  message: string;
-  showIcon: boolean;
-  dismissible: boolean;
+  message?: string;
+  showIcon?: boolean;
+  dismissible?: boolean;
+  marginTop?: string;
+  marginBottom?: string;
+  paddingX?: string;
+  paddingY?: string;
 }

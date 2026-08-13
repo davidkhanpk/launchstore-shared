@@ -10,11 +10,20 @@ export interface SharedCategoryNode {
 
 export interface CategoryDescriptionProps {
   category?: SharedCategoryNode | null;
-  fontSize: 'sm' | 'base' | 'md' | 'lg' | 'xl';
-  color: 'default' | 'black' | 'gray' | 'muted' | 'white';
-  alignment: 'left' | 'center' | 'right' | 'justify';
-  lineHeight: 'tight' | 'normal' | 'relaxed' | 'loose';
   maxWidth: 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
-  marginBottom?: string;
   className?: string;
+  // Shared typography
+  fontSize?: string;
+  fontWeight?: string;
+  textAlign?: string;
+  textColor?: string;
+  lineHeight?: string;
+  // Shared layout
+  marginTop?: string;
+  marginBottom?: string;
+  paddingX?: string;
+  paddingY?: string;
+  // Shared color
+  backgroundColor?: string;
+  borderRadius?: string;
 }

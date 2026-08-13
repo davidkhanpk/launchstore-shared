@@ -1,9 +1,39 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { mobileMenuFields } from './mobilemenu.fields';
 import type { MobileMenuProps, MobileMenuThemeResolved, SharedMobileMenuItem } from './mobilemenu.types';
 import { resolveColor } from '../../../../theme/resolveColor';
 import { MobileMenuItem } from './MobileMenuItem';
+import {
+  createAccordionFields,
+} from '../../../design-system';
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+// MobileMenu is a RENDERED-FROM-DATA component: in the Puck editor it shows an
+// empty placeholder (no menu data bound), but in the live renderer the consumer
+// wrapper injects `items` + `theme` from the page's navigation/menu config
+// before passing the props down. Therefore the Puck fields are intentionally
+// minimal — only cosmetic overrides (drawer width, animation direction).
+
+const allFields = {
+  drawerMaxWidth: { type: 'text' as const, label: 'Drawer Max Width (e.g. 400px)' },
+  animationDirection: {
+    type: 'select' as const, label: 'Slide-In Direction',
+    options: [{ label: 'Left', value: 'left' }, { label: 'Right', value: 'right' }],
+  },
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Drawer',
+      defaultOpen: true,
+      fieldKeys: ['drawerMaxWidth', 'animationDirection'],
+    },
+  ],
+  allFields,
+});
 
 const X_SVG = ({ size = 24 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -45,7 +75,7 @@ const filterTopLevel = (items: SharedMobileMenuItem[]): SharedMobileMenuItem[] =
 
 export const MobileMenu: ComponentConfig<MobileMenuProps> = {
   label: 'Mobile Menu',
-  fields: mobileMenuFields as ComponentConfig<MobileMenuProps>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     items: [],
     theme: {},

@@ -1,12 +1,17 @@
 import React from 'react';
 import { SwiperSlide } from 'swiper/react';
 import type { ComponentConfig } from '@puckeditor/core';
-import { testimonialCarouselFields } from './testimonialcarousel.fields';
 import type {
   TestimonialCarouselProps, TestimonialLayout, TestimonialRadius, TestimonialShadow,
   TestimonialItem, TestimonialEffect,
 } from './testimonialcarousel.types';
 import { SwiperBase } from '../../shared/SwiperBase';
+import {
+  createAccordionFields,
+  sharedLayoutFields,
+  buildLayoutClasses,
+  defaultLayoutProps,
+} from '../../../design-system';
 
 const RADII: Record<TestimonialRadius, string> = {
   none: 'rounded-none', sm: 'rounded-sm', md: 'rounded-md', lg: 'rounded-lg', xl: 'rounded-xl', '2xl': 'rounded-2xl',
@@ -92,9 +97,107 @@ export interface TestimonialCarouselWithItems extends TestimonialCarouselProps {
   items?: TestimonialItem[];
 }
 
+const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
+
+// ── Content fields (component-specific) ─────────────────────────────────────
+
+const contentFields = {
+  layout: {
+    type: 'select' as const, label: 'Layout Style',
+    options: [{ label: 'Card', value: 'card' }, { label: 'Quote', value: 'quote' }, { label: 'Minimal', value: 'minimal' }],
+  },
+  showAvatar: { type: 'radio' as const, label: 'Show Avatar', options: RADIO_YES_NO },
+  showRating: { type: 'radio' as const, label: 'Show Rating', options: RADIO_YES_NO },
+  showRole: { type: 'radio' as const, label: 'Show Role/Title', options: RADIO_YES_NO },
+};
+
+// ── Carousel fields (component-specific) ────────────────────────────────────
+
+const carouselFields = {
+  cardsPerView: { type: 'number' as const, label: 'Cards Per View (Desktop)' },
+  cardsPerViewTablet: { type: 'number' as const, label: 'Cards Per View (Tablet)' },
+  cardsPerViewMobile: { type: 'number' as const, label: 'Cards Per View (Mobile)' },
+  effect: { type: 'select' as const, label: 'Transition Effect', options: [{ label: 'Slide', value: 'slide' }, { label: 'Fade', value: 'fade' }] },
+  showNavigation: { type: 'radio' as const, label: 'Show Navigation Arrows', options: RADIO_YES_NO },
+  navigationColor: { type: 'text' as const, label: 'Navigation Color (hex)' },
+  showPagination: { type: 'radio' as const, label: 'Show Pagination', options: RADIO_YES_NO },
+  paginationType: { type: 'select' as const, label: 'Pagination Type', options: [{ label: 'Bullets', value: 'bullets' }, { label: 'Fraction', value: 'fraction' }] },
+  paginationColor: { type: 'text' as const, label: 'Pagination Color (hex)' },
+  enableAutoplay: { type: 'radio' as const, label: 'Enable Autoplay', options: RADIO_YES_NO },
+  autoplayDelay: { type: 'number' as const, label: 'Autoplay Delay (ms)' },
+  pauseOnHover: { type: 'radio' as const, label: 'Pause on Hover', options: RADIO_YES_NO },
+  loop: { type: 'radio' as const, label: 'Loop', options: RADIO_YES_NO },
+  spaceBetween: { type: 'number' as const, label: 'Space Between Cards (px)' },
+  centeredSlides: { type: 'radio' as const, label: 'Centered Slides', options: RADIO_YES_NO },
+};
+
+// ── Color fields (component-specific) ───────────────────────────────────────
+
+const colorFields = {
+  backgroundColor: { type: 'text' as const, label: 'Background Color (hex)' },
+  cardBackground: { type: 'text' as const, label: 'Card Background Color (hex)' },
+  textColor: { type: 'text' as const, label: 'Text Color (hex)' },
+  accentColor: { type: 'text' as const, label: 'Accent Color (ratings/quotes)' },
+  borderRadius: {
+    type: 'select' as const, label: 'Border Radius',
+    options: [
+      { label: 'None', value: 'none' }, { label: 'Small', value: 'sm' },
+      { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' },
+      { label: 'Extra Large', value: 'xl' }, { label: '2XL', value: '2xl' },
+    ],
+  },
+  cardShadow: {
+    type: 'select' as const, label: 'Card Shadow',
+    options: [
+      { label: 'None', value: 'none' }, { label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' },
+      { label: 'Large', value: 'lg' }, { label: 'Extra Large', value: 'xl' },
+    ],
+  },
+};
+
+// ── All flat fields ─────────────────────────────────────────────────────────
+
+const allFields = {
+  ...contentFields,
+  ...carouselFields,
+  ...colorFields,
+  ...sharedLayoutFields,
+};
+
+// ── Accordion config ────────────────────────────────────────────────────────
+
+const accordionFields = createAccordionFields({
+  groups: [
+    {
+      label: 'Content',
+      defaultOpen: true,
+      fieldKeys: ['layout', 'showAvatar', 'showRating', 'showRole'],
+    },
+    {
+      label: 'Carousel',
+      fieldKeys: [
+        'cardsPerView', 'cardsPerViewTablet', 'cardsPerViewMobile', 'effect',
+        'showNavigation', 'navigationColor', 'showPagination', 'paginationType', 'paginationColor',
+        'enableAutoplay', 'autoplayDelay', 'pauseOnHover', 'loop', 'spaceBetween', 'centeredSlides',
+      ],
+    },
+    {
+      label: 'Colors',
+      fieldKeys: ['backgroundColor', 'cardBackground', 'textColor', 'accentColor', 'borderRadius', 'cardShadow'],
+    },
+    {
+      label: 'Layout',
+      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
+    },
+  ],
+  allFields,
+});
+
+// ── Component ───────────────────────────────────────────────────────────────
+
 export const TestimonialCarousel: ComponentConfig<TestimonialCarouselWithItems> = {
   label: 'Testimonial Carousel (Swiper)',
-  fields: testimonialCarouselFields as ComponentConfig<TestimonialCarouselWithItems>['fields'],
+  fields: accordionFields as any,
   defaultProps: {
     layout: 'card', cardsPerView: 3, cardsPerViewTablet: 2, cardsPerViewMobile: 1,
     effect: 'slide', showNavigation: true, navigationColor: '#1f2937',
@@ -104,13 +207,26 @@ export const TestimonialCarousel: ComponentConfig<TestimonialCarouselWithItems> 
     showAvatar: true, showRating: true, showRole: true,
     backgroundColor: '#f9fafb', cardBackground: '#ffffff',
     textColor: '#1f2937', accentColor: '#f59e0b',
-    borderRadius: 'lg', cardShadow: 'md', paddingY: 80, paddingX: 20,
-  },
+    borderRadius: 'lg', cardShadow: 'md',
+    ...defaultLayoutProps,
+    paddingY: 'xl',
+    paddingX: 'md',
+  } as TestimonialCarouselWithItems,
   render: (rawProps: any) => {
     const { items = MOCK_TESTIMONIALS, ...props } = rawProps as TestimonialCarouselWithItems;
     const layout = (props.layout as TestimonialLayout) || 'card';
+
+    const wrapperClassName = [
+      'testimonial-carousel',
+      buildLayoutClasses({ marginTop: props.marginTop, marginBottom: props.marginBottom, paddingX: props.paddingX, paddingY: props.paddingY }),
+    ].filter(Boolean).join(' ');
+
+    const wrapperStyle: React.CSSProperties = {
+      backgroundColor: props.backgroundColor,
+    };
+
     return (
-      <div className="testimonial-carousel" style={{ backgroundColor: props.backgroundColor, paddingTop: `${props.paddingY}px`, paddingBottom: `${props.paddingY}px`, paddingLeft: `${props.paddingX}px`, paddingRight: `${props.paddingX}px` }}>
+      <div className={wrapperClassName} style={wrapperStyle}>
         <div className="max-w-7xl mx-auto">
           <SwiperBase
             breakpoints={{ mobile: props.cardsPerViewMobile, tablet: props.cardsPerViewTablet, desktop: props.cardsPerView }}

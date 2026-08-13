@@ -1,17 +1,15 @@
-import type { Field } from '@puckeditor/core';
-
 export type VariantSelectorStyle = 'dropdown' | 'buttons' | 'color-swatches';
 
 export interface ProductVariantSelectorProps {
   selectorStyle: VariantSelectorStyle;
   showLabels: boolean;
   showStock: boolean;
-  marginTop: string;
-  marginBottom: string;
-  marginLeft: string;
-  marginRight: string;
-  paddingX: string;
-  paddingY: string;
+  marginTop?: string;
+  marginBottom?: string;
+  marginLeft?: string;
+  marginRight?: string;
+  paddingX?: string;
+  paddingY?: string;
 }
 
 /**

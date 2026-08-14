@@ -27,12 +27,6 @@ const BORDER_WIDTH_CLASS: Record<string, string> = {
 };
 
 const formContainerFields = {
-  // Content
-  formId: { type: 'text', label: 'Form ID (auto — do not change)' },
-  formName: { type: 'text', label: 'Form Name' },
-  submitButtonText: { type: 'text', label: 'Submit Button Text' },
-  successMessage: { type: 'textarea', label: 'Success Message' },
-  successRedirectUrl: { type: 'text', label: 'Success Redirect URL (optional)' },
   // Layout
   maxWidth: { type: 'select', label: 'Max Width', options: MAX_WIDTH_OPTIONS },
   gap: { type: 'select', label: 'Field Spacing', options: SPACING_OPTIONS },
@@ -49,11 +43,11 @@ const formContainerFields = {
 } as Record<string, Field>;
 
 export interface FormContainerProps {
+  /**
+   * Bound to the Form record id by the designer (injected on load and
+   * force-kept on save). NOT a visible field — the id comes from the URL.
+   */
   formId: string;
-  formName: string;
-  submitButtonText: string;
-  successMessage: string;
-  successRedirectUrl: string;
   maxWidth: string;
   gap: string;
   paddingX: string;
@@ -68,19 +62,17 @@ export interface FormContainerProps {
 }
 
 /**
- * FormContainer — the shell of a Puck-designed form. Presentational in the
- * editor (a DropZone that accepts field components); the storefront wrapper
- * renders the same tree inside a live <form> with react-hook-form + submission.
+ * FormContainer — the shell of a Puck-designed form. Pure layout/styling:
+ * field spacing, padding, background, border, radius. Submit behavior
+ * (button text, success message, redirect) lives on the FormSubmitButton.
+ * Presentational in the editor (a DropZone that accepts field components);
+ * the storefront wrapper renders the same tree inside a live <form>.
  */
 export const FormContainer: ComponentConfig<FormContainerProps> = {
   label: 'Form Container',
   fields: formContainerFields as ComponentConfig<FormContainerProps>['fields'],
   defaultProps: {
     formId: '',
-    formName: 'Contact Form',
-    submitButtonText: 'Submit',
-    successMessage: 'Thank you! Your submission has been received.',
-    successRedirectUrl: '',
     maxWidth: 'md',
     gap: '4',
     paddingX: '4',

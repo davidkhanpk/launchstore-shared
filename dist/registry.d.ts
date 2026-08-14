@@ -36,7 +36,7 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-08-14T15:27:14.550Z",
+  "generatedAt": "2026-08-14T19:26:20.202Z",
   "total": 139,
   "entries": [
     {
@@ -6265,10 +6265,6 @@ export const registry: CompiledRegistry = {
       },
       "defaultProps": {
         "formId": "",
-        "formName": "Contact Form",
-        "submitButtonText": "Submit",
-        "successMessage": "Thank you! Your submission has been received.",
-        "successRedirectUrl": "",
         "maxWidth": "md",
         "gap": "4",
         "paddingX": "4",
@@ -6881,6 +6877,8 @@ export const registry: CompiledRegistry = {
       "defaultProps": {
         "buttonText": "Submit",
         "fullWidth": true,
+        "successMessage": "Thank you! Your submission has been received.",
+        "successRedirectUrl": "",
         "fontSize": "sm",
         "fontWeight": "semibold",
         "backgroundColor": "#111827",
@@ -25288,10 +25286,6 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "formId": "",
-          "formName": "Contact Form",
-          "submitButtonText": "Submit",
-          "successMessage": "Thank you! Your submission has been received.",
-          "successRedirectUrl": "",
           "maxWidth": "md",
           "gap": "4",
           "paddingX": "4",
@@ -25904,6 +25898,8 @@ export const registry: CompiledRegistry = {
         "defaultProps": {
           "buttonText": "Submit",
           "fullWidth": true,
+          "successMessage": "Thank you! Your submission has been received.",
+          "successRedirectUrl": "",
           "fontSize": "sm",
           "fontWeight": "semibold",
           "backgroundColor": "#111827",
@@ -46352,10 +46348,6 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "formId": "",
-          "formName": "Contact Form",
-          "submitButtonText": "Submit",
-          "successMessage": "Thank you! Your submission has been received.",
-          "successRedirectUrl": "",
           "maxWidth": "md",
           "gap": "4",
           "paddingX": "4",
@@ -46968,6 +46960,8 @@ export const registry: CompiledRegistry = {
         "defaultProps": {
           "buttonText": "Submit",
           "fullWidth": true,
+          "successMessage": "Thank you! Your submission has been received.",
+          "successRedirectUrl": "",
           "fontSize": "sm",
           "fontWeight": "semibold",
           "backgroundColor": "#111827",
@@ -66409,6 +66403,8 @@ export const registry: CompiledRegistry = {
         "defaultProps": {
           "buttonText": "Submit",
           "fullWidth": true,
+          "successMessage": "Thank you! Your submission has been received.",
+          "successRedirectUrl": "",
           "fontSize": "sm",
           "fontWeight": "semibold",
           "backgroundColor": "#111827",
@@ -67684,6 +67680,8 @@ export const registry: CompiledRegistry = {
         "defaultProps": {
           "buttonText": "Submit",
           "fullWidth": true,
+          "successMessage": "Thank you! Your submission has been received.",
+          "successRedirectUrl": "",
           "fontSize": "sm",
           "fontWeight": "semibold",
           "backgroundColor": "#111827",
@@ -76044,10 +76042,6 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "formId": "",
-          "formName": "Contact Form",
-          "submitButtonText": "Submit",
-          "successMessage": "Thank you! Your submission has been received.",
-          "successRedirectUrl": "",
           "maxWidth": "md",
           "gap": "4",
           "paddingX": "4",

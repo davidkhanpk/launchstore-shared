@@ -16,12 +16,6 @@ const BORDER_WIDTH_CLASS = {
     '4': 'border-4',
 };
 const formContainerFields = {
-    // Content
-    formId: { type: 'text', label: 'Form ID (auto — do not change)' },
-    formName: { type: 'text', label: 'Form Name' },
-    submitButtonText: { type: 'text', label: 'Submit Button Text' },
-    successMessage: { type: 'textarea', label: 'Success Message' },
-    successRedirectUrl: { type: 'text', label: 'Success Redirect URL (optional)' },
     // Layout
     maxWidth: { type: 'select', label: 'Max Width', options: MAX_WIDTH_OPTIONS },
     gap: { type: 'select', label: 'Field Spacing', options: SPACING_OPTIONS },
@@ -37,19 +31,17 @@ const formContainerFields = {
     shadow: { type: 'select', label: 'Shadow', options: SHADOW_OPTIONS },
 };
 /**
- * FormContainer — the shell of a Puck-designed form. Presentational in the
- * editor (a DropZone that accepts field components); the storefront wrapper
- * renders the same tree inside a live <form> with react-hook-form + submission.
+ * FormContainer — the shell of a Puck-designed form. Pure layout/styling:
+ * field spacing, padding, background, border, radius. Submit behavior
+ * (button text, success message, redirect) lives on the FormSubmitButton.
+ * Presentational in the editor (a DropZone that accepts field components);
+ * the storefront wrapper renders the same tree inside a live <form>.
  */
 export const FormContainer = {
     label: 'Form Container',
     fields: formContainerFields,
     defaultProps: {
         formId: '',
-        formName: 'Contact Form',
-        submitButtonText: 'Submit',
-        successMessage: 'Thank you! Your submission has been received.',
-        successRedirectUrl: '',
         maxWidth: 'md',
         gap: '4',
         paddingX: '4',

@@ -19,6 +19,9 @@ const formSubmitButtonFields = {
   // Content
   buttonText: { type: 'text', label: 'Button Text' },
   fullWidth: { type: 'radio', label: 'Full Width', options: RADIO_YES_NO },
+  // After submit (form-level behavior owned by the submit action)
+  successMessage: { type: 'textarea', label: 'Success Message (shown after submit)' },
+  successRedirectUrl: { type: 'text', label: 'Success Redirect URL (optional — overrides message)' },
   // Typography
   fontSize: { type: 'select', label: 'Font Size', options: FONT_SIZE_OPTIONS },
   fontWeight: { type: 'select', label: 'Font Weight', options: FONT_WEIGHT_OPTIONS },
@@ -37,6 +40,8 @@ const formSubmitButtonFields = {
 export interface FormSubmitButtonProps {
   buttonText: string;
   fullWidth: boolean;
+  successMessage: string;
+  successRedirectUrl: string;
   fontSize: string;
   fontWeight: string;
   backgroundColor: string;
@@ -50,8 +55,11 @@ export interface FormSubmitButtonProps {
 }
 
 /**
- * FormSubmitButton — submits the live form. The storefront wrapper reads
- * isSubmitting from FormContext (disabled + "Submitting…" label swap).
+ * FormSubmitButton — submits the live form AND owns the after-submit
+ * behavior: success message / redirect. The storefront wrapper publishes
+ * these through FormContext so the form owner (FormContainer) applies them
+ * on successful submission; while submitting the button disables and swaps
+ * its label.
  */
 export const FormSubmitButton: ComponentConfig<FormSubmitButtonProps> = {
   label: 'Submit Button',
@@ -59,6 +67,8 @@ export const FormSubmitButton: ComponentConfig<FormSubmitButtonProps> = {
   defaultProps: {
     buttonText: 'Submit',
     fullWidth: true,
+    successMessage: 'Thank you! Your submission has been received.',
+    successRedirectUrl: '',
     fontSize: 'sm',
     fontWeight: 'semibold',
     backgroundColor: '#111827',

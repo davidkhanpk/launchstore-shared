@@ -6,7 +6,7 @@ export { FormHeading } from './FormHeading';
 export { FormDivider } from './FormDivider';
 export { FormEmbed } from './FormEmbed';
 export { FormSubmitButton } from './FormSubmitButton';
-export { commonInputFields, commonInputDefaultProps } from './form-field-shared';
+export { commonInputFields, commonInputDefaultProps, inputSurface } from './form-field-shared';
 export { formContainerMeta } from './formcontainer.meta';
 export { formFieldMeta } from './formfield.meta';
 export { formChoiceFieldMeta } from './formchoicefield.meta';

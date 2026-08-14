@@ -14,7 +14,7 @@ export { FormEmbed } from './FormEmbed';
 export type { FormEmbedProps } from './FormEmbed';
 export { FormSubmitButton } from './FormSubmitButton';
 export type { FormSubmitButtonProps } from './FormSubmitButton';
-export { commonInputFields, commonInputDefaultProps } from './form-field-shared';
+export { commonInputFields, commonInputDefaultProps, inputSurface } from './form-field-shared';
 export type { CommonInputProps } from './form-field-shared';
 export { formContainerMeta, type FormContainerMeta } from './formcontainer.meta';
 export { formFieldMeta, type FormFieldMeta } from './formfield.meta';

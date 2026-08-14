@@ -1,4 +1,4 @@
-export { FormContainer } from './FormContainer';
+export { FormContainer, MAX_WIDTH_OPTIONS } from './FormContainer';
 export type { FormContainerProps } from './FormContainer';
 export { FormField } from './FormField';
 export type { FormFieldProps, FieldType } from './FormField';
@@ -14,6 +14,8 @@ export { FormEmbed } from './FormEmbed';
 export type { FormEmbedProps } from './FormEmbed';
 export { FormSubmitButton } from './FormSubmitButton';
 export type { FormSubmitButtonProps } from './FormSubmitButton';
+export { commonInputFields, commonInputDefaultProps } from './form-field-shared';
+export type { CommonInputProps } from './form-field-shared';
 export { formContainerMeta, type FormContainerMeta } from './formcontainer.meta';
 export { formFieldMeta, type FormFieldMeta } from './formfield.meta';
 export { formChoiceFieldMeta, type FormChoiceFieldMeta } from './formchoicefield.meta';

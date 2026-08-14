@@ -1,15 +1,17 @@
 import type { ComponentConfig } from '@puckeditor/core';
-export interface FormChoiceFieldProps {
+import { CommonInputProps } from './form-field-shared';
+export interface FormChoiceFieldProps extends CommonInputProps {
     choiceType: 'radio' | 'checkbox';
-    label: string;
-    helpText?: string;
-    required: boolean;
     options: {
         label: string;
     }[];
-    labelColor: string;
     accentColor: string;
 }
+/**
+ * FormChoiceField — radio group (single) or checkbox group (multiple).
+ * The storefront wrapper registers the group with react-hook-form; checkbox
+ * groups submit an array of selected labels.
+ */
 export declare const FormChoiceField: ComponentConfig<FormChoiceFieldProps>;
 export default FormChoiceField;
 //# sourceMappingURL=FormChoiceField.d.ts.map

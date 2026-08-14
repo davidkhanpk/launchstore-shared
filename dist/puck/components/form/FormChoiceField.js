@@ -1,20 +1,39 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../theme/resolveColor';
-const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
+import { commonInputFields, commonInputDefaultProps, FieldLabel, FieldShell, } from './form-field-shared';
 const formChoiceFieldFields = {
-    choiceType: { type: 'radio', label: 'Choice Type', options: [{ label: 'Radio (single)', value: 'radio' }, { label: 'Checkbox (multiple)', value: 'checkbox' }] },
-    label: { type: 'text', label: 'Group Label' },
-    helpText: { type: 'text', label: 'Help Text' },
-    required: { type: 'radio', label: 'Required', options: RADIO_YES_NO },
-    options: { type: 'array', label: 'Options', arrayFields: { label: { type: 'text', label: 'Option Label' } }, defaultItemProps: { label: 'Option' } },
-    labelColor: { type: 'text', label: 'Label Color (token or hex)' },
+    choiceType: {
+        type: 'radio',
+        label: 'Choice Type',
+        options: [
+            { label: 'Radio (single choice)', value: 'radio' },
+            { label: 'Checkbox (multiple)', value: 'checkbox' },
+        ],
+    },
+    options: {
+        type: 'array',
+        label: 'Options',
+        arrayFields: { label: { type: 'text', label: 'Option Label' } },
+        defaultItemProps: { label: 'Option' },
+    },
     accentColor: { type: 'text', label: 'Accent Color (token or hex)' },
+    ...commonInputFields,
 };
+/**
+ * FormChoiceField — radio group (single) or checkbox group (multiple).
+ * The storefront wrapper registers the group with react-hook-form; checkbox
+ * groups submit an array of selected labels.
+ */
 export const FormChoiceField = {
-    label: 'Form Choice (Radio / Checkbox)',
+    label: 'Radio / Checkbox Group',
     fields: formChoiceFieldFields,
-    defaultProps: { choiceType: 'radio', label: 'Choose one', helpText: '', required: false, options: [{ label: 'Option 1' }, { label: 'Option 2' }], labelColor: 'text.primary', accentColor: 'brand.primary' },
-    render: ({ choiceType, label, helpText, required, options, labelColor }) => (_jsxs("div", { className: "mb-4", children: [_jsxs("p", { className: "block text-sm font-medium mb-2", style: { color: resolveColor(labelColor) }, children: [label, required && _jsx("span", { className: "text-red-500 ml-1", children: "*" })] }), _jsx("div", { className: "space-y-2", children: options.map((opt, i) => (_jsxs("label", { className: "flex items-center gap-2 text-sm cursor-pointer", style: { color: resolveColor(labelColor) }, children: [_jsx("input", { type: choiceType, name: `choice-${label}`, value: opt.label, readOnly: true }), opt.label] }, i))) }), helpText && _jsx("p", { className: "mt-1 text-xs text-gray-500", children: helpText })] })),
+    defaultProps: {
+        choiceType: 'radio',
+        options: [{ label: 'Option 1' }, { label: 'Option 2' }, { label: 'Option 3' }],
+        accentColor: '#2563eb',
+        ...commonInputDefaultProps,
+    },
+    render: (props) => (_jsx(FieldShell, { props: props, labelNode: _jsx(FieldLabel, { label: props.label, required: props.required, labelFontSize: props.labelFontSize, labelFontWeight: props.labelFontWeight, labelColor: props.labelColor }), children: _jsx("div", { className: "flex flex-col gap-2", children: (props.options || []).map((opt, i) => (_jsxs("label", { className: "flex items-center gap-2 text-sm", style: { color: resolveColor(props.inputTextColor) }, children: [_jsx("input", { type: props.choiceType, name: `choice-${props.label}`, value: opt.label, style: { accentColor: resolveColor(props.accentColor) }, readOnly: true }), opt.label] }, i))) }) })),
 };
 export default FormChoiceField;
 //# sourceMappingURL=FormChoiceField.js.map

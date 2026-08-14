@@ -1,28 +1,39 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { resolveColor } from '../../../theme/resolveColor';
-const formFieldFields = {
-    fieldType: { type: 'select', label: 'Field Type', options: [{ label: 'Text', value: 'text' }, { label: 'Email', value: 'email' }, { label: 'Phone', value: 'phone' }, { label: 'Number', value: 'number' }, { label: 'Textarea', value: 'textarea' }, { label: 'URL', value: 'url' }] },
-    label: { type: 'text', label: 'Label' },
-    placeholder: { type: 'text', label: 'Placeholder' },
-    helpText: { type: 'text', label: 'Help Text' },
-    required: { type: 'radio', label: 'Required', options: [{ label: 'Yes', value: true }, { label: 'No', value: false }] },
-    minLength: { type: 'number', label: 'Min Length / Min Value' },
-    maxLength: { type: 'number', label: 'Max Length / Max Value' },
-    rows: { type: 'number', label: 'Rows (textarea only)' },
-    labelColor: { type: 'text', label: 'Label Color (token or hex)' },
-    inputBackground: { type: 'text', label: 'Input Background (token or hex)' },
-    borderColor: { type: 'text', label: 'Border Color (token or hex)' },
+import { jsx as _jsx } from "react/jsx-runtime";
+import { commonInputFields, commonInputDefaultProps, inputSurface, FieldLabel, FieldShell, } from './form-field-shared';
+const FIELD_TYPE_OPTIONS = [
+    { label: 'Text', value: 'text' },
+    { label: 'Email', value: 'email' },
+    { label: 'Phone', value: 'phone' },
+    { label: 'Number', value: 'number' },
+    { label: 'Textarea', value: 'textarea' },
+    { label: 'URL', value: 'url' },
+];
+const inputTypeMap = {
+    text: 'text', email: 'email', phone: 'tel', number: 'number', textarea: 'textarea', url: 'url',
 };
-const inputTypeMap = { text: 'text', email: 'email', phone: 'tel', number: 'number', textarea: 'textarea', url: 'url' };
+const formFieldFields = {
+    fieldType: { type: 'select', label: 'Field Type', options: FIELD_TYPE_OPTIONS },
+    placeholder: { type: 'text', label: 'Placeholder' },
+    rows: { type: 'number', label: 'Rows (textarea only)' },
+    ...commonInputFields,
+};
+/**
+ * FormField — a single text-like input (text/email/phone/number/url/textarea).
+ * Editor render is a read-only preview; the storefront wrapper registers the
+ * real input with react-hook-form (required/min/max rules + type patterns).
+ */
 export const FormField = {
-    label: 'Form Field',
+    label: 'Input Field',
     fields: formFieldFields,
-    defaultProps: { fieldType: 'text', label: 'Field Label', placeholder: '', helpText: '', required: false, rows: 4, labelColor: 'text.primary', inputBackground: 'ui.surface', borderColor: 'ui.border' },
-    render: ({ fieldType, label, placeholder, helpText, required, rows, labelColor, inputBackground, borderColor }) => {
-        const inputStyle = { backgroundColor: resolveColor(inputBackground), borderColor: resolveColor(borderColor), color: 'inherit' };
-        const labelStyle = { color: resolveColor(labelColor) };
-        const inputClass = 'w-full px-3 py-2 border rounded-md text-sm outline-none focus:ring-2 focus:ring-offset-0';
-        return (_jsxs("div", { className: "mb-4", children: [_jsxs("label", { className: "block text-sm font-medium mb-1", style: labelStyle, children: [label, required && _jsx("span", { className: "text-red-500 ml-1", children: "*" })] }), fieldType === 'textarea' ? (_jsx("textarea", { className: inputClass, placeholder: placeholder, rows: rows, style: inputStyle, readOnly: true })) : (_jsx("input", { type: inputTypeMap[fieldType], className: inputClass, placeholder: placeholder, style: inputStyle, readOnly: true })), helpText && _jsx("p", { className: "mt-1 text-xs text-gray-500", children: helpText })] }));
+    defaultProps: {
+        fieldType: 'text',
+        placeholder: '',
+        rows: 4,
+        ...commonInputDefaultProps,
+    },
+    render: (props) => {
+        const surface = inputSurface(props);
+        return (_jsx(FieldShell, { props: props, labelNode: _jsx(FieldLabel, { label: props.label, required: props.required, labelFontSize: props.labelFontSize, labelFontWeight: props.labelFontWeight, labelColor: props.labelColor }), children: props.fieldType === 'textarea' ? (_jsx("textarea", { className: surface.classes, placeholder: props.placeholder, rows: props.rows, style: surface.style, readOnly: true })) : (_jsx("input", { type: inputTypeMap[props.fieldType] || 'text', className: surface.classes, placeholder: props.placeholder, style: surface.style, readOnly: true })) }));
     },
 };
 export default FormField;

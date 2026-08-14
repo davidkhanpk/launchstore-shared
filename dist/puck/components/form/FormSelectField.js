@@ -1,21 +1,32 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { resolveColor } from '../../../theme/resolveColor';
-const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
+import { commonInputFields, commonInputDefaultProps, inputSurface, FieldLabel, FieldShell, } from './form-field-shared';
 const formSelectFieldFields = {
-    label: { type: 'text', label: 'Label' },
     placeholder: { type: 'text', label: 'Placeholder' },
-    helpText: { type: 'text', label: 'Help Text' },
-    required: { type: 'radio', label: 'Required', options: RADIO_YES_NO },
-    options: { type: 'array', label: 'Options', arrayFields: { label: { type: 'text', label: 'Option Label' } }, defaultItemProps: { label: 'Option' } },
-    labelColor: { type: 'text', label: 'Label Color (token or hex)' },
-    inputBackground: { type: 'text', label: 'Input Background (token or hex)' },
-    borderColor: { type: 'text', label: 'Border Color (token or hex)' },
+    options: {
+        type: 'array',
+        label: 'Options',
+        arrayFields: { label: { type: 'text', label: 'Option Label' } },
+        defaultItemProps: { label: 'Option' },
+    },
+    ...commonInputFields,
 };
+/**
+ * FormSelectField — a dropdown select. Options are designed in the editor
+ * (array field); the storefront wrapper registers the live <select> with
+ * react-hook-form.
+ */
 export const FormSelectField = {
-    label: 'Form Select (Dropdown)',
+    label: 'Dropdown Select',
     fields: formSelectFieldFields,
-    defaultProps: { label: 'Select an option', placeholder: 'Choose...', helpText: '', required: false, options: [{ label: 'Option 1' }, { label: 'Option 2' }], labelColor: 'text.primary', inputBackground: 'ui.surface', borderColor: 'ui.border' },
-    render: ({ label, placeholder, helpText, required, options, labelColor, inputBackground, borderColor }) => (_jsxs("div", { className: "mb-4", children: [_jsxs("label", { className: "block text-sm font-medium mb-1", style: { color: resolveColor(labelColor) }, children: [label, required && _jsx("span", { className: "text-red-500 ml-1", children: "*" })] }), _jsxs("select", { className: "w-full px-3 py-2 border rounded-md text-sm outline-none", style: { backgroundColor: resolveColor(inputBackground), borderColor: resolveColor(borderColor), color: 'inherit' }, children: [placeholder && _jsx("option", { value: "", children: placeholder }), options.map((opt, i) => _jsx("option", { value: opt.label, children: opt.label }, i))] }), helpText && _jsx("p", { className: "mt-1 text-xs text-gray-500", children: helpText })] })),
+    defaultProps: {
+        placeholder: 'Choose an option',
+        options: [{ label: 'Option 1' }, { label: 'Option 2' }, { label: 'Option 3' }],
+        ...commonInputDefaultProps,
+    },
+    render: (props) => {
+        const surface = inputSurface(props);
+        return (_jsx(FieldShell, { props: props, labelNode: _jsx(FieldLabel, { label: props.label, required: props.required, labelFontSize: props.labelFontSize, labelFontWeight: props.labelFontWeight, labelColor: props.labelColor }), children: _jsxs("select", { className: surface.classes, style: surface.style, disabled: true, children: [props.placeholder && _jsx("option", { value: "", children: props.placeholder }), (props.options || []).map((opt, i) => (_jsx("option", { value: opt.label, children: opt.label }, i)))] }) }));
+    },
 };
 export default FormSelectField;
 //# sourceMappingURL=FormSelectField.js.map

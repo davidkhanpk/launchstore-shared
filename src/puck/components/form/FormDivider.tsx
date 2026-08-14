@@ -1,28 +1,43 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import type { Field } from '@puckeditor/core';
-import { resolveColor } from '../../../theme/resolveColor';
+import {
+  BORDER_WIDTH_OPTIONS,
+  SPACING_OPTIONS,
+  resolveColor,
+} from '../../design-system';
 
 const formDividerFields = {
-  spacingTop: { type: 'select', label: 'Space Above', options: [{ label: 'None', value: 'none' }, { label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }] },
-  spacingBottom: { type: 'select', label: 'Space Below', options: [{ label: 'None', value: 'none' }, { label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }] },
-  color: { type: 'text', label: 'Line Color (token or hex)' },
+  marginTop: { type: 'select', label: 'Margin Top', options: SPACING_OPTIONS },
+  marginBottom: { type: 'select', label: 'Margin Bottom', options: SPACING_OPTIONS },
+  borderWidth: { type: 'select', label: 'Line Width', options: BORDER_WIDTH_OPTIONS },
+  borderColor: { type: 'text', label: 'Line Color (token or hex)' },
 } as Record<string, Field>;
 
-const spacingMap = { none: '0', sm: '8px', md: '16px', lg: '24px' } as const;
+const BORDER_WIDTH_CLASS: Record<string, string> = {
+  '0': 'border-0',
+  '': 'border-t',
+  '2': 'border-t-2',
+  '4': 'border-t-4',
+};
 
 export interface FormDividerProps {
-  spacingTop: 'none' | 'sm' | 'md' | 'lg';
-  spacingBottom: 'none' | 'sm' | 'md' | 'lg';
-  color: string;
+  marginTop: string;
+  marginBottom: string;
+  borderWidth: string;
+  borderColor: string;
 }
 
+/** FormDivider — display-only horizontal rule inside a form. */
 export const FormDivider: ComponentConfig<FormDividerProps> = {
   label: 'Form Divider',
   fields: formDividerFields as ComponentConfig<FormDividerProps>['fields'],
-  defaultProps: { spacingTop: 'sm', spacingBottom: 'sm', color: 'ui.border' },
-  render: ({ spacingTop, spacingBottom, color }: FormDividerProps) => (
-    <hr style={{ marginTop: spacingMap[spacingTop], marginBottom: spacingMap[spacingBottom], borderColor: resolveColor(color), borderTopWidth: '1px' }} />
+  defaultProps: { marginTop: '2', marginBottom: '2', borderWidth: '', borderColor: '#e5e7eb' },
+  render: ({ marginTop, marginBottom, borderWidth, borderColor }: FormDividerProps) => (
+    <hr
+      className={`mt-${marginTop} mb-${marginBottom} w-full ${BORDER_WIDTH_CLASS[borderWidth] ?? 'border-t'}`}
+      style={{ borderColor: resolveColor(borderColor) }}
+    />
   ),
 };
 

@@ -2,48 +2,75 @@ import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import type { Field } from '@puckeditor/core';
 import { resolveColor } from '../../../theme/resolveColor';
-
-const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
+import {
+  commonInputFields,
+  commonInputDefaultProps,
+  CommonInputProps,
+  FieldLabel,
+  FieldShell,
+} from './form-field-shared';
 
 const formChoiceFieldFields = {
-  choiceType: { type: 'radio', label: 'Choice Type', options: [{ label: 'Radio (single)', value: 'radio' }, { label: 'Checkbox (multiple)', value: 'checkbox' }] },
-  label: { type: 'text', label: 'Group Label' },
-  helpText: { type: 'text', label: 'Help Text' },
-  required: { type: 'radio', label: 'Required', options: RADIO_YES_NO },
-  options: { type: 'array', label: 'Options', arrayFields: { label: { type: 'text', label: 'Option Label' } } as any, defaultItemProps: { label: 'Option' } },
-  labelColor: { type: 'text', label: 'Label Color (token or hex)' },
+  choiceType: {
+    type: 'radio',
+    label: 'Choice Type',
+    options: [
+      { label: 'Radio (single choice)', value: 'radio' },
+      { label: 'Checkbox (multiple)', value: 'checkbox' },
+    ],
+  },
+  options: {
+    type: 'array',
+    label: 'Options',
+    arrayFields: { label: { type: 'text', label: 'Option Label' } } as any,
+    defaultItemProps: { label: 'Option' },
+  },
   accentColor: { type: 'text', label: 'Accent Color (token or hex)' },
+  ...commonInputFields,
 } as Record<string, Field>;
 
-export interface FormChoiceFieldProps {
+export interface FormChoiceFieldProps extends CommonInputProps {
   choiceType: 'radio' | 'checkbox';
-  label: string;
-  helpText?: string;
-  required: boolean;
   options: { label: string }[];
-  labelColor: string;
   accentColor: string;
 }
 
+/**
+ * FormChoiceField — radio group (single) or checkbox group (multiple).
+ * The storefront wrapper registers the group with react-hook-form; checkbox
+ * groups submit an array of selected labels.
+ */
 export const FormChoiceField: ComponentConfig<FormChoiceFieldProps> = {
-  label: 'Form Choice (Radio / Checkbox)',
+  label: 'Radio / Checkbox Group',
   fields: formChoiceFieldFields as ComponentConfig<FormChoiceFieldProps>['fields'],
-  defaultProps: { choiceType: 'radio', label: 'Choose one', helpText: '', required: false, options: [{ label: 'Option 1' }, { label: 'Option 2' }], labelColor: 'text.primary', accentColor: 'brand.primary' },
-  render: ({ choiceType, label, helpText, required, options, labelColor }: FormChoiceFieldProps) => (
-    <div className="mb-4">
-      <p className="block text-sm font-medium mb-2" style={{ color: resolveColor(labelColor) }}>
-        {label}{required && <span className="text-red-500 ml-1">*</span>}
-      </p>
-      <div className="space-y-2">
-        {options.map((opt, i) => (
-          <label key={i} className="flex items-center gap-2 text-sm cursor-pointer" style={{ color: resolveColor(labelColor) }}>
-            <input type={choiceType} name={`choice-${label}`} value={opt.label} readOnly />
+  defaultProps: {
+    choiceType: 'radio',
+    options: [{ label: 'Option 1' }, { label: 'Option 2' }, { label: 'Option 3' }],
+    accentColor: '#2563eb',
+    ...commonInputDefaultProps,
+  },
+  render: (props: FormChoiceFieldProps) => (
+    <FieldShell
+      props={props}
+      labelNode={
+        <FieldLabel
+          label={props.label}
+          required={props.required}
+          labelFontSize={props.labelFontSize}
+          labelFontWeight={props.labelFontWeight}
+          labelColor={props.labelColor}
+        />
+      }
+    >
+      <div className="flex flex-col gap-2">
+        {(props.options || []).map((opt, i) => (
+          <label key={i} className="flex items-center gap-2 text-sm" style={{ color: resolveColor(props.inputTextColor) }}>
+            <input type={props.choiceType} name={`choice-${props.label}`} value={opt.label} style={{ accentColor: resolveColor(props.accentColor) }} readOnly />
             {opt.label}
           </label>
         ))}
       </div>
-      {helpText && <p className="mt-1 text-xs text-gray-500">{helpText}</p>}
-    </div>
+    </FieldShell>
   ),
 };
 

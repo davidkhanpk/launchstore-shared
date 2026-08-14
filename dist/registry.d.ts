@@ -36,7 +36,7 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-08-14T10:18:32.037Z",
+  "generatedAt": "2026-08-14T14:49:45.906Z",
   "total": 139,
   "entries": [
     {
@@ -6109,19 +6109,18 @@ export const registry: CompiledRegistry = {
       },
       "defaultProps": {
         "choiceType": "radio",
-        "label": "Choose one",
-        "helpText": "",
-        "required": false,
         "options": [
           {
             "label": "Option 1"
           },
           {
             "label": "Option 2"
+          },
+          {
+            "label": "Option 3"
           }
         ],
-        "labelColor": "text.primary",
-        "accentColor": "brand.primary"
+        "accentColor": "#2563eb"
       },
       "isContainer": false,
       "zones": [],
@@ -6265,13 +6264,22 @@ export const registry: CompiledRegistry = {
         }
       },
       "defaultProps": {
+        "formId": "",
         "formName": "Contact Form",
         "submitButtonText": "Submit",
-        "successMessage": "Thank you! Your message has been sent.",
-        "padding": "lg",
-        "backgroundColor": "ui.background",
-        "borderRadius": "md",
-        "maxWidth": "lg"
+        "successMessage": "Thank you! Your submission has been received.",
+        "successRedirectUrl": "",
+        "maxWidth": "md",
+        "gap": "4",
+        "paddingX": "4",
+        "paddingY": "4",
+        "marginTop": "0",
+        "marginBottom": "0",
+        "backgroundColor": "",
+        "borderWidth": "0",
+        "borderColor": "",
+        "borderRadius": "lg",
+        "shadow": "none"
       },
       "isContainer": true,
       "zones": [
@@ -6354,9 +6362,10 @@ export const registry: CompiledRegistry = {
         }
       },
       "defaultProps": {
-        "spacingTop": "sm",
-        "spacingBottom": "sm",
-        "color": "ui.border"
+        "marginTop": "2",
+        "marginBottom": "2",
+        "borderWidth": "",
+        "borderColor": "#e5e7eb"
       },
       "isContainer": false,
       "zones": [],
@@ -6434,10 +6443,11 @@ export const registry: CompiledRegistry = {
       },
       "defaultProps": {
         "formId": "",
-        "padding": "24px",
-        "maxWidth": "640px",
+        "maxWidth": "md",
+        "paddingX": "0",
+        "paddingY": "0",
         "backgroundColor": "",
-        "borderRadius": "16px"
+        "borderRadius": "lg"
       },
       "isContainer": false,
       "zones": [],
@@ -6570,14 +6580,8 @@ export const registry: CompiledRegistry = {
       },
       "defaultProps": {
         "fieldType": "text",
-        "label": "Field Label",
         "placeholder": "",
-        "helpText": "",
-        "required": false,
-        "rows": 4,
-        "labelColor": "text.primary",
-        "inputBackground": "ui.surface",
-        "borderColor": "ui.border"
+        "rows": 4
       },
       "isContainer": false,
       "zones": [],
@@ -6672,9 +6676,12 @@ export const registry: CompiledRegistry = {
       },
       "defaultProps": {
         "text": "Section heading or instruction text",
-        "size": "md",
-        "color": "text.primary",
-        "marginBottom": "sm"
+        "fontSize": "base",
+        "fontWeight": "semibold",
+        "textAlign": "left",
+        "lineHeight": "normal",
+        "textColor": "#111827",
+        "marginBottom": "2"
       },
       "isContainer": false,
       "zones": [],
@@ -6770,21 +6777,18 @@ export const registry: CompiledRegistry = {
         }
       },
       "defaultProps": {
-        "label": "Select an option",
-        "placeholder": "Choose...",
-        "helpText": "",
-        "required": false,
+        "placeholder": "Choose an option",
         "options": [
           {
             "label": "Option 1"
           },
           {
             "label": "Option 2"
+          },
+          {
+            "label": "Option 3"
           }
-        ],
-        "labelColor": "text.primary",
-        "inputBackground": "ui.surface",
-        "borderColor": "ui.border"
+        ]
       },
       "isContainer": false,
       "zones": [],
@@ -6875,11 +6879,18 @@ export const registry: CompiledRegistry = {
         }
       },
       "defaultProps": {
-        "label": "Submit",
-        "backgroundColor": "brand.primary",
-        "textColor": "text.inverse",
+        "buttonText": "Submit",
         "fullWidth": true,
-        "borderRadius": "md"
+        "fontSize": "sm",
+        "fontWeight": "semibold",
+        "backgroundColor": "#111827",
+        "textColor": "#ffffff",
+        "hoverBackgroundColor": "#1f2937",
+        "borderRadius": "md",
+        "shadow": "sm",
+        "paddingX": "4",
+        "paddingY": "2",
+        "marginTop": "2"
       },
       "isContainer": false,
       "zones": [],
@@ -25121,19 +25132,18 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "choiceType": "radio",
-          "label": "Choose one",
-          "helpText": "",
-          "required": false,
           "options": [
             {
               "label": "Option 1"
             },
             {
               "label": "Option 2"
+            },
+            {
+              "label": "Option 3"
             }
           ],
-          "labelColor": "text.primary",
-          "accentColor": "brand.primary"
+          "accentColor": "#2563eb"
         },
         "isContainer": false,
         "zones": [],
@@ -25277,13 +25287,22 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
+          "formId": "",
           "formName": "Contact Form",
           "submitButtonText": "Submit",
-          "successMessage": "Thank you! Your message has been sent.",
-          "padding": "lg",
-          "backgroundColor": "ui.background",
-          "borderRadius": "md",
-          "maxWidth": "lg"
+          "successMessage": "Thank you! Your submission has been received.",
+          "successRedirectUrl": "",
+          "maxWidth": "md",
+          "gap": "4",
+          "paddingX": "4",
+          "paddingY": "4",
+          "marginTop": "0",
+          "marginBottom": "0",
+          "backgroundColor": "",
+          "borderWidth": "0",
+          "borderColor": "",
+          "borderRadius": "lg",
+          "shadow": "none"
         },
         "isContainer": true,
         "zones": [
@@ -25366,9 +25385,10 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "spacingTop": "sm",
-          "spacingBottom": "sm",
-          "color": "ui.border"
+          "marginTop": "2",
+          "marginBottom": "2",
+          "borderWidth": "",
+          "borderColor": "#e5e7eb"
         },
         "isContainer": false,
         "zones": [],
@@ -25446,10 +25466,11 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "formId": "",
-          "padding": "24px",
-          "maxWidth": "640px",
+          "maxWidth": "md",
+          "paddingX": "0",
+          "paddingY": "0",
           "backgroundColor": "",
-          "borderRadius": "16px"
+          "borderRadius": "lg"
         },
         "isContainer": false,
         "zones": [],
@@ -25582,14 +25603,8 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "fieldType": "text",
-          "label": "Field Label",
           "placeholder": "",
-          "helpText": "",
-          "required": false,
-          "rows": 4,
-          "labelColor": "text.primary",
-          "inputBackground": "ui.surface",
-          "borderColor": "ui.border"
+          "rows": 4
         },
         "isContainer": false,
         "zones": [],
@@ -25684,9 +25699,12 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "text": "Section heading or instruction text",
-          "size": "md",
-          "color": "text.primary",
-          "marginBottom": "sm"
+          "fontSize": "base",
+          "fontWeight": "semibold",
+          "textAlign": "left",
+          "lineHeight": "normal",
+          "textColor": "#111827",
+          "marginBottom": "2"
         },
         "isContainer": false,
         "zones": [],
@@ -25782,21 +25800,18 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "label": "Select an option",
-          "placeholder": "Choose...",
-          "helpText": "",
-          "required": false,
+          "placeholder": "Choose an option",
           "options": [
             {
               "label": "Option 1"
             },
             {
               "label": "Option 2"
+            },
+            {
+              "label": "Option 3"
             }
-          ],
-          "labelColor": "text.primary",
-          "inputBackground": "ui.surface",
-          "borderColor": "ui.border"
+          ]
         },
         "isContainer": false,
         "zones": [],
@@ -25887,11 +25902,18 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "label": "Submit",
-          "backgroundColor": "brand.primary",
-          "textColor": "text.inverse",
+          "buttonText": "Submit",
           "fullWidth": true,
-          "borderRadius": "md"
+          "fontSize": "sm",
+          "fontWeight": "semibold",
+          "backgroundColor": "#111827",
+          "textColor": "#ffffff",
+          "hoverBackgroundColor": "#1f2937",
+          "borderRadius": "md",
+          "shadow": "sm",
+          "paddingX": "4",
+          "paddingY": "2",
+          "marginTop": "2"
         },
         "isContainer": false,
         "zones": [],
@@ -46174,19 +46196,18 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "choiceType": "radio",
-          "label": "Choose one",
-          "helpText": "",
-          "required": false,
           "options": [
             {
               "label": "Option 1"
             },
             {
               "label": "Option 2"
+            },
+            {
+              "label": "Option 3"
             }
           ],
-          "labelColor": "text.primary",
-          "accentColor": "brand.primary"
+          "accentColor": "#2563eb"
         },
         "isContainer": false,
         "zones": [],
@@ -46330,13 +46351,22 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
+          "formId": "",
           "formName": "Contact Form",
           "submitButtonText": "Submit",
-          "successMessage": "Thank you! Your message has been sent.",
-          "padding": "lg",
-          "backgroundColor": "ui.background",
-          "borderRadius": "md",
-          "maxWidth": "lg"
+          "successMessage": "Thank you! Your submission has been received.",
+          "successRedirectUrl": "",
+          "maxWidth": "md",
+          "gap": "4",
+          "paddingX": "4",
+          "paddingY": "4",
+          "marginTop": "0",
+          "marginBottom": "0",
+          "backgroundColor": "",
+          "borderWidth": "0",
+          "borderColor": "",
+          "borderRadius": "lg",
+          "shadow": "none"
         },
         "isContainer": true,
         "zones": [
@@ -46419,9 +46449,10 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "spacingTop": "sm",
-          "spacingBottom": "sm",
-          "color": "ui.border"
+          "marginTop": "2",
+          "marginBottom": "2",
+          "borderWidth": "",
+          "borderColor": "#e5e7eb"
         },
         "isContainer": false,
         "zones": [],
@@ -46499,10 +46530,11 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "formId": "",
-          "padding": "24px",
-          "maxWidth": "640px",
+          "maxWidth": "md",
+          "paddingX": "0",
+          "paddingY": "0",
           "backgroundColor": "",
-          "borderRadius": "16px"
+          "borderRadius": "lg"
         },
         "isContainer": false,
         "zones": [],
@@ -46635,14 +46667,8 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "fieldType": "text",
-          "label": "Field Label",
           "placeholder": "",
-          "helpText": "",
-          "required": false,
-          "rows": 4,
-          "labelColor": "text.primary",
-          "inputBackground": "ui.surface",
-          "borderColor": "ui.border"
+          "rows": 4
         },
         "isContainer": false,
         "zones": [],
@@ -46737,9 +46763,12 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "text": "Section heading or instruction text",
-          "size": "md",
-          "color": "text.primary",
-          "marginBottom": "sm"
+          "fontSize": "base",
+          "fontWeight": "semibold",
+          "textAlign": "left",
+          "lineHeight": "normal",
+          "textColor": "#111827",
+          "marginBottom": "2"
         },
         "isContainer": false,
         "zones": [],
@@ -46835,21 +46864,18 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "label": "Select an option",
-          "placeholder": "Choose...",
-          "helpText": "",
-          "required": false,
+          "placeholder": "Choose an option",
           "options": [
             {
               "label": "Option 1"
             },
             {
               "label": "Option 2"
+            },
+            {
+              "label": "Option 3"
             }
-          ],
-          "labelColor": "text.primary",
-          "inputBackground": "ui.surface",
-          "borderColor": "ui.border"
+          ]
         },
         "isContainer": false,
         "zones": [],
@@ -46940,11 +46966,18 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "label": "Submit",
-          "backgroundColor": "brand.primary",
-          "textColor": "text.inverse",
+          "buttonText": "Submit",
           "fullWidth": true,
-          "borderRadius": "md"
+          "fontSize": "sm",
+          "fontWeight": "semibold",
+          "backgroundColor": "#111827",
+          "textColor": "#ffffff",
+          "hoverBackgroundColor": "#1f2937",
+          "borderRadius": "md",
+          "shadow": "sm",
+          "paddingX": "4",
+          "paddingY": "2",
+          "marginTop": "2"
         },
         "isContainer": false,
         "zones": [],
@@ -63419,9 +63452,12 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "text": "Section heading or instruction text",
-          "size": "md",
-          "color": "text.primary",
-          "marginBottom": "sm"
+          "fontSize": "base",
+          "fontWeight": "semibold",
+          "textAlign": "left",
+          "lineHeight": "normal",
+          "textColor": "#111827",
+          "marginBottom": "2"
         },
         "isContainer": false,
         "zones": [],
@@ -66371,11 +66407,18 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "label": "Submit",
-          "backgroundColor": "brand.primary",
-          "textColor": "text.inverse",
+          "buttonText": "Submit",
           "fullWidth": true,
-          "borderRadius": "md"
+          "fontSize": "sm",
+          "fontWeight": "semibold",
+          "backgroundColor": "#111827",
+          "textColor": "#ffffff",
+          "hoverBackgroundColor": "#1f2937",
+          "borderRadius": "md",
+          "shadow": "sm",
+          "paddingX": "4",
+          "paddingY": "2",
+          "marginTop": "2"
         },
         "isContainer": false,
         "zones": [],
@@ -67639,11 +67682,18 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "label": "Submit",
-          "backgroundColor": "brand.primary",
-          "textColor": "text.inverse",
+          "buttonText": "Submit",
           "fullWidth": true,
-          "borderRadius": "md"
+          "fontSize": "sm",
+          "fontWeight": "semibold",
+          "backgroundColor": "#111827",
+          "textColor": "#ffffff",
+          "hoverBackgroundColor": "#1f2937",
+          "borderRadius": "md",
+          "shadow": "sm",
+          "paddingX": "4",
+          "paddingY": "2",
+          "marginTop": "2"
         },
         "isContainer": false,
         "zones": [],
@@ -71803,10 +71853,11 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "formId": "",
-          "padding": "24px",
-          "maxWidth": "640px",
+          "maxWidth": "md",
+          "paddingX": "0",
+          "paddingY": "0",
           "backgroundColor": "",
-          "borderRadius": "16px"
+          "borderRadius": "lg"
         },
         "isContainer": false,
         "zones": [],
@@ -72685,10 +72736,11 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "formId": "",
-          "padding": "24px",
-          "maxWidth": "640px",
+          "maxWidth": "md",
+          "paddingX": "0",
+          "paddingY": "0",
           "backgroundColor": "",
-          "borderRadius": "16px"
+          "borderRadius": "lg"
         },
         "isContainer": false,
         "zones": [],
@@ -75612,19 +75664,18 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "choiceType": "radio",
-          "label": "Choose one",
-          "helpText": "",
-          "required": false,
           "options": [
             {
               "label": "Option 1"
             },
             {
               "label": "Option 2"
+            },
+            {
+              "label": "Option 3"
             }
           ],
-          "labelColor": "text.primary",
-          "accentColor": "brand.primary"
+          "accentColor": "#2563eb"
         },
         "isContainer": false,
         "zones": [],
@@ -75724,19 +75775,18 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "choiceType": "radio",
-          "label": "Choose one",
-          "helpText": "",
-          "required": false,
           "options": [
             {
               "label": "Option 1"
             },
             {
               "label": "Option 2"
+            },
+            {
+              "label": "Option 3"
             }
           ],
-          "labelColor": "text.primary",
-          "accentColor": "brand.primary"
+          "accentColor": "#2563eb"
         },
         "isContainer": false,
         "zones": [],
@@ -75836,19 +75886,18 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "choiceType": "radio",
-          "label": "Choose one",
-          "helpText": "",
-          "required": false,
           "options": [
             {
               "label": "Option 1"
             },
             {
               "label": "Option 2"
+            },
+            {
+              "label": "Option 3"
             }
           ],
-          "labelColor": "text.primary",
-          "accentColor": "brand.primary"
+          "accentColor": "#2563eb"
         },
         "isContainer": false,
         "zones": [],
@@ -75994,13 +76043,22 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
+          "formId": "",
           "formName": "Contact Form",
           "submitButtonText": "Submit",
-          "successMessage": "Thank you! Your message has been sent.",
-          "padding": "lg",
-          "backgroundColor": "ui.background",
-          "borderRadius": "md",
-          "maxWidth": "lg"
+          "successMessage": "Thank you! Your submission has been received.",
+          "successRedirectUrl": "",
+          "maxWidth": "md",
+          "gap": "4",
+          "paddingX": "4",
+          "paddingY": "4",
+          "marginTop": "0",
+          "marginBottom": "0",
+          "backgroundColor": "",
+          "borderWidth": "0",
+          "borderColor": "",
+          "borderRadius": "lg",
+          "shadow": "none"
         },
         "isContainer": true,
         "zones": [
@@ -76291,9 +76349,10 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "spacingTop": "sm",
-          "spacingBottom": "sm",
-          "color": "ui.border"
+          "marginTop": "2",
+          "marginBottom": "2",
+          "borderWidth": "",
+          "borderColor": "#e5e7eb"
         },
         "isContainer": false,
         "zones": [],
@@ -76660,14 +76719,8 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "fieldType": "text",
-          "label": "Field Label",
           "placeholder": "",
-          "helpText": "",
-          "required": false,
-          "rows": 4,
-          "labelColor": "text.primary",
-          "inputBackground": "ui.surface",
-          "borderColor": "ui.border"
+          "rows": 4
         },
         "isContainer": false,
         "zones": [],
@@ -76802,14 +76855,8 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "fieldType": "text",
-          "label": "Field Label",
           "placeholder": "",
-          "helpText": "",
-          "required": false,
-          "rows": 4,
-          "labelColor": "text.primary",
-          "inputBackground": "ui.surface",
-          "borderColor": "ui.border"
+          "rows": 4
         },
         "isContainer": false,
         "zones": [],
@@ -76906,9 +76953,12 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "text": "Section heading or instruction text",
-          "size": "md",
-          "color": "text.primary",
-          "marginBottom": "sm"
+          "fontSize": "base",
+          "fontWeight": "semibold",
+          "textAlign": "left",
+          "lineHeight": "normal",
+          "textColor": "#111827",
+          "marginBottom": "2"
         },
         "isContainer": false,
         "zones": [],
@@ -77006,21 +77056,18 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "label": "Select an option",
-          "placeholder": "Choose...",
-          "helpText": "",
-          "required": false,
+          "placeholder": "Choose an option",
           "options": [
             {
               "label": "Option 1"
             },
             {
               "label": "Option 2"
+            },
+            {
+              "label": "Option 3"
             }
-          ],
-          "labelColor": "text.primary",
-          "inputBackground": "ui.surface",
-          "borderColor": "ui.border"
+          ]
         },
         "isContainer": false,
         "zones": [],
@@ -77118,21 +77165,18 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "label": "Select an option",
-          "placeholder": "Choose...",
-          "helpText": "",
-          "required": false,
+          "placeholder": "Choose an option",
           "options": [
             {
               "label": "Option 1"
             },
             {
               "label": "Option 2"
+            },
+            {
+              "label": "Option 3"
             }
-          ],
-          "labelColor": "text.primary",
-          "inputBackground": "ui.surface",
-          "borderColor": "ui.border"
+          ]
         },
         "isContainer": false,
         "zones": [],

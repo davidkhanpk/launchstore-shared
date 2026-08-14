@@ -1,18 +1,31 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { resolveColor } from '../../../theme/resolveColor';
+import { FONT_SIZE_OPTIONS, FONT_WEIGHT_OPTIONS, TEXT_ALIGN_OPTIONS, LINE_HEIGHT_OPTIONS, SPACING_OPTIONS, resolveColor, } from '../../design-system';
 const formHeadingFields = {
+    // Content
     text: { type: 'textarea', label: 'Text' },
-    size: { type: 'select', label: 'Size', options: [{ label: 'Extra Small', value: 'xs' }, { label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }, { label: 'Extra Large', value: 'xl' }] },
-    color: { type: 'text', label: 'Text Color (token or hex)' },
-    marginBottom: { type: 'select', label: 'Bottom Spacing', options: [{ label: 'None', value: 'none' }, { label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }] },
+    // Typography
+    fontSize: { type: 'select', label: 'Font Size', options: FONT_SIZE_OPTIONS },
+    fontWeight: { type: 'select', label: 'Font Weight', options: FONT_WEIGHT_OPTIONS },
+    textAlign: { type: 'select', label: 'Text Align', options: TEXT_ALIGN_OPTIONS },
+    lineHeight: { type: 'select', label: 'Line Height', options: LINE_HEIGHT_OPTIONS },
+    textColor: { type: 'text', label: 'Text Color (token or hex)' },
+    // Layout
+    marginBottom: { type: 'select', label: 'Margin Bottom', options: SPACING_OPTIONS },
 };
-const sizeMap = { xs: 'text-xs', sm: 'text-sm', md: 'text-base', lg: 'text-lg', xl: 'text-xl' };
-const marginMap = { none: '', sm: 'mb-2', md: 'mb-4', lg: 'mb-6' };
+/** FormHeading — display-only heading/instruction text inside a form. */
 export const FormHeading = {
-    label: 'Form Heading / Instruction',
+    label: 'Form Heading',
     fields: formHeadingFields,
-    defaultProps: { text: 'Section heading or instruction text', size: 'md', color: 'text.primary', marginBottom: 'sm' },
-    render: ({ text, size, color, marginBottom }) => (_jsx("p", { className: `${sizeMap[size]} ${marginMap[marginBottom]}`, style: { color: resolveColor(color) }, children: text })),
+    defaultProps: {
+        text: 'Section heading or instruction text',
+        fontSize: 'base',
+        fontWeight: 'semibold',
+        textAlign: 'left',
+        lineHeight: 'normal',
+        textColor: '#111827',
+        marginBottom: '2',
+    },
+    render: ({ text, fontSize, fontWeight, textAlign, lineHeight, textColor, marginBottom }) => (_jsx("p", { className: `text-${fontSize} font-${fontWeight} text-${textAlign} leading-${lineHeight} mb-${marginBottom}`, style: { color: resolveColor(textColor) }, children: text })),
 };
 export default FormHeading;
 //# sourceMappingURL=FormHeading.js.map

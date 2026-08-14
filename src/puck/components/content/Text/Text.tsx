@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { TextProps } from './text.types';
 import {
-  createAccordionFields,
   sharedTypographyFields,
   sharedLayoutFields,
   buildTypographyClasses,
@@ -28,32 +27,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['text', 'richText', 'maxWidth'],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const Text: ComponentConfig<TextProps> = {
   label: 'Text',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     text: 'Add your text content here. You can write multiple paragraphs, include line breaks, and format your content as needed.',
     richText: false,

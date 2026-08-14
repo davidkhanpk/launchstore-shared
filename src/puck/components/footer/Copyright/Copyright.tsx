@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { CopyrightProps } from './copyright.types';
 import {
-  createAccordionFields,
   sharedTypographyFields,
   sharedLayoutFields,
   buildLayoutClasses,
@@ -48,32 +47,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['text', 'showYear', 'showDivider', 'dividerColor'],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['alignment', 'fontSize', 'textColor'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['paddingY', 'marginTop', 'marginBottom', 'paddingX'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const Copyright: ComponentConfig<CopyrightProps> = {
   label: 'Copyright',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     text: 'All rights reserved.',
     showYear: true,

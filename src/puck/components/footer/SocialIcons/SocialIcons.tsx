@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { SocialIconsProps, SocialIconLink } from './socialicons.types';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   buildLayoutClasses,
   defaultLayoutProps,
@@ -105,32 +104,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['links', 'size', 'style'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['textColor', 'hoverColor', 'backgroundColor', 'hoverBackgroundColor'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['gap', 'alignment', 'marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const SocialIcons: ComponentConfig<SocialIconsProps> = {
   label: 'Social Icons',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     links: [
       { platform: 'facebook', url: 'https://facebook.com' },

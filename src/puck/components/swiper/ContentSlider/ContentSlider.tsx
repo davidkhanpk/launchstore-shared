@@ -4,7 +4,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import type { ContentSliderProps, ContentSlide, ContentSliderEffect } from './contentslider.types';
 import { SwiperBase } from '../../shared/SwiperBase';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   buildLayoutClasses,
   defaultLayoutProps,
@@ -108,41 +107,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['slides', 'slideHeight', 'contentWidth', 'contentPosition'],
-    },
-    {
-      label: 'Carousel',
-      fieldKeys: [
-        'effect', 'speed', 'loop',
-        'showNavigation', 'navigationColor', 'navigationPosition',
-        'showPagination', 'paginationType', 'paginationColor',
-        'enableAutoplay', 'autoplayDelay', 'pauseOnHover',
-      ],
-    },
-    {
-      label: 'Overlay',
-      fieldKeys: ['enableOverlay', 'overlayColor', 'overlayOpacity'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const ContentSlider: ComponentConfig<ContentSliderProps> = {
   label: 'Content Slider (Swiper)',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     slides: MOCK_SLIDES,
     slideHeight: 'lg', contentWidth: 'contained', contentPosition: 'center',

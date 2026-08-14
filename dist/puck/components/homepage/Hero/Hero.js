@@ -1,5 +1,4 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
-import { createAccordionFields } from '../../../design-system';
 const HEIGHT_CLASSES = {
     sm: 'h-[400px]',
     md: 'h-[500px]',
@@ -111,34 +110,10 @@ const allFields = {
     ...layoutFields,
     ...styleFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: [
-                'title', 'subtitle', 'description',
-                'showPrimaryButton', 'primaryButtonText', 'primaryButtonLink',
-                'showSecondaryButton', 'secondaryButtonText', 'secondaryButtonLink',
-                'showImage', 'imageUrl', 'imagePosition', 'imageAlt',
-            ],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['height', 'contentAlignment', 'verticalAlignment'],
-        },
-        {
-            label: 'Style',
-            fieldKeys: ['textColor', 'overlayOpacity', 'backgroundColor', 'backgroundGradient', 'gradientFrom', 'gradientTo'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const HeroSection = {
     label: 'Hero Section',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         title: 'Welcome to Our Store',
         subtitle: 'Discover Amazing Products',

@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { SwiperSlide } from 'swiper/react';
 import { SwiperBase } from '../../shared/SwiperBase';
-import { createAccordionFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 const RADII = {
     none: 'rounded-none', sm: 'rounded-sm', md: 'rounded-md', lg: 'rounded-lg', xl: 'rounded-xl', '2xl': 'rounded-2xl',
 };
@@ -87,37 +87,10 @@ const allFields = {
     ...colorFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['layout', 'showAvatar', 'showRating', 'showRole'],
-        },
-        {
-            label: 'Carousel',
-            fieldKeys: [
-                'cardsPerView', 'cardsPerViewTablet', 'cardsPerViewMobile', 'effect',
-                'showNavigation', 'navigationColor', 'showPagination', 'paginationType', 'paginationColor',
-                'enableAutoplay', 'autoplayDelay', 'pauseOnHover', 'loop', 'spaceBetween', 'centeredSlides',
-            ],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['backgroundColor', 'cardBackground', 'textColor', 'accentColor', 'borderRadius', 'cardShadow'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const TestimonialCarousel = {
     label: 'Testimonial Carousel (Swiper)',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         layout: 'card', cardsPerView: 3, cardsPerViewTablet: 2, cardsPerViewMobile: 1,
         effect: 'slide', showNavigation: true, navigationColor: '#1f2937',

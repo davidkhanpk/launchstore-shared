@@ -6,7 +6,6 @@ import type {
 } from './wishlistbutton.types';
 import type { ProductData } from '../ProductData';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 const HeartSvg = ({ size = 20, filled }: { size?: number; filled?: boolean }) => (
@@ -62,26 +61,9 @@ const allFields = {
   },
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['showLabel', 'labelText'],
-    },
-    {
-      label: 'Appearance',
-      fieldKeys: ['size', 'style', 'iconPosition'],
-    },
-  ],
-  allFields,
-});
-
 export const WishlistButton: ComponentConfig<WishlistButtonWithData> = {
   label: 'Wishlist Button',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     showLabel: true, labelText: 'Add to Wishlist',
     size: 'medium', style: 'outline', iconPosition: 'left',

@@ -1,6 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { evaluateStock } from './stockindicator.types';
-import { createAccordionFields, } from '../../../design-system';
 const StockIcon = ({ status, size = 20 }) => {
     if (status === 'in-stock')
         return (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: _jsx("polyline", { points: "20 6 9 17 4 12" }) }));
@@ -30,24 +29,9 @@ const allFields = {
         options: [{ label: 'Default', value: 'default' }, { label: 'Badge', value: 'badge' }, { label: 'Minimal', value: 'minimal' }],
     },
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['showIcon', 'showText', 'showQuantity', 'lowStockThreshold'],
-        },
-        {
-            label: 'Appearance',
-            fieldKeys: ['style'],
-        },
-    ],
-    allFields,
-});
 export const StockIndicator = {
     label: 'Stock Indicator',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         showIcon: true, showText: true, showQuantity: true,
         lowStockThreshold: 10, style: 'default',

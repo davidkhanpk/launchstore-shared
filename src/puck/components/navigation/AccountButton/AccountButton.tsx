@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import type { AccountButtonProps, AccountButtonIconSize, AccountButtonStyle, AccountCustomer } from './accountbutton.types';
 import { resolveColor } from '../../../../theme/resolveColor';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 const UserSvg = ({ size }: { size: number }) => (
@@ -54,30 +53,9 @@ const allFields = {
   },
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['showLabel', 'label'],
-    },
-    {
-      label: 'Appearance',
-      fieldKeys: ['iconSize', 'style', 'iconColor', 'hoverColor'],
-    },
-    {
-      label: 'Links & Visibility',
-      fieldKeys: ['linkTo', 'signedInLink', 'showWhenSignedOut', 'showWhenSignedIn'],
-    },
-  ],
-  allFields,
-});
-
 export const AccountButton: ComponentConfig<AccountButtonProps> = {
   label: 'Account Button',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     showLabel: false, label: 'Account', iconSize: 'md',
     iconColor: '#000000', hoverColor: '#3b82f6', style: 'minimal',

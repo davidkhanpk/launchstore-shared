@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { CategoryDescriptionProps } from './categorydescription.types';
 import {
-  createAccordionFields,
   sharedTypographyFields,
   sharedLayoutFields,
   sharedColorFields,
@@ -52,36 +51,11 @@ const allFields = {
   ...sharedColorFields,
 };
 
-// ── Accordion config ─────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['maxWidth', 'className'],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'borderRadius'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const CategoryDescription: ComponentConfig<CategoryDescriptionProps> = {
   label: 'Category Description',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     maxWidth: 'full',
     className: '',

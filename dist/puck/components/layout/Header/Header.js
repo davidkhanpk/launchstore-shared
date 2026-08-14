@@ -1,7 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { useState } from 'react';
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, } from '../../../design-system';
 // ── Flat field definitions (referenced by key inside the accordion) ─────────
 const headerFields = {
     layout: {
@@ -85,37 +84,6 @@ const headerFields = {
         ],
     },
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Header',
-            defaultOpen: true,
-            fieldKeys: ['layout', 'backgroundColor', 'textColor', 'sticky', 'shadow', 'transparent'],
-        },
-        {
-            label: 'Logo',
-            fieldKeys: ['logoPosition', 'logoMaxWidth', 'logoUrl', 'logoAlt'],
-        },
-        {
-            label: 'Navigation',
-            fieldKeys: ['menuPosition', 'menuStyle', 'menuTextColor', 'menuHoverColor', 'actions', 'actionsPosition'],
-        },
-        {
-            label: 'Actions',
-            fieldKeys: ['showCartBadge', 'showLabels', 'cartBadgeCount'],
-        },
-        {
-            label: 'Top Bar',
-            fieldKeys: ['topBar'],
-        },
-        {
-            label: 'Mobile',
-            fieldKeys: ['mobileBreakpoint', 'mobileMenuStyle'],
-        },
-    ],
-    allFields: headerFields,
-});
 // Inline SVG icons (no external dep). Mirrors lucide-react visual.
 const SearchIcon = () => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("circle", { cx: "11", cy: "11", r: "8" }), _jsx("path", { d: "m21 21-4.3-4.3" })] }));
 const HeartIcon = () => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: _jsx("path", { d: "M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z" }) }));
@@ -125,7 +93,7 @@ const MenuIcon = () => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width
 const XIcon = () => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: "24", height: "24", fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: _jsx("path", { d: "M18 6 6 18M6 6l12 12" }) }));
 export const Header = {
     label: 'Header',
-    fields: accordionFields,
+    fields: headerFields,
     defaultProps: {
         layout: 'left-center-right',
         backgroundColor: '#ffffff',

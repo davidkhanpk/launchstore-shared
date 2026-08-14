@@ -15,7 +15,6 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import type { NewsletterProps } from './newsletter.types';
-import { createAccordionFields } from '../../../design-system';
 
 const RADIUS_CLASSES: Record<NewsletterProps['borderRadius'], string> = {
   none: 'rounded-none',
@@ -120,36 +119,11 @@ const allFields = {
   ...styleFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['title', 'subtitle', 'description', 'placeholderText', 'buttonText', 'showPrivacyText', 'privacyText'],
-    },
-    {
-      label: 'Email Form',
-      fieldKeys: ['collectName', 'nameRequired', 'successMessage'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['layout', 'showImage', 'imageUrl'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'textColor', 'inputBackground', 'inputBorder', 'buttonBackground', 'buttonTextColor', 'borderRadius'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const Newsletter: ComponentConfig<NewsletterProps> = {
   label: 'Newsletter',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     title: 'Join Our Newsletter',
     subtitle: 'Stay Updated',

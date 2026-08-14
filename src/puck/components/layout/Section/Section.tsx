@@ -4,7 +4,6 @@ import { DropZone } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { SectionProps } from './section.types';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   sharedColorFields,
   buildLayoutClasses,
@@ -20,28 +19,11 @@ const allFields = {
   ...sharedColorFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Layout',
-      defaultOpen: true,
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-    {
-      label: 'Color',
-      fieldKeys: ['backgroundColor', 'borderRadius'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const Section: ComponentConfig<SectionProps> = {
   label: 'Section',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     ...defaultLayoutProps,
     paddingY: 'md',

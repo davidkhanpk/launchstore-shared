@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import type { ProductRatingProps, ProductRatingSize, FetchProductReviews } from './productrating.types';
 import type { ProductData } from '../ProductData';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 // ── All flat fields ─────────────────────────────────────────────────────────
@@ -18,19 +17,6 @@ const allFields = {
     options: [{ label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }],
   },
 };
-
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Appearance',
-      defaultOpen: true,
-      fieldKeys: ['showCount', 'size'],
-    },
-  ],
-  allFields,
-});
 
 const StarSvg = ({ filled, size = 16 }: { filled: boolean; size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill={filled ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -48,7 +34,7 @@ export interface ProductRatingWithProduct extends ProductRatingProps {
 
 export const ProductRating: ComponentConfig<ProductRatingWithProduct> = {
   label: 'Product Rating',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: { showCount: true, size: 'md' },
   render: (rawProps: any) => {
     const { showCount = true, size = 'md', product, fetchReviews } = rawProps as ProductRatingWithProduct;

@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { SpacerProps } from './spacer.types';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   defaultLayoutProps,
 } from '../../../design-system';
@@ -39,23 +38,6 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['id', 'height', 'showDivider', 'dividerStyle', 'dividerColor'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 const HEIGHT_PX: Record<string, number> = {
   xs: 8, sm: 16, md: 32, lg: 48, xl: 64, '2xl': 96, '3xl': 128,
 };
@@ -64,7 +46,7 @@ const HEIGHT_PX: Record<string, number> = {
 
 export const Spacer: ComponentConfig<SpacerProps> = {
   label: 'Spacer',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     id: 'spacer-1',
     height: 'md',

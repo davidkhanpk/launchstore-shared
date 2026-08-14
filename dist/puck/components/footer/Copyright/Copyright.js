@@ -1,6 +1,6 @@
 import { jsxs as _jsxs, jsx as _jsx } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedTypographyFields, sharedLayoutFields, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
+import { sharedTypographyFields, sharedLayoutFields, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
 const ALIGN = { left: 'text-left', center: 'text-center', right: 'text-right' };
 // ── Content fields (component-specific) ─────────────────────────────────────
 const contentFields = {
@@ -31,29 +31,10 @@ const allFields = {
     ...sharedTypographyFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['text', 'showYear', 'showDivider', 'dividerColor'],
-        },
-        {
-            label: 'Typography',
-            fieldKeys: ['alignment', 'fontSize', 'textColor'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['paddingY', 'marginTop', 'marginBottom', 'paddingX'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const Copyright = {
     label: 'Copyright',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         text: 'All rights reserved.',
         showYear: true,

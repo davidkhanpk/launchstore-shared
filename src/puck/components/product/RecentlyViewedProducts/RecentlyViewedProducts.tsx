@@ -4,7 +4,6 @@ import type { RecentlyViewedProductsProps } from './recentlyviewedproducts.types
 import { ProductGridRenderer } from '../RelatedProducts/productgrid';
 import type { CarouselProduct } from '../../swiper/ProductCarousel';
 import {
-  createAccordionFields,
   sharedTypographyFields,
   sharedLayoutFields,
   defaultTypographyProps,
@@ -44,32 +43,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['showTitle', 'title', 'displayStyle', 'maxProducts', 'containerPadding'],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const RecentlyViewedProducts: ComponentConfig<RecentlyViewedProductsWithData> = {
   label: 'Recently Viewed Products',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     showTitle: true,
     title: 'Recently Viewed',

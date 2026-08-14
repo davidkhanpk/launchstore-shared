@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import type { SearchBarProps, SearchBarSize, SearchBarStyle, SearchBarRadius, SearchBarIconPosition } from './searchbar.types';
 import { resolveColor } from '../../../../theme/resolveColor';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 const SearchSvg = ({ size }: { size: number }) => (
@@ -76,34 +75,9 @@ const allFields = {
   } as any,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['placeholder', 'showPopularSearches', 'popularSearches'],
-    },
-    {
-      label: 'Appearance',
-      fieldKeys: ['style', 'size', 'borderRadius', 'fullWidth', 'maxWidth'],
-    },
-    {
-      label: 'Icon',
-      fieldKeys: ['showIcon', 'iconPosition'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'textColor', 'borderColor', 'focusBorderColor'],
-    },
-  ],
-  allFields,
-});
-
 export const SearchBar: ComponentConfig<SearchBarProps> = {
   label: 'Search Bar',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     placeholder: 'Search products...', style: 'outlined', size: 'md',
     showIcon: true, iconPosition: 'left', fullWidth: false, maxWidth: '400px',

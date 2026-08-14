@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { SearchIconProps } from './searchicon.types';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 const SearchIconSvg = ({ size }: { size: number }) => (
@@ -45,26 +44,9 @@ const allFields = {
   },
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Appearance',
-      defaultOpen: true,
-      fieldKeys: ['iconSize', 'style', 'iconColor', 'hoverColor'],
-    },
-    {
-      label: 'Behavior',
-      fieldKeys: ['openSearchOnClick'],
-    },
-  ],
-  allFields,
-});
-
 export const SearchIcon: ComponentConfig<SearchIconProps> = {
   label: 'Search Icon',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     iconSize: 'md', iconColor: '#000000', hoverColor: '#3b82f6',
     style: 'minimal', openSearchOnClick: true,

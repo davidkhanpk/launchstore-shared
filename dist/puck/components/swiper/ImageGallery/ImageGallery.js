@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Thumbs } from 'swiper/modules';
 import { SwiperBase } from '../../shared/SwiperBase';
-import { createAccordionFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 const RADII = { none: 'rounded-none', sm: 'rounded-sm', md: 'rounded-md', lg: 'rounded-lg', xl: 'rounded-xl' };
 const ASPECT = { square: 'aspect-square', portrait: 'aspect-[3/4]', landscape: 'aspect-[4/3]', wide: 'aspect-[16/9]' };
 const WIDTH = { full: '100%', large: '1200px', medium: '800px', small: '600px', custom: '800px' };
@@ -95,41 +95,10 @@ const allFields = {
     ...colorFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['containerWidth', 'customWidth', 'maxHeight', 'layout', 'mainImageAspectRatio'],
-        },
-        {
-            label: 'Thumbnails',
-            fieldKeys: ['showThumbnails', 'thumbnailPosition', 'thumbnailsPerView', 'thumbnailSpacing'],
-        },
-        {
-            label: 'Carousel',
-            fieldKeys: [
-                'showNavigation', 'navigationColor', 'navigationSize',
-                'showPagination', 'paginationType', 'paginationColor',
-                'enableZoom', 'maxZoomScale', 'loop', 'autoHeight', 'spaceBetween',
-            ],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['borderRadius', 'showBorder', 'borderColor', 'backgroundColor'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const ImageGallery = {
     label: 'Image Gallery (Swiper)',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         containerWidth: 'large', customWidth: 800, maxHeight: 500,
         layout: 'thumbnails', mainImageAspectRatio: 'landscape',

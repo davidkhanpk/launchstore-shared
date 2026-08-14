@@ -7,7 +7,6 @@ import type {
 } from './productvariantselector.types';
 import type { ProductData, ProductDataOption } from '../ProductData';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 const MARGIN_OPTS = (prefix: string) => [
@@ -44,23 +43,6 @@ const allFields = {
   paddingX: { type: 'select' as const, label: 'Padding Horizontal', options: MARGIN_OPTS('px') },
   paddingY: { type: 'select' as const, label: 'Padding Vertical', options: MARGIN_OPTS('py') },
 };
-
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Appearance',
-      defaultOpen: true,
-      fieldKeys: ['selectorStyle', 'showLabels', 'showStock'],
-    },
-    {
-      label: 'Spacing',
-      fieldKeys: ['marginTop', 'marginBottom', 'marginLeft', 'marginRight', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
 
 const CheckSvg = ({ size = 16 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
@@ -136,7 +118,7 @@ export interface ProductVariantSelectorWithState extends ProductVariantSelectorP
 
 export const ProductVariantSelector: ComponentConfig<ProductVariantSelectorWithState> = {
   label: 'Product Variant Selector',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     selectorStyle: 'buttons', showLabels: true, showStock: true,
     marginTop: 'mt-4', marginBottom: 'mb-4', marginLeft: 'ml-0', marginRight: 'mr-0',

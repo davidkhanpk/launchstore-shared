@@ -1,6 +1,5 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from 'react';
-import { createAccordionFields, } from '../../../design-system';
 const HeartSvg = ({ size = 20, filled }) => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: filled ? 'currentColor' : 'none', stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: _jsx("path", { d: "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" }) }));
 const SIZE_CLASS = {
     small: 'px-3 py-1.5 text-sm', medium: 'px-4 py-2 text-base', large: 'px-6 py-3 text-lg',
@@ -34,24 +33,9 @@ const allFields = {
         options: [{ label: 'Left', value: 'left' }, { label: 'Right', value: 'right' }],
     },
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['showLabel', 'labelText'],
-        },
-        {
-            label: 'Appearance',
-            fieldKeys: ['size', 'style', 'iconPosition'],
-        },
-    ],
-    allFields,
-});
 export const WishlistButton = {
     label: 'Wishlist Button',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         showLabel: true, labelText: 'Add to Wishlist',
         size: 'medium', style: 'outline', iconPosition: 'left',

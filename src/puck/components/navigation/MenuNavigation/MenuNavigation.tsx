@@ -12,7 +12,6 @@ import { resolveColor } from '../../../../theme/resolveColor';
 import { CategoryMegaMenu } from '../CategoryMegaMenu/CategoryMegaMenu';
 import type { CategoryMegaMenuProps, SharedMegaMenuTheme } from '../CategoryMegaMenu/categorymegamenu.types';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 // ── All flat fields ─────────────────────────────────────────────────────────
@@ -120,43 +119,6 @@ const allFields = {
   mobileBreakpoint: { type: 'number' as const, label: 'Mobile Breakpoint (px)' },
   mobileSearchPlaceholder: { type: 'text' as const, label: 'Mobile Search Placeholder (empty hides search)' },
 };
-
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Menu Source',
-      defaultOpen: true,
-      fieldKeys: ['menuHandle'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['layout', 'alignment', 'maxDepth'],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['fontSize', 'fontWeight', 'textColor', 'hoverColor'],
-    },
-    {
-      label: 'Hover Effect',
-      fieldKeys: ['hoverEffect'],
-    },
-    {
-      label: 'Dropdown',
-      fieldKeys: ['dropdownStyle', 'showDropdownArrows', 'triggerMode', 'subMenuPosition'],
-    },
-    {
-      label: 'Dropdown Appearance',
-      fieldKeys: ['dropdownBackground', 'dropdownBorder', 'dropdownShadow', 'dropdownRadius'],
-    },
-    {
-      label: 'Mobile',
-      fieldKeys: ['mobileBreakpoint', 'mobileSearchPlaceholder'],
-    },
-  ],
-  allFields,
-});
 
 const ChevronDown = ({ size = 16 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
@@ -817,7 +779,7 @@ const MobileAccordionItem: React.FC<{
 
 export const MenuNavigation: ComponentConfig<MenuNavigationProps> = {
   label: 'Menu Navigation',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     menuHandle: '',
     layout: 'horizontal',

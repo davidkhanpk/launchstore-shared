@@ -14,7 +14,6 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import type { CustomHTMLProps } from './customhtml.types';
-import { createAccordionFields } from '../../../design-system';
 
 const MAX_WIDTH_CLASSES: Record<CustomHTMLProps['maxWidth'], string> = {
   sm: 'max-w-screen-sm',
@@ -87,32 +86,11 @@ const allFields = {
   ...layoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['htmlContent', 'cssContent', 'sanitizeHTML'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: [
-        'useContainer', 'maxWidth',
-        'paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight',
-        'backgroundColor', 'backgroundImage',
-      ],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const CustomHTML: ComponentConfig<CustomHTMLProps> = {
   label: 'Custom HTML',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     htmlContent: `<div class="custom-section">
   <h2>Custom HTML Section</h2>

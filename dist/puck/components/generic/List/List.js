@@ -1,6 +1,6 @@
 import { jsxs as _jsxs, jsx as _jsx } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedTypographyFields, sharedLayoutFields, buildTypographyClasses, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
+import { sharedTypographyFields, sharedLayoutFields, buildTypographyClasses, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
 const SPACE_CLASS = { tight: 'space-y-1', normal: 'space-y-2', relaxed: 'space-y-4' };
 // ── Content fields (component-specific) ─────────────────────────────────────
 const contentFields = {
@@ -31,29 +31,10 @@ const allFields = {
     ...sharedTypographyFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['id', 'items', 'type', 'spacing'],
-        },
-        {
-            label: 'Typography',
-            fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const List = {
     label: 'List',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         id: 'list-1',
         items: [{ text: 'First item' }, { text: 'Second item' }, { text: 'Third item' }],

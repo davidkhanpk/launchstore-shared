@@ -1,6 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, } from '../../../design-system';
 // ── Flat field definitions (referenced by key inside the accordion) ─────────
 const categoriesGridFields = {
     sectionTitle: { type: 'text', label: 'Section Title' },
@@ -70,33 +69,6 @@ const categoriesGridFields = {
         defaultItemProps: { id: '' },
     },
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Section',
-            defaultOpen: true,
-            fieldKeys: ['sectionTitle', 'sectionSubtitle', 'showTitle'],
-        },
-        {
-            label: 'Grid',
-            fieldKeys: ['columns', 'columnsTablet', 'columnsMobile', 'gap'],
-        },
-        {
-            label: 'Category Display',
-            fieldKeys: ['showCategoryImage', 'showCategoryName', 'showProductCount', 'imageAspectRatio'],
-        },
-        {
-            label: 'Styling',
-            fieldKeys: ['backgroundColor', 'textColor', 'cardStyle', 'borderRadius', 'hoverEffect'],
-        },
-        {
-            label: 'Category Source',
-            fieldKeys: ['categorySource', 'selectedCategoryIds'],
-        },
-    ],
-    allFields: categoriesGridFields,
-});
 const ASPECT = {
     square: 'aspect-square', portrait: 'aspect-[3/4]', landscape: 'aspect-[4/3]', wide: 'aspect-[16/9]',
 };
@@ -120,7 +92,7 @@ function applyManualFilter(all, ids) {
 }
 export const CategoriesGrid = {
     label: 'Categories Grid',
-    fields: accordionFields,
+    fields: categoriesGridFields,
     defaultProps: {
         sectionTitle: 'Shop by Category',
         sectionSubtitle: 'Browse our popular categories',

@@ -1,6 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, } from '../../../design-system';
 // ── All flat fields ─────────────────────────────────────────────────────────
 const allFields = {
     imageUrl: { type: 'text', label: 'Logo Image URL' },
@@ -37,25 +36,9 @@ const allFields = {
         ],
     },
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Image',
-            defaultOpen: true,
-            fieldKeys: ['imageUrl', 'altText', 'linkTo', 'maxWidth', 'maxHeight'],
-        },
-        {
-            label: 'Store Name',
-            defaultOpen: true,
-            fieldKeys: ['showText', 'text', 'textPosition', 'textSize', 'textColor', 'textWeight'],
-        },
-    ],
-    allFields,
-});
 export const Logo = {
     label: 'Logo',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         imageUrl: '',
         altText: 'Store Logo',

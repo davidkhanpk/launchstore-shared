@@ -1,5 +1,4 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { createAccordionFields, } from '../../../design-system';
 const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
 // ── All flat fields ─────────────────────────────────────────────────────────
 const allFields = {
@@ -105,45 +104,6 @@ const allFields = {
     fontFamily: { type: 'text', label: 'Font Family' },
     productId: { type: 'text', label: 'Product ID (optional)' },
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Source',
-            defaultOpen: true,
-            fieldKeys: ['productId'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['layout', 'enableSwiper'],
-        },
-        {
-            label: 'Image',
-            fieldKeys: ['aspectRatio', 'borderRadius', 'showShadow', 'hoverZoom'],
-        },
-        {
-            label: 'Title',
-            fieldKeys: ['showTitle', 'titleSize', 'titleWeight', 'titleAlign'],
-        },
-        {
-            label: 'Price',
-            fieldKeys: ['showPrice', 'priceSize', 'priceColor', 'showCompareAtPrice', 'showSavingsBadge'],
-        },
-        {
-            label: 'Badges',
-            fieldKeys: ['showBadges', 'showSaleBadge', 'showNewBadge', 'showLowStockBadge', 'badgePosition'],
-        },
-        {
-            label: 'Add to Cart Button',
-            fieldKeys: ['showAddToCart', 'buttonText', 'buttonStyle', 'buttonSize', 'showCartIcon'],
-        },
-        {
-            label: 'Card Appearance',
-            fieldKeys: ['cardRadius', 'cardBorder', 'cardShadow', 'cardBackground', 'accentColor', 'fontFamily'],
-        },
-    ],
-    allFields,
-});
 const CartSvg = ({ size = 16 }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("circle", { cx: "9", cy: "21", r: "1" }), _jsx("circle", { cx: "20", cy: "21", r: "1" }), _jsx("path", { d: "M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" })] }));
 const ASPECT = { square: 'aspect-square', portrait: 'aspect-[3/4]', landscape: 'aspect-[16/9]' };
 const IMG_RADIUS = { none: 'rounded-none', sm: 'rounded-sm', md: 'rounded-md', lg: 'rounded-lg', full: 'rounded-full' };
@@ -182,7 +142,7 @@ const DefaultCard = ({ product, props }) => {
 };
 export const ProductCard = {
     label: 'Product Card',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         layout: 'vertical', enableSwiper: true, aspectRatio: 'square',
         borderRadius: 'md', showShadow: true, hoverZoom: true,

@@ -14,7 +14,6 @@
 import React from 'react';
 import type { ComponentConfig, Field } from '@puckeditor/core';
 import type { PromotionalBannerGridProps, PromotionalBannerItem } from './promotionalbannergrid.types';
-import { createAccordionFields } from '../../../design-system';
 
 const SPACING_CLASSES: Record<PromotionalBannerGridProps['spacing'], string> = {
   none: 'gap-0',
@@ -203,32 +202,11 @@ const allFields = {
   ...colorFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['title', 'subtitle', 'banners'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['layout', 'spacing', 'hoverEffect', 'minHeight'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['borderRadius'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const PromotionalBannerGrid: ComponentConfig<PromotionalBannerGridProps> = {
   label: 'Promotional Banner Grid',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     title: '',
     subtitle: '',

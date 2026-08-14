@@ -7,7 +7,6 @@ import type {
 } from './testimonialcarousel.types';
 import { SwiperBase } from '../../shared/SwiperBase';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   buildLayoutClasses,
   defaultLayoutProps,
@@ -164,40 +163,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['layout', 'showAvatar', 'showRating', 'showRole'],
-    },
-    {
-      label: 'Carousel',
-      fieldKeys: [
-        'cardsPerView', 'cardsPerViewTablet', 'cardsPerViewMobile', 'effect',
-        'showNavigation', 'navigationColor', 'showPagination', 'paginationType', 'paginationColor',
-        'enableAutoplay', 'autoplayDelay', 'pauseOnHover', 'loop', 'spaceBetween', 'centeredSlides',
-      ],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'cardBackground', 'textColor', 'accentColor', 'borderRadius', 'cardShadow'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const TestimonialCarousel: ComponentConfig<TestimonialCarouselWithItems> = {
   label: 'Testimonial Carousel (Swiper)',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     layout: 'card', cardsPerView: 3, cardsPerViewTablet: 2, cardsPerViewMobile: 1,
     effect: 'slide', showNavigation: true, navigationColor: '#1f2937',

@@ -1,7 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { useState } from 'react';
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, } from '../../../design-system';
 const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
 // ── All flat fields ─────────────────────────────────────────────────────────
 const allFields = {
@@ -75,29 +74,6 @@ const allFields = {
     },
     disabled: { type: 'radio', label: 'Disabled State (Preview)', options: RADIO_YES_NO },
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['text', 'preorderText', 'showIcon'],
-        },
-        {
-            label: 'Style',
-            fieldKeys: ['variant', 'size', 'fullWidth', 'borderRadius', 'disabled'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['useThemeColors', 'backgroundColor', 'textColor', 'hoverBackgroundColor', 'hoverTextColor', 'borderColor'],
-        },
-        {
-            label: 'Spacing',
-            fieldKeys: ['marginTop', 'marginBottom', 'marginLeft', 'marginRight', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 const CartSvg = ({ size = 20 }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("circle", { cx: "9", cy: "21", r: "1" }), _jsx("circle", { cx: "20", cy: "21", r: "1" }), _jsx("path", { d: "M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" })] }));
 const CheckSvg = ({ size = 20 }) => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: _jsx("polyline", { points: "20 6 9 17 4 12" }) }));
 const ClockSvg = ({ size = 20 }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("circle", { cx: "12", cy: "12", r: "10" }), _jsx("polyline", { points: "12 6 12 12 16 14" })] }));
@@ -120,7 +96,7 @@ const formatPreorderDate = (iso) => {
 const noopAdd = async () => { };
 export const AddToCart = {
     label: 'Add to Cart Button',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         text: 'Add to Cart', preorderText: 'Pre-order',
         variant: 'primary', size: 'md', fullWidth: false, showIcon: true, disabled: false,

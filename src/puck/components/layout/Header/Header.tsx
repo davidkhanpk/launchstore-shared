@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { HeaderProps, SharedMenuItem } from './header.types';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 // ── Flat field definitions (referenced by key inside the accordion) ─────────
@@ -91,39 +90,6 @@ const headerFields = {
   },
 } as Record<string, any>;
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Header',
-      defaultOpen: true,
-      fieldKeys: ['layout', 'backgroundColor', 'textColor', 'sticky', 'shadow', 'transparent'],
-    },
-    {
-      label: 'Logo',
-      fieldKeys: ['logoPosition', 'logoMaxWidth', 'logoUrl', 'logoAlt'],
-    },
-    {
-      label: 'Navigation',
-      fieldKeys: ['menuPosition', 'menuStyle', 'menuTextColor', 'menuHoverColor', 'actions', 'actionsPosition'],
-    },
-    {
-      label: 'Actions',
-      fieldKeys: ['showCartBadge', 'showLabels', 'cartBadgeCount'],
-    },
-    {
-      label: 'Top Bar',
-      fieldKeys: ['topBar'],
-    },
-    {
-      label: 'Mobile',
-      fieldKeys: ['mobileBreakpoint', 'mobileMenuStyle'],
-    },
-  ],
-  allFields: headerFields,
-});
-
 // Inline SVG icons (no external dep). Mirrors lucide-react visual.
 const SearchIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>);
 const HeartIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z" /></svg>);
@@ -134,7 +100,7 @@ const XIcon = () => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="
 
 export const Header: ComponentConfig<HeaderProps> = {
   label: 'Header',
-  fields: accordionFields as any,
+  fields: headerFields as any,
   defaultProps: {
     layout: 'left-center-right',
     backgroundColor: '#ffffff',

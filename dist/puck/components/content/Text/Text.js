@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedTypographyFields, sharedLayoutFields, buildTypographyClasses, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
+import { sharedTypographyFields, sharedLayoutFields, buildTypographyClasses, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
 // ── Content fields (component-specific) ─────────────────────────────────────
 const contentFields = {
     text: { type: 'textarea', label: 'Text' },
@@ -13,29 +13,10 @@ const allFields = {
     ...sharedTypographyFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['text', 'richText', 'maxWidth'],
-        },
-        {
-            label: 'Typography',
-            fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const Text = {
     label: 'Text',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         text: 'Add your text content here. You can write multiple paragraphs, include line breaks, and format your content as needed.',
         richText: false,

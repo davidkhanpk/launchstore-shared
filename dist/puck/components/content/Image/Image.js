@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedTypographyFields, sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultTypographyProps, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
+import { sharedTypographyFields, sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultTypographyProps, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
 // ── Static option maps ─────────────────────────────────────────────────────
 const ASPECT_RATIO_MAP = {
     auto: '',
@@ -126,40 +126,10 @@ const allFields = {
     ...sharedLayoutFields,
     ...sharedColorFields,
 };
-// ── Accordion config ─────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: [
-                'src', 'alt', 'aspectRatio', 'objectFit', 'width', 'customWidth',
-                'linkUrl', 'openInNewTab',
-            ],
-        },
-        {
-            label: 'Caption',
-            fieldKeys: ['showCaption', 'caption', 'captionPosition', 'captionAlign'],
-        },
-        {
-            label: 'Typography',
-            fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['alignment', 'marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['backgroundColor', 'borderRadius', 'shadow', 'showBorder', 'borderColor', 'borderWidth', 'hoverEffect'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const Image = {
     label: 'Image',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         src: 'https://via.placeholder.com/800x600',
         alt: 'Image description',

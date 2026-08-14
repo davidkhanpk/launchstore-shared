@@ -5,7 +5,6 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { CategoryProductsProps, CategoryProduct } from './categoryproducts.types';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 // ── Flat field definitions (referenced by key inside the accordion) ─────────
@@ -56,39 +55,6 @@ const categoryProductsFields = {
     { label: 'Small', value: 'small' }, { label: 'Medium', value: 'medium' }, { label: 'Large', value: 'large' }, { label: 'None', value: 'none' },
   ]},
 } as Record<string, any>;
-
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Section',
-      defaultOpen: true,
-      fieldKeys: ['sectionTitle', 'sectionSubtitle', 'showTitle', 'categoryId', 'categoryName'],
-    },
-    {
-      label: 'Display',
-      fieldKeys: ['displayMode', 'productsPerRow', 'maxProducts'],
-    },
-    {
-      label: 'Carousel',
-      fieldKeys: ['slidesPerView', 'slidesPerViewTablet', 'slidesPerViewMobile', 'spaceBetween', 'autoplay', 'autoplayDelay', 'loop', 'navigation', 'pagination'],
-    },
-    {
-      label: 'Product Card',
-      fieldKeys: ['imageAspectRatio', 'showPrice', 'showAddToCart', 'showRating', 'showBadges'],
-    },
-    {
-      label: 'View All Button',
-      fieldKeys: ['showViewAllButton', 'viewAllButtonText', 'buttonColor', 'buttonTextColor', 'buttonRadius'],
-    },
-    {
-      label: 'Styling',
-      fieldKeys: ['backgroundColor', 'textColor', 'cardStyle', 'borderRadius'],
-    },
-  ],
-  allFields: categoryProductsFields,
-});
 
 const ASPECT: Record<CategoryProductsProps['imageAspectRatio'], string> = {
   square: 'aspect-square', portrait: 'aspect-[3/4]', landscape: 'aspect-[4/3]',
@@ -153,7 +119,7 @@ const ViewAllButton = ({ props }: { props: CategoryProductsProps }) =>
 
 export const CategoryProducts: ComponentConfig<CategoryProductsProps> = {
   label: 'Category Products',
-  fields: accordionFields as any,
+  fields: categoryProductsFields as any,
   defaultProps: {
     sectionTitle: 'Shop by Category',
     sectionSubtitle: 'Discover our curated collection',

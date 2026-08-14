@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { CategoryBreadcrumbsProps, SharedCategoryNode } from './categorybreadcrumbs.types';
 import {
-  createAccordionFields,
   sharedTypographyFields,
   sharedLayoutFields,
   sharedColorFields,
@@ -34,36 +33,11 @@ const allFields = {
   ...sharedColorFields,
 };
 
-// ── Accordion config ─────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['separator', 'showHome', 'homeText', 'className'],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'borderRadius', 'activeColor', 'hoverColor'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const CategoryBreadcrumbs: ComponentConfig<CategoryBreadcrumbsProps> = {
   label: 'Category Breadcrumbs',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     separator: '/',
     showHome: true,

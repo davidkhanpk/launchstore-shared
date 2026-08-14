@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { ListProps } from './list.types';
 import {
-  createAccordionFields,
   sharedTypographyFields,
   sharedLayoutFields,
   buildTypographyClasses,
@@ -47,32 +46,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['id', 'items', 'type', 'spacing'],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const List: ComponentConfig<ListProps> = {
   label: 'List',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     id: 'list-1',
     items: [{ text: 'First item' }, { text: 'Second item' }, { text: 'Third item' }],

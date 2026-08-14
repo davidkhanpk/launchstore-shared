@@ -1,7 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from 'react';
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, } from '../../../design-system';
 const CartSvg = ({ size }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("circle", { cx: "9", cy: "21", r: "1" }), _jsx("circle", { cx: "20", cy: "21", r: "1" }), _jsx("path", { d: "M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" })] }));
 const SIZE_MAP = { sm: 20, md: 24, lg: 28 };
 const BADGE_POS = {
@@ -46,28 +45,9 @@ const allFields = {
     badgeBackgroundColor: { type: 'text', label: 'Badge Background Color (hex or theme token)' },
     badgeTextColor: { type: 'text', label: 'Badge Text Color (hex or theme token)' },
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['showLabel', 'label', 'showBadge', 'badgePosition'],
-        },
-        {
-            label: 'Appearance',
-            fieldKeys: ['iconSize', 'style'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['iconColor', 'hoverColor', 'badgeBackgroundColor', 'badgeTextColor'],
-        },
-    ],
-    allFields,
-});
 export const CartButton = {
     label: 'Cart Button',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         showLabel: false, label: 'Cart', showBadge: true,
         badgePosition: 'top-right', iconSize: 'md',

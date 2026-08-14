@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 // Inline SVG icons (replacing lucide-react) — MapPin / Phone / Mail / Clock
 const ICONS = {
     map: (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("path", { d: "M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z" }), _jsx("circle", { cx: "12", cy: "10", r: "3" })] })),
@@ -44,25 +44,6 @@ const allFields = {
     ...styleFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['showAddress', 'address', 'showPhone', 'phone', 'showEmail', 'email', 'showHours', 'hours', 'showIcons', 'layout'],
-        },
-        {
-            label: 'Typography & Color',
-            fieldKeys: ['textColor', 'iconColor', 'fontSize', 'gap'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 const GAP_CLASS = { sm: 'gap-2', md: 'gap-4', lg: 'gap-6' };
 const LAYOUT_CLASS = {
     stacked: 'flex flex-col', grid: 'grid grid-cols-1 md:grid-cols-2',
@@ -70,7 +51,7 @@ const LAYOUT_CLASS = {
 // ── Component ───────────────────────────────────────────────────────────────
 export const ContactInfo = {
     label: 'Contact Info',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         showAddress: true,
         address: '123 Main Street\nCity, State 12345\nCountry',

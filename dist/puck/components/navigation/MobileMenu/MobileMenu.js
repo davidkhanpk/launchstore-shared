@@ -1,7 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
 import { MobileMenuItem } from './MobileMenuItem';
-import { createAccordionFields, } from '../../../design-system';
 // ── All flat fields ─────────────────────────────────────────────────────────
 // MobileMenu is a RENDERED-FROM-DATA component: in the Puck editor it shows an
 // empty placeholder (no menu data bound), but in the live renderer the consumer
@@ -15,17 +14,6 @@ const allFields = {
         options: [{ label: 'Left', value: 'left' }, { label: 'Right', value: 'right' }],
     },
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Drawer',
-            defaultOpen: true,
-            fieldKeys: ['drawerMaxWidth', 'animationDirection'],
-        },
-    ],
-    allFields,
-});
 const X_SVG = ({ size = 24 }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("line", { x1: "18", y1: "6", x2: "6", y2: "18" }), _jsx("line", { x1: "6", y1: "6", x2: "18", y2: "18" })] }));
 const STAGE_OPACITY = 0.5;
 const FALLBACK = {
@@ -56,7 +44,7 @@ const resolveTheme = (t) => ({
 const filterTopLevel = (items) => items.filter((it) => !('parentId' in it) || !it.parentId || it.parentId == null);
 export const MobileMenu = {
     label: 'Mobile Menu',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         items: [],
         theme: {},

@@ -8,7 +8,6 @@ import type {
 } from './productprice.types';
 import type { ProductData, ProductDataPrice } from '../ProductData';
 import {
-  createAccordionFields,
   sharedTypographyFields,
   sharedLayoutFields,
   buildLayoutClasses,
@@ -70,27 +69,6 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['size', 'showComparePrice', 'showSavingsBadge', 'layout'],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['fontWeight', 'textColor'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom'],
-    },
-  ],
-  allFields,
-});
-
 const defaultResolvePrice = (_product: ProductData): ProductDataPrice | undefined => undefined;
 
 export interface ProductPriceWithProduct extends ProductPriceProps {
@@ -101,7 +79,7 @@ export interface ProductPriceWithProduct extends ProductPriceProps {
 
 export const ProductPrice: ComponentConfig<ProductPriceWithProduct> = {
   label: 'Product Price',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     size: 'xl',
     showComparePrice: true,

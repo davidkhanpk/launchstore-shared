@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedTypographyFields, sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultTypographyProps, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
+import { sharedTypographyFields, sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultTypographyProps, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
 const MAX_WIDTH_DEFAULT = '800px';
 // ── Static option maps ─────────────────────────────────────────────────────
 const ASPECT_RATIO_MAP = {
@@ -71,32 +71,6 @@ const allFields = {
     ...sharedLayoutFields,
     ...sharedColorFields,
 };
-// ── Accordion config ─────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: [
-                'videoType', 'videoUrl', 'autoplay', 'loop', 'muted', 'controls',
-                'caption',
-            ],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['aspectRatio', 'maxWidth', 'alignment', 'marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['backgroundColor', 'borderRadius', 'shadow'],
-        },
-        {
-            label: 'Typography',
-            fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-        },
-    ],
-    allFields,
-});
 // ── Helpers ─────────────────────────────────────────────────────────────────
 function extractYouTubeId(url) {
     const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
@@ -109,7 +83,7 @@ function extractVimeoId(url) {
 // ── Component ───────────────────────────────────────────────────────────────
 export const Video = {
     label: 'Video',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         videoType: 'youtube',
         videoUrl: '',

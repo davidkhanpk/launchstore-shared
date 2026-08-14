@@ -3,7 +3,6 @@
 import React from 'react';
 import type { ComponentConfig, Field } from '@puckeditor/core';
 import type { TrustBadgesProps, TrustBadgeItem } from './trustbadges.types';
-import { createAccordionFields } from '../../../design-system';
 
 /**
  * TrustBadges emoji icon dictionary (13 icons — see fields config below for
@@ -201,32 +200,11 @@ const allFields = {
   ...colorFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['title', 'subtitle', 'badges'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['layout', 'columns', 'alignment', 'spacing', 'showBorder'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'textColor', 'borderRadius'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const TrustBadges: ComponentConfig<TrustBadgesProps> = {
   label: 'Trust Badges',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     title: 'Why Shop With Us',
     subtitle: '',

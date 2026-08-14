@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedLayoutFields, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, defaultLayoutProps, } from '../../../design-system';
 // ── Content fields (component-specific) ─────────────────────────────────────
 const contentFields = {
     id: { type: 'text', label: 'ID' },
@@ -28,28 +28,13 @@ const allFields = {
     ...contentFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['id', 'height', 'showDivider', 'dividerStyle', 'dividerColor'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 const HEIGHT_PX = {
     xs: 8, sm: 16, md: 32, lg: 48, xl: 64, '2xl': 96, '3xl': 128,
 };
 // ── Component ───────────────────────────────────────────────────────────────
 export const Spacer = {
     label: 'Spacer',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         id: 'spacer-1',
         height: 'md',

@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { LinkProps } from './link.types';
 import {
-  createAccordionFields,
   sharedTypographyFields,
   sharedLayoutFields,
   buildTypographyClasses,
@@ -50,27 +49,6 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['text', 'href', 'target', 'underline'],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['fontSize', 'fontWeight', 'textColor'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom'],
-    },
-  ],
-  allFields,
-});
-
 // ── Underline resolver ──────────────────────────────────────────────────────
 
 function resolveTextDecoration(underline: string | undefined): React.CSSProperties {
@@ -89,7 +67,7 @@ function resolveTextDecoration(underline: string | undefined): React.CSSProperti
 
 export const Link: ComponentConfig<LinkProps> = {
   label: 'Link',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     id: 'link-1',
     text: 'Click here',

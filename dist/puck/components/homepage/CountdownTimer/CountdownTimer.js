@@ -1,7 +1,6 @@
 'use client';
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from 'react';
-import { createAccordionFields } from '../../../design-system';
 const SPACING_CLASSES = {
     compact: 'py-6 px-4',
     normal: 'py-10 px-6',
@@ -96,29 +95,10 @@ const allFields = {
     ...layoutFields,
     ...colorFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['title', 'subtitle', 'endDate', 'timerStyle', 'showDays', 'showHours', 'showMinutes', 'showSeconds', 'showCTA', 'ctaText', 'ctaLink'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['spacing', 'mode'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['backgroundColor', 'textColor', 'timerColor', 'accentColor'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const CountdownTimer = {
     label: 'Countdown Timer',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         title: 'Limited Time Offer',
         subtitle: 'Sale ends soon',

@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import type { ProductAccordionProps, ProductAccordionSection, ProductAccordionBorderStyle } from './productaccordion.types';
 import type { ProductData } from '../ProductData';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 // ── All flat fields ─────────────────────────────────────────────────────────
@@ -44,27 +43,6 @@ const allFields = {
     ],
   },
 };
-
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Sections',
-      defaultOpen: true,
-      fieldKeys: ['sections'],
-    },
-    {
-      label: 'Behavior',
-      fieldKeys: ['allowMultiple', 'defaultOpen'],
-    },
-    {
-      label: 'Appearance',
-      fieldKeys: ['borderStyle'],
-    },
-  ],
-  allFields,
-});
 
 const ChevronSvg = ({ rotated }: { rotated?: boolean }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" style={{ transform: rotated ? 'rotate(180deg)' : 'none', transition: 'transform 200ms' }}>
@@ -136,7 +114,7 @@ export interface ProductAccordionWithProduct extends ProductAccordionProps {
 
 export const ProductAccordion: ComponentConfig<ProductAccordionWithProduct> = {
   label: 'Product Accordion',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     sections: [
       { id: 'description', title: 'Product Details', contentType: 'description', customContent: '' },

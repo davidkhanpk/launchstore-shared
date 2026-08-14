@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { CategoriesGridProps, SharedCategory } from './categoriesgrid.types';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 // ── Flat field definitions (referenced by key inside the accordion) ─────────
@@ -77,35 +76,6 @@ const categoriesGridFields = {
   } as any,
 } as Record<string, any>;
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Section',
-      defaultOpen: true,
-      fieldKeys: ['sectionTitle', 'sectionSubtitle', 'showTitle'],
-    },
-    {
-      label: 'Grid',
-      fieldKeys: ['columns', 'columnsTablet', 'columnsMobile', 'gap'],
-    },
-    {
-      label: 'Category Display',
-      fieldKeys: ['showCategoryImage', 'showCategoryName', 'showProductCount', 'imageAspectRatio'],
-    },
-    {
-      label: 'Styling',
-      fieldKeys: ['backgroundColor', 'textColor', 'cardStyle', 'borderRadius', 'hoverEffect'],
-    },
-    {
-      label: 'Category Source',
-      fieldKeys: ['categorySource', 'selectedCategoryIds'],
-    },
-  ],
-  allFields: categoriesGridFields,
-});
-
 const ASPECT: Record<CategoriesGridProps['imageAspectRatio'], string> = {
   square: 'aspect-square', portrait: 'aspect-[3/4]', landscape: 'aspect-[4/3]', wide: 'aspect-[16/9]',
 };
@@ -130,7 +100,7 @@ function applyManualFilter(all: SharedCategory[], ids: string[]) {
 
 export const CategoriesGrid: ComponentConfig<CategoriesGridProps> = {
   label: 'Categories Grid',
-  fields: accordionFields as any,
+  fields: categoriesGridFields as any,
   defaultProps: {
     sectionTitle: 'Shop by Category',
     sectionSubtitle: 'Browse our popular categories',

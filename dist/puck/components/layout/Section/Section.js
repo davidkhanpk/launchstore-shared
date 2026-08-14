@@ -1,31 +1,16 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { DropZone } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
+import { sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
 // ── All flat fields ─────────────────────────────────────────────────────────
 const allFields = {
     ...sharedLayoutFields,
     ...sharedColorFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Layout',
-            defaultOpen: true,
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-        {
-            label: 'Color',
-            fieldKeys: ['backgroundColor', 'borderRadius'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const Section = {
     label: 'Section',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         ...defaultLayoutProps,
         paddingY: 'md',

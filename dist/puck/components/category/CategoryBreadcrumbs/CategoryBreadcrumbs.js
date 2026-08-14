@@ -1,6 +1,6 @@
 import { Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedTypographyFields, sharedLayoutFields, sharedColorFields, buildTypographyClasses, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
+import { sharedTypographyFields, sharedLayoutFields, sharedColorFields, buildTypographyClasses, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
 // ── Content fields (component-specific) ─────────────────────────────────────
 const contentFields = {
     separator: { type: 'text', label: 'Separator' },
@@ -17,33 +17,10 @@ const allFields = {
     ...sharedLayoutFields,
     ...sharedColorFields,
 };
-// ── Accordion config ─────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['separator', 'showHome', 'homeText', 'className'],
-        },
-        {
-            label: 'Typography',
-            fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['backgroundColor', 'borderRadius', 'activeColor', 'hoverColor'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const CategoryBreadcrumbs = {
     label: 'Category Breadcrumbs',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         separator: '/',
         showHome: true,

@@ -1,6 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from 'react';
-import { createAccordionFields, } from '../../../design-system';
 const MARGIN_OPTS = (prefix) => [
     { label: 'None', value: `${prefix}-0` },
     { label: 'Small', value: `${prefix}-2` },
@@ -33,25 +32,6 @@ const allFields = {
     paddingX: { type: 'select', label: 'Padding Horizontal', options: MARGIN_OPTS('px') },
     paddingY: { type: 'select', label: 'Padding Vertical', options: MARGIN_OPTS('py') },
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['showLabel', 'labelText', 'minQuantity', 'maxQuantity', 'defaultQuantity'],
-        },
-        {
-            label: 'Appearance',
-            fieldKeys: ['size', 'style'],
-        },
-        {
-            label: 'Spacing',
-            fieldKeys: ['marginTop', 'marginBottom', 'marginLeft', 'marginRight', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 const MinusSvg = ({ size = 16 }) => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: _jsx("line", { x1: "5", y1: "12", x2: "19", y2: "12" }) }));
 const PlusSvg = ({ size = 16 }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("line", { x1: "12", y1: "5", x2: "12", y2: "19" }), _jsx("line", { x1: "5", y1: "12", x2: "19", y2: "12" })] }));
 const SIZE_INPUT = { small: 'h-8 text-sm', medium: 'h-10 text-base', large: 'h-12 text-lg' };
@@ -64,7 +44,7 @@ const STYLE = {
 };
 export const QuantitySelector = {
     label: 'Quantity Selector',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         showLabel: true, labelText: 'Quantity',
         minQuantity: 1, maxQuantity: 99, defaultQuantity: 1,

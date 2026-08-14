@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 const WIDTH_CLASS = { full: 'w-full', '3/4': 'w-3/4', '1/2': 'w-1/2', '1/4': 'w-1/4' };
 // ── Content fields (component-specific) ─────────────────────────────────────
 const contentFields = {
@@ -24,25 +24,10 @@ const allFields = {
     ...contentFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['id', 'style', 'thickness', 'width', 'textColor'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const Divider = {
     label: 'Divider',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         id: 'divider-1',
         style: 'solid',

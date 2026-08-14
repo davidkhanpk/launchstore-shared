@@ -2,7 +2,6 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, } from '../../../design-system';
 // ── Flat field definitions (referenced by key inside the accordion) ─────────
 const categoryProductsFields = {
     sectionTitle: { type: 'text', label: 'Section Title' },
@@ -50,37 +49,6 @@ const categoryProductsFields = {
             { label: 'Small', value: 'small' }, { label: 'Medium', value: 'medium' }, { label: 'Large', value: 'large' }, { label: 'None', value: 'none' },
         ] },
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Section',
-            defaultOpen: true,
-            fieldKeys: ['sectionTitle', 'sectionSubtitle', 'showTitle', 'categoryId', 'categoryName'],
-        },
-        {
-            label: 'Display',
-            fieldKeys: ['displayMode', 'productsPerRow', 'maxProducts'],
-        },
-        {
-            label: 'Carousel',
-            fieldKeys: ['slidesPerView', 'slidesPerViewTablet', 'slidesPerViewMobile', 'spaceBetween', 'autoplay', 'autoplayDelay', 'loop', 'navigation', 'pagination'],
-        },
-        {
-            label: 'Product Card',
-            fieldKeys: ['imageAspectRatio', 'showPrice', 'showAddToCart', 'showRating', 'showBadges'],
-        },
-        {
-            label: 'View All Button',
-            fieldKeys: ['showViewAllButton', 'viewAllButtonText', 'buttonColor', 'buttonTextColor', 'buttonRadius'],
-        },
-        {
-            label: 'Styling',
-            fieldKeys: ['backgroundColor', 'textColor', 'cardStyle', 'borderRadius'],
-        },
-    ],
-    allFields: categoryProductsFields,
-});
 const ASPECT = {
     square: 'aspect-square', portrait: 'aspect-[3/4]', landscape: 'aspect-[4/3]',
 };
@@ -100,7 +68,7 @@ const defaultCard = (p, props) => {
 const ViewAllButton = ({ props }) => props.showViewAllButton ? (_jsx("div", { className: "text-center mt-12", children: _jsx("a", { href: `/categories/${props.categoryId}`, className: `inline-block px-8 py-3 transition-colors ${BTN_RADIUS[props.buttonRadius] || 'rounded-md'}`, style: { backgroundColor: props.buttonColor, color: props.buttonTextColor }, children: props.viewAllButtonText }) })) : null;
 export const CategoryProducts = {
     label: 'Category Products',
-    fields: accordionFields,
+    fields: categoryProductsFields,
     defaultProps: {
         sectionTitle: 'Shop by Category',
         sectionSubtitle: 'Discover our curated collection',

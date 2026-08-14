@@ -4,7 +4,6 @@ import { DropZone } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { CardProps } from './card.types';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   buildLayoutClasses,
   defaultLayoutProps,
@@ -51,34 +50,13 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['id', 'padding', 'shadow', 'border', 'rounded', 'hoverEffect'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 const PAD_VALUE: Record<string, string> = { none: '0', sm: '12px', md: '24px', lg: '32px', xl: '48px' };
 
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const Card: ComponentConfig<CardProps> = {
   label: 'Card',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     id: 'card-1',
     padding: 'lg',

@@ -4,7 +4,6 @@ import { resolveColor } from '../../../../theme/resolveColor';
 import { ICONS } from './icons';
 import type { IconProps } from './icon.types';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   buildLayoutClasses,
   defaultLayoutProps,
@@ -64,23 +63,6 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['id', 'iconName', 'size', 'textColor', 'strokeWidth', 'alignment'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 const SIZE_PX: Record<string, number> = { xs: 16, sm: 20, md: 24, lg: 32, xl: 40, '2xl': 48 };
 const ALIGN_MARGIN: Record<string, string> = {
   left: 'mr-auto', center: 'mx-auto', right: 'ml-auto',
@@ -90,7 +72,7 @@ const ALIGN_MARGIN: Record<string, string> = {
 
 export const Icon: ComponentConfig<IconProps> = {
   label: 'Icon',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     id: 'icon-1',
     iconName: 'HeartIcon' as IconProps['iconName'],

@@ -35,9 +35,3 @@ export {
 
 // Color resolver (hex/token → CSS color — the only inline style usage)
 export { resolveColor } from './presets';
-
-// Accordion inspector widget
-export {
-  createAccordionFields,
-} from './accordion-field';
-export type { AccordionGroup, AccordionConfig } from './accordion-field';

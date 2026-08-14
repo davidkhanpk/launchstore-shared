@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { ButtonProps } from './button.types';
 import {
-  createAccordionFields,
   sharedColorFields,
   buildColorClasses,
   defaultLayoutProps,
@@ -97,32 +96,11 @@ const allFields = {
   ...layoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Button Settings',
-      defaultOpen: true,
-      fieldKeys: ['text', 'url', 'openInNewTab', 'variant', 'size', 'fullWidth', 'showIcon', 'iconPosition'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'textColor', 'borderColor', 'hoverBackgroundColor', 'hoverTextColor', 'borderRadius', 'shadow'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['textAlign', 'marginTop', 'marginBottom'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const Button: ComponentConfig<ButtonProps> = {
   label: 'Button',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     text: 'Click Me',
     url: '#',

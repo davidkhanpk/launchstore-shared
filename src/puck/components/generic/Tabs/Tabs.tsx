@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import type { TabsProps } from './tabs.types';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   buildLayoutClasses,
   defaultLayoutProps,
@@ -46,28 +45,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['id', 'tabs', 'defaultTab', 'alignment', 'tabStyle'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const Tabs: ComponentConfig<TabsProps> = {
   label: 'Tabs',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     id: 'tabs-1',
     tabs: [

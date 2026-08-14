@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from 'react';
-import { createAccordionFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 const ALIGN_CLASS = { left: 'justify-start', center: 'justify-center', right: 'justify-end' };
 const getTabClasses = (tabStyle, isActive) => {
     const base = 'px-4 py-2 font-medium transition-colors cursor-pointer';
@@ -33,25 +33,10 @@ const allFields = {
     ...contentFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['id', 'tabs', 'defaultTab', 'alignment', 'tabStyle'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const Tabs = {
     label: 'Tabs',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         id: 'tabs-1',
         tabs: [

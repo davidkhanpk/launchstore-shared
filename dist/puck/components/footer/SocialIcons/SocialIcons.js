@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 // Inline-SVG brand logos (no lucide-react dep). Sized by props.size at render.
 // Centered or stroke variants use stroke=currentColor for theming.
 const ICON_SIZE = 24;
@@ -75,29 +75,10 @@ const allFields = {
     ...layoutFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['links', 'size', 'style'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['textColor', 'hoverColor', 'backgroundColor', 'hoverBackgroundColor'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['gap', 'alignment', 'marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const SocialIcons = {
     label: 'Social Icons',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         links: [
             { platform: 'facebook', url: 'https://facebook.com' },

@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 const VARIANT_CLASS = {
     default: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200',
     primary: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
@@ -44,29 +44,10 @@ const allFields = {
     ...colorFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['id', 'text', 'variant', 'size', 'rounded'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['customBgColor', 'customTextColor'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const Badge = {
     label: 'Badge',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         id: 'badge-1',
         text: 'Badge',

@@ -4,7 +4,6 @@ import { DropZone } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { ContainerProps } from './container.types';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   sharedColorFields,
   buildLayoutClasses,
@@ -45,32 +44,11 @@ const allFields = {
   ...sharedColorFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Container',
-      defaultOpen: true,
-      fieldKeys: ['maxWidth'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-    {
-      label: 'Color',
-      fieldKeys: ['backgroundColor', 'borderRadius'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const Container: ComponentConfig<ContainerProps> = {
   label: 'Container',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     maxWidth: 'xl',
     ...defaultLayoutProps,

@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { SwiperSlide } from 'swiper/react';
 import { SwiperBase } from '../../shared/SwiperBase';
-import { createAccordionFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 const ASPECT = { square: 'aspect-square', portrait: 'aspect-[3/4]', landscape: 'aspect-[4/3]' };
 const RADII = { none: 'rounded-none', sm: 'rounded-sm', md: 'rounded-md', lg: 'rounded-lg', xl: 'rounded-xl' };
 const getPrice = (p) => {
@@ -101,42 +101,10 @@ const allFields = {
     ...colorFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['sectionTitle', 'showTitle', 'productSource', 'productIds', 'collectionId', 'categoryId', 'maxProducts'],
-        },
-        {
-            label: 'Carousel',
-            fieldKeys: [
-                'slidesPerView', 'slidesPerViewTablet', 'slidesPerViewMobile', 'spaceBetween',
-                'effect', 'speed',
-                'navigation', 'navigationColor', 'pagination', 'paginationType', 'paginationColor',
-                'autoplay', 'autoplayDelay', 'pauseOnHover', 'loop', 'centeredSlides', 'freeMode',
-            ],
-        },
-        {
-            label: 'Card',
-            fieldKeys: ['showProductImage', 'showProductTitle', 'showProductPrice', 'showAddToCart', 'imageAspectRatio'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['backgroundColor', 'cardBackground', 'cardBorderRadius', 'cardShadow'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const ProductCarousel = {
     label: 'Product Carousel (Swiper)',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         sectionTitle: 'Popular Products', showTitle: true,
         productSource: 'featured', productIds: '', collectionId: '', categoryId: '',

@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { ContactInfoProps } from './contactinfo.types';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   buildLayoutClasses,
   defaultLayoutProps,
@@ -60,27 +59,6 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['showAddress', 'address', 'showPhone', 'phone', 'showEmail', 'email', 'showHours', 'hours', 'showIcons', 'layout'],
-    },
-    {
-      label: 'Typography & Color',
-      fieldKeys: ['textColor', 'iconColor', 'fontSize', 'gap'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 const GAP_CLASS: Record<string, string> = { sm: 'gap-2', md: 'gap-4', lg: 'gap-6' };
 const LAYOUT_CLASS: Record<string, string> = {
   stacked: 'flex flex-col', grid: 'grid grid-cols-1 md:grid-cols-2',
@@ -90,7 +68,7 @@ const LAYOUT_CLASS: Record<string, string> = {
 
 export const ContactInfo: ComponentConfig<ContactInfoProps> = {
   label: 'Contact Info',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     showAddress: true,
     address: '123 Main Street\nCity, State 12345\nCountry',

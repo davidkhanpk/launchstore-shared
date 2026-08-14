@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import type { FeaturedProductsProps, SharedProduct } from './featuredproducts.types';
-import { createAccordionFields } from '../../../design-system';
 
 const CARD_STYLE: Record<FeaturedProductsProps['cardStyle'], string> = {
   minimal: 'bg-transparent',
@@ -126,32 +125,11 @@ const allFields = {
   ...colorFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['sectionTitle', 'sectionSubtitle', 'showTitle', 'productSource', 'categoryId', 'productIds', 'showPrice', 'showAddToCart', 'buttonText'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['displayMode', 'productsPerRow', 'maxProducts', 'slidesPerView', 'slidesPerViewTablet', 'slidesPerViewMobile', 'spaceBetween', 'autoplay', 'autoplayDelay', 'loop', 'navigation', 'pagination', 'paginationStyle'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'textColor', 'cardStyle'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const FeaturedProducts: ComponentConfig<FeaturedProductsProps> = {
   label: 'Featured Products',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     sectionTitle: 'Featured Products',
     sectionSubtitle: 'Check out our most popular items',

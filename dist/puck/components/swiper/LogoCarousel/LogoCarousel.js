@@ -1,7 +1,7 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { SwiperSlide } from 'swiper/react';
 import { SwiperBase } from '../../shared/SwiperBase';
-import { createAccordionFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 const MOCK_LOGOS = [
     'https://via.placeholder.com/200x80?text=Brand+1', 'https://via.placeholder.com/200x80?text=Brand+2',
     'https://via.placeholder.com/200x80?text=Brand+3', 'https://via.placeholder.com/200x80?text=Brand+4',
@@ -53,37 +53,10 @@ const allFields = {
     ...colorFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['logoUrls', 'logosPerView', 'logosPerViewTablet', 'logosPerViewMobile', 'logoMaxHeight'],
-        },
-        {
-            label: 'Carousel',
-            fieldKeys: ['enableAutoplay', 'autoplaySpeed', 'freeMode', 'loop', 'spaceBetween'],
-        },
-        {
-            label: 'Appearance',
-            fieldKeys: ['grayscale', 'grayscaleHover', 'showBorder'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['backgroundColor', 'logoBackgroundColor', 'borderColor', 'borderRadius'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const LogoCarousel = {
     label: 'Logo Carousel (Swiper)',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         logoUrls: MOCK_LOGOS.join('\n'),
         logosPerView: 6, logosPerViewTablet: 4, logosPerViewMobile: 2,

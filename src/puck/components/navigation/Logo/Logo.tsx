@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { LogoProps } from './logo.types';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 // ── All flat fields ─────────────────────────────────────────────────────────
@@ -44,27 +43,9 @@ const allFields = {
   },
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Image',
-      defaultOpen: true,
-      fieldKeys: ['imageUrl', 'altText', 'linkTo', 'maxWidth', 'maxHeight'],
-    },
-    {
-      label: 'Store Name',
-      defaultOpen: true,
-      fieldKeys: ['showText', 'text', 'textPosition', 'textSize', 'textColor', 'textWeight'],
-    },
-  ],
-  allFields,
-});
-
 export const Logo: ComponentConfig<LogoProps> = {
   label: 'Logo',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     imageUrl: '',
     altText: 'Store Logo',

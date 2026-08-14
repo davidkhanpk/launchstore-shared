@@ -1,5 +1,4 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { createAccordionFields } from '../../../design-system';
 const MAX_WIDTH_CLASSES = {
     sm: 'max-w-screen-sm',
     md: 'max-w-screen-md',
@@ -63,29 +62,10 @@ const allFields = {
     ...contentFields,
     ...layoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['htmlContent', 'cssContent', 'sanitizeHTML'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: [
-                'useContainer', 'maxWidth',
-                'paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight',
-                'backgroundColor', 'backgroundImage',
-            ],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const CustomHTML = {
     label: 'Custom HTML',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         htmlContent: `<div class="custom-section">
   <h2>Custom HTML Section</h2>

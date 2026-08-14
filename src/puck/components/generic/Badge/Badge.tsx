@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { BadgeProps } from './badge.types';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   buildLayoutClasses,
   defaultLayoutProps,
@@ -59,32 +58,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['id', 'text', 'variant', 'size', 'rounded'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['customBgColor', 'customTextColor'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const Badge: ComponentConfig<BadgeProps> = {
   label: 'Badge',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     id: 'badge-1',
     text: 'Badge',

@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import type { StockIndicatorProps, StockIndicatorStyle, StockStatus } from './stockindicator.types';
 import { evaluateStock } from './stockindicator.types';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 const StockIcon = ({ status, size = 20 }: { status: StockStatus; size?: number }) => {
@@ -48,26 +47,9 @@ const allFields = {
   },
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['showIcon', 'showText', 'showQuantity', 'lowStockThreshold'],
-    },
-    {
-      label: 'Appearance',
-      fieldKeys: ['style'],
-    },
-  ],
-  allFields,
-});
-
 export const StockIndicator: ComponentConfig<StockIndicatorWithProduct> = {
   label: 'Stock Indicator',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     showIcon: true, showText: true, showQuantity: true,
     lowStockThreshold: 10, style: 'default',

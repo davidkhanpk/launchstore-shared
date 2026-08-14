@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { HeadingProps } from './heading.types';
 import {
-  createAccordionFields,
   sharedTypographyFields,
   sharedLayoutFields,
   buildTypographyClasses,
@@ -63,32 +62,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['text', 'level', 'animation', 'animationDelay'],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const Heading: ComponentConfig<HeadingProps> = {
   label: 'Heading',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     text: 'Your Heading Here',
     level: 'h2',

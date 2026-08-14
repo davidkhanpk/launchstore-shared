@@ -1,6 +1,5 @@
 'use client';
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { createAccordionFields } from '../../../design-system';
 /**
  * TrustBadges emoji icon dictionary (13 icons — see fields config below for
  * the canonical list). Drift decision: storefront had 13, frontend had 10
@@ -142,29 +141,10 @@ const allFields = {
     ...layoutFields,
     ...colorFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['title', 'subtitle', 'badges'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['layout', 'columns', 'alignment', 'spacing', 'showBorder'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['backgroundColor', 'textColor', 'borderRadius'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const TrustBadges = {
     label: 'Trust Badges',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         title: 'Why Shop With Us',
         subtitle: '',

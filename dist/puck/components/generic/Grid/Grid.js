@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { DropZone } from '@puckeditor/core';
-import { createAccordionFields, sharedLayoutFields, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, defaultLayoutProps, } from '../../../design-system';
 // ── Content fields (component-specific) ─────────────────────────────────────
 const contentFields = {
     id: { type: 'text', label: 'ID' },
@@ -26,21 +26,6 @@ const allFields = {
     ...contentFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['id', 'columns', 'tabletColumns', 'mobileColumns', 'gap'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 const GAP_CLASS = { none: 'gap-0', sm: 'gap-3', md: 'gap-6', lg: 'gap-8', xl: 'gap-12' };
 const MOBILE_CLASS = { '1': 'grid-cols-1', '2': 'grid-cols-2' };
 const TABLET_CLASS = { '1': 'md:grid-cols-1', '2': 'md:grid-cols-2', '3': 'md:grid-cols-3', '4': 'md:grid-cols-4' };
@@ -51,7 +36,7 @@ const DESKTOP_CLASS = {
 // ── Component ───────────────────────────────────────────────────────────────
 export const Grid = {
     label: 'Grid',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         id: 'grid-1',
         columns: '3',

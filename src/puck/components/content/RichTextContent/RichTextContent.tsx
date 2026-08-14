@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { RichTextContentProps } from './richtext.types';
 import {
-  createAccordionFields,
   sharedTypographyFields,
   sharedLayoutFields,
   sharedColorFields,
@@ -46,36 +45,11 @@ const allFields = {
   ...sharedColorFields,
 };
 
-// ── Accordion config ─────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['content', 'maxWidth'],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'borderRadius'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const RichTextContent: ComponentConfig<RichTextContentProps> = {
   label: 'Rich Text Content',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     content: '',
     maxWidth: 'max-w-3xl',

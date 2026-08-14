@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { VideoProps } from './video.types';
 import {
-  createAccordionFields,
   sharedTypographyFields,
   sharedLayoutFields,
   sharedColorFields,
@@ -93,34 +92,6 @@ const allFields = {
   ...sharedColorFields,
 };
 
-// ── Accordion config ─────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: [
-        'videoType', 'videoUrl', 'autoplay', 'loop', 'muted', 'controls',
-        'caption',
-      ],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['aspectRatio', 'maxWidth', 'alignment', 'marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'borderRadius', 'shadow'],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-    },
-  ],
-  allFields,
-});
-
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
 function extractYouTubeId(url: string): string | null {
@@ -137,7 +108,7 @@ function extractVimeoId(url: string): string | null {
 
 export const Video: ComponentConfig<VideoProps> = {
   label: 'Video',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     videoType: 'youtube',
     videoUrl: '',

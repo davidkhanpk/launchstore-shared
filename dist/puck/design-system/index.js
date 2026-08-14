@@ -8,6 +8,4 @@ export { defaultTypographyProps, defaultLayoutProps, defaultColorProps, defaultB
 export { buildTypographyClasses, buildLayoutClasses, buildColorClasses, } from './presets';
 // Color resolver (hex/token → CSS color — the only inline style usage)
 export { resolveColor } from './presets';
-// Accordion inspector widget
-export { createAccordionFields, } from './accordion-field';
 //# sourceMappingURL=index.js.map

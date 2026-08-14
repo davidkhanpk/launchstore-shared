@@ -5,7 +5,6 @@ import type {
   FormatBundlePrice, BundleAddItemsArg,
 } from './bundledproductdetail.types';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 // ── All flat fields ─────────────────────────────────────────────────────────
@@ -22,19 +21,6 @@ const allFields = {
   buttonText: { type: 'text' as const, label: 'Button Text' },
   bundleIdOverride: { type: 'text' as const, label: 'Bundle ID Override (optional)' },
 };
-
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['showSavingsBadge', 'showItemImages', 'buttonText', 'bundleIdOverride'],
-    },
-  ],
-  allFields,
-});
 
 const AlertSvg = ({ size = 20 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
@@ -75,7 +61,7 @@ export interface BundledProductDetailWithData extends BundledProductDetailProps 
 
 export const BundledProductDetail: ComponentConfig<BundledProductDetailWithData> = {
   label: 'Bundled Product Detail',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     showSavingsBadge: true, showItemImages: true,
     buttonText: 'Add Bundle to Cart', bundleIdOverride: '',

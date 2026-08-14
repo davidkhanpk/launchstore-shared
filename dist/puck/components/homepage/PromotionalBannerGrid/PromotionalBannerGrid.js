@@ -1,6 +1,5 @@
 'use client';
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { createAccordionFields } from '../../../design-system';
 const SPACING_CLASSES = {
     none: 'gap-0',
     sm: 'gap-2',
@@ -143,29 +142,10 @@ const allFields = {
     ...layoutFields,
     ...colorFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['title', 'subtitle', 'banners'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['layout', 'spacing', 'hoverEffect', 'minHeight'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['borderRadius'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const PromotionalBannerGrid = {
     label: 'Promotional Banner Grid',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         title: '',
         subtitle: '',

@@ -1,6 +1,5 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from 'react';
-import { createAccordionFields, } from '../../../design-system';
 // ── All flat fields ─────────────────────────────────────────────────────────
 const allFields = {
     showCount: {
@@ -12,22 +11,11 @@ const allFields = {
         options: [{ label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }],
     },
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Appearance',
-            defaultOpen: true,
-            fieldKeys: ['showCount', 'size'],
-        },
-    ],
-    allFields,
-});
 const StarSvg = ({ filled, size = 16 }) => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: filled ? 'currentColor' : 'none', stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: _jsx("polygon", { points: "12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" }) }));
 const SIZE_MAP = { sm: 14, md: 20, lg: 24 };
 export const ProductRating = {
     label: 'Product Rating',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: { showCount: true, size: 'md' },
     render: (rawProps) => {
         const { showCount = true, size = 'md', product, fetchReviews } = rawProps;

@@ -4,7 +4,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import type { LogoCarouselProps, LogoRadius } from './logocarousel.types';
 import { SwiperBase } from '../../shared/SwiperBase';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   buildLayoutClasses,
   defaultLayoutProps,
@@ -74,40 +73,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['logoUrls', 'logosPerView', 'logosPerViewTablet', 'logosPerViewMobile', 'logoMaxHeight'],
-    },
-    {
-      label: 'Carousel',
-      fieldKeys: ['enableAutoplay', 'autoplaySpeed', 'freeMode', 'loop', 'spaceBetween'],
-    },
-    {
-      label: 'Appearance',
-      fieldKeys: ['grayscale', 'grayscaleHover', 'showBorder'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'logoBackgroundColor', 'borderColor', 'borderRadius'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const LogoCarousel: ComponentConfig<LogoCarouselProps> = {
   label: 'Logo Carousel (Swiper)',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     logoUrls: MOCK_LOGOS.join('\n'),
     logosPerView: 6, logosPerViewTablet: 4, logosPerViewMobile: 2,

@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, buildColorClasses, } from '../../../design-system';
+import { buildColorClasses, } from '../../../design-system';
 const ArrowIcon = () => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 2, stroke: "currentColor", style: { width: '20px', height: '20px' }, children: _jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" }) }));
 const SIZE_MAP = {
     sm: { padding: '8px 16px', fontSize: '0.875rem' },
@@ -76,29 +76,10 @@ const allFields = {
     ...buttonColorFields,
     ...layoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Button Settings',
-            defaultOpen: true,
-            fieldKeys: ['text', 'url', 'openInNewTab', 'variant', 'size', 'fullWidth', 'showIcon', 'iconPosition'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['backgroundColor', 'textColor', 'borderColor', 'hoverBackgroundColor', 'hoverTextColor', 'borderRadius', 'shadow'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['textAlign', 'marginTop', 'marginBottom'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const Button = {
     label: 'Button',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         text: 'Click Me',
         url: '#',

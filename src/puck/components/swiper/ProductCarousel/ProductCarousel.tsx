@@ -6,7 +6,6 @@ import type {
 } from './productcarousel.types';
 import { SwiperBase } from '../../shared/SwiperBase';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   buildLayoutClasses,
   defaultLayoutProps,
@@ -146,45 +145,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['sectionTitle', 'showTitle', 'productSource', 'productIds', 'collectionId', 'categoryId', 'maxProducts'],
-    },
-    {
-      label: 'Carousel',
-      fieldKeys: [
-        'slidesPerView', 'slidesPerViewTablet', 'slidesPerViewMobile', 'spaceBetween',
-        'effect', 'speed',
-        'navigation', 'navigationColor', 'pagination', 'paginationType', 'paginationColor',
-        'autoplay', 'autoplayDelay', 'pauseOnHover', 'loop', 'centeredSlides', 'freeMode',
-      ],
-    },
-    {
-      label: 'Card',
-      fieldKeys: ['showProductImage', 'showProductTitle', 'showProductPrice', 'showAddToCart', 'imageAspectRatio'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'cardBackground', 'cardBorderRadius', 'cardShadow'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const ProductCarousel: ComponentConfig<ProductCarouselWithProducts> = {
   label: 'Product Carousel (Swiper)',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     sectionTitle: 'Popular Products', showTitle: true,
     productSource: 'featured', productIds: '', collectionId: '', categoryId: '',

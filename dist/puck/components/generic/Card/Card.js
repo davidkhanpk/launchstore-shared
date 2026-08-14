@@ -1,7 +1,7 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { DropZone } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 const SHADOW_CLASS = {
     none: 'shadow-none', sm: 'shadow-sm', md: 'shadow-md', lg: 'shadow-lg', xl: 'shadow-xl',
 };
@@ -36,30 +36,11 @@ const allFields = {
     ...colorFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['id', 'padding', 'shadow', 'border', 'rounded', 'hoverEffect'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['backgroundColor'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 const PAD_VALUE = { none: '0', sm: '12px', md: '24px', lg: '32px', xl: '48px' };
 // ── Component ───────────────────────────────────────────────────────────────
 export const Card = {
     label: 'Card',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         id: 'card-1',
         padding: 'lg',

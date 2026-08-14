@@ -1,7 +1,7 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { SwiperSlide } from 'swiper/react';
 import { SwiperBase } from '../../shared/SwiperBase';
-import { createAccordionFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 const HEIGHT = { sm: 'h-[400px]', md: 'h-[500px]', lg: 'h-[600px]', xl: 'h-[700px]', full: 'h-screen' };
 const CONTENT_ALIGN = { left: 'items-start text-left', center: 'items-center text-center', right: 'items-end text-right' };
 const MOCK_SLIDES = [
@@ -89,38 +89,10 @@ const allFields = {
     ...overlayFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['slides', 'slideHeight', 'contentWidth', 'contentPosition'],
-        },
-        {
-            label: 'Carousel',
-            fieldKeys: [
-                'effect', 'speed', 'loop',
-                'showNavigation', 'navigationColor', 'navigationPosition',
-                'showPagination', 'paginationType', 'paginationColor',
-                'enableAutoplay', 'autoplayDelay', 'pauseOnHover',
-            ],
-        },
-        {
-            label: 'Overlay',
-            fieldKeys: ['enableOverlay', 'overlayColor', 'overlayOpacity'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const ContentSlider = {
     label: 'Content Slider (Swiper)',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         slides: MOCK_SLIDES,
         slideHeight: 'lg', contentWidth: 'contained', contentPosition: 'center',

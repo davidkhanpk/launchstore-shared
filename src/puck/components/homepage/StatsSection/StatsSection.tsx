@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import type { ComponentConfig, Field } from '@puckeditor/core';
 import type { StatsSectionProps, StatsItem } from './statssection.types';
-import { createAccordionFields } from '../../../design-system';
 
 /** Emoji icon dictionary for StatsSection icons. */
 const ICON_EMOJI: Record<string, string> = {
@@ -160,32 +159,11 @@ const allFields = {
   ...colorFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['title', 'subtitle', 'stats'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['columns', 'alignment', 'spacing', 'showDividers'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'textColor', 'numberColor', 'borderRadius'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const StatsSection: ComponentConfig<StatsSectionProps> = {
   label: 'Stats Section',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     title: 'Our Impact',
     subtitle: 'Trusted by thousands',

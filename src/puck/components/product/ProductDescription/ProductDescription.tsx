@@ -4,7 +4,6 @@ import { resolveColor } from '../../../../theme/resolveColor';
 import type { ProductDescriptionProps } from './productdescription.types';
 import type { ProductData } from '../ProductData';
 import {
-  createAccordionFields,
   sharedTypographyFields,
   sharedLayoutFields,
   buildTypographyClasses,
@@ -43,27 +42,6 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['maxLines'],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['fontSize', 'fontWeight', 'textColor', 'lineHeight'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom'],
-    },
-  ],
-  allFields,
-});
-
 export interface ProductDescriptionWithProduct extends ProductDescriptionProps {
   product?: ProductData | null;
 }
@@ -72,7 +50,7 @@ export interface ProductDescriptionWithProduct extends ProductDescriptionProps {
 
 export const ProductDescription: ComponentConfig<ProductDescriptionWithProduct> = {
   label: 'Product Description',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     maxLines: 0,
     ...defaultTypographyProps,

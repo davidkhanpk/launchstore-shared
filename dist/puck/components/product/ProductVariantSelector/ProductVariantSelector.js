@@ -1,6 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from 'react';
-import { createAccordionFields, } from '../../../design-system';
 const MARGIN_OPTS = (prefix) => [
     { label: 'None', value: `${prefix}-0` },
     { label: 'Small', value: `${prefix}-2` },
@@ -33,21 +32,6 @@ const allFields = {
     paddingX: { type: 'select', label: 'Padding Horizontal', options: MARGIN_OPTS('px') },
     paddingY: { type: 'select', label: 'Padding Vertical', options: MARGIN_OPTS('py') },
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Appearance',
-            defaultOpen: true,
-            fieldKeys: ['selectorStyle', 'showLabels', 'showStock'],
-        },
-        {
-            label: 'Spacing',
-            fieldKeys: ['marginTop', 'marginBottom', 'marginLeft', 'marginRight', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 const CheckSvg = ({ size = 16 }) => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: _jsx("polyline", { points: "20 6 9 17 4 12" }) }));
 const renderOptionRow = (option, selectorStyle, showLabels, selected, onChange) => {
     if (selectorStyle === 'dropdown') {
@@ -68,7 +52,7 @@ const renderOptionRow = (option, selectorStyle, showLabels, selected, onChange) 
 };
 export const ProductVariantSelector = {
     label: 'Product Variant Selector',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         selectorStyle: 'buttons', showLabels: true, showStock: true,
         marginTop: 'mt-4', marginBottom: 'mb-4', marginLeft: 'ml-0', marginRight: 'mr-0',

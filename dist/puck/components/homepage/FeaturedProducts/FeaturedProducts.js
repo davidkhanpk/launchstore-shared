@@ -1,7 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { createAccordionFields } from '../../../design-system';
 const CARD_STYLE = {
     minimal: 'bg-transparent',
     bordered: 'border border-gray-200 bg-white',
@@ -100,29 +99,10 @@ const allFields = {
     ...layoutFields,
     ...colorFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['sectionTitle', 'sectionSubtitle', 'showTitle', 'productSource', 'categoryId', 'productIds', 'showPrice', 'showAddToCart', 'buttonText'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['displayMode', 'productsPerRow', 'maxProducts', 'slidesPerView', 'slidesPerViewTablet', 'slidesPerViewMobile', 'spaceBetween', 'autoplay', 'autoplayDelay', 'loop', 'navigation', 'pagination', 'paginationStyle'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['backgroundColor', 'textColor', 'cardStyle'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const FeaturedProducts = {
     label: 'Featured Products',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         sectionTitle: 'Featured Products',
         sectionSubtitle: 'Check out our most popular items',

@@ -1,6 +1,6 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { DropZone } from '@puckeditor/core';
-import { createAccordionFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 // ── Component-specific fields ───────────────────────────────────────────────
 const contentFields = {
     columns: {
@@ -51,21 +51,6 @@ const allFields = {
     ...contentFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Columns',
-            defaultOpen: true,
-            fieldKeys: ['columns', 'layout', 'gap', 'mobileStack', 'alignItems'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 // ── Grid template resolver ──────────────────────────────────────────────────
 // Desktop column template per layout/count. Mobile stacks to 1 col when
 // mobileStack is true (media-query injected via inline <style>).
@@ -104,7 +89,7 @@ function desktopTemplate(columns, layout) {
 // ── Component ───────────────────────────────────────────────────────────────
 export const Columns = {
     label: 'Columns',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         columns: '2',
         layout: '50-50',

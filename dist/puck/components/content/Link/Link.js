@@ -1,6 +1,6 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedTypographyFields, sharedLayoutFields, buildTypographyClasses, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
+import { sharedTypographyFields, sharedLayoutFields, buildTypographyClasses, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
 // ── Content fields (component-specific) ─────────────────────────────────────
 const contentFields = {
     text: { type: 'text', label: 'Link Text' },
@@ -33,25 +33,6 @@ const allFields = {
     ...typographyFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['text', 'href', 'target', 'underline'],
-        },
-        {
-            label: 'Typography',
-            fieldKeys: ['fontSize', 'fontWeight', 'textColor'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom'],
-        },
-    ],
-    allFields,
-});
 // ── Underline resolver ──────────────────────────────────────────────────────
 function resolveTextDecoration(underline) {
     switch (underline) {
@@ -67,7 +48,7 @@ function resolveTextDecoration(underline) {
 // ── Component ───────────────────────────────────────────────────────────────
 export const Link = {
     label: 'Link',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         id: 'link-1',
         text: 'Click here',

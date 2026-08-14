@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { FooterProps, FooterMenuConfig, SocialLink } from './footer.types';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 // ── Flat field definitions (referenced by key inside the accordion) ─────────
@@ -101,43 +100,6 @@ const footerFields = {
   paddingBottom: { type: 'text', label: 'Padding Bottom' },
 } as Record<string, any>;
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Footer',
-      defaultOpen: true,
-      fieldKeys: ['columns', 'backgroundColor', 'textColor', 'linkColor', 'linkHoverColor'],
-    },
-    {
-      label: 'Menus',
-      fieldKeys: ['menuConfigs'],
-    },
-    {
-      label: 'Newsletter',
-      fieldKeys: ['newsletter'],
-    },
-    {
-      label: 'Social',
-      fieldKeys: ['social'],
-    },
-    {
-      label: 'Payment Icons',
-      fieldKeys: ['paymentIcons'],
-    },
-    {
-      label: 'Bottom Bar',
-      fieldKeys: ['bottomBar'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['paddingTop', 'paddingBottom'],
-    },
-  ],
-  allFields: footerFields,
-});
-
 const Fb = () => (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9V15h-2.5v-3h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 3h-2.3v6.9A10 10 0 0 0 22 12z" /></svg>);
 const Ig = () => (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" /><path d="M16 11.4A4 4 0 1 1 12.6 8 4 4 0 0 1 16 11.4z" /><line x1="17.5" y1="6.5" x2="17.5" y2="6.5" /></svg>);
 const Tw = () => (<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M22 4.01c-.7.3-1.5.6-2.4.7a4 4 0 0 0 1.8-2.2c-.8.5-1.7.8-2.6 1a4 4 0 0 0-7 3.7A11.4 11.4 0 0 1 3.4 3.6a4 4 0 0 0 1.2 5.3c-.7 0-1.3-.2-1.8-.5a4 4 0 0 0 3.2 4 4 4 0 0 1-1.8.1 4 4 0 0 0 3.7 2.8A8 8 0 0 1 1 17.4 11.4 11.4 0 0 0 7.2 19c7.5 0 11.6-6.2 11.6-11.6v-.5A8 8 0 0 0 22 4z" /></svg>);
@@ -157,7 +119,7 @@ const gridMap: Record<string, string> = {
 
 export const Footer: ComponentConfig<FooterProps> = {
   label: 'Footer',
-  fields: accordionFields as any,
+  fields: footerFields as any,
   defaultProps: {
     columns: '4',
     backgroundColor: '#1f2937',

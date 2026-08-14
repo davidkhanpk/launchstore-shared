@@ -1,7 +1,7 @@
 import { jsxs as _jsxs, jsx as _jsx } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
 import { ICONS } from './icons';
-import { createAccordionFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 // Curated icon name list (used by the icon picker + re-exported for consumers)
 export const ICON_NAMES = [
     'HeartIcon', 'StarIcon', 'BookmarkIcon', 'CheckIcon', 'XMarkIcon',
@@ -51,21 +51,6 @@ const allFields = {
     ...contentFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['id', 'iconName', 'size', 'textColor', 'strokeWidth', 'alignment'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 const SIZE_PX = { xs: 16, sm: 20, md: 24, lg: 32, xl: 40, '2xl': 48 };
 const ALIGN_MARGIN = {
     left: 'mr-auto', center: 'mx-auto', right: 'ml-auto',
@@ -73,7 +58,7 @@ const ALIGN_MARGIN = {
 // ── Component ───────────────────────────────────────────────────────────────
 export const Icon = {
     label: 'Icon',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         id: 'icon-1',
         iconName: 'HeartIcon',

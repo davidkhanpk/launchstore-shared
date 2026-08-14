@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import type { QuantitySelectorProps, QuantitySelectorSize, QuantitySelectorStyle, SetQuantity } from './quantityselector.types';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 const MARGIN_OPTS = (prefix: string) => [
@@ -40,27 +39,6 @@ const allFields = {
   paddingY: { type: 'select' as const, label: 'Padding Vertical', options: MARGIN_OPTS('py') },
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['showLabel', 'labelText', 'minQuantity', 'maxQuantity', 'defaultQuantity'],
-    },
-    {
-      label: 'Appearance',
-      fieldKeys: ['size', 'style'],
-    },
-    {
-      label: 'Spacing',
-      fieldKeys: ['marginTop', 'marginBottom', 'marginLeft', 'marginRight', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 const MinusSvg = ({ size = 16 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12" /></svg>
 );
@@ -85,7 +63,7 @@ export interface QuantitySelectorWithState extends QuantitySelectorProps {
 
 export const QuantitySelector: ComponentConfig<QuantitySelectorWithState> = {
   label: 'Quantity Selector',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     showLabel: true, labelText: 'Quantity',
     minQuantity: 1, maxQuantity: 99, defaultQuantity: 1,

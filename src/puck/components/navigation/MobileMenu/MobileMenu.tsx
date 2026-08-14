@@ -4,7 +4,6 @@ import type { MobileMenuProps, MobileMenuThemeResolved, SharedMobileMenuItem } f
 import { resolveColor } from '../../../../theme/resolveColor';
 import { MobileMenuItem } from './MobileMenuItem';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 // ── All flat fields ─────────────────────────────────────────────────────────
@@ -21,19 +20,6 @@ const allFields = {
     options: [{ label: 'Left', value: 'left' }, { label: 'Right', value: 'right' }],
   },
 };
-
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Drawer',
-      defaultOpen: true,
-      fieldKeys: ['drawerMaxWidth', 'animationDirection'],
-    },
-  ],
-  allFields,
-});
 
 const X_SVG = ({ size = 24 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -75,7 +61,7 @@ const filterTopLevel = (items: SharedMobileMenuItem[]): SharedMobileMenuItem[] =
 
 export const MobileMenu: ComponentConfig<MobileMenuProps> = {
   label: 'Mobile Menu',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     items: [],
     theme: {},

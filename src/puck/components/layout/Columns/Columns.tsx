@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { DropZone } from '@puckeditor/core';
 import type { ColumnsProps } from './columns.types';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   buildLayoutClasses,
   defaultLayoutProps,
@@ -63,23 +62,6 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Columns',
-      defaultOpen: true,
-      fieldKeys: ['columns', 'layout', 'gap', 'mobileStack', 'alignItems'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 // ── Grid template resolver ──────────────────────────────────────────────────
 // Desktop column template per layout/count. Mobile stacks to 1 col when
 // mobileStack is true (media-query injected via inline <style>).
@@ -121,7 +103,7 @@ function desktopTemplate(columns: string, layout?: string): string {
 
 export const Columns: ComponentConfig<ColumnsProps> = {
   label: 'Columns',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     columns: '2',
     layout: '50-50',

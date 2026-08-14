@@ -22,7 +22,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import type { TestimonialsProps } from './testimonials.types';
-import { createAccordionFields } from '../../../design-system';
 
 const RADIUS_CLASSES: Record<TestimonialsProps['borderRadius'], string> = {
   none: 'rounded-none',
@@ -191,32 +190,11 @@ const allFields = {
   ...colorFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['sectionTitle', 'sectionSubtitle', 'showTitle', 'layout', 'maxTestimonials', 'showAvatar', 'showName', 'showRole', 'showRating', 'showDate'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['displayMode', 'columns', 'slidesPerView', 'slidesPerViewTablet', 'slidesPerViewMobile', 'spaceBetween', 'autoplay', 'autoplayDelay', 'loop', 'navigation', 'pagination', 'effect'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'textColor', 'cardBackground', 'accentColor', 'borderRadius'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const Testimonials: ComponentConfig<TestimonialsProps> = {
   label: 'Testimonials',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     sectionTitle: 'What Our Customers Say',
     sectionSubtitle: 'Real reviews from real customers',

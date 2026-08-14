@@ -1,5 +1,4 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { createAccordionFields } from '../../../design-system';
 const RADIUS_CLASSES = {
     none: 'rounded-none',
     sm: 'rounded-sm',
@@ -91,33 +90,10 @@ const allFields = {
     ...layoutFields,
     ...styleFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['title', 'subtitle', 'description', 'placeholderText', 'buttonText', 'showPrivacyText', 'privacyText'],
-        },
-        {
-            label: 'Email Form',
-            fieldKeys: ['collectName', 'nameRequired', 'successMessage'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['layout', 'showImage', 'imageUrl'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['backgroundColor', 'textColor', 'inputBackground', 'inputBorder', 'buttonBackground', 'buttonTextColor', 'borderRadius'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const Newsletter = {
     label: 'Newsletter',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         title: 'Join Our Newsletter',
         subtitle: 'Stay Updated',

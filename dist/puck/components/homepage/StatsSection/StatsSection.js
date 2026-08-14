@@ -1,7 +1,6 @@
 'use client';
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useRef } from 'react';
-import { createAccordionFields } from '../../../design-system';
 /** Emoji icon dictionary for StatsSection icons. */
 const ICON_EMOJI = {
     people: '👥', star: '⭐', trophy: '🏆', briefcase: '💼',
@@ -118,29 +117,10 @@ const allFields = {
     ...layoutFields,
     ...colorFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['title', 'subtitle', 'stats'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['columns', 'alignment', 'spacing', 'showDividers'],
-        },
-        {
-            label: 'Colors',
-            fieldKeys: ['backgroundColor', 'textColor', 'numberColor', 'borderRadius'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const StatsSection = {
     label: 'Stats Section',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         title: 'Our Impact',
         subtitle: 'Trusted by thousands',

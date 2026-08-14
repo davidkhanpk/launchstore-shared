@@ -9,7 +9,6 @@ import type {
 import type { ProductDataImage } from '../../product/ProductData';
 import { SwiperBase } from '../../shared/SwiperBase';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   buildLayoutClasses,
   defaultLayoutProps,
@@ -124,44 +123,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['containerWidth', 'customWidth', 'maxHeight', 'layout', 'mainImageAspectRatio'],
-    },
-    {
-      label: 'Thumbnails',
-      fieldKeys: ['showThumbnails', 'thumbnailPosition', 'thumbnailsPerView', 'thumbnailSpacing'],
-    },
-    {
-      label: 'Carousel',
-      fieldKeys: [
-        'showNavigation', 'navigationColor', 'navigationSize',
-        'showPagination', 'paginationType', 'paginationColor',
-        'enableZoom', 'maxZoomScale', 'loop', 'autoHeight', 'spaceBetween',
-      ],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['borderRadius', 'showBorder', 'borderColor', 'backgroundColor'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const ImageGallery: ComponentConfig<ImageGalleryWithImages> = {
   label: 'Image Gallery (Swiper)',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     containerWidth: 'large', customWidth: 800, maxHeight: 500,
     layout: 'thumbnails', mainImageAspectRatio: 'landscape',

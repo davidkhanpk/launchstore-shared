@@ -5,7 +5,6 @@ import type { RelatedProductsProps } from './relatedproducts.types';
 import { ProductGridRenderer } from './productgrid';
 import type { CarouselProduct } from '../../swiper/ProductCarousel';
 import {
-  createAccordionFields,
   sharedTypographyFields,
   sharedLayoutFields,
   defaultTypographyProps,
@@ -67,36 +66,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: [
-        'showTitle', 'title', 'showTagline', 'tagline',
-        'relatedBy', 'displayStyle', 'maxProducts',
-        'productCardTemplateId', 'gridColumns', 'containerPadding',
-      ],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const RelatedProducts: ComponentConfig<RelatedProductsWithData> = {
   label: 'Related Products',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     showTitle: true,
     title: 'You Might Also Like',

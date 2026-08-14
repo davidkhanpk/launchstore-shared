@@ -3,6 +3,4 @@ export { sharedTypographyFields, sharedLayoutFields, sharedColorFields, sharedBo
 export { defaultTypographyProps, defaultLayoutProps, defaultColorProps, defaultBorderProps, } from './presets';
 export { buildTypographyClasses, buildLayoutClasses, buildColorClasses, } from './presets';
 export { resolveColor } from './presets';
-export { createAccordionFields, } from './accordion-field';
-export type { AccordionGroup, AccordionConfig } from './accordion-field';
 //# sourceMappingURL=index.d.ts.map

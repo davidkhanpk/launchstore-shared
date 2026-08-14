@@ -1,7 +1,7 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { DropZone } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
+import { sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
 // ── Component-specific fields ───────────────────────────────────────────────
 const contentFields = {
     justifyContent: {
@@ -56,25 +56,6 @@ const allFields = {
     ...sharedLayoutFields,
     ...sharedColorFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Flex Row',
-            defaultOpen: true,
-            fieldKeys: ['justifyContent', 'alignItems', 'gap', 'wrap', 'fullWidth', 'maxWidth'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-        {
-            label: 'Color',
-            fieldKeys: ['backgroundColor', 'borderRadius'],
-        },
-    ],
-    allFields,
-});
 // ── Mappers ─────────────────────────────────────────────────────────────────
 const JUSTIFY_MAP = {
     start: 'flex-start', center: 'center', end: 'flex-end',
@@ -96,7 +77,7 @@ const GAP_CLASS = {
 // ── Component ───────────────────────────────────────────────────────────────
 export const FlexRow = {
     label: 'Flex Row',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         justifyContent: 'space-between',
         alignItems: 'center',

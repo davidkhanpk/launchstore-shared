@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import type { ProductBreadcrumbsProps, ProductBreadcrumbsSeparator, ProductBreadcrumbsTransform } from './productbreadcrumbs.types';
 import type { ProductData } from '../ProductData';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 const HomeSvg = ({ size = 16 }: { size?: number }) => (
@@ -56,22 +55,9 @@ const allFields = {
   },
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Appearance',
-      defaultOpen: true,
-      fieldKeys: ['showHomeIcon', 'separator', 'textTransform'],
-    },
-  ],
-  allFields,
-});
-
 export const ProductBreadcrumbs: ComponentConfig<ProductBreadcrumbsWithProduct> = {
   label: 'Product Breadcrumbs',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: { showHomeIcon: true, separator: 'arrow', textTransform: 'none' } as ProductBreadcrumbsProps,
   render: (rawProps: any) => {
     const { showHomeIcon, separator, textTransform, product } = rawProps as ProductBreadcrumbsWithProduct;

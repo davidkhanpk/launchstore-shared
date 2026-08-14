@@ -5,7 +5,6 @@ import type {
   ProductCardLayout,
 } from './productcard.types';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
@@ -122,47 +121,6 @@ const allFields = {
   productId: { type: 'text' as const, label: 'Product ID (optional)' },
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Source',
-      defaultOpen: true,
-      fieldKeys: ['productId'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['layout', 'enableSwiper'],
-    },
-    {
-      label: 'Image',
-      fieldKeys: ['aspectRatio', 'borderRadius', 'showShadow', 'hoverZoom'],
-    },
-    {
-      label: 'Title',
-      fieldKeys: ['showTitle', 'titleSize', 'titleWeight', 'titleAlign'],
-    },
-    {
-      label: 'Price',
-      fieldKeys: ['showPrice', 'priceSize', 'priceColor', 'showCompareAtPrice', 'showSavingsBadge'],
-    },
-    {
-      label: 'Badges',
-      fieldKeys: ['showBadges', 'showSaleBadge', 'showNewBadge', 'showLowStockBadge', 'badgePosition'],
-    },
-    {
-      label: 'Add to Cart Button',
-      fieldKeys: ['showAddToCart', 'buttonText', 'buttonStyle', 'buttonSize', 'showCartIcon'],
-    },
-    {
-      label: 'Card Appearance',
-      fieldKeys: ['cardRadius', 'cardBorder', 'cardShadow', 'cardBackground', 'accentColor', 'fontFamily'],
-    },
-  ],
-  allFields,
-});
-
 const CartSvg = ({ size = 16 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" /></svg>
 );
@@ -263,7 +221,7 @@ export interface ProductCardWithRender extends ProductCardProps {
 
 export const ProductCard: ComponentConfig<ProductCardWithRender> = {
   label: 'Product Card',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     layout: 'vertical', enableSwiper: true, aspectRatio: 'square',
     borderRadius: 'md', showShadow: true, hoverZoom: true,

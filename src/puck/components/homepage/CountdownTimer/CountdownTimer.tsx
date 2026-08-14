@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import type { CountdownTimerProps } from './countdowntimer.types';
-import { createAccordionFields } from '../../../design-system';
 
 const SPACING_CLASSES: Record<CountdownTimerProps['spacing'], string> = {
   compact: 'py-6 px-4',
@@ -160,32 +159,11 @@ const allFields = {
   ...colorFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['title', 'subtitle', 'endDate', 'timerStyle', 'showDays', 'showHours', 'showMinutes', 'showSeconds', 'showCTA', 'ctaText', 'ctaLink'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['spacing', 'mode'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'textColor', 'timerColor', 'accentColor'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const CountdownTimer: ComponentConfig<CountdownTimerProps> = {
   label: 'Countdown Timer',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     title: 'Limited Time Offer',
     subtitle: 'Sale ends soon',

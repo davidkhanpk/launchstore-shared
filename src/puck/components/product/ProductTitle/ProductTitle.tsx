@@ -4,7 +4,6 @@ import { resolveColor } from '../../../../theme/resolveColor';
 import type { ProductTitleProps, ProductTitleTag } from './producttitle.types';
 import type { ProductData } from '../ProductData';
 import {
-  createAccordionFields,
   sharedTypographyFields,
   sharedLayoutFields,
   buildTypographyClasses,
@@ -46,27 +45,6 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['tag', 'level'],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom'],
-    },
-  ],
-  allFields,
-});
-
 export interface ProductTitleWithProduct extends ProductTitleProps {
   /** Injected at render-time by the consumer wrapper. */
   product?: ProductData | null;
@@ -76,7 +54,7 @@ export interface ProductTitleWithProduct extends ProductTitleProps {
 
 export const ProductTitle: ComponentConfig<ProductTitleWithProduct> = {
   label: 'Product Title',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     tag: 'h1',
     level: 'h1',

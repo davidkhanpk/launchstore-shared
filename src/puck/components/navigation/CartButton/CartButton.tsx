@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import type { CartButtonProps, CartButtonIconSize, CartButtonStyle, CartButtonBadgePosition } from './cartbutton.types';
 import { resolveColor } from '../../../../theme/resolveColor';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 const CartSvg = ({ size }: { size: number }) => (
@@ -56,30 +55,9 @@ const allFields = {
   badgeTextColor: { type: 'text' as const, label: 'Badge Text Color (hex or theme token)' },
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['showLabel', 'label', 'showBadge', 'badgePosition'],
-    },
-    {
-      label: 'Appearance',
-      fieldKeys: ['iconSize', 'style'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['iconColor', 'hoverColor', 'badgeBackgroundColor', 'badgeTextColor'],
-    },
-  ],
-  allFields,
-});
-
 export const CartButton: ComponentConfig<CartButtonProps> = {
   label: 'Cart Button',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     showLabel: false, label: 'Cart', showBadge: true,
     badgePosition: 'top-right', iconSize: 'md',

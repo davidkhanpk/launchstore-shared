@@ -6,7 +6,6 @@ import type {
 } from './productreviews.types';
 import type { ProductData } from '../ProductData';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 // ── All flat fields ─────────────────────────────────────────────────────────
@@ -31,23 +30,6 @@ const allFields = {
   },
   reviewsPerPage: { type: 'number' as const, label: 'Reviews Per Page' },
 };
-
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Appearance',
-      defaultOpen: true,
-      fieldKeys: ['showRatingsSummary', 'showVerifiedBadge'],
-    },
-    {
-      label: 'Reviews',
-      fieldKeys: ['sortBy', 'reviewsPerPage'],
-    },
-  ],
-  allFields,
-});
 
 // ── Inline SVG icons ─────────────────────────────────────────────────────────
 const StarSvg = ({ size = 20, filled }: { size?: number; filled?: boolean }) => (
@@ -102,7 +84,7 @@ export interface ProductReviewsWithData extends ProductReviewsProps {
 
 export const ProductReviews: ComponentConfig<ProductReviewsWithData> = {
   label: 'Product Reviews',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     showRatingsSummary: true, showVerifiedBadge: true,
     sortBy: 'recent', reviewsPerPage: 5,

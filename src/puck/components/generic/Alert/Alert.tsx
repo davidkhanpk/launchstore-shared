@@ -2,7 +2,6 @@ import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import type { AlertProps } from './alert.types';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   buildLayoutClasses,
   defaultLayoutProps,
@@ -44,28 +43,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['id', 'type', 'title', 'message', 'showIcon', 'dismissible'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const Alert: ComponentConfig<AlertProps> = {
   label: 'Alert',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     id: 'alert-1',
     type: 'info',

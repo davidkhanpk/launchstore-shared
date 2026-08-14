@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import type { AccordionProps } from './accordion.types';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   buildLayoutClasses,
   defaultLayoutProps,
@@ -41,28 +40,11 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const inspectorFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: ['id', 'items', 'allowMultiple', 'bordered', 'rounded'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const Accordion: ComponentConfig<AccordionProps> = {
   label: 'Accordion',
-  fields: inspectorFields as any,
+  fields: allFields as any,
   defaultProps: {
     id: 'accordion-1',
     items: [

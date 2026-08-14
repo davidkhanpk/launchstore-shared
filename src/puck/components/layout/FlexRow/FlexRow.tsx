@@ -4,7 +4,6 @@ import { DropZone } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { FlexRowProps } from './flexrow.types';
 import {
-  createAccordionFields,
   sharedLayoutFields,
   sharedColorFields,
   buildLayoutClasses,
@@ -71,27 +70,6 @@ const allFields = {
   ...sharedColorFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Flex Row',
-      defaultOpen: true,
-      fieldKeys: ['justifyContent', 'alignItems', 'gap', 'wrap', 'fullWidth', 'maxWidth'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-    {
-      label: 'Color',
-      fieldKeys: ['backgroundColor', 'borderRadius'],
-    },
-  ],
-  allFields,
-});
-
 // ── Mappers ─────────────────────────────────────────────────────────────────
 
 const JUSTIFY_MAP: Record<string, string> = {
@@ -117,7 +95,7 @@ const GAP_CLASS: Record<string, string> = {
 
 export const FlexRow: ComponentConfig<FlexRowProps> = {
   label: 'Flex Row',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     justifyContent: 'space-between',
     alignItems: 'center',

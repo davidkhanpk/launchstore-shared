@@ -9,7 +9,7 @@ export type { OrderTotalsProps, OrderTotalsWithData } from './OrderTotals';
 export { PaymentMethod } from './PaymentMethod';
 export type { PaymentMethodProps, PaymentMethodWithData } from './PaymentMethod';
 export { ShippingAddress } from './ShippingAddress';
-export type { ShippingAddressProps, ShippingAddressWithData } from './ShippingAddress';
+export type { ShippingAddressProps, ShippingAddressWithData, ShippingAddressValue } from './ShippingAddress';
 export { ShippingMethod } from './ShippingMethod';
 export type { ShippingMethodProps, ShippingMethodWithData } from './ShippingMethod';
 

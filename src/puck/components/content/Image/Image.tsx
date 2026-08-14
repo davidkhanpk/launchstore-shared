@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { ImageProps } from './image.types';
 import {
-  createAccordionFields,
   sharedTypographyFields,
   sharedLayoutFields,
   sharedColorFields,
@@ -148,43 +147,11 @@ const allFields = {
   ...sharedColorFields,
 };
 
-// ── Accordion config ─────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: [
-        'src', 'alt', 'aspectRatio', 'objectFit', 'width', 'customWidth',
-        'linkUrl', 'openInNewTab',
-      ],
-    },
-    {
-      label: 'Caption',
-      fieldKeys: ['showCaption', 'caption', 'captionPosition', 'captionAlign'],
-    },
-    {
-      label: 'Typography',
-      fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['alignment', 'marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-    },
-    {
-      label: 'Colors',
-      fieldKeys: ['backgroundColor', 'borderRadius', 'shadow', 'showBorder', 'borderColor', 'borderWidth', 'hoverEffect'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const Image: ComponentConfig<ImageProps> = {
   label: 'Image',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     src: 'https://via.placeholder.com/800x600',
     alt: 'Image description',

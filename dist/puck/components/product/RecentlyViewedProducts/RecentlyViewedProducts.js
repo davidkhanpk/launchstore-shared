@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { ProductGridRenderer } from '../RelatedProducts/productgrid';
-import { createAccordionFields, sharedTypographyFields, sharedLayoutFields, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
+import { sharedTypographyFields, sharedLayoutFields, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
 // ── Content fields (component-specific) ─────────────────────────────────────
 const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
 const contentFields = {
@@ -25,29 +25,10 @@ const allFields = {
     ...sharedTypographyFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['showTitle', 'title', 'displayStyle', 'maxProducts', 'containerPadding'],
-        },
-        {
-            label: 'Typography',
-            fieldKeys: ['fontSize', 'fontWeight', 'textAlign', 'textColor', 'lineHeight'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const RecentlyViewedProducts = {
     label: 'Recently Viewed Products',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         showTitle: true,
         title: 'Recently Viewed',

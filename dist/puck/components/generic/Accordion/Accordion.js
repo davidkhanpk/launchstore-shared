@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState } from 'react';
-import { createAccordionFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 const ROUND_CLASS = { none: 'rounded-none', sm: 'rounded-sm', md: 'rounded-md', lg: 'rounded-lg' };
 const Chevron = ({ open }) => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", className: `w-5 h-5 transition-transform ${open ? 'transform rotate-180' : ''}`, children: _jsx("polyline", { points: "6 9 12 15 18 9" }) }));
 // ── Content fields (component-specific) ─────────────────────────────────────
@@ -24,25 +24,10 @@ const allFields = {
     ...contentFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const inspectorFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['id', 'items', 'allowMultiple', 'bordered', 'rounded'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const Accordion = {
     label: 'Accordion',
-    fields: inspectorFields,
+    fields: allFields,
     defaultProps: {
         id: 'accordion-1',
         items: [

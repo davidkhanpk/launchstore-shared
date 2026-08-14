@@ -1,6 +1,6 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedTypographyFields, sharedLayoutFields, buildTypographyClasses, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
+import { sharedTypographyFields, sharedLayoutFields, buildTypographyClasses, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
 const PLACEHOLDER = (_jsxs(_Fragment, { children: [_jsx("p", { children: "Product description will appear here. This could be a detailed explanation of the product features, materials, sizing information, and care instructions." }), _jsx("p", { style: { marginTop: '8px' }, children: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." })] }));
 // ── Content fields (component-specific) ─────────────────────────────────────
 const contentFields = {
@@ -19,29 +19,10 @@ const allFields = {
     ...typographyFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['maxLines'],
-        },
-        {
-            label: 'Typography',
-            fieldKeys: ['fontSize', 'fontWeight', 'textColor', 'lineHeight'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const ProductDescription = {
     label: 'Product Description',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         maxLines: 0,
         ...defaultTypographyProps,

@@ -8,7 +8,6 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import type { HeroSectionProps } from './hero.types';
-import { createAccordionFields } from '../../../design-system';
 
 const HEIGHT_CLASSES: Record<HeroSectionProps['height'], string> = {
   sm: 'h-[400px]',
@@ -138,37 +137,11 @@ const allFields = {
   ...styleFields,
 };
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Content',
-      defaultOpen: true,
-      fieldKeys: [
-        'title', 'subtitle', 'description',
-        'showPrimaryButton', 'primaryButtonText', 'primaryButtonLink',
-        'showSecondaryButton', 'secondaryButtonText', 'secondaryButtonLink',
-        'showImage', 'imageUrl', 'imagePosition', 'imageAlt',
-      ],
-    },
-    {
-      label: 'Layout',
-      fieldKeys: ['height', 'contentAlignment', 'verticalAlignment'],
-    },
-    {
-      label: 'Style',
-      fieldKeys: ['textColor', 'overlayOpacity', 'backgroundColor', 'backgroundGradient', 'gradientFrom', 'gradientTo'],
-    },
-  ],
-  allFields,
-});
-
 // ── Component ───────────────────────────────────────────────────────────────
 
 export const HeroSection: ComponentConfig<HeroSectionProps> = {
   label: 'Hero Section',
-  fields: accordionFields as any,
+  fields: allFields as any,
   defaultProps: {
     title: 'Welcome to Our Store',
     subtitle: 'Discover Amazing Products',

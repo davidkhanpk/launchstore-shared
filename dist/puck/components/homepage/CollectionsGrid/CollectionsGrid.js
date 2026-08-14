@@ -1,6 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, } from '../../../design-system';
 // ── Flat field definitions (referenced by key inside the accordion) ─────────
 const collectionsGridFields = {
     sectionTitle: { type: 'text', label: 'Section Title' },
@@ -69,33 +68,6 @@ const collectionsGridFields = {
         defaultItemProps: { id: '' },
     },
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Section',
-            defaultOpen: true,
-            fieldKeys: ['sectionTitle', 'sectionSubtitle', 'showTitle'],
-        },
-        {
-            label: 'Grid',
-            fieldKeys: ['columns', 'columnsTablet', 'columnsMobile', 'gap'],
-        },
-        {
-            label: 'Collection Display',
-            fieldKeys: ['showCollectionImage', 'showCollectionTitle', 'showProductCount', 'showDescription', 'imageAspectRatio'],
-        },
-        {
-            label: 'Styling',
-            fieldKeys: ['backgroundColor', 'textColor', 'cardStyle', 'borderRadius', 'hoverEffect'],
-        },
-        {
-            label: 'Collection Source',
-            fieldKeys: ['collectionSource', 'selectedCollectionIds'],
-        },
-    ],
-    allFields: collectionsGridFields,
-});
 const ASPECT = {
     square: 'aspect-square', portrait: 'aspect-[3/4]', landscape: 'aspect-[4/3]', wide: 'aspect-[16/9]',
 };
@@ -119,7 +91,7 @@ function applyManualFilter(all, ids) {
 }
 export const CollectionsGrid = {
     label: 'Collections Grid',
-    fields: accordionFields,
+    fields: collectionsGridFields,
     defaultProps: {
         sectionTitle: 'Shop by Collection',
         sectionSubtitle: 'Browse our curated collections',

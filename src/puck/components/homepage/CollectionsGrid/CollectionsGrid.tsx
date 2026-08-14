@@ -3,7 +3,6 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { CollectionsGridProps, SharedCollection } from './collectionsgrid.types';
 import {
-  createAccordionFields,
 } from '../../../design-system';
 
 // ── Flat field definitions (referenced by key inside the accordion) ─────────
@@ -76,35 +75,6 @@ const collectionsGridFields = {
   } as any,
 } as Record<string, any>;
 
-// ── Accordion config ────────────────────────────────────────────────────────
-
-const accordionFields = createAccordionFields({
-  groups: [
-    {
-      label: 'Section',
-      defaultOpen: true,
-      fieldKeys: ['sectionTitle', 'sectionSubtitle', 'showTitle'],
-    },
-    {
-      label: 'Grid',
-      fieldKeys: ['columns', 'columnsTablet', 'columnsMobile', 'gap'],
-    },
-    {
-      label: 'Collection Display',
-      fieldKeys: ['showCollectionImage', 'showCollectionTitle', 'showProductCount', 'showDescription', 'imageAspectRatio'],
-    },
-    {
-      label: 'Styling',
-      fieldKeys: ['backgroundColor', 'textColor', 'cardStyle', 'borderRadius', 'hoverEffect'],
-    },
-    {
-      label: 'Collection Source',
-      fieldKeys: ['collectionSource', 'selectedCollectionIds'],
-    },
-  ],
-  allFields: collectionsGridFields,
-});
-
 const ASPECT: Record<string, string> = {
   square: 'aspect-square', portrait: 'aspect-[3/4]', landscape: 'aspect-[4/3]', wide: 'aspect-[16/9]',
 };
@@ -129,7 +99,7 @@ function applyManualFilter(all: SharedCollection[], ids: string[]) {
 
 export const CollectionsGrid: ComponentConfig<CollectionsGridProps> = {
   label: 'Collections Grid',
-  fields: accordionFields as any,
+  fields: collectionsGridFields as any,
   defaultProps: {
     sectionTitle: 'Shop by Collection',
     sectionSubtitle: 'Browse our curated collections',

@@ -1,7 +1,7 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { DropZone } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
+import { sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
 // ── Component-specific fields ───────────────────────────────────────────────
 const MAX_WIDTH_OPTIONS = [
     { label: 'Small (640px)', value: 'sm' },
@@ -28,29 +28,10 @@ const allFields = {
     ...sharedLayoutFields,
     ...sharedColorFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Container',
-            defaultOpen: true,
-            fieldKeys: ['maxWidth'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom', 'paddingX', 'paddingY'],
-        },
-        {
-            label: 'Color',
-            fieldKeys: ['backgroundColor', 'borderRadius'],
-        },
-    ],
-    allFields,
-});
 // ── Component ───────────────────────────────────────────────────────────────
 export const Container = {
     label: 'Container',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         maxWidth: 'xl',
         ...defaultLayoutProps,

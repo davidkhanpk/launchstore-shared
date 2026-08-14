@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { createAccordionFields, sharedTypographyFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedTypographyFields, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 // ── Price has its own size ladder (not shared fontSize) ─────────────────────
 const SIZE_MAP = {
     sm: '0.875rem',
@@ -48,30 +48,11 @@ const allFields = {
     ...typographyFields,
     ...sharedLayoutFields,
 };
-// ── Accordion config ────────────────────────────────────────────────────────
-const accordionFields = createAccordionFields({
-    groups: [
-        {
-            label: 'Content',
-            defaultOpen: true,
-            fieldKeys: ['size', 'showComparePrice', 'showSavingsBadge', 'layout'],
-        },
-        {
-            label: 'Typography',
-            fieldKeys: ['fontWeight', 'textColor'],
-        },
-        {
-            label: 'Layout',
-            fieldKeys: ['marginTop', 'marginBottom'],
-        },
-    ],
-    allFields,
-});
 const defaultResolvePrice = (_product) => undefined;
 // ── Component ───────────────────────────────────────────────────────────────
 export const ProductPrice = {
     label: 'Product Price',
-    fields: accordionFields,
+    fields: allFields,
     defaultProps: {
         size: 'xl',
         showComparePrice: true,

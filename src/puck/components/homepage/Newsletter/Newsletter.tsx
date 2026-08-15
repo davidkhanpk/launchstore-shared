@@ -1,6 +1,11 @@
 /**
  * Newsletter Puck component — render + inline accordion fields + defaultProps.
  *
+ * Migrated to the ecommerce section control model: SectionShell provides the
+ * background surface (scheme | image + overlay | gradient | color), density,
+ * content width, and alignment. Typography fields drive the title (size /
+ * weight) and the subtitle eyebrow (transform / tracking).
+ *
  * Both consumers import `Newsletter` from here:
  *   - launchstore-frontend (Puck editor) — extends color/image fields with
  *     custom widgets
@@ -14,13 +19,28 @@
  */
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
+import { resolveColor } from '../../../../theme/resolveColor';
+import {
+  SectionShell,
+  sharedBackgroundFields,
+  sharedSectionLayoutFields,
+  sharedTypographyFields,
+  buildTypographyClasses,
+  RADIUS_OPTIONS,
+} from '../../../design-system';
 import type { NewsletterProps } from './newsletter.types';
 
-const RADIUS_CLASSES: Record<NewsletterProps['borderRadius'], string> = {
+// Text alignment follows the `layout` field (centered layout centers text) —
+// drop the standalone textAlign field to avoid two competing controls.
+const { textAlign: _textAlign, ...newsletterTypographyFields } = sharedTypographyFields;
+
+// Static lookups so Tailwind can see the classes at build time.
+const RADIUS_CLASSES: Record<string, string> = {
   none: 'rounded-none',
   sm: 'rounded-sm',
   md: 'rounded-md',
   lg: 'rounded-lg',
+  xl: 'rounded-xl',
   full: 'rounded-full',
 };
 
@@ -93,21 +113,11 @@ const layoutFields = {
 
 const styleFields = {
   backgroundColor: { type: 'text' as const, label: 'Background Color (hex or theme token)' },
-  textColor: { type: 'text' as const, label: 'Text Color (hex or theme token)' },
   inputBackground: { type: 'text' as const, label: 'Input Background (hex or theme token)' },
   inputBorder: { type: 'text' as const, label: 'Input Border (hex or theme token)' },
   buttonBackground: { type: 'text' as const, label: 'Button Background (hex or theme token)' },
   buttonTextColor: { type: 'text' as const, label: 'Button Text Color (hex or theme token)' },
-  borderRadius: {
-    type: 'select' as const, label: 'Border Radius',
-    options: [
-      { label: 'None', value: 'none' },
-      { label: 'Small', value: 'sm' },
-      { label: 'Medium', value: 'md' },
-      { label: 'Large', value: 'lg' },
-      { label: 'Full (Pills)', value: 'full' },
-    ],
-  },
+  borderRadius: { type: 'select' as const, label: 'Border Radius', options: RADIUS_OPTIONS },
 };
 
 // ── All flat fields ─────────────────────────────────────────────────────────
@@ -117,6 +127,9 @@ const allFields = {
   ...emailFields,
   ...layoutFields,
   ...styleFields,
+  ...newsletterTypographyFields,
+  ...sharedBackgroundFields,
+  ...sharedSectionLayoutFields,
 };
 
 // ── Component ───────────────────────────────────────────────────────────────
@@ -138,18 +151,67 @@ export const Newsletter: ComponentConfig<NewsletterProps> = {
     collectName: false,
     nameRequired: false,
     successMessage: 'Thanks for subscribing! Check your email to confirm.',
-    backgroundColor: '#000000',
+
+    // Typography (fontSize/fontWeight drive the title, textTransform/
+    // letterSpacing drive the subtitle eyebrow)
+    fontSize: '4xl',
+    fontWeight: 'bold',
+    lineHeight: 'normal',
+    textTransform: 'uppercase',
+    letterSpacing: 'wide',
     textColor: '#ffffff',
+
+    // Component-specific form styling
     inputBackground: '#ffffff',
     inputBorder: '#e5e5e5',
     buttonBackground: '#3b82f6',
     buttonTextColor: '#ffffff',
     borderRadius: 'md',
+
+    // Background (shared section control model)
+    backgroundScheme: '',
+    backgroundImage: '',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    overlayColor: '',
+    overlayOpacity: '0',
+    gradientFrom: '',
+    gradientTo: '',
+    backgroundColor: '#000000',
+
+    // Section layout (shared)
+    density: 'comfortable',
+    contentWidth: 'wide',
+    contentAlign: 'center',
+    verticalAlign: 'top',
+    minHeight: '',
   } as NewsletterProps,
-  render: (props) => (
-    <div className="newsletter-section py-16" style={{ backgroundColor: props.backgroundColor }}>
-      <div className="container mx-auto px-4">
-        <div className={LAYOUT_CLASSES[props.layout] || 'text-center max-w-2xl mx-auto'}>
+  render: (props) => {
+    // When a scheme is active its text color flows from SectionShell; the
+    // explicit textColor prop only applies on plain/gradient backgrounds.
+    const fg = props.backgroundScheme
+      ? undefined
+      : (resolveColor(props.textColor) || props.textColor);
+    const fgStyle = fg ? { color: fg } : undefined;
+
+    // Title: size + weight (+ line height). Subtitle: transform + tracking.
+    const titleTypography = buildTypographyClasses({
+      fontSize: props.fontSize,
+      fontWeight: props.fontWeight,
+      lineHeight: props.lineHeight,
+    });
+    const subtitleTypography = buildTypographyClasses({
+      textTransform: props.textTransform,
+      letterSpacing: props.letterSpacing,
+    });
+
+    return (
+      <SectionShell
+        {...props}
+        className="overflow-hidden"
+        contentClassName="px-4"
+      >
+        <div className={`w-full ${LAYOUT_CLASSES[props.layout] || 'text-center max-w-2xl mx-auto'}`}>
           {props.layout === 'split' && props.showImage && (
             <div className="w-1/2">
               <img
@@ -162,25 +224,22 @@ export const Newsletter: ComponentConfig<NewsletterProps> = {
 
           <div className={props.layout === 'split' ? 'w-1/2' : 'w-full'}>
             {props.subtitle && (
-              <p
-                className="text-sm font-semibold uppercase tracking-wide mb-2"
-                style={{ color: props.textColor, opacity: 0.8 }}
-              >
+              <p className={`text-sm font-semibold mb-2 ${subtitleTypography}`} style={fgStyle ? { ...fgStyle, opacity: 0.8 } : { opacity: 0.8 }}>
                 {props.subtitle}
               </p>
             )}
 
-            <h2 className="text-4xl font-bold mb-4" style={{ color: props.textColor }}>
+            <h2 className={`${titleTypography || 'text-4xl font-bold'} mb-4`} style={fgStyle}>
               {props.title}
             </h2>
 
             {props.description && (
-              <p className="text-lg mb-6" style={{ color: props.textColor, opacity: 0.9 }}>
+              <p className="text-lg mb-6" style={fgStyle ? { ...fgStyle, opacity: 0.9 } : { opacity: 0.9 }}>
                 {props.description}
               </p>
             )}
 
-            {/* 
+            {/*
              * The form shell renders correctly but has no onSubmit wiring.
              * Platform newsletter integration (Mailchimp / Klaviyo) is handled
              * at the page level, not inside this component.
@@ -224,16 +283,16 @@ export const Newsletter: ComponentConfig<NewsletterProps> = {
               </div>
 
               {props.showPrivacyText && (
-                <p className="text-xs" style={{ color: props.textColor, opacity: 0.7 }}>
+                <p className="text-xs" style={fgStyle ? { ...fgStyle, opacity: 0.7 } : { opacity: 0.7 }}>
                   {props.privacyText}
                 </p>
               )}
             </form>
           </div>
         </div>
-      </div>
-    </div>
-  ),
+      </SectionShell>
+    );
+  },
 };
 
 export default Newsletter;

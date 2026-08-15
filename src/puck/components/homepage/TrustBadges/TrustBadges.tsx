@@ -2,6 +2,13 @@
 
 import React from 'react';
 import type { ComponentConfig, Field } from '@puckeditor/core';
+import { resolveColor } from '../../../../theme/resolveColor';
+import {
+  SectionShell,
+  sharedBackgroundFields,
+  sharedSectionLayoutFields,
+  RADIUS_OPTIONS,
+} from '../../../design-system';
 import type { TrustBadgesProps, TrustBadgeItem } from './trustbadges.types';
 
 /**
@@ -41,15 +48,12 @@ const COLS: Record<string, string> = {
   '5': 'md:grid-cols-5',
 };
 
-const SPACING_CLASSES: Record<TrustBadgesProps['spacing'], string> = {
-  compact: 'py-4 px-4',
-  normal: 'py-8 px-6',
-  spacious: 'py-12 px-8',
-};
-const RADIUS_CLASSES: Record<TrustBadgesProps['borderRadius'], string> = {
+// Static lookups so Tailwind can see the classes at build time.
+const RADIUS_CLASSES: Record<string, string> = {
   none: 'rounded-none', sm: 'rounded-sm', md: 'rounded-md', lg: 'rounded-lg',
+  xl: 'rounded-xl', full: 'rounded-full',
 };
-const ALIGNMENT_CLASSES: Record<TrustBadgesProps['alignment'], string> = {
+const TEXT_ALIGN_CLASSES: Record<string, string> = {
   left: 'text-left', center: 'text-center', right: 'text-right',
 };
 
@@ -151,22 +155,6 @@ const layoutFields = {
       { label: '5', value: '5' },
     ],
   },
-  alignment: {
-    type: 'select' as const, label: 'Alignment',
-    options: [
-      { label: 'Left', value: 'left' },
-      { label: 'Center', value: 'center' },
-      { label: 'Right', value: 'right' },
-    ],
-  },
-  spacing: {
-    type: 'select' as const, label: 'Spacing',
-    options: [
-      { label: 'Compact', value: 'compact' },
-      { label: 'Normal', value: 'normal' },
-      { label: 'Spacious', value: 'spacious' },
-    ],
-  },
   showBorder: {
     type: 'radio' as const, label: 'Show Border',
     options: [
@@ -181,15 +169,7 @@ const layoutFields = {
 const colorFields = {
   backgroundColor: { type: 'text' as const, label: 'Background Color (hex or theme token)' },
   textColor: { type: 'text' as const, label: 'Text Color (hex or theme token)' },
-  borderRadius: {
-    type: 'select' as const, label: 'Border Radius',
-    options: [
-      { label: 'None', value: 'none' },
-      { label: 'Small', value: 'sm' },
-      { label: 'Medium', value: 'md' },
-      { label: 'Large', value: 'lg' },
-    ],
-  },
+  borderRadius: { type: 'select' as const, label: 'Border Radius', options: RADIUS_OPTIONS },
 };
 
 // ── All flat fields ─────────────────────────────────────────────────────────
@@ -198,6 +178,8 @@ const allFields = {
   ...contentFields,
   ...layoutFields,
   ...colorFields,
+  ...sharedBackgroundFields,
+  ...sharedSectionLayoutFields,
 };
 
 // ── Component ───────────────────────────────────────────────────────────────
@@ -210,7 +192,6 @@ export const TrustBadges: ComponentConfig<TrustBadgesProps> = {
     subtitle: '',
     layout: 'horizontal',
     columns: '4',
-    alignment: 'center',
     badges: [
       { id: '1', icon: 'truck', title: 'Free Shipping', description: 'On orders over $50', iconColor: '#3b82f6' },
       { id: '2', icon: 'shield', title: 'Secure Checkout', description: '100% secure payment', iconColor: '#3b82f6' },
@@ -219,64 +200,102 @@ export const TrustBadges: ComponentConfig<TrustBadgesProps> = {
     ],
     backgroundColor: '#ffffff',
     textColor: '#1f2937',
-    spacing: 'normal',
     showBorder: true,
     borderRadius: 'none',
+
+    // Background (shared section control model)
+    backgroundScheme: '',
+    backgroundImage: '',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    overlayColor: '',
+    overlayOpacity: '0',
+    gradientFrom: '',
+    gradientTo: '',
+
+    // Section layout (shared)
+    density: 'comfortable',
+    contentWidth: 'wide',
+    contentAlign: 'center',
+    verticalAlign: 'top',
+    minHeight: '',
   } as TrustBadgesProps,
   render: ({
-    title, subtitle, layout, columns, alignment, badges, backgroundColor,
-    textColor, spacing, showBorder, borderRadius,
-  }) => (
-    <div
-      style={{ backgroundColor }}
-      className={`w-full ${SPACING_CLASSES[spacing] || 'py-8 px-6'} ${
-        showBorder ? 'border-t border-b border-gray-200' : ''
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4">
-        {(title || subtitle) && (
-          <div className={`mb-8 ${ALIGNMENT_CLASSES[alignment] || 'text-center'}`}>
-            {title && <h2 className="text-2xl font-bold mb-2" style={{ color: textColor }}>{title}</h2>}
-            {subtitle && <p className="text-base opacity-75" style={{ color: textColor }}>{subtitle}</p>}
-          </div>
-        )}
+    title, subtitle, layout, columns, badges, backgroundColor,
+    textColor, showBorder, borderRadius,
+    backgroundScheme, backgroundImage, backgroundSize, backgroundPosition,
+    overlayColor, overlayOpacity, gradientFrom, gradientTo,
+    density, contentWidth, contentAlign, verticalAlign, minHeight,
+  }) => {
+    // When a scheme is active its text color flows from SectionShell; the
+    // explicit textColor prop only applies on plain/gradient backgrounds.
+    const fg = backgroundScheme ? undefined : (resolveColor(textColor) || textColor);
+    const fgStyle = fg ? { color: fg } : undefined;
 
-        <div
-          className={`grid gap-6 ${
-            layout === 'horizontal'
-              ? `grid-cols-1 ${COLS[columns as string] || COLS['4']}`
-              : layout === 'grid'
-              ? `grid-cols-2 ${COLS[columns as string] || COLS['4']}`
-              : 'grid-cols-1 max-w-md mx-auto'
-          }`}
-        >
-          {(badges || []).map((badge: TrustBadgeItem) => (
-            <div
-              key={badge.id}
-              className={`flex ${
-                layout === 'stacked' ? 'flex-row items-center' : 'flex-col items-center'
-              } ${ALIGNMENT_CLASSES[alignment] || 'text-center'} ${RADIUS_CLASSES[borderRadius] || 'rounded-none'} p-4 transition-transform hover:scale-105`}
-            >
-              <div
-                className={`text-4xl ${layout === 'stacked' ? 'mr-4' : 'mb-3'}`}
-                style={{ color: badge.iconColor }}
-              >
-                {ICON_EMOJI[badge.icon] || '✓'}
-              </div>
-              <div className={layout === 'stacked' ? 'flex-1' : ''}>
-                <h3 className="font-semibold text-base mb-1" style={{ color: textColor }}>
-                  {badge.title}
-                </h3>
-                <p className="text-sm opacity-75" style={{ color: textColor }}>
-                  {badge.description}
-                </p>
-              </div>
+    return (
+      <SectionShell
+        backgroundScheme={backgroundScheme}
+        backgroundImage={backgroundImage}
+        backgroundSize={backgroundSize}
+        backgroundPosition={backgroundPosition}
+        overlayColor={overlayColor}
+        overlayOpacity={overlayOpacity}
+        gradientFrom={gradientFrom}
+        gradientTo={gradientTo}
+        backgroundColor={backgroundColor}
+        density={density}
+        contentWidth={contentWidth}
+        contentAlign={contentAlign}
+        verticalAlign={verticalAlign}
+        minHeight={minHeight}
+        className={showBorder ? 'border-t border-b border-gray-200' : ''}
+        contentClassName="px-4 sm:px-6 lg:px-8"
+      >
+        <div className="w-full">
+          {(title || subtitle) && (
+            <div className={`mb-8 ${TEXT_ALIGN_CLASSES[contentAlign || 'center'] || 'text-center'}`}>
+              {title && <h2 className="text-2xl font-bold mb-2" style={fgStyle}>{title}</h2>}
+              {subtitle && <p className="text-base opacity-75" style={fgStyle}>{subtitle}</p>}
             </div>
-          ))}
+          )}
+
+          <div
+            className={`grid gap-6 ${
+              layout === 'horizontal'
+                ? `grid-cols-1 ${COLS[columns as string] || COLS['4']}`
+                : layout === 'grid'
+                ? `grid-cols-2 ${COLS[columns as string] || COLS['4']}`
+                : 'grid-cols-1 max-w-md mx-auto'
+            }`}
+          >
+            {(badges || []).map((badge: TrustBadgeItem) => (
+              <div
+                key={badge.id}
+                className={`flex ${
+                  layout === 'stacked' ? 'flex-row items-center' : 'flex-col items-center'
+                } ${TEXT_ALIGN_CLASSES[contentAlign || 'center'] || 'text-center'} ${RADIUS_CLASSES[borderRadius || 'none'] || 'rounded-none'} p-4 transition-transform hover:scale-105`}
+              >
+                <div
+                  className={`text-4xl ${layout === 'stacked' ? 'mr-4' : 'mb-3'}`}
+                  style={{ color: badge.iconColor }}
+                >
+                  {ICON_EMOJI[badge.icon] || '✓'}
+                </div>
+                <div className={layout === 'stacked' ? 'flex-1' : ''}>
+                  <h3 className="font-semibold text-base mb-1" style={fgStyle}>
+                    {badge.title}
+                  </h3>
+                  <p className="text-sm opacity-75" style={fgStyle}>
+                    {badge.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </div>
-  ),
+      </SectionShell>
+    );
+  },
 };
 
 export default TrustBadges;

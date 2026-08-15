@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { DropZone } from '@puckeditor/core';
-import { sharedLayoutFields, defaultLayoutProps, } from '../../../design-system';
+import { SPACING_OPTIONS, sharedLayoutFields, defaultLayoutProps, } from '../../../design-system';
 // ── Content fields (component-specific) ─────────────────────────────────────
 const contentFields = {
     id: { type: 'text', label: 'ID' },
@@ -16,17 +16,15 @@ const contentFields = {
         type: 'radio', label: 'Mobile Columns',
         options: [{ label: '1', value: '1' }, { label: '2', value: '2' }],
     },
-    gap: {
-        type: 'radio', label: 'Gap',
-        options: [{ label: 'None', value: 'none' }, { label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }, { label: 'Extra Large', value: 'xl' }],
-    },
+    gap: { type: 'select', label: 'Gap', options: SPACING_OPTIONS },
 };
 // ── All flat fields ─────────────────────────────────────────────────────────
 const allFields = {
     ...contentFields,
     ...sharedLayoutFields,
 };
-const GAP_CLASS = { none: 'gap-0', sm: 'gap-3', md: 'gap-6', lg: 'gap-8', xl: 'gap-12' };
+// Legacy semantic gap values still resolve; new values are Tailwind spacing numbers.
+const LEGACY_GAP = { none: '0', sm: '3', md: '6', lg: '8', xl: '12' };
 const MOBILE_CLASS = { '1': 'grid-cols-1', '2': 'grid-cols-2' };
 const TABLET_CLASS = { '1': 'md:grid-cols-1', '2': 'md:grid-cols-2', '3': 'md:grid-cols-3', '4': 'md:grid-cols-4' };
 const DESKTOP_CLASS = {
@@ -47,7 +45,7 @@ export const Grid = {
     },
     render: (rawProps) => {
         const { id, columns, tabletColumns, mobileColumns, gap } = rawProps;
-        return (_jsx("div", { id: id, className: `grid ${MOBILE_CLASS[mobileColumns || '1'] || 'grid-cols-1'} ${TABLET_CLASS[tabletColumns || '2'] || 'md:grid-cols-2'} ${DESKTOP_CLASS[columns || '3'] || 'lg:grid-cols-3'} ${GAP_CLASS[gap || 'md'] || 'gap-6'}`, children: _jsx(DropZone, { zone: "items" }) }));
+        return (_jsx("div", { id: id, className: `grid ${MOBILE_CLASS[mobileColumns || '1'] || 'grid-cols-1'} ${TABLET_CLASS[tabletColumns || '2'] || 'md:grid-cols-2'} ${DESKTOP_CLASS[columns || '3'] || 'lg:grid-cols-3'} ${`gap-${LEGACY_GAP[gap] ?? gap ?? '6'}`}`, children: _jsx(DropZone, { zone: "items" }) }));
     },
 };
 export default Grid;

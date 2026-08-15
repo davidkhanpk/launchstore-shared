@@ -2,8 +2,12 @@ import type { ComponentConfig } from '@puckeditor/core';
 export interface CollectionTitleProps {
     tag: 'h1' | 'h2' | 'h3' | 'h4';
     fontSize: string;
-    textAlign: 'left' | 'center' | 'right';
-    fontWeight: 'normal' | 'medium' | 'semibold' | 'bold';
+    fontWeight: string;
+    textAlign: string;
+    textColor: string;
+    lineHeight: string;
+    letterSpacing: string;
+    textTransform: string;
     marginBottom: string;
     showProductCount: boolean;
 }

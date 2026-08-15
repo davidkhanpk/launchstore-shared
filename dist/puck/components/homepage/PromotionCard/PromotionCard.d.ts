@@ -8,7 +8,21 @@ export interface PromotionCardProps {
     textColor: string;
     buttonColor: string;
     buttonTextColor: string;
-    alignment: 'left' | 'center';
+    /** Tailwind radius scale value — see RADIUS_OPTIONS in the design system. */
+    borderRadius: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+    backgroundScheme?: string;
+    backgroundImage?: string;
+    backgroundSize?: string;
+    backgroundPosition?: string;
+    overlayColor?: string;
+    overlayOpacity?: string;
+    gradientFrom?: string;
+    gradientTo?: string;
+    density?: string;
+    contentWidth?: string;
+    contentAlign?: string;
+    verticalAlign?: string;
+    minHeight?: string;
 }
 export declare const promotionCardFields: ComponentConfig<PromotionCardProps>['fields'];
 export declare const PromotionCard: ComponentConfig<PromotionCardProps>;

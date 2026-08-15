@@ -3,8 +3,7 @@ export interface CategoryHeroProps {
     showImage: boolean;
     showTitle: boolean;
     showDescription: boolean;
-    height: 'small' | 'medium' | 'large';
-    overlayOpacity: number;
+    /** 'standard' renders a solid headline; 'luxury' lightens + widens + uppercases it. */
     style: 'standard' | 'luxury';
     backgroundColor: string;
     textColor: string;
@@ -12,6 +11,19 @@ export interface CategoryHeroProps {
     title?: string;
     description?: string;
     image?: string;
+    backgroundScheme?: string;
+    backgroundImage?: string;
+    backgroundSize?: string;
+    backgroundPosition?: string;
+    overlayColor?: string;
+    overlayOpacity?: string;
+    gradientFrom?: string;
+    gradientTo?: string;
+    density?: string;
+    contentWidth?: string;
+    contentAlign?: string;
+    verticalAlign?: string;
+    minHeight?: string;
 }
 export declare const categoryHeroFields: ComponentConfig<CategoryHeroProps>['fields'];
 export declare const CategoryHero: ComponentConfig<CategoryHeroProps>;

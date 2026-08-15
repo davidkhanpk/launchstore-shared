@@ -3,6 +3,10 @@
 /**
  * Testimonials Puck component — render + inline accordion fields + defaultProps.
  *
+ * Migrated to the ecommerce section control model: SectionShell provides the
+ * background surface (scheme | image + overlay | gradient | color), density,
+ * content width, and alignment.
+ *
  * Both consumers import `Testimonials` from here:
  *   - launchstore-frontend (Puck editor) — extends color fields with ColorField
  *   - launchstore-storefront (renderer) — uses the base fields as-is
@@ -21,14 +25,26 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
+import { resolveColor } from '../../../../theme/resolveColor';
+import {
+  SectionShell,
+  sharedBackgroundFields,
+  sharedSectionLayoutFields,
+  RADIUS_OPTIONS,
+} from '../../../design-system';
 import type { TestimonialsProps } from './testimonials.types';
 
-const RADIUS_CLASSES: Record<TestimonialsProps['borderRadius'], string> = {
+// Static lookups so Tailwind can see the classes at build time.
+const RADIUS_CLASSES: Record<string, string> = {
   none: 'rounded-none',
   sm: 'rounded-sm',
   md: 'rounded-md',
   lg: 'rounded-lg',
   xl: 'rounded-xl',
+  full: 'rounded-full',
+};
+const TEXT_ALIGN_CLASSES: Record<string, string> = {
+  left: 'text-left', center: 'text-center', right: 'text-right',
 };
 
 const MOCK_TESTIMONIALS = [
@@ -170,16 +186,7 @@ const colorFields = {
   textColor: { type: 'text' as const, label: 'Text Color (hex or theme token)' },
   cardBackground: { type: 'text' as const, label: 'Card Background (hex or theme token)' },
   accentColor: { type: 'text' as const, label: 'Accent Color (hex or theme token)' },
-  borderRadius: {
-    type: 'select' as const, label: 'Border Radius',
-    options: [
-      { label: 'None', value: 'none' },
-      { label: 'Small', value: 'sm' },
-      { label: 'Medium', value: 'md' },
-      { label: 'Large', value: 'lg' },
-      { label: 'Extra Large', value: 'xl' },
-    ],
-  },
+  borderRadius: { type: 'select' as const, label: 'Border Radius', options: RADIUS_OPTIONS },
 };
 
 // ── All flat fields ─────────────────────────────────────────────────────────
@@ -188,6 +195,8 @@ const allFields = {
   ...contentFields,
   ...layoutFields,
   ...colorFields,
+  ...sharedBackgroundFields,
+  ...sharedSectionLayoutFields,
 };
 
 // ── Component ───────────────────────────────────────────────────────────────
@@ -223,9 +232,33 @@ export const Testimonials: ComponentConfig<TestimonialsProps> = {
     cardBackground: '#ffffff',
     accentColor: '#3b82f6',
     borderRadius: 'lg',
+
+    // Background (shared section control model)
+    backgroundScheme: '',
+    backgroundImage: '',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    overlayColor: '',
+    overlayOpacity: '0',
+    gradientFrom: '',
+    gradientTo: '',
+
+    // Section layout (shared)
+    density: 'comfortable',
+    contentWidth: 'wide',
+    contentAlign: 'center',
+    verticalAlign: 'top',
+    minHeight: '',
   } as TestimonialsProps,
   render: (props) => {
     const visibleTestimonials = MOCK_TESTIMONIALS.slice(0, props.maxTestimonials);
+
+    // When a scheme is active its text color flows from SectionShell; the
+    // explicit textColor prop only applies on plain/gradient backgrounds.
+    const fg = props.backgroundScheme
+      ? undefined
+      : (resolveColor(props.textColor) || props.textColor);
+    const fgStyle = fg ? { color: fg } : undefined;
 
     const renderTestimonial = (testimonial: typeof MOCK_TESTIMONIALS[number]) => (
       <div
@@ -239,7 +272,7 @@ export const Testimonials: ComponentConfig<TestimonialsProps> = {
             &ldquo;
           </div>
         )}
-        <p className="text-lg mb-6 italic" style={{ color: props.textColor }}>
+        <p className="text-lg mb-6 italic" style={fgStyle}>
           &ldquo;{testimonial.text}&rdquo;
         </p>
         <div className="flex items-center gap-4">
@@ -248,17 +281,17 @@ export const Testimonials: ComponentConfig<TestimonialsProps> = {
           )}
           <div>
             {props.showName && (
-              <p className="font-bold" style={{ color: props.textColor }}>
+              <p className="font-bold" style={fgStyle}>
                 {testimonial.name}
               </p>
             )}
             {props.showRole && (
-              <p className="text-sm opacity-70" style={{ color: props.textColor }}>
+              <p className="text-sm opacity-70" style={fgStyle}>
                 {testimonial.role}
               </p>
             )}
             {props.showDate && (
-              <p className="text-xs opacity-50 mt-1" style={{ color: props.textColor }}>
+              <p className="text-xs opacity-50 mt-1" style={fgStyle}>
                 {testimonial.date}
               </p>
             )}
@@ -268,15 +301,19 @@ export const Testimonials: ComponentConfig<TestimonialsProps> = {
     );
 
     return (
-      <div className="testimonials-section py-16" style={{ backgroundColor: props.backgroundColor }}>
-        <div className="container mx-auto px-4">
+      <SectionShell
+        {...props}
+        className="overflow-hidden"
+        contentClassName="px-4"
+      >
+        <div className="w-full">
           {props.showTitle && (
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-2" style={{ color: props.textColor }}>
+            <div className={`${TEXT_ALIGN_CLASSES[props.contentAlign || 'center'] || 'text-center'} mb-12`}>
+              <h2 className="text-4xl font-bold mb-2" style={fgStyle}>
                 {props.sectionTitle}
               </h2>
               {props.sectionSubtitle && (
-                <p className="text-lg opacity-80" style={{ color: props.textColor }}>
+                <p className="text-lg opacity-80" style={fgStyle}>
                   {props.sectionSubtitle}
                 </p>
               )}
@@ -316,7 +353,7 @@ export const Testimonials: ComponentConfig<TestimonialsProps> = {
             </Swiper>
           )}
         </div>
-      </div>
+      </SectionShell>
     );
   },
 };

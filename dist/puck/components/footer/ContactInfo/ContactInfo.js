@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { SPACING_OPTIONS, sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
 // Inline SVG icons (replacing lucide-react) — MapPin / Phone / Mail / Clock
 const ICONS = {
     map: (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("path", { d: "M20 10c0 7-8 13-8 13s-8-6-8-13a8 8 0 0 1 16 0Z" }), _jsx("circle", { cx: "12", cy: "10", r: "3" })] })),
@@ -33,10 +33,7 @@ const styleFields = {
         type: 'select', label: 'Font Size',
         options: [{ label: 'Small', value: 'sm' }, { label: 'Base', value: 'base' }],
     },
-    gap: {
-        type: 'select', label: 'Spacing',
-        options: [{ label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }],
-    },
+    gap: { type: 'select', label: 'Spacing', options: SPACING_OPTIONS },
 };
 // ── All flat fields ─────────────────────────────────────────────────────────
 const allFields = {
@@ -44,7 +41,8 @@ const allFields = {
     ...styleFields,
     ...sharedLayoutFields,
 };
-const GAP_CLASS = { sm: 'gap-2', md: 'gap-4', lg: 'gap-6' };
+// Legacy semantic gap values still resolve.
+const LEGACY_GAP = { sm: '2', md: '4', lg: '6' };
 const LAYOUT_CLASS = {
     stacked: 'flex flex-col', grid: 'grid grid-cols-1 md:grid-cols-2',
 };
@@ -81,7 +79,7 @@ export const ContactInfo = {
         if (showHours && hours)
             items.push({ icon: ICONS.clock, content: hours, href: null });
         const layoutClasses = buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY });
-        return (_jsx("div", { className: `${LAYOUT_CLASS[layout || 'stacked'] || 'flex flex-col'} ${GAP_CLASS[gap || 'md'] || 'gap-4'} ${layoutClasses}`, children: items.map((item, i) => {
+        return (_jsx("div", { className: `${LAYOUT_CLASS[layout || 'stacked'] || 'flex flex-col'} ${`gap-${LEGACY_GAP[gap] ?? gap ?? '4'}`} ${layoutClasses}`, children: items.map((item, i) => {
                 const content = (_jsxs("div", { className: "flex items-start gap-3", children: [showIcons && (_jsx("span", { className: "flex-shrink-0 mt-0.5", style: { color: resolveColor(iconColor) }, children: item.icon })), _jsx("div", { className: `${FONT[fontSize || 'sm'] || 'text-sm'} whitespace-pre-line`, style: { color: resolveColor(textColor) }, children: item.content })] }));
                 return item.href ? (_jsx("a", { href: item.href, target: "_blank", rel: "noopener noreferrer", className: "hover:opacity-70 transition-opacity", children: content }, i)) : (_jsx("div", { children: content }, i));
             }) }));

@@ -15,13 +15,25 @@ export interface StatsSectionProps {
      * the build-registry zod schema). Cast to number in the render fn.
      */
     columns: '2' | '3' | '4';
-    alignment: 'left' | 'center' | 'right';
     stats: StatsItem[];
     backgroundColor: string;
     textColor: string;
     numberColor: string;
-    spacing: 'compact' | 'normal' | 'spacious';
     showDividers: boolean;
-    borderRadius: 'none' | 'sm' | 'md' | 'lg';
+    /** Tailwind radius scale value — see RADIUS_OPTIONS in the design system. */
+    borderRadius: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+    backgroundScheme?: string;
+    backgroundImage?: string;
+    backgroundSize?: string;
+    backgroundPosition?: string;
+    overlayColor?: string;
+    overlayOpacity?: string;
+    gradientFrom?: string;
+    gradientTo?: string;
+    density?: string;
+    contentWidth?: string;
+    contentAlign?: string;
+    verticalAlign?: string;
+    minHeight?: string;
 }
 //# sourceMappingURL=statssection.types.d.ts.map

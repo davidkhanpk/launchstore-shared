@@ -28,16 +28,29 @@ export interface HeroSectionProps {
   imagePosition: 'left' | 'right' | 'background';
   imageAlt: string;
 
-  // Layout
-  height: 'sm' | 'md' | 'lg' | 'xl' | 'full';
-  contentAlignment: 'left' | 'center' | 'right';
-  verticalAlignment: 'top' | 'center' | 'bottom';
-  textColor: string;
-  overlayOpacity: number;
+  // Typography (shared design-system fields — title size/weight, subtitle transform/tracking)
+  fontSize?: string;
+  fontWeight?: string;
+  lineHeight?: string;
+  letterSpacing?: string;
+  textTransform?: string;
+  textColor?: string;
 
-  // Styling
-  backgroundColor: string;
-  backgroundGradient: boolean;
-  gradientFrom: string;
-  gradientTo: string;
+  // Background (shared section control model: image > gradient > scheme > color)
+  backgroundScheme?: string;
+  backgroundImage?: string;
+  backgroundSize?: string;
+  backgroundPosition?: string;
+  overlayColor?: string;
+  overlayOpacity?: string;
+  gradientFrom?: string;
+  gradientTo?: string;
+  backgroundColor?: string;
+
+  // Section layout (shared)
+  density?: string;
+  contentWidth?: string;
+  contentAlign?: string;
+  verticalAlign?: string;
+  minHeight?: string;
 }

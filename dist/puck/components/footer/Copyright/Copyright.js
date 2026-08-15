@@ -1,6 +1,6 @@
 import { jsxs as _jsxs, jsx as _jsx } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { sharedTypographyFields, sharedLayoutFields, buildLayoutClasses, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
+import { sharedTypographyFields, sharedLayoutFields, buildLayoutClasses, buildTypographyClasses, TEXT_ALIGN_OPTIONS, FONT_SIZE_OPTIONS, LETTER_SPACING_OPTIONS, TEXT_TRANSFORM_OPTIONS, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
 const ALIGN = { left: 'text-left', center: 'text-center', right: 'text-right' };
 // ── Content fields (component-specific) ─────────────────────────────────────
 const contentFields = {
@@ -11,18 +11,10 @@ const contentFields = {
 };
 // ── Typography fields (component-specific alignment + shared) ───────────────
 const typographyFields = {
-    alignment: {
-        type: 'select', label: 'Alignment',
-        options: [{ label: 'Left', value: 'left' }, { label: 'Center', value: 'center' }, { label: 'Right', value: 'right' }],
-    },
-    fontSize: {
-        type: 'select', label: 'Font Size',
-        options: [
-            { label: 'Extra Small', value: 'xs' },
-            { label: 'Small', value: 'sm' },
-            { label: 'Base', value: 'base' },
-        ],
-    },
+    textAlign: { type: 'select', label: 'Text Align', options: TEXT_ALIGN_OPTIONS },
+    fontSize: { type: 'select', label: 'Font Size', options: FONT_SIZE_OPTIONS },
+    letterSpacing: { type: 'select', label: 'Letter Spacing', options: LETTER_SPACING_OPTIONS },
+    textTransform: { type: 'select', label: 'Text Transform', options: TEXT_TRANSFORM_OPTIONS },
 };
 // ── All flat fields ─────────────────────────────────────────────────────────
 const allFields = {
@@ -38,8 +30,8 @@ export const Copyright = {
     defaultProps: {
         text: 'All rights reserved.',
         showYear: true,
-        alignment: 'center',
         ...defaultTypographyProps,
+        textAlign: 'center',
         fontSize: 'sm',
         textColor: '#6b7280',
         showDivider: true,
@@ -48,13 +40,13 @@ export const Copyright = {
         paddingY: 'md',
     },
     render: (rawProps) => {
-        const { text, showYear, alignment, fontSize, textColor, showDivider, dividerColor, paddingY, marginTop, marginBottom, paddingX, } = rawProps;
+        const { text, showYear, textAlign, textColor, showDivider, dividerColor, paddingY, marginTop, marginBottom, paddingX, } = rawProps;
         const currentYear = new Date().getFullYear();
-        const fsClass = fontSize === 'xs' ? 'text-xs' : fontSize === 'sm' ? 'text-sm' : 'text-base';
+        const typographyClasses = buildTypographyClasses(rawProps);
         const layoutClasses = buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY });
         return (_jsx("div", { className: `w-full ${layoutClasses}`, style: {
                 borderTop: showDivider ? `1px solid ${resolveColor(dividerColor) || dividerColor}` : 'none',
-            }, children: _jsx("div", { className: "container mx-auto", children: _jsxs("p", { className: `${ALIGN[alignment || 'center'] || 'text-center'} ${fsClass}`, style: { color: resolveColor(textColor) }, children: [showYear && `© ${currentYear} `, text] }) }) }));
+            }, children: _jsx("div", { className: "container mx-auto", children: _jsxs("p", { className: `${typographyClasses}`, style: { color: resolveColor(textColor) }, children: [showYear && `© ${currentYear} `, text] }) }) }));
     },
 };
 export default Copyright;

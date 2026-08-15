@@ -30,12 +30,37 @@ export interface NewsletterProps {
   // Success Message
   successMessage: string;
 
-  // Styling
-  backgroundColor: string;
-  textColor: string;
+  // Typography (shared design-system fields — title size/weight, subtitle transform/tracking)
+  fontSize?: string;
+  fontWeight?: string;
+  lineHeight?: string;
+  letterSpacing?: string;
+  textTransform?: string;
+  textColor?: string;
+
+  // Styling (component-specific form surfaces)
   inputBackground: string;
   inputBorder: string;
   buttonBackground: string;
   buttonTextColor: string;
-  borderRadius: 'none' | 'sm' | 'md' | 'lg' | 'full';
+  /** Tailwind radius scale value — see RADIUS_OPTIONS in the design system. */
+  borderRadius: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+
+  // Background (shared section control model: image > gradient > scheme > color)
+  backgroundScheme?: string;
+  backgroundImage?: string;
+  backgroundSize?: string;
+  backgroundPosition?: string;
+  overlayColor?: string;
+  overlayOpacity?: string;
+  gradientFrom?: string;
+  gradientTo?: string;
+  backgroundColor?: string;
+
+  // Section layout (shared)
+  density?: string;
+  contentWidth?: string;
+  contentAlign?: string;
+  verticalAlign?: string;
+  minHeight?: string;
 }

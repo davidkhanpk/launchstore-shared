@@ -6,12 +6,19 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
+import { resolveColor } from '../../../../theme/resolveColor';
+import { SectionShell, sharedBackgroundFields, sharedSectionLayoutFields, RADIUS_OPTIONS, } from '../../../design-system';
+// Static lookups so Tailwind can see the classes at build time.
 const RADIUS_CLASSES = {
     none: 'rounded-none',
     sm: 'rounded-sm',
     md: 'rounded-md',
     lg: 'rounded-lg',
     xl: 'rounded-xl',
+    full: 'rounded-full',
+};
+const TEXT_ALIGN_CLASSES = {
+    left: 'text-left', center: 'text-center', right: 'text-right',
 };
 const MOCK_TESTIMONIALS = [
     {
@@ -137,22 +144,15 @@ const colorFields = {
     textColor: { type: 'text', label: 'Text Color (hex or theme token)' },
     cardBackground: { type: 'text', label: 'Card Background (hex or theme token)' },
     accentColor: { type: 'text', label: 'Accent Color (hex or theme token)' },
-    borderRadius: {
-        type: 'select', label: 'Border Radius',
-        options: [
-            { label: 'None', value: 'none' },
-            { label: 'Small', value: 'sm' },
-            { label: 'Medium', value: 'md' },
-            { label: 'Large', value: 'lg' },
-            { label: 'Extra Large', value: 'xl' },
-        ],
-    },
+    borderRadius: { type: 'select', label: 'Border Radius', options: RADIUS_OPTIONS },
 };
 // ── All flat fields ─────────────────────────────────────────────────────────
 const allFields = {
     ...contentFields,
     ...layoutFields,
     ...colorFields,
+    ...sharedBackgroundFields,
+    ...sharedSectionLayoutFields,
 };
 // ── Component ───────────────────────────────────────────────────────────────
 export const Testimonials = {
@@ -186,11 +186,32 @@ export const Testimonials = {
         cardBackground: '#ffffff',
         accentColor: '#3b82f6',
         borderRadius: 'lg',
+        // Background (shared section control model)
+        backgroundScheme: '',
+        backgroundImage: '',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        overlayColor: '',
+        overlayOpacity: '0',
+        gradientFrom: '',
+        gradientTo: '',
+        // Section layout (shared)
+        density: 'comfortable',
+        contentWidth: 'wide',
+        contentAlign: 'center',
+        verticalAlign: 'top',
+        minHeight: '',
     },
     render: (props) => {
         const visibleTestimonials = MOCK_TESTIMONIALS.slice(0, props.maxTestimonials);
-        const renderTestimonial = (testimonial) => (_jsxs("div", { className: `testimonial-card p-6 ${RADIUS_CLASSES[props.borderRadius] || 'rounded-lg'} shadow-lg`, style: { backgroundColor: props.cardBackground }, children: [props.showRating && _jsx("div", { className: "mb-4", children: renderStars(testimonial.rating) }), props.layout === 'quote' && (_jsx("div", { className: "text-6xl mb-4", style: { color: props.accentColor, opacity: 0.2 }, children: "\u201C" })), _jsxs("p", { className: "text-lg mb-6 italic", style: { color: props.textColor }, children: ["\u201C", testimonial.text, "\u201D"] }), _jsxs("div", { className: "flex items-center gap-4", children: [props.showAvatar && (_jsx("img", { src: testimonial.avatar, alt: testimonial.name, className: "w-12 h-12 rounded-full" })), _jsxs("div", { children: [props.showName && (_jsx("p", { className: "font-bold", style: { color: props.textColor }, children: testimonial.name })), props.showRole && (_jsx("p", { className: "text-sm opacity-70", style: { color: props.textColor }, children: testimonial.role })), props.showDate && (_jsx("p", { className: "text-xs opacity-50 mt-1", style: { color: props.textColor }, children: testimonial.date }))] })] })] }, testimonial.id));
-        return (_jsx("div", { className: "testimonials-section py-16", style: { backgroundColor: props.backgroundColor }, children: _jsxs("div", { className: "container mx-auto px-4", children: [props.showTitle && (_jsxs("div", { className: "text-center mb-12", children: [_jsx("h2", { className: "text-4xl font-bold mb-2", style: { color: props.textColor }, children: props.sectionTitle }), props.sectionSubtitle && (_jsx("p", { className: "text-lg opacity-80", style: { color: props.textColor }, children: props.sectionSubtitle }))] })), props.displayMode === 'grid' ? (_jsx("div", { className: "grid gap-8", style: { gridTemplateColumns: `repeat(${props.columns}, minmax(0, 1fr))` }, children: visibleTestimonials.map(renderTestimonial) })) : (_jsx(Swiper, { modules: [Navigation, Pagination, Autoplay, EffectFade], slidesPerView: props.slidesPerViewMobile, spaceBetween: props.spaceBetween, navigation: props.navigation, pagination: props.pagination ? { clickable: true } : false, autoplay: props.autoplay
+        // When a scheme is active its text color flows from SectionShell; the
+        // explicit textColor prop only applies on plain/gradient backgrounds.
+        const fg = props.backgroundScheme
+            ? undefined
+            : (resolveColor(props.textColor) || props.textColor);
+        const fgStyle = fg ? { color: fg } : undefined;
+        const renderTestimonial = (testimonial) => (_jsxs("div", { className: `testimonial-card p-6 ${RADIUS_CLASSES[props.borderRadius] || 'rounded-lg'} shadow-lg`, style: { backgroundColor: props.cardBackground }, children: [props.showRating && _jsx("div", { className: "mb-4", children: renderStars(testimonial.rating) }), props.layout === 'quote' && (_jsx("div", { className: "text-6xl mb-4", style: { color: props.accentColor, opacity: 0.2 }, children: "\u201C" })), _jsxs("p", { className: "text-lg mb-6 italic", style: fgStyle, children: ["\u201C", testimonial.text, "\u201D"] }), _jsxs("div", { className: "flex items-center gap-4", children: [props.showAvatar && (_jsx("img", { src: testimonial.avatar, alt: testimonial.name, className: "w-12 h-12 rounded-full" })), _jsxs("div", { children: [props.showName && (_jsx("p", { className: "font-bold", style: fgStyle, children: testimonial.name })), props.showRole && (_jsx("p", { className: "text-sm opacity-70", style: fgStyle, children: testimonial.role })), props.showDate && (_jsx("p", { className: "text-xs opacity-50 mt-1", style: fgStyle, children: testimonial.date }))] })] })] }, testimonial.id));
+        return (_jsx(SectionShell, { ...props, className: "overflow-hidden", contentClassName: "px-4", children: _jsxs("div", { className: "w-full", children: [props.showTitle && (_jsxs("div", { className: `${TEXT_ALIGN_CLASSES[props.contentAlign || 'center'] || 'text-center'} mb-12`, children: [_jsx("h2", { className: "text-4xl font-bold mb-2", style: fgStyle, children: props.sectionTitle }), props.sectionSubtitle && (_jsx("p", { className: "text-lg opacity-80", style: fgStyle, children: props.sectionSubtitle }))] })), props.displayMode === 'grid' ? (_jsx("div", { className: "grid gap-8", style: { gridTemplateColumns: `repeat(${props.columns}, minmax(0, 1fr))` }, children: visibleTestimonials.map(renderTestimonial) })) : (_jsx(Swiper, { modules: [Navigation, Pagination, Autoplay, EffectFade], slidesPerView: props.slidesPerViewMobile, spaceBetween: props.spaceBetween, navigation: props.navigation, pagination: props.pagination ? { clickable: true } : false, autoplay: props.autoplay
                             ? { delay: props.autoplayDelay, disableOnInteraction: false }
                             : false, loop: props.loop, effect: props.effect, breakpoints: {
                             640: { slidesPerView: props.slidesPerViewTablet },

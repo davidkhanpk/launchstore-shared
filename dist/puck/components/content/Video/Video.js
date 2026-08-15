@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { sharedTypographyFields, sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultTypographyProps, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
+import { SHADOW_OPTIONS, sharedTypographyFields, sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultTypographyProps, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
 const MAX_WIDTH_DEFAULT = '800px';
 // ── Static option maps ─────────────────────────────────────────────────────
 const ASPECT_RATIO_MAP = {
@@ -53,15 +53,7 @@ const contentFields = {
             { label: 'Right', value: 'right' },
         ],
     },
-    shadow: {
-        type: 'select', label: 'Shadow',
-        options: [
-            { label: 'None', value: 'none' },
-            { label: 'Small', value: 'sm' },
-            { label: 'Medium', value: 'md' },
-            { label: 'Large', value: 'lg' },
-        ],
-    },
+    shadow: { type: 'select', label: 'Shadow', options: SHADOW_OPTIONS },
     caption: { type: 'textarea', label: 'Caption (optional)' },
 };
 // ── All flat fields ─────────────────────────────────────────────────────────

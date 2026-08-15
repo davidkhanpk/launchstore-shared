@@ -11,12 +11,24 @@ export interface TrustBadgesProps {
     subtitle?: string;
     layout: 'horizontal' | 'grid' | 'stacked';
     columns: '2' | '3' | '4' | '5';
-    alignment: 'left' | 'center' | 'right';
     badges: TrustBadgeItem[];
     backgroundColor: string;
     textColor: string;
-    spacing: 'compact' | 'normal' | 'spacious';
     showBorder: boolean;
-    borderRadius: 'none' | 'sm' | 'md' | 'lg';
+    /** Tailwind radius scale value — see RADIUS_OPTIONS in the design system. */
+    borderRadius: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+    backgroundScheme?: string;
+    backgroundImage?: string;
+    backgroundSize?: string;
+    backgroundPosition?: string;
+    overlayColor?: string;
+    overlayOpacity?: string;
+    gradientFrom?: string;
+    gradientTo?: string;
+    density?: string;
+    contentWidth?: string;
+    contentAlign?: string;
+    verticalAlign?: string;
+    minHeight?: string;
 }
 //# sourceMappingURL=trustbadges.types.d.ts.map

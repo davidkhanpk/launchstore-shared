@@ -19,14 +19,25 @@ export interface HeroSectionProps {
     imageUrl: string;
     imagePosition: 'left' | 'right' | 'background';
     imageAlt: string;
-    height: 'sm' | 'md' | 'lg' | 'xl' | 'full';
-    contentAlignment: 'left' | 'center' | 'right';
-    verticalAlignment: 'top' | 'center' | 'bottom';
-    textColor: string;
-    overlayOpacity: number;
-    backgroundColor: string;
-    backgroundGradient: boolean;
-    gradientFrom: string;
-    gradientTo: string;
+    fontSize?: string;
+    fontWeight?: string;
+    lineHeight?: string;
+    letterSpacing?: string;
+    textTransform?: string;
+    textColor?: string;
+    backgroundScheme?: string;
+    backgroundImage?: string;
+    backgroundSize?: string;
+    backgroundPosition?: string;
+    overlayColor?: string;
+    overlayOpacity?: string;
+    gradientFrom?: string;
+    gradientTo?: string;
+    backgroundColor?: string;
+    density?: string;
+    contentWidth?: string;
+    contentAlign?: string;
+    verticalAlign?: string;
+    minHeight?: string;
 }
 //# sourceMappingURL=hero.types.d.ts.map

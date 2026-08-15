@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { sharedTypographyFields, sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultTypographyProps, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
+import { SHADOW_OPTIONS, sharedTypographyFields, sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultTypographyProps, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
 // ── Static option maps ─────────────────────────────────────────────────────
 const ASPECT_RATIO_MAP = {
     auto: '',
@@ -83,17 +83,7 @@ const contentFields = {
         type: 'radio', label: 'Open in New Tab',
         options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
     },
-    shadow: {
-        type: 'select', label: 'Shadow',
-        options: [
-            { label: 'None', value: 'none' },
-            { label: 'Small', value: 'sm' },
-            { label: 'Medium', value: 'md' },
-            { label: 'Large', value: 'lg' },
-            { label: 'Extra Large', value: 'xl' },
-            { label: '2XL', value: '2xl' },
-        ],
-    },
+    shadow: { type: 'select', label: 'Shadow', options: SHADOW_OPTIONS },
     showBorder: {
         type: 'radio', label: 'Show Border',
         options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],

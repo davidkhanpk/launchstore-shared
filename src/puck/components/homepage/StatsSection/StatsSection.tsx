@@ -2,6 +2,13 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import type { ComponentConfig, Field } from '@puckeditor/core';
+import { resolveColor } from '../../../../theme/resolveColor';
+import {
+  SectionShell,
+  sharedBackgroundFields,
+  sharedSectionLayoutFields,
+  RADIUS_OPTIONS,
+} from '../../../design-system';
 import type { StatsSectionProps, StatsItem } from './statssection.types';
 
 /** Emoji icon dictionary for StatsSection icons. */
@@ -24,15 +31,12 @@ const ICON_OPTIONS = [
   { label: '✓ Check', value: 'check' },
 ];
 
-const SPACING_CLASSES: Record<StatsSectionProps['spacing'], string> = {
-  compact: 'py-6 px-4',
-  normal: 'py-12 px-6',
-  spacious: 'py-20 px-8',
-};
-const RADIUS_CLASSES: Record<StatsSectionProps['borderRadius'], string> = {
+// Static lookups so Tailwind can see the classes at build time.
+const RADIUS_CLASSES: Record<string, string> = {
   none: 'rounded-none', sm: 'rounded-sm', md: 'rounded-md', lg: 'rounded-lg',
+  xl: 'rounded-xl', full: 'rounded-full',
 };
-const ALIGNMENT_CLASSES: Record<StatsSectionProps['alignment'], string> = {
+const TEXT_ALIGN_CLASSES: Record<string, string> = {
   left: 'text-left', center: 'text-center', right: 'text-right',
 };
 
@@ -109,22 +113,6 @@ const layoutFields = {
       { label: '4', value: '4' },
     ],
   },
-  alignment: {
-    type: 'select' as const, label: 'Alignment',
-    options: [
-      { label: 'Left', value: 'left' },
-      { label: 'Center', value: 'center' },
-      { label: 'Right', value: 'right' },
-    ],
-  },
-  spacing: {
-    type: 'select' as const, label: 'Spacing',
-    options: [
-      { label: 'Compact', value: 'compact' },
-      { label: 'Normal', value: 'normal' },
-      { label: 'Spacious', value: 'spacious' },
-    ],
-  },
   showDividers: {
     type: 'radio' as const, label: 'Show Dividers',
     options: [
@@ -140,15 +128,7 @@ const colorFields = {
   backgroundColor: { type: 'text' as const, label: 'Background Color (hex or theme token)' },
   textColor: { type: 'text' as const, label: 'Text Color (hex or theme token)' },
   numberColor: { type: 'text' as const, label: 'Number Color (hex or theme token)' },
-  borderRadius: {
-    type: 'select' as const, label: 'Border Radius',
-    options: [
-      { label: 'None', value: 'none' },
-      { label: 'Small', value: 'sm' },
-      { label: 'Medium', value: 'md' },
-      { label: 'Large', value: 'lg' },
-    ],
-  },
+  borderRadius: { type: 'select' as const, label: 'Border Radius', options: RADIUS_OPTIONS },
 };
 
 // ── All flat fields ─────────────────────────────────────────────────────────
@@ -157,6 +137,8 @@ const allFields = {
   ...contentFields,
   ...layoutFields,
   ...colorFields,
+  ...sharedBackgroundFields,
+  ...sharedSectionLayoutFields,
 };
 
 // ── Component ───────────────────────────────────────────────────────────────
@@ -168,7 +150,6 @@ export const StatsSection: ComponentConfig<StatsSectionProps> = {
     title: 'Our Impact',
     subtitle: 'Trusted by thousands',
     columns: '4',
-    alignment: 'center',
     stats: [
       { id: '1', number: '10K+', label: 'Happy Customers', icon: 'people', iconColor: '#3b82f6' },
       { id: '2', number: '500+', label: 'Products', icon: 'package', iconColor: '#3b82f6' },
@@ -178,13 +159,32 @@ export const StatsSection: ComponentConfig<StatsSectionProps> = {
     backgroundColor: '#ffffff',
     textColor: '#000000',
     numberColor: '#3b82f6',
-    spacing: 'normal',
     showDividers: true,
     borderRadius: 'md',
+
+    // Background (shared section control model)
+    backgroundScheme: '',
+    backgroundImage: '',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    overlayColor: '',
+    overlayOpacity: '0',
+    gradientFrom: '',
+    gradientTo: '',
+
+    // Section layout (shared)
+    density: 'comfortable',
+    contentWidth: 'wide',
+    contentAlign: 'center',
+    verticalAlign: 'top',
+    minHeight: '',
   } as StatsSectionProps,
   render: ({
-    title, subtitle, columns, alignment, stats, backgroundColor,
-    textColor, numberColor, spacing, showDividers, borderRadius,
+    title, subtitle, columns, stats, backgroundColor,
+    textColor, numberColor, showDividers, borderRadius,
+    backgroundScheme, backgroundImage, backgroundSize, backgroundPosition,
+    overlayColor, overlayOpacity, gradientFrom, gradientTo,
+    density, contentWidth, contentAlign, verticalAlign, minHeight,
   }) => {
     const [_hasAnimated, setHasAnimated] = useState(false);
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -200,54 +200,74 @@ export const StatsSection: ComponentConfig<StatsSectionProps> = {
       return () => observer.disconnect();
     }, [_hasAnimated]);
 
-    return (
-      <div
-        ref={sectionRef}
-        className={`stats-section w-full ${SPACING_CLASSES[spacing] || 'py-12 px-6'}`}
-        style={{ backgroundColor }}
-      >
-        <div className="max-w-7xl mx-auto px-4">
-          {(title || subtitle) && (
-            <div className={`mb-12 ${ALIGNMENT_CLASSES[alignment] || 'text-center'}`}>
-              {title && <h2 className="text-4xl font-bold mb-2" style={{ color: textColor }}>{title}</h2>}
-              {subtitle && <p className="text-lg opacity-75" style={{ color: textColor }}>{subtitle}</p>}
-            </div>
-          )}
+    // When a scheme is active its text color flows from SectionShell; the
+    // explicit textColor prop only applies on plain/gradient backgrounds.
+    const fg = backgroundScheme ? undefined : (resolveColor(textColor) || textColor);
+    const fgStyle = fg ? { color: fg } : undefined;
 
-          <div
-            className={`grid gap-6 md:gap-8 ${
-              columns === '2' ? 'grid-cols-1 md:grid-cols-2' :
-              columns === '3' ? 'grid-cols-1 md:grid-cols-3' :
-              'grid-cols-2 md:grid-cols-4'
-            }`}
-          >
-            {(stats || []).map((stat, index) => {
-              const isLast = index === (stats || []).length - 1;
-              const borderClass = showDividers && !isLast ? 'md:border-r border-gray-200' : '';
-              return (
-                <div
-                  key={stat.id}
-                  className={`relative ${borderClass} ${RADIUS_CLASSES[borderRadius] || 'rounded-md'} p-6`}
-                >
-                  <div className="text-4xl mb-2" style={{ color: stat.iconColor }}>
-                    {ICON_EMOJI[stat.icon] || '📊'}
-                  </div>
-                  <div className="text-5xl font-bold mb-2" style={{ color: numberColor }}>
-                    {stat.number}
-                  </div>
-                  <div className="text-base font-semibold mb-1" style={{ color: textColor }}>
-                    {stat.label}
-                  </div>
-                  {stat.description && (
-                    <div className="text-sm opacity-75" style={{ color: textColor }}>
-                      {stat.description}
+    return (
+      <div ref={sectionRef} className="w-full">
+        <SectionShell
+          backgroundScheme={backgroundScheme}
+          backgroundImage={backgroundImage}
+          backgroundSize={backgroundSize}
+          backgroundPosition={backgroundPosition}
+          overlayColor={overlayColor}
+          overlayOpacity={overlayOpacity}
+          gradientFrom={gradientFrom}
+          gradientTo={gradientTo}
+          backgroundColor={backgroundColor}
+          density={density}
+          contentWidth={contentWidth}
+          contentAlign={contentAlign}
+          verticalAlign={verticalAlign}
+          minHeight={minHeight}
+          className="overflow-hidden"
+          contentClassName="px-4"
+        >
+          <div className="w-full">
+            {(title || subtitle) && (
+              <div className={`mb-12 ${TEXT_ALIGN_CLASSES[contentAlign || 'center'] || 'text-center'}`}>
+                {title && <h2 className="text-4xl font-bold mb-2" style={fgStyle}>{title}</h2>}
+                {subtitle && <p className="text-lg opacity-75" style={fgStyle}>{subtitle}</p>}
+              </div>
+            )}
+
+            <div
+              className={`grid gap-6 md:gap-8 ${
+                columns === '2' ? 'grid-cols-1 md:grid-cols-2' :
+                columns === '3' ? 'grid-cols-1 md:grid-cols-3' :
+                'grid-cols-2 md:grid-cols-4'
+              }`}
+            >
+              {(stats || []).map((stat, index) => {
+                const isLast = index === (stats || []).length - 1;
+                const borderClass = showDividers && !isLast ? 'md:border-r border-gray-200' : '';
+                return (
+                  <div
+                    key={stat.id}
+                    className={`relative ${borderClass} ${RADIUS_CLASSES[borderRadius || 'md'] || 'rounded-md'} p-6`}
+                  >
+                    <div className="text-4xl mb-2" style={{ color: stat.iconColor }}>
+                      {ICON_EMOJI[stat.icon] || '📊'}
                     </div>
-                  )}
-                </div>
-              );
-            })}
+                    <div className="text-5xl font-bold mb-2" style={{ color: numberColor }}>
+                      {stat.number}
+                    </div>
+                    <div className="text-base font-semibold mb-1" style={fgStyle}>
+                      {stat.label}
+                    </div>
+                    {stat.description && (
+                      <div className="text-sm opacity-75" style={fgStyle}>
+                        {stat.description}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        </SectionShell>
       </div>
     );
   },

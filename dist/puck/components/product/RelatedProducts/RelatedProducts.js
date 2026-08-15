@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
 import { ProductGridRenderer } from './productgrid';
-import { sharedTypographyFields, sharedLayoutFields, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
+import { buildTypographyClasses, sharedTypographyFields, sharedLayoutFields, defaultTypographyProps, defaultLayoutProps, } from '../../../design-system';
 // ── Content fields (component-specific) ─────────────────────────────────────
 const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
 const contentFields = {
@@ -69,20 +69,21 @@ export const RelatedProducts = {
     },
     render: (rawProps) => {
         const { products = [], showTagline, tagline, marginTop, marginBottom, fontSize, fontWeight, lineHeight, textAlign, textColor, ...gridProps } = rawProps;
+        // Typography via design-system classes (semantic ladder values) —
+        // Number(fontWeight) broke with 'bold'/'semibold' values.
+        const taglineClasses = [
+            buildTypographyClasses(rawProps),
+            textAlign === 'center' ? 'mx-auto' : textAlign === 'right' ? 'ml-auto' : '',
+            'max-w-2xl mb-12',
+        ].filter(Boolean).join(' ');
         const taglineStyle = {
-            textAlign: textAlign || 'center',
-            fontSize: fontSize || '1.125rem',
-            fontWeight: Number(fontWeight) || 400,
-            lineHeight: lineHeight || '1.625',
             color: resolveColor(textColor) || '#374151',
-            maxWidth: '42rem',
-            margin: '0 auto 3rem auto',
         };
         const wrapperStyle = {
             marginTop: marginTop || undefined,
             marginBottom: marginBottom || undefined,
         };
-        return (_jsxs("div", { style: wrapperStyle, children: [showTagline && tagline && (_jsx("div", { style: taglineStyle, children: tagline })), _jsx(ProductGridRenderer, { products: products, ...gridProps })] }));
+        return (_jsxs("div", { style: wrapperStyle, children: [showTagline && tagline && (_jsx("div", { className: taglineClasses, style: taglineStyle, children: tagline })), _jsx(ProductGridRenderer, { products: products, ...gridProps })] }));
     },
 };
 export default RelatedProducts;

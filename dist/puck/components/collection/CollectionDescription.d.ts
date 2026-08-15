@@ -1,8 +1,12 @@
 import type { ComponentConfig } from '@puckeditor/core';
 export interface CollectionDescriptionProps {
     fontSize: string;
-    textAlign: 'left' | 'center' | 'right';
+    fontWeight: string;
+    textAlign: string;
     textColor: string;
+    lineHeight: string;
+    letterSpacing: string;
+    textTransform: string;
     marginBottom: string;
     maxWidth: string;
 }

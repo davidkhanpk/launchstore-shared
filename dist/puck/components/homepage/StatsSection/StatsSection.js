@@ -1,6 +1,8 @@
 'use client';
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useRef } from 'react';
+import { resolveColor } from '../../../../theme/resolveColor';
+import { SectionShell, sharedBackgroundFields, sharedSectionLayoutFields, RADIUS_OPTIONS, } from '../../../design-system';
 /** Emoji icon dictionary for StatsSection icons. */
 const ICON_EMOJI = {
     people: '👥', star: '⭐', trophy: '🏆', briefcase: '💼',
@@ -19,15 +21,12 @@ const ICON_OPTIONS = [
     { label: '🚀 Rocket', value: 'rocket' },
     { label: '✓ Check', value: 'check' },
 ];
-const SPACING_CLASSES = {
-    compact: 'py-6 px-4',
-    normal: 'py-12 px-6',
-    spacious: 'py-20 px-8',
-};
+// Static lookups so Tailwind can see the classes at build time.
 const RADIUS_CLASSES = {
     none: 'rounded-none', sm: 'rounded-sm', md: 'rounded-md', lg: 'rounded-lg',
+    xl: 'rounded-xl', full: 'rounded-full',
 };
-const ALIGNMENT_CLASSES = {
+const TEXT_ALIGN_CLASSES = {
     left: 'text-left', center: 'text-center', right: 'text-right',
 };
 // ── Stats array field (custom render — Puck array field) ────────────────────
@@ -72,22 +71,6 @@ const layoutFields = {
             { label: '4', value: '4' },
         ],
     },
-    alignment: {
-        type: 'select', label: 'Alignment',
-        options: [
-            { label: 'Left', value: 'left' },
-            { label: 'Center', value: 'center' },
-            { label: 'Right', value: 'right' },
-        ],
-    },
-    spacing: {
-        type: 'select', label: 'Spacing',
-        options: [
-            { label: 'Compact', value: 'compact' },
-            { label: 'Normal', value: 'normal' },
-            { label: 'Spacious', value: 'spacious' },
-        ],
-    },
     showDividers: {
         type: 'radio', label: 'Show Dividers',
         options: [
@@ -101,21 +84,15 @@ const colorFields = {
     backgroundColor: { type: 'text', label: 'Background Color (hex or theme token)' },
     textColor: { type: 'text', label: 'Text Color (hex or theme token)' },
     numberColor: { type: 'text', label: 'Number Color (hex or theme token)' },
-    borderRadius: {
-        type: 'select', label: 'Border Radius',
-        options: [
-            { label: 'None', value: 'none' },
-            { label: 'Small', value: 'sm' },
-            { label: 'Medium', value: 'md' },
-            { label: 'Large', value: 'lg' },
-        ],
-    },
+    borderRadius: { type: 'select', label: 'Border Radius', options: RADIUS_OPTIONS },
 };
 // ── All flat fields ─────────────────────────────────────────────────────────
 const allFields = {
     ...contentFields,
     ...layoutFields,
     ...colorFields,
+    ...sharedBackgroundFields,
+    ...sharedSectionLayoutFields,
 };
 // ── Component ───────────────────────────────────────────────────────────────
 export const StatsSection = {
@@ -125,7 +102,6 @@ export const StatsSection = {
         title: 'Our Impact',
         subtitle: 'Trusted by thousands',
         columns: '4',
-        alignment: 'center',
         stats: [
             { id: '1', number: '10K+', label: 'Happy Customers', icon: 'people', iconColor: '#3b82f6' },
             { id: '2', number: '500+', label: 'Products', icon: 'package', iconColor: '#3b82f6' },
@@ -135,11 +111,25 @@ export const StatsSection = {
         backgroundColor: '#ffffff',
         textColor: '#000000',
         numberColor: '#3b82f6',
-        spacing: 'normal',
         showDividers: true,
         borderRadius: 'md',
+        // Background (shared section control model)
+        backgroundScheme: '',
+        backgroundImage: '',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        overlayColor: '',
+        overlayOpacity: '0',
+        gradientFrom: '',
+        gradientTo: '',
+        // Section layout (shared)
+        density: 'comfortable',
+        contentWidth: 'wide',
+        contentAlign: 'center',
+        verticalAlign: 'top',
+        minHeight: '',
     },
-    render: ({ title, subtitle, columns, alignment, stats, backgroundColor, textColor, numberColor, spacing, showDividers, borderRadius, }) => {
+    render: ({ title, subtitle, columns, stats, backgroundColor, textColor, numberColor, showDividers, borderRadius, backgroundScheme, backgroundImage, backgroundSize, backgroundPosition, overlayColor, overlayOpacity, gradientFrom, gradientTo, density, contentWidth, contentAlign, verticalAlign, minHeight, }) => {
         const [_hasAnimated, setHasAnimated] = useState(false);
         const sectionRef = useRef(null);
         useEffect(() => {
@@ -151,13 +141,17 @@ export const StatsSection = {
                 observer.observe(sectionRef.current);
             return () => observer.disconnect();
         }, [_hasAnimated]);
-        return (_jsx("div", { ref: sectionRef, className: `stats-section w-full ${SPACING_CLASSES[spacing] || 'py-12 px-6'}`, style: { backgroundColor }, children: _jsxs("div", { className: "max-w-7xl mx-auto px-4", children: [(title || subtitle) && (_jsxs("div", { className: `mb-12 ${ALIGNMENT_CLASSES[alignment] || 'text-center'}`, children: [title && _jsx("h2", { className: "text-4xl font-bold mb-2", style: { color: textColor }, children: title }), subtitle && _jsx("p", { className: "text-lg opacity-75", style: { color: textColor }, children: subtitle })] })), _jsx("div", { className: `grid gap-6 md:gap-8 ${columns === '2' ? 'grid-cols-1 md:grid-cols-2' :
-                            columns === '3' ? 'grid-cols-1 md:grid-cols-3' :
-                                'grid-cols-2 md:grid-cols-4'}`, children: (stats || []).map((stat, index) => {
-                            const isLast = index === (stats || []).length - 1;
-                            const borderClass = showDividers && !isLast ? 'md:border-r border-gray-200' : '';
-                            return (_jsxs("div", { className: `relative ${borderClass} ${RADIUS_CLASSES[borderRadius] || 'rounded-md'} p-6`, children: [_jsx("div", { className: "text-4xl mb-2", style: { color: stat.iconColor }, children: ICON_EMOJI[stat.icon] || '📊' }), _jsx("div", { className: "text-5xl font-bold mb-2", style: { color: numberColor }, children: stat.number }), _jsx("div", { className: "text-base font-semibold mb-1", style: { color: textColor }, children: stat.label }), stat.description && (_jsx("div", { className: "text-sm opacity-75", style: { color: textColor }, children: stat.description }))] }, stat.id));
-                        }) })] }) }));
+        // When a scheme is active its text color flows from SectionShell; the
+        // explicit textColor prop only applies on plain/gradient backgrounds.
+        const fg = backgroundScheme ? undefined : (resolveColor(textColor) || textColor);
+        const fgStyle = fg ? { color: fg } : undefined;
+        return (_jsx("div", { ref: sectionRef, className: "w-full", children: _jsx(SectionShell, { backgroundScheme: backgroundScheme, backgroundImage: backgroundImage, backgroundSize: backgroundSize, backgroundPosition: backgroundPosition, overlayColor: overlayColor, overlayOpacity: overlayOpacity, gradientFrom: gradientFrom, gradientTo: gradientTo, backgroundColor: backgroundColor, density: density, contentWidth: contentWidth, contentAlign: contentAlign, verticalAlign: verticalAlign, minHeight: minHeight, className: "overflow-hidden", contentClassName: "px-4", children: _jsxs("div", { className: "w-full", children: [(title || subtitle) && (_jsxs("div", { className: `mb-12 ${TEXT_ALIGN_CLASSES[contentAlign || 'center'] || 'text-center'}`, children: [title && _jsx("h2", { className: "text-4xl font-bold mb-2", style: fgStyle, children: title }), subtitle && _jsx("p", { className: "text-lg opacity-75", style: fgStyle, children: subtitle })] })), _jsx("div", { className: `grid gap-6 md:gap-8 ${columns === '2' ? 'grid-cols-1 md:grid-cols-2' :
+                                columns === '3' ? 'grid-cols-1 md:grid-cols-3' :
+                                    'grid-cols-2 md:grid-cols-4'}`, children: (stats || []).map((stat, index) => {
+                                const isLast = index === (stats || []).length - 1;
+                                const borderClass = showDividers && !isLast ? 'md:border-r border-gray-200' : '';
+                                return (_jsxs("div", { className: `relative ${borderClass} ${RADIUS_CLASSES[borderRadius || 'md'] || 'rounded-md'} p-6`, children: [_jsx("div", { className: "text-4xl mb-2", style: { color: stat.iconColor }, children: ICON_EMOJI[stat.icon] || '📊' }), _jsx("div", { className: "text-5xl font-bold mb-2", style: { color: numberColor }, children: stat.number }), _jsx("div", { className: "text-base font-semibold mb-1", style: fgStyle, children: stat.label }), stat.description && (_jsx("div", { className: "text-sm opacity-75", style: fgStyle, children: stat.description }))] }, stat.id));
+                            }) })] }) }) }));
     },
 };
 export default StatsSection;

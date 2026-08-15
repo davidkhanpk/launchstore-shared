@@ -36,7 +36,7 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-08-15T08:56:44.445Z",
+  "generatedAt": "2026-08-15T09:11:48.770Z",
   "total": 139,
   "entries": [
     {
@@ -1917,12 +1917,6 @@ export const registry: CompiledRegistry = {
         "showDescription": {
           "type": "boolean"
         },
-        "height": {
-          "type": "string"
-        },
-        "overlayOpacity": {
-          "type": "number"
-        },
         "style": {
           "type": "string"
         },
@@ -1931,6 +1925,45 @@ export const registry: CompiledRegistry = {
         },
         "textColor": {
           "type": "color"
+        },
+        "backgroundScheme": {
+          "type": "string"
+        },
+        "backgroundImage": {
+          "type": "string"
+        },
+        "backgroundSize": {
+          "type": "string"
+        },
+        "backgroundPosition": {
+          "type": "string"
+        },
+        "overlayColor": {
+          "type": "color"
+        },
+        "overlayOpacity": {
+          "type": "string"
+        },
+        "gradientFrom": {
+          "type": "string"
+        },
+        "gradientTo": {
+          "type": "string"
+        },
+        "density": {
+          "type": "string"
+        },
+        "contentWidth": {
+          "type": "string"
+        },
+        "contentAlign": {
+          "type": "string"
+        },
+        "verticalAlign": {
+          "type": "string"
+        },
+        "minHeight": {
+          "type": "string"
         }
       },
       "jsonSchema": {
@@ -1943,12 +1976,6 @@ export const registry: CompiledRegistry = {
         "showDescription": {
           "type": "boolean"
         },
-        "height": {
-          "type": "string"
-        },
-        "overlayOpacity": {
-          "type": "number"
-        },
         "style": {
           "type": "string"
         },
@@ -1957,17 +1984,67 @@ export const registry: CompiledRegistry = {
         },
         "textColor": {
           "type": "color"
+        },
+        "backgroundScheme": {
+          "type": "string"
+        },
+        "backgroundImage": {
+          "type": "string"
+        },
+        "backgroundSize": {
+          "type": "string"
+        },
+        "backgroundPosition": {
+          "type": "string"
+        },
+        "overlayColor": {
+          "type": "color"
+        },
+        "overlayOpacity": {
+          "type": "string"
+        },
+        "gradientFrom": {
+          "type": "string"
+        },
+        "gradientTo": {
+          "type": "string"
+        },
+        "density": {
+          "type": "string"
+        },
+        "contentWidth": {
+          "type": "string"
+        },
+        "contentAlign": {
+          "type": "string"
+        },
+        "verticalAlign": {
+          "type": "string"
+        },
+        "minHeight": {
+          "type": "string"
         }
       },
       "defaultProps": {
         "showImage": true,
         "showTitle": true,
         "showDescription": true,
-        "height": "medium",
-        "overlayOpacity": 0.4,
         "style": "standard",
         "backgroundColor": "#111827",
-        "textColor": "#ffffff"
+        "textColor": "#ffffff",
+        "backgroundScheme": "",
+        "backgroundImage": "",
+        "backgroundSize": "cover",
+        "backgroundPosition": "center",
+        "overlayColor": "#000000",
+        "overlayOpacity": "40",
+        "gradientFrom": "",
+        "gradientTo": "",
+        "density": "spacious",
+        "contentWidth": "full",
+        "contentAlign": "center",
+        "verticalAlign": "middle",
+        "minHeight": "lg"
       },
       "isContainer": false,
       "zones": [],
@@ -3184,10 +3261,14 @@ export const registry: CompiledRegistry = {
         }
       },
       "defaultProps": {
-        "fontSize": "text-base",
+        "fontSize": "base",
+        "fontWeight": "normal",
         "textAlign": "left",
-        "textColor": "text-gray-600",
-        "marginBottom": "mb-6",
+        "textColor": "#6b7280",
+        "lineHeight": "normal",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginBottom": "6",
         "maxWidth": "max-w-3xl"
       },
       "isContainer": false,
@@ -3348,12 +3429,6 @@ export const registry: CompiledRegistry = {
         "showDescription": {
           "type": "boolean"
         },
-        "height": {
-          "type": "string"
-        },
-        "overlayOpacity": {
-          "type": "number"
-        },
         "style": {
           "type": "string"
         },
@@ -3362,6 +3437,45 @@ export const registry: CompiledRegistry = {
         },
         "textColor": {
           "type": "color"
+        },
+        "backgroundScheme": {
+          "type": "string"
+        },
+        "backgroundImage": {
+          "type": "string"
+        },
+        "backgroundSize": {
+          "type": "string"
+        },
+        "backgroundPosition": {
+          "type": "string"
+        },
+        "overlayColor": {
+          "type": "color"
+        },
+        "overlayOpacity": {
+          "type": "string"
+        },
+        "gradientFrom": {
+          "type": "string"
+        },
+        "gradientTo": {
+          "type": "string"
+        },
+        "density": {
+          "type": "string"
+        },
+        "contentWidth": {
+          "type": "string"
+        },
+        "contentAlign": {
+          "type": "string"
+        },
+        "verticalAlign": {
+          "type": "string"
+        },
+        "minHeight": {
+          "type": "string"
         }
       },
       "jsonSchema": {
@@ -3374,12 +3488,6 @@ export const registry: CompiledRegistry = {
         "showDescription": {
           "type": "boolean"
         },
-        "height": {
-          "type": "string"
-        },
-        "overlayOpacity": {
-          "type": "number"
-        },
         "style": {
           "type": "string"
         },
@@ -3388,17 +3496,67 @@ export const registry: CompiledRegistry = {
         },
         "textColor": {
           "type": "color"
+        },
+        "backgroundScheme": {
+          "type": "string"
+        },
+        "backgroundImage": {
+          "type": "string"
+        },
+        "backgroundSize": {
+          "type": "string"
+        },
+        "backgroundPosition": {
+          "type": "string"
+        },
+        "overlayColor": {
+          "type": "color"
+        },
+        "overlayOpacity": {
+          "type": "string"
+        },
+        "gradientFrom": {
+          "type": "string"
+        },
+        "gradientTo": {
+          "type": "string"
+        },
+        "density": {
+          "type": "string"
+        },
+        "contentWidth": {
+          "type": "string"
+        },
+        "contentAlign": {
+          "type": "string"
+        },
+        "verticalAlign": {
+          "type": "string"
+        },
+        "minHeight": {
+          "type": "string"
         }
       },
       "defaultProps": {
         "showImage": true,
         "showTitle": true,
         "showDescription": true,
-        "height": "medium",
-        "overlayOpacity": 0.3,
         "style": "standard",
         "backgroundColor": "#111827",
-        "textColor": "#ffffff"
+        "textColor": "#ffffff",
+        "backgroundScheme": "",
+        "backgroundImage": "",
+        "backgroundSize": "cover",
+        "backgroundPosition": "center",
+        "overlayColor": "#000000",
+        "overlayOpacity": "30",
+        "gradientFrom": "",
+        "gradientTo": "",
+        "density": "spacious",
+        "contentWidth": "full",
+        "contentAlign": "center",
+        "verticalAlign": "middle",
+        "minHeight": "lg"
       },
       "isContainer": false,
       "zones": [],
@@ -3641,10 +3799,14 @@ export const registry: CompiledRegistry = {
       },
       "defaultProps": {
         "tag": "h1",
-        "fontSize": "text-3xl",
-        "textAlign": "left",
+        "fontSize": "3xl",
         "fontWeight": "bold",
-        "marginBottom": "mb-4",
+        "textAlign": "left",
+        "textColor": "#111827",
+        "lineHeight": "normal",
+        "letterSpacing": "normal",
+        "textTransform": "none",
+        "marginBottom": "4",
         "showProductCount": true
       },
       "isContainer": false,
@@ -10314,7 +10476,46 @@ export const registry: CompiledRegistry = {
         "buttonTextColor": {
           "type": "color"
         },
-        "alignment": {
+        "borderRadius": {
+          "type": "string"
+        },
+        "backgroundScheme": {
+          "type": "string"
+        },
+        "backgroundImage": {
+          "type": "string"
+        },
+        "backgroundSize": {
+          "type": "string"
+        },
+        "backgroundPosition": {
+          "type": "string"
+        },
+        "overlayColor": {
+          "type": "string"
+        },
+        "overlayOpacity": {
+          "type": "string"
+        },
+        "gradientFrom": {
+          "type": "string"
+        },
+        "gradientTo": {
+          "type": "string"
+        },
+        "density": {
+          "type": "string"
+        },
+        "contentWidth": {
+          "type": "string"
+        },
+        "contentAlign": {
+          "type": "string"
+        },
+        "verticalAlign": {
+          "type": "string"
+        },
+        "minHeight": {
           "type": "string"
         }
       },
@@ -10343,7 +10544,46 @@ export const registry: CompiledRegistry = {
         "buttonTextColor": {
           "type": "color"
         },
-        "alignment": {
+        "borderRadius": {
+          "type": "string"
+        },
+        "backgroundScheme": {
+          "type": "string"
+        },
+        "backgroundImage": {
+          "type": "string"
+        },
+        "backgroundSize": {
+          "type": "string"
+        },
+        "backgroundPosition": {
+          "type": "string"
+        },
+        "overlayColor": {
+          "type": "string"
+        },
+        "overlayOpacity": {
+          "type": "string"
+        },
+        "gradientFrom": {
+          "type": "string"
+        },
+        "gradientTo": {
+          "type": "string"
+        },
+        "density": {
+          "type": "string"
+        },
+        "contentWidth": {
+          "type": "string"
+        },
+        "contentAlign": {
+          "type": "string"
+        },
+        "verticalAlign": {
+          "type": "string"
+        },
+        "minHeight": {
           "type": "string"
         }
       },
@@ -10356,7 +10596,20 @@ export const registry: CompiledRegistry = {
         "textColor": "#ffffff",
         "buttonColor": "#ffffff",
         "buttonTextColor": "#111827",
-        "alignment": "center"
+        "borderRadius": "lg",
+        "backgroundScheme": "",
+        "backgroundImage": "",
+        "backgroundSize": "cover",
+        "backgroundPosition": "center",
+        "overlayColor": "",
+        "overlayOpacity": "0",
+        "gradientFrom": "",
+        "gradientTo": "",
+        "density": "compact",
+        "contentWidth": "full",
+        "contentAlign": "center",
+        "verticalAlign": "top",
+        "minHeight": ""
       },
       "isContainer": false,
       "zones": [],
@@ -21127,12 +21380,6 @@ export const registry: CompiledRegistry = {
           "showDescription": {
             "type": "boolean"
           },
-          "height": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number"
-          },
           "style": {
             "type": "string"
           },
@@ -21141,6 +21388,45 @@ export const registry: CompiledRegistry = {
           },
           "textColor": {
             "type": "color"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
+            "type": "string"
           }
         },
         "jsonSchema": {
@@ -21153,12 +21439,6 @@ export const registry: CompiledRegistry = {
           "showDescription": {
             "type": "boolean"
           },
-          "height": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number"
-          },
           "style": {
             "type": "string"
           },
@@ -21167,17 +21447,67 @@ export const registry: CompiledRegistry = {
           },
           "textColor": {
             "type": "color"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
+            "type": "string"
           }
         },
         "defaultProps": {
           "showImage": true,
           "showTitle": true,
           "showDescription": true,
-          "height": "medium",
-          "overlayOpacity": 0.4,
           "style": "standard",
           "backgroundColor": "#111827",
-          "textColor": "#ffffff"
+          "textColor": "#ffffff",
+          "backgroundScheme": "",
+          "backgroundImage": "",
+          "backgroundSize": "cover",
+          "backgroundPosition": "center",
+          "overlayColor": "#000000",
+          "overlayOpacity": "40",
+          "gradientFrom": "",
+          "gradientTo": "",
+          "density": "spacious",
+          "contentWidth": "full",
+          "contentAlign": "center",
+          "verticalAlign": "middle",
+          "minHeight": "lg"
         },
         "isContainer": false,
         "zones": [],
@@ -22398,10 +22728,14 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "fontSize": "text-base",
+          "fontSize": "base",
+          "fontWeight": "normal",
           "textAlign": "left",
-          "textColor": "text-gray-600",
-          "marginBottom": "mb-6",
+          "textColor": "#6b7280",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "textTransform": "none",
+          "marginBottom": "6",
           "maxWidth": "max-w-3xl"
         },
         "isContainer": false,
@@ -22562,12 +22896,6 @@ export const registry: CompiledRegistry = {
           "showDescription": {
             "type": "boolean"
           },
-          "height": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number"
-          },
           "style": {
             "type": "string"
           },
@@ -22576,6 +22904,45 @@ export const registry: CompiledRegistry = {
           },
           "textColor": {
             "type": "color"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
+            "type": "string"
           }
         },
         "jsonSchema": {
@@ -22588,12 +22955,6 @@ export const registry: CompiledRegistry = {
           "showDescription": {
             "type": "boolean"
           },
-          "height": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number"
-          },
           "style": {
             "type": "string"
           },
@@ -22602,17 +22963,67 @@ export const registry: CompiledRegistry = {
           },
           "textColor": {
             "type": "color"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
+            "type": "string"
           }
         },
         "defaultProps": {
           "showImage": true,
           "showTitle": true,
           "showDescription": true,
-          "height": "medium",
-          "overlayOpacity": 0.3,
           "style": "standard",
           "backgroundColor": "#111827",
-          "textColor": "#ffffff"
+          "textColor": "#ffffff",
+          "backgroundScheme": "",
+          "backgroundImage": "",
+          "backgroundSize": "cover",
+          "backgroundPosition": "center",
+          "overlayColor": "#000000",
+          "overlayOpacity": "30",
+          "gradientFrom": "",
+          "gradientTo": "",
+          "density": "spacious",
+          "contentWidth": "full",
+          "contentAlign": "center",
+          "verticalAlign": "middle",
+          "minHeight": "lg"
         },
         "isContainer": false,
         "zones": [],
@@ -22855,10 +23266,14 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "tag": "h1",
-          "fontSize": "text-3xl",
-          "textAlign": "left",
+          "fontSize": "3xl",
           "fontWeight": "bold",
-          "marginBottom": "mb-4",
+          "textAlign": "left",
+          "textColor": "#111827",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "textTransform": "none",
+          "marginBottom": "4",
           "showProductCount": true
         },
         "isContainer": false,
@@ -29540,7 +29955,46 @@ export const registry: CompiledRegistry = {
           "buttonTextColor": {
             "type": "color"
           },
-          "alignment": {
+          "borderRadius": {
+            "type": "string"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "string"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
             "type": "string"
           }
         },
@@ -29569,7 +30023,46 @@ export const registry: CompiledRegistry = {
           "buttonTextColor": {
             "type": "color"
           },
-          "alignment": {
+          "borderRadius": {
+            "type": "string"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "string"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
             "type": "string"
           }
         },
@@ -29582,7 +30075,20 @@ export const registry: CompiledRegistry = {
           "textColor": "#ffffff",
           "buttonColor": "#ffffff",
           "buttonTextColor": "#111827",
-          "alignment": "center"
+          "borderRadius": "lg",
+          "backgroundScheme": "",
+          "backgroundImage": "",
+          "backgroundSize": "cover",
+          "backgroundPosition": "center",
+          "overlayColor": "",
+          "overlayOpacity": "0",
+          "gradientFrom": "",
+          "gradientTo": "",
+          "density": "compact",
+          "contentWidth": "full",
+          "contentAlign": "center",
+          "verticalAlign": "top",
+          "minHeight": ""
         },
         "isContainer": false,
         "zones": [],
@@ -44878,10 +45384,14 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "fontSize": "text-base",
+          "fontSize": "base",
+          "fontWeight": "normal",
           "textAlign": "left",
-          "textColor": "text-gray-600",
-          "marginBottom": "mb-6",
+          "textColor": "#6b7280",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "textTransform": "none",
+          "marginBottom": "6",
           "maxWidth": "max-w-3xl"
         },
         "isContainer": false,
@@ -53054,10 +53564,14 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "fontSize": "text-base",
+          "fontSize": "base",
+          "fontWeight": "normal",
           "textAlign": "left",
-          "textColor": "text-gray-600",
-          "marginBottom": "mb-6",
+          "textColor": "#6b7280",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "textTransform": "none",
+          "marginBottom": "6",
           "maxWidth": "max-w-3xl"
         },
         "isContainer": false,
@@ -53776,12 +54290,6 @@ export const registry: CompiledRegistry = {
           "showDescription": {
             "type": "boolean"
           },
-          "height": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number"
-          },
           "style": {
             "type": "string"
           },
@@ -53790,6 +54298,45 @@ export const registry: CompiledRegistry = {
           },
           "textColor": {
             "type": "color"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
+            "type": "string"
           }
         },
         "jsonSchema": {
@@ -53802,12 +54349,6 @@ export const registry: CompiledRegistry = {
           "showDescription": {
             "type": "boolean"
           },
-          "height": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number"
-          },
           "style": {
             "type": "string"
           },
@@ -53816,17 +54357,67 @@ export const registry: CompiledRegistry = {
           },
           "textColor": {
             "type": "color"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
+            "type": "string"
           }
         },
         "defaultProps": {
           "showImage": true,
           "showTitle": true,
           "showDescription": true,
-          "height": "medium",
-          "overlayOpacity": 0.4,
           "style": "standard",
           "backgroundColor": "#111827",
-          "textColor": "#ffffff"
+          "textColor": "#ffffff",
+          "backgroundScheme": "",
+          "backgroundImage": "",
+          "backgroundSize": "cover",
+          "backgroundPosition": "center",
+          "overlayColor": "#000000",
+          "overlayOpacity": "40",
+          "gradientFrom": "",
+          "gradientTo": "",
+          "density": "spacious",
+          "contentWidth": "full",
+          "contentAlign": "center",
+          "verticalAlign": "middle",
+          "minHeight": "lg"
         },
         "isContainer": false,
         "zones": [],
@@ -55883,12 +56474,6 @@ export const registry: CompiledRegistry = {
           "showDescription": {
             "type": "boolean"
           },
-          "height": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number"
-          },
           "style": {
             "type": "string"
           },
@@ -55897,6 +56482,45 @@ export const registry: CompiledRegistry = {
           },
           "textColor": {
             "type": "color"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
+            "type": "string"
           }
         },
         "jsonSchema": {
@@ -55909,12 +56533,6 @@ export const registry: CompiledRegistry = {
           "showDescription": {
             "type": "boolean"
           },
-          "height": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number"
-          },
           "style": {
             "type": "string"
           },
@@ -55923,17 +56541,67 @@ export const registry: CompiledRegistry = {
           },
           "textColor": {
             "type": "color"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
+            "type": "string"
           }
         },
         "defaultProps": {
           "showImage": true,
           "showTitle": true,
           "showDescription": true,
-          "height": "medium",
-          "overlayOpacity": 0.4,
           "style": "standard",
           "backgroundColor": "#111827",
-          "textColor": "#ffffff"
+          "textColor": "#ffffff",
+          "backgroundScheme": "",
+          "backgroundImage": "",
+          "backgroundSize": "cover",
+          "backgroundPosition": "center",
+          "overlayColor": "#000000",
+          "overlayOpacity": "40",
+          "gradientFrom": "",
+          "gradientTo": "",
+          "density": "spacious",
+          "contentWidth": "full",
+          "contentAlign": "center",
+          "verticalAlign": "middle",
+          "minHeight": "lg"
         },
         "isContainer": false,
         "zones": [],
@@ -55966,12 +56634,6 @@ export const registry: CompiledRegistry = {
           "showDescription": {
             "type": "boolean"
           },
-          "height": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number"
-          },
           "style": {
             "type": "string"
           },
@@ -55980,6 +56642,45 @@ export const registry: CompiledRegistry = {
           },
           "textColor": {
             "type": "color"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
+            "type": "string"
           }
         },
         "jsonSchema": {
@@ -55992,12 +56693,6 @@ export const registry: CompiledRegistry = {
           "showDescription": {
             "type": "boolean"
           },
-          "height": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number"
-          },
           "style": {
             "type": "string"
           },
@@ -56006,17 +56701,67 @@ export const registry: CompiledRegistry = {
           },
           "textColor": {
             "type": "color"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
+            "type": "string"
           }
         },
         "defaultProps": {
           "showImage": true,
           "showTitle": true,
           "showDescription": true,
-          "height": "medium",
-          "overlayOpacity": 0.3,
           "style": "standard",
           "backgroundColor": "#111827",
-          "textColor": "#ffffff"
+          "textColor": "#ffffff",
+          "backgroundScheme": "",
+          "backgroundImage": "",
+          "backgroundSize": "cover",
+          "backgroundPosition": "center",
+          "overlayColor": "#000000",
+          "overlayOpacity": "30",
+          "gradientFrom": "",
+          "gradientTo": "",
+          "density": "spacious",
+          "contentWidth": "full",
+          "contentAlign": "center",
+          "verticalAlign": "middle",
+          "minHeight": "lg"
         },
         "isContainer": false,
         "zones": [],
@@ -57546,10 +58291,14 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "tag": "h1",
-          "fontSize": "text-3xl",
-          "textAlign": "left",
+          "fontSize": "3xl",
           "fontWeight": "bold",
-          "marginBottom": "mb-4",
+          "textAlign": "left",
+          "textColor": "#111827",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "textTransform": "none",
+          "marginBottom": "4",
           "showProductCount": true
         },
         "isContainer": false,
@@ -61156,7 +61905,46 @@ export const registry: CompiledRegistry = {
           "buttonTextColor": {
             "type": "color"
           },
-          "alignment": {
+          "borderRadius": {
+            "type": "string"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "string"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
             "type": "string"
           }
         },
@@ -61185,7 +61973,46 @@ export const registry: CompiledRegistry = {
           "buttonTextColor": {
             "type": "color"
           },
-          "alignment": {
+          "borderRadius": {
+            "type": "string"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "string"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
             "type": "string"
           }
         },
@@ -61198,7 +62025,20 @@ export const registry: CompiledRegistry = {
           "textColor": "#ffffff",
           "buttonColor": "#ffffff",
           "buttonTextColor": "#111827",
-          "alignment": "center"
+          "borderRadius": "lg",
+          "backgroundScheme": "",
+          "backgroundImage": "",
+          "backgroundSize": "cover",
+          "backgroundPosition": "center",
+          "overlayColor": "",
+          "overlayOpacity": "0",
+          "gradientFrom": "",
+          "gradientTo": "",
+          "density": "compact",
+          "contentWidth": "full",
+          "contentAlign": "center",
+          "verticalAlign": "top",
+          "minHeight": ""
         },
         "isContainer": false,
         "zones": [],
@@ -61890,10 +62730,14 @@ export const registry: CompiledRegistry = {
           }
         },
         "defaultProps": {
-          "fontSize": "text-base",
+          "fontSize": "base",
+          "fontWeight": "normal",
           "textAlign": "left",
-          "textColor": "text-gray-600",
-          "marginBottom": "mb-6",
+          "textColor": "#6b7280",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "textTransform": "none",
+          "marginBottom": "6",
           "maxWidth": "max-w-3xl"
         },
         "isContainer": false,
@@ -62054,12 +62898,6 @@ export const registry: CompiledRegistry = {
           "showDescription": {
             "type": "boolean"
           },
-          "height": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number"
-          },
           "style": {
             "type": "string"
           },
@@ -62068,6 +62906,45 @@ export const registry: CompiledRegistry = {
           },
           "textColor": {
             "type": "color"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
+            "type": "string"
           }
         },
         "jsonSchema": {
@@ -62080,12 +62957,6 @@ export const registry: CompiledRegistry = {
           "showDescription": {
             "type": "boolean"
           },
-          "height": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number"
-          },
           "style": {
             "type": "string"
           },
@@ -62094,17 +62965,67 @@ export const registry: CompiledRegistry = {
           },
           "textColor": {
             "type": "color"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
+            "type": "string"
           }
         },
         "defaultProps": {
           "showImage": true,
           "showTitle": true,
           "showDescription": true,
-          "height": "medium",
-          "overlayOpacity": 0.3,
           "style": "standard",
           "backgroundColor": "#111827",
-          "textColor": "#ffffff"
+          "textColor": "#ffffff",
+          "backgroundScheme": "",
+          "backgroundImage": "",
+          "backgroundSize": "cover",
+          "backgroundPosition": "center",
+          "overlayColor": "#000000",
+          "overlayOpacity": "30",
+          "gradientFrom": "",
+          "gradientTo": "",
+          "density": "spacious",
+          "contentWidth": "full",
+          "contentAlign": "center",
+          "verticalAlign": "middle",
+          "minHeight": "lg"
         },
         "isContainer": false,
         "zones": [],
@@ -62347,10 +63268,14 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "tag": "h1",
-          "fontSize": "text-3xl",
-          "textAlign": "left",
+          "fontSize": "3xl",
           "fontWeight": "bold",
-          "marginBottom": "mb-4",
+          "textAlign": "left",
+          "textColor": "#111827",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "textTransform": "none",
+          "marginBottom": "4",
           "showProductCount": true
         },
         "isContainer": false,
@@ -63515,10 +64440,14 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "tag": "h1",
-          "fontSize": "text-3xl",
-          "textAlign": "left",
+          "fontSize": "3xl",
           "fontWeight": "bold",
-          "marginBottom": "mb-4",
+          "textAlign": "left",
+          "textColor": "#111827",
+          "lineHeight": "normal",
+          "letterSpacing": "normal",
+          "textTransform": "none",
+          "marginBottom": "4",
           "showProductCount": true
         },
         "isContainer": false,
@@ -94698,7 +95627,46 @@ export const registry: CompiledRegistry = {
           "buttonTextColor": {
             "type": "color"
           },
-          "alignment": {
+          "borderRadius": {
+            "type": "string"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "string"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
             "type": "string"
           }
         },
@@ -94727,7 +95695,46 @@ export const registry: CompiledRegistry = {
           "buttonTextColor": {
             "type": "color"
           },
-          "alignment": {
+          "borderRadius": {
+            "type": "string"
+          },
+          "backgroundScheme": {
+            "type": "string"
+          },
+          "backgroundImage": {
+            "type": "string"
+          },
+          "backgroundSize": {
+            "type": "string"
+          },
+          "backgroundPosition": {
+            "type": "string"
+          },
+          "overlayColor": {
+            "type": "string"
+          },
+          "overlayOpacity": {
+            "type": "string"
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          },
+          "density": {
+            "type": "string"
+          },
+          "contentWidth": {
+            "type": "string"
+          },
+          "contentAlign": {
+            "type": "string"
+          },
+          "verticalAlign": {
+            "type": "string"
+          },
+          "minHeight": {
             "type": "string"
           }
         },
@@ -94740,7 +95747,20 @@ export const registry: CompiledRegistry = {
           "textColor": "#ffffff",
           "buttonColor": "#ffffff",
           "buttonTextColor": "#111827",
-          "alignment": "center"
+          "borderRadius": "lg",
+          "backgroundScheme": "",
+          "backgroundImage": "",
+          "backgroundSize": "cover",
+          "backgroundPosition": "center",
+          "overlayColor": "",
+          "overlayOpacity": "0",
+          "gradientFrom": "",
+          "gradientTo": "",
+          "density": "compact",
+          "contentWidth": "full",
+          "contentAlign": "center",
+          "verticalAlign": "top",
+          "minHeight": ""
         },
         "isContainer": false,
         "zones": [],

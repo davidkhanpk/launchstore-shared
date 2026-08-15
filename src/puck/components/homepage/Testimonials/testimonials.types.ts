@@ -44,5 +44,23 @@ export interface TestimonialsProps {
   textColor: string;
   cardBackground: string;
   accentColor: string;
-  borderRadius: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+  /** Tailwind radius scale value — see RADIUS_OPTIONS in the design system. */
+  borderRadius: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+
+  // Background (shared section control model: image > gradient > scheme > color)
+  backgroundScheme?: string;
+  backgroundImage?: string;
+  backgroundSize?: string;
+  backgroundPosition?: string;
+  overlayColor?: string;
+  overlayOpacity?: string;
+  gradientFrom?: string;
+  gradientTo?: string;
+
+  // Section layout (shared)
+  density?: string;
+  contentWidth?: string;
+  contentAlign?: string;
+  verticalAlign?: string;
+  minHeight?: string;
 }

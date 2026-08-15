@@ -19,12 +19,31 @@ export interface NewsletterProps {
     collectName: boolean;
     nameRequired: boolean;
     successMessage: string;
-    backgroundColor: string;
-    textColor: string;
+    fontSize?: string;
+    fontWeight?: string;
+    lineHeight?: string;
+    letterSpacing?: string;
+    textTransform?: string;
+    textColor?: string;
     inputBackground: string;
     inputBorder: string;
     buttonBackground: string;
     buttonTextColor: string;
-    borderRadius: 'none' | 'sm' | 'md' | 'lg' | 'full';
+    /** Tailwind radius scale value — see RADIUS_OPTIONS in the design system. */
+    borderRadius: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
+    backgroundScheme?: string;
+    backgroundImage?: string;
+    backgroundSize?: string;
+    backgroundPosition?: string;
+    overlayColor?: string;
+    overlayOpacity?: string;
+    gradientFrom?: string;
+    gradientTo?: string;
+    backgroundColor?: string;
+    density?: string;
+    contentWidth?: string;
+    contentAlign?: string;
+    verticalAlign?: string;
+    minHeight?: string;
 }
 //# sourceMappingURL=newsletter.types.d.ts.map

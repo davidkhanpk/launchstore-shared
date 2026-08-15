@@ -3,9 +3,12 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { DropZone } from '@puckeditor/core';
 import type { ColumnsProps } from './columns.types';
 import {
+  sharedBackgroundFields,
   sharedLayoutFields,
+  buildBackground,
+  BackgroundOverlay,
   buildLayoutClasses,
-  defaultLayoutProps,
+  SPACING_OPTIONS,
 } from '../../../design-system';
 
 // ── Component-specific fields ───────────────────────────────────────────────
@@ -29,17 +32,7 @@ const contentFields = {
       { label: 'Right Much Larger (30/70)', value: '30-70' },
     ],
   },
-  gap: {
-    type: 'select' as const, label: 'Gap Between Columns',
-    options: [
-      { label: 'None', value: 'none' },
-      { label: 'XS', value: 'xs' },
-      { label: 'Small', value: 'sm' },
-      { label: 'Medium', value: 'md' },
-      { label: 'Large', value: 'lg' },
-      { label: 'XL', value: 'xl' },
-    ],
-  },
+  gap: { type: 'select' as const, label: 'Gap Between Columns', options: SPACING_OPTIONS },
   mobileStack: {
     type: 'radio' as const, label: 'Stack on Mobile',
     options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
@@ -59,6 +52,7 @@ const contentFields = {
 
 const allFields = {
   ...contentFields,
+  ...sharedBackgroundFields,
   ...sharedLayoutFields,
 };
 
@@ -73,15 +67,8 @@ const ALIGN_MAP: Record<string, string> = {
   stretch: 'stretch',
 };
 
-// Component-specific gap scale → Tailwind class.
-const GAP_CLASS: Record<string, string> = {
-  none: 'gap-0',
-  xs: 'gap-1',
-  sm: 'gap-2',
-  md: 'gap-4',
-  lg: 'gap-6',
-  xl: 'gap-8',
-};
+// Legacy semantic gap values (pre-normalization) still resolve.
+const LEGACY_GAP: Record<string, string> = { none: '0', xs: '1', sm: '2', md: '4', lg: '6', xl: '8' };
 
 function desktopTemplate(columns: string, layout?: string): string {
   if (columns === '2') {
@@ -107,30 +94,52 @@ export const Columns: ComponentConfig<ColumnsProps> = {
   defaultProps: {
     columns: '2',
     layout: '50-50',
-    gap: 'lg',
+    gap: '6',
     mobileStack: true,
     alignItems: 'start',
-    ...defaultLayoutProps,
+    backgroundScheme: '',
+    backgroundImage: '',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    overlayColor: '',
+    overlayOpacity: '0',
+    gradientFrom: '',
+    gradientTo: '',
+    backgroundColor: '',
+    marginTop: '0',
+    marginBottom: '0',
+    paddingX: '0',
+    paddingY: '0',
   } as ColumnsProps,
   render: (rawProps: any) => {
     const {
-      columns = '2', layout = '50-50', gap = 'lg',
+      columns = '2', layout = '50-50', gap = '6',
       mobileStack = true, alignItems = 'start',
       marginTop, marginBottom, paddingX, paddingY,
+      backgroundScheme, backgroundImage, backgroundSize, backgroundPosition,
+      overlayColor, overlayOpacity, gradientFrom, gradientTo, backgroundColor,
     } = rawProps;
+
+    const bg = buildBackground({
+      backgroundScheme, backgroundImage, backgroundSize, backgroundPosition,
+      gradientFrom, gradientTo, backgroundColor,
+    });
 
     const n = parseInt(columns, 10) || 2;
     const desktopCols = desktopTemplate(columns, layout);
     const stackId = `cols-${columns}-${layout || '50-50'}-${mobileStack ? 's' : 'n'}`;
 
+    const gapValue = LEGACY_GAP[gap] ?? gap;
     const className = [
+      'relative',
       stackId,
       'grid',
-      GAP_CLASS[gap] || '',
+      gapValue ? `gap-${gapValue}` : '',
       buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY }),
     ].filter(Boolean).join(' ');
 
     const gridStyle: React.CSSProperties = {
+      ...bg.style,
       gridTemplateColumns: mobileStack ? '1fr' : desktopCols,
       alignItems: ALIGN_MAP[alignItems] || 'start',
     };
@@ -145,8 +154,11 @@ export const Columns: ComponentConfig<ColumnsProps> = {
       <>
         {responsiveStyle}
         <div className={className} style={gridStyle}>
+          {bg.hasOverlaySource && (
+            <BackgroundOverlay overlayColor={overlayColor} overlayOpacity={overlayOpacity} />
+          )}
           {Array.from({ length: n }, (_, i) => (
-            <div key={i} style={{ minHeight: '100px' }}>
+            <div key={i} className="relative" style={{ minHeight: '100px' }}>
               <DropZone zone={`column-${i + 1}`} />
             </div>
           ))}

@@ -1,15 +1,16 @@
 import React from 'react';
 import type { ComponentConfig } from '@puckeditor/core';
 import { DropZone } from '@puckeditor/core';
-import { resolveColor } from '../../../../theme/resolveColor';
 import type { FlexColumnProps } from './flexcolumn.types';
 import {
+  sharedBackgroundFields,
   sharedLayoutFields,
   sharedColorFields,
+  buildBackground,
+  BackgroundOverlay,
   buildLayoutClasses,
   buildColorClasses,
-  defaultLayoutProps,
-  defaultColorProps,
+  SPACING_OPTIONS,
 } from '../../../design-system';
 
 // ── Component-specific fields ───────────────────────────────────────────────
@@ -35,17 +36,7 @@ const contentFields = {
       { label: 'Stretch', value: 'stretch' },
     ],
   },
-  gap: {
-    type: 'select' as const, label: 'Gap Between Items',
-    options: [
-      { label: 'None', value: 'none' },
-      { label: 'Extra Small', value: 'xs' },
-      { label: 'Small', value: 'sm' },
-      { label: 'Medium', value: 'md' },
-      { label: 'Large', value: 'lg' },
-      { label: 'Extra Large', value: 'xl' },
-    ],
-  },
+  gap: { type: 'select' as const, label: 'Gap Between Items', options: SPACING_OPTIONS },
   fullHeight: {
     type: 'radio' as const, label: 'Full Height',
     options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
@@ -57,6 +48,7 @@ const contentFields = {
 
 const allFields = {
   ...contentFields,
+  ...sharedBackgroundFields,
   ...sharedLayoutFields,
   ...sharedColorFields,
 };
@@ -71,15 +63,8 @@ const ALIGN_MAP: Record<string, string> = {
   start: 'flex-start', center: 'center', end: 'flex-end', stretch: 'stretch',
 };
 
-// Component-specific gap scale → Tailwind class.
-const GAP_CLASS: Record<string, string> = {
-  none: 'gap-0',
-  xs: 'gap-1',
-  sm: 'gap-2',
-  md: 'gap-4',
-  lg: 'gap-6',
-  xl: 'gap-8',
-};
+// Legacy semantic gap values (pre-normalization) still resolve.
+const LEGACY_GAP: Record<string, string> = { none: '0', xs: '1', sm: '2', md: '4', lg: '6', xl: '8' };
 
 // ── Component ───────────────────────────────────────────────────────────────
 
@@ -89,46 +74,66 @@ export const FlexColumn: ComponentConfig<FlexColumnProps> = {
   defaultProps: {
     justifyContent: 'start',
     alignItems: 'start',
-    gap: 'md',
+    gap: '4',
     fullHeight: false,
     minHeight: 'auto',
-    ...defaultLayoutProps,
-    ...defaultColorProps,
+    backgroundScheme: '',
+    backgroundImage: '',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    overlayColor: '',
+    overlayOpacity: '0',
+    gradientFrom: '',
+    gradientTo: '',
+    backgroundColor: '',
+    marginTop: '0',
+    marginBottom: '0',
+    paddingX: '0',
+    paddingY: '0',
+    borderRadius: 'none',
   } as FlexColumnProps,
   render: (rawProps: any) => {
     const {
       justifyContent = 'start',
       alignItems = 'start',
-      gap = 'md',
+      gap = '4',
       fullHeight = false,
       minHeight,
       marginTop, marginBottom, paddingX, paddingY,
+      backgroundScheme, backgroundImage, backgroundSize, backgroundPosition,
+      overlayColor, overlayOpacity, gradientFrom, gradientTo,
       backgroundColor, borderRadius,
     } = rawProps;
 
+    const bg = buildBackground({
+      backgroundScheme, backgroundImage, backgroundSize, backgroundPosition,
+      gradientFrom, gradientTo, backgroundColor,
+    });
+
+    const gapValue = LEGACY_GAP[gap] ?? gap;
     const className = [
-      'flex flex-col',
-      GAP_CLASS[gap] || '',
+      'relative flex flex-col',
+      gapValue ? `gap-${gapValue}` : '',
       buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY }),
       buildColorClasses({ borderRadius }),
     ].filter(Boolean).join(' ');
 
     const style: React.CSSProperties = {
-      display: 'flex',
-      flexDirection: 'column',
+      ...bg.style,
       justifyContent: JUSTIFY_MAP[justifyContent] || 'flex-start',
       alignItems: ALIGN_MAP[alignItems] || 'stretch',
       height: fullHeight ? '100%' : 'auto',
-      minHeight: fullHeight ? undefined : (minHeight || '50px'),
-      border: '1px dashed rgba(0, 0, 0, 0.1)',
+      minHeight: fullHeight ? undefined : (minHeight && minHeight !== 'auto' ? minHeight : '50px'),
     };
-    if (backgroundColor && backgroundColor !== 'transparent') {
-      style.backgroundColor = resolveColor(backgroundColor) || backgroundColor;
-    }
 
     return (
       <div className={className} style={style}>
-        <DropZone zone="flex-column-content" disallow={[] as any} />
+        {bg.hasOverlaySource && (
+          <BackgroundOverlay overlayColor={overlayColor} overlayOpacity={overlayOpacity} />
+        )}
+        <div className="relative flex flex-col w-full">
+          <DropZone zone="flex-column-content" disallow={[] as any} />
+        </div>
       </div>
     );
   },

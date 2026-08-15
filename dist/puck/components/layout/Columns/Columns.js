@@ -1,6 +1,6 @@
-import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { DropZone } from '@puckeditor/core';
-import { sharedLayoutFields, buildLayoutClasses, defaultLayoutProps, } from '../../../design-system';
+import { sharedBackgroundFields, sharedLayoutFields, buildBackground, BackgroundOverlay, buildLayoutClasses, SPACING_OPTIONS, } from '../../../design-system';
 // ── Component-specific fields ───────────────────────────────────────────────
 const contentFields = {
     columns: {
@@ -21,17 +21,7 @@ const contentFields = {
             { label: 'Right Much Larger (30/70)', value: '30-70' },
         ],
     },
-    gap: {
-        type: 'select', label: 'Gap Between Columns',
-        options: [
-            { label: 'None', value: 'none' },
-            { label: 'XS', value: 'xs' },
-            { label: 'Small', value: 'sm' },
-            { label: 'Medium', value: 'md' },
-            { label: 'Large', value: 'lg' },
-            { label: 'XL', value: 'xl' },
-        ],
-    },
+    gap: { type: 'select', label: 'Gap Between Columns', options: SPACING_OPTIONS },
     mobileStack: {
         type: 'radio', label: 'Stack on Mobile',
         options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
@@ -49,6 +39,7 @@ const contentFields = {
 // ── All flat fields ─────────────────────────────────────────────────────────
 const allFields = {
     ...contentFields,
+    ...sharedBackgroundFields,
     ...sharedLayoutFields,
 };
 // ── Grid template resolver ──────────────────────────────────────────────────
@@ -60,15 +51,8 @@ const ALIGN_MAP = {
     end: 'end',
     stretch: 'stretch',
 };
-// Component-specific gap scale → Tailwind class.
-const GAP_CLASS = {
-    none: 'gap-0',
-    xs: 'gap-1',
-    sm: 'gap-2',
-    md: 'gap-4',
-    lg: 'gap-6',
-    xl: 'gap-8',
-};
+// Legacy semantic gap values (pre-normalization) still resolve.
+const LEGACY_GAP = { none: '0', xs: '1', sm: '2', md: '4', lg: '6', xl: '8' };
 function desktopTemplate(columns, layout) {
     if (columns === '2') {
         switch (layout) {
@@ -93,30 +77,49 @@ export const Columns = {
     defaultProps: {
         columns: '2',
         layout: '50-50',
-        gap: 'lg',
+        gap: '6',
         mobileStack: true,
         alignItems: 'start',
-        ...defaultLayoutProps,
+        backgroundScheme: '',
+        backgroundImage: '',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        overlayColor: '',
+        overlayOpacity: '0',
+        gradientFrom: '',
+        gradientTo: '',
+        backgroundColor: '',
+        marginTop: '0',
+        marginBottom: '0',
+        paddingX: '0',
+        paddingY: '0',
     },
     render: (rawProps) => {
-        const { columns = '2', layout = '50-50', gap = 'lg', mobileStack = true, alignItems = 'start', marginTop, marginBottom, paddingX, paddingY, } = rawProps;
+        const { columns = '2', layout = '50-50', gap = '6', mobileStack = true, alignItems = 'start', marginTop, marginBottom, paddingX, paddingY, backgroundScheme, backgroundImage, backgroundSize, backgroundPosition, overlayColor, overlayOpacity, gradientFrom, gradientTo, backgroundColor, } = rawProps;
+        const bg = buildBackground({
+            backgroundScheme, backgroundImage, backgroundSize, backgroundPosition,
+            gradientFrom, gradientTo, backgroundColor,
+        });
         const n = parseInt(columns, 10) || 2;
         const desktopCols = desktopTemplate(columns, layout);
         const stackId = `cols-${columns}-${layout || '50-50'}-${mobileStack ? 's' : 'n'}`;
+        const gapValue = LEGACY_GAP[gap] ?? gap;
         const className = [
+            'relative',
             stackId,
             'grid',
-            GAP_CLASS[gap] || '',
+            gapValue ? `gap-${gapValue}` : '',
             buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY }),
         ].filter(Boolean).join(' ');
         const gridStyle = {
+            ...bg.style,
             gridTemplateColumns: mobileStack ? '1fr' : desktopCols,
             alignItems: ALIGN_MAP[alignItems] || 'start',
         };
         const responsiveStyle = mobileStack ? (_jsx("style", { children: `
         @media (min-width: 768px) { .${stackId} { grid-template-columns: ${desktopCols} !important; } }
       ` })) : null;
-        return (_jsxs(_Fragment, { children: [responsiveStyle, _jsx("div", { className: className, style: gridStyle, children: Array.from({ length: n }, (_, i) => (_jsx("div", { style: { minHeight: '100px' }, children: _jsx(DropZone, { zone: `column-${i + 1}` }) }, i))) })] }));
+        return (_jsxs(_Fragment, { children: [responsiveStyle, _jsxs("div", { className: className, style: gridStyle, children: [bg.hasOverlaySource && (_jsx(BackgroundOverlay, { overlayColor: overlayColor, overlayOpacity: overlayOpacity })), Array.from({ length: n }, (_, i) => (_jsx("div", { className: "relative", style: { minHeight: '100px' }, children: _jsx(DropZone, { zone: `column-${i + 1}` }) }, i)))] })] }));
     },
 };
 export default Columns;

@@ -1,7 +1,6 @@
-import { jsx as _jsx } from "react/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { DropZone } from '@puckeditor/core';
-import { resolveColor } from '../../../../theme/resolveColor';
-import { sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
+import { sharedBackgroundFields, sharedLayoutFields, sharedColorFields, buildBackground, BackgroundOverlay, buildLayoutClasses, buildColorClasses, SPACING_OPTIONS, } from '../../../design-system';
 // ── Component-specific fields ───────────────────────────────────────────────
 const contentFields = {
     justifyContent: {
@@ -25,17 +24,7 @@ const contentFields = {
             { label: 'Baseline', value: 'baseline' },
         ],
     },
-    gap: {
-        type: 'select', label: 'Gap Between Items',
-        options: [
-            { label: 'None', value: 'none' },
-            { label: 'Extra Small', value: 'xs' },
-            { label: 'Small', value: 'sm' },
-            { label: 'Medium', value: 'md' },
-            { label: 'Large', value: 'lg' },
-            { label: 'Extra Large', value: 'xl' },
-        ],
-    },
+    gap: { type: 'select', label: 'Gap Between Items', options: SPACING_OPTIONS },
     wrap: {
         type: 'select', label: 'Wrap Behavior',
         options: [
@@ -53,6 +42,7 @@ const contentFields = {
 // ── All flat fields ─────────────────────────────────────────────────────────
 const allFields = {
     ...contentFields,
+    ...sharedBackgroundFields,
     ...sharedLayoutFields,
     ...sharedColorFields,
 };
@@ -65,15 +55,8 @@ const ALIGN_MAP = {
     start: 'flex-start', center: 'center', end: 'flex-end',
     stretch: 'stretch', baseline: 'baseline',
 };
-// Component-specific gap scale → Tailwind class.
-const GAP_CLASS = {
-    none: 'gap-0',
-    xs: 'gap-1',
-    sm: 'gap-2',
-    md: 'gap-4',
-    lg: 'gap-6',
-    xl: 'gap-8',
-};
+// Legacy semantic gap values (pre-normalization) still resolve.
+const LEGACY_GAP = { none: '0', xs: '1', sm: '2', md: '4', lg: '6', xl: '8' };
 // ── Component ───────────────────────────────────────────────────────────────
 export const FlexRow = {
     label: 'Flex Row',
@@ -81,14 +64,30 @@ export const FlexRow = {
     defaultProps: {
         justifyContent: 'space-between',
         alignItems: 'center',
-        gap: 'md',
+        gap: '4',
         wrap: 'nowrap',
         fullWidth: true,
-        ...defaultLayoutProps,
-        ...defaultColorProps,
+        backgroundScheme: '',
+        backgroundImage: '',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        overlayColor: '',
+        overlayOpacity: '0',
+        gradientFrom: '',
+        gradientTo: '',
+        backgroundColor: '',
+        marginTop: '0',
+        marginBottom: '0',
+        paddingX: '0',
+        paddingY: '0',
+        borderRadius: 'none',
     },
     render: (rawProps) => {
-        const { justifyContent = 'space-between', alignItems = 'center', gap = 'md', wrap = 'nowrap', fullWidth = true, maxWidth, marginTop, marginBottom, paddingX, paddingY, backgroundColor, borderRadius, } = rawProps;
+        const { justifyContent = 'space-between', alignItems = 'center', gap = '4', wrap = 'nowrap', fullWidth = true, maxWidth, marginTop, marginBottom, paddingX, paddingY, backgroundScheme, backgroundImage, backgroundSize, backgroundPosition, overlayColor, overlayOpacity, gradientFrom, gradientTo, backgroundColor, borderRadius, } = rawProps;
+        const bg = buildBackground({
+            backgroundScheme, backgroundImage, backgroundSize, backgroundPosition,
+            gradientFrom, gradientTo, backgroundColor,
+        });
         const flexLayout = {
             display: 'flex',
             flexDirection: 'row',
@@ -96,22 +95,20 @@ export const FlexRow = {
             alignItems: ALIGN_MAP[alignItems] || 'center',
             flexWrap: wrap,
         };
+        const gapValue = LEGACY_GAP[gap] ?? gap;
         const className = [
-            'flex flex-row',
-            GAP_CLASS[gap] || '',
+            'relative flex flex-row',
+            gapValue ? `gap-${gapValue}` : '',
             buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY }),
             buildColorClasses({ borderRadius }),
         ].filter(Boolean).join(' ');
         const style = {
-            ...flexLayout,
+            ...bg.style,
             width: fullWidth ? '100%' : 'auto',
             maxWidth: fullWidth ? undefined : maxWidth,
             minHeight: '50px',
         };
-        if (backgroundColor && backgroundColor !== 'transparent') {
-            style.backgroundColor = resolveColor(backgroundColor) || backgroundColor;
-        }
-        return (_jsx("div", { className: className, style: style, children: _jsx(DropZone, { zone: "flex-row-content", disallow: [], style: { ...flexLayout, width: '100%' } }) }));
+        return (_jsxs("div", { className: className, style: style, children: [bg.hasOverlaySource && (_jsx(BackgroundOverlay, { overlayColor: overlayColor, overlayOpacity: overlayOpacity })), _jsx("div", { className: "relative w-full", style: flexLayout, children: _jsx(DropZone, { zone: "flex-row-content", disallow: [], style: { ...flexLayout, width: '100%' } }) })] }));
     },
 };
 export default FlexRow;

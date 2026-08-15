@@ -1,6 +1,6 @@
 {
   "name": "@launchstore/shared-puck",
-  "version": "0.1.75",
+  "version": "0.1.76",
   "private": true,
   "description": "Single source of truth for Puck components + AI capability registry, shared between launchstore-frontend (editor) and launchstore-storefront (renderer).",
   "main": "dist/index.js",
@@ -9,6 +9,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./theme": {
+      "types": "./dist/theme/resolveColor.d.ts",
+      "default": "./dist/theme/resolveColor.js"
     },
     "./registry": {
       "types": "./dist/registry.d.ts",

@@ -119,7 +119,7 @@ export const Newsletter = {
         // Component-specific form styling
         inputBackground: '#ffffff',
         inputBorder: '#e5e5e5',
-        buttonBackground: '#3b82f6',
+        buttonBackground: 'button.primary.background',
         buttonTextColor: '#ffffff',
         borderRadius: 'md',
         // Background (shared section control model)

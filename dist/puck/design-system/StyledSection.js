@@ -1,29 +1,26 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { resolveColor } from '../../theme/resolveColor';
-import { buildLayoutClasses, buildColorClasses, } from './presets';
+import { SectionShell } from './section-shell';
+import { buildColorClasses, buildBorderClasses, resolveColor } from './presets';
 /**
- * StyledSection — universal layout wrapper for all Puck components.
- *
- * Uses Tailwind classes (via buildLayoutClasses/buildColorClasses) for
- * spacing, padding, and border radius. Colors use inline style with
- * resolveColor (hex/token → CSS value).
+ * StyledSection — universal section wrapper for Puck components, now built
+ * on SectionShell (the ecommerce section control model): background scheme /
+ * image + overlay / gradient, density, content width, alignment, min-height.
+ * Surface extras (radius, border, shadow) layer on top of the shell.
  */
-export const StyledSection = ({ marginTop, marginBottom, paddingX, paddingY, backgroundColor, borderRadius, borderWidth, borderColor, children, }) => {
-    const layoutClasses = buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY });
-    const colorClasses = buildColorClasses({ borderRadius });
-    const borderClasses = borderWidth ? `border-${borderWidth}` : '';
-    const style = {};
-    if (backgroundColor && backgroundColor !== 'transparent') {
-        style.backgroundColor = resolveColor(backgroundColor) || backgroundColor;
-    }
+export const StyledSection = ({ borderRadius, borderWidth, borderColor, shadow, ...shellProps }) => {
+    const surfaceClasses = [
+        buildColorClasses({ borderRadius }),
+        buildBorderClasses({ borderWidth }),
+        shadow && shadow !== 'none' ? `shadow-${shadow}` : '',
+        'overflow-hidden',
+    ].filter(Boolean).join(' ');
+    const surfaceStyle = {};
     const bw = borderWidth;
     if (bw && bw !== '0') {
-        style.borderWidth = `${bw}px`;
-        style.borderStyle = 'solid';
-        style.borderColor = resolveColor(borderColor) || borderColor || '#e5e7eb';
+        surfaceStyle.borderStyle = 'solid';
+        surfaceStyle.borderColor = resolveColor(borderColor) || '#e5e7eb';
     }
-    const allClasses = [layoutClasses, colorClasses, borderClasses].filter(Boolean).join(' ');
-    return _jsx("div", { className: allClasses, style: style, children: children });
+    return (_jsx(SectionShell, { ...shellProps, className: surfaceClasses, style: surfaceStyle }));
 };
 export default StyledSection;
 //# sourceMappingURL=StyledSection.js.map

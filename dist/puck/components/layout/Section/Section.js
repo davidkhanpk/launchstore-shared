@@ -1,34 +1,40 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { DropZone } from '@puckeditor/core';
-import { resolveColor } from '../../../../theme/resolveColor';
-import { sharedLayoutFields, sharedColorFields, buildLayoutClasses, buildColorClasses, defaultLayoutProps, defaultColorProps, } from '../../../design-system';
+import { SectionShell, sharedBackgroundFields, sharedSectionLayoutFields, sharedColorFields, } from '../../../design-system';
 // ── All flat fields ─────────────────────────────────────────────────────────
 const allFields = {
-    ...sharedLayoutFields,
+    ...sharedBackgroundFields,
+    ...sharedSectionLayoutFields,
     ...sharedColorFields,
 };
 // ── Component ───────────────────────────────────────────────────────────────
+/**
+ * Section — the reference implementation of the ecommerce section control
+ * model (SectionShell). Background scheme / image + overlay / gradient,
+ * density, content width, content + vertical alignment, min-height —
+ * everything a merchant needs to build professional section rhythm.
+ */
 export const Section = {
     label: 'Section',
     fields: allFields,
     defaultProps: {
-        ...defaultLayoutProps,
-        paddingY: 'md',
-        ...defaultColorProps,
+        backgroundScheme: '',
+        backgroundImage: '',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        overlayColor: '',
+        overlayOpacity: '0',
+        gradientFrom: '',
+        gradientTo: '',
+        backgroundColor: '',
+        density: 'comfortable',
+        contentWidth: 'standard',
+        contentAlign: 'left',
+        verticalAlign: 'top',
+        minHeight: '',
+        borderRadius: 'none',
     },
-    render: (rawProps) => {
-        const { marginTop, marginBottom, paddingX, paddingY, backgroundColor, borderRadius, } = rawProps;
-        const className = [
-            'w-full',
-            buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY }),
-            buildColorClasses({ borderRadius }),
-        ].filter(Boolean).join(' ');
-        const style = {};
-        if (backgroundColor && backgroundColor !== 'transparent') {
-            style.backgroundColor = resolveColor(backgroundColor) || backgroundColor;
-        }
-        return (_jsx("section", { className: className, style: style, children: _jsx(DropZone, { zone: "content" }) }));
-    },
+    render: (props) => (_jsx(SectionShell, { ...props, children: _jsx(DropZone, { zone: "content" }) })),
 };
 export default Section;
 //# sourceMappingURL=Section.js.map

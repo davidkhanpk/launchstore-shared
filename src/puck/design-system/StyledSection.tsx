@@ -1,58 +1,49 @@
 import React from 'react';
-import { resolveColor } from '../../theme/resolveColor';
-import {
-  buildLayoutClasses,
-  buildColorClasses,
-} from './presets';
+import { SectionShell } from './section-shell';
+import type { SectionShellProps } from './section-shell';
+import { buildColorClasses, buildBorderClasses, resolveColor } from './presets';
 
-export interface StyledSectionProps {
-  marginTop?: string;
-  marginBottom?: string;
-  paddingX?: string;
-  paddingY?: string;
-  backgroundColor?: string;
+export interface StyledSectionProps extends SectionShellProps {
   borderRadius?: string;
   borderWidth?: string;
   borderColor?: string;
-  children: React.ReactNode;
+  shadow?: string;
 }
 
 /**
- * StyledSection — universal layout wrapper for all Puck components.
- *
- * Uses Tailwind classes (via buildLayoutClasses/buildColorClasses) for
- * spacing, padding, and border radius. Colors use inline style with
- * resolveColor (hex/token → CSS value).
+ * StyledSection — universal section wrapper for Puck components, now built
+ * on SectionShell (the ecommerce section control model): background scheme /
+ * image + overlay / gradient, density, content width, alignment, min-height.
+ * Surface extras (radius, border, shadow) layer on top of the shell.
  */
 export const StyledSection: React.FC<StyledSectionProps> = ({
-  marginTop,
-  marginBottom,
-  paddingX,
-  paddingY,
-  backgroundColor,
   borderRadius,
   borderWidth,
   borderColor,
-  children,
+  shadow,
+  ...shellProps
 }) => {
-  const layoutClasses = buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY });
-  const colorClasses = buildColorClasses({ borderRadius });
-  const borderClasses = borderWidth ? `border-${borderWidth}` : '';
+  const surfaceClasses = [
+    buildColorClasses({ borderRadius }),
+    buildBorderClasses({ borderWidth }),
+    shadow && shadow !== 'none' ? `shadow-${shadow}` : '',
+    'overflow-hidden',
+  ].filter(Boolean).join(' ');
 
-  const style: React.CSSProperties = {};
-  if (backgroundColor && backgroundColor !== 'transparent') {
-    style.backgroundColor = resolveColor(backgroundColor) || backgroundColor;
-  }
+  const surfaceStyle: React.CSSProperties = {};
   const bw = borderWidth;
   if (bw && bw !== '0') {
-    style.borderWidth = `${bw}px`;
-    style.borderStyle = 'solid';
-    style.borderColor = resolveColor(borderColor) || borderColor || '#e5e7eb';
+    surfaceStyle.borderStyle = 'solid';
+    surfaceStyle.borderColor = resolveColor(borderColor) || '#e5e7eb';
   }
 
-  const allClasses = [layoutClasses, colorClasses, borderClasses].filter(Boolean).join(' ');
-
-  return <div className={allClasses} style={style}>{children}</div>;
+  return (
+    <SectionShell
+      {...shellProps}
+      className={surfaceClasses}
+      style={surfaceStyle}
+    />
+  );
 };
 
 export default StyledSection;

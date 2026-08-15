@@ -1,21 +1,16 @@
 import React from 'react';
-export interface StyledSectionProps {
-    marginTop?: string;
-    marginBottom?: string;
-    paddingX?: string;
-    paddingY?: string;
-    backgroundColor?: string;
+import type { SectionShellProps } from './section-shell';
+export interface StyledSectionProps extends SectionShellProps {
     borderRadius?: string;
     borderWidth?: string;
     borderColor?: string;
-    children: React.ReactNode;
+    shadow?: string;
 }
 /**
- * StyledSection — universal layout wrapper for all Puck components.
- *
- * Uses Tailwind classes (via buildLayoutClasses/buildColorClasses) for
- * spacing, padding, and border radius. Colors use inline style with
- * resolveColor (hex/token → CSS value).
+ * StyledSection — universal section wrapper for Puck components, now built
+ * on SectionShell (the ecommerce section control model): background scheme /
+ * image + overlay / gradient, density, content width, alignment, min-height.
+ * Surface extras (radius, border, shadow) layer on top of the shell.
  */
 export declare const StyledSection: React.FC<StyledSectionProps>;
 export default StyledSection;

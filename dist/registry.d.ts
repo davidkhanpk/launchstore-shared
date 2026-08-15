@@ -36,7 +36,7 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-08-15T08:25:01.028Z",
+  "generatedAt": "2026-08-15T08:41:26.082Z",
   "total": 139,
   "entries": [
     {
@@ -11931,68 +11931,269 @@ export const registry: CompiledRegistry = {
     {
       "name": "Section",
       "label": "Section",
-      "description": "Semantic <section> wrapper with vertical padding preset (none..xl) and a fixed set of background presets (transparent/white/gray/brand-primary). Contains children — typically a Container with DropZones inside.",
+      "description": "Full ecommerce section: background scheme (light/dark/accent/subtle), background image with overlay, gradient, density (compact/comfortable/spacious), content width (narrow/standard/wide/full), content alignment (L/C/R), vertical alignment and min-height. Contains children via a content DropZone.",
       "category": "layout",
       "intent": [
         "section",
         "page-section",
-        "layout-wrapper",
         "background",
+        "hero-band",
+        "layout-wrapper",
         "padding"
       ],
       "visualRole": "block",
       "dataDeps": [],
       "copyFields": [],
-      "themeable": [],
+      "themeable": [
+        "backgroundScheme",
+        "backgroundColor",
+        "overlayColor",
+        "gradientFrom",
+        "gradientTo"
+      ],
       "a11yRisk": "low",
       "mobileBehavior": "responsive",
       "searchTags": [
         "section",
-        "page-section",
-        "wrapper",
-        "background",
-        "padding",
-        "layout"
+        "background image",
+        "overlay",
+        "gradient",
+        "scheme",
+        "alignment",
+        "hero",
+        "band"
       ],
       "propSchema": {
-        "paddingY": {
+        "backgroundScheme": {
+          "type": "enum",
+          "options": [
+            "",
+            "light",
+            "dark",
+            "accent",
+            "subtle"
+          ]
+        },
+        "backgroundImage": {
+          "type": "string",
+          "description": "Image URL — renders with overlay when set"
+        },
+        "backgroundSize": {
+          "type": "enum",
+          "options": [
+            "cover",
+            "contain",
+            "auto"
+          ]
+        },
+        "backgroundPosition": {
+          "type": "enum",
+          "options": [
+            "center",
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ]
+        },
+        "overlayColor": {
+          "type": "color"
+        },
+        "overlayOpacity": {
+          "type": "enum",
+          "options": [
+            "0",
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60",
+            "70",
+            "80",
+            "90",
+            "100"
+          ]
+        },
+        "gradientFrom": {
+          "type": "color"
+        },
+        "gradientTo": {
+          "type": "color"
+        },
+        "backgroundColor": {
+          "type": "color"
+        },
+        "density": {
+          "type": "enum",
+          "options": [
+            "compact",
+            "comfortable",
+            "spacious"
+          ]
+        },
+        "contentWidth": {
+          "type": "enum",
+          "options": [
+            "narrow",
+            "standard",
+            "wide",
+            "full"
+          ]
+        },
+        "contentAlign": {
+          "type": "enum",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
+        },
+        "verticalAlign": {
+          "type": "enum",
+          "options": [
+            "top",
+            "middle",
+            "bottom"
+          ]
+        },
+        "minHeight": {
+          "type": "enum",
+          "options": [
+            "",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "screen"
+          ]
+        },
+        "borderRadius": {
           "type": "enum",
           "options": [
             "none",
             "sm",
             "md",
             "lg",
-            "xl"
-          ]
-        },
-        "backgroundColor": {
-          "type": "enum",
-          "options": [
-            "transparent",
-            "white",
-            "gray",
-            "primary"
+            "xl",
+            "full"
           ]
         }
       },
       "jsonSchema": {
-        "paddingY": {
+        "backgroundScheme": {
+          "type": "enum",
+          "options": [
+            "",
+            "light",
+            "dark",
+            "accent",
+            "subtle"
+          ]
+        },
+        "backgroundImage": {
+          "type": "string",
+          "description": "Image URL — renders with overlay when set"
+        },
+        "backgroundSize": {
+          "type": "enum",
+          "options": [
+            "cover",
+            "contain",
+            "auto"
+          ]
+        },
+        "backgroundPosition": {
+          "type": "enum",
+          "options": [
+            "center",
+            "top",
+            "bottom",
+            "left",
+            "right"
+          ]
+        },
+        "overlayColor": {
+          "type": "color"
+        },
+        "overlayOpacity": {
+          "type": "enum",
+          "options": [
+            "0",
+            "10",
+            "20",
+            "30",
+            "40",
+            "50",
+            "60",
+            "70",
+            "80",
+            "90",
+            "100"
+          ]
+        },
+        "gradientFrom": {
+          "type": "color"
+        },
+        "gradientTo": {
+          "type": "color"
+        },
+        "backgroundColor": {
+          "type": "color"
+        },
+        "density": {
+          "type": "enum",
+          "options": [
+            "compact",
+            "comfortable",
+            "spacious"
+          ]
+        },
+        "contentWidth": {
+          "type": "enum",
+          "options": [
+            "narrow",
+            "standard",
+            "wide",
+            "full"
+          ]
+        },
+        "contentAlign": {
+          "type": "enum",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
+        },
+        "verticalAlign": {
+          "type": "enum",
+          "options": [
+            "top",
+            "middle",
+            "bottom"
+          ]
+        },
+        "minHeight": {
+          "type": "enum",
+          "options": [
+            "",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "screen"
+          ]
+        },
+        "borderRadius": {
           "type": "enum",
           "options": [
             "none",
             "sm",
             "md",
             "lg",
-            "xl"
-          ]
-        },
-        "backgroundColor": {
-          "type": "enum",
-          "options": [
-            "transparent",
-            "white",
-            "gray",
-            "primary"
+            "xl",
+            "full"
           ]
         }
       },
@@ -30958,68 +31159,269 @@ export const registry: CompiledRegistry = {
       {
         "name": "Section",
         "label": "Section",
-        "description": "Semantic <section> wrapper with vertical padding preset (none..xl) and a fixed set of background presets (transparent/white/gray/brand-primary). Contains children — typically a Container with DropZones inside.",
+        "description": "Full ecommerce section: background scheme (light/dark/accent/subtle), background image with overlay, gradient, density (compact/comfortable/spacious), content width (narrow/standard/wide/full), content alignment (L/C/R), vertical alignment and min-height. Contains children via a content DropZone.",
         "category": "layout",
         "intent": [
           "section",
           "page-section",
-          "layout-wrapper",
           "background",
+          "hero-band",
+          "layout-wrapper",
           "padding"
         ],
         "visualRole": "block",
         "dataDeps": [],
         "copyFields": [],
-        "themeable": [],
+        "themeable": [
+          "backgroundScheme",
+          "backgroundColor",
+          "overlayColor",
+          "gradientFrom",
+          "gradientTo"
+        ],
         "a11yRisk": "low",
         "mobileBehavior": "responsive",
         "searchTags": [
           "section",
-          "page-section",
-          "wrapper",
-          "background",
-          "padding",
-          "layout"
+          "background image",
+          "overlay",
+          "gradient",
+          "scheme",
+          "alignment",
+          "hero",
+          "band"
         ],
         "propSchema": {
-          "paddingY": {
+          "backgroundScheme": {
+            "type": "enum",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Image URL — renders with overlay when set"
+          },
+          "backgroundSize": {
+            "type": "enum",
+            "options": [
+              "cover",
+              "contain",
+              "auto"
+            ]
+          },
+          "backgroundPosition": {
+            "type": "enum",
+            "options": [
+              "center",
+              "top",
+              "bottom",
+              "left",
+              "right"
+            ]
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "enum",
+            "options": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "70",
+              "80",
+              "90",
+              "100"
+            ]
+          },
+          "gradientFrom": {
+            "type": "color"
+          },
+          "gradientTo": {
+            "type": "color"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "density": {
+            "type": "enum",
+            "options": [
+              "compact",
+              "comfortable",
+              "spacious"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "options": [
+              "narrow",
+              "standard",
+              "wide",
+              "full"
+            ]
+          },
+          "contentAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlign": {
+            "type": "enum",
+            "options": [
+              "top",
+              "middle",
+              "bottom"
+            ]
+          },
+          "minHeight": {
+            "type": "enum",
+            "options": [
+              "",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "screen"
+            ]
+          },
+          "borderRadius": {
             "type": "enum",
             "options": [
               "none",
               "sm",
               "md",
               "lg",
-              "xl"
-            ]
-          },
-          "backgroundColor": {
-            "type": "enum",
-            "options": [
-              "transparent",
-              "white",
-              "gray",
-              "primary"
+              "xl",
+              "full"
             ]
           }
         },
         "jsonSchema": {
-          "paddingY": {
+          "backgroundScheme": {
+            "type": "enum",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Image URL — renders with overlay when set"
+          },
+          "backgroundSize": {
+            "type": "enum",
+            "options": [
+              "cover",
+              "contain",
+              "auto"
+            ]
+          },
+          "backgroundPosition": {
+            "type": "enum",
+            "options": [
+              "center",
+              "top",
+              "bottom",
+              "left",
+              "right"
+            ]
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "enum",
+            "options": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "70",
+              "80",
+              "90",
+              "100"
+            ]
+          },
+          "gradientFrom": {
+            "type": "color"
+          },
+          "gradientTo": {
+            "type": "color"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "density": {
+            "type": "enum",
+            "options": [
+              "compact",
+              "comfortable",
+              "spacious"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "options": [
+              "narrow",
+              "standard",
+              "wide",
+              "full"
+            ]
+          },
+          "contentAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlign": {
+            "type": "enum",
+            "options": [
+              "top",
+              "middle",
+              "bottom"
+            ]
+          },
+          "minHeight": {
+            "type": "enum",
+            "options": [
+              "",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "screen"
+            ]
+          },
+          "borderRadius": {
             "type": "enum",
             "options": [
               "none",
               "sm",
               "md",
               "lg",
-              "xl"
-            ]
-          },
-          "backgroundColor": {
-            "type": "enum",
-            "options": [
-              "transparent",
-              "white",
-              "gray",
-              "primary"
+              "xl",
+              "full"
             ]
           }
         },
@@ -102279,68 +102681,269 @@ export const registry: CompiledRegistry = {
       {
         "name": "Section",
         "label": "Section",
-        "description": "Semantic <section> wrapper with vertical padding preset (none..xl) and a fixed set of background presets (transparent/white/gray/brand-primary). Contains children — typically a Container with DropZones inside.",
+        "description": "Full ecommerce section: background scheme (light/dark/accent/subtle), background image with overlay, gradient, density (compact/comfortable/spacious), content width (narrow/standard/wide/full), content alignment (L/C/R), vertical alignment and min-height. Contains children via a content DropZone.",
         "category": "layout",
         "intent": [
           "section",
           "page-section",
-          "layout-wrapper",
           "background",
+          "hero-band",
+          "layout-wrapper",
           "padding"
         ],
         "visualRole": "block",
         "dataDeps": [],
         "copyFields": [],
-        "themeable": [],
+        "themeable": [
+          "backgroundScheme",
+          "backgroundColor",
+          "overlayColor",
+          "gradientFrom",
+          "gradientTo"
+        ],
         "a11yRisk": "low",
         "mobileBehavior": "responsive",
         "searchTags": [
           "section",
-          "page-section",
-          "wrapper",
-          "background",
-          "padding",
-          "layout"
+          "background image",
+          "overlay",
+          "gradient",
+          "scheme",
+          "alignment",
+          "hero",
+          "band"
         ],
         "propSchema": {
-          "paddingY": {
+          "backgroundScheme": {
+            "type": "enum",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Image URL — renders with overlay when set"
+          },
+          "backgroundSize": {
+            "type": "enum",
+            "options": [
+              "cover",
+              "contain",
+              "auto"
+            ]
+          },
+          "backgroundPosition": {
+            "type": "enum",
+            "options": [
+              "center",
+              "top",
+              "bottom",
+              "left",
+              "right"
+            ]
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "enum",
+            "options": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "70",
+              "80",
+              "90",
+              "100"
+            ]
+          },
+          "gradientFrom": {
+            "type": "color"
+          },
+          "gradientTo": {
+            "type": "color"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "density": {
+            "type": "enum",
+            "options": [
+              "compact",
+              "comfortable",
+              "spacious"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "options": [
+              "narrow",
+              "standard",
+              "wide",
+              "full"
+            ]
+          },
+          "contentAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlign": {
+            "type": "enum",
+            "options": [
+              "top",
+              "middle",
+              "bottom"
+            ]
+          },
+          "minHeight": {
+            "type": "enum",
+            "options": [
+              "",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "screen"
+            ]
+          },
+          "borderRadius": {
             "type": "enum",
             "options": [
               "none",
               "sm",
               "md",
               "lg",
-              "xl"
-            ]
-          },
-          "backgroundColor": {
-            "type": "enum",
-            "options": [
-              "transparent",
-              "white",
-              "gray",
-              "primary"
+              "xl",
+              "full"
             ]
           }
         },
         "jsonSchema": {
-          "paddingY": {
+          "backgroundScheme": {
+            "type": "enum",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Image URL — renders with overlay when set"
+          },
+          "backgroundSize": {
+            "type": "enum",
+            "options": [
+              "cover",
+              "contain",
+              "auto"
+            ]
+          },
+          "backgroundPosition": {
+            "type": "enum",
+            "options": [
+              "center",
+              "top",
+              "bottom",
+              "left",
+              "right"
+            ]
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "enum",
+            "options": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "70",
+              "80",
+              "90",
+              "100"
+            ]
+          },
+          "gradientFrom": {
+            "type": "color"
+          },
+          "gradientTo": {
+            "type": "color"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "density": {
+            "type": "enum",
+            "options": [
+              "compact",
+              "comfortable",
+              "spacious"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "options": [
+              "narrow",
+              "standard",
+              "wide",
+              "full"
+            ]
+          },
+          "contentAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlign": {
+            "type": "enum",
+            "options": [
+              "top",
+              "middle",
+              "bottom"
+            ]
+          },
+          "minHeight": {
+            "type": "enum",
+            "options": [
+              "",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "screen"
+            ]
+          },
+          "borderRadius": {
             "type": "enum",
             "options": [
               "none",
               "sm",
               "md",
               "lg",
-              "xl"
-            ]
-          },
-          "backgroundColor": {
-            "type": "enum",
-            "options": [
-              "transparent",
-              "white",
-              "gray",
-              "primary"
+              "xl",
+              "full"
             ]
           }
         },
@@ -102355,144 +102958,269 @@ export const registry: CompiledRegistry = {
       {
         "name": "Section",
         "label": "Section",
-        "description": "Semantic <section> wrapper with vertical padding preset (none..xl) and a fixed set of background presets (transparent/white/gray/brand-primary). Contains children — typically a Container with DropZones inside.",
+        "description": "Full ecommerce section: background scheme (light/dark/accent/subtle), background image with overlay, gradient, density (compact/comfortable/spacious), content width (narrow/standard/wide/full), content alignment (L/C/R), vertical alignment and min-height. Contains children via a content DropZone.",
         "category": "layout",
         "intent": [
           "section",
           "page-section",
-          "layout-wrapper",
           "background",
+          "hero-band",
+          "layout-wrapper",
           "padding"
         ],
         "visualRole": "block",
         "dataDeps": [],
         "copyFields": [],
-        "themeable": [],
+        "themeable": [
+          "backgroundScheme",
+          "backgroundColor",
+          "overlayColor",
+          "gradientFrom",
+          "gradientTo"
+        ],
         "a11yRisk": "low",
         "mobileBehavior": "responsive",
         "searchTags": [
           "section",
-          "page-section",
-          "wrapper",
-          "background",
-          "padding",
-          "layout"
+          "background image",
+          "overlay",
+          "gradient",
+          "scheme",
+          "alignment",
+          "hero",
+          "band"
         ],
         "propSchema": {
-          "paddingY": {
+          "backgroundScheme": {
+            "type": "enum",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Image URL — renders with overlay when set"
+          },
+          "backgroundSize": {
+            "type": "enum",
+            "options": [
+              "cover",
+              "contain",
+              "auto"
+            ]
+          },
+          "backgroundPosition": {
+            "type": "enum",
+            "options": [
+              "center",
+              "top",
+              "bottom",
+              "left",
+              "right"
+            ]
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "enum",
+            "options": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "70",
+              "80",
+              "90",
+              "100"
+            ]
+          },
+          "gradientFrom": {
+            "type": "color"
+          },
+          "gradientTo": {
+            "type": "color"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "density": {
+            "type": "enum",
+            "options": [
+              "compact",
+              "comfortable",
+              "spacious"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "options": [
+              "narrow",
+              "standard",
+              "wide",
+              "full"
+            ]
+          },
+          "contentAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlign": {
+            "type": "enum",
+            "options": [
+              "top",
+              "middle",
+              "bottom"
+            ]
+          },
+          "minHeight": {
+            "type": "enum",
+            "options": [
+              "",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "screen"
+            ]
+          },
+          "borderRadius": {
             "type": "enum",
             "options": [
               "none",
               "sm",
               "md",
               "lg",
-              "xl"
-            ]
-          },
-          "backgroundColor": {
-            "type": "enum",
-            "options": [
-              "transparent",
-              "white",
-              "gray",
-              "primary"
+              "xl",
+              "full"
             ]
           }
         },
         "jsonSchema": {
-          "paddingY": {
+          "backgroundScheme": {
+            "type": "enum",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Image URL — renders with overlay when set"
+          },
+          "backgroundSize": {
+            "type": "enum",
+            "options": [
+              "cover",
+              "contain",
+              "auto"
+            ]
+          },
+          "backgroundPosition": {
+            "type": "enum",
+            "options": [
+              "center",
+              "top",
+              "bottom",
+              "left",
+              "right"
+            ]
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "enum",
+            "options": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "70",
+              "80",
+              "90",
+              "100"
+            ]
+          },
+          "gradientFrom": {
+            "type": "color"
+          },
+          "gradientTo": {
+            "type": "color"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "density": {
+            "type": "enum",
+            "options": [
+              "compact",
+              "comfortable",
+              "spacious"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "options": [
+              "narrow",
+              "standard",
+              "wide",
+              "full"
+            ]
+          },
+          "contentAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlign": {
+            "type": "enum",
+            "options": [
+              "top",
+              "middle",
+              "bottom"
+            ]
+          },
+          "minHeight": {
+            "type": "enum",
+            "options": [
+              "",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "screen"
+            ]
+          },
+          "borderRadius": {
             "type": "enum",
             "options": [
               "none",
               "sm",
               "md",
               "lg",
-              "xl"
-            ]
-          },
-          "backgroundColor": {
-            "type": "enum",
-            "options": [
-              "transparent",
-              "white",
-              "gray",
-              "primary"
-            ]
-          }
-        },
-        "isContainer": true,
-        "zones": [
-          "content"
-        ],
-        "metaPath": "src\\puck\\components\\layout\\Section\\section.meta.ts"
-      }
-    ],
-    "layout-wrapper": [
-      {
-        "name": "Section",
-        "label": "Section",
-        "description": "Semantic <section> wrapper with vertical padding preset (none..xl) and a fixed set of background presets (transparent/white/gray/brand-primary). Contains children — typically a Container with DropZones inside.",
-        "category": "layout",
-        "intent": [
-          "section",
-          "page-section",
-          "layout-wrapper",
-          "background",
-          "padding"
-        ],
-        "visualRole": "block",
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "section",
-          "page-section",
-          "wrapper",
-          "background",
-          "padding",
-          "layout"
-        ],
-        "propSchema": {
-          "paddingY": {
-            "type": "enum",
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "backgroundColor": {
-            "type": "enum",
-            "options": [
-              "transparent",
-              "white",
-              "gray",
-              "primary"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "paddingY": {
-            "type": "enum",
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "backgroundColor": {
-            "type": "enum",
-            "options": [
-              "transparent",
-              "white",
-              "gray",
-              "primary"
+              "xl",
+              "full"
             ]
           }
         },
@@ -102507,68 +103235,823 @@ export const registry: CompiledRegistry = {
       {
         "name": "Section",
         "label": "Section",
-        "description": "Semantic <section> wrapper with vertical padding preset (none..xl) and a fixed set of background presets (transparent/white/gray/brand-primary). Contains children — typically a Container with DropZones inside.",
+        "description": "Full ecommerce section: background scheme (light/dark/accent/subtle), background image with overlay, gradient, density (compact/comfortable/spacious), content width (narrow/standard/wide/full), content alignment (L/C/R), vertical alignment and min-height. Contains children via a content DropZone.",
         "category": "layout",
         "intent": [
           "section",
           "page-section",
-          "layout-wrapper",
           "background",
+          "hero-band",
+          "layout-wrapper",
           "padding"
         ],
         "visualRole": "block",
         "dataDeps": [],
         "copyFields": [],
-        "themeable": [],
+        "themeable": [
+          "backgroundScheme",
+          "backgroundColor",
+          "overlayColor",
+          "gradientFrom",
+          "gradientTo"
+        ],
         "a11yRisk": "low",
         "mobileBehavior": "responsive",
         "searchTags": [
           "section",
-          "page-section",
-          "wrapper",
-          "background",
-          "padding",
-          "layout"
+          "background image",
+          "overlay",
+          "gradient",
+          "scheme",
+          "alignment",
+          "hero",
+          "band"
         ],
         "propSchema": {
-          "paddingY": {
+          "backgroundScheme": {
+            "type": "enum",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Image URL — renders with overlay when set"
+          },
+          "backgroundSize": {
+            "type": "enum",
+            "options": [
+              "cover",
+              "contain",
+              "auto"
+            ]
+          },
+          "backgroundPosition": {
+            "type": "enum",
+            "options": [
+              "center",
+              "top",
+              "bottom",
+              "left",
+              "right"
+            ]
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "enum",
+            "options": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "70",
+              "80",
+              "90",
+              "100"
+            ]
+          },
+          "gradientFrom": {
+            "type": "color"
+          },
+          "gradientTo": {
+            "type": "color"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "density": {
+            "type": "enum",
+            "options": [
+              "compact",
+              "comfortable",
+              "spacious"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "options": [
+              "narrow",
+              "standard",
+              "wide",
+              "full"
+            ]
+          },
+          "contentAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlign": {
+            "type": "enum",
+            "options": [
+              "top",
+              "middle",
+              "bottom"
+            ]
+          },
+          "minHeight": {
+            "type": "enum",
+            "options": [
+              "",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "screen"
+            ]
+          },
+          "borderRadius": {
             "type": "enum",
             "options": [
               "none",
               "sm",
               "md",
               "lg",
-              "xl"
-            ]
-          },
-          "backgroundColor": {
-            "type": "enum",
-            "options": [
-              "transparent",
-              "white",
-              "gray",
-              "primary"
+              "xl",
+              "full"
             ]
           }
         },
         "jsonSchema": {
-          "paddingY": {
+          "backgroundScheme": {
+            "type": "enum",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Image URL — renders with overlay when set"
+          },
+          "backgroundSize": {
+            "type": "enum",
+            "options": [
+              "cover",
+              "contain",
+              "auto"
+            ]
+          },
+          "backgroundPosition": {
+            "type": "enum",
+            "options": [
+              "center",
+              "top",
+              "bottom",
+              "left",
+              "right"
+            ]
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "enum",
+            "options": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "70",
+              "80",
+              "90",
+              "100"
+            ]
+          },
+          "gradientFrom": {
+            "type": "color"
+          },
+          "gradientTo": {
+            "type": "color"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "density": {
+            "type": "enum",
+            "options": [
+              "compact",
+              "comfortable",
+              "spacious"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "options": [
+              "narrow",
+              "standard",
+              "wide",
+              "full"
+            ]
+          },
+          "contentAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlign": {
+            "type": "enum",
+            "options": [
+              "top",
+              "middle",
+              "bottom"
+            ]
+          },
+          "minHeight": {
+            "type": "enum",
+            "options": [
+              "",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "screen"
+            ]
+          },
+          "borderRadius": {
             "type": "enum",
             "options": [
               "none",
               "sm",
               "md",
               "lg",
-              "xl"
+              "xl",
+              "full"
             ]
-          },
-          "backgroundColor": {
+          }
+        },
+        "isContainer": true,
+        "zones": [
+          "content"
+        ],
+        "metaPath": "src\\puck\\components\\layout\\Section\\section.meta.ts"
+      }
+    ],
+    "hero-band": [
+      {
+        "name": "Section",
+        "label": "Section",
+        "description": "Full ecommerce section: background scheme (light/dark/accent/subtle), background image with overlay, gradient, density (compact/comfortable/spacious), content width (narrow/standard/wide/full), content alignment (L/C/R), vertical alignment and min-height. Contains children via a content DropZone.",
+        "category": "layout",
+        "intent": [
+          "section",
+          "page-section",
+          "background",
+          "hero-band",
+          "layout-wrapper",
+          "padding"
+        ],
+        "visualRole": "block",
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [
+          "backgroundScheme",
+          "backgroundColor",
+          "overlayColor",
+          "gradientFrom",
+          "gradientTo"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "section",
+          "background image",
+          "overlay",
+          "gradient",
+          "scheme",
+          "alignment",
+          "hero",
+          "band"
+        ],
+        "propSchema": {
+          "backgroundScheme": {
             "type": "enum",
             "options": [
-              "transparent",
-              "white",
-              "gray",
-              "primary"
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Image URL — renders with overlay when set"
+          },
+          "backgroundSize": {
+            "type": "enum",
+            "options": [
+              "cover",
+              "contain",
+              "auto"
+            ]
+          },
+          "backgroundPosition": {
+            "type": "enum",
+            "options": [
+              "center",
+              "top",
+              "bottom",
+              "left",
+              "right"
+            ]
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "enum",
+            "options": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "70",
+              "80",
+              "90",
+              "100"
+            ]
+          },
+          "gradientFrom": {
+            "type": "color"
+          },
+          "gradientTo": {
+            "type": "color"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "density": {
+            "type": "enum",
+            "options": [
+              "compact",
+              "comfortable",
+              "spacious"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "options": [
+              "narrow",
+              "standard",
+              "wide",
+              "full"
+            ]
+          },
+          "contentAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlign": {
+            "type": "enum",
+            "options": [
+              "top",
+              "middle",
+              "bottom"
+            ]
+          },
+          "minHeight": {
+            "type": "enum",
+            "options": [
+              "",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "screen"
+            ]
+          },
+          "borderRadius": {
+            "type": "enum",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "full"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "backgroundScheme": {
+            "type": "enum",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Image URL — renders with overlay when set"
+          },
+          "backgroundSize": {
+            "type": "enum",
+            "options": [
+              "cover",
+              "contain",
+              "auto"
+            ]
+          },
+          "backgroundPosition": {
+            "type": "enum",
+            "options": [
+              "center",
+              "top",
+              "bottom",
+              "left",
+              "right"
+            ]
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "enum",
+            "options": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "70",
+              "80",
+              "90",
+              "100"
+            ]
+          },
+          "gradientFrom": {
+            "type": "color"
+          },
+          "gradientTo": {
+            "type": "color"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "density": {
+            "type": "enum",
+            "options": [
+              "compact",
+              "comfortable",
+              "spacious"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "options": [
+              "narrow",
+              "standard",
+              "wide",
+              "full"
+            ]
+          },
+          "contentAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlign": {
+            "type": "enum",
+            "options": [
+              "top",
+              "middle",
+              "bottom"
+            ]
+          },
+          "minHeight": {
+            "type": "enum",
+            "options": [
+              "",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "screen"
+            ]
+          },
+          "borderRadius": {
+            "type": "enum",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "full"
+            ]
+          }
+        },
+        "isContainer": true,
+        "zones": [
+          "content"
+        ],
+        "metaPath": "src\\puck\\components\\layout\\Section\\section.meta.ts"
+      }
+    ],
+    "layout-wrapper": [
+      {
+        "name": "Section",
+        "label": "Section",
+        "description": "Full ecommerce section: background scheme (light/dark/accent/subtle), background image with overlay, gradient, density (compact/comfortable/spacious), content width (narrow/standard/wide/full), content alignment (L/C/R), vertical alignment and min-height. Contains children via a content DropZone.",
+        "category": "layout",
+        "intent": [
+          "section",
+          "page-section",
+          "background",
+          "hero-band",
+          "layout-wrapper",
+          "padding"
+        ],
+        "visualRole": "block",
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [
+          "backgroundScheme",
+          "backgroundColor",
+          "overlayColor",
+          "gradientFrom",
+          "gradientTo"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "section",
+          "background image",
+          "overlay",
+          "gradient",
+          "scheme",
+          "alignment",
+          "hero",
+          "band"
+        ],
+        "propSchema": {
+          "backgroundScheme": {
+            "type": "enum",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Image URL — renders with overlay when set"
+          },
+          "backgroundSize": {
+            "type": "enum",
+            "options": [
+              "cover",
+              "contain",
+              "auto"
+            ]
+          },
+          "backgroundPosition": {
+            "type": "enum",
+            "options": [
+              "center",
+              "top",
+              "bottom",
+              "left",
+              "right"
+            ]
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "enum",
+            "options": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "70",
+              "80",
+              "90",
+              "100"
+            ]
+          },
+          "gradientFrom": {
+            "type": "color"
+          },
+          "gradientTo": {
+            "type": "color"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "density": {
+            "type": "enum",
+            "options": [
+              "compact",
+              "comfortable",
+              "spacious"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "options": [
+              "narrow",
+              "standard",
+              "wide",
+              "full"
+            ]
+          },
+          "contentAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlign": {
+            "type": "enum",
+            "options": [
+              "top",
+              "middle",
+              "bottom"
+            ]
+          },
+          "minHeight": {
+            "type": "enum",
+            "options": [
+              "",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "screen"
+            ]
+          },
+          "borderRadius": {
+            "type": "enum",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "full"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "backgroundScheme": {
+            "type": "enum",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Image URL — renders with overlay when set"
+          },
+          "backgroundSize": {
+            "type": "enum",
+            "options": [
+              "cover",
+              "contain",
+              "auto"
+            ]
+          },
+          "backgroundPosition": {
+            "type": "enum",
+            "options": [
+              "center",
+              "top",
+              "bottom",
+              "left",
+              "right"
+            ]
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "enum",
+            "options": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "70",
+              "80",
+              "90",
+              "100"
+            ]
+          },
+          "gradientFrom": {
+            "type": "color"
+          },
+          "gradientTo": {
+            "type": "color"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "density": {
+            "type": "enum",
+            "options": [
+              "compact",
+              "comfortable",
+              "spacious"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "options": [
+              "narrow",
+              "standard",
+              "wide",
+              "full"
+            ]
+          },
+          "contentAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlign": {
+            "type": "enum",
+            "options": [
+              "top",
+              "middle",
+              "bottom"
+            ]
+          },
+          "minHeight": {
+            "type": "enum",
+            "options": [
+              "",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "screen"
+            ]
+          },
+          "borderRadius": {
+            "type": "enum",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "full"
             ]
           }
         },
@@ -102583,68 +104066,269 @@ export const registry: CompiledRegistry = {
       {
         "name": "Section",
         "label": "Section",
-        "description": "Semantic <section> wrapper with vertical padding preset (none..xl) and a fixed set of background presets (transparent/white/gray/brand-primary). Contains children — typically a Container with DropZones inside.",
+        "description": "Full ecommerce section: background scheme (light/dark/accent/subtle), background image with overlay, gradient, density (compact/comfortable/spacious), content width (narrow/standard/wide/full), content alignment (L/C/R), vertical alignment and min-height. Contains children via a content DropZone.",
         "category": "layout",
         "intent": [
           "section",
           "page-section",
-          "layout-wrapper",
           "background",
+          "hero-band",
+          "layout-wrapper",
           "padding"
         ],
         "visualRole": "block",
         "dataDeps": [],
         "copyFields": [],
-        "themeable": [],
+        "themeable": [
+          "backgroundScheme",
+          "backgroundColor",
+          "overlayColor",
+          "gradientFrom",
+          "gradientTo"
+        ],
         "a11yRisk": "low",
         "mobileBehavior": "responsive",
         "searchTags": [
           "section",
-          "page-section",
-          "wrapper",
-          "background",
-          "padding",
-          "layout"
+          "background image",
+          "overlay",
+          "gradient",
+          "scheme",
+          "alignment",
+          "hero",
+          "band"
         ],
         "propSchema": {
-          "paddingY": {
+          "backgroundScheme": {
+            "type": "enum",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Image URL — renders with overlay when set"
+          },
+          "backgroundSize": {
+            "type": "enum",
+            "options": [
+              "cover",
+              "contain",
+              "auto"
+            ]
+          },
+          "backgroundPosition": {
+            "type": "enum",
+            "options": [
+              "center",
+              "top",
+              "bottom",
+              "left",
+              "right"
+            ]
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "enum",
+            "options": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "70",
+              "80",
+              "90",
+              "100"
+            ]
+          },
+          "gradientFrom": {
+            "type": "color"
+          },
+          "gradientTo": {
+            "type": "color"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "density": {
+            "type": "enum",
+            "options": [
+              "compact",
+              "comfortable",
+              "spacious"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "options": [
+              "narrow",
+              "standard",
+              "wide",
+              "full"
+            ]
+          },
+          "contentAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlign": {
+            "type": "enum",
+            "options": [
+              "top",
+              "middle",
+              "bottom"
+            ]
+          },
+          "minHeight": {
+            "type": "enum",
+            "options": [
+              "",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "screen"
+            ]
+          },
+          "borderRadius": {
             "type": "enum",
             "options": [
               "none",
               "sm",
               "md",
               "lg",
-              "xl"
-            ]
-          },
-          "backgroundColor": {
-            "type": "enum",
-            "options": [
-              "transparent",
-              "white",
-              "gray",
-              "primary"
+              "xl",
+              "full"
             ]
           }
         },
         "jsonSchema": {
-          "paddingY": {
+          "backgroundScheme": {
+            "type": "enum",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Image URL — renders with overlay when set"
+          },
+          "backgroundSize": {
+            "type": "enum",
+            "options": [
+              "cover",
+              "contain",
+              "auto"
+            ]
+          },
+          "backgroundPosition": {
+            "type": "enum",
+            "options": [
+              "center",
+              "top",
+              "bottom",
+              "left",
+              "right"
+            ]
+          },
+          "overlayColor": {
+            "type": "color"
+          },
+          "overlayOpacity": {
+            "type": "enum",
+            "options": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "70",
+              "80",
+              "90",
+              "100"
+            ]
+          },
+          "gradientFrom": {
+            "type": "color"
+          },
+          "gradientTo": {
+            "type": "color"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "density": {
+            "type": "enum",
+            "options": [
+              "compact",
+              "comfortable",
+              "spacious"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "options": [
+              "narrow",
+              "standard",
+              "wide",
+              "full"
+            ]
+          },
+          "contentAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlign": {
+            "type": "enum",
+            "options": [
+              "top",
+              "middle",
+              "bottom"
+            ]
+          },
+          "minHeight": {
+            "type": "enum",
+            "options": [
+              "",
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "screen"
+            ]
+          },
+          "borderRadius": {
             "type": "enum",
             "options": [
               "none",
               "sm",
               "md",
               "lg",
-              "xl"
-            ]
-          },
-          "backgroundColor": {
-            "type": "enum",
-            "options": [
-              "transparent",
-              "white",
-              "gray",
-              "primary"
+              "xl",
+              "full"
             ]
           }
         },

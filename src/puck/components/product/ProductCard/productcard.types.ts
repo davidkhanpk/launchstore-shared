@@ -33,8 +33,13 @@ export interface ProductCardProps {
   aspectRatio: ProductCardAspectRatio;
   borderRadius: ProductCardRadius;
   showShadow: boolean;
-  hoverZoom: boolean;
+  hoverEffect?: 'none' | 'zoom' | 'second-image';
+  /** @deprecated use hoverEffect - still honored as 'zoom' */
+  hoverZoom?: boolean;
+  imageFit?: 'cover' | 'contain';
   showTitle: boolean;
+  showVendor?: boolean;
+  customBadgeText?: string;
   titleSize: ProductCardTitleSize;
   titleWeight: ProductCardTitleWeight;
   titleAlign: ProductCardTitleAlign;
@@ -50,6 +55,7 @@ export interface ProductCardProps {
   badgePosition: ProductCardBadgePosition;
   showAddToCart: boolean;
   buttonText: string;
+  quickAddBehavior?: 'link' | 'add';
   buttonStyle: ProductCardButtonStyle;
   buttonSize: ProductCardButtonSize;
   showCartIcon: boolean;

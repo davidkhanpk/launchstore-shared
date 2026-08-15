@@ -70,7 +70,9 @@ const layoutFields = {
     type: 'select' as const, label: 'Display Mode',
     options: [{ label: 'Grid', value: 'grid' }, { label: 'Carousel (Swiper)', value: 'carousel' }],
   },
-  productsPerRow: { type: 'number' as const, label: 'Products Per Row (Grid)', min: 2, max: 6 },
+  productsPerRow: { type: 'number' as const, label: 'Products Per Row — Desktop (Grid)', min: 2, max: 6 },
+  productsPerRowTablet: { type: 'number' as const, label: 'Products Per Row — Tablet (Grid)', min: 1, max: 4 },
+  productsPerRowMobile: { type: 'number' as const, label: 'Products Per Row — Mobile (Grid)', min: 1, max: 2 },
   maxProducts: { type: 'number' as const, label: 'Maximum Products', min: 1, max: 50 },
   slidesPerView: { type: 'number' as const, label: 'Slides Per View (Desktop)', min: 1, max: 6 },
   slidesPerViewTablet: { type: 'number' as const, label: 'Slides Per View (Tablet)', min: 1, max: 4 },
@@ -137,6 +139,8 @@ export const FeaturedProducts: ComponentConfig<FeaturedProductsProps> = {
     showTitle: true,
     displayMode: 'carousel',
     productsPerRow: 4,
+    productsPerRowTablet: 2,
+    productsPerRowMobile: 1,
     maxProducts: 12,
     slidesPerView: 4,
     slidesPerViewTablet: 3,
@@ -162,7 +166,7 @@ export const FeaturedProducts: ComponentConfig<FeaturedProductsProps> = {
   } as FeaturedProductsProps,
   render: ({
     sectionTitle, sectionSubtitle, showTitle,
-    displayMode, productsPerRow,
+    displayMode, productsPerRow, productsPerRowTablet, productsPerRowMobile,
     maxProducts, slidesPerView, slidesPerViewTablet, slidesPerViewMobile, spaceBetween,
     autoplay, autoplayDelay, loop, navigation, pagination, paginationStyle,
     backgroundColor, textColor, cardStyle, showPrice, showAddToCart, buttonText,
@@ -229,8 +233,15 @@ export const FeaturedProducts: ComponentConfig<FeaturedProductsProps> = {
         <div className="featured-products-section py-16" style={sectionStyle}>
           <div className="container mx-auto px-4">
             {Header}
-            <div className="grid gap-6" style={{ gridTemplateColumns: `repeat(${productsPerRow}, minmax(0, 1fr))` }}>
+            <div
+              className={`fp-grid-${productsPerRow}-${productsPerRowTablet || 2}-${productsPerRowMobile || 1} grid gap-6`}
+              style={{ gridTemplateColumns: `repeat(${productsPerRowMobile || 1}, minmax(0, 1fr))` }}
+            >
               {(products || []).map((p: SharedProduct) => <div key={p.id}>{renderer(p)}</div>)}
+              <style>{`
+                @media (min-width: 512px) { .fp-grid-${productsPerRow}-${productsPerRowTablet || 2}-${productsPerRowMobile || 1} { grid-template-columns: repeat(${productsPerRowTablet || 2}, minmax(0, 1fr)) !important; } }
+                @media (min-width: 1024px) { .fp-grid-${productsPerRow}-${productsPerRowTablet || 2}-${productsPerRowMobile || 1} { grid-template-columns: repeat(${productsPerRow}, minmax(0, 1fr)) !important; } }
+              `}</style>
             </div>
           </div>
         </div>

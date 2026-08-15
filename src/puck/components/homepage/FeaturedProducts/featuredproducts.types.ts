@@ -20,6 +20,8 @@ export interface FeaturedProductsProps {
   displayMode: 'grid' | 'carousel';
   // Grid Settings
   productsPerRow: number;
+  productsPerRowTablet?: number;
+  productsPerRowMobile?: number;
   maxProducts: number;
   // Carousel Settings (uses Swiper)
   slidesPerView: number;

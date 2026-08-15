@@ -46,7 +46,18 @@ const allFields = {
     ],
   },
   showShadow: { type: 'radio' as const, label: 'Image Shadow', options: RADIO_YES_NO },
-  hoverZoom: { type: 'radio' as const, label: 'Hover Zoom Effect', options: RADIO_YES_NO },
+  hoverEffect: {
+    type: 'select' as const, label: 'Hover Effect',
+    options: [
+      { label: 'None', value: 'none' },
+      { label: 'Zoom Image', value: 'zoom' },
+      { label: 'Second Image', value: 'second-image' },
+    ],
+  },
+  imageFit: {
+    type: 'select' as const, label: 'Image Fit',
+    options: [{ label: 'Cover', value: 'cover' }, { label: 'Contain', value: 'contain' }],
+  },
 
   showTitle: { type: 'radio' as const, label: 'Show Title', options: RADIO_YES_NO },
   titleSize: {
@@ -91,6 +102,15 @@ const allFields = {
 
   showAddToCart: { type: 'radio' as const, label: 'Show Add to Cart', options: RADIO_YES_NO },
   buttonText: { type: 'text' as const, label: 'Button Text' },
+  quickAddBehavior: {
+    type: 'select' as const, label: 'Quick Add Behavior',
+    options: [
+      { label: 'Link to Product Page', value: 'link' },
+      { label: 'Add to Cart', value: 'add' },
+    ],
+  },
+  showVendor: { type: 'radio' as const, label: 'Show Vendor', options: RADIO_YES_NO },
+  customBadgeText: { type: 'text' as const, label: 'Custom Badge Text (optional)' },
   buttonStyle: {
     type: 'select' as const, label: 'Button Style',
     options: [{ label: 'Filled', value: 'filled' }, { label: 'Outline', value: 'outline' }, { label: 'Ghost', value: 'ghost' }],
@@ -160,16 +180,38 @@ const DefaultCard: React.FC<{ product: SharedProductCardProduct; props: ProductC
 
   return (
     <div className={`puck-product-card-wrapper overflow-hidden ${CARD_RADIUS[props.cardRadius]} ${CARD_BORDER[props.cardBorder]} ${props.cardShadow ? 'shadow-md' : ''}`} style={{ backgroundColor: props.cardBackground, fontFamily: props.fontFamily, color: props.accentColor }}>
-      <div className="relative">
-        {product.thumbnail || product.images?.[0]?.url ? (
-          <img src={(product.thumbnail || product.images?.[0]?.url) as string} alt={product.title} className={`w-full ${ASPECT[props.aspectRatio]} object-cover ${IMG_RADIUS[props.borderRadius]} ${props.hoverZoom ? 'hover:scale-105 transition-transform' : ''}`} />
-        ) : (
-          <div className={`w-full ${ASPECT[props.aspectRatio]} bg-gray-100 ${IMG_RADIUS[props.borderRadius]} flex items-center justify-center text-gray-400 text-sm`}>
-            No image
-          </div>
-        )}
+      <div className="relative group/pc">
+        {(() => {
+          const primary = (product.thumbnail || product.images?.[0]?.url) as string | undefined;
+          const secondary = (product.images?.[1]?.url || (!product.thumbnail ? product.images?.[0]?.url : undefined)) as string | undefined;
+          const fit = props.imageFit === 'contain' ? 'object-contain' : 'object-cover';
+          const hoverEffect = props.hoverEffect || (props.hoverZoom ? 'zoom' : 'none');
+          if (!primary) {
+            return (
+              <div className={`w-full ${ASPECT[props.aspectRatio]} bg-gray-100 ${IMG_RADIUS[props.borderRadius]} flex items-center justify-center text-gray-400 text-sm`}>
+                No image
+              </div>
+            );
+          }
+          if (hoverEffect === 'second-image' && secondary) {
+            return (
+              <div className={`relative w-full ${ASPECT[props.aspectRatio]} overflow-hidden ${IMG_RADIUS[props.borderRadius]}`}>
+                <img src={primary} alt={product.title} className={`absolute inset-0 h-full w-full ${fit} transition-opacity duration-300 group-hover/pc:opacity-0`} />
+                <img src={secondary} alt={product.title} className={`absolute inset-0 h-full w-full ${fit} opacity-0 transition-opacity duration-300 group-hover/pc:opacity-100`} />
+              </div>
+            );
+          }
+          return (
+            <img
+              src={primary}
+              alt={product.title}
+              className={`w-full ${ASPECT[props.aspectRatio]} ${fit} ${IMG_RADIUS[props.borderRadius]} ${hoverEffect === 'zoom' ? 'transition-transform duration-300 group-hover/pc:scale-105' : ''}`}
+            />
+          );
+        })()}
         {props.showBadges && (props.showSaleBadge && isSale || props.showNewBadge && isNew || props.showLowStockBadge && isLowStock) && (
           <div className={`absolute ${badgePos[props.badgePosition]} flex gap-1`}>
+            {props.customBadgeText && <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: resolveColor('badge.new.background'), color: resolveColor('badge.new.text') }}>{props.customBadgeText}</span>}
             {props.showSaleBadge && isSale && <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: resolveColor('badge.sale.background'), color: resolveColor('badge.sale.text') }}>Sale</span>}
             {props.showNewBadge && isNew && <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: resolveColor('badge.new.background'), color: resolveColor('badge.new.text') }}>New</span>}
             {props.showLowStockBadge && isLowStock && <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: resolveColor('badge.lowStock.background'), color: resolveColor('badge.lowStock.text') }}>Low Stock</span>}
@@ -178,9 +220,14 @@ const DefaultCard: React.FC<{ product: SharedProductCardProduct; props: ProductC
       </div>
       <div className="p-4 space-y-2">
         {props.showTitle && (
-          <h3 className={`${TITLE_SIZE[props.titleSize]} ${TITLE_WEIGHT[props.titleWeight]} ${TITLE_ALIGN[props.titleAlign]} text-gray-900`}>
-            {product.title}
-          </h3>
+          <div>
+            {props.showVendor && (product as any).vendor && (
+              <p className="text-xs uppercase tracking-wide text-gray-500 mb-0.5">{(product as any).vendor}</p>
+            )}
+            <h3 className={`${TITLE_SIZE[props.titleSize]} ${TITLE_WEIGHT[props.titleWeight]} ${TITLE_ALIGN[props.titleAlign]} text-gray-900`}>
+              {product.title}
+            </h3>
+          </div>
         )}
         {props.showPrice && (
           <div className="flex items-baseline gap-2">
@@ -195,19 +242,38 @@ const DefaultCard: React.FC<{ product: SharedProductCardProduct; props: ProductC
             )}
           </div>
         )}
-        {props.showAddToCart && (
-          <button
-            type="button"
-            className={`${BTN_SIZE[props.buttonSize]} rounded-lg font-medium transition-colors ${
-              props.buttonStyle === 'filled' ? 'bg-gray-900 text-white hover:bg-gray-700'
-              : props.buttonStyle === 'outline' ? 'border-2 border-gray-900 text-gray-900 hover:bg-gray-100'
-              : 'text-gray-900 hover:bg-gray-100'
-            }`}
-          >
-            {props.showCartIcon && <span className="inline-flex items-center gap-2"><CartSvg /> {props.buttonText}</span>}
-            {!props.showCartIcon && props.buttonText}
-          </button>
-        )}
+        {props.showAddToCart && (() => {
+          // CTA hierarchy: filled resolves through button.primary tokens
+          // (change brand.primary -> every card CTA follows); outline/ghost -> brand.
+          const filled = props.buttonStyle === 'filled';
+          const ctaStyle: React.CSSProperties = filled
+            ? { backgroundColor: resolveColor('button.primary.background') || '#111827', color: resolveColor('button.primary.text') || '#ffffff' }
+            : { color: resolveColor('brand.primary') || '#111827' };
+          const ctaClasses = `${BTN_SIZE[props.buttonSize]} rounded-lg font-medium transition-colors w-full ${
+            filled ? 'hover:opacity-90'
+            : props.buttonStyle === 'outline' ? 'border-2 hover:bg-gray-100'
+            : 'hover:bg-gray-100'
+          }`;
+          if (props.buttonStyle === 'outline') {
+            (ctaStyle as any).borderColor = ctaStyle.color;
+          }
+          const inner = (
+            <>
+              {props.showCartIcon && <span className="inline-flex items-center gap-2"><CartSvg /> {props.buttonText}</span>}
+              {!props.showCartIcon && props.buttonText}
+            </>
+          );
+          // 'link' navigates to the product page; 'add' is a plain button the
+          // storefront wires to the cart (via its renderProduct injection).
+          if (props.quickAddBehavior === 'add') {
+            return <button type="button" className={ctaClasses} style={ctaStyle}>{inner}</button>;
+          }
+          return (
+            <a href={`/products/${product.handle || product.id}`} className={`inline-flex justify-center ${ctaClasses}`} style={{ ...ctaStyle, textDecoration: 'none' }}>
+              {inner}
+            </a>
+          );
+        })()}
       </div>
     </div>
   );
@@ -223,13 +289,13 @@ export const ProductCard: ComponentConfig<ProductCardWithRender> = {
   fields: allFields as any,
   defaultProps: {
     layout: 'vertical', enableSwiper: true, aspectRatio: 'square',
-    borderRadius: 'md', showShadow: true, hoverZoom: true,
-    showTitle: true, titleSize: 'lg', titleWeight: 'semibold', titleAlign: 'left',
+    borderRadius: 'md', showShadow: true, hoverEffect: 'zoom', imageFit: 'cover',
+    showTitle: true, titleSize: 'lg', titleWeight: 'semibold', titleAlign: 'left', showVendor: false,
     showPrice: true, priceSize: 'lg', priceColor: 'card.price',
     showCompareAtPrice: true, showSavingsBadge: true,
     showBadges: true, showSaleBadge: true, showNewBadge: true, showLowStockBadge: true,
-    badgePosition: 'top-right',
-    showAddToCart: true, buttonText: 'Add to Cart',
+    badgePosition: 'top-right', customBadgeText: '',
+    showAddToCart: true, buttonText: 'Add to Cart', quickAddBehavior: 'link',
     buttonStyle: 'filled', buttonSize: 'md', showCartIcon: true,
     cardRadius: 'lg', cardBorder: 'sm', cardShadow: true,
     cardBackground: 'card.background', accentColor: 'brand.primary', fontFamily: 'inherit',

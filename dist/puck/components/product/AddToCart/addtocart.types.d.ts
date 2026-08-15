@@ -1,4 +1,4 @@
-export type AddToCartVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'custom';
+export type AddToCartVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'custom';
 export type AddToCartSize = 'sm' | 'md' | 'lg';
 export interface AddToCartProps {
     variant: AddToCartVariant;

@@ -49,7 +49,9 @@ const layoutFields = {
         type: 'select', label: 'Display Mode',
         options: [{ label: 'Grid', value: 'grid' }, { label: 'Carousel (Swiper)', value: 'carousel' }],
     },
-    productsPerRow: { type: 'number', label: 'Products Per Row (Grid)', min: 2, max: 6 },
+    productsPerRow: { type: 'number', label: 'Products Per Row — Desktop (Grid)', min: 2, max: 6 },
+    productsPerRowTablet: { type: 'number', label: 'Products Per Row — Tablet (Grid)', min: 1, max: 4 },
+    productsPerRowMobile: { type: 'number', label: 'Products Per Row — Mobile (Grid)', min: 1, max: 2 },
     maxProducts: { type: 'number', label: 'Maximum Products', min: 1, max: 50 },
     slidesPerView: { type: 'number', label: 'Slides Per View (Desktop)', min: 1, max: 6 },
     slidesPerViewTablet: { type: 'number', label: 'Slides Per View (Tablet)', min: 1, max: 4 },
@@ -110,6 +112,8 @@ export const FeaturedProducts = {
         showTitle: true,
         displayMode: 'carousel',
         productsPerRow: 4,
+        productsPerRowTablet: 2,
+        productsPerRowMobile: 1,
         maxProducts: 12,
         slidesPerView: 4,
         slidesPerViewTablet: 3,
@@ -133,7 +137,7 @@ export const FeaturedProducts = {
         loading: false,
         error: '',
     },
-    render: ({ sectionTitle, sectionSubtitle, showTitle, displayMode, productsPerRow, maxProducts, slidesPerView, slidesPerViewTablet, slidesPerViewMobile, spaceBetween, autoplay, autoplayDelay, loop, navigation, pagination, paginationStyle, backgroundColor, textColor, cardStyle, showPrice, showAddToCart, buttonText, products, loading, error, renderProduct, }) => {
+    render: ({ sectionTitle, sectionSubtitle, showTitle, displayMode, productsPerRow, productsPerRowTablet, productsPerRowMobile, maxProducts, slidesPerView, slidesPerViewTablet, slidesPerViewMobile, spaceBetween, autoplay, autoplayDelay, loop, navigation, pagination, paginationStyle, backgroundColor, textColor, cardStyle, showPrice, showAddToCart, buttonText, products, loading, error, renderProduct, }) => {
         const isLoading = !!loading && (!products || products.length === 0);
         const errMsg = error || '';
         const empty = !isLoading && !errMsg && (!products || products.length === 0);
@@ -156,7 +160,10 @@ export const FeaturedProducts = {
             backgroundColor, textColor, cardStyle, showPrice, showAddToCart, buttonText,
         }));
         if (displayMode === 'grid') {
-            return (_jsx("div", { className: "featured-products-section py-16", style: sectionStyle, children: _jsxs("div", { className: "container mx-auto px-4", children: [Header, _jsx("div", { className: "grid gap-6", style: { gridTemplateColumns: `repeat(${productsPerRow}, minmax(0, 1fr))` }, children: (products || []).map((p) => _jsx("div", { children: renderer(p) }, p.id)) })] }) }));
+            return (_jsx("div", { className: "featured-products-section py-16", style: sectionStyle, children: _jsxs("div", { className: "container mx-auto px-4", children: [Header, _jsxs("div", { className: `fp-grid-${productsPerRow}-${productsPerRowTablet || 2}-${productsPerRowMobile || 1} grid gap-6`, style: { gridTemplateColumns: `repeat(${productsPerRowMobile || 1}, minmax(0, 1fr))` }, children: [(products || []).map((p) => _jsx("div", { children: renderer(p) }, p.id)), _jsx("style", { children: `
+                @media (min-width: 512px) { .fp-grid-${productsPerRow}-${productsPerRowTablet || 2}-${productsPerRowMobile || 1} { grid-template-columns: repeat(${productsPerRowTablet || 2}, minmax(0, 1fr)) !important; } }
+                @media (min-width: 1024px) { .fp-grid-${productsPerRow}-${productsPerRowTablet || 2}-${productsPerRowMobile || 1} { grid-template-columns: repeat(${productsPerRow}, minmax(0, 1fr)) !important; } }
+              ` })] })] }) }));
         }
         // Carousel
         return (_jsx("div", { className: "featured-products-section py-16", style: sectionStyle, children: _jsxs("div", { className: "container mx-auto px-4", children: [Header, _jsx(Swiper, { modules: [Navigation, Pagination, Autoplay], slidesPerView: slidesPerViewMobile, spaceBetween: spaceBetween, navigation: navigation, pagination: pagination ? { type: paginationStyle, clickable: true } : false, autoplay: autoplay ? { delay: autoplayDelay, disableOnInteraction: false } : false, loop: loop, breakpoints: {

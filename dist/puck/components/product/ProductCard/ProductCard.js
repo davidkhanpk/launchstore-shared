@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { resolveColor } from '../../../design-system';
 const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
 // ── All flat fields ─────────────────────────────────────────────────────────
@@ -38,7 +38,18 @@ const allFields = {
         ],
     },
     showShadow: { type: 'radio', label: 'Image Shadow', options: RADIO_YES_NO },
-    hoverZoom: { type: 'radio', label: 'Hover Zoom Effect', options: RADIO_YES_NO },
+    hoverEffect: {
+        type: 'select', label: 'Hover Effect',
+        options: [
+            { label: 'None', value: 'none' },
+            { label: 'Zoom Image', value: 'zoom' },
+            { label: 'Second Image', value: 'second-image' },
+        ],
+    },
+    imageFit: {
+        type: 'select', label: 'Image Fit',
+        options: [{ label: 'Cover', value: 'cover' }, { label: 'Contain', value: 'contain' }],
+    },
     showTitle: { type: 'radio', label: 'Show Title', options: RADIO_YES_NO },
     titleSize: {
         type: 'select', label: 'Title Size',
@@ -79,6 +90,15 @@ const allFields = {
     },
     showAddToCart: { type: 'radio', label: 'Show Add to Cart', options: RADIO_YES_NO },
     buttonText: { type: 'text', label: 'Button Text' },
+    quickAddBehavior: {
+        type: 'select', label: 'Quick Add Behavior',
+        options: [
+            { label: 'Link to Product Page', value: 'link' },
+            { label: 'Add to Cart', value: 'add' },
+        ],
+    },
+    showVendor: { type: 'radio', label: 'Show Vendor', options: RADIO_YES_NO },
+    customBadgeText: { type: 'text', label: 'Custom Badge Text (optional)' },
     buttonStyle: {
         type: 'select', label: 'Button Style',
         options: [{ label: 'Filled', value: 'filled' }, { label: 'Outline', value: 'outline' }, { label: 'Ghost', value: 'ghost' }],
@@ -137,22 +157,52 @@ const DefaultCard = ({ product, props }) => {
         'top-left': 'top-2 left-2', 'top-right': 'top-2 right-2',
         'bottom-left': 'bottom-2 left-2', 'bottom-right': 'bottom-2 right-2',
     };
-    return (_jsxs("div", { className: `puck-product-card-wrapper overflow-hidden ${CARD_RADIUS[props.cardRadius]} ${CARD_BORDER[props.cardBorder]} ${props.cardShadow ? 'shadow-md' : ''}`, style: { backgroundColor: props.cardBackground, fontFamily: props.fontFamily, color: props.accentColor }, children: [_jsxs("div", { className: "relative", children: [product.thumbnail || product.images?.[0]?.url ? (_jsx("img", { src: (product.thumbnail || product.images?.[0]?.url), alt: product.title, className: `w-full ${ASPECT[props.aspectRatio]} object-cover ${IMG_RADIUS[props.borderRadius]} ${props.hoverZoom ? 'hover:scale-105 transition-transform' : ''}` })) : (_jsx("div", { className: `w-full ${ASPECT[props.aspectRatio]} bg-gray-100 ${IMG_RADIUS[props.borderRadius]} flex items-center justify-center text-gray-400 text-sm`, children: "No image" })), props.showBadges && (props.showSaleBadge && isSale || props.showNewBadge && isNew || props.showLowStockBadge && isLowStock) && (_jsxs("div", { className: `absolute ${badgePos[props.badgePosition]} flex gap-1`, children: [props.showSaleBadge && isSale && _jsx("span", { className: "text-xs px-2 py-1 rounded", style: { backgroundColor: resolveColor('badge.sale.background'), color: resolveColor('badge.sale.text') }, children: "Sale" }), props.showNewBadge && isNew && _jsx("span", { className: "text-xs px-2 py-1 rounded", style: { backgroundColor: resolveColor('badge.new.background'), color: resolveColor('badge.new.text') }, children: "New" }), props.showLowStockBadge && isLowStock && _jsx("span", { className: "text-xs px-2 py-1 rounded", style: { backgroundColor: resolveColor('badge.lowStock.background'), color: resolveColor('badge.lowStock.text') }, children: "Low Stock" })] }))] }), _jsxs("div", { className: "p-4 space-y-2", children: [props.showTitle && (_jsx("h3", { className: `${TITLE_SIZE[props.titleSize]} ${TITLE_WEIGHT[props.titleWeight]} ${TITLE_ALIGN[props.titleAlign]} text-gray-900`, children: product.title })), props.showPrice && (_jsxs("div", { className: "flex items-baseline gap-2", children: [_jsx("span", { className: `${PRICE_SIZE[props.priceSize]} font-semibold`, style: { color: props.priceColor }, children: typeof cap === 'number' ? `$${(cap / 100).toFixed(2)}` : 'Price N/A' }), props.showCompareAtPrice && isSale && typeof op === 'number' && (_jsxs("span", { className: `${PRICE_SIZE[props.priceSize]} text-gray-500 line-through`, children: ["$", (op / 100).toFixed(2)] })), props.showSavingsBadge && isSale && typeof op === 'number' && typeof cap === 'number' && (_jsxs("span", { className: "bg-red-100 text-red-600 text-xs px-2 py-1 rounded", children: ["Save ", Math.round(((op - cap) / op) * 100), "%"] }))] })), props.showAddToCart && (_jsxs("button", { type: "button", className: `${BTN_SIZE[props.buttonSize]} rounded-lg font-medium transition-colors ${props.buttonStyle === 'filled' ? 'bg-gray-900 text-white hover:bg-gray-700'
-                            : props.buttonStyle === 'outline' ? 'border-2 border-gray-900 text-gray-900 hover:bg-gray-100'
-                                : 'text-gray-900 hover:bg-gray-100'}`, children: [props.showCartIcon && _jsxs("span", { className: "inline-flex items-center gap-2", children: [_jsx(CartSvg, {}), " ", props.buttonText] }), !props.showCartIcon && props.buttonText] }))] })] }));
+    return (_jsxs("div", { className: `puck-product-card-wrapper overflow-hidden ${CARD_RADIUS[props.cardRadius]} ${CARD_BORDER[props.cardBorder]} ${props.cardShadow ? 'shadow-md' : ''}`, style: { backgroundColor: props.cardBackground, fontFamily: props.fontFamily, color: props.accentColor }, children: [_jsxs("div", { className: "relative group/pc", children: [(() => {
+                        const primary = (product.thumbnail || product.images?.[0]?.url);
+                        const secondary = (product.images?.[1]?.url || (!product.thumbnail ? product.images?.[0]?.url : undefined));
+                        const fit = props.imageFit === 'contain' ? 'object-contain' : 'object-cover';
+                        const hoverEffect = props.hoverEffect || (props.hoverZoom ? 'zoom' : 'none');
+                        if (!primary) {
+                            return (_jsx("div", { className: `w-full ${ASPECT[props.aspectRatio]} bg-gray-100 ${IMG_RADIUS[props.borderRadius]} flex items-center justify-center text-gray-400 text-sm`, children: "No image" }));
+                        }
+                        if (hoverEffect === 'second-image' && secondary) {
+                            return (_jsxs("div", { className: `relative w-full ${ASPECT[props.aspectRatio]} overflow-hidden ${IMG_RADIUS[props.borderRadius]}`, children: [_jsx("img", { src: primary, alt: product.title, className: `absolute inset-0 h-full w-full ${fit} transition-opacity duration-300 group-hover/pc:opacity-0` }), _jsx("img", { src: secondary, alt: product.title, className: `absolute inset-0 h-full w-full ${fit} opacity-0 transition-opacity duration-300 group-hover/pc:opacity-100` })] }));
+                        }
+                        return (_jsx("img", { src: primary, alt: product.title, className: `w-full ${ASPECT[props.aspectRatio]} ${fit} ${IMG_RADIUS[props.borderRadius]} ${hoverEffect === 'zoom' ? 'transition-transform duration-300 group-hover/pc:scale-105' : ''}` }));
+                    })(), props.showBadges && (props.showSaleBadge && isSale || props.showNewBadge && isNew || props.showLowStockBadge && isLowStock) && (_jsxs("div", { className: `absolute ${badgePos[props.badgePosition]} flex gap-1`, children: [props.customBadgeText && _jsx("span", { className: "text-xs px-2 py-1 rounded", style: { backgroundColor: resolveColor('badge.new.background'), color: resolveColor('badge.new.text') }, children: props.customBadgeText }), props.showSaleBadge && isSale && _jsx("span", { className: "text-xs px-2 py-1 rounded", style: { backgroundColor: resolveColor('badge.sale.background'), color: resolveColor('badge.sale.text') }, children: "Sale" }), props.showNewBadge && isNew && _jsx("span", { className: "text-xs px-2 py-1 rounded", style: { backgroundColor: resolveColor('badge.new.background'), color: resolveColor('badge.new.text') }, children: "New" }), props.showLowStockBadge && isLowStock && _jsx("span", { className: "text-xs px-2 py-1 rounded", style: { backgroundColor: resolveColor('badge.lowStock.background'), color: resolveColor('badge.lowStock.text') }, children: "Low Stock" })] }))] }), _jsxs("div", { className: "p-4 space-y-2", children: [props.showTitle && (_jsxs("div", { children: [props.showVendor && product.vendor && (_jsx("p", { className: "text-xs uppercase tracking-wide text-gray-500 mb-0.5", children: product.vendor })), _jsx("h3", { className: `${TITLE_SIZE[props.titleSize]} ${TITLE_WEIGHT[props.titleWeight]} ${TITLE_ALIGN[props.titleAlign]} text-gray-900`, children: product.title })] })), props.showPrice && (_jsxs("div", { className: "flex items-baseline gap-2", children: [_jsx("span", { className: `${PRICE_SIZE[props.priceSize]} font-semibold`, style: { color: props.priceColor }, children: typeof cap === 'number' ? `$${(cap / 100).toFixed(2)}` : 'Price N/A' }), props.showCompareAtPrice && isSale && typeof op === 'number' && (_jsxs("span", { className: `${PRICE_SIZE[props.priceSize]} text-gray-500 line-through`, children: ["$", (op / 100).toFixed(2)] })), props.showSavingsBadge && isSale && typeof op === 'number' && typeof cap === 'number' && (_jsxs("span", { className: "bg-red-100 text-red-600 text-xs px-2 py-1 rounded", children: ["Save ", Math.round(((op - cap) / op) * 100), "%"] }))] })), props.showAddToCart && (() => {
+                        // CTA hierarchy: filled resolves through button.primary tokens
+                        // (change brand.primary -> every card CTA follows); outline/ghost -> brand.
+                        const filled = props.buttonStyle === 'filled';
+                        const ctaStyle = filled
+                            ? { backgroundColor: resolveColor('button.primary.background') || '#111827', color: resolveColor('button.primary.text') || '#ffffff' }
+                            : { color: resolveColor('brand.primary') || '#111827' };
+                        const ctaClasses = `${BTN_SIZE[props.buttonSize]} rounded-lg font-medium transition-colors w-full ${filled ? 'hover:opacity-90'
+                            : props.buttonStyle === 'outline' ? 'border-2 hover:bg-gray-100'
+                                : 'hover:bg-gray-100'}`;
+                        if (props.buttonStyle === 'outline') {
+                            ctaStyle.borderColor = ctaStyle.color;
+                        }
+                        const inner = (_jsxs(_Fragment, { children: [props.showCartIcon && _jsxs("span", { className: "inline-flex items-center gap-2", children: [_jsx(CartSvg, {}), " ", props.buttonText] }), !props.showCartIcon && props.buttonText] }));
+                        // 'link' navigates to the product page; 'add' is a plain button the
+                        // storefront wires to the cart (via its renderProduct injection).
+                        if (props.quickAddBehavior === 'add') {
+                            return _jsx("button", { type: "button", className: ctaClasses, style: ctaStyle, children: inner });
+                        }
+                        return (_jsx("a", { href: `/products/${product.handle || product.id}`, className: `inline-flex justify-center ${ctaClasses}`, style: { ...ctaStyle, textDecoration: 'none' }, children: inner }));
+                    })()] })] }));
 };
 export const ProductCard = {
     label: 'Product Card',
     fields: allFields,
     defaultProps: {
         layout: 'vertical', enableSwiper: true, aspectRatio: 'square',
-        borderRadius: 'md', showShadow: true, hoverZoom: true,
-        showTitle: true, titleSize: 'lg', titleWeight: 'semibold', titleAlign: 'left',
+        borderRadius: 'md', showShadow: true, hoverEffect: 'zoom', imageFit: 'cover',
+        showTitle: true, titleSize: 'lg', titleWeight: 'semibold', titleAlign: 'left', showVendor: false,
         showPrice: true, priceSize: 'lg', priceColor: 'card.price',
         showCompareAtPrice: true, showSavingsBadge: true,
         showBadges: true, showSaleBadge: true, showNewBadge: true, showLowStockBadge: true,
-        badgePosition: 'top-right',
-        showAddToCart: true, buttonText: 'Add to Cart',
+        badgePosition: 'top-right', customBadgeText: '',
+        showAddToCart: true, buttonText: 'Add to Cart', quickAddBehavior: 'link',
         buttonStyle: 'filled', buttonSize: 'md', showCartIcon: true,
         cardRadius: 'lg', cardBorder: 'sm', cardShadow: true,
         cardBackground: 'card.background', accentColor: 'brand.primary', fontFamily: 'inherit',

@@ -16,6 +16,8 @@ export interface FeaturedProductsProps {
     showTitle: boolean;
     displayMode: 'grid' | 'carousel';
     productsPerRow: number;
+    productsPerRowTablet?: number;
+    productsPerRowMobile?: number;
     maxProducts: number;
     slidesPerView: number;
     slidesPerViewTablet: number;

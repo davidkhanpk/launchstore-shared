@@ -77,12 +77,15 @@ const allFields = {
 const CartSvg = ({ size = 20 }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("circle", { cx: "9", cy: "21", r: "1" }), _jsx("circle", { cx: "20", cy: "21", r: "1" }), _jsx("path", { d: "M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" })] }));
 const CheckSvg = ({ size = 20 }) => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: _jsx("polyline", { points: "20 6 9 17 4 12" }) }));
 const ClockSvg = ({ size = 20 }) => (_jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", width: size, height: size, fill: "none", stroke: "currentColor", strokeWidth: "2", viewBox: "0 0 24 24", children: [_jsx("circle", { cx: "12", cy: "12", r: "10" }), _jsx("polyline", { points: "12 6 12 12 16 14" })] }));
-const VARIANT = {
-    primary: 'bg-black text-white hover:bg-gray-900',
-    secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300',
-    outline: 'border-2 border-black text-black hover:bg-black hover:text-white bg-transparent',
-    ghost: 'text-black hover:bg-gray-100 bg-transparent',
-    custom: '',
+// Variant tokens resolved inline at render (below) so brand changes flow:
+// primary/secondary/danger read button.* tokens; outline/ghost read brand.primary.
+const VARIANT_TOKENS = {
+    primary: { bg: 'button.primary.background', text: 'button.primary.text' },
+    secondary: { bg: 'button.secondary.background', text: 'button.secondary.text' },
+    outline: { outline: true },
+    ghost: { ghost: true },
+    danger: { bg: 'button.danger.background', text: 'button.danger.text' },
+    custom: {},
 };
 const SIZE = { sm: 'text-sm', md: 'text-base', lg: 'text-lg' };
 const formatPreorderDate = (iso) => {
@@ -101,13 +104,13 @@ export const AddToCart = {
         text: 'Add to Cart', preorderText: 'Pre-order',
         variant: 'primary', size: 'md', fullWidth: false, showIcon: true, disabled: false,
         backgroundColor: '#000000', textColor: '#ffffff',
-        hoverBackgroundColor: '#1f2937', hoverTextColor: '#ffffff', borderColor: '#000000',
+        hoverBackgroundColor: '', hoverTextColor: '', borderColor: '',
         useThemeColors: false,
         marginTop: 'mt-4', marginBottom: 'mb-4', marginLeft: 'ml-0', marginRight: 'mr-0',
         paddingX: 'px-6', paddingY: 'py-3', borderRadius: 'rounded-lg',
     },
     render: (rawProps) => {
-        const { text, preorderText, variant = 'primary', size = 'md', fullWidth = false, showIcon = true, disabled = false, backgroundColor = '#000000', textColor = '#ffffff', hoverBackgroundColor = '#1f2937', hoverTextColor = '#ffffff', borderColor = '#000000', useThemeColors = false, marginTop = 'mt-4', marginBottom = 'mb-4', marginLeft = 'ml-0', marginRight = 'mr-0', paddingX = 'px-6', paddingY = 'py-3', borderRadius = 'rounded-lg', selectedVariantId, quantity = 1, onAdd, isLoading = false, inStock = true, isPreorder = false, preorderAvailableDate, theme, } = rawProps;
+        const { text, preorderText, variant = 'primary', size = 'md', fullWidth = false, showIcon = true, disabled = false, backgroundColor = '', textColor = '', hoverBackgroundColor = '#1f2937', hoverTextColor = '#ffffff', borderColor = '#000000', useThemeColors = false, marginTop = 'mt-4', marginBottom = 'mb-4', marginLeft = 'ml-0', marginRight = 'mr-0', paddingX = 'px-6', paddingY = 'py-3', borderRadius = 'rounded-lg', selectedVariantId, quantity = 1, onAdd, isLoading = false, inStock = true, isPreorder = false, preorderAvailableDate, theme, } = rawProps;
         const [justAdded, setJustAdded] = useState(false);
         const [isHovered, setIsHovered] = useState(false);
         const hasVariant = !!selectedVariantId;
@@ -134,11 +137,26 @@ export const AddToCart = {
         // non-custom variant silently ignored the color props — exactly the
         // symptom in the bug report. The generic Button.tsx in the same project
         // does NOT gate on variant; this aligns AddToCart with that pattern.
+        // CTA hierarchy: explicit color props win; otherwise the variant resolves
+        // through the theme's button.* tokens (change brand.primary -> the PDP
+        // add-to-cart follows). Hover keeps its explicit colors when set.
+        const vt = VARIANT_TOKENS[variant || 'primary'] || VARIANT_TOKENS.primary;
+        const variantBg = vt.bg ? resolve(vt.bg) : vt.ghost || vt.outline ? 'transparent' : undefined;
+        const variantText = vt.text ? resolve(vt.text) : vt.outline || vt.ghost ? resolve('brand.primary') : undefined;
         const customStyles = {
-            backgroundColor: isHovered ? resolve(hoverBackgroundColor) : resolve(backgroundColor),
-            color: isHovered ? resolve(hoverTextColor) : resolve(textColor),
+            backgroundColor: backgroundColor
+                ? (isHovered && hoverBackgroundColor ? resolve(hoverBackgroundColor) : resolve(backgroundColor))
+                : (isHovered && hoverBackgroundColor ? resolve(hoverBackgroundColor) : variantBg),
+            color: textColor
+                ? (isHovered && hoverTextColor ? resolve(hoverTextColor) : resolve(textColor))
+                : (isHovered && hoverTextColor ? resolve(hoverTextColor) : variantText),
         };
-        if (borderColor) {
+        if (vt.outline) {
+            customStyles.borderWidth = '2px';
+            customStyles.borderStyle = 'solid';
+            customStyles.borderColor = borderColor ? resolve(borderColor) : variantText;
+        }
+        else if (borderColor) {
             customStyles.borderColor = resolve(borderColor);
             customStyles.borderWidth = '2px';
             customStyles.borderStyle = 'solid';
@@ -151,7 +169,7 @@ export const AddToCart = {
         if (!hasVariant) {
             const previewText = !inStock ? 'Out of Stock' : (text || 'Add to Cart');
             return (_jsxs("button", { type: "button", disabled: true, className: `
-          ${variant === 'custom' ? '' : VARIANT[variant || 'primary']} ${SIZE[size || 'md']}
+          ${SIZE[size || 'md']}
           ${fullWidth ? 'w-full' : ''} ${marginTop} ${marginBottom} ${marginLeft} ${marginRight}
           ${paddingX} ${paddingY} ${borderRadius}
           font-medium transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed
@@ -161,7 +179,7 @@ export const AddToCart = {
         const isBtnDisabled = disabled || !inStock || isLoading;
         const widthClass = fullWidth ? 'w-full' : '';
         return (_jsxs(_Fragment, { children: [_jsxs("button", { type: "button", disabled: isBtnDisabled, className: `
-            ${variant === 'custom' ? '' : VARIANT[variant || 'primary']}
+
             ${SIZE[size || 'md']} ${widthClass}
             ${marginTop} ${marginBottom} ${marginLeft} ${marginRight}
             ${paddingX} ${paddingY} ${borderRadius}

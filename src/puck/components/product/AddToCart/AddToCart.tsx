@@ -91,12 +91,15 @@ const ClockSvg = ({ size = 20 }: { size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
 );
 
-const VARIANT: Record<AddToCartVariant, string> = {
-  primary: 'bg-black text-white hover:bg-gray-900',
-  secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300',
-  outline: 'border-2 border-black text-black hover:bg-black hover:text-white bg-transparent',
-  ghost: 'text-black hover:bg-gray-100 bg-transparent',
-  custom: '',
+// Variant tokens resolved inline at render (below) so brand changes flow:
+// primary/secondary/danger read button.* tokens; outline/ghost read brand.primary.
+const VARIANT_TOKENS: Record<AddToCartVariant, { bg?: string; text?: string; outline?: boolean; ghost?: boolean }> = {
+  primary: { bg: 'button.primary.background', text: 'button.primary.text' },
+  secondary: { bg: 'button.secondary.background', text: 'button.secondary.text' },
+  outline: { outline: true },
+  ghost: { ghost: true },
+  danger: { bg: 'button.danger.background', text: 'button.danger.text' },
+  custom: {},
 };
 const SIZE: Record<AddToCartSize, string> = { sm: 'text-sm', md: 'text-base', lg: 'text-lg' };
 
@@ -134,7 +137,7 @@ export const AddToCart: ComponentConfig<AddToCartWithData> = {
     text: 'Add to Cart', preorderText: 'Pre-order',
     variant: 'primary', size: 'md', fullWidth: false, showIcon: true, disabled: false,
     backgroundColor: '#000000', textColor: '#ffffff',
-    hoverBackgroundColor: '#1f2937', hoverTextColor: '#ffffff', borderColor: '#000000',
+    hoverBackgroundColor: '', hoverTextColor: '', borderColor: '',
     useThemeColors: false,
     marginTop: 'mt-4', marginBottom: 'mb-4', marginLeft: 'ml-0', marginRight: 'mr-0',
     paddingX: 'px-6', paddingY: 'py-3', borderRadius: 'rounded-lg',
@@ -143,7 +146,7 @@ export const AddToCart: ComponentConfig<AddToCartWithData> = {
     const {
       text, preorderText, variant = 'primary', size = 'md', fullWidth = false,
       showIcon = true, disabled = false,
-      backgroundColor = '#000000', textColor = '#ffffff',
+      backgroundColor = '', textColor = '',
       hoverBackgroundColor = '#1f2937', hoverTextColor = '#ffffff', borderColor = '#000000',
       useThemeColors = false,
       marginTop = 'mt-4', marginBottom = 'mb-4', marginLeft = 'ml-0', marginRight = 'mr-0',
@@ -180,11 +183,26 @@ export const AddToCart: ComponentConfig<AddToCartWithData> = {
     // non-custom variant silently ignored the color props — exactly the
     // symptom in the bug report. The generic Button.tsx in the same project
     // does NOT gate on variant; this aligns AddToCart with that pattern.
+    // CTA hierarchy: explicit color props win; otherwise the variant resolves
+    // through the theme's button.* tokens (change brand.primary -> the PDP
+    // add-to-cart follows). Hover keeps its explicit colors when set.
+    const vt = VARIANT_TOKENS[(variant as AddToCartVariant) || 'primary'] || VARIANT_TOKENS.primary;
+    const variantBg = vt.bg ? resolve(vt.bg) : vt.ghost || vt.outline ? 'transparent' : undefined;
+    const variantText = vt.text ? resolve(vt.text) : vt.outline || vt.ghost ? resolve('brand.primary') : undefined;
+
     const customStyles: React.CSSProperties = {
-      backgroundColor: isHovered ? resolve(hoverBackgroundColor) : resolve(backgroundColor),
-      color: isHovered ? resolve(hoverTextColor) : resolve(textColor),
+      backgroundColor: backgroundColor
+        ? (isHovered && hoverBackgroundColor ? resolve(hoverBackgroundColor) : resolve(backgroundColor))
+        : (isHovered && hoverBackgroundColor ? resolve(hoverBackgroundColor) : variantBg),
+      color: textColor
+        ? (isHovered && hoverTextColor ? resolve(hoverTextColor) : resolve(textColor))
+        : (isHovered && hoverTextColor ? resolve(hoverTextColor) : variantText),
     };
-    if (borderColor) {
+    if (vt.outline) {
+      customStyles.borderWidth = '2px';
+      customStyles.borderStyle = 'solid';
+      customStyles.borderColor = borderColor ? resolve(borderColor) : variantText;
+    } else if (borderColor) {
       customStyles.borderColor = resolve(borderColor);
       customStyles.borderWidth = '2px';
       customStyles.borderStyle = 'solid';
@@ -199,7 +217,7 @@ export const AddToCart: ComponentConfig<AddToCartWithData> = {
       const previewText = !inStock ? 'Out of Stock' : (text || 'Add to Cart');
       return (
         <button type="button" disabled className={`
-          ${variant === 'custom' ? '' : VARIANT[(variant as AddToCartVariant) || 'primary']} ${SIZE[(size as AddToCartSize) || 'md']}
+          ${SIZE[(size as AddToCartSize) || 'md']}
           ${fullWidth ? 'w-full' : ''} ${marginTop} ${marginBottom} ${marginLeft} ${marginRight}
           ${paddingX} ${paddingY} ${borderRadius}
           font-medium transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed
@@ -223,7 +241,7 @@ export const AddToCart: ComponentConfig<AddToCartWithData> = {
         <button
           type="button" disabled={isBtnDisabled}
           className={`
-            ${variant === 'custom' ? '' : VARIANT[(variant as AddToCartVariant) || 'primary']}
+
             ${SIZE[(size as AddToCartSize) || 'md']} ${widthClass}
             ${marginTop} ${marginBottom} ${marginLeft} ${marginRight}
             ${paddingX} ${paddingY} ${borderRadius}

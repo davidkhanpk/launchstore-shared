@@ -118,6 +118,12 @@ export declare function buildTypographyClasses(props: any): string;
 export declare function buildLayoutClasses(props: any): string;
 export declare function buildColorClasses(props: any): string;
 export declare function buildBorderClasses(props: any): string;
+/** Min height → CSS value, applied as an INLINE STYLE by SectionShell.
+ * Inline styles bypass Tailwind's scanner entirely — arbitrary classes like
+ * min-h-[480px] generate unreliably across consumers (the storefront's
+ * Tailwind doesn't scan this package), which made heroes render at
+ * different heights in the editor vs the storefront. */
+export declare const MIN_HEIGHT_PX: Record<string, string>;
 /**
  * Resolve the section's background LAYERS. Precedence: image > gradient >
  * scheme > plain color. Returns the inline style for the background surface
@@ -137,12 +143,13 @@ export declare function buildBackground(props: {
     hasOverlaySource: boolean;
 };
 /** Classes for the section's content wrapper (inside the background surface). */
+/** Resolved inline min-height for a section (undefined when auto). */
+export declare function sectionMinHeight(minHeight?: string): string | undefined;
 export declare function buildSectionContentClasses(props: {
     density?: string;
     contentWidth?: string;
     contentAlign?: string;
     verticalAlign?: string;
-    minHeight?: string;
 }): string;
 export { resolveColor } from '../../theme/resolveColor';
 //# sourceMappingURL=presets.d.ts.map

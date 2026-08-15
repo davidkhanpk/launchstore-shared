@@ -17,7 +17,7 @@
 
 import React from 'react';
 import { resolveColor } from '../../theme/resolveColor';
-import { buildBackground, buildSectionContentClasses } from './presets';
+import { buildBackground, buildSectionContentClasses, sectionMinHeight } from './presets';
 
 export interface SectionShellProps {
   // Background (scheme | image+overlay | gradient | color)
@@ -83,7 +83,7 @@ export function SectionShell({
   ].filter(Boolean).join(' ');
 
   const contentClasses = [
-    buildSectionContentClasses({ density, contentWidth, contentAlign, verticalAlign, minHeight }),
+    buildSectionContentClasses({ density, contentWidth, contentAlign, verticalAlign }),
     contentClassName || '',
   ].filter(Boolean).join(' ');
 
@@ -92,13 +92,23 @@ export function SectionShell({
     ? resolveColor(`scheme.${backgroundScheme}.text`)
     : undefined;
 
+  // Min-height as an inline style — identical in every consumer, regardless
+  // of whether their Tailwind generates the equivalent class.
+  const minHeightPx = sectionMinHeight(minHeight);
+
   return (
     <section className={marginClasses}>
       <div className={`relative w-full ${className || ''}`} style={{ ...bg.style, ...style }}>
         {bg.hasOverlaySource && (
           <BackgroundOverlay overlayColor={overlayColor} overlayOpacity={overlayOpacity} />
         )}
-        <div className={`relative ${contentClasses}`} style={schemeTextColor ? { color: schemeTextColor } : undefined}>
+        <div
+          className={`relative ${contentClasses}`}
+          style={{
+            ...(minHeightPx ? { minHeight: minHeightPx } : {}),
+            ...(schemeTextColor ? { color: schemeTextColor } : {}),
+          }}
+        >
           {children}
         </div>
       </div>

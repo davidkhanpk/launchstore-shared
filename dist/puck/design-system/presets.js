@@ -283,13 +283,17 @@ const VERTICAL_ALIGN_CLASS = {
     middle: 'items-center',
     bottom: 'items-end',
 };
-/** Min height → class. */
-const MIN_HEIGHT_CLASS = {
-    sm: 'min-h-64',
-    md: 'min-h-96',
-    lg: 'min-h-[480px]',
-    xl: 'min-h-[576px]',
-    screen: 'min-h-screen',
+/** Min height → CSS value, applied as an INLINE STYLE by SectionShell.
+ * Inline styles bypass Tailwind's scanner entirely — arbitrary classes like
+ * min-h-[480px] generate unreliably across consumers (the storefront's
+ * Tailwind doesn't scan this package), which made heroes render at
+ * different heights in the editor vs the storefront. */
+export const MIN_HEIGHT_PX = {
+    sm: '256px',
+    md: '384px',
+    lg: '480px',
+    xl: '576px',
+    screen: '100vh',
 };
 /**
  * Resolve the section's background LAYERS. Precedence: image > gradient >
@@ -330,15 +334,22 @@ export function buildBackground(props) {
     return { style: {}, hasOverlaySource: false };
 }
 /** Classes for the section's content wrapper (inside the background surface). */
+/** Resolved inline min-height for a section (undefined when auto). */
+export function sectionMinHeight(minHeight) {
+    return minHeight ? MIN_HEIGHT_PX[minHeight] : undefined;
+}
 export function buildSectionContentClasses(props) {
-    const { density, contentWidth, contentAlign, verticalAlign, minHeight } = props || {};
+    const { density, contentWidth, contentAlign, verticalAlign } = props || {};
+    // mx-auto centers the capped content; with 'full' width it's pointless.
+    const widthClasses = contentWidth === 'full' || !contentWidth
+        ? 'w-full'
+        : `${CONTENT_WIDTH_CLASS[contentWidth] || 'max-w-5xl'} mx-auto w-full`;
     return [
-        'mx-auto w-full flex flex-col',
+        'flex flex-col',
         DENSITY_CLASS[density || 'compact'] || '',
-        (contentWidth && CONTENT_WIDTH_CLASS[contentWidth]) || 'max-w-5xl',
+        widthClasses,
         (contentAlign && CONTENT_ALIGN_CLASS[contentAlign]) || '',
         (verticalAlign && VERTICAL_ALIGN_CLASS[verticalAlign]) || '',
-        (minHeight && MIN_HEIGHT_CLASS[minHeight]) || '',
     ].filter(Boolean).join(' ');
 }
 // ── resolveColor (kept for color values — not a Tailwind class) ────────────

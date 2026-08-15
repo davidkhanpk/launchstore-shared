@@ -330,13 +330,17 @@ const VERTICAL_ALIGN_CLASS: Record<string, string> = {
   bottom: 'items-end',
 };
 
-/** Min height → class. */
-const MIN_HEIGHT_CLASS: Record<string, string> = {
-  sm: 'min-h-64',
-  md: 'min-h-96',
-  lg: 'min-h-[480px]',
-  xl: 'min-h-[576px]',
-  screen: 'min-h-screen',
+/** Min height → CSS value, applied as an INLINE STYLE by SectionShell.
+ * Inline styles bypass Tailwind's scanner entirely — arbitrary classes like
+ * min-h-[480px] generate unreliably across consumers (the storefront's
+ * Tailwind doesn't scan this package), which made heroes render at
+ * different heights in the editor vs the storefront. */
+export const MIN_HEIGHT_PX: Record<string, string> = {
+  sm: '256px',
+  md: '384px',
+  lg: '480px',
+  xl: '576px',
+  screen: '100vh',
 };
 
 /**
@@ -395,21 +399,29 @@ export function buildBackground(props: {
 }
 
 /** Classes for the section's content wrapper (inside the background surface). */
+/** Resolved inline min-height for a section (undefined when auto). */
+export function sectionMinHeight(minHeight?: string): string | undefined {
+  return minHeight ? MIN_HEIGHT_PX[minHeight] : undefined;
+}
+
 export function buildSectionContentClasses(props: {
   density?: string;
   contentWidth?: string;
   contentAlign?: string;
   verticalAlign?: string;
-  minHeight?: string;
 }): string {
-  const { density, contentWidth, contentAlign, verticalAlign, minHeight } = props || {};
+  const { density, contentWidth, contentAlign, verticalAlign } = props || {};
+  // mx-auto centers the capped content; with 'full' width it's pointless.
+  const widthClasses =
+    contentWidth === 'full' || !contentWidth
+      ? 'w-full'
+      : `${CONTENT_WIDTH_CLASS[contentWidth] || 'max-w-5xl'} mx-auto w-full`;
   return [
-    'mx-auto w-full flex flex-col',
+    'flex flex-col',
     DENSITY_CLASS[density || 'compact'] || '',
-    (contentWidth && CONTENT_WIDTH_CLASS[contentWidth]) || 'max-w-5xl',
+    widthClasses,
     (contentAlign && CONTENT_ALIGN_CLASS[contentAlign]) || '',
     (verticalAlign && VERTICAL_ALIGN_CLASS[verticalAlign]) || '',
-    (minHeight && MIN_HEIGHT_CLASS[minHeight]) || '',
   ].filter(Boolean).join(' ');
 }
 

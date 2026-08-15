@@ -1,6 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { resolveColor } from '../../../design-system';
 const CARD_STYLE = {
     minimal: 'bg-transparent',
     bordered: 'border border-gray-200 bg-white',

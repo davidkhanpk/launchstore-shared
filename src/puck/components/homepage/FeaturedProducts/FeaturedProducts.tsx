@@ -3,6 +3,7 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import type { FeaturedProductsProps, SharedProduct } from './featuredproducts.types';
+import { resolveColor } from '../../../design-system';
 
 const CARD_STYLE: Record<FeaturedProductsProps['cardStyle'], string> = {
   minimal: 'bg-transparent',

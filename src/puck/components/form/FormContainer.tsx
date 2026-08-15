@@ -89,10 +89,9 @@ export const FormContainer: ComponentConfig<FormContainerProps> = {
     formId, maxWidth, gap, paddingX, paddingY, marginTop, marginBottom,
     backgroundColor, borderWidth, borderColor, borderRadius, shadow,
   }: FormContainerProps) => {
-    const classes = [
-      'w-full mx-auto flex flex-wrap',
+    const shellClasses = [
+      'w-full mx-auto',
       maxWidth && maxWidth !== 'full' ? `max-w-${maxWidth}` : '',
-      `gap-${gap}`,
       `px-${paddingX} py-${paddingY}`,
       `mt-${marginTop} mb-${marginBottom}`,
       `rounded-${borderRadius}`,
@@ -100,16 +99,22 @@ export const FormContainer: ComponentConfig<FormContainerProps> = {
       BORDER_WIDTH_CLASS[borderWidth] ?? 'border-0',
     ].filter(Boolean).join(' ');
 
+    // The DropZone wrapper must BE the flex container: Puck's render-mode
+    // DropZone renders a bare <div> (applying this className), which would
+    // otherwise shrink to content width inside a flex shell and break
+    // field widths.
+    const zoneClasses = `w-full flex flex-wrap gap-${gap}`;
+
     return (
       <div
         data-form-id={formId}
-        className={classes}
+        className={shellClasses}
         style={{
           backgroundColor: backgroundColor ? resolveColor(backgroundColor) : undefined,
           borderColor: borderColor ? resolveColor(borderColor) : undefined,
         }}
       >
-        <DropZone zone="fields" />
+        <DropZone zone="fields" className={zoneClasses} />
       </div>
     );
   },

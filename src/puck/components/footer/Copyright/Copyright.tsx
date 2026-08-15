@@ -6,6 +6,11 @@ import {
   sharedTypographyFields,
   sharedLayoutFields,
   buildLayoutClasses,
+  buildTypographyClasses,
+  TEXT_ALIGN_OPTIONS,
+  FONT_SIZE_OPTIONS,
+  LETTER_SPACING_OPTIONS,
+  TEXT_TRANSFORM_OPTIONS,
   defaultTypographyProps,
   defaultLayoutProps,
 } from '../../../design-system';
@@ -24,18 +29,10 @@ const contentFields = {
 // ── Typography fields (component-specific alignment + shared) ───────────────
 
 const typographyFields = {
-  alignment: {
-    type: 'select' as const, label: 'Alignment',
-    options: [{ label: 'Left', value: 'left' }, { label: 'Center', value: 'center' }, { label: 'Right', value: 'right' }],
-  },
-  fontSize: {
-    type: 'select' as const, label: 'Font Size',
-    options: [
-      { label: 'Extra Small', value: 'xs' },
-      { label: 'Small', value: 'sm' },
-      { label: 'Base', value: 'base' },
-    ],
-  },
+  textAlign: { type: 'select' as const, label: 'Text Align', options: TEXT_ALIGN_OPTIONS },
+  fontSize: { type: 'select' as const, label: 'Font Size', options: FONT_SIZE_OPTIONS },
+  letterSpacing: { type: 'select' as const, label: 'Letter Spacing', options: LETTER_SPACING_OPTIONS },
+  textTransform: { type: 'select' as const, label: 'Text Transform', options: TEXT_TRANSFORM_OPTIONS },
 };
 
 // ── All flat fields ─────────────────────────────────────────────────────────
@@ -55,8 +52,8 @@ export const Copyright: ComponentConfig<CopyrightProps> = {
   defaultProps: {
     text: 'All rights reserved.',
     showYear: true,
-    alignment: 'center',
     ...defaultTypographyProps,
+    textAlign: 'center',
     fontSize: 'sm',
     textColor: '#6b7280',
     showDivider: true,
@@ -66,12 +63,12 @@ export const Copyright: ComponentConfig<CopyrightProps> = {
   } as CopyrightProps,
   render: (rawProps: any) => {
     const {
-      text, showYear, alignment, fontSize, textColor,
+      text, showYear, textAlign, textColor,
       showDivider, dividerColor, paddingY, marginTop, marginBottom, paddingX,
     } = rawProps;
 
     const currentYear = new Date().getFullYear();
-    const fsClass = fontSize === 'xs' ? 'text-xs' : fontSize === 'sm' ? 'text-sm' : 'text-base';
+    const typographyClasses = buildTypographyClasses(rawProps);
     const layoutClasses = buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY });
 
     return (
@@ -83,7 +80,7 @@ export const Copyright: ComponentConfig<CopyrightProps> = {
       >
         <div className="container mx-auto">
           <p
-            className={`${ALIGN[alignment || 'center'] || 'text-center'} ${fsClass}`}
+            className={`${typographyClasses}`}
             style={{ color: resolveColor(textColor) }}
           >
             {showYear && `© ${currentYear} `}

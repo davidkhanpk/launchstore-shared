@@ -3,6 +3,7 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { DropZone } from '@puckeditor/core';
 import type { GridProps } from './grid.types';
 import {
+  SPACING_OPTIONS,
   sharedLayoutFields,
   defaultLayoutProps,
 } from '../../../design-system';
@@ -23,10 +24,7 @@ const contentFields = {
     type: 'radio' as const, label: 'Mobile Columns',
     options: [{ label: '1', value: '1' }, { label: '2', value: '2' }],
   },
-  gap: {
-    type: 'radio' as const, label: 'Gap',
-    options: [{ label: 'None', value: 'none' }, { label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }, { label: 'Extra Large', value: 'xl' }],
-  },
+  gap: { type: 'select' as const, label: 'Gap', options: SPACING_OPTIONS },
 };
 
 // ── All flat fields ─────────────────────────────────────────────────────────
@@ -36,7 +34,8 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-const GAP_CLASS: Record<string, string> = { none: 'gap-0', sm: 'gap-3', md: 'gap-6', lg: 'gap-8', xl: 'gap-12' };
+// Legacy semantic gap values still resolve; new values are Tailwind spacing numbers.
+const LEGACY_GAP: Record<string, string> = { none: '0', sm: '3', md: '6', lg: '8', xl: '12' };
 const MOBILE_CLASS: Record<string, string> = { '1': 'grid-cols-1', '2': 'grid-cols-2' };
 const TABLET_CLASS: Record<string, string> = { '1': 'md:grid-cols-1', '2': 'md:grid-cols-2', '3': 'md:grid-cols-3', '4': 'md:grid-cols-4' };
 const DESKTOP_CLASS: Record<string, string> = {
@@ -60,7 +59,7 @@ export const Grid: ComponentConfig<GridProps> = {
   render: (rawProps: any) => {
     const { id, columns, tabletColumns, mobileColumns, gap } = rawProps;
     return (
-      <div id={id} className={`grid ${MOBILE_CLASS[mobileColumns || '1'] || 'grid-cols-1'} ${TABLET_CLASS[tabletColumns || '2'] || 'md:grid-cols-2'} ${DESKTOP_CLASS[columns || '3'] || 'lg:grid-cols-3'} ${GAP_CLASS[gap || 'md'] || 'gap-6'}`}>
+      <div id={id} className={`grid ${MOBILE_CLASS[mobileColumns || '1'] || 'grid-cols-1'} ${TABLET_CLASS[tabletColumns || '2'] || 'md:grid-cols-2'} ${DESKTOP_CLASS[columns || '3'] || 'lg:grid-cols-3'} ${`gap-${LEGACY_GAP[gap] ?? gap ?? '6'}`}`}>
         <DropZone zone="items" />
       </div>
     );

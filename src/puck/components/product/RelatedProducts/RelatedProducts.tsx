@@ -5,6 +5,7 @@ import type { RelatedProductsProps } from './relatedproducts.types';
 import { ProductGridRenderer } from './productgrid';
 import type { CarouselProduct } from '../../swiper/ProductCarousel';
 import {
+  buildTypographyClasses,
   sharedTypographyFields,
   sharedLayoutFields,
   defaultTypographyProps,
@@ -99,14 +100,15 @@ export const RelatedProducts: ComponentConfig<RelatedProductsWithData> = {
       textAlign?: string; textColor?: string;
     };
 
+    // Typography via design-system classes (semantic ladder values) —
+    // Number(fontWeight) broke with 'bold'/'semibold' values.
+    const taglineClasses = [
+      buildTypographyClasses(rawProps),
+      textAlign === 'center' ? 'mx-auto' : textAlign === 'right' ? 'ml-auto' : '',
+      'max-w-2xl mb-12',
+    ].filter(Boolean).join(' ');
     const taglineStyle: React.CSSProperties = {
-      textAlign: (textAlign as React.CSSProperties['textAlign']) || 'center',
-      fontSize: fontSize || '1.125rem',
-      fontWeight: Number(fontWeight) || 400,
-      lineHeight: lineHeight || '1.625',
       color: resolveColor(textColor) || '#374151',
-      maxWidth: '42rem',
-      margin: '0 auto 3rem auto',
     };
 
     const wrapperStyle: React.CSSProperties = {
@@ -117,7 +119,7 @@ export const RelatedProducts: ComponentConfig<RelatedProductsWithData> = {
     return (
       <div style={wrapperStyle}>
         {showTagline && tagline && (
-          <div style={taglineStyle}>{tagline}</div>
+          <div className={taglineClasses} style={taglineStyle}>{tagline}</div>
         )}
         <ProductGridRenderer products={products} {...gridProps} />
       </div>

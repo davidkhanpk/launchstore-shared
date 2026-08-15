@@ -3,6 +3,7 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { ContactInfoProps } from './contactinfo.types';
 import {
+  SPACING_OPTIONS,
   sharedLayoutFields,
   buildLayoutClasses,
   defaultLayoutProps,
@@ -45,10 +46,7 @@ const styleFields = {
     type: 'select' as const, label: 'Font Size',
     options: [{ label: 'Small', value: 'sm' }, { label: 'Base', value: 'base' }],
   },
-  gap: {
-    type: 'select' as const, label: 'Spacing',
-    options: [{ label: 'Small', value: 'sm' }, { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }],
-  },
+  gap: { type: 'select' as const, label: 'Spacing', options: SPACING_OPTIONS },
 };
 
 // ── All flat fields ─────────────────────────────────────────────────────────
@@ -59,7 +57,8 @@ const allFields = {
   ...sharedLayoutFields,
 };
 
-const GAP_CLASS: Record<string, string> = { sm: 'gap-2', md: 'gap-4', lg: 'gap-6' };
+// Legacy semantic gap values still resolve.
+const LEGACY_GAP: Record<string, string> = { sm: '2', md: '4', lg: '6' };
 const LAYOUT_CLASS: Record<string, string> = {
   stacked: 'flex flex-col', grid: 'grid grid-cols-1 md:grid-cols-2',
 };
@@ -102,7 +101,7 @@ export const ContactInfo: ComponentConfig<ContactInfoProps> = {
     const layoutClasses = buildLayoutClasses({ marginTop, marginBottom, paddingX, paddingY });
 
     return (
-      <div className={`${LAYOUT_CLASS[layout || 'stacked'] || 'flex flex-col'} ${GAP_CLASS[gap || 'md'] || 'gap-4'} ${layoutClasses}`}>
+      <div className={`${LAYOUT_CLASS[layout || 'stacked'] || 'flex flex-col'} ${`gap-${LEGACY_GAP[gap] ?? gap ?? '4'}`} ${layoutClasses}`}>
         {items.map((item, i) => {
           const content = (
             <div className="flex items-start gap-3">

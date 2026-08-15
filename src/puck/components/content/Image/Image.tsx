@@ -3,6 +3,7 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { ImageProps } from './image.types';
 import {
+  SHADOW_OPTIONS,
   sharedTypographyFields,
   sharedLayoutFields,
   sharedColorFields,
@@ -101,17 +102,7 @@ const contentFields = {
     type: 'radio' as const, label: 'Open in New Tab',
     options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],
   },
-  shadow: {
-    type: 'select' as const, label: 'Shadow',
-    options: [
-      { label: 'None', value: 'none' },
-      { label: 'Small', value: 'sm' },
-      { label: 'Medium', value: 'md' },
-      { label: 'Large', value: 'lg' },
-      { label: 'Extra Large', value: 'xl' },
-      { label: '2XL', value: '2xl' },
-    ],
-  },
+  shadow: { type: 'select' as const, label: 'Shadow', options: SHADOW_OPTIONS },
   showBorder: {
     type: 'radio' as const, label: 'Show Border',
     options: [{ label: 'Yes', value: true }, { label: 'No', value: false }],

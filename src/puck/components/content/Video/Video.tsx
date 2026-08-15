@@ -3,6 +3,7 @@ import type { ComponentConfig } from '@puckeditor/core';
 import { resolveColor } from '../../../../theme/resolveColor';
 import type { VideoProps } from './video.types';
 import {
+  SHADOW_OPTIONS,
   sharedTypographyFields,
   sharedLayoutFields,
   sharedColorFields,
@@ -71,15 +72,7 @@ const contentFields = {
       { label: 'Right', value: 'right' },
     ],
   },
-  shadow: {
-    type: 'select' as const, label: 'Shadow',
-    options: [
-      { label: 'None', value: 'none' },
-      { label: 'Small', value: 'sm' },
-      { label: 'Medium', value: 'md' },
-      { label: 'Large', value: 'lg' },
-    ],
-  },
+  shadow: { type: 'select' as const, label: 'Shadow', options: SHADOW_OPTIONS },
   caption: { type: 'textarea' as const, label: 'Caption (optional)' },
 };
 

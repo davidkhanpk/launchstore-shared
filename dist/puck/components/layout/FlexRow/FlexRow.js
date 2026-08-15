@@ -108,7 +108,7 @@ export const FlexRow = {
             maxWidth: fullWidth ? undefined : maxWidth,
             minHeight: '50px',
         };
-        return (_jsxs("div", { className: className, style: style, children: [bg.hasOverlaySource && (_jsx(BackgroundOverlay, { overlayColor: overlayColor, overlayOpacity: overlayOpacity })), _jsx("div", { className: "relative w-full", style: flexLayout, children: _jsx(DropZone, { zone: "flex-row-content", disallow: [], style: { ...flexLayout, width: '100%' } }) })] }));
+        return (_jsxs("div", { className: className, style: style, children: [bg.hasOverlaySource && (_jsx(BackgroundOverlay, { overlayColor: overlayColor, overlayOpacity: overlayOpacity })), _jsx("div", { className: "relative w-full min-w-0", style: flexLayout, children: _jsx(DropZone, { zone: "flex-row-content", disallow: [], style: { ...flexLayout, width: '100%' } }) })] }));
     },
 };
 export default FlexRow;

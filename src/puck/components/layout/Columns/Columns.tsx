@@ -158,7 +158,7 @@ export const Columns: ComponentConfig<ColumnsProps> = {
             <BackgroundOverlay overlayColor={overlayColor} overlayOpacity={overlayOpacity} />
           )}
           {Array.from({ length: n }, (_, i) => (
-            <div key={i} className="relative" style={{ minHeight: '100px' }}>
+            <div key={i} className="relative min-w-0" style={{ minHeight: '100px' }}>
               <DropZone zone={`column-${i + 1}`} />
             </div>
           ))}

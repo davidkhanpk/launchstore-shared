@@ -189,6 +189,7 @@ export const sharedBackgroundFields: Record<string, Field> = {
 // ── Section semantics: layout ──────────────────────────────────────────────
 
 export const DENSITY_OPTIONS = [
+  { label: 'None', value: 'none' },
   { label: 'Compact', value: 'compact' },
   { label: 'Comfortable', value: 'comfortable' },
   { label: 'Spacious', value: 'spacious' },
@@ -301,6 +302,7 @@ export function buildBorderClasses(props: any): string {
 
 /** Density → vertical padding classes. */
 const DENSITY_CLASS: Record<string, string> = {
+  none: '',
   compact: 'py-6',
   comfortable: 'py-12',
   spacious: 'py-20',
@@ -403,7 +405,7 @@ export function buildSectionContentClasses(props: {
   const { density, contentWidth, contentAlign, verticalAlign, minHeight } = props || {};
   return [
     'mx-auto w-full flex flex-col',
-    DENSITY_CLASS[density || 'comfortable'] || '',
+    DENSITY_CLASS[density || 'compact'] || '',
     (contentWidth && CONTENT_WIDTH_CLASS[contentWidth]) || 'max-w-5xl',
     (contentAlign && CONTENT_ALIGN_CLASS[contentAlign]) || '',
     (verticalAlign && VERTICAL_ALIGN_CLASS[verticalAlign]) || '',

@@ -119,7 +119,7 @@ export const Columns = {
         const responsiveStyle = mobileStack ? (_jsx("style", { children: `
         @media (min-width: 768px) { .${stackId} { grid-template-columns: ${desktopCols} !important; } }
       ` })) : null;
-        return (_jsxs(_Fragment, { children: [responsiveStyle, _jsxs("div", { className: className, style: gridStyle, children: [bg.hasOverlaySource && (_jsx(BackgroundOverlay, { overlayColor: overlayColor, overlayOpacity: overlayOpacity })), Array.from({ length: n }, (_, i) => (_jsx("div", { className: "relative", style: { minHeight: '100px' }, children: _jsx(DropZone, { zone: `column-${i + 1}` }) }, i)))] })] }));
+        return (_jsxs(_Fragment, { children: [responsiveStyle, _jsxs("div", { className: className, style: gridStyle, children: [bg.hasOverlaySource && (_jsx(BackgroundOverlay, { overlayColor: overlayColor, overlayOpacity: overlayOpacity })), Array.from({ length: n }, (_, i) => (_jsx("div", { className: "relative min-w-0", style: { minHeight: '100px' }, children: _jsx(DropZone, { zone: `column-${i + 1}` }) }, i)))] })] }));
     },
 };
 export default Columns;

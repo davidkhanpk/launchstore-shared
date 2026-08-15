@@ -38,7 +38,7 @@ export const Section: ComponentConfig<SectionProps> = {
     gradientFrom: '',
     gradientTo: '',
     backgroundColor: '',
-    density: 'comfortable',
+    density: 'compact',
     contentWidth: 'standard',
     contentAlign: 'left',
     verticalAlign: 'top',

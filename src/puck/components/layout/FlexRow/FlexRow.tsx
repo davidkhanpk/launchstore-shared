@@ -149,7 +149,7 @@ export const FlexRow: ComponentConfig<FlexRowProps> = {
         {bg.hasOverlaySource && (
           <BackgroundOverlay overlayColor={overlayColor} overlayOpacity={overlayOpacity} />
         )}
-        <div className="relative w-full" style={flexLayout}>
+        <div className="relative w-full min-w-0" style={flexLayout}>
           <DropZone zone="flex-row-content" disallow={[] as any} style={{ ...flexLayout, width: '100%' }} />
         </div>
       </div>

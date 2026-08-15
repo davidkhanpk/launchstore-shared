@@ -36,7 +36,7 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-08-15T13:10:27.227Z",
+  "generatedAt": "2026-08-15T14:32:56.838Z",
   "total": 139,
   "entries": [
     {

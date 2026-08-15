@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { resolveColor } from '../../../../theme/resolveColor';
-import { buildColorClasses, } from '../../../design-system';
+import { RADIUS_OPTIONS, SHADOW_OPTIONS, SPACING_OPTIONS, TEXT_ALIGN_OPTIONS, buildColorClasses, } from '../../../design-system';
 const ArrowIcon = () => (_jsx("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 2, stroke: "currentColor", style: { width: '20px', height: '20px' }, children: _jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" }) }));
 const SIZE_MAP = {
     sm: { padding: '8px 16px', fontSize: '0.875rem' },
@@ -8,7 +8,21 @@ const SIZE_MAP = {
     lg: { padding: '16px 32px', fontSize: '1.125rem' },
     xl: { padding: '20px 40px', fontSize: '1.25rem' },
 };
-// ── Content fields (component-specific) ─────────────────────────────────────
+/**
+ * Variant → theme token map. Used when the merchant hasn't set an explicit
+ * color, so variants are visually real and follow the theme automatically
+ * (change brand.primary → every primary CTA follows).
+ */
+const VARIANT_TOKENS = {
+    primary: { bg: 'button.primary.background', text: 'button.primary.text' },
+    secondary: { bg: 'button.secondary.background', text: 'button.secondary.text' },
+    outline: { bg: 'transparent', text: 'brand.primary', border: 'brand.primary' },
+    ghost: { bg: 'transparent', text: 'brand.primary' },
+    danger: { bg: 'button.danger.background', text: 'button.danger.text' },
+};
+// Legacy semantic margin values (pre-normalization) still resolve.
+const LEGACY_SPACING = { none: '0', xs: '1', sm: '2', md: '4', lg: '6', xl: '8' };
+// ── Fields ───────────────────────────────────────────────────────────────────
 const contentFields = {
     text: { type: 'text', label: 'Button Text' },
     url: { type: 'text', label: 'URL' },
@@ -39,44 +53,26 @@ const contentFields = {
         options: [{ label: 'Left', value: 'left' }, { label: 'Right', value: 'right' }],
     },
 };
-// ── Colors fields (component-specific — Button has more color options than shared) ──
 const buttonColorFields = {
-    backgroundColor: { type: 'text', label: 'Background Color' },
-    textColor: { type: 'text', label: 'Text Color' },
+    backgroundColor: { type: 'text', label: 'Background Color (empty = theme variant)' },
+    textColor: { type: 'text', label: 'Text Color (empty = theme variant)' },
     borderColor: { type: 'text', label: 'Border Color' },
     hoverBackgroundColor: { type: 'text', label: 'Hover Background' },
     hoverTextColor: { type: 'text', label: 'Hover Text Color' },
-    borderRadius: { type: 'select', label: 'Border Radius', options: [
-            { label: 'None', value: 'none' }, { label: 'Small', value: 'sm' },
-            { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' },
-            { label: 'Full', value: 'full' },
-        ] },
-    shadow: { type: 'select', label: 'Shadow', options: [
-            { label: 'None', value: 'none' }, { label: 'Small', value: 'sm' },
-            { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' },
-            { label: 'XL', value: 'xl' },
-        ] },
+    borderRadius: { type: 'select', label: 'Border Radius', options: RADIUS_OPTIONS },
+    shadow: { type: 'select', label: 'Shadow', options: SHADOW_OPTIONS },
 };
 const layoutFields = {
-    textAlign: { type: 'select', label: 'Alignment', options: [
-            { label: 'Left', value: 'left' }, { label: 'Center', value: 'center' }, { label: 'Right', value: 'right' },
-        ] },
-    marginTop: { type: 'select', label: 'Margin Top', options: [
-            { label: 'None', value: 'none' }, { label: 'XS', value: 'xs' }, { label: 'Small', value: 'sm' },
-            { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }, { label: 'XL', value: 'xl' },
-        ] },
-    marginBottom: { type: 'select', label: 'Margin Bottom', options: [
-            { label: 'None', value: 'none' }, { label: 'XS', value: 'xs' }, { label: 'Small', value: 'sm' },
-            { label: 'Medium', value: 'md' }, { label: 'Large', value: 'lg' }, { label: 'XL', value: 'xl' },
-        ] },
+    textAlign: { type: 'select', label: 'Alignment', options: TEXT_ALIGN_OPTIONS },
+    marginTop: { type: 'select', label: 'Margin Top', options: SPACING_OPTIONS },
+    marginBottom: { type: 'select', label: 'Margin Bottom', options: SPACING_OPTIONS },
 };
-// ── All flat fields ─────────────────────────────────────────────────────────
 const allFields = {
     ...contentFields,
     ...buttonColorFields,
     ...layoutFields,
 };
-// ── Component ───────────────────────────────────────────────────────────────
+// ── Component ────────────────────────────────────────────────────────────────
 export const Button = {
     label: 'Button',
     fields: allFields,
@@ -87,36 +83,41 @@ export const Button = {
         variant: 'primary',
         size: 'md',
         fullWidth: false,
-        backgroundColor: '#3b82f6',
-        textColor: '#ffffff',
-        borderColor: '#3b82f6',
-        hoverBackgroundColor: '#2563eb',
-        hoverTextColor: '#ffffff',
+        // Colors intentionally empty — variants resolve through theme tokens.
+        backgroundColor: '',
+        textColor: '',
+        borderColor: '',
+        hoverBackgroundColor: '',
+        hoverTextColor: '',
         showIcon: false,
         iconPosition: 'right',
         borderRadius: 'md',
-        shadow: 'md',
+        shadow: 'sm',
         textAlign: 'left',
-        marginTop: 'none',
-        marginBottom: 'md',
+        marginTop: '0',
+        marginBottom: '4',
     },
     render: (rawProps) => {
         const { text, url, openInNewTab, variant, size, fullWidth, backgroundColor, textColor, borderColor, hoverBackgroundColor, hoverTextColor, showIcon, iconPosition, borderRadius, shadow, textAlign, marginTop, marginBottom, } = rawProps;
         const sizeStyle = SIZE_MAP[size] || SIZE_MAP.md;
+        const tokens = VARIANT_TOKENS[variant] || VARIANT_TOKENS.primary;
         const justifyMap = { left: 'flex-start', center: 'center', right: 'flex-end' };
         const shadowMap = {
             none: 'none', sm: '0 1px 2px rgba(0,0,0,0.05)', md: '0 4px 6px rgba(0,0,0,0.1)',
             lg: '0 10px 15px rgba(0,0,0,0.1)', xl: '0 20px 25px rgba(0,0,0,0.15)',
         };
-        // Button spacing field values are semantic (none/xs/sm/md/lg/xl), not Tailwind
-        // scale numbers, so map them to Tailwind classes here without changing the field.
-        const SPACING_CLASS = {
-            none: '0', xs: '1', sm: '2', md: '4', lg: '6', xl: '8',
-        };
+        const spacingValue = (v) => (v == null ? '' : LEGACY_SPACING[v] ?? v);
         const marginClasses = [
-            marginTop ? `mt-${SPACING_CLASS[marginTop] ?? marginTop}` : '',
-            marginBottom ? `mb-${SPACING_CLASS[marginBottom] ?? marginBottom}` : '',
+            marginTop != null ? `mt-${spacingValue(marginTop)}` : '',
+            marginBottom != null ? `mb-${spacingValue(marginBottom)}` : '',
         ].filter(Boolean).join(' ');
+        // Explicit prop wins; otherwise resolve through the variant's theme tokens.
+        const resolvedBg = backgroundColor ? resolveColor(backgroundColor) : resolveColor(tokens.bg);
+        const resolvedText = textColor ? resolveColor(textColor) : resolveColor(tokens.text);
+        const isOutline = variant === 'outline';
+        const resolvedBorder = borderColor
+            ? resolveColor(borderColor)
+            : tokens.border ? resolveColor(tokens.border) : resolvedBg;
         const buttonStyle = {
             display: fullWidth ? 'flex' : 'inline-flex',
             alignItems: 'center',
@@ -124,24 +125,27 @@ export const Button = {
             fontWeight: 600,
             padding: sizeStyle.padding,
             fontSize: sizeStyle.fontSize,
-            boxShadow: shadowMap[shadow || 'none'] || 'none',
-            backgroundColor: resolveColor(backgroundColor) || '#3b82f6',
-            color: resolveColor(textColor) || '#ffffff',
-            borderWidth: variant === 'outline' ? '2px' : '0',
-            borderColor: resolveColor(borderColor) || '#3b82f6',
-            borderStyle: variant === 'outline' ? 'solid' : undefined,
+            boxShadow: shadowMap[shadow || 'sm'] || 'none',
+            backgroundColor: resolvedBg || '#000000',
+            color: resolvedText || '#ffffff',
+            borderWidth: isOutline ? '2px' : '0',
+            borderColor: resolvedBorder,
+            borderStyle: isOutline ? 'solid' : undefined,
             textDecoration: 'none',
             cursor: 'pointer',
             justifyContent: fullWidth ? 'center' : undefined,
             width: fullWidth ? '100%' : undefined,
-            transition: 'transform 0.2s, background-color 0.2s',
+            transition: 'transform 0.2s, background-color 0.2s, opacity 0.2s',
         };
         const buttonClassName = [
             'btn-shared',
             buildColorClasses({ borderRadius }),
+            hoverBackgroundColor || hoverTextColor ? '' : 'hover:opacity-90',
         ].filter(Boolean).join(' ');
-        const hoverCss = `.btn-shared:hover { background-color: ${resolveColor(hoverBackgroundColor) || '#2563eb'} !important; color: ${resolveColor(hoverTextColor) || '#fff'} !important; }`;
-        return (_jsxs("div", { className: marginClasses, style: { display: 'flex', justifyContent: justifyMap[textAlign || 'left'] || 'flex-start' }, children: [_jsxs("a", { href: url || '#', target: openInNewTab ? '_blank' : undefined, rel: openInNewTab ? 'noopener noreferrer' : undefined, className: buttonClassName, style: buttonStyle, onMouseEnter: (e) => { e.currentTarget.style.transform = 'scale(1.05)'; }, onMouseLeave: (e) => { e.currentTarget.style.transform = 'scale(1)'; }, children: [showIcon && iconPosition === 'left' && _jsx(ArrowIcon, {}), text, showIcon && iconPosition === 'right' && _jsx(ArrowIcon, {})] }), _jsx("style", { dangerouslySetInnerHTML: { __html: hoverCss } })] }));
+        const hoverCss = (hoverBackgroundColor || hoverTextColor)
+            ? `.btn-shared:hover { background-color: ${resolveColor(hoverBackgroundColor) || 'transparent'} !important; color: ${resolveColor(hoverTextColor) || resolvedText || '#fff'} !important; }`
+            : '';
+        return (_jsxs("div", { className: marginClasses, style: { display: 'flex', justifyContent: justifyMap[textAlign || 'left'] || 'flex-start' }, children: [_jsxs("a", { href: url || '#', target: openInNewTab ? '_blank' : undefined, rel: openInNewTab ? 'noopener noreferrer' : undefined, className: buttonClassName, style: buttonStyle, onMouseEnter: (e) => { e.currentTarget.style.transform = 'scale(1.03)'; }, onMouseLeave: (e) => { e.currentTarget.style.transform = 'scale(1)'; }, children: [showIcon && iconPosition === 'left' && _jsx(ArrowIcon, {}), text, showIcon && iconPosition === 'right' && _jsx(ArrowIcon, {})] }), hoverCss && _jsx("style", { dangerouslySetInnerHTML: { __html: hoverCss } })] }));
     },
 };
 export default Button;

@@ -4,8 +4,7 @@ import type {
   ProductCardProps, SharedProductCardProduct, RenderProductCard,
   ProductCardLayout,
 } from './productcard.types';
-import {
-} from '../../../design-system';
+import { resolveColor } from '../../../design-system';
 
 const RADIO_YES_NO = [{ label: 'Yes', value: true }, { label: 'No', value: false }];
 
@@ -171,9 +170,9 @@ const DefaultCard: React.FC<{ product: SharedProductCardProduct; props: ProductC
         )}
         {props.showBadges && (props.showSaleBadge && isSale || props.showNewBadge && isNew || props.showLowStockBadge && isLowStock) && (
           <div className={`absolute ${badgePos[props.badgePosition]} flex gap-1`}>
-            {props.showSaleBadge && isSale && <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">Sale</span>}
-            {props.showNewBadge && isNew && <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded">New</span>}
-            {props.showLowStockBadge && isLowStock && <span className="bg-orange-500 text-white text-xs px-2 py-1 rounded">Low Stock</span>}
+            {props.showSaleBadge && isSale && <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: resolveColor('badge.sale.background'), color: resolveColor('badge.sale.text') }}>Sale</span>}
+            {props.showNewBadge && isNew && <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: resolveColor('badge.new.background'), color: resolveColor('badge.new.text') }}>New</span>}
+            {props.showLowStockBadge && isLowStock && <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: resolveColor('badge.lowStock.background'), color: resolveColor('badge.lowStock.text') }}>Low Stock</span>}
           </div>
         )}
       </div>
@@ -226,14 +225,14 @@ export const ProductCard: ComponentConfig<ProductCardWithRender> = {
     layout: 'vertical', enableSwiper: true, aspectRatio: 'square',
     borderRadius: 'md', showShadow: true, hoverZoom: true,
     showTitle: true, titleSize: 'lg', titleWeight: 'semibold', titleAlign: 'left',
-    showPrice: true, priceSize: 'lg', priceColor: '#000000',
+    showPrice: true, priceSize: 'lg', priceColor: 'card.price',
     showCompareAtPrice: true, showSavingsBadge: true,
     showBadges: true, showSaleBadge: true, showNewBadge: true, showLowStockBadge: true,
     badgePosition: 'top-right',
     showAddToCart: true, buttonText: 'Add to Cart',
     buttonStyle: 'filled', buttonSize: 'md', showCartIcon: true,
     cardRadius: 'lg', cardBorder: 'sm', cardShadow: true,
-    cardBackground: '#ffffff', accentColor: '#000000', fontFamily: 'inherit',
+    cardBackground: 'card.background', accentColor: 'brand.primary', fontFamily: 'inherit',
     productId: '',
   },
   resolveData: async (data, { changed }) => {

@@ -137,7 +137,7 @@ export const FeaturedProducts = {
         const errMsg = error || '';
         const empty = !isLoading && !errMsg && (!products || products.length === 0);
         const Header = showTitle ? (_jsxs("div", { className: "text-center mb-12", children: [_jsx("h2", { className: "text-4xl font-bold mb-2", style: { color: textColor }, children: sectionTitle }), sectionSubtitle && _jsx("p", { className: "text-lg opacity-80", style: { color: textColor }, children: sectionSubtitle })] })) : null;
-        const sectionStyle = { backgroundColor };
+        const sectionStyle = { backgroundColor: resolveColor(backgroundColor) || backgroundColor };
         if (errMsg) {
             return (_jsx("div", { className: "featured-products-section py-16", style: sectionStyle, children: _jsxs("div", { className: "container mx-auto px-4", children: [Header, _jsx("div", { className: "text-center text-red-500", children: _jsxs("p", { children: ["Error: ", errMsg] }) })] }) }));
         }

@@ -178,7 +178,7 @@ export const FeaturedProducts: ComponentConfig<FeaturedProductsProps> = {
       </div>
     ) : null;
 
-    const sectionStyle: React.CSSProperties = { backgroundColor };
+    const sectionStyle: React.CSSProperties = { backgroundColor: resolveColor(backgroundColor) || backgroundColor };
 
     if (errMsg) {
       return (

@@ -31,8 +31,10 @@ const PADDING: Record<ProductGridPadding, string> = {
   lg: 'px-8 py-16',
 };
 
-export const ProductGridRenderer: React.FC<ProductGridProps & { products: CarouselProduct[] }> = ({
-  title, showTitle, maxProducts, displayStyle, containerPadding, products,
+export const ProductGridRenderer: React.FC<
+  ProductGridProps & { products: CarouselProduct[]; renderProduct?: (p: any) => React.ReactNode }
+> = ({
+  title, showTitle, maxProducts, displayStyle, containerPadding, products, renderProduct,
 }) => {
   if (!products || products.length === 0) return <></>;
   const list = products.slice(0, maxProducts);
@@ -86,43 +88,47 @@ export const ProductGridRenderer: React.FC<ProductGridProps & { products: Carous
           <h2 className="text-3xl font-semibold text-gray-900 mb-8">{title}</h2>
         )}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {list.map((p) => (
-            <ProductCardRender
-              key={p.id}
-              product={p as any}
-              layout="vertical"
-              enableSwiper={false}
-              aspectRatio="square"
-              borderRadius="md"
-              showShadow={true}
-              hoverZoom={true}
-              showTitle={true}
-              titleSize="lg"
-              titleWeight="semibold"
-              titleAlign="left"
-              showPrice={true}
-              priceSize="lg"
-              priceColor="#000000"
-              showCompareAtPrice={true}
-              showSavingsBadge={true}
-              showBadges={true}
-              showSaleBadge={true}
-              showNewBadge={false}
-              showLowStockBadge={false}
-              badgePosition="top-right"
-              showAddToCart={false}
-              buttonText="Add to Cart"
-              buttonStyle="filled"
-              buttonSize="md"
-              showCartIcon={true}
-              cardRadius="lg"
-              cardBorder="none"
-              cardShadow={true}
-              cardBackground="#ffffff"
-              accentColor="#000000"
-              fontFamily="inherit"
-            />
-          ))}
+          {list.map((p) =>
+            renderProduct ? (
+              <React.Fragment key={p.id}>{renderProduct(p)}</React.Fragment>
+            ) : (
+              <ProductCardRender
+                key={p.id}
+                product={p as any}
+                layout="vertical"
+                enableSwiper={false}
+                aspectRatio="square"
+                borderRadius="md"
+                showShadow={true}
+                hoverZoom={true}
+                showTitle={true}
+                titleSize="lg"
+                titleWeight="semibold"
+                titleAlign="left"
+                showPrice={true}
+                priceSize="lg"
+                priceColor="#000000"
+                showCompareAtPrice={true}
+                showSavingsBadge={true}
+                showBadges={true}
+                showSaleBadge={true}
+                showNewBadge={false}
+                showLowStockBadge={false}
+                badgePosition="top-right"
+                showAddToCart={false}
+                buttonText="Add to Cart"
+                buttonStyle="filled"
+                buttonSize="md"
+                showCartIcon={true}
+                cardRadius="lg"
+                cardBorder="none"
+                cardShadow={true}
+                cardBackground="#ffffff"
+                accentColor="#000000"
+                fontFamily="inherit"
+              />
+            )
+          )}
         </div>
       </div>
     </div>

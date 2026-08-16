@@ -49,7 +49,7 @@ export const RecentlyViewedProducts = {
             marginTop: marginTop || undefined,
             marginBottom: marginBottom || undefined,
         };
-        return (_jsx("div", { style: wrapperStyle, children: _jsx(ProductGridRenderer, { products: products, ...rest }) }));
+        return (_jsx("div", { style: wrapperStyle, children: _jsx(ProductGridRenderer, { products: products, ...rest, renderProduct: rawProps.renderProduct }) }));
     },
 };
 export default RecentlyViewedProducts;

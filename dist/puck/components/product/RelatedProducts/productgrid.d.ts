@@ -14,5 +14,6 @@ import React from 'react';
 import type { CarouselProduct } from '../../swiper/ProductCarousel';
 export declare const ProductGridRenderer: React.FC<ProductGridProps & {
     products: CarouselProduct[];
+    renderProduct?: (p: any) => React.ReactNode;
 }>;
 //# sourceMappingURL=productgrid.d.ts.map

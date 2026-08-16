@@ -121,7 +121,7 @@ export const RelatedProducts: ComponentConfig<RelatedProductsWithData> = {
         {showTagline && tagline && (
           <div className={taglineClasses} style={taglineStyle}>{tagline}</div>
         )}
-        <ProductGridRenderer products={products} {...gridProps} />
+        <ProductGridRenderer products={products} {...gridProps}  renderProduct={rawProps.renderProduct} />
       </div>
     );
   },

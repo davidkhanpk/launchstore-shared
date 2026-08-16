@@ -78,7 +78,7 @@ export const RecentlyViewedProducts: ComponentConfig<RecentlyViewedProductsWithD
 
     return (
       <div style={wrapperStyle}>
-        <ProductGridRenderer products={products} {...rest} />
+        <ProductGridRenderer products={products} {...rest}  renderProduct={rawProps.renderProduct} />
       </div>
     );
   },

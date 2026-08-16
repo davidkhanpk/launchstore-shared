@@ -83,7 +83,7 @@ export const RelatedProducts = {
             marginTop: marginTop || undefined,
             marginBottom: marginBottom || undefined,
         };
-        return (_jsxs("div", { style: wrapperStyle, children: [showTagline && tagline && (_jsx("div", { className: taglineClasses, style: taglineStyle, children: tagline })), _jsx(ProductGridRenderer, { products: products, ...gridProps })] }));
+        return (_jsxs("div", { style: wrapperStyle, children: [showTagline && tagline && (_jsx("div", { className: taglineClasses, style: taglineStyle, children: tagline })), _jsx(ProductGridRenderer, { products: products, ...gridProps, renderProduct: rawProps.renderProduct })] }));
     },
 };
 export default RelatedProducts;

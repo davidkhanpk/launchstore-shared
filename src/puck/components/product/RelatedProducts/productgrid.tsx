@@ -18,10 +18,11 @@ import { ProductCard as RawProductCard } from '../ProductCard';
 import type { ProductCarouselWithProducts, CarouselProduct } from '../../swiper/ProductCarousel';
 import type { ProductCardWithRender } from '../ProductCard';
 
-// Puck ComponentConfig types don't allow direct JSX usage; cast to any-component
-// at the import boundary so the renderer below can use them.
-const ProductCarousel = RawProductCarousel as unknown as React.ComponentType<ProductCarouselWithProducts>;
-const ProductCard = RawProductCard as unknown as React.ComponentType<ProductCardWithRender>;
+// ProductCarousel/ProductCard are Puck ComponentConfig OBJECTS — rendering
+// them as JSX is React error #130 ("got: object"), even when cast to
+// ComponentType. Render their .render functions instead.
+const ProductCarouselRender = (RawProductCarousel as any).render as React.FC<ProductCarouselWithProducts>;
+const ProductCardRender = (RawProductCard as any).render as React.FC<ProductCardWithRender>;
 
 const PADDING: Record<ProductGridPadding, string> = {
   none: '',
@@ -39,7 +40,7 @@ export const ProductGridRenderer: React.FC<ProductGridProps & { products: Carous
 
   if (displayStyle === 'carousel') {
     return (
-      <ProductCarousel
+      <ProductCarouselRender
         products={list as any}
         sectionTitle={title}
         showTitle={showTitle}
@@ -86,7 +87,7 @@ export const ProductGridRenderer: React.FC<ProductGridProps & { products: Carous
         )}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {list.map((p) => (
-            <ProductCard
+            <ProductCardRender
               key={p.id}
               product={p as any}
               layout="vertical"

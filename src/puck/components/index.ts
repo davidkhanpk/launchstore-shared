@@ -43,7 +43,6 @@ export * from './product/BundledProductDetail';
 export * from './product/ProductCard';
 export * from './product/RelatedProducts';
 export * from './product/RecentlyViewedProducts';
-export * from './product/ProductRecommendations';
 export * from './product/AddToCart';
 export * from './cart';
 export * from './checkout';

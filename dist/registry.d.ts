@@ -36,8 +36,8 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-08-15T20:19:46.250Z",
-  "total": 139,
+  "generatedAt": "2026-08-16T10:16:54.786Z",
+  "total": 138,
   "entries": [
     {
       "name": "AccountContent",
@@ -16316,75 +16316,6 @@ export const registry: CompiledRegistry = {
       "isContainer": false,
       "zones": [],
       "metaPath": "src\\puck\\components\\product\\ProductRating\\productrating.meta.ts"
-    },
-    {
-      "name": "ProductRecommendations",
-      "label": "Product Recommendations",
-      "description": "Product Recommendations component (auto-derived).",
-      "category": "product",
-      "intent": [
-        "product",
-        "recommendations"
-      ],
-      "dataDeps": [],
-      "copyFields": [],
-      "themeable": [],
-      "a11yRisk": "low",
-      "searchTags": [
-        "product",
-        "recommendations"
-      ],
-      "propSchema": {
-        "type": {
-          "type": "string"
-        },
-        "limit": {
-          "type": "number"
-        },
-        "columns": {
-          "type": "number"
-        },
-        "showPrices": {
-          "type": "boolean"
-        },
-        "showAddToCart": {
-          "type": "boolean"
-        },
-        "luxuryStyle": {
-          "type": "boolean"
-        }
-      },
-      "jsonSchema": {
-        "type": {
-          "type": "string"
-        },
-        "limit": {
-          "type": "number"
-        },
-        "columns": {
-          "type": "number"
-        },
-        "showPrices": {
-          "type": "boolean"
-        },
-        "showAddToCart": {
-          "type": "boolean"
-        },
-        "luxuryStyle": {
-          "type": "boolean"
-        }
-      },
-      "defaultProps": {
-        "type": "related",
-        "limit": 4,
-        "columns": 4,
-        "showPrices": true,
-        "showAddToCart": false,
-        "luxuryStyle": false
-      },
-      "isContainer": false,
-      "zones": [],
-      "metaPath": "src\\puck\\components\\product\\ProductRecommendations\\ProductRecommendations.tsx (auto-derived)"
     },
     {
       "name": "ProductReviews",
@@ -35807,75 +35738,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\product\\ProductRating\\productrating.meta.ts"
-      },
-      {
-        "name": "ProductRecommendations",
-        "label": "Product Recommendations",
-        "description": "Product Recommendations component (auto-derived).",
-        "category": "product",
-        "intent": [
-          "product",
-          "recommendations"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "product",
-          "recommendations"
-        ],
-        "propSchema": {
-          "type": {
-            "type": "string"
-          },
-          "limit": {
-            "type": "number"
-          },
-          "columns": {
-            "type": "number"
-          },
-          "showPrices": {
-            "type": "boolean"
-          },
-          "showAddToCart": {
-            "type": "boolean"
-          },
-          "luxuryStyle": {
-            "type": "boolean"
-          }
-        },
-        "jsonSchema": {
-          "type": {
-            "type": "string"
-          },
-          "limit": {
-            "type": "number"
-          },
-          "columns": {
-            "type": "number"
-          },
-          "showPrices": {
-            "type": "boolean"
-          },
-          "showAddToCart": {
-            "type": "boolean"
-          },
-          "luxuryStyle": {
-            "type": "boolean"
-          }
-        },
-        "defaultProps": {
-          "type": "related",
-          "limit": 4,
-          "columns": 4,
-          "showPrices": true,
-          "showAddToCart": false,
-          "luxuryStyle": false
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\product\\ProductRecommendations\\ProductRecommendations.tsx (auto-derived)"
       },
       {
         "name": "ProductReviews",
@@ -112973,75 +112835,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\product\\ProductRating\\productrating.meta.ts"
       },
       {
-        "name": "ProductRecommendations",
-        "label": "Product Recommendations",
-        "description": "Product Recommendations component (auto-derived).",
-        "category": "product",
-        "intent": [
-          "product",
-          "recommendations"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "product",
-          "recommendations"
-        ],
-        "propSchema": {
-          "type": {
-            "type": "string"
-          },
-          "limit": {
-            "type": "number"
-          },
-          "columns": {
-            "type": "number"
-          },
-          "showPrices": {
-            "type": "boolean"
-          },
-          "showAddToCart": {
-            "type": "boolean"
-          },
-          "luxuryStyle": {
-            "type": "boolean"
-          }
-        },
-        "jsonSchema": {
-          "type": {
-            "type": "string"
-          },
-          "limit": {
-            "type": "number"
-          },
-          "columns": {
-            "type": "number"
-          },
-          "showPrices": {
-            "type": "boolean"
-          },
-          "showAddToCart": {
-            "type": "boolean"
-          },
-          "luxuryStyle": {
-            "type": "boolean"
-          }
-        },
-        "defaultProps": {
-          "type": "related",
-          "limit": 4,
-          "columns": 4,
-          "showPrices": true,
-          "showAddToCart": false,
-          "luxuryStyle": false
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\product\\ProductRecommendations\\ProductRecommendations.tsx (auto-derived)"
-      },
-      {
         "name": "ProductReviews",
         "label": "Product Reviews",
         "description": "Full product-reviews widget: list + ratings summary + sort + paginate + inline submit form + helpful/unhelpful votes + optional media uploads + verified-purchase badges. State (form, votes, media) lives in shared. Data actions are callback-injected: fetchReviews, createReview, voteOnReview, uploadReviewMedia, fetchCustomer. signInHref is the localized path consumers pass (default /account). All 7 lucide icons (Star/Check/Pencil/X/Image/ThumbUp/ThumbDown) replaced with inline SVG.",
@@ -116864,77 +116657,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\product\\ProductRating\\productrating.meta.ts"
-      }
-    ],
-    "recommendations": [
-      {
-        "name": "ProductRecommendations",
-        "label": "Product Recommendations",
-        "description": "Product Recommendations component (auto-derived).",
-        "category": "product",
-        "intent": [
-          "product",
-          "recommendations"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "product",
-          "recommendations"
-        ],
-        "propSchema": {
-          "type": {
-            "type": "string"
-          },
-          "limit": {
-            "type": "number"
-          },
-          "columns": {
-            "type": "number"
-          },
-          "showPrices": {
-            "type": "boolean"
-          },
-          "showAddToCart": {
-            "type": "boolean"
-          },
-          "luxuryStyle": {
-            "type": "boolean"
-          }
-        },
-        "jsonSchema": {
-          "type": {
-            "type": "string"
-          },
-          "limit": {
-            "type": "number"
-          },
-          "columns": {
-            "type": "number"
-          },
-          "showPrices": {
-            "type": "boolean"
-          },
-          "showAddToCart": {
-            "type": "boolean"
-          },
-          "luxuryStyle": {
-            "type": "boolean"
-          }
-        },
-        "defaultProps": {
-          "type": "related",
-          "limit": 4,
-          "columns": 4,
-          "showPrices": true,
-          "showAddToCart": false,
-          "luxuryStyle": false
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\product\\ProductRecommendations\\ProductRecommendations.tsx (auto-derived)"
       }
     ],
     "feedback": [

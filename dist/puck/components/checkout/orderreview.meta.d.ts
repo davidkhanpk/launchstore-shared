@@ -11,8 +11,16 @@ export declare const orderReviewMeta: {
     readonly a11yRisk: "medium";
     readonly a11yNotes: "Real <button>, <input type=\"checkbox\">. Disabled when terms not agreed.";
     readonly mobileBehavior: "responsive";
-    readonly searchTags: readonly ["order", "review", "place-order", "terms", "confirmation"];
+    readonly searchTags: readonly ["order", "review", "place-order", "terms", "confirmation", "whatsapp", "opt-in", "consent"];
     readonly props: {
+        readonly showWhatsappOptIn: {
+            readonly type: "boolean";
+            readonly required: false;
+        };
+        readonly whatsappOptInText: {
+            readonly type: "string";
+            readonly required: false;
+        };
         readonly showTermsCheckbox: {
             readonly type: "boolean";
             readonly required: true;

@@ -3,7 +3,7 @@ export const orderReviewMeta = {
     description: 'Final order review block: shipping address, shipping method, payment method, terms checkbox, place-order button, security badge, policy links. Cart-library-agnostic: takes shippingAddress, shippingMethod, paymentMethod, onPlaceOrder, agreedToTerms/onAgreedChange, isProcessing, hrefs.',
     category: 'checkout', intent: ['order', 'review', 'place-order', 'terms'], visualRole: 'block', dataDeps: ['shippingAddress/shippingMethod/paymentMethod (consumer)'],
     copyFields: ['buttonText'], themeable: [], a11yRisk: 'medium', a11yNotes: 'Real <button>, <input type="checkbox">. Disabled when terms not agreed.', mobileBehavior: 'responsive',
-    searchTags: ['order', 'review', 'place-order', 'terms', 'confirmation'],
-    props: { showTermsCheckbox: { type: 'boolean', required: true }, showPolicies: { type: 'boolean', required: true }, showSecurityBadge: { type: 'boolean', required: true }, buttonText: { type: 'string', required: true }, buttonSize: { type: 'enum', options: ['default', 'large'], required: true } },
+    searchTags: ['order', 'review', 'place-order', 'terms', 'confirmation', 'whatsapp', 'opt-in', 'consent'],
+    props: { showWhatsappOptIn: { type: 'boolean', required: false }, whatsappOptInText: { type: 'string', required: false }, showTermsCheckbox: { type: 'boolean', required: true }, showPolicies: { type: 'boolean', required: true }, showSecurityBadge: { type: 'boolean', required: true }, buttonText: { type: 'string', required: true }, buttonSize: { type: 'enum', options: ['default', 'large'], required: true } },
 };
 //# sourceMappingURL=orderreview.meta.js.map

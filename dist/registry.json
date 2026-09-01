@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-08-16T16:10:50.821Z",
+  "generatedAt": "2026-09-01T20:24:56.890Z",
   "total": 138,
   "entries": [
     {
@@ -2533,9 +2533,20 @@
         "review",
         "place-order",
         "terms",
-        "confirmation"
+        "confirmation",
+        "whatsapp",
+        "opt-in",
+        "consent"
       ],
       "propSchema": {
+        "showWhatsappOptIn": {
+          "type": "boolean",
+          "required": false
+        },
+        "whatsappOptInText": {
+          "type": "string",
+          "required": false
+        },
         "showTermsCheckbox": {
           "type": "boolean",
           "required": true
@@ -2562,6 +2573,14 @@
         }
       },
       "jsonSchema": {
+        "showWhatsappOptIn": {
+          "type": "boolean",
+          "required": false
+        },
+        "whatsappOptInText": {
+          "type": "string",
+          "required": false
+        },
         "showTermsCheckbox": {
           "type": "boolean",
           "required": true
@@ -2589,6 +2608,8 @@
       },
       "defaultProps": {
         "showTermsCheckbox": true,
+        "showWhatsappOptIn": true,
+        "whatsappOptInText": "Get order updates on WhatsApp",
         "showPolicies": true,
         "showSecurityBadge": true,
         "buttonText": "Place Order",
@@ -21933,9 +21954,20 @@
           "review",
           "place-order",
           "terms",
-          "confirmation"
+          "confirmation",
+          "whatsapp",
+          "opt-in",
+          "consent"
         ],
         "propSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -21962,6 +21994,14 @@
           }
         },
         "jsonSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -21989,6 +22029,8 @@
         },
         "defaultProps": {
           "showTermsCheckbox": true,
+          "showWhatsappOptIn": true,
+          "whatsappOptInText": "Get order updates on WhatsApp",
           "showPolicies": true,
           "showSecurityBadge": true,
           "buttonText": "Place Order",
@@ -49287,9 +49329,20 @@
           "review",
           "place-order",
           "terms",
-          "confirmation"
+          "confirmation",
+          "whatsapp",
+          "opt-in",
+          "consent"
         ],
         "propSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -49316,6 +49369,14 @@
           }
         },
         "jsonSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -49343,6 +49404,8 @@
         },
         "defaultProps": {
           "showTermsCheckbox": true,
+          "showWhatsappOptIn": true,
+          "whatsappOptInText": "Get order updates on WhatsApp",
           "showPolicies": true,
           "showSecurityBadge": true,
           "buttonText": "Place Order",
@@ -50340,9 +50403,20 @@
           "review",
           "place-order",
           "terms",
-          "confirmation"
+          "confirmation",
+          "whatsapp",
+          "opt-in",
+          "consent"
         ],
         "propSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -50369,6 +50443,14 @@
           }
         },
         "jsonSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -50396,6 +50478,8 @@
         },
         "defaultProps": {
           "showTermsCheckbox": true,
+          "showWhatsappOptIn": true,
+          "whatsappOptInText": "Get order updates on WhatsApp",
           "showPolicies": true,
           "showSecurityBadge": true,
           "buttonText": "Place Order",
@@ -61322,9 +61406,20 @@
           "review",
           "place-order",
           "terms",
-          "confirmation"
+          "confirmation",
+          "whatsapp",
+          "opt-in",
+          "consent"
         ],
         "propSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -61351,6 +61446,14 @@
           }
         },
         "jsonSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -61378,6 +61481,8 @@
         },
         "defaultProps": {
           "showTermsCheckbox": true,
+          "showWhatsappOptIn": true,
+          "whatsappOptInText": "Get order updates on WhatsApp",
           "showPolicies": true,
           "showSecurityBadge": true,
           "buttonText": "Place Order",
@@ -61415,9 +61520,20 @@
           "review",
           "place-order",
           "terms",
-          "confirmation"
+          "confirmation",
+          "whatsapp",
+          "opt-in",
+          "consent"
         ],
         "propSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -61444,6 +61560,14 @@
           }
         },
         "jsonSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -61471,6 +61595,8 @@
         },
         "defaultProps": {
           "showTermsCheckbox": true,
+          "showWhatsappOptIn": true,
+          "whatsappOptInText": "Get order updates on WhatsApp",
           "showPolicies": true,
           "showSecurityBadge": true,
           "buttonText": "Place Order",

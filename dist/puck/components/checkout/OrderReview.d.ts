@@ -1,6 +1,8 @@
 import type { ComponentConfig } from '@puckeditor/core';
 export interface OrderReviewProps {
     showTermsCheckbox: boolean;
+    showWhatsappOptIn?: boolean;
+    whatsappOptInText?: string;
     showPolicies: boolean;
     showSecurityBadge: boolean;
     buttonText: string;
@@ -33,6 +35,9 @@ export interface OrderReviewWithData extends OrderReviewProps {
     isProcessing?: boolean;
     agreedToTerms?: boolean;
     onAgreedChange?: (v: boolean) => void;
+    /** WhatsApp opt-in state (injected by the storefront wrapper) */
+    whatsappOptIn?: boolean;
+    onWhatsappOptInChange?: (v: boolean) => void;
     /** Optional label override for the button while the order is being placed. */
     processingText?: string;
 }

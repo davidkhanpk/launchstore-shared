@@ -36,7 +36,7 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-08-16T16:10:50.821Z",
+  "generatedAt": "2026-09-01T20:24:56.890Z",
   "total": 138,
   "entries": [
     {
@@ -2569,9 +2569,20 @@ export const registry: CompiledRegistry = {
         "review",
         "place-order",
         "terms",
-        "confirmation"
+        "confirmation",
+        "whatsapp",
+        "opt-in",
+        "consent"
       ],
       "propSchema": {
+        "showWhatsappOptIn": {
+          "type": "boolean",
+          "required": false
+        },
+        "whatsappOptInText": {
+          "type": "string",
+          "required": false
+        },
         "showTermsCheckbox": {
           "type": "boolean",
           "required": true
@@ -2598,6 +2609,14 @@ export const registry: CompiledRegistry = {
         }
       },
       "jsonSchema": {
+        "showWhatsappOptIn": {
+          "type": "boolean",
+          "required": false
+        },
+        "whatsappOptInText": {
+          "type": "string",
+          "required": false
+        },
         "showTermsCheckbox": {
           "type": "boolean",
           "required": true
@@ -2625,6 +2644,8 @@ export const registry: CompiledRegistry = {
       },
       "defaultProps": {
         "showTermsCheckbox": true,
+        "showWhatsappOptIn": true,
+        "whatsappOptInText": "Get order updates on WhatsApp",
         "showPolicies": true,
         "showSecurityBadge": true,
         "buttonText": "Place Order",
@@ -21969,9 +21990,20 @@ export const registry: CompiledRegistry = {
           "review",
           "place-order",
           "terms",
-          "confirmation"
+          "confirmation",
+          "whatsapp",
+          "opt-in",
+          "consent"
         ],
         "propSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -21998,6 +22030,14 @@ export const registry: CompiledRegistry = {
           }
         },
         "jsonSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -22025,6 +22065,8 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "showTermsCheckbox": true,
+          "showWhatsappOptIn": true,
+          "whatsappOptInText": "Get order updates on WhatsApp",
           "showPolicies": true,
           "showSecurityBadge": true,
           "buttonText": "Place Order",
@@ -49323,9 +49365,20 @@ export const registry: CompiledRegistry = {
           "review",
           "place-order",
           "terms",
-          "confirmation"
+          "confirmation",
+          "whatsapp",
+          "opt-in",
+          "consent"
         ],
         "propSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -49352,6 +49405,14 @@ export const registry: CompiledRegistry = {
           }
         },
         "jsonSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -49379,6 +49440,8 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "showTermsCheckbox": true,
+          "showWhatsappOptIn": true,
+          "whatsappOptInText": "Get order updates on WhatsApp",
           "showPolicies": true,
           "showSecurityBadge": true,
           "buttonText": "Place Order",
@@ -50376,9 +50439,20 @@ export const registry: CompiledRegistry = {
           "review",
           "place-order",
           "terms",
-          "confirmation"
+          "confirmation",
+          "whatsapp",
+          "opt-in",
+          "consent"
         ],
         "propSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -50405,6 +50479,14 @@ export const registry: CompiledRegistry = {
           }
         },
         "jsonSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -50432,6 +50514,8 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "showTermsCheckbox": true,
+          "showWhatsappOptIn": true,
+          "whatsappOptInText": "Get order updates on WhatsApp",
           "showPolicies": true,
           "showSecurityBadge": true,
           "buttonText": "Place Order",
@@ -61358,9 +61442,20 @@ export const registry: CompiledRegistry = {
           "review",
           "place-order",
           "terms",
-          "confirmation"
+          "confirmation",
+          "whatsapp",
+          "opt-in",
+          "consent"
         ],
         "propSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -61387,6 +61482,14 @@ export const registry: CompiledRegistry = {
           }
         },
         "jsonSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -61414,6 +61517,8 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "showTermsCheckbox": true,
+          "showWhatsappOptIn": true,
+          "whatsappOptInText": "Get order updates on WhatsApp",
           "showPolicies": true,
           "showSecurityBadge": true,
           "buttonText": "Place Order",
@@ -61451,9 +61556,20 @@ export const registry: CompiledRegistry = {
           "review",
           "place-order",
           "terms",
-          "confirmation"
+          "confirmation",
+          "whatsapp",
+          "opt-in",
+          "consent"
         ],
         "propSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -61480,6 +61596,14 @@ export const registry: CompiledRegistry = {
           }
         },
         "jsonSchema": {
+          "showWhatsappOptIn": {
+            "type": "boolean",
+            "required": false
+          },
+          "whatsappOptInText": {
+            "type": "string",
+            "required": false
+          },
           "showTermsCheckbox": {
             "type": "boolean",
             "required": true
@@ -61507,6 +61631,8 @@ export const registry: CompiledRegistry = {
         },
         "defaultProps": {
           "showTermsCheckbox": true,
+          "showWhatsappOptIn": true,
+          "whatsappOptInText": "Get order updates on WhatsApp",
           "showPolicies": true,
           "showSecurityBadge": true,
           "buttonText": "Place Order",

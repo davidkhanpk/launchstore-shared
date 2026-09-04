@@ -10,6 +10,7 @@ const orderTotalsFields = {
   showShipping: { type: 'radio', label: 'Show Shipping', options: RADIO_YES_NO },
   showTax: { type: 'radio', label: 'Show Tax', options: RADIO_YES_NO },
   showDiscount: { type: 'radio', label: 'Show Discount', options: RADIO_YES_NO },
+  showGiftCard: { type: 'radio', label: 'Show Gift Card Credit', options: RADIO_YES_NO },
   showTotal: { type: 'radio', label: 'Show Total', options: RADIO_YES_NO },
   highlightTotal: { type: 'radio', label: 'Highlight Total', options: RADIO_YES_NO },
 } as Record<string, Field>;
@@ -23,13 +24,23 @@ export interface OrderTotalsProps {
   showShipping: boolean;
   showTax: boolean;
   showDiscount: boolean;
+  showGiftCard?: boolean;
   showTotal: boolean;
   highlightTotal: boolean;
   layout: 'default' | 'compact';
 }
 
 export interface OrderTotalsWithData extends OrderTotalsProps {
-  totals?: { subtotal: string; shipping: string; tax: string; discount: string; total: string; discountCode?: string };
+  totals?: {
+    subtotal: string;
+    shipping: string;
+    tax: string;
+    discount: string;
+    giftCard?: string;
+    giftCardCode?: string;
+    total: string;
+    discountCode?: string;
+  };
 }
 
 // No static MOCK — the storefront wrapper injects real Medusa cart totals
@@ -38,9 +49,9 @@ export interface OrderTotalsWithData extends OrderTotalsProps {
 export const OrderTotals: ComponentConfig<OrderTotalsWithData> = {
   label: 'Order Totals',
   fields: orderTotalsFields as ComponentConfig<OrderTotalsWithData>['fields'],
-  defaultProps: { showSubtotal: true, showShipping: true, showTax: true, showDiscount: true, showTotal: true, highlightTotal: true, layout: 'default' },
+  defaultProps: { showSubtotal: true, showShipping: true, showTax: true, showDiscount: true, showGiftCard: true, showTotal: true, highlightTotal: true, layout: 'default' },
   render: (raw: any) => {
-    const { showSubtotal, showShipping, showTax, showDiscount, showTotal, highlightTotal, layout = 'default' } = raw as OrderTotalsWithData;
+    const { showSubtotal, showShipping, showTax, showDiscount, showGiftCard = true, showTotal, highlightTotal, layout = 'default' } = raw as OrderTotalsWithData;
     const totals = (raw as any).totals ?? { subtotal: '', shipping: '', tax: '', discount: '', total: '' };
     const textSize = layout === 'compact' ? 'text-sm' : 'text-base';
     const spacing = layout === 'compact' ? 'space-y-2' : 'space-y-3';
@@ -56,6 +67,12 @@ export const OrderTotals: ComponentConfig<OrderTotalsWithData> = {
           {showShipping && <div className={`flex justify-between ${textSize} text-gray-700`}><span>Shipping</span><span>{totals.shipping}</span></div>}
           {showTax && <div className={`flex justify-between ${textSize} text-gray-700`}><span>Tax</span><span>{totals.tax}</span></div>}
           {showDiscount && <div className={`flex justify-between ${textSize} text-green-600`}><span>Discount{totals.discountCode ? ` (${totals.discountCode})` : ''}</span><span>{totals.discount}</span></div>}
+          {showGiftCard && totals.giftCard && (
+            <div className={`flex justify-between ${textSize} text-green-600`}>
+              <span>Gift Card{totals.giftCardCode ? ` (${totals.giftCardCode})` : ''}</span>
+              <span>{totals.giftCard}</span>
+            </div>
+          )}
         </div>
         {showTotal && (
           <div className={`mt-4 pt-4 border-t border-gray-200 ${highlightTotal ? 'bg-gray-50 -mx-6 -mb-6 px-6 pb-6 rounded-b-lg' : ''}`}>

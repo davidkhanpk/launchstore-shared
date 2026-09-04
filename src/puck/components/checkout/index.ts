@@ -2,6 +2,8 @@ export { CartItemsPreview } from './CartItemsPreview';
 export type { CartItemsPreviewProps, CartItemsPreviewWithData } from './CartItemsPreview';
 export { DiscountCode } from './DiscountCode';
 export type { DiscountCodeProps, DiscountCodeWithData } from './DiscountCode';
+export { GiftCardCode } from './GiftCardCode';
+export type { GiftCardCodeProps, GiftCardCodeWithData, GiftCardApplyResult } from './GiftCardCode';
 export { OrderReview } from './OrderReview';
 export type { OrderReviewProps, OrderReviewWithData } from './OrderReview';
 export { OrderTotals } from './OrderTotals';
@@ -15,6 +17,7 @@ export type { ShippingMethodProps, ShippingMethodWithData } from './ShippingMeth
 
 export { cartItemsPreviewMeta, type CartItemsPreviewMeta } from './cartitemspreview.meta';
 export { discountCodeMeta, type DiscountCodeMeta } from './discountcode.meta';
+export { giftCardCodeMeta, type GiftCardCodeMeta } from './giftcardcode.meta';
 export { orderReviewMeta, type OrderReviewMeta } from './orderreview.meta';
 export { orderTotalsMeta, type OrderTotalsMeta } from './ordertotals.meta';
 export { paymentMethodMeta, type PaymentMethodMeta } from './paymentmethod.meta';

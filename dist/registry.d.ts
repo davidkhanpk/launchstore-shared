@@ -36,8 +36,8 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-09-01T20:24:56.890Z",
-  "total": 138,
+  "generatedAt": "2026-09-04T20:15:18.050Z",
+  "total": 139,
   "entries": [
     {
       "name": "AccountContent",
@@ -2544,6 +2544,93 @@ export const registry: CompiledRegistry = {
       "metaPath": "src\\puck\\components\\checkout\\discountcode.meta.ts"
     },
     {
+      "name": "GiftCardCode",
+      "label": "Gift Card Code",
+      "description": "Gift card code input for checkout — customers enter a code to apply store credit balance to their order total. Expandable layout, applied-card chip with remove button, specific error feedback for invalid/expired/redeemed codes.",
+      "category": "checkout",
+      "intent": [
+        "checkout",
+        "payment",
+        "gift-card",
+        "credit",
+        "redeem"
+      ],
+      "visualRole": "block",
+      "dataDeps": [
+        "appliedGiftCard (cart credit_lines)"
+      ],
+      "copyFields": [
+        "buttonText",
+        "placeholder"
+      ],
+      "themeable": [],
+      "a11yRisk": "medium",
+      "mobileBehavior": "responsive",
+      "searchTags": [
+        "gift",
+        "card",
+        "code",
+        "credit",
+        "redeem",
+        "checkout",
+        "balance",
+        "voucher"
+      ],
+      "propSchema": {
+        "layout": {
+          "type": "enum",
+          "required": false,
+          "options": [
+            "inline",
+            "expandable"
+          ]
+        },
+        "showAppliedGiftCard": {
+          "type": "boolean",
+          "required": false
+        },
+        "buttonText": {
+          "type": "string",
+          "required": false
+        },
+        "placeholder": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "jsonSchema": {
+        "layout": {
+          "type": "enum",
+          "required": false,
+          "options": [
+            "inline",
+            "expandable"
+          ]
+        },
+        "showAppliedGiftCard": {
+          "type": "boolean",
+          "required": false
+        },
+        "buttonText": {
+          "type": "string",
+          "required": false
+        },
+        "placeholder": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "defaultProps": {
+        "layout": "expandable",
+        "showAppliedGiftCard": true,
+        "buttonText": "Apply",
+        "placeholder": "Enter gift card code"
+      },
+      "isContainer": false,
+      "zones": [],
+      "metaPath": "src\\puck\\components\\checkout\\giftcardcode.meta.ts"
+    },
+    {
       "name": "OrderReview",
       "label": "Order Review & Place Order",
       "description": "Final order review block: shipping address, shipping method, payment method, terms checkbox, place-order button, security badge, policy links. Cart-library-agnostic: takes shippingAddress, shippingMethod, paymentMethod, onPlaceOrder, agreedToTerms/onAgreedChange, isProcessing, hrefs.",
@@ -2696,6 +2783,10 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": true
         },
+        "showGiftCard": {
+          "type": "boolean",
+          "required": false
+        },
         "showTotal": {
           "type": "boolean",
           "required": true
@@ -2730,6 +2821,10 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": true
         },
+        "showGiftCard": {
+          "type": "boolean",
+          "required": false
+        },
         "showTotal": {
           "type": "boolean",
           "required": true
@@ -2752,6 +2847,7 @@ export const registry: CompiledRegistry = {
         "showShipping": true,
         "showTax": true,
         "showDiscount": true,
+        "showGiftCard": true,
         "showTotal": true,
         "highlightTotal": true,
         "layout": "default"
@@ -21965,6 +22061,93 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\checkout\\discountcode.meta.ts"
       },
       {
+        "name": "GiftCardCode",
+        "label": "Gift Card Code",
+        "description": "Gift card code input for checkout — customers enter a code to apply store credit balance to their order total. Expandable layout, applied-card chip with remove button, specific error feedback for invalid/expired/redeemed codes.",
+        "category": "checkout",
+        "intent": [
+          "checkout",
+          "payment",
+          "gift-card",
+          "credit",
+          "redeem"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "appliedGiftCard (cart credit_lines)"
+        ],
+        "copyFields": [
+          "buttonText",
+          "placeholder"
+        ],
+        "themeable": [],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "gift",
+          "card",
+          "code",
+          "credit",
+          "redeem",
+          "checkout",
+          "balance",
+          "voucher"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "inline",
+              "expandable"
+            ]
+          },
+          "showAppliedGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
+          "buttonText": {
+            "type": "string",
+            "required": false
+          },
+          "placeholder": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "inline",
+              "expandable"
+            ]
+          },
+          "showAppliedGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
+          "buttonText": {
+            "type": "string",
+            "required": false
+          },
+          "placeholder": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "layout": "expandable",
+          "showAppliedGiftCard": true,
+          "buttonText": "Apply",
+          "placeholder": "Enter gift card code"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\checkout\\giftcardcode.meta.ts"
+      },
+      {
         "name": "OrderReview",
         "label": "Order Review & Place Order",
         "description": "Final order review block: shipping address, shipping method, payment method, terms checkbox, place-order button, security badge, policy links. Cart-library-agnostic: takes shippingAddress, shippingMethod, paymentMethod, onPlaceOrder, agreedToTerms/onAgreedChange, isProcessing, hrefs.",
@@ -22117,6 +22300,10 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           },
+          "showGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
           "showTotal": {
             "type": "boolean",
             "required": true
@@ -22151,6 +22338,10 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           },
+          "showGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
           "showTotal": {
             "type": "boolean",
             "required": true
@@ -22173,6 +22364,7 @@ export const registry: CompiledRegistry = {
           "showShipping": true,
           "showTax": true,
           "showDiscount": true,
+          "showGiftCard": true,
           "showTotal": true,
           "highlightTotal": true,
           "layout": "default"
@@ -45108,6 +45300,10 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           },
+          "showGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
           "showTotal": {
             "type": "boolean",
             "required": true
@@ -45142,6 +45338,10 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           },
+          "showGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
           "showTotal": {
             "type": "boolean",
             "required": true
@@ -45164,6 +45364,7 @@ export const registry: CompiledRegistry = {
           "showShipping": true,
           "showTax": true,
           "showDiscount": true,
+          "showGiftCard": true,
           "showTotal": true,
           "highlightTotal": true,
           "layout": "default"
@@ -45494,6 +45695,10 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           },
+          "showGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
           "showTotal": {
             "type": "boolean",
             "required": true
@@ -45528,6 +45733,10 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           },
+          "showGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
           "showTotal": {
             "type": "boolean",
             "required": true
@@ -45550,6 +45759,7 @@ export const registry: CompiledRegistry = {
           "showShipping": true,
           "showTax": true,
           "showDiscount": true,
+          "showGiftCard": true,
           "showTotal": true,
           "highlightTotal": true,
           "layout": "default"
@@ -46166,6 +46376,93 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\cart\\ordersummary.meta.ts"
+      },
+      {
+        "name": "GiftCardCode",
+        "label": "Gift Card Code",
+        "description": "Gift card code input for checkout — customers enter a code to apply store credit balance to their order total. Expandable layout, applied-card chip with remove button, specific error feedback for invalid/expired/redeemed codes.",
+        "category": "checkout",
+        "intent": [
+          "checkout",
+          "payment",
+          "gift-card",
+          "credit",
+          "redeem"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "appliedGiftCard (cart credit_lines)"
+        ],
+        "copyFields": [
+          "buttonText",
+          "placeholder"
+        ],
+        "themeable": [],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "gift",
+          "card",
+          "code",
+          "credit",
+          "redeem",
+          "checkout",
+          "balance",
+          "voucher"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "inline",
+              "expandable"
+            ]
+          },
+          "showAppliedGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
+          "buttonText": {
+            "type": "string",
+            "required": false
+          },
+          "placeholder": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "inline",
+              "expandable"
+            ]
+          },
+          "showAppliedGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
+          "buttonText": {
+            "type": "string",
+            "required": false
+          },
+          "placeholder": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "layout": "expandable",
+          "showAppliedGiftCard": true,
+          "buttonText": "Apply",
+          "placeholder": "Enter gift card code"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\checkout\\giftcardcode.meta.ts"
       },
       {
         "name": "PaymentMethod",
@@ -47909,6 +48206,93 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\cart\\checkoutform.meta.ts"
       },
       {
+        "name": "GiftCardCode",
+        "label": "Gift Card Code",
+        "description": "Gift card code input for checkout — customers enter a code to apply store credit balance to their order total. Expandable layout, applied-card chip with remove button, specific error feedback for invalid/expired/redeemed codes.",
+        "category": "checkout",
+        "intent": [
+          "checkout",
+          "payment",
+          "gift-card",
+          "credit",
+          "redeem"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "appliedGiftCard (cart credit_lines)"
+        ],
+        "copyFields": [
+          "buttonText",
+          "placeholder"
+        ],
+        "themeable": [],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "gift",
+          "card",
+          "code",
+          "credit",
+          "redeem",
+          "checkout",
+          "balance",
+          "voucher"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "inline",
+              "expandable"
+            ]
+          },
+          "showAppliedGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
+          "buttonText": {
+            "type": "string",
+            "required": false
+          },
+          "placeholder": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "inline",
+              "expandable"
+            ]
+          },
+          "showAppliedGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
+          "buttonText": {
+            "type": "string",
+            "required": false
+          },
+          "placeholder": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "layout": "expandable",
+          "showAppliedGiftCard": true,
+          "buttonText": "Apply",
+          "placeholder": "Enter gift card code"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\checkout\\giftcardcode.meta.ts"
+      },
+      {
         "name": "PaymentMethod",
         "label": "Payment Method",
         "description": "Payment method selector with 3 layouts (list/cards/icons), optional security badges, save-card checkbox. Display info (name, description, icon) comes from the shared PAYMENT_INFO_MAP keyed by Medusa provider id. No express checkout — those are the same Medusa provider IDs (pp_apple_pay_apple, pp_google_pay_google) shown with friendly names.",
@@ -49492,6 +49876,10 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           },
+          "showGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
           "showTotal": {
             "type": "boolean",
             "required": true
@@ -49526,6 +49914,10 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": true
           },
+          "showGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
           "showTotal": {
             "type": "boolean",
             "required": true
@@ -49548,6 +49940,7 @@ export const registry: CompiledRegistry = {
           "showShipping": true,
           "showTax": true,
           "showDiscount": true,
+          "showGiftCard": true,
           "showTotal": true,
           "highlightTotal": true,
           "layout": "default"
@@ -61413,6 +61806,273 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\checkout\\discountcode.meta.ts"
+      }
+    ],
+    "gift-card": [
+      {
+        "name": "GiftCardCode",
+        "label": "Gift Card Code",
+        "description": "Gift card code input for checkout — customers enter a code to apply store credit balance to their order total. Expandable layout, applied-card chip with remove button, specific error feedback for invalid/expired/redeemed codes.",
+        "category": "checkout",
+        "intent": [
+          "checkout",
+          "payment",
+          "gift-card",
+          "credit",
+          "redeem"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "appliedGiftCard (cart credit_lines)"
+        ],
+        "copyFields": [
+          "buttonText",
+          "placeholder"
+        ],
+        "themeable": [],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "gift",
+          "card",
+          "code",
+          "credit",
+          "redeem",
+          "checkout",
+          "balance",
+          "voucher"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "inline",
+              "expandable"
+            ]
+          },
+          "showAppliedGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
+          "buttonText": {
+            "type": "string",
+            "required": false
+          },
+          "placeholder": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "inline",
+              "expandable"
+            ]
+          },
+          "showAppliedGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
+          "buttonText": {
+            "type": "string",
+            "required": false
+          },
+          "placeholder": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "layout": "expandable",
+          "showAppliedGiftCard": true,
+          "buttonText": "Apply",
+          "placeholder": "Enter gift card code"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\checkout\\giftcardcode.meta.ts"
+      }
+    ],
+    "credit": [
+      {
+        "name": "GiftCardCode",
+        "label": "Gift Card Code",
+        "description": "Gift card code input for checkout — customers enter a code to apply store credit balance to their order total. Expandable layout, applied-card chip with remove button, specific error feedback for invalid/expired/redeemed codes.",
+        "category": "checkout",
+        "intent": [
+          "checkout",
+          "payment",
+          "gift-card",
+          "credit",
+          "redeem"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "appliedGiftCard (cart credit_lines)"
+        ],
+        "copyFields": [
+          "buttonText",
+          "placeholder"
+        ],
+        "themeable": [],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "gift",
+          "card",
+          "code",
+          "credit",
+          "redeem",
+          "checkout",
+          "balance",
+          "voucher"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "inline",
+              "expandable"
+            ]
+          },
+          "showAppliedGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
+          "buttonText": {
+            "type": "string",
+            "required": false
+          },
+          "placeholder": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "inline",
+              "expandable"
+            ]
+          },
+          "showAppliedGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
+          "buttonText": {
+            "type": "string",
+            "required": false
+          },
+          "placeholder": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "layout": "expandable",
+          "showAppliedGiftCard": true,
+          "buttonText": "Apply",
+          "placeholder": "Enter gift card code"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\checkout\\giftcardcode.meta.ts"
+      }
+    ],
+    "redeem": [
+      {
+        "name": "GiftCardCode",
+        "label": "Gift Card Code",
+        "description": "Gift card code input for checkout — customers enter a code to apply store credit balance to their order total. Expandable layout, applied-card chip with remove button, specific error feedback for invalid/expired/redeemed codes.",
+        "category": "checkout",
+        "intent": [
+          "checkout",
+          "payment",
+          "gift-card",
+          "credit",
+          "redeem"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "appliedGiftCard (cart credit_lines)"
+        ],
+        "copyFields": [
+          "buttonText",
+          "placeholder"
+        ],
+        "themeable": [],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "gift",
+          "card",
+          "code",
+          "credit",
+          "redeem",
+          "checkout",
+          "balance",
+          "voucher"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "inline",
+              "expandable"
+            ]
+          },
+          "showAppliedGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
+          "buttonText": {
+            "type": "string",
+            "required": false
+          },
+          "placeholder": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "inline",
+              "expandable"
+            ]
+          },
+          "showAppliedGiftCard": {
+            "type": "boolean",
+            "required": false
+          },
+          "buttonText": {
+            "type": "string",
+            "required": false
+          },
+          "placeholder": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "layout": "expandable",
+          "showAppliedGiftCard": true,
+          "buttonText": "Apply",
+          "placeholder": "Enter gift card code"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\checkout\\giftcardcode.meta.ts"
       }
     ],
     "place-order": [

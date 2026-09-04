@@ -1,5 +1,6 @@
 export { CartItemsPreview } from './CartItemsPreview';
 export { DiscountCode } from './DiscountCode';
+export { GiftCardCode } from './GiftCardCode';
 export { OrderReview } from './OrderReview';
 export { OrderTotals } from './OrderTotals';
 export { PaymentMethod } from './PaymentMethod';
@@ -7,6 +8,7 @@ export { ShippingAddress } from './ShippingAddress';
 export { ShippingMethod } from './ShippingMethod';
 export { cartItemsPreviewMeta } from './cartitemspreview.meta';
 export { discountCodeMeta } from './discountcode.meta';
+export { giftCardCodeMeta } from './giftcardcode.meta';
 export { orderReviewMeta } from './orderreview.meta';
 export { orderTotalsMeta } from './ordertotals.meta';
 export { paymentMethodMeta } from './paymentmethod.meta';

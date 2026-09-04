@@ -29,6 +29,10 @@ export declare const orderTotalsMeta: {
             readonly type: "boolean";
             readonly required: true;
         };
+        readonly showGiftCard: {
+            readonly type: "boolean";
+            readonly required: false;
+        };
         readonly showTotal: {
             readonly type: "boolean";
             readonly required: true;

@@ -4,6 +4,7 @@ export interface OrderTotalsProps {
     showShipping: boolean;
     showTax: boolean;
     showDiscount: boolean;
+    showGiftCard?: boolean;
     showTotal: boolean;
     highlightTotal: boolean;
     layout: 'default' | 'compact';
@@ -14,6 +15,8 @@ export interface OrderTotalsWithData extends OrderTotalsProps {
         shipping: string;
         tax: string;
         discount: string;
+        giftCard?: string;
+        giftCardCode?: string;
         total: string;
         discountCode?: string;
     };

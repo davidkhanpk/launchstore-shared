@@ -36,8 +36,8 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-09-04T20:15:18.050Z",
-  "total": 139,
+  "generatedAt": "2026-09-05T13:10:55.056Z",
+  "total": 140,
   "entries": [
     {
       "name": "AccountContent",
@@ -14119,6 +14119,73 @@ export const registry: CompiledRegistry = {
       "isContainer": false,
       "zones": [],
       "metaPath": "src\\puck\\components\\order\\CustomerEmail.tsx (auto-derived)"
+    },
+    {
+      "name": "GiftCardCodesDisplay",
+      "label": "Gift Card Codes",
+      "description": "Displays gift card codes purchased in the order — for the order confirmation page. Shows code, value, copy button, and email note. Fetches codes automatically from the loyalty plugin.",
+      "category": "order",
+      "intent": [
+        "order-confirmation",
+        "gift-card",
+        "purchase",
+        "success"
+      ],
+      "visualRole": "block",
+      "dataDeps": [
+        "giftCards (order gift card items)"
+      ],
+      "copyFields": [
+        "title"
+      ],
+      "themeable": [],
+      "a11yRisk": "low",
+      "mobileBehavior": "responsive",
+      "searchTags": [
+        "gift",
+        "card",
+        "code",
+        "confirmation",
+        "success",
+        "purchase",
+        "delivery"
+      ],
+      "propSchema": {
+        "showCopyButton": {
+          "type": "boolean",
+          "required": false
+        },
+        "showEmailNote": {
+          "type": "boolean",
+          "required": false
+        },
+        "title": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "jsonSchema": {
+        "showCopyButton": {
+          "type": "boolean",
+          "required": false
+        },
+        "showEmailNote": {
+          "type": "boolean",
+          "required": false
+        },
+        "title": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "defaultProps": {
+        "showCopyButton": true,
+        "showEmailNote": true,
+        "title": "Your Gift Card Codes"
+      },
+      "isContainer": false,
+      "zones": [],
+      "metaPath": "src\\puck\\components\\order\\giftcardcodesdisplay.meta.ts"
     },
     {
       "name": "NextSteps",
@@ -33656,6 +33723,73 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\order\\CustomerEmail.tsx (auto-derived)"
+      },
+      {
+        "name": "GiftCardCodesDisplay",
+        "label": "Gift Card Codes",
+        "description": "Displays gift card codes purchased in the order — for the order confirmation page. Shows code, value, copy button, and email note. Fetches codes automatically from the loyalty plugin.",
+        "category": "order",
+        "intent": [
+          "order-confirmation",
+          "gift-card",
+          "purchase",
+          "success"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "giftCards (order gift card items)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "gift",
+          "card",
+          "code",
+          "confirmation",
+          "success",
+          "purchase",
+          "delivery"
+        ],
+        "propSchema": {
+          "showCopyButton": {
+            "type": "boolean",
+            "required": false
+          },
+          "showEmailNote": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "showCopyButton": {
+            "type": "boolean",
+            "required": false
+          },
+          "showEmailNote": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "showCopyButton": true,
+          "showEmailNote": true,
+          "title": "Your Gift Card Codes"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\giftcardcodesdisplay.meta.ts"
       },
       {
         "name": "NextSteps",
@@ -61895,6 +62029,73 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\checkout\\giftcardcode.meta.ts"
+      },
+      {
+        "name": "GiftCardCodesDisplay",
+        "label": "Gift Card Codes",
+        "description": "Displays gift card codes purchased in the order — for the order confirmation page. Shows code, value, copy button, and email note. Fetches codes automatically from the loyalty plugin.",
+        "category": "order",
+        "intent": [
+          "order-confirmation",
+          "gift-card",
+          "purchase",
+          "success"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "giftCards (order gift card items)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "gift",
+          "card",
+          "code",
+          "confirmation",
+          "success",
+          "purchase",
+          "delivery"
+        ],
+        "propSchema": {
+          "showCopyButton": {
+            "type": "boolean",
+            "required": false
+          },
+          "showEmailNote": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "showCopyButton": {
+            "type": "boolean",
+            "required": false
+          },
+          "showEmailNote": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "showCopyButton": true,
+          "showEmailNote": true,
+          "title": "Your Gift Card Codes"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\giftcardcodesdisplay.meta.ts"
       }
     ],
     "credit": [
@@ -110495,6 +110696,378 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\navigation\\SearchIcon\\searchicon.meta.ts"
       }
     ],
+    "order-confirmation": [
+      {
+        "name": "GiftCardCodesDisplay",
+        "label": "Gift Card Codes",
+        "description": "Displays gift card codes purchased in the order — for the order confirmation page. Shows code, value, copy button, and email note. Fetches codes automatically from the loyalty plugin.",
+        "category": "order",
+        "intent": [
+          "order-confirmation",
+          "gift-card",
+          "purchase",
+          "success"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "giftCards (order gift card items)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "gift",
+          "card",
+          "code",
+          "confirmation",
+          "success",
+          "purchase",
+          "delivery"
+        ],
+        "propSchema": {
+          "showCopyButton": {
+            "type": "boolean",
+            "required": false
+          },
+          "showEmailNote": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "showCopyButton": {
+            "type": "boolean",
+            "required": false
+          },
+          "showEmailNote": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "showCopyButton": true,
+          "showEmailNote": true,
+          "title": "Your Gift Card Codes"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\giftcardcodesdisplay.meta.ts"
+      }
+    ],
+    "purchase": [
+      {
+        "name": "GiftCardCodesDisplay",
+        "label": "Gift Card Codes",
+        "description": "Displays gift card codes purchased in the order — for the order confirmation page. Shows code, value, copy button, and email note. Fetches codes automatically from the loyalty plugin.",
+        "category": "order",
+        "intent": [
+          "order-confirmation",
+          "gift-card",
+          "purchase",
+          "success"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "giftCards (order gift card items)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "gift",
+          "card",
+          "code",
+          "confirmation",
+          "success",
+          "purchase",
+          "delivery"
+        ],
+        "propSchema": {
+          "showCopyButton": {
+            "type": "boolean",
+            "required": false
+          },
+          "showEmailNote": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "showCopyButton": {
+            "type": "boolean",
+            "required": false
+          },
+          "showEmailNote": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "showCopyButton": true,
+          "showEmailNote": true,
+          "title": "Your Gift Card Codes"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\giftcardcodesdisplay.meta.ts"
+      }
+    ],
+    "success": [
+      {
+        "name": "GiftCardCodesDisplay",
+        "label": "Gift Card Codes",
+        "description": "Displays gift card codes purchased in the order — for the order confirmation page. Shows code, value, copy button, and email note. Fetches codes automatically from the loyalty plugin.",
+        "category": "order",
+        "intent": [
+          "order-confirmation",
+          "gift-card",
+          "purchase",
+          "success"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "giftCards (order gift card items)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "gift",
+          "card",
+          "code",
+          "confirmation",
+          "success",
+          "purchase",
+          "delivery"
+        ],
+        "propSchema": {
+          "showCopyButton": {
+            "type": "boolean",
+            "required": false
+          },
+          "showEmailNote": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "showCopyButton": {
+            "type": "boolean",
+            "required": false
+          },
+          "showEmailNote": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "showCopyButton": true,
+          "showEmailNote": true,
+          "title": "Your Gift Card Codes"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\giftcardcodesdisplay.meta.ts"
+      },
+      {
+        "name": "OrderConfirmation",
+        "label": "Order Confirmation",
+        "description": "Post-purchase success page (3 styles: success/minimal/detailed) with optional order number, email confirmation, and continue-shopping button. Cart-library-agnostic: takes orderId, email, viewOrderHref, continueShoppingHref.",
+        "category": "order",
+        "intent": [
+          "order",
+          "confirmation",
+          "success"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "orderId/email (consumer)"
+        ],
+        "copyFields": [
+          "titleText",
+          "messageText"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "order",
+          "confirmation",
+          "success",
+          "thank-you"
+        ],
+        "propSchema": {
+          "style": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "success",
+              "minimal",
+              "detailed"
+            ]
+          },
+          "titleText": {
+            "type": "string",
+            "required": true
+          },
+          "messageText": {
+            "type": "string",
+            "required": true
+          },
+          "showCheckmark": {
+            "type": "boolean",
+            "required": true
+          },
+          "showOrderNumber": {
+            "type": "boolean",
+            "required": true
+          },
+          "showEmailConfirmation": {
+            "type": "boolean",
+            "required": true
+          },
+          "showContinueShopping": {
+            "type": "boolean",
+            "required": true
+          }
+        },
+        "jsonSchema": {
+          "style": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "success",
+              "minimal",
+              "detailed"
+            ]
+          },
+          "titleText": {
+            "type": "string",
+            "required": true
+          },
+          "messageText": {
+            "type": "string",
+            "required": true
+          },
+          "showCheckmark": {
+            "type": "boolean",
+            "required": true
+          },
+          "showOrderNumber": {
+            "type": "boolean",
+            "required": true
+          },
+          "showEmailConfirmation": {
+            "type": "boolean",
+            "required": true
+          },
+          "showContinueShopping": {
+            "type": "boolean",
+            "required": true
+          }
+        },
+        "defaultProps": {
+          "showCheckmark": true,
+          "titleText": "Order Confirmed!",
+          "messageText": "Thank you for your order. We've received your order and will begin processing it right away.",
+          "showOrderNumber": true,
+          "showEmailConfirmation": true,
+          "showContinueShopping": true,
+          "style": "success"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\orderconfirmation.meta.ts"
+      },
+      {
+        "name": "SuccessIcon",
+        "label": "Success Icon",
+        "description": "Success Icon component (auto-derived).",
+        "category": "order",
+        "intent": [
+          "success",
+          "icon"
+        ],
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "searchTags": [
+          "success",
+          "icon"
+        ],
+        "propSchema": {
+          "size": {
+            "type": "string"
+          },
+          "color": {
+            "type": "color"
+          },
+          "animate": {
+            "type": "boolean"
+          },
+          "style": {
+            "type": "string"
+          }
+        },
+        "jsonSchema": {
+          "size": {
+            "type": "string"
+          },
+          "color": {
+            "type": "color"
+          },
+          "animate": {
+            "type": "boolean"
+          },
+          "style": {
+            "type": "string"
+          }
+        },
+        "defaultProps": {
+          "size": "xl",
+          "color": "#10b981",
+          "animate": false,
+          "style": "standard"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\SuccessIcon\\SuccessIcon.tsx (auto-derived)"
+      }
+    ],
     "next": [
       {
         "name": "NextSteps",
@@ -110813,173 +111386,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\order\\orderconfirmation.meta.ts"
-      }
-    ],
-    "success": [
-      {
-        "name": "OrderConfirmation",
-        "label": "Order Confirmation",
-        "description": "Post-purchase success page (3 styles: success/minimal/detailed) with optional order number, email confirmation, and continue-shopping button. Cart-library-agnostic: takes orderId, email, viewOrderHref, continueShoppingHref.",
-        "category": "order",
-        "intent": [
-          "order",
-          "confirmation",
-          "success"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "orderId/email (consumer)"
-        ],
-        "copyFields": [
-          "titleText",
-          "messageText"
-        ],
-        "themeable": [],
-        "a11yRisk": "low",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "order",
-          "confirmation",
-          "success",
-          "thank-you"
-        ],
-        "propSchema": {
-          "style": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "success",
-              "minimal",
-              "detailed"
-            ]
-          },
-          "titleText": {
-            "type": "string",
-            "required": true
-          },
-          "messageText": {
-            "type": "string",
-            "required": true
-          },
-          "showCheckmark": {
-            "type": "boolean",
-            "required": true
-          },
-          "showOrderNumber": {
-            "type": "boolean",
-            "required": true
-          },
-          "showEmailConfirmation": {
-            "type": "boolean",
-            "required": true
-          },
-          "showContinueShopping": {
-            "type": "boolean",
-            "required": true
-          }
-        },
-        "jsonSchema": {
-          "style": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "success",
-              "minimal",
-              "detailed"
-            ]
-          },
-          "titleText": {
-            "type": "string",
-            "required": true
-          },
-          "messageText": {
-            "type": "string",
-            "required": true
-          },
-          "showCheckmark": {
-            "type": "boolean",
-            "required": true
-          },
-          "showOrderNumber": {
-            "type": "boolean",
-            "required": true
-          },
-          "showEmailConfirmation": {
-            "type": "boolean",
-            "required": true
-          },
-          "showContinueShopping": {
-            "type": "boolean",
-            "required": true
-          }
-        },
-        "defaultProps": {
-          "showCheckmark": true,
-          "titleText": "Order Confirmed!",
-          "messageText": "Thank you for your order. We've received your order and will begin processing it right away.",
-          "showOrderNumber": true,
-          "showEmailConfirmation": true,
-          "showContinueShopping": true,
-          "style": "success"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\order\\orderconfirmation.meta.ts"
-      },
-      {
-        "name": "SuccessIcon",
-        "label": "Success Icon",
-        "description": "Success Icon component (auto-derived).",
-        "category": "order",
-        "intent": [
-          "success",
-          "icon"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "success",
-          "icon"
-        ],
-        "propSchema": {
-          "size": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "animate": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "size": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "animate": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "size": "xl",
-          "color": "#10b981",
-          "animate": false,
-          "style": "standard"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\order\\SuccessIcon\\SuccessIcon.tsx (auto-derived)"
       }
     ],
     "date": [

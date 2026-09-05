@@ -1,4 +1,5 @@
 export { OrderActions } from './OrderActions';
+export { GiftCardCodesDisplay } from './GiftCardCodesDisplay';
 export { OrderConfirmation } from './OrderConfirmation';
 export { OrderDetails } from './OrderDetails';
 export { OrderTimeline } from './OrderTimeline';
@@ -11,6 +12,7 @@ export { CustomerEmail } from './CustomerEmail';
 export { OrderTotal } from './OrderTotal';
 export { OrderDate } from './OrderDate';
 export { orderActionsMeta } from './orderactions.meta';
+export { giftCardCodesDisplayMeta } from './giftcardcodesdisplay.meta';
 export { orderConfirmationMeta } from './orderconfirmation.meta';
 export { orderDetailsMeta } from './orderdetails.meta';
 export { orderTimelineMeta } from './ordertimeline.meta';

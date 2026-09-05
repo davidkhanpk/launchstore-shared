@@ -1,4 +1,6 @@
 export { OrderActions } from './OrderActions';
+export { GiftCardCodesDisplay } from './GiftCardCodesDisplay';
+export type { GiftCardCodesDisplayProps, GiftCardCodesDisplayWithData } from './GiftCardCodesDisplay';
 export type { OrderActionsProps, OrderActionsWithData } from './OrderActions';
 export { OrderConfirmation } from './OrderConfirmation';
 export type { OrderConfirmationProps, OrderConfirmationWithData } from './OrderConfirmation';
@@ -24,6 +26,7 @@ export { OrderDate } from './OrderDate';
 export type { OrderDateProps } from './OrderDate';
 
 export { orderActionsMeta, type OrderActionsMeta } from './orderactions.meta';
+export { giftCardCodesDisplayMeta, type GiftCardCodesDisplayMeta } from './giftcardcodesdisplay.meta';
 export { orderConfirmationMeta, type OrderConfirmationMeta } from './orderconfirmation.meta';
 export { orderDetailsMeta, type OrderDetailsMeta } from './orderdetails.meta';
 export { orderTimelineMeta, type OrderTimelineMeta } from './ordertimeline.meta';

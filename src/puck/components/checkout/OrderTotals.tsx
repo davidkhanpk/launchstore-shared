@@ -38,6 +38,7 @@ export interface OrderTotalsWithData extends OrderTotalsProps {
     discount: string;
     giftCard?: string;
     giftCardCode?: string;
+    volumeSavings?: string;
     total: string;
     discountCode?: string;
   };
@@ -71,6 +72,12 @@ export const OrderTotals: ComponentConfig<OrderTotalsWithData> = {
             <div className={`flex justify-between ${textSize} text-green-600`}>
               <span>Gift Card{totals.giftCardCode ? ` (${totals.giftCardCode})` : ''}</span>
               <span>{totals.giftCard}</span>
+            </div>
+          )}
+          {totals.volumeSavings && (
+            <div className={`flex justify-between ${textSize} text-green-600`}>
+              <span>Volume Savings</span>
+              <span>{totals.volumeSavings}</span>
             </div>
           )}
         </div>

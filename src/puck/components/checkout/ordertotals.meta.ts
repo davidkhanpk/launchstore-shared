@@ -4,6 +4,6 @@ export const orderTotalsMeta = {
   category: 'checkout', intent: ['order', 'totals', 'summary'], visualRole: 'block', dataDeps: ['totals (cart flow)'],
   copyFields: [], themeable: [], a11yRisk: 'low', a11yNotes: 'Plain text only.', mobileBehavior: 'responsive',
   searchTags: ['order', 'totals', 'summary', 'subtotal'],
-  props: { showSubtotal: { type: 'boolean', required: true }, showShipping: { type: 'boolean', required: true }, showTax: { type: 'boolean', required: true }, showDiscount: { type: 'boolean', required: true }, showGiftCard: { type: 'boolean', required: false }, showTotal: { type: 'boolean', required: true }, highlightTotal: { type: 'boolean', required: true }, layout: { type: 'enum', options: ['default', 'compact'], required: true } },
+  props: { showSubtotal: { type: 'boolean', required: true }, showShipping: { type: 'boolean', required: true }, showTax: { type: 'boolean', required: true }, showDiscount: { type: 'boolean', required: true }, showGiftCard: { type: 'boolean', required: false }, volumeSavings: { type: 'string', required: false }, showTotal: { type: 'boolean', required: true }, highlightTotal: { type: 'boolean', required: true }, layout: { type: 'enum', options: ['default', 'compact'], required: true } },
 } as const;
 export type OrderTotalsMeta = typeof orderTotalsMeta;

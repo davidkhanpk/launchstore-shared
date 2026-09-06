@@ -35,6 +35,7 @@ export * from './product/ProductAccordion';
 export * from './product/ProductBreadcrumbs';
 export * from './product/ProductRating';
 export * from './product/ProductReviews';
+export * from './product/QuantityPricingTable';
 export * from './product/QuantitySelector';
 export * from './product/StockIndicator';
 export * from './product/WishlistButton';

@@ -17,6 +17,7 @@ export interface OrderTotalsWithData extends OrderTotalsProps {
         discount: string;
         giftCard?: string;
         giftCardCode?: string;
+        volumeSavings?: string;
         total: string;
         discountCode?: string;
     };

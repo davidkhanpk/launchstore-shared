@@ -36,8 +36,8 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-09-05T13:41:22.549Z",
-  "total": 140,
+  "generatedAt": "2026-09-06T12:14:09.675Z",
+  "total": 141,
   "entries": [
     {
       "name": "AccountContent",
@@ -2787,6 +2787,10 @@ export const registry: CompiledRegistry = {
           "type": "boolean",
           "required": false
         },
+        "volumeSavings": {
+          "type": "string",
+          "required": false
+        },
         "showTotal": {
           "type": "boolean",
           "required": true
@@ -2823,6 +2827,10 @@ export const registry: CompiledRegistry = {
         },
         "showGiftCard": {
           "type": "boolean",
+          "required": false
+        },
+        "volumeSavings": {
+          "type": "string",
           "required": false
         },
         "showTotal": {
@@ -16932,6 +16940,104 @@ export const registry: CompiledRegistry = {
       "metaPath": "src\\puck\\components\\product\\ProductVariantSelector\\productvariantselector.meta.ts"
     },
     {
+      "name": "QuantityPricingTable",
+      "label": "Quantity Pricing",
+      "description": "Displays quantity-based tier pricing (volume discounts) on the product page. Shows tier cards or table with quantity ranges, unit prices, and savings percentages. Automatically highlights the active tier based on current cart quantity.",
+      "category": "product",
+      "intent": [
+        "product-page",
+        "pricing",
+        "quantity",
+        "volume",
+        "tier",
+        "discount"
+      ],
+      "visualRole": "block",
+      "dataDeps": [
+        "tiers (variant prices with min_quantity)"
+      ],
+      "copyFields": [
+        "title"
+      ],
+      "themeable": [],
+      "a11yRisk": "low",
+      "mobileBehavior": "responsive (cards stack on mobile)",
+      "searchTags": [
+        "quantity",
+        "volume",
+        "tier",
+        "pricing",
+        "breaks",
+        "discount",
+        "buy more",
+        "save",
+        "bulk",
+        "wholesale"
+      ],
+      "propSchema": {
+        "layout": {
+          "type": "enum",
+          "required": false,
+          "options": [
+            "cards",
+            "table"
+          ]
+        },
+        "showSavings": {
+          "type": "boolean",
+          "required": false
+        },
+        "showBasePrice": {
+          "type": "boolean",
+          "required": false
+        },
+        "highlightActiveTier": {
+          "type": "boolean",
+          "required": false
+        },
+        "title": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "jsonSchema": {
+        "layout": {
+          "type": "enum",
+          "required": false,
+          "options": [
+            "cards",
+            "table"
+          ]
+        },
+        "showSavings": {
+          "type": "boolean",
+          "required": false
+        },
+        "showBasePrice": {
+          "type": "boolean",
+          "required": false
+        },
+        "highlightActiveTier": {
+          "type": "boolean",
+          "required": false
+        },
+        "title": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "defaultProps": {
+        "layout": "cards",
+        "showSavings": true,
+        "showBasePrice": true,
+        "highlightActiveTier": true,
+        "title": "Buy More, Save More"
+      },
+      "isContainer": false,
+      "zones": [],
+      "metaPath": "src\\puck\\components\\product\\quantitypricingtable.meta.ts"
+    },
+    {
       "name": "QuantitySelector",
       "label": "Quantity Selector",
       "description": "Stepped quantity input with +/- buttons. Optional label, three sizes, three border styles, margin/padding shortcuts. Optional controlled mode: pass `quantity` + `setQuantity` to drive from the cart context; otherwise the component uses internal state. Lucide Minus/Plus replaced with inline SVG.",
@@ -22371,6 +22477,10 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": false
           },
+          "volumeSavings": {
+            "type": "string",
+            "required": false
+          },
           "showTotal": {
             "type": "boolean",
             "required": true
@@ -22407,6 +22517,10 @@ export const registry: CompiledRegistry = {
           },
           "showGiftCard": {
             "type": "boolean",
+            "required": false
+          },
+          "volumeSavings": {
+            "type": "string",
             "required": false
           },
           "showTotal": {
@@ -36538,6 +36652,104 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\product\\ProductVariantSelector\\productvariantselector.meta.ts"
       },
       {
+        "name": "QuantityPricingTable",
+        "label": "Quantity Pricing",
+        "description": "Displays quantity-based tier pricing (volume discounts) on the product page. Shows tier cards or table with quantity ranges, unit prices, and savings percentages. Automatically highlights the active tier based on current cart quantity.",
+        "category": "product",
+        "intent": [
+          "product-page",
+          "pricing",
+          "quantity",
+          "volume",
+          "tier",
+          "discount"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "tiers (variant prices with min_quantity)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive (cards stack on mobile)",
+        "searchTags": [
+          "quantity",
+          "volume",
+          "tier",
+          "pricing",
+          "breaks",
+          "discount",
+          "buy more",
+          "save",
+          "bulk",
+          "wholesale"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "cards",
+              "table"
+            ]
+          },
+          "showSavings": {
+            "type": "boolean",
+            "required": false
+          },
+          "showBasePrice": {
+            "type": "boolean",
+            "required": false
+          },
+          "highlightActiveTier": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "cards",
+              "table"
+            ]
+          },
+          "showSavings": {
+            "type": "boolean",
+            "required": false
+          },
+          "showBasePrice": {
+            "type": "boolean",
+            "required": false
+          },
+          "highlightActiveTier": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "layout": "cards",
+          "showSavings": true,
+          "showBasePrice": true,
+          "highlightActiveTier": true,
+          "title": "Buy More, Save More"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\product\\quantitypricingtable.meta.ts"
+      },
+      {
         "name": "QuantitySelector",
         "label": "Quantity Selector",
         "description": "Stepped quantity input with +/- buttons. Optional label, three sizes, three border styles, margin/padding shortcuts. Optional controlled mode: pass `quantity` + `setQuantity` to drive from the cart context; otherwise the component uses internal state. Lucide Minus/Plus replaced with inline SVG.",
@@ -45438,6 +45650,10 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": false
           },
+          "volumeSavings": {
+            "type": "string",
+            "required": false
+          },
           "showTotal": {
             "type": "boolean",
             "required": true
@@ -45474,6 +45690,10 @@ export const registry: CompiledRegistry = {
           },
           "showGiftCard": {
             "type": "boolean",
+            "required": false
+          },
+          "volumeSavings": {
+            "type": "string",
             "required": false
           },
           "showTotal": {
@@ -45833,6 +46053,10 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": false
           },
+          "volumeSavings": {
+            "type": "string",
+            "required": false
+          },
           "showTotal": {
             "type": "boolean",
             "required": true
@@ -45869,6 +46093,10 @@ export const registry: CompiledRegistry = {
           },
           "showGiftCard": {
             "type": "boolean",
+            "required": false
+          },
+          "volumeSavings": {
+            "type": "string",
             "required": false
           },
           "showTotal": {
@@ -50014,6 +50242,10 @@ export const registry: CompiledRegistry = {
             "type": "boolean",
             "required": false
           },
+          "volumeSavings": {
+            "type": "string",
+            "required": false
+          },
           "showTotal": {
             "type": "boolean",
             "required": true
@@ -50050,6 +50282,10 @@ export const registry: CompiledRegistry = {
           },
           "showGiftCard": {
             "type": "boolean",
+            "required": false
+          },
+          "volumeSavings": {
+            "type": "string",
             "required": false
           },
           "showTotal": {
@@ -61940,6 +62176,104 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\checkout\\discountcode.meta.ts"
+      },
+      {
+        "name": "QuantityPricingTable",
+        "label": "Quantity Pricing",
+        "description": "Displays quantity-based tier pricing (volume discounts) on the product page. Shows tier cards or table with quantity ranges, unit prices, and savings percentages. Automatically highlights the active tier based on current cart quantity.",
+        "category": "product",
+        "intent": [
+          "product-page",
+          "pricing",
+          "quantity",
+          "volume",
+          "tier",
+          "discount"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "tiers (variant prices with min_quantity)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive (cards stack on mobile)",
+        "searchTags": [
+          "quantity",
+          "volume",
+          "tier",
+          "pricing",
+          "breaks",
+          "discount",
+          "buy more",
+          "save",
+          "bulk",
+          "wholesale"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "cards",
+              "table"
+            ]
+          },
+          "showSavings": {
+            "type": "boolean",
+            "required": false
+          },
+          "showBasePrice": {
+            "type": "boolean",
+            "required": false
+          },
+          "highlightActiveTier": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "cards",
+              "table"
+            ]
+          },
+          "showSavings": {
+            "type": "boolean",
+            "required": false
+          },
+          "showBasePrice": {
+            "type": "boolean",
+            "required": false
+          },
+          "highlightActiveTier": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "layout": "cards",
+          "showSavings": true,
+          "showBasePrice": true,
+          "highlightActiveTier": true,
+          "title": "Buy More, Save More"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\product\\quantitypricingtable.meta.ts"
       }
     ],
     "gift-card": [
@@ -118579,7 +118913,305 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\product\\ProductVariantSelector\\productvariantselector.meta.ts"
       }
     ],
+    "product-page": [
+      {
+        "name": "QuantityPricingTable",
+        "label": "Quantity Pricing",
+        "description": "Displays quantity-based tier pricing (volume discounts) on the product page. Shows tier cards or table with quantity ranges, unit prices, and savings percentages. Automatically highlights the active tier based on current cart quantity.",
+        "category": "product",
+        "intent": [
+          "product-page",
+          "pricing",
+          "quantity",
+          "volume",
+          "tier",
+          "discount"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "tiers (variant prices with min_quantity)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive (cards stack on mobile)",
+        "searchTags": [
+          "quantity",
+          "volume",
+          "tier",
+          "pricing",
+          "breaks",
+          "discount",
+          "buy more",
+          "save",
+          "bulk",
+          "wholesale"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "cards",
+              "table"
+            ]
+          },
+          "showSavings": {
+            "type": "boolean",
+            "required": false
+          },
+          "showBasePrice": {
+            "type": "boolean",
+            "required": false
+          },
+          "highlightActiveTier": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "cards",
+              "table"
+            ]
+          },
+          "showSavings": {
+            "type": "boolean",
+            "required": false
+          },
+          "showBasePrice": {
+            "type": "boolean",
+            "required": false
+          },
+          "highlightActiveTier": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "layout": "cards",
+          "showSavings": true,
+          "showBasePrice": true,
+          "highlightActiveTier": true,
+          "title": "Buy More, Save More"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\product\\quantitypricingtable.meta.ts"
+      }
+    ],
+    "pricing": [
+      {
+        "name": "QuantityPricingTable",
+        "label": "Quantity Pricing",
+        "description": "Displays quantity-based tier pricing (volume discounts) on the product page. Shows tier cards or table with quantity ranges, unit prices, and savings percentages. Automatically highlights the active tier based on current cart quantity.",
+        "category": "product",
+        "intent": [
+          "product-page",
+          "pricing",
+          "quantity",
+          "volume",
+          "tier",
+          "discount"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "tiers (variant prices with min_quantity)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive (cards stack on mobile)",
+        "searchTags": [
+          "quantity",
+          "volume",
+          "tier",
+          "pricing",
+          "breaks",
+          "discount",
+          "buy more",
+          "save",
+          "bulk",
+          "wholesale"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "cards",
+              "table"
+            ]
+          },
+          "showSavings": {
+            "type": "boolean",
+            "required": false
+          },
+          "showBasePrice": {
+            "type": "boolean",
+            "required": false
+          },
+          "highlightActiveTier": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "cards",
+              "table"
+            ]
+          },
+          "showSavings": {
+            "type": "boolean",
+            "required": false
+          },
+          "showBasePrice": {
+            "type": "boolean",
+            "required": false
+          },
+          "highlightActiveTier": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "layout": "cards",
+          "showSavings": true,
+          "showBasePrice": true,
+          "highlightActiveTier": true,
+          "title": "Buy More, Save More"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\product\\quantitypricingtable.meta.ts"
+      }
+    ],
     "quantity": [
+      {
+        "name": "QuantityPricingTable",
+        "label": "Quantity Pricing",
+        "description": "Displays quantity-based tier pricing (volume discounts) on the product page. Shows tier cards or table with quantity ranges, unit prices, and savings percentages. Automatically highlights the active tier based on current cart quantity.",
+        "category": "product",
+        "intent": [
+          "product-page",
+          "pricing",
+          "quantity",
+          "volume",
+          "tier",
+          "discount"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "tiers (variant prices with min_quantity)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive (cards stack on mobile)",
+        "searchTags": [
+          "quantity",
+          "volume",
+          "tier",
+          "pricing",
+          "breaks",
+          "discount",
+          "buy more",
+          "save",
+          "bulk",
+          "wholesale"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "cards",
+              "table"
+            ]
+          },
+          "showSavings": {
+            "type": "boolean",
+            "required": false
+          },
+          "showBasePrice": {
+            "type": "boolean",
+            "required": false
+          },
+          "highlightActiveTier": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "cards",
+              "table"
+            ]
+          },
+          "showSavings": {
+            "type": "boolean",
+            "required": false
+          },
+          "showBasePrice": {
+            "type": "boolean",
+            "required": false
+          },
+          "highlightActiveTier": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "layout": "cards",
+          "showSavings": true,
+          "showBasePrice": true,
+          "highlightActiveTier": true,
+          "title": "Buy More, Save More"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\product\\quantitypricingtable.meta.ts"
+      },
       {
         "name": "QuantitySelector",
         "label": "Quantity Selector",
@@ -118756,6 +119388,206 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\product\\QuantitySelector\\quantityselector.meta.ts"
+      }
+    ],
+    "volume": [
+      {
+        "name": "QuantityPricingTable",
+        "label": "Quantity Pricing",
+        "description": "Displays quantity-based tier pricing (volume discounts) on the product page. Shows tier cards or table with quantity ranges, unit prices, and savings percentages. Automatically highlights the active tier based on current cart quantity.",
+        "category": "product",
+        "intent": [
+          "product-page",
+          "pricing",
+          "quantity",
+          "volume",
+          "tier",
+          "discount"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "tiers (variant prices with min_quantity)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive (cards stack on mobile)",
+        "searchTags": [
+          "quantity",
+          "volume",
+          "tier",
+          "pricing",
+          "breaks",
+          "discount",
+          "buy more",
+          "save",
+          "bulk",
+          "wholesale"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "cards",
+              "table"
+            ]
+          },
+          "showSavings": {
+            "type": "boolean",
+            "required": false
+          },
+          "showBasePrice": {
+            "type": "boolean",
+            "required": false
+          },
+          "highlightActiveTier": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "cards",
+              "table"
+            ]
+          },
+          "showSavings": {
+            "type": "boolean",
+            "required": false
+          },
+          "showBasePrice": {
+            "type": "boolean",
+            "required": false
+          },
+          "highlightActiveTier": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "layout": "cards",
+          "showSavings": true,
+          "showBasePrice": true,
+          "highlightActiveTier": true,
+          "title": "Buy More, Save More"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\product\\quantitypricingtable.meta.ts"
+      }
+    ],
+    "tier": [
+      {
+        "name": "QuantityPricingTable",
+        "label": "Quantity Pricing",
+        "description": "Displays quantity-based tier pricing (volume discounts) on the product page. Shows tier cards or table with quantity ranges, unit prices, and savings percentages. Automatically highlights the active tier based on current cart quantity.",
+        "category": "product",
+        "intent": [
+          "product-page",
+          "pricing",
+          "quantity",
+          "volume",
+          "tier",
+          "discount"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "tiers (variant prices with min_quantity)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive (cards stack on mobile)",
+        "searchTags": [
+          "quantity",
+          "volume",
+          "tier",
+          "pricing",
+          "breaks",
+          "discount",
+          "buy more",
+          "save",
+          "bulk",
+          "wholesale"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "cards",
+              "table"
+            ]
+          },
+          "showSavings": {
+            "type": "boolean",
+            "required": false
+          },
+          "showBasePrice": {
+            "type": "boolean",
+            "required": false
+          },
+          "highlightActiveTier": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "cards",
+              "table"
+            ]
+          },
+          "showSavings": {
+            "type": "boolean",
+            "required": false
+          },
+          "showBasePrice": {
+            "type": "boolean",
+            "required": false
+          },
+          "highlightActiveTier": {
+            "type": "boolean",
+            "required": false
+          },
+          "title": {
+            "type": "string",
+            "required": false
+          }
+        },
+        "defaultProps": {
+          "layout": "cards",
+          "showSavings": true,
+          "showBasePrice": true,
+          "highlightActiveTier": true,
+          "title": "Buy More, Save More"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\product\\quantitypricingtable.meta.ts"
       }
     ],
     "qty": [

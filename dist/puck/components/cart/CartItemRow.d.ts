@@ -11,6 +11,8 @@ export interface CartItemsViewProps extends CartItem {
     onDelete: CartItemDeleteFn;
     updating: boolean;
     formatPrice: (price: number) => string;
+    /** Base price without tier discount — enables Volume Discount badge */
+    compareAtPrice?: number;
 }
 export declare const CartItemRow: React.FC<CartItemsViewProps>;
 //# sourceMappingURL=CartItemRow.d.ts.map

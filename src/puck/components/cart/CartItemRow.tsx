@@ -12,6 +12,8 @@ export interface CartItemsViewProps extends CartItem {
   onDelete: CartItemDeleteFn;
   updating: boolean;
   formatPrice: (price: number) => string;
+  /** Base price without tier discount — enables Volume Discount badge */
+  compareAtPrice?: number;
 }
 
 const IMAGE_SIZES = { sm: 'w-16 h-16', md: 'w-24 h-24', lg: 'w-32 h-32' } as const;
@@ -29,11 +31,19 @@ const Trash = () => (
 export const CartItemRow: React.FC<CartItemsViewProps> = ({
   id, title, product_title, product_handle, thumbnail, variant, quantity, unit_price, total, isPreorder,
   layout, showImages, showVariantInfo, showQuantitySelector, showDeleteButton, imageSize, maxQuantity,
-  onQuantityChange, onDelete, updating, formatPrice,
+  onQuantityChange, onDelete, updating, formatPrice, compareAtPrice,
 }) => {
   const variantLabel = variant.options.map(o => o.value).join(' / ');
   const op = (n: number) => () => onQuantityChange(id, n);
   const rm = () => onDelete(id);
+  const hasVolDiscount = compareAtPrice !== undefined && compareAtPrice > unit_price;
+  const volSavingsPct = hasVolDiscount ? Math.round(((compareAtPrice - unit_price) / compareAtPrice) * 100) : 0;
+
+  const VolumeBadge = () => hasVolDiscount ? (
+    <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide bg-gray-900 dark:bg-white text-white dark:text-black rounded-full px-2 py-0.5">
+      Volume Discount · save {volSavingsPct}%
+    </span>
+  ) : null;
 
   if (layout === 'card') {
     return (
@@ -45,7 +55,13 @@ export const CartItemRow: React.FC<CartItemsViewProps> = ({
         {showVariantInfo && variantLabel && <p className="text-sm text-gray-600 mb-3">{variantLabel}</p>}
         {isPreorder && <p className="text-xs text-orange-600 mb-2">Pre-order · Ships on expected date</p>}
         <div className="flex items-center justify-between mb-3">
-          <span className="text-gray-700">{formatPrice(unit_price)}</span>
+          <div>
+            <span className="text-gray-700">{formatPrice(unit_price)}</span>
+            {hasVolDiscount && compareAtPrice && (
+              <span className="ml-1.5 text-xs text-gray-400 line-through">{formatPrice(compareAtPrice)}</span>
+            )}
+            <div className="mt-0.5"><VolumeBadge /></div>
+          </div>
           <span className="font-semibold text-gray-900">{formatPrice(total)}</span>
         </div>
         <div className="flex items-center justify-between">
@@ -82,7 +98,15 @@ export const CartItemRow: React.FC<CartItemsViewProps> = ({
                 <button onClick={op(quantity + 1)} disabled={quantity >= maxQuantity || updating} className="p-1 border border-gray-300 rounded hover:bg-gray-100 disabled:opacity-50"><Plus /></button>
               </div>
             )}
-            <p className="text-gray-700">{formatPrice(unit_price)} each</p>
+            <div>
+              <p className="text-gray-700">
+                {formatPrice(unit_price)} each
+                {hasVolDiscount && compareAtPrice && (
+                  <span className="ml-1.5 text-xs text-gray-400 line-through">{formatPrice(compareAtPrice)}</span>
+                )}
+              </p>
+              <div className="mt-0.5"><VolumeBadge /></div>
+            </div>
           </div>
         </div>
         <div className="text-right flex-shrink-0">

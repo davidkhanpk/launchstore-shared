@@ -36,7 +36,7 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-09-06T13:47:06.503Z",
+  "generatedAt": "2026-10-14T14:50:12.749Z",
   "total": 141,
   "entries": [
     {
@@ -1824,58 +1824,91 @@ export const registry: CompiledRegistry = {
     {
       "name": "CategoryGrid",
       "label": "Category Grid",
-      "description": "Category Grid component (auto-derived).",
+      "description": "Grid of the store's product CATEGORIES (not products) — each card is a category with image, name, and optional product count. Categories data is injected by the host at render time; in the editor it shows placeholder cards. Use this for \"browse by category\" / collection navigation sections. To FEATURE PRODUCTS instead, use FeaturedProducts or a product carousel.",
       "category": "category",
       "intent": [
-        "category",
-        "grid"
+        "navigate",
+        "browse",
+        "organize",
+        "group"
       ],
-      "dataDeps": [],
+      "visualRole": "block",
+      "dataDeps": [
+        "categories (consumer-injected)"
+      ],
       "copyFields": [],
       "themeable": [],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
-        "category",
-        "grid"
+        "categories",
+        "collections",
+        "grid",
+        "browse",
+        "navigation"
       ],
       "propSchema": {
         "columns": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Category cards per row (1-4)."
         },
         "gap": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Spacing between cards: sm | md | lg."
         },
         "showImages": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show each category's image."
         },
         "showCounts": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the product count per category."
         },
         "showDescriptions": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show category descriptions."
         },
         "cardStyle": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Card look: standard | bordered | shadow."
         }
       },
       "jsonSchema": {
         "columns": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Category cards per row (1-4)."
         },
         "gap": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Spacing between cards: sm | md | lg."
         },
         "showImages": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show each category's image."
         },
         "showCounts": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the product count per category."
         },
         "showDescriptions": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show category descriptions."
         },
         "cardStyle": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Card look: standard | bordered | shadow."
         }
       },
       "defaultProps": {
@@ -1888,7 +1921,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\category\\CategoryGrid\\CategoryGrid.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\category\\CategoryGrid\\categorygrid.meta.ts"
     },
     {
       "name": "CategoryHero",
@@ -9733,18 +9766,22 @@ export const registry: CompiledRegistry = {
       "propSchema": {
         "sectionTitle": {
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "Heading for the section, e.g. \"Best Sellers\"."
         },
         "sectionSubtitle": {
-          "type": "string"
+          "type": "string",
+          "description": "Optional subheading under the title."
         },
         "showTitle": {
           "type": "boolean",
-          "required": true
+          "required": true,
+          "description": "Whether to render sectionTitle/subtitle."
         },
         "displayMode": {
           "type": "enum",
           "required": true,
+          "description": "grid = static rows; carousel = Swiper slider.",
           "options": [
             "grid",
             "carousel"
@@ -9752,51 +9789,63 @@ export const registry: CompiledRegistry = {
         },
         "productsPerRow": {
           "type": "number",
-          "required": true
+          "required": true,
+          "description": "Products per row in grid mode (2-5)."
         },
         "maxProducts": {
           "type": "number",
-          "required": true
+          "required": true,
+          "description": "Max products to show."
         },
         "slidesPerView": {
           "type": "number",
-          "required": true
+          "required": true,
+          "description": "Carousel: slides visible on desktop."
         },
         "slidesPerViewTablet": {
           "type": "number",
-          "required": true
+          "required": true,
+          "description": "Carousel: slides visible on tablet."
         },
         "slidesPerViewMobile": {
           "type": "number",
-          "required": true
+          "required": true,
+          "description": "Carousel: slides visible on mobile."
         },
         "spaceBetween": {
           "type": "number",
-          "required": true
+          "required": true,
+          "description": "Carousel: gap between slides in px."
         },
         "autoplay": {
           "type": "boolean",
-          "required": true
+          "required": true,
+          "description": "Carousel: auto-advance slides."
         },
         "autoplayDelay": {
           "type": "number",
-          "required": true
+          "required": true,
+          "description": "Carousel: autoplay delay in ms."
         },
         "loop": {
           "type": "boolean",
-          "required": true
+          "required": true,
+          "description": "Carousel: loop back to the start."
         },
         "navigation": {
           "type": "boolean",
-          "required": true
+          "required": true,
+          "description": "Carousel: show prev/next arrows."
         },
         "pagination": {
           "type": "boolean",
-          "required": true
+          "required": true,
+          "description": "Carousel: show pagination indicator."
         },
         "paginationStyle": {
           "type": "enum",
           "required": true,
+          "description": "Carousel pagination style.",
           "options": [
             "dots",
             "fraction",
@@ -9806,6 +9855,7 @@ export const registry: CompiledRegistry = {
         "productSource": {
           "type": "enum",
           "required": true,
+          "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
           "options": [
             "featured",
             "bestsellers",
@@ -9816,23 +9866,28 @@ export const registry: CompiledRegistry = {
         },
         "categoryId": {
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
         },
         "productIds": {
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
         },
         "backgroundColor": {
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "Token path (e.g. \"ui.surface\") or hex."
         },
         "textColor": {
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "Token path (e.g. \"text.primary\") or hex."
         },
         "cardStyle": {
           "type": "enum",
           "required": true,
+          "description": "Product card look.",
           "options": [
             "minimal",
             "bordered",
@@ -9841,32 +9896,39 @@ export const registry: CompiledRegistry = {
         },
         "showPrice": {
           "type": "boolean",
-          "required": true
+          "required": true,
+          "description": "Show price on each product card."
         },
         "showAddToCart": {
           "type": "boolean",
-          "required": true
+          "required": true,
+          "description": "Show an Add-to-Cart button on each card."
         },
         "buttonText": {
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "Label for the section CTA button."
         }
       },
       "jsonSchema": {
         "sectionTitle": {
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "Heading for the section, e.g. \"Best Sellers\"."
         },
         "sectionSubtitle": {
-          "type": "string"
+          "type": "string",
+          "description": "Optional subheading under the title."
         },
         "showTitle": {
           "type": "boolean",
-          "required": true
+          "required": true,
+          "description": "Whether to render sectionTitle/subtitle."
         },
         "displayMode": {
           "type": "enum",
           "required": true,
+          "description": "grid = static rows; carousel = Swiper slider.",
           "options": [
             "grid",
             "carousel"
@@ -9874,51 +9936,63 @@ export const registry: CompiledRegistry = {
         },
         "productsPerRow": {
           "type": "number",
-          "required": true
+          "required": true,
+          "description": "Products per row in grid mode (2-5)."
         },
         "maxProducts": {
           "type": "number",
-          "required": true
+          "required": true,
+          "description": "Max products to show."
         },
         "slidesPerView": {
           "type": "number",
-          "required": true
+          "required": true,
+          "description": "Carousel: slides visible on desktop."
         },
         "slidesPerViewTablet": {
           "type": "number",
-          "required": true
+          "required": true,
+          "description": "Carousel: slides visible on tablet."
         },
         "slidesPerViewMobile": {
           "type": "number",
-          "required": true
+          "required": true,
+          "description": "Carousel: slides visible on mobile."
         },
         "spaceBetween": {
           "type": "number",
-          "required": true
+          "required": true,
+          "description": "Carousel: gap between slides in px."
         },
         "autoplay": {
           "type": "boolean",
-          "required": true
+          "required": true,
+          "description": "Carousel: auto-advance slides."
         },
         "autoplayDelay": {
           "type": "number",
-          "required": true
+          "required": true,
+          "description": "Carousel: autoplay delay in ms."
         },
         "loop": {
           "type": "boolean",
-          "required": true
+          "required": true,
+          "description": "Carousel: loop back to the start."
         },
         "navigation": {
           "type": "boolean",
-          "required": true
+          "required": true,
+          "description": "Carousel: show prev/next arrows."
         },
         "pagination": {
           "type": "boolean",
-          "required": true
+          "required": true,
+          "description": "Carousel: show pagination indicator."
         },
         "paginationStyle": {
           "type": "enum",
           "required": true,
+          "description": "Carousel pagination style.",
           "options": [
             "dots",
             "fraction",
@@ -9928,6 +10002,7 @@ export const registry: CompiledRegistry = {
         "productSource": {
           "type": "enum",
           "required": true,
+          "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
           "options": [
             "featured",
             "bestsellers",
@@ -9938,23 +10013,28 @@ export const registry: CompiledRegistry = {
         },
         "categoryId": {
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
         },
         "productIds": {
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
         },
         "backgroundColor": {
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "Token path (e.g. \"ui.surface\") or hex."
         },
         "textColor": {
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "Token path (e.g. \"text.primary\") or hex."
         },
         "cardStyle": {
           "type": "enum",
           "required": true,
+          "description": "Product card look.",
           "options": [
             "minimal",
             "bordered",
@@ -9963,15 +10043,18 @@ export const registry: CompiledRegistry = {
         },
         "showPrice": {
           "type": "boolean",
-          "required": true
+          "required": true,
+          "description": "Show price on each product card."
         },
         "showAddToCart": {
           "type": "boolean",
-          "required": true
+          "required": true,
+          "description": "Show an Add-to-Cart button on each card."
         },
         "buttonText": {
           "type": "string",
-          "required": true
+          "required": true,
+          "description": "Label for the section CTA button."
         }
       },
       "isContainer": false,
@@ -21512,58 +21595,91 @@ export const registry: CompiledRegistry = {
       {
         "name": "CategoryGrid",
         "label": "Category Grid",
-        "description": "Category Grid component (auto-derived).",
+        "description": "Grid of the store's product CATEGORIES (not products) — each card is a category with image, name, and optional product count. Categories data is injected by the host at render time; in the editor it shows placeholder cards. Use this for \"browse by category\" / collection navigation sections. To FEATURE PRODUCTS instead, use FeaturedProducts or a product carousel.",
         "category": "category",
         "intent": [
-          "category",
-          "grid"
+          "navigate",
+          "browse",
+          "organize",
+          "group"
         ],
-        "dataDeps": [],
+        "visualRole": "block",
+        "dataDeps": [
+          "categories (consumer-injected)"
+        ],
         "copyFields": [],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
-          "category",
-          "grid"
+          "categories",
+          "collections",
+          "grid",
+          "browse",
+          "navigation"
         ],
         "propSchema": {
           "columns": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Category cards per row (1-4)."
           },
           "gap": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Spacing between cards: sm | md | lg."
           },
           "showImages": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show each category's image."
           },
           "showCounts": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the product count per category."
           },
           "showDescriptions": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show category descriptions."
           },
           "cardStyle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
           }
         },
         "jsonSchema": {
           "columns": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Category cards per row (1-4)."
           },
           "gap": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Spacing between cards: sm | md | lg."
           },
           "showImages": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show each category's image."
           },
           "showCounts": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the product count per category."
           },
           "showDescriptions": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show category descriptions."
           },
           "cardStyle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
           }
         },
         "defaultProps": {
@@ -21576,7 +21692,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\category\\CategoryGrid\\CategoryGrid.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\category\\CategoryGrid\\categorygrid.meta.ts"
       },
       {
         "name": "CategoryHero",
@@ -29437,18 +29553,22 @@ export const registry: CompiledRegistry = {
         "propSchema": {
           "sectionTitle": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Heading for the section, e.g. \"Best Sellers\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "description": "Optional subheading under the title."
           },
           "showTitle": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Whether to render sectionTitle/subtitle."
           },
           "displayMode": {
             "type": "enum",
             "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
             "options": [
               "grid",
               "carousel"
@@ -29456,51 +29576,63 @@ export const registry: CompiledRegistry = {
           },
           "productsPerRow": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Products per row in grid mode (2-5)."
           },
           "maxProducts": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Max products to show."
           },
           "slidesPerView": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on desktop."
           },
           "slidesPerViewTablet": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on tablet."
           },
           "slidesPerViewMobile": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on mobile."
           },
           "spaceBetween": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: gap between slides in px."
           },
           "autoplay": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: auto-advance slides."
           },
           "autoplayDelay": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: autoplay delay in ms."
           },
           "loop": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: loop back to the start."
           },
           "navigation": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show prev/next arrows."
           },
           "pagination": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show pagination indicator."
           },
           "paginationStyle": {
             "type": "enum",
             "required": true,
+            "description": "Carousel pagination style.",
             "options": [
               "dots",
               "fraction",
@@ -29510,6 +29642,7 @@ export const registry: CompiledRegistry = {
           "productSource": {
             "type": "enum",
             "required": true,
+            "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
             "options": [
               "featured",
               "bestsellers",
@@ -29520,23 +29653,28 @@ export const registry: CompiledRegistry = {
           },
           "categoryId": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
           },
           "productIds": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
           },
           "backgroundColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
             "type": "enum",
             "required": true,
+            "description": "Product card look.",
             "options": [
               "minimal",
               "bordered",
@@ -29545,32 +29683,39 @@ export const registry: CompiledRegistry = {
           },
           "showPrice": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show price on each product card."
           },
           "showAddToCart": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show an Add-to-Cart button on each card."
           },
           "buttonText": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Label for the section CTA button."
           }
         },
         "jsonSchema": {
           "sectionTitle": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Heading for the section, e.g. \"Best Sellers\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "description": "Optional subheading under the title."
           },
           "showTitle": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Whether to render sectionTitle/subtitle."
           },
           "displayMode": {
             "type": "enum",
             "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
             "options": [
               "grid",
               "carousel"
@@ -29578,51 +29723,63 @@ export const registry: CompiledRegistry = {
           },
           "productsPerRow": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Products per row in grid mode (2-5)."
           },
           "maxProducts": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Max products to show."
           },
           "slidesPerView": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on desktop."
           },
           "slidesPerViewTablet": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on tablet."
           },
           "slidesPerViewMobile": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on mobile."
           },
           "spaceBetween": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: gap between slides in px."
           },
           "autoplay": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: auto-advance slides."
           },
           "autoplayDelay": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: autoplay delay in ms."
           },
           "loop": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: loop back to the start."
           },
           "navigation": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show prev/next arrows."
           },
           "pagination": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show pagination indicator."
           },
           "paginationStyle": {
             "type": "enum",
             "required": true,
+            "description": "Carousel pagination style.",
             "options": [
               "dots",
               "fraction",
@@ -29632,6 +29789,7 @@ export const registry: CompiledRegistry = {
           "productSource": {
             "type": "enum",
             "required": true,
+            "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
             "options": [
               "featured",
               "bestsellers",
@@ -29642,23 +29800,28 @@ export const registry: CompiledRegistry = {
           },
           "categoryId": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
           },
           "productIds": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
           },
           "backgroundColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
             "type": "enum",
             "required": true,
+            "description": "Product card look.",
             "options": [
               "minimal",
               "bordered",
@@ -29667,15 +29830,18 @@ export const registry: CompiledRegistry = {
           },
           "showPrice": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show price on each product card."
           },
           "showAddToCart": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show an Add-to-Cart button on each card."
           },
           "buttonText": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Label for the section CTA button."
           }
         },
         "isContainer": false,
@@ -54910,62 +55076,95 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\category\\CategoryDescription\\categorydescription.meta.ts"
       }
     ],
-    "category": [
+    "navigate": [
       {
         "name": "CategoryGrid",
         "label": "Category Grid",
-        "description": "Category Grid component (auto-derived).",
+        "description": "Grid of the store's product CATEGORIES (not products) — each card is a category with image, name, and optional product count. Categories data is injected by the host at render time; in the editor it shows placeholder cards. Use this for \"browse by category\" / collection navigation sections. To FEATURE PRODUCTS instead, use FeaturedProducts or a product carousel.",
         "category": "category",
         "intent": [
-          "category",
-          "grid"
+          "navigate",
+          "browse",
+          "organize",
+          "group"
         ],
-        "dataDeps": [],
+        "visualRole": "block",
+        "dataDeps": [
+          "categories (consumer-injected)"
+        ],
         "copyFields": [],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
-          "category",
-          "grid"
+          "categories",
+          "collections",
+          "grid",
+          "browse",
+          "navigation"
         ],
         "propSchema": {
           "columns": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Category cards per row (1-4)."
           },
           "gap": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Spacing between cards: sm | md | lg."
           },
           "showImages": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show each category's image."
           },
           "showCounts": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the product count per category."
           },
           "showDescriptions": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show category descriptions."
           },
           "cardStyle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
           }
         },
         "jsonSchema": {
           "columns": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Category cards per row (1-4)."
           },
           "gap": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Spacing between cards: sm | md | lg."
           },
           "showImages": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show each category's image."
           },
           "showCounts": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the product count per category."
           },
           "showDescriptions": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show category descriptions."
           },
           "cardStyle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
           }
         },
         "defaultProps": {
@@ -54978,8 +55177,607 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\category\\CategoryGrid\\CategoryGrid.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\category\\CategoryGrid\\categorygrid.meta.ts"
+      }
+    ],
+    "browse": [
+      {
+        "name": "CategoryGrid",
+        "label": "Category Grid",
+        "description": "Grid of the store's product CATEGORIES (not products) — each card is a category with image, name, and optional product count. Categories data is injected by the host at render time; in the editor it shows placeholder cards. Use this for \"browse by category\" / collection navigation sections. To FEATURE PRODUCTS instead, use FeaturedProducts or a product carousel.",
+        "category": "category",
+        "intent": [
+          "navigate",
+          "browse",
+          "organize",
+          "group"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "categories (consumer-injected)"
+        ],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "categories",
+          "collections",
+          "grid",
+          "browse",
+          "navigation"
+        ],
+        "propSchema": {
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Category cards per row (1-4)."
+          },
+          "gap": {
+            "type": "string",
+            "required": true,
+            "description": "Spacing between cards: sm | md | lg."
+          },
+          "showImages": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each category's image."
+          },
+          "showCounts": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the product count per category."
+          },
+          "showDescriptions": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show category descriptions."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          }
+        },
+        "jsonSchema": {
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Category cards per row (1-4)."
+          },
+          "gap": {
+            "type": "string",
+            "required": true,
+            "description": "Spacing between cards: sm | md | lg."
+          },
+          "showImages": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each category's image."
+          },
+          "showCounts": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the product count per category."
+          },
+          "showDescriptions": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show category descriptions."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          }
+        },
+        "defaultProps": {
+          "columns": 4,
+          "gap": "lg",
+          "showImages": true,
+          "showCounts": true,
+          "showDescriptions": false,
+          "cardStyle": "standard"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\category\\CategoryGrid\\categorygrid.meta.ts"
       },
+      {
+        "name": "CategoriesGrid",
+        "label": "Categories Grid",
+        "description": "Category tile grid. Consumer fetches categories via Medusa API (or stub); passes them as a `categories` prop along with loading/error flags. Supports 3 sources (all / featured / manual-id-list), 4 image aspect ratios, 4 card styles (incl. image-overlay), 4 hover effects. Renders loading skeleton + empty + error states when no data.",
+        "category": "homepage",
+        "intent": [
+          "categories",
+          "tiles",
+          "shop-by-category",
+          "grid",
+          "browse",
+          "department"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "categories (consumer-injected)",
+          "loading flag",
+          "error string"
+        ],
+        "copyFields": [
+          "sectionTitle",
+          "sectionSubtitle"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "categories",
+          "tiles",
+          "department",
+          "browse",
+          "shop",
+          "homepage"
+        ],
+        "propSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true
+          },
+          "columns": {
+            "type": "number",
+            "required": true
+          },
+          "columnsTablet": {
+            "type": "number",
+            "required": true
+          },
+          "columnsMobile": {
+            "type": "number",
+            "required": true
+          },
+          "gap": {
+            "type": "number",
+            "required": true
+          },
+          "showCategoryImage": {
+            "type": "boolean",
+            "required": true
+          },
+          "showCategoryName": {
+            "type": "boolean",
+            "required": true
+          },
+          "showProductCount": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageAspectRatio": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "square",
+              "portrait",
+              "landscape",
+              "wide"
+            ]
+          },
+          "backgroundColor": {
+            "type": "string",
+            "required": true
+          },
+          "textColor": {
+            "type": "string",
+            "required": true
+          },
+          "cardStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "minimal",
+              "bordered",
+              "shadow",
+              "overlay"
+            ]
+          },
+          "borderRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
+          },
+          "hoverEffect": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "scale",
+              "shadow",
+              "lift"
+            ]
+          },
+          "categorySource": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "all",
+              "featured",
+              "manual"
+            ]
+          },
+          "selectedCategoryIds": {
+            "type": "array"
+          },
+          "categories": {
+            "type": "array"
+          },
+          "loading": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "jsonSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true
+          },
+          "columns": {
+            "type": "number",
+            "required": true
+          },
+          "columnsTablet": {
+            "type": "number",
+            "required": true
+          },
+          "columnsMobile": {
+            "type": "number",
+            "required": true
+          },
+          "gap": {
+            "type": "number",
+            "required": true
+          },
+          "showCategoryImage": {
+            "type": "boolean",
+            "required": true
+          },
+          "showCategoryName": {
+            "type": "boolean",
+            "required": true
+          },
+          "showProductCount": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageAspectRatio": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "square",
+              "portrait",
+              "landscape",
+              "wide"
+            ]
+          },
+          "backgroundColor": {
+            "type": "string",
+            "required": true
+          },
+          "textColor": {
+            "type": "string",
+            "required": true
+          },
+          "cardStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "minimal",
+              "bordered",
+              "shadow",
+              "overlay"
+            ]
+          },
+          "borderRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
+          },
+          "hoverEffect": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "scale",
+              "shadow",
+              "lift"
+            ]
+          },
+          "categorySource": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "all",
+              "featured",
+              "manual"
+            ]
+          },
+          "selectedCategoryIds": {
+            "type": "array"
+          },
+          "categories": {
+            "type": "array"
+          },
+          "loading": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Browse our popular categories",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCategoryImage": true,
+          "showCategoryName": true,
+          "showProductCount": true,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "categorySource": "all",
+          "selectedCategoryIds": [],
+          "loading": false,
+          "error": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\CategoriesGrid\\categoriesgrid.meta.ts"
+      }
+    ],
+    "organize": [
+      {
+        "name": "CategoryGrid",
+        "label": "Category Grid",
+        "description": "Grid of the store's product CATEGORIES (not products) — each card is a category with image, name, and optional product count. Categories data is injected by the host at render time; in the editor it shows placeholder cards. Use this for \"browse by category\" / collection navigation sections. To FEATURE PRODUCTS instead, use FeaturedProducts or a product carousel.",
+        "category": "category",
+        "intent": [
+          "navigate",
+          "browse",
+          "organize",
+          "group"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "categories (consumer-injected)"
+        ],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "categories",
+          "collections",
+          "grid",
+          "browse",
+          "navigation"
+        ],
+        "propSchema": {
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Category cards per row (1-4)."
+          },
+          "gap": {
+            "type": "string",
+            "required": true,
+            "description": "Spacing between cards: sm | md | lg."
+          },
+          "showImages": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each category's image."
+          },
+          "showCounts": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the product count per category."
+          },
+          "showDescriptions": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show category descriptions."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          }
+        },
+        "jsonSchema": {
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Category cards per row (1-4)."
+          },
+          "gap": {
+            "type": "string",
+            "required": true,
+            "description": "Spacing between cards: sm | md | lg."
+          },
+          "showImages": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each category's image."
+          },
+          "showCounts": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the product count per category."
+          },
+          "showDescriptions": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show category descriptions."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          }
+        },
+        "defaultProps": {
+          "columns": 4,
+          "gap": "lg",
+          "showImages": true,
+          "showCounts": true,
+          "showDescriptions": false,
+          "cardStyle": "standard"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\category\\CategoryGrid\\categorygrid.meta.ts"
+      }
+    ],
+    "group": [
+      {
+        "name": "CategoryGrid",
+        "label": "Category Grid",
+        "description": "Grid of the store's product CATEGORIES (not products) — each card is a category with image, name, and optional product count. Categories data is injected by the host at render time; in the editor it shows placeholder cards. Use this for \"browse by category\" / collection navigation sections. To FEATURE PRODUCTS instead, use FeaturedProducts or a product carousel.",
+        "category": "category",
+        "intent": [
+          "navigate",
+          "browse",
+          "organize",
+          "group"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "categories (consumer-injected)"
+        ],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "categories",
+          "collections",
+          "grid",
+          "browse",
+          "navigation"
+        ],
+        "propSchema": {
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Category cards per row (1-4)."
+          },
+          "gap": {
+            "type": "string",
+            "required": true,
+            "description": "Spacing between cards: sm | md | lg."
+          },
+          "showImages": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each category's image."
+          },
+          "showCounts": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the product count per category."
+          },
+          "showDescriptions": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show category descriptions."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          }
+        },
+        "jsonSchema": {
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Category cards per row (1-4)."
+          },
+          "gap": {
+            "type": "string",
+            "required": true,
+            "description": "Spacing between cards: sm | md | lg."
+          },
+          "showImages": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each category's image."
+          },
+          "showCounts": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the product count per category."
+          },
+          "showDescriptions": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show category descriptions."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          }
+        },
+        "defaultProps": {
+          "columns": 4,
+          "gap": "lg",
+          "showImages": true,
+          "showCounts": true,
+          "showDescriptions": false,
+          "cardStyle": "standard"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\category\\CategoryGrid\\categorygrid.meta.ts"
+      }
+    ],
+    "category": [
       {
         "name": "CategoryHero",
         "label": "Category Hero",
@@ -55576,1591 +56374,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\navigation\\CategoryNav\\CategoryNav.tsx (auto-derived)"
-      }
-    ],
-    "grid": [
-      {
-        "name": "CategoryGrid",
-        "label": "Category Grid",
-        "description": "Category Grid component (auto-derived).",
-        "category": "category",
-        "intent": [
-          "category",
-          "grid"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "category",
-          "grid"
-        ],
-        "propSchema": {
-          "columns": {
-            "type": "number"
-          },
-          "gap": {
-            "type": "string"
-          },
-          "showImages": {
-            "type": "boolean"
-          },
-          "showCounts": {
-            "type": "boolean"
-          },
-          "showDescriptions": {
-            "type": "boolean"
-          },
-          "cardStyle": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "columns": {
-            "type": "number"
-          },
-          "gap": {
-            "type": "string"
-          },
-          "showImages": {
-            "type": "boolean"
-          },
-          "showCounts": {
-            "type": "boolean"
-          },
-          "showDescriptions": {
-            "type": "boolean"
-          },
-          "cardStyle": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "columns": 4,
-          "gap": "lg",
-          "showImages": true,
-          "showCounts": true,
-          "showDescriptions": false,
-          "cardStyle": "standard"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\category\\CategoryGrid\\CategoryGrid.tsx (auto-derived)"
-      },
-      {
-        "name": "ProductGrid",
-        "label": "Product Grid",
-        "description": "Product grid/list with 3 column counts, 3 image aspect ratios, optional quick view/wishlist/compare buttons, optional badges, 3 gap sizes. Cart-library-agnostic: takes products[], onQuickView, onAddToWishlist, onCompare. Lucide Heart/Eye replaced with inline SVG.",
-        "category": "collection",
-        "intent": [
-          "products",
-          "grid",
-          "list"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "products (consumer)"
-        ],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "products",
-          "grid",
-          "list",
-          "shop"
-        ],
-        "propSchema": {
-          "layout": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "grid",
-              "list"
-            ]
-          },
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "2",
-              "3",
-              "4"
-            ]
-          },
-          "showQuickView": {
-            "type": "boolean",
-            "required": true
-          },
-          "showWishlist": {
-            "type": "boolean",
-            "required": true
-          },
-          "showCompare": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageAspectRatio": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "square",
-              "portrait",
-              "landscape"
-            ]
-          },
-          "showBadges": {
-            "type": "boolean",
-            "required": true
-          },
-          "gap": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "md",
-              "lg"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "layout": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "grid",
-              "list"
-            ]
-          },
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "2",
-              "3",
-              "4"
-            ]
-          },
-          "showQuickView": {
-            "type": "boolean",
-            "required": true
-          },
-          "showWishlist": {
-            "type": "boolean",
-            "required": true
-          },
-          "showCompare": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageAspectRatio": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "square",
-              "portrait",
-              "landscape"
-            ]
-          },
-          "showBadges": {
-            "type": "boolean",
-            "required": true
-          },
-          "gap": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "md",
-              "lg"
-            ]
-          }
-        },
-        "defaultProps": {
-          "showTitle": false,
-          "title": "Products",
-          "titleAlignment": "left",
-          "layout": "grid",
-          "columns": "4",
-          "gap": "md",
-          "imageAspectRatio": "square",
-          "showBadges": true,
-          "showQuickView": false,
-          "showWishlist": false
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\collection\\productgrid.meta.ts"
-      },
-      {
-        "name": "Grid",
-        "label": "Grid",
-        "description": "Responsive grid with independent column controls per breakpoint (mobile / tablet / desktop) and configurable gap. Hosts a single DropZone (\"items\"). Tailwind responsive prefixes mobile/tablet/desktop based on selected counts.",
-        "category": "generic",
-        "intent": [
-          "grid",
-          "responsive-grid",
-          "tile",
-          "multi-column",
-          "responsive",
-          "layout"
-        ],
-        "visualRole": "block",
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "grid",
-          "responsive",
-          "tile",
-          "multi-column",
-          "layout",
-          "dropzone"
-        ],
-        "propSchema": {
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6"
-            ]
-          },
-          "tabletColumns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "1",
-              "2",
-              "3",
-              "4"
-            ]
-          },
-          "mobileColumns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "1",
-              "2"
-            ]
-          },
-          "gap": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6"
-            ]
-          },
-          "tabletColumns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "1",
-              "2",
-              "3",
-              "4"
-            ]
-          },
-          "mobileColumns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "1",
-              "2"
-            ]
-          },
-          "gap": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          }
-        },
-        "isContainer": true,
-        "zones": [
-          "items"
-        ],
-        "metaPath": "src\\puck\\components\\generic\\Grid\\grid.meta.ts"
-      },
-      {
-        "name": "CategoriesGrid",
-        "label": "Categories Grid",
-        "description": "Category tile grid. Consumer fetches categories via Medusa API (or stub); passes them as a `categories` prop along with loading/error flags. Supports 3 sources (all / featured / manual-id-list), 4 image aspect ratios, 4 card styles (incl. image-overlay), 4 hover effects. Renders loading skeleton + empty + error states when no data.",
-        "category": "homepage",
-        "intent": [
-          "categories",
-          "tiles",
-          "shop-by-category",
-          "grid",
-          "browse",
-          "department"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "categories (consumer-injected)",
-          "loading flag",
-          "error string"
-        ],
-        "copyFields": [
-          "sectionTitle",
-          "sectionSubtitle"
-        ],
-        "themeable": [
-          "backgroundColor",
-          "textColor"
-        ],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "categories",
-          "tiles",
-          "department",
-          "browse",
-          "shop",
-          "homepage"
-        ],
-        "propSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "columns": {
-            "type": "number",
-            "required": true
-          },
-          "columnsTablet": {
-            "type": "number",
-            "required": true
-          },
-          "columnsMobile": {
-            "type": "number",
-            "required": true
-          },
-          "gap": {
-            "type": "number",
-            "required": true
-          },
-          "showCategoryImage": {
-            "type": "boolean",
-            "required": true
-          },
-          "showCategoryName": {
-            "type": "boolean",
-            "required": true
-          },
-          "showProductCount": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageAspectRatio": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "square",
-              "portrait",
-              "landscape",
-              "wide"
-            ]
-          },
-          "backgroundColor": {
-            "type": "string",
-            "required": true
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "cardStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "minimal",
-              "bordered",
-              "shadow",
-              "overlay"
-            ]
-          },
-          "borderRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "hoverEffect": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "scale",
-              "shadow",
-              "lift"
-            ]
-          },
-          "categorySource": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "all",
-              "featured",
-              "manual"
-            ]
-          },
-          "selectedCategoryIds": {
-            "type": "array"
-          },
-          "categories": {
-            "type": "array"
-          },
-          "loading": {
-            "type": "boolean"
-          },
-          "error": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "columns": {
-            "type": "number",
-            "required": true
-          },
-          "columnsTablet": {
-            "type": "number",
-            "required": true
-          },
-          "columnsMobile": {
-            "type": "number",
-            "required": true
-          },
-          "gap": {
-            "type": "number",
-            "required": true
-          },
-          "showCategoryImage": {
-            "type": "boolean",
-            "required": true
-          },
-          "showCategoryName": {
-            "type": "boolean",
-            "required": true
-          },
-          "showProductCount": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageAspectRatio": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "square",
-              "portrait",
-              "landscape",
-              "wide"
-            ]
-          },
-          "backgroundColor": {
-            "type": "string",
-            "required": true
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "cardStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "minimal",
-              "bordered",
-              "shadow",
-              "overlay"
-            ]
-          },
-          "borderRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "hoverEffect": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "scale",
-              "shadow",
-              "lift"
-            ]
-          },
-          "categorySource": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "all",
-              "featured",
-              "manual"
-            ]
-          },
-          "selectedCategoryIds": {
-            "type": "array"
-          },
-          "categories": {
-            "type": "array"
-          },
-          "loading": {
-            "type": "boolean"
-          },
-          "error": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "sectionTitle": "Shop by Category",
-          "sectionSubtitle": "Browse our popular categories",
-          "showTitle": true,
-          "columns": 4,
-          "columnsTablet": 3,
-          "columnsMobile": 2,
-          "gap": 24,
-          "showCategoryImage": true,
-          "showCategoryName": true,
-          "showProductCount": true,
-          "imageAspectRatio": "square",
-          "backgroundColor": "#f9fafb",
-          "textColor": "#000000",
-          "cardStyle": "shadow",
-          "borderRadius": "lg",
-          "hoverEffect": "scale",
-          "categorySource": "all",
-          "selectedCategoryIds": [],
-          "loading": false,
-          "error": ""
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\CategoriesGrid\\categoriesgrid.meta.ts"
-      },
-      {
-        "name": "CategoryProducts",
-        "label": "Category Products",
-        "description": "Products-from-a-specific-category section. Grid or carousel (Swiper) display modes. Each card can show image with optional Sale/New badges, rating, price (with compare-at-price), and Add to Cart. Bottom View All button. Consumer fetches via category_id (or override via renderProduct — D-1 escape hatch).",
-        "category": "homepage",
-        "intent": [
-          "products",
-          "category",
-          "shop-by-category",
-          "grid",
-          "carousel",
-          "department-products"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "products (consumer-injected, keyed by categoryId)",
-          "loading flag",
-          "error string"
-        ],
-        "copyFields": [
-          "sectionTitle",
-          "sectionSubtitle",
-          "viewAllButtonText",
-          "categoryName"
-        ],
-        "themeable": [
-          "backgroundColor",
-          "textColor",
-          "buttonColor",
-          "buttonTextColor"
-        ],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "products",
-          "category",
-          "shop",
-          "department",
-          "carousel",
-          "grid"
-        ],
-        "propSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "categoryId": {
-            "type": "string",
-            "required": true
-          },
-          "categoryName": {
-            "type": "string",
-            "required": true
-          },
-          "displayMode": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "grid",
-              "carousel"
-            ]
-          },
-          "productsPerRow": {
-            "type": "number",
-            "required": true
-          },
-          "maxProducts": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerView": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewTablet": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewMobile": {
-            "type": "number",
-            "required": true
-          },
-          "spaceBetween": {
-            "type": "number",
-            "required": true
-          },
-          "autoplay": {
-            "type": "boolean",
-            "required": true
-          },
-          "autoplayDelay": {
-            "type": "number",
-            "required": true
-          },
-          "loop": {
-            "type": "boolean",
-            "required": true
-          },
-          "navigation": {
-            "type": "boolean",
-            "required": true
-          },
-          "pagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageAspectRatio": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "square",
-              "portrait",
-              "landscape"
-            ]
-          },
-          "showPrice": {
-            "type": "boolean",
-            "required": true
-          },
-          "showAddToCart": {
-            "type": "boolean",
-            "required": true
-          },
-          "showRating": {
-            "type": "boolean",
-            "required": true
-          },
-          "showBadges": {
-            "type": "boolean",
-            "required": true
-          },
-          "showViewAllButton": {
-            "type": "boolean",
-            "required": true
-          },
-          "viewAllButtonText": {
-            "type": "string",
-            "required": true
-          },
-          "backgroundColor": {
-            "type": "string",
-            "required": true
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "cardStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "minimal",
-              "bordered",
-              "shadow"
-            ]
-          },
-          "borderRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg"
-            ]
-          },
-          "buttonColor": {
-            "type": "string",
-            "required": true
-          },
-          "buttonTextColor": {
-            "type": "string",
-            "required": true
-          },
-          "buttonRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "medium",
-              "small",
-              "large",
-              "none"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "categoryId": {
-            "type": "string",
-            "required": true
-          },
-          "categoryName": {
-            "type": "string",
-            "required": true
-          },
-          "displayMode": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "grid",
-              "carousel"
-            ]
-          },
-          "productsPerRow": {
-            "type": "number",
-            "required": true
-          },
-          "maxProducts": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerView": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewTablet": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewMobile": {
-            "type": "number",
-            "required": true
-          },
-          "spaceBetween": {
-            "type": "number",
-            "required": true
-          },
-          "autoplay": {
-            "type": "boolean",
-            "required": true
-          },
-          "autoplayDelay": {
-            "type": "number",
-            "required": true
-          },
-          "loop": {
-            "type": "boolean",
-            "required": true
-          },
-          "navigation": {
-            "type": "boolean",
-            "required": true
-          },
-          "pagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageAspectRatio": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "square",
-              "portrait",
-              "landscape"
-            ]
-          },
-          "showPrice": {
-            "type": "boolean",
-            "required": true
-          },
-          "showAddToCart": {
-            "type": "boolean",
-            "required": true
-          },
-          "showRating": {
-            "type": "boolean",
-            "required": true
-          },
-          "showBadges": {
-            "type": "boolean",
-            "required": true
-          },
-          "showViewAllButton": {
-            "type": "boolean",
-            "required": true
-          },
-          "viewAllButtonText": {
-            "type": "string",
-            "required": true
-          },
-          "backgroundColor": {
-            "type": "string",
-            "required": true
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "cardStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "minimal",
-              "bordered",
-              "shadow"
-            ]
-          },
-          "borderRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg"
-            ]
-          },
-          "buttonColor": {
-            "type": "string",
-            "required": true
-          },
-          "buttonTextColor": {
-            "type": "string",
-            "required": true
-          },
-          "buttonRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "medium",
-              "small",
-              "large",
-              "none"
-            ]
-          }
-        },
-        "defaultProps": {
-          "sectionTitle": "Shop by Category",
-          "sectionSubtitle": "Discover our curated collection",
-          "showTitle": true,
-          "categoryId": "",
-          "categoryName": "",
-          "displayMode": "grid",
-          "productsPerRow": 4,
-          "maxProducts": 12,
-          "slidesPerView": 4,
-          "slidesPerViewTablet": 3,
-          "slidesPerViewMobile": 1,
-          "spaceBetween": 20,
-          "autoplay": false,
-          "autoplayDelay": 3000,
-          "loop": false,
-          "navigation": true,
-          "pagination": true,
-          "imageAspectRatio": "square",
-          "showPrice": true,
-          "showAddToCart": true,
-          "showRating": false,
-          "showBadges": true,
-          "showViewAllButton": true,
-          "viewAllButtonText": "View All Products",
-          "backgroundColor": "#f9fafb",
-          "textColor": "#111827",
-          "cardStyle": "shadow",
-          "borderRadius": "md",
-          "buttonColor": "#000000",
-          "buttonTextColor": "#ffffff",
-          "buttonRadius": "medium",
-          "loading": false,
-          "error": ""
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
-      },
-      {
-        "name": "CollectionsGrid",
-        "label": "Collections Grid",
-        "description": "Collections Grid component (auto-derived).",
-        "category": "homepage",
-        "intent": [
-          "collections",
-          "grid"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "collections",
-          "grid"
-        ],
-        "propSchema": {
-          "sectionTitle": {
-            "type": "string"
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean"
-          },
-          "columns": {
-            "type": "number"
-          },
-          "columnsTablet": {
-            "type": "number"
-          },
-          "columnsMobile": {
-            "type": "number"
-          },
-          "gap": {
-            "type": "number"
-          },
-          "showCollectionImage": {
-            "type": "boolean"
-          },
-          "showCollectionTitle": {
-            "type": "boolean"
-          },
-          "showProductCount": {
-            "type": "boolean"
-          },
-          "showDescription": {
-            "type": "boolean"
-          },
-          "imageAspectRatio": {
-            "type": "string"
-          },
-          "backgroundColor": {
-            "type": "color"
-          },
-          "textColor": {
-            "type": "color"
-          },
-          "cardStyle": {
-            "type": "string"
-          },
-          "borderRadius": {
-            "type": "string"
-          },
-          "hoverEffect": {
-            "type": "string"
-          },
-          "collectionSource": {
-            "type": "string"
-          },
-          "selectedCollectionIds": {
-            "type": "array"
-          },
-          "loading": {
-            "type": "boolean"
-          },
-          "error": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "sectionTitle": {
-            "type": "string"
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean"
-          },
-          "columns": {
-            "type": "number"
-          },
-          "columnsTablet": {
-            "type": "number"
-          },
-          "columnsMobile": {
-            "type": "number"
-          },
-          "gap": {
-            "type": "number"
-          },
-          "showCollectionImage": {
-            "type": "boolean"
-          },
-          "showCollectionTitle": {
-            "type": "boolean"
-          },
-          "showProductCount": {
-            "type": "boolean"
-          },
-          "showDescription": {
-            "type": "boolean"
-          },
-          "imageAspectRatio": {
-            "type": "string"
-          },
-          "backgroundColor": {
-            "type": "color"
-          },
-          "textColor": {
-            "type": "color"
-          },
-          "cardStyle": {
-            "type": "string"
-          },
-          "borderRadius": {
-            "type": "string"
-          },
-          "hoverEffect": {
-            "type": "string"
-          },
-          "collectionSource": {
-            "type": "string"
-          },
-          "selectedCollectionIds": {
-            "type": "array"
-          },
-          "loading": {
-            "type": "boolean"
-          },
-          "error": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "sectionTitle": "Shop by Collection",
-          "sectionSubtitle": "Browse our curated collections",
-          "showTitle": true,
-          "columns": 4,
-          "columnsTablet": 3,
-          "columnsMobile": 2,
-          "gap": 24,
-          "showCollectionImage": true,
-          "showCollectionTitle": true,
-          "showProductCount": true,
-          "showDescription": false,
-          "imageAspectRatio": "square",
-          "backgroundColor": "#f9fafb",
-          "textColor": "#000000",
-          "cardStyle": "shadow",
-          "borderRadius": "lg",
-          "hoverEffect": "scale",
-          "collectionSource": "all",
-          "selectedCollectionIds": [],
-          "loading": false,
-          "error": ""
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\CollectionsGrid.tsx (auto-derived)"
-      },
-      {
-        "name": "FeaturedProducts",
-        "label": "Featured Products",
-        "description": "Section header + product grid (grid or Swiper carousel) with loading/error/empty/success states. Consumer injects products data via prop plus an optional renderProduct callback (D-1 escape hatch) — storefront passes its own <ProductPreview> via the renderProduct prop. Defaults to a simple image+title+price card when renderProduct is omitted.",
-        "category": "homepage",
-        "intent": [
-          "products",
-          "featured",
-          "grid",
-          "carousel",
-          "hero-products",
-          "picks"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "products (consumer-injected)",
-          "loading flag",
-          "error string"
-        ],
-        "copyFields": [
-          "sectionTitle",
-          "sectionSubtitle",
-          "buttonText"
-        ],
-        "themeable": [
-          "backgroundColor",
-          "textColor"
-        ],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "products",
-          "featured",
-          "grid",
-          "carousel",
-          "hero",
-          "picks",
-          "swiper"
-        ],
-        "propSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "displayMode": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "grid",
-              "carousel"
-            ]
-          },
-          "productsPerRow": {
-            "type": "number",
-            "required": true
-          },
-          "maxProducts": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerView": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewTablet": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewMobile": {
-            "type": "number",
-            "required": true
-          },
-          "spaceBetween": {
-            "type": "number",
-            "required": true
-          },
-          "autoplay": {
-            "type": "boolean",
-            "required": true
-          },
-          "autoplayDelay": {
-            "type": "number",
-            "required": true
-          },
-          "loop": {
-            "type": "boolean",
-            "required": true
-          },
-          "navigation": {
-            "type": "boolean",
-            "required": true
-          },
-          "pagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "dots",
-              "fraction",
-              "progressbar"
-            ]
-          },
-          "productSource": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "featured",
-              "bestsellers",
-              "new",
-              "category",
-              "manual"
-            ]
-          },
-          "categoryId": {
-            "type": "string",
-            "required": true
-          },
-          "productIds": {
-            "type": "string",
-            "required": true
-          },
-          "backgroundColor": {
-            "type": "string",
-            "required": true
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "cardStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "minimal",
-              "bordered",
-              "shadow"
-            ]
-          },
-          "showPrice": {
-            "type": "boolean",
-            "required": true
-          },
-          "showAddToCart": {
-            "type": "boolean",
-            "required": true
-          },
-          "buttonText": {
-            "type": "string",
-            "required": true
-          }
-        },
-        "jsonSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "displayMode": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "grid",
-              "carousel"
-            ]
-          },
-          "productsPerRow": {
-            "type": "number",
-            "required": true
-          },
-          "maxProducts": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerView": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewTablet": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewMobile": {
-            "type": "number",
-            "required": true
-          },
-          "spaceBetween": {
-            "type": "number",
-            "required": true
-          },
-          "autoplay": {
-            "type": "boolean",
-            "required": true
-          },
-          "autoplayDelay": {
-            "type": "number",
-            "required": true
-          },
-          "loop": {
-            "type": "boolean",
-            "required": true
-          },
-          "navigation": {
-            "type": "boolean",
-            "required": true
-          },
-          "pagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "dots",
-              "fraction",
-              "progressbar"
-            ]
-          },
-          "productSource": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "featured",
-              "bestsellers",
-              "new",
-              "category",
-              "manual"
-            ]
-          },
-          "categoryId": {
-            "type": "string",
-            "required": true
-          },
-          "productIds": {
-            "type": "string",
-            "required": true
-          },
-          "backgroundColor": {
-            "type": "string",
-            "required": true
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "cardStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "minimal",
-              "bordered",
-              "shadow"
-            ]
-          },
-          "showPrice": {
-            "type": "boolean",
-            "required": true
-          },
-          "showAddToCart": {
-            "type": "boolean",
-            "required": true
-          },
-          "buttonText": {
-            "type": "string",
-            "required": true
-          }
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\FeaturedProducts\\featuredproducts.meta.ts"
-      },
-      {
-        "name": "Columns",
-        "label": "Columns",
-        "description": "Grid layout with 2/3/4 columns and per-ratio layout for 2-col mode (50/50, 60/40, 70/30, etc). Each column hosts a numbered DropZone (column-1, column-2...). Stacks on mobile unless disabled.",
-        "category": "layout",
-        "intent": [
-          "columns",
-          "grid",
-          "multi-column",
-          "row",
-          "layout"
-        ],
-        "visualRole": "block",
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "columns",
-          "grid",
-          "layout",
-          "multi-column",
-          "dropzone",
-          "responsive"
-        ],
-        "propSchema": {
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "2",
-              "3",
-              "4"
-            ]
-          },
-          "layout": {
-            "type": "enum",
-            "options": [
-              "equal",
-              "60-40",
-              "40-60",
-              "70-30",
-              "30-70",
-              "50-50"
-            ]
-          },
-          "gap": {
-            "type": "enum",
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "mobileStack": {
-            "type": "boolean",
-            "required": true
-          },
-          "alignItems": {
-            "type": "enum",
-            "options": [
-              "start",
-              "center",
-              "end",
-              "stretch"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "columns": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "2",
-              "3",
-              "4"
-            ]
-          },
-          "layout": {
-            "type": "enum",
-            "options": [
-              "equal",
-              "60-40",
-              "40-60",
-              "70-30",
-              "30-70",
-              "50-50"
-            ]
-          },
-          "gap": {
-            "type": "enum",
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "mobileStack": {
-            "type": "boolean",
-            "required": true
-          },
-          "alignItems": {
-            "type": "enum",
-            "options": [
-              "start",
-              "center",
-              "end",
-              "stretch"
-            ]
-          }
-        },
-        "isContainer": true,
-        "zones": [],
-        "dynamicZonePrefix": "column-",
-        "metaPath": "src\\puck\\components\\layout\\Columns\\columns.meta.ts"
       }
     ],
     "hero": [
@@ -67620,18 +66833,22 @@ export const registry: CompiledRegistry = {
         "propSchema": {
           "sectionTitle": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Heading for the section, e.g. \"Best Sellers\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "description": "Optional subheading under the title."
           },
           "showTitle": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Whether to render sectionTitle/subtitle."
           },
           "displayMode": {
             "type": "enum",
             "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
             "options": [
               "grid",
               "carousel"
@@ -67639,51 +66856,63 @@ export const registry: CompiledRegistry = {
           },
           "productsPerRow": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Products per row in grid mode (2-5)."
           },
           "maxProducts": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Max products to show."
           },
           "slidesPerView": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on desktop."
           },
           "slidesPerViewTablet": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on tablet."
           },
           "slidesPerViewMobile": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on mobile."
           },
           "spaceBetween": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: gap between slides in px."
           },
           "autoplay": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: auto-advance slides."
           },
           "autoplayDelay": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: autoplay delay in ms."
           },
           "loop": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: loop back to the start."
           },
           "navigation": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show prev/next arrows."
           },
           "pagination": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show pagination indicator."
           },
           "paginationStyle": {
             "type": "enum",
             "required": true,
+            "description": "Carousel pagination style.",
             "options": [
               "dots",
               "fraction",
@@ -67693,6 +66922,7 @@ export const registry: CompiledRegistry = {
           "productSource": {
             "type": "enum",
             "required": true,
+            "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
             "options": [
               "featured",
               "bestsellers",
@@ -67703,23 +66933,28 @@ export const registry: CompiledRegistry = {
           },
           "categoryId": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
           },
           "productIds": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
           },
           "backgroundColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
             "type": "enum",
             "required": true,
+            "description": "Product card look.",
             "options": [
               "minimal",
               "bordered",
@@ -67728,32 +66963,39 @@ export const registry: CompiledRegistry = {
           },
           "showPrice": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show price on each product card."
           },
           "showAddToCart": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show an Add-to-Cart button on each card."
           },
           "buttonText": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Label for the section CTA button."
           }
         },
         "jsonSchema": {
           "sectionTitle": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Heading for the section, e.g. \"Best Sellers\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "description": "Optional subheading under the title."
           },
           "showTitle": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Whether to render sectionTitle/subtitle."
           },
           "displayMode": {
             "type": "enum",
             "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
             "options": [
               "grid",
               "carousel"
@@ -67761,51 +67003,63 @@ export const registry: CompiledRegistry = {
           },
           "productsPerRow": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Products per row in grid mode (2-5)."
           },
           "maxProducts": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Max products to show."
           },
           "slidesPerView": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on desktop."
           },
           "slidesPerViewTablet": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on tablet."
           },
           "slidesPerViewMobile": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on mobile."
           },
           "spaceBetween": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: gap between slides in px."
           },
           "autoplay": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: auto-advance slides."
           },
           "autoplayDelay": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: autoplay delay in ms."
           },
           "loop": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: loop back to the start."
           },
           "navigation": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show prev/next arrows."
           },
           "pagination": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show pagination indicator."
           },
           "paginationStyle": {
             "type": "enum",
             "required": true,
+            "description": "Carousel pagination style.",
             "options": [
               "dots",
               "fraction",
@@ -67815,6 +67069,7 @@ export const registry: CompiledRegistry = {
           "productSource": {
             "type": "enum",
             "required": true,
+            "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
             "options": [
               "featured",
               "bestsellers",
@@ -67825,23 +67080,28 @@ export const registry: CompiledRegistry = {
           },
           "categoryId": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
           },
           "productIds": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
           },
           "backgroundColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
             "type": "enum",
             "required": true,
+            "description": "Product card look.",
             "options": [
               "minimal",
               "bordered",
@@ -67850,15 +67110,18 @@ export const registry: CompiledRegistry = {
           },
           "showPrice": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show price on each product card."
           },
           "showAddToCart": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show an Add-to-Cart button on each card."
           },
           "buttonText": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Label for the section CTA button."
           }
         },
         "isContainer": false,
@@ -67914,6 +67177,1572 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\product\\RelatedProducts\\RelatedProducts.tsx (auto-derived)"
+      }
+    ],
+    "grid": [
+      {
+        "name": "ProductGrid",
+        "label": "Product Grid",
+        "description": "Product grid/list with 3 column counts, 3 image aspect ratios, optional quick view/wishlist/compare buttons, optional badges, 3 gap sizes. Cart-library-agnostic: takes products[], onQuickView, onAddToWishlist, onCompare. Lucide Heart/Eye replaced with inline SVG.",
+        "category": "collection",
+        "intent": [
+          "products",
+          "grid",
+          "list"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "products (consumer)"
+        ],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "products",
+          "grid",
+          "list",
+          "shop"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "grid",
+              "list"
+            ]
+          },
+          "columns": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "showQuickView": {
+            "type": "boolean",
+            "required": true
+          },
+          "showWishlist": {
+            "type": "boolean",
+            "required": true
+          },
+          "showCompare": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageAspectRatio": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "square",
+              "portrait",
+              "landscape"
+            ]
+          },
+          "showBadges": {
+            "type": "boolean",
+            "required": true
+          },
+          "gap": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "grid",
+              "list"
+            ]
+          },
+          "columns": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "showQuickView": {
+            "type": "boolean",
+            "required": true
+          },
+          "showWishlist": {
+            "type": "boolean",
+            "required": true
+          },
+          "showCompare": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageAspectRatio": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "square",
+              "portrait",
+              "landscape"
+            ]
+          },
+          "showBadges": {
+            "type": "boolean",
+            "required": true
+          },
+          "gap": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          }
+        },
+        "defaultProps": {
+          "showTitle": false,
+          "title": "Products",
+          "titleAlignment": "left",
+          "layout": "grid",
+          "columns": "4",
+          "gap": "md",
+          "imageAspectRatio": "square",
+          "showBadges": true,
+          "showQuickView": false,
+          "showWishlist": false
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\collection\\productgrid.meta.ts"
+      },
+      {
+        "name": "Grid",
+        "label": "Grid",
+        "description": "Responsive grid with independent column controls per breakpoint (mobile / tablet / desktop) and configurable gap. Hosts a single DropZone (\"items\"). Tailwind responsive prefixes mobile/tablet/desktop based on selected counts.",
+        "category": "generic",
+        "intent": [
+          "grid",
+          "responsive-grid",
+          "tile",
+          "multi-column",
+          "responsive",
+          "layout"
+        ],
+        "visualRole": "block",
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "grid",
+          "responsive",
+          "tile",
+          "multi-column",
+          "layout",
+          "dropzone"
+        ],
+        "propSchema": {
+          "columns": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6"
+            ]
+          },
+          "tabletColumns": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "mobileColumns": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "1",
+              "2"
+            ]
+          },
+          "gap": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "columns": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6"
+            ]
+          },
+          "tabletColumns": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "mobileColumns": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "1",
+              "2"
+            ]
+          },
+          "gap": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
+          }
+        },
+        "isContainer": true,
+        "zones": [
+          "items"
+        ],
+        "metaPath": "src\\puck\\components\\generic\\Grid\\grid.meta.ts"
+      },
+      {
+        "name": "CategoriesGrid",
+        "label": "Categories Grid",
+        "description": "Category tile grid. Consumer fetches categories via Medusa API (or stub); passes them as a `categories` prop along with loading/error flags. Supports 3 sources (all / featured / manual-id-list), 4 image aspect ratios, 4 card styles (incl. image-overlay), 4 hover effects. Renders loading skeleton + empty + error states when no data.",
+        "category": "homepage",
+        "intent": [
+          "categories",
+          "tiles",
+          "shop-by-category",
+          "grid",
+          "browse",
+          "department"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "categories (consumer-injected)",
+          "loading flag",
+          "error string"
+        ],
+        "copyFields": [
+          "sectionTitle",
+          "sectionSubtitle"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "categories",
+          "tiles",
+          "department",
+          "browse",
+          "shop",
+          "homepage"
+        ],
+        "propSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true
+          },
+          "columns": {
+            "type": "number",
+            "required": true
+          },
+          "columnsTablet": {
+            "type": "number",
+            "required": true
+          },
+          "columnsMobile": {
+            "type": "number",
+            "required": true
+          },
+          "gap": {
+            "type": "number",
+            "required": true
+          },
+          "showCategoryImage": {
+            "type": "boolean",
+            "required": true
+          },
+          "showCategoryName": {
+            "type": "boolean",
+            "required": true
+          },
+          "showProductCount": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageAspectRatio": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "square",
+              "portrait",
+              "landscape",
+              "wide"
+            ]
+          },
+          "backgroundColor": {
+            "type": "string",
+            "required": true
+          },
+          "textColor": {
+            "type": "string",
+            "required": true
+          },
+          "cardStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "minimal",
+              "bordered",
+              "shadow",
+              "overlay"
+            ]
+          },
+          "borderRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
+          },
+          "hoverEffect": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "scale",
+              "shadow",
+              "lift"
+            ]
+          },
+          "categorySource": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "all",
+              "featured",
+              "manual"
+            ]
+          },
+          "selectedCategoryIds": {
+            "type": "array"
+          },
+          "categories": {
+            "type": "array"
+          },
+          "loading": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "jsonSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true
+          },
+          "columns": {
+            "type": "number",
+            "required": true
+          },
+          "columnsTablet": {
+            "type": "number",
+            "required": true
+          },
+          "columnsMobile": {
+            "type": "number",
+            "required": true
+          },
+          "gap": {
+            "type": "number",
+            "required": true
+          },
+          "showCategoryImage": {
+            "type": "boolean",
+            "required": true
+          },
+          "showCategoryName": {
+            "type": "boolean",
+            "required": true
+          },
+          "showProductCount": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageAspectRatio": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "square",
+              "portrait",
+              "landscape",
+              "wide"
+            ]
+          },
+          "backgroundColor": {
+            "type": "string",
+            "required": true
+          },
+          "textColor": {
+            "type": "string",
+            "required": true
+          },
+          "cardStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "minimal",
+              "bordered",
+              "shadow",
+              "overlay"
+            ]
+          },
+          "borderRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
+          },
+          "hoverEffect": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "scale",
+              "shadow",
+              "lift"
+            ]
+          },
+          "categorySource": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "all",
+              "featured",
+              "manual"
+            ]
+          },
+          "selectedCategoryIds": {
+            "type": "array"
+          },
+          "categories": {
+            "type": "array"
+          },
+          "loading": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Browse our popular categories",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCategoryImage": true,
+          "showCategoryName": true,
+          "showProductCount": true,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "categorySource": "all",
+          "selectedCategoryIds": [],
+          "loading": false,
+          "error": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\CategoriesGrid\\categoriesgrid.meta.ts"
+      },
+      {
+        "name": "CategoryProducts",
+        "label": "Category Products",
+        "description": "Products-from-a-specific-category section. Grid or carousel (Swiper) display modes. Each card can show image with optional Sale/New badges, rating, price (with compare-at-price), and Add to Cart. Bottom View All button. Consumer fetches via category_id (or override via renderProduct — D-1 escape hatch).",
+        "category": "homepage",
+        "intent": [
+          "products",
+          "category",
+          "shop-by-category",
+          "grid",
+          "carousel",
+          "department-products"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "products (consumer-injected, keyed by categoryId)",
+          "loading flag",
+          "error string"
+        ],
+        "copyFields": [
+          "sectionTitle",
+          "sectionSubtitle",
+          "viewAllButtonText",
+          "categoryName"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor",
+          "buttonColor",
+          "buttonTextColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "products",
+          "category",
+          "shop",
+          "department",
+          "carousel",
+          "grid"
+        ],
+        "propSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true
+          },
+          "categoryId": {
+            "type": "string",
+            "required": true
+          },
+          "categoryName": {
+            "type": "string",
+            "required": true
+          },
+          "displayMode": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productsPerRow": {
+            "type": "number",
+            "required": true
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerView": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewTablet": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewMobile": {
+            "type": "number",
+            "required": true
+          },
+          "spaceBetween": {
+            "type": "number",
+            "required": true
+          },
+          "autoplay": {
+            "type": "boolean",
+            "required": true
+          },
+          "autoplayDelay": {
+            "type": "number",
+            "required": true
+          },
+          "loop": {
+            "type": "boolean",
+            "required": true
+          },
+          "navigation": {
+            "type": "boolean",
+            "required": true
+          },
+          "pagination": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageAspectRatio": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "square",
+              "portrait",
+              "landscape"
+            ]
+          },
+          "showPrice": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddToCart": {
+            "type": "boolean",
+            "required": true
+          },
+          "showRating": {
+            "type": "boolean",
+            "required": true
+          },
+          "showBadges": {
+            "type": "boolean",
+            "required": true
+          },
+          "showViewAllButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "viewAllButtonText": {
+            "type": "string",
+            "required": true
+          },
+          "backgroundColor": {
+            "type": "string",
+            "required": true
+          },
+          "textColor": {
+            "type": "string",
+            "required": true
+          },
+          "cardStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "minimal",
+              "bordered",
+              "shadow"
+            ]
+          },
+          "borderRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "buttonColor": {
+            "type": "string",
+            "required": true
+          },
+          "buttonTextColor": {
+            "type": "string",
+            "required": true
+          },
+          "buttonRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "medium",
+              "small",
+              "large",
+              "none"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true
+          },
+          "categoryId": {
+            "type": "string",
+            "required": true
+          },
+          "categoryName": {
+            "type": "string",
+            "required": true
+          },
+          "displayMode": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productsPerRow": {
+            "type": "number",
+            "required": true
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerView": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewTablet": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewMobile": {
+            "type": "number",
+            "required": true
+          },
+          "spaceBetween": {
+            "type": "number",
+            "required": true
+          },
+          "autoplay": {
+            "type": "boolean",
+            "required": true
+          },
+          "autoplayDelay": {
+            "type": "number",
+            "required": true
+          },
+          "loop": {
+            "type": "boolean",
+            "required": true
+          },
+          "navigation": {
+            "type": "boolean",
+            "required": true
+          },
+          "pagination": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageAspectRatio": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "square",
+              "portrait",
+              "landscape"
+            ]
+          },
+          "showPrice": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddToCart": {
+            "type": "boolean",
+            "required": true
+          },
+          "showRating": {
+            "type": "boolean",
+            "required": true
+          },
+          "showBadges": {
+            "type": "boolean",
+            "required": true
+          },
+          "showViewAllButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "viewAllButtonText": {
+            "type": "string",
+            "required": true
+          },
+          "backgroundColor": {
+            "type": "string",
+            "required": true
+          },
+          "textColor": {
+            "type": "string",
+            "required": true
+          },
+          "cardStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "minimal",
+              "bordered",
+              "shadow"
+            ]
+          },
+          "borderRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "buttonColor": {
+            "type": "string",
+            "required": true
+          },
+          "buttonTextColor": {
+            "type": "string",
+            "required": true
+          },
+          "buttonRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "medium",
+              "small",
+              "large",
+              "none"
+            ]
+          }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Discover our curated collection",
+          "showTitle": true,
+          "categoryId": "",
+          "categoryName": "",
+          "displayMode": "grid",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 20,
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "loop": false,
+          "navigation": true,
+          "pagination": true,
+          "imageAspectRatio": "square",
+          "showPrice": true,
+          "showAddToCart": true,
+          "showRating": false,
+          "showBadges": true,
+          "showViewAllButton": true,
+          "viewAllButtonText": "View All Products",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827",
+          "cardStyle": "shadow",
+          "borderRadius": "md",
+          "buttonColor": "#000000",
+          "buttonTextColor": "#ffffff",
+          "buttonRadius": "medium",
+          "loading": false,
+          "error": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
+      },
+      {
+        "name": "CollectionsGrid",
+        "label": "Collections Grid",
+        "description": "Collections Grid component (auto-derived).",
+        "category": "homepage",
+        "intent": [
+          "collections",
+          "grid"
+        ],
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "searchTags": [
+          "collections",
+          "grid"
+        ],
+        "propSchema": {
+          "sectionTitle": {
+            "type": "string"
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean"
+          },
+          "columns": {
+            "type": "number"
+          },
+          "columnsTablet": {
+            "type": "number"
+          },
+          "columnsMobile": {
+            "type": "number"
+          },
+          "gap": {
+            "type": "number"
+          },
+          "showCollectionImage": {
+            "type": "boolean"
+          },
+          "showCollectionTitle": {
+            "type": "boolean"
+          },
+          "showProductCount": {
+            "type": "boolean"
+          },
+          "showDescription": {
+            "type": "boolean"
+          },
+          "imageAspectRatio": {
+            "type": "string"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "textColor": {
+            "type": "color"
+          },
+          "cardStyle": {
+            "type": "string"
+          },
+          "borderRadius": {
+            "type": "string"
+          },
+          "hoverEffect": {
+            "type": "string"
+          },
+          "collectionSource": {
+            "type": "string"
+          },
+          "selectedCollectionIds": {
+            "type": "array"
+          },
+          "loading": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "jsonSchema": {
+          "sectionTitle": {
+            "type": "string"
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean"
+          },
+          "columns": {
+            "type": "number"
+          },
+          "columnsTablet": {
+            "type": "number"
+          },
+          "columnsMobile": {
+            "type": "number"
+          },
+          "gap": {
+            "type": "number"
+          },
+          "showCollectionImage": {
+            "type": "boolean"
+          },
+          "showCollectionTitle": {
+            "type": "boolean"
+          },
+          "showProductCount": {
+            "type": "boolean"
+          },
+          "showDescription": {
+            "type": "boolean"
+          },
+          "imageAspectRatio": {
+            "type": "string"
+          },
+          "backgroundColor": {
+            "type": "color"
+          },
+          "textColor": {
+            "type": "color"
+          },
+          "cardStyle": {
+            "type": "string"
+          },
+          "borderRadius": {
+            "type": "string"
+          },
+          "hoverEffect": {
+            "type": "string"
+          },
+          "collectionSource": {
+            "type": "string"
+          },
+          "selectedCollectionIds": {
+            "type": "array"
+          },
+          "loading": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Collection",
+          "sectionSubtitle": "Browse our curated collections",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCollectionImage": true,
+          "showCollectionTitle": true,
+          "showProductCount": true,
+          "showDescription": false,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "collectionSource": "all",
+          "selectedCollectionIds": [],
+          "loading": false,
+          "error": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\CollectionsGrid.tsx (auto-derived)"
+      },
+      {
+        "name": "FeaturedProducts",
+        "label": "Featured Products",
+        "description": "Section header + product grid (grid or Swiper carousel) with loading/error/empty/success states. Consumer injects products data via prop plus an optional renderProduct callback (D-1 escape hatch) — storefront passes its own <ProductPreview> via the renderProduct prop. Defaults to a simple image+title+price card when renderProduct is omitted.",
+        "category": "homepage",
+        "intent": [
+          "products",
+          "featured",
+          "grid",
+          "carousel",
+          "hero-products",
+          "picks"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "products (consumer-injected)",
+          "loading flag",
+          "error string"
+        ],
+        "copyFields": [
+          "sectionTitle",
+          "sectionSubtitle",
+          "buttonText"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "products",
+          "featured",
+          "grid",
+          "carousel",
+          "hero",
+          "picks",
+          "swiper"
+        ],
+        "propSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true,
+            "description": "Heading for the section, e.g. \"Best Sellers\"."
+          },
+          "sectionSubtitle": {
+            "type": "string",
+            "description": "Optional subheading under the title."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Whether to render sectionTitle/subtitle."
+          },
+          "displayMode": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productsPerRow": {
+            "type": "number",
+            "required": true,
+            "description": "Products per row in grid mode (2-5)."
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products to show."
+          },
+          "slidesPerView": {
+            "type": "number",
+            "required": true,
+            "description": "Carousel: slides visible on desktop."
+          },
+          "slidesPerViewTablet": {
+            "type": "number",
+            "required": true,
+            "description": "Carousel: slides visible on tablet."
+          },
+          "slidesPerViewMobile": {
+            "type": "number",
+            "required": true,
+            "description": "Carousel: slides visible on mobile."
+          },
+          "spaceBetween": {
+            "type": "number",
+            "required": true,
+            "description": "Carousel: gap between slides in px."
+          },
+          "autoplay": {
+            "type": "boolean",
+            "required": true,
+            "description": "Carousel: auto-advance slides."
+          },
+          "autoplayDelay": {
+            "type": "number",
+            "required": true,
+            "description": "Carousel: autoplay delay in ms."
+          },
+          "loop": {
+            "type": "boolean",
+            "required": true,
+            "description": "Carousel: loop back to the start."
+          },
+          "navigation": {
+            "type": "boolean",
+            "required": true,
+            "description": "Carousel: show prev/next arrows."
+          },
+          "pagination": {
+            "type": "boolean",
+            "required": true,
+            "description": "Carousel: show pagination indicator."
+          },
+          "paginationStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "Carousel pagination style.",
+            "options": [
+              "dots",
+              "fraction",
+              "progressbar"
+            ]
+          },
+          "productSource": {
+            "type": "enum",
+            "required": true,
+            "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
+            "options": [
+              "featured",
+              "bestsellers",
+              "new",
+              "category",
+              "manual"
+            ]
+          },
+          "categoryId": {
+            "type": "string",
+            "required": true,
+            "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
+          },
+          "productIds": {
+            "type": "string",
+            "required": true,
+            "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
+          },
+          "backgroundColor": {
+            "type": "string",
+            "required": true,
+            "description": "Token path (e.g. \"ui.surface\") or hex."
+          },
+          "textColor": {
+            "type": "string",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          },
+          "cardStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "Product card look.",
+            "options": [
+              "minimal",
+              "bordered",
+              "shadow"
+            ]
+          },
+          "showPrice": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show price on each product card."
+          },
+          "showAddToCart": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show an Add-to-Cart button on each card."
+          },
+          "buttonText": {
+            "type": "string",
+            "required": true,
+            "description": "Label for the section CTA button."
+          }
+        },
+        "jsonSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true,
+            "description": "Heading for the section, e.g. \"Best Sellers\"."
+          },
+          "sectionSubtitle": {
+            "type": "string",
+            "description": "Optional subheading under the title."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Whether to render sectionTitle/subtitle."
+          },
+          "displayMode": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productsPerRow": {
+            "type": "number",
+            "required": true,
+            "description": "Products per row in grid mode (2-5)."
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products to show."
+          },
+          "slidesPerView": {
+            "type": "number",
+            "required": true,
+            "description": "Carousel: slides visible on desktop."
+          },
+          "slidesPerViewTablet": {
+            "type": "number",
+            "required": true,
+            "description": "Carousel: slides visible on tablet."
+          },
+          "slidesPerViewMobile": {
+            "type": "number",
+            "required": true,
+            "description": "Carousel: slides visible on mobile."
+          },
+          "spaceBetween": {
+            "type": "number",
+            "required": true,
+            "description": "Carousel: gap between slides in px."
+          },
+          "autoplay": {
+            "type": "boolean",
+            "required": true,
+            "description": "Carousel: auto-advance slides."
+          },
+          "autoplayDelay": {
+            "type": "number",
+            "required": true,
+            "description": "Carousel: autoplay delay in ms."
+          },
+          "loop": {
+            "type": "boolean",
+            "required": true,
+            "description": "Carousel: loop back to the start."
+          },
+          "navigation": {
+            "type": "boolean",
+            "required": true,
+            "description": "Carousel: show prev/next arrows."
+          },
+          "pagination": {
+            "type": "boolean",
+            "required": true,
+            "description": "Carousel: show pagination indicator."
+          },
+          "paginationStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "Carousel pagination style.",
+            "options": [
+              "dots",
+              "fraction",
+              "progressbar"
+            ]
+          },
+          "productSource": {
+            "type": "enum",
+            "required": true,
+            "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
+            "options": [
+              "featured",
+              "bestsellers",
+              "new",
+              "category",
+              "manual"
+            ]
+          },
+          "categoryId": {
+            "type": "string",
+            "required": true,
+            "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
+          },
+          "productIds": {
+            "type": "string",
+            "required": true,
+            "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
+          },
+          "backgroundColor": {
+            "type": "string",
+            "required": true,
+            "description": "Token path (e.g. \"ui.surface\") or hex."
+          },
+          "textColor": {
+            "type": "string",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          },
+          "cardStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "Product card look.",
+            "options": [
+              "minimal",
+              "bordered",
+              "shadow"
+            ]
+          },
+          "showPrice": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show price on each product card."
+          },
+          "showAddToCart": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show an Add-to-Cart button on each card."
+          },
+          "buttonText": {
+            "type": "string",
+            "required": true,
+            "description": "Label for the section CTA button."
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\FeaturedProducts\\featuredproducts.meta.ts"
+      },
+      {
+        "name": "Columns",
+        "label": "Columns",
+        "description": "Grid layout with 2/3/4 columns and per-ratio layout for 2-col mode (50/50, 60/40, 70/30, etc). Each column hosts a numbered DropZone (column-1, column-2...). Stacks on mobile unless disabled.",
+        "category": "layout",
+        "intent": [
+          "columns",
+          "grid",
+          "multi-column",
+          "row",
+          "layout"
+        ],
+        "visualRole": "block",
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "columns",
+          "grid",
+          "layout",
+          "multi-column",
+          "dropzone",
+          "responsive"
+        ],
+        "propSchema": {
+          "columns": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "layout": {
+            "type": "enum",
+            "options": [
+              "equal",
+              "60-40",
+              "40-60",
+              "70-30",
+              "30-70",
+              "50-50"
+            ]
+          },
+          "gap": {
+            "type": "enum",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
+          },
+          "mobileStack": {
+            "type": "boolean",
+            "required": true
+          },
+          "alignItems": {
+            "type": "enum",
+            "options": [
+              "start",
+              "center",
+              "end",
+              "stretch"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "columns": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "layout": {
+            "type": "enum",
+            "options": [
+              "equal",
+              "60-40",
+              "40-60",
+              "70-30",
+              "30-70",
+              "50-50"
+            ]
+          },
+          "gap": {
+            "type": "enum",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
+          },
+          "mobileStack": {
+            "type": "boolean",
+            "required": true
+          },
+          "alignItems": {
+            "type": "enum",
+            "options": [
+              "start",
+              "center",
+              "end",
+              "stretch"
+            ]
+          }
+        },
+        "isContainer": true,
+        "zones": [],
+        "dynamicZonePrefix": "column-",
+        "metaPath": "src\\puck\\components\\layout\\Columns\\columns.meta.ts"
       }
     ],
     "list": [
@@ -88532,293 +89361,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
       }
     ],
-    "browse": [
-      {
-        "name": "CategoriesGrid",
-        "label": "Categories Grid",
-        "description": "Category tile grid. Consumer fetches categories via Medusa API (or stub); passes them as a `categories` prop along with loading/error flags. Supports 3 sources (all / featured / manual-id-list), 4 image aspect ratios, 4 card styles (incl. image-overlay), 4 hover effects. Renders loading skeleton + empty + error states when no data.",
-        "category": "homepage",
-        "intent": [
-          "categories",
-          "tiles",
-          "shop-by-category",
-          "grid",
-          "browse",
-          "department"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "categories (consumer-injected)",
-          "loading flag",
-          "error string"
-        ],
-        "copyFields": [
-          "sectionTitle",
-          "sectionSubtitle"
-        ],
-        "themeable": [
-          "backgroundColor",
-          "textColor"
-        ],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "categories",
-          "tiles",
-          "department",
-          "browse",
-          "shop",
-          "homepage"
-        ],
-        "propSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "columns": {
-            "type": "number",
-            "required": true
-          },
-          "columnsTablet": {
-            "type": "number",
-            "required": true
-          },
-          "columnsMobile": {
-            "type": "number",
-            "required": true
-          },
-          "gap": {
-            "type": "number",
-            "required": true
-          },
-          "showCategoryImage": {
-            "type": "boolean",
-            "required": true
-          },
-          "showCategoryName": {
-            "type": "boolean",
-            "required": true
-          },
-          "showProductCount": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageAspectRatio": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "square",
-              "portrait",
-              "landscape",
-              "wide"
-            ]
-          },
-          "backgroundColor": {
-            "type": "string",
-            "required": true
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "cardStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "minimal",
-              "bordered",
-              "shadow",
-              "overlay"
-            ]
-          },
-          "borderRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "hoverEffect": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "scale",
-              "shadow",
-              "lift"
-            ]
-          },
-          "categorySource": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "all",
-              "featured",
-              "manual"
-            ]
-          },
-          "selectedCategoryIds": {
-            "type": "array"
-          },
-          "categories": {
-            "type": "array"
-          },
-          "loading": {
-            "type": "boolean"
-          },
-          "error": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "columns": {
-            "type": "number",
-            "required": true
-          },
-          "columnsTablet": {
-            "type": "number",
-            "required": true
-          },
-          "columnsMobile": {
-            "type": "number",
-            "required": true
-          },
-          "gap": {
-            "type": "number",
-            "required": true
-          },
-          "showCategoryImage": {
-            "type": "boolean",
-            "required": true
-          },
-          "showCategoryName": {
-            "type": "boolean",
-            "required": true
-          },
-          "showProductCount": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageAspectRatio": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "square",
-              "portrait",
-              "landscape",
-              "wide"
-            ]
-          },
-          "backgroundColor": {
-            "type": "string",
-            "required": true
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "cardStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "minimal",
-              "bordered",
-              "shadow",
-              "overlay"
-            ]
-          },
-          "borderRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "hoverEffect": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "scale",
-              "shadow",
-              "lift"
-            ]
-          },
-          "categorySource": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "all",
-              "featured",
-              "manual"
-            ]
-          },
-          "selectedCategoryIds": {
-            "type": "array"
-          },
-          "categories": {
-            "type": "array"
-          },
-          "loading": {
-            "type": "boolean"
-          },
-          "error": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "sectionTitle": "Shop by Category",
-          "sectionSubtitle": "Browse our popular categories",
-          "showTitle": true,
-          "columns": 4,
-          "columnsTablet": 3,
-          "columnsMobile": 2,
-          "gap": 24,
-          "showCategoryImage": true,
-          "showCategoryName": true,
-          "showProductCount": true,
-          "imageAspectRatio": "square",
-          "backgroundColor": "#f9fafb",
-          "textColor": "#000000",
-          "cardStyle": "shadow",
-          "borderRadius": "lg",
-          "hoverEffect": "scale",
-          "categorySource": "all",
-          "selectedCategoryIds": [],
-          "loading": false,
-          "error": ""
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\CategoriesGrid\\categoriesgrid.meta.ts"
-      }
-    ],
     "department": [
       {
         "name": "CategoriesGrid",
@@ -89531,18 +90073,22 @@ export const registry: CompiledRegistry = {
         "propSchema": {
           "sectionTitle": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Heading for the section, e.g. \"Best Sellers\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "description": "Optional subheading under the title."
           },
           "showTitle": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Whether to render sectionTitle/subtitle."
           },
           "displayMode": {
             "type": "enum",
             "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
             "options": [
               "grid",
               "carousel"
@@ -89550,51 +90096,63 @@ export const registry: CompiledRegistry = {
           },
           "productsPerRow": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Products per row in grid mode (2-5)."
           },
           "maxProducts": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Max products to show."
           },
           "slidesPerView": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on desktop."
           },
           "slidesPerViewTablet": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on tablet."
           },
           "slidesPerViewMobile": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on mobile."
           },
           "spaceBetween": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: gap between slides in px."
           },
           "autoplay": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: auto-advance slides."
           },
           "autoplayDelay": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: autoplay delay in ms."
           },
           "loop": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: loop back to the start."
           },
           "navigation": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show prev/next arrows."
           },
           "pagination": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show pagination indicator."
           },
           "paginationStyle": {
             "type": "enum",
             "required": true,
+            "description": "Carousel pagination style.",
             "options": [
               "dots",
               "fraction",
@@ -89604,6 +90162,7 @@ export const registry: CompiledRegistry = {
           "productSource": {
             "type": "enum",
             "required": true,
+            "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
             "options": [
               "featured",
               "bestsellers",
@@ -89614,23 +90173,28 @@ export const registry: CompiledRegistry = {
           },
           "categoryId": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
           },
           "productIds": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
           },
           "backgroundColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
             "type": "enum",
             "required": true,
+            "description": "Product card look.",
             "options": [
               "minimal",
               "bordered",
@@ -89639,32 +90203,39 @@ export const registry: CompiledRegistry = {
           },
           "showPrice": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show price on each product card."
           },
           "showAddToCart": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show an Add-to-Cart button on each card."
           },
           "buttonText": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Label for the section CTA button."
           }
         },
         "jsonSchema": {
           "sectionTitle": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Heading for the section, e.g. \"Best Sellers\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "description": "Optional subheading under the title."
           },
           "showTitle": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Whether to render sectionTitle/subtitle."
           },
           "displayMode": {
             "type": "enum",
             "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
             "options": [
               "grid",
               "carousel"
@@ -89672,51 +90243,63 @@ export const registry: CompiledRegistry = {
           },
           "productsPerRow": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Products per row in grid mode (2-5)."
           },
           "maxProducts": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Max products to show."
           },
           "slidesPerView": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on desktop."
           },
           "slidesPerViewTablet": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on tablet."
           },
           "slidesPerViewMobile": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on mobile."
           },
           "spaceBetween": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: gap between slides in px."
           },
           "autoplay": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: auto-advance slides."
           },
           "autoplayDelay": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: autoplay delay in ms."
           },
           "loop": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: loop back to the start."
           },
           "navigation": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show prev/next arrows."
           },
           "pagination": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show pagination indicator."
           },
           "paginationStyle": {
             "type": "enum",
             "required": true,
+            "description": "Carousel pagination style.",
             "options": [
               "dots",
               "fraction",
@@ -89726,6 +90309,7 @@ export const registry: CompiledRegistry = {
           "productSource": {
             "type": "enum",
             "required": true,
+            "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
             "options": [
               "featured",
               "bestsellers",
@@ -89736,23 +90320,28 @@ export const registry: CompiledRegistry = {
           },
           "categoryId": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
           },
           "productIds": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
           },
           "backgroundColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
             "type": "enum",
             "required": true,
+            "description": "Product card look.",
             "options": [
               "minimal",
               "bordered",
@@ -89761,15 +90350,18 @@ export const registry: CompiledRegistry = {
           },
           "showPrice": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show price on each product card."
           },
           "showAddToCart": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show an Add-to-Cart button on each card."
           },
           "buttonText": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Label for the section CTA button."
           }
         },
         "isContainer": false,
@@ -93039,18 +93631,22 @@ export const registry: CompiledRegistry = {
         "propSchema": {
           "sectionTitle": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Heading for the section, e.g. \"Best Sellers\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "description": "Optional subheading under the title."
           },
           "showTitle": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Whether to render sectionTitle/subtitle."
           },
           "displayMode": {
             "type": "enum",
             "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
             "options": [
               "grid",
               "carousel"
@@ -93058,51 +93654,63 @@ export const registry: CompiledRegistry = {
           },
           "productsPerRow": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Products per row in grid mode (2-5)."
           },
           "maxProducts": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Max products to show."
           },
           "slidesPerView": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on desktop."
           },
           "slidesPerViewTablet": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on tablet."
           },
           "slidesPerViewMobile": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on mobile."
           },
           "spaceBetween": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: gap between slides in px."
           },
           "autoplay": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: auto-advance slides."
           },
           "autoplayDelay": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: autoplay delay in ms."
           },
           "loop": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: loop back to the start."
           },
           "navigation": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show prev/next arrows."
           },
           "pagination": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show pagination indicator."
           },
           "paginationStyle": {
             "type": "enum",
             "required": true,
+            "description": "Carousel pagination style.",
             "options": [
               "dots",
               "fraction",
@@ -93112,6 +93720,7 @@ export const registry: CompiledRegistry = {
           "productSource": {
             "type": "enum",
             "required": true,
+            "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
             "options": [
               "featured",
               "bestsellers",
@@ -93122,23 +93731,28 @@ export const registry: CompiledRegistry = {
           },
           "categoryId": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
           },
           "productIds": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
           },
           "backgroundColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
             "type": "enum",
             "required": true,
+            "description": "Product card look.",
             "options": [
               "minimal",
               "bordered",
@@ -93147,32 +93761,39 @@ export const registry: CompiledRegistry = {
           },
           "showPrice": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show price on each product card."
           },
           "showAddToCart": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show an Add-to-Cart button on each card."
           },
           "buttonText": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Label for the section CTA button."
           }
         },
         "jsonSchema": {
           "sectionTitle": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Heading for the section, e.g. \"Best Sellers\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "description": "Optional subheading under the title."
           },
           "showTitle": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Whether to render sectionTitle/subtitle."
           },
           "displayMode": {
             "type": "enum",
             "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
             "options": [
               "grid",
               "carousel"
@@ -93180,51 +93801,63 @@ export const registry: CompiledRegistry = {
           },
           "productsPerRow": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Products per row in grid mode (2-5)."
           },
           "maxProducts": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Max products to show."
           },
           "slidesPerView": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on desktop."
           },
           "slidesPerViewTablet": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on tablet."
           },
           "slidesPerViewMobile": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on mobile."
           },
           "spaceBetween": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: gap between slides in px."
           },
           "autoplay": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: auto-advance slides."
           },
           "autoplayDelay": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: autoplay delay in ms."
           },
           "loop": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: loop back to the start."
           },
           "navigation": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show prev/next arrows."
           },
           "pagination": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show pagination indicator."
           },
           "paginationStyle": {
             "type": "enum",
             "required": true,
+            "description": "Carousel pagination style.",
             "options": [
               "dots",
               "fraction",
@@ -93234,6 +93867,7 @@ export const registry: CompiledRegistry = {
           "productSource": {
             "type": "enum",
             "required": true,
+            "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
             "options": [
               "featured",
               "bestsellers",
@@ -93244,23 +93878,28 @@ export const registry: CompiledRegistry = {
           },
           "categoryId": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
           },
           "productIds": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
           },
           "backgroundColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
             "type": "enum",
             "required": true,
+            "description": "Product card look.",
             "options": [
               "minimal",
               "bordered",
@@ -93269,15 +93908,18 @@ export const registry: CompiledRegistry = {
           },
           "showPrice": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show price on each product card."
           },
           "showAddToCart": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show an Add-to-Cart button on each card."
           },
           "buttonText": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Label for the section CTA button."
           }
         },
         "isContainer": false,
@@ -93839,18 +94481,22 @@ export const registry: CompiledRegistry = {
         "propSchema": {
           "sectionTitle": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Heading for the section, e.g. \"Best Sellers\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "description": "Optional subheading under the title."
           },
           "showTitle": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Whether to render sectionTitle/subtitle."
           },
           "displayMode": {
             "type": "enum",
             "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
             "options": [
               "grid",
               "carousel"
@@ -93858,51 +94504,63 @@ export const registry: CompiledRegistry = {
           },
           "productsPerRow": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Products per row in grid mode (2-5)."
           },
           "maxProducts": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Max products to show."
           },
           "slidesPerView": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on desktop."
           },
           "slidesPerViewTablet": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on tablet."
           },
           "slidesPerViewMobile": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on mobile."
           },
           "spaceBetween": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: gap between slides in px."
           },
           "autoplay": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: auto-advance slides."
           },
           "autoplayDelay": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: autoplay delay in ms."
           },
           "loop": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: loop back to the start."
           },
           "navigation": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show prev/next arrows."
           },
           "pagination": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show pagination indicator."
           },
           "paginationStyle": {
             "type": "enum",
             "required": true,
+            "description": "Carousel pagination style.",
             "options": [
               "dots",
               "fraction",
@@ -93912,6 +94570,7 @@ export const registry: CompiledRegistry = {
           "productSource": {
             "type": "enum",
             "required": true,
+            "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
             "options": [
               "featured",
               "bestsellers",
@@ -93922,23 +94581,28 @@ export const registry: CompiledRegistry = {
           },
           "categoryId": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
           },
           "productIds": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
           },
           "backgroundColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
             "type": "enum",
             "required": true,
+            "description": "Product card look.",
             "options": [
               "minimal",
               "bordered",
@@ -93947,32 +94611,39 @@ export const registry: CompiledRegistry = {
           },
           "showPrice": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show price on each product card."
           },
           "showAddToCart": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show an Add-to-Cart button on each card."
           },
           "buttonText": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Label for the section CTA button."
           }
         },
         "jsonSchema": {
           "sectionTitle": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Heading for the section, e.g. \"Best Sellers\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "description": "Optional subheading under the title."
           },
           "showTitle": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Whether to render sectionTitle/subtitle."
           },
           "displayMode": {
             "type": "enum",
             "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
             "options": [
               "grid",
               "carousel"
@@ -93980,51 +94651,63 @@ export const registry: CompiledRegistry = {
           },
           "productsPerRow": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Products per row in grid mode (2-5)."
           },
           "maxProducts": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Max products to show."
           },
           "slidesPerView": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on desktop."
           },
           "slidesPerViewTablet": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on tablet."
           },
           "slidesPerViewMobile": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on mobile."
           },
           "spaceBetween": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: gap between slides in px."
           },
           "autoplay": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: auto-advance slides."
           },
           "autoplayDelay": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: autoplay delay in ms."
           },
           "loop": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: loop back to the start."
           },
           "navigation": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show prev/next arrows."
           },
           "pagination": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show pagination indicator."
           },
           "paginationStyle": {
             "type": "enum",
             "required": true,
+            "description": "Carousel pagination style.",
             "options": [
               "dots",
               "fraction",
@@ -94034,6 +94717,7 @@ export const registry: CompiledRegistry = {
           "productSource": {
             "type": "enum",
             "required": true,
+            "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
             "options": [
               "featured",
               "bestsellers",
@@ -94044,23 +94728,28 @@ export const registry: CompiledRegistry = {
           },
           "categoryId": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
           },
           "productIds": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
           },
           "backgroundColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
             "type": "enum",
             "required": true,
+            "description": "Product card look.",
             "options": [
               "minimal",
               "bordered",
@@ -94069,15 +94758,18 @@ export const registry: CompiledRegistry = {
           },
           "showPrice": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show price on each product card."
           },
           "showAddToCart": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show an Add-to-Cart button on each card."
           },
           "buttonText": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Label for the section CTA button."
           }
         },
         "isContainer": false,
@@ -94128,18 +94820,22 @@ export const registry: CompiledRegistry = {
         "propSchema": {
           "sectionTitle": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Heading for the section, e.g. \"Best Sellers\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "description": "Optional subheading under the title."
           },
           "showTitle": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Whether to render sectionTitle/subtitle."
           },
           "displayMode": {
             "type": "enum",
             "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
             "options": [
               "grid",
               "carousel"
@@ -94147,51 +94843,63 @@ export const registry: CompiledRegistry = {
           },
           "productsPerRow": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Products per row in grid mode (2-5)."
           },
           "maxProducts": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Max products to show."
           },
           "slidesPerView": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on desktop."
           },
           "slidesPerViewTablet": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on tablet."
           },
           "slidesPerViewMobile": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on mobile."
           },
           "spaceBetween": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: gap between slides in px."
           },
           "autoplay": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: auto-advance slides."
           },
           "autoplayDelay": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: autoplay delay in ms."
           },
           "loop": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: loop back to the start."
           },
           "navigation": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show prev/next arrows."
           },
           "pagination": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show pagination indicator."
           },
           "paginationStyle": {
             "type": "enum",
             "required": true,
+            "description": "Carousel pagination style.",
             "options": [
               "dots",
               "fraction",
@@ -94201,6 +94909,7 @@ export const registry: CompiledRegistry = {
           "productSource": {
             "type": "enum",
             "required": true,
+            "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
             "options": [
               "featured",
               "bestsellers",
@@ -94211,23 +94920,28 @@ export const registry: CompiledRegistry = {
           },
           "categoryId": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
           },
           "productIds": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
           },
           "backgroundColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
             "type": "enum",
             "required": true,
+            "description": "Product card look.",
             "options": [
               "minimal",
               "bordered",
@@ -94236,32 +94950,39 @@ export const registry: CompiledRegistry = {
           },
           "showPrice": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show price on each product card."
           },
           "showAddToCart": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show an Add-to-Cart button on each card."
           },
           "buttonText": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Label for the section CTA button."
           }
         },
         "jsonSchema": {
           "sectionTitle": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Heading for the section, e.g. \"Best Sellers\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "description": "Optional subheading under the title."
           },
           "showTitle": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Whether to render sectionTitle/subtitle."
           },
           "displayMode": {
             "type": "enum",
             "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
             "options": [
               "grid",
               "carousel"
@@ -94269,51 +94990,63 @@ export const registry: CompiledRegistry = {
           },
           "productsPerRow": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Products per row in grid mode (2-5)."
           },
           "maxProducts": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Max products to show."
           },
           "slidesPerView": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on desktop."
           },
           "slidesPerViewTablet": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on tablet."
           },
           "slidesPerViewMobile": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: slides visible on mobile."
           },
           "spaceBetween": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: gap between slides in px."
           },
           "autoplay": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: auto-advance slides."
           },
           "autoplayDelay": {
             "type": "number",
-            "required": true
+            "required": true,
+            "description": "Carousel: autoplay delay in ms."
           },
           "loop": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: loop back to the start."
           },
           "navigation": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show prev/next arrows."
           },
           "pagination": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Carousel: show pagination indicator."
           },
           "paginationStyle": {
             "type": "enum",
             "required": true,
+            "description": "Carousel pagination style.",
             "options": [
               "dots",
               "fraction",
@@ -94323,6 +95056,7 @@ export const registry: CompiledRegistry = {
           "productSource": {
             "type": "enum",
             "required": true,
+            "description": "Where products come from. \"featured\"/\"bestsellers\"/\"new\" = the STOREFRONT auto-selects them (PREFER these for such requests — no ids needed). \"category\" = all products in one categoryId (requires categoryId). \"manual\" = exactly the products in productIds (requires productIds).",
             "options": [
               "featured",
               "bestsellers",
@@ -94333,23 +95067,28 @@ export const registry: CompiledRegistry = {
           },
           "categoryId": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"category\". Get a real collection/category id from list_collections — never invent one."
           },
           "productIds": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "ONLY used when productSource=\"manual\". Comma-separated real product ids, e.g. \"prod_1,prod_2\" — get them from search_products, never invent ids."
           },
           "backgroundColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
             "type": "enum",
             "required": true,
+            "description": "Product card look.",
             "options": [
               "minimal",
               "bordered",
@@ -94358,15 +95097,18 @@ export const registry: CompiledRegistry = {
           },
           "showPrice": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show price on each product card."
           },
           "showAddToCart": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Show an Add-to-Cart button on each card."
           },
           "buttonText": {
             "type": "string",
-            "required": true
+            "required": true,
+            "description": "Label for the section CTA button."
           }
         },
         "isContainer": false,

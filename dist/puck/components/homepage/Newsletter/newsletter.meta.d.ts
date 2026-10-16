@@ -78,26 +78,73 @@ export declare const newsletterMeta: {
             readonly type: "string";
         };
         readonly backgroundColor: {
-            readonly type: "string";
+            readonly type: "color";
+            readonly description: "Section background. Token path (e.g. \"brand.primary\") or hex. PRECEDENCE: backgroundImage > gradientFrom/To > backgroundScheme > backgroundColor — this only applies when backgroundScheme is empty and no image/gradient is set. If the user asks for a background color and a scheme is active, also set backgroundScheme to \"\".";
         };
         readonly textColor: {
-            readonly type: "string";
+            readonly type: "color";
+            readonly description: "Text color over the background. Token path or hex. Only applies when backgroundScheme is empty (schemes control their own text color).";
         };
         readonly inputBackground: {
-            readonly type: "string";
+            readonly type: "color";
+            readonly description: "Email input field background. Token path (e.g. \"ui.surface\") or hex.";
         };
         readonly inputBorder: {
-            readonly type: "string";
+            readonly type: "color";
+            readonly description: "Email input border color. Token path (e.g. \"ui.border\") or hex.";
         };
         readonly buttonBackground: {
-            readonly type: "string";
+            readonly type: "color";
+            readonly description: "Subscribe button background. Token path (e.g. \"button.primary.background\") or hex.";
         };
         readonly buttonTextColor: {
-            readonly type: "string";
+            readonly type: "color";
+            readonly description: "Subscribe button label color. Token path or hex.";
         };
         readonly borderRadius: {
             readonly type: "enum";
             readonly options: readonly ["none", "sm", "md", "lg", "full"];
+        };
+        readonly backgroundScheme: {
+            readonly type: "enum";
+            readonly options: readonly ["", "light", "dark", "accent", "subtle"];
+            readonly description: "Theme background scheme. Takes precedence over backgroundColor — set to \"\" to use a custom backgroundColor. Schemes also control text color (textColor is ignored while a scheme is active).";
+        };
+        readonly backgroundImage: {
+            readonly type: "string";
+            readonly description: "Optional background image URL — overrides all other background settings.";
+        };
+        readonly overlayColor: {
+            readonly type: "color";
+            readonly description: "Overlay tint over a background image (with overlayOpacity).";
+        };
+        readonly overlayOpacity: {
+            readonly type: "string";
+            readonly description: "Overlay strength, e.g. \"50\" (percent) — used with backgroundImage.";
+        };
+        readonly gradientFrom: {
+            readonly type: "color";
+            readonly description: "Gradient start color — when set (with gradientTo), overrides scheme/color backgrounds.";
+        };
+        readonly gradientTo: {
+            readonly type: "color";
+            readonly description: "Gradient end color.";
+        };
+        readonly density: {
+            readonly type: "string";
+            readonly description: "Section padding: sm | md | lg | xl.";
+        };
+        readonly contentWidth: {
+            readonly type: "string";
+            readonly description: "Content container width: sm | md | lg | full.";
+        };
+        readonly contentAlign: {
+            readonly type: "string";
+            readonly description: "Content alignment: left | center | right.";
+        };
+        readonly minHeight: {
+            readonly type: "string";
+            readonly description: "Minimum section height.";
         };
     };
 };

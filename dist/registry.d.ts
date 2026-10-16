@@ -36,7 +36,7 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-10-14T14:50:12.749Z",
+  "generatedAt": "2026-10-16T06:44:29.037Z",
   "total": 141,
   "entries": [
     {
@@ -9220,148 +9220,197 @@ export const registry: CompiledRegistry = {
     {
       "name": "CollectionsGrid",
       "label": "Collections Grid",
-      "description": "Collections Grid component (auto-derived).",
+      "description": "Grid of the store's product COLLECTIONS (curated groups) — each card is a collection with image, title, and optional product count/description. Collections data is injected by the storefront at render (configure which via selectedCollectionIds, or leave empty for all). For product CATEGORIES use CategoryGrid; for products use FeaturedProducts.",
       "category": "homepage",
       "intent": [
-        "collections",
-        "grid"
+        "browse",
+        "navigate",
+        "curate",
+        "showcase"
       ],
-      "dataDeps": [],
-      "copyFields": [],
-      "themeable": [],
+      "visualRole": "block",
+      "dataDeps": [
+        "collections (storefront-injected)"
+      ],
+      "copyFields": [
+        "sectionTitle",
+        "sectionSubtitle"
+      ],
+      "themeable": [
+        "backgroundColor",
+        "textColor"
+      ],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
         "collections",
-        "grid"
+        "curated",
+        "grid",
+        "shop by collection",
+        "groups"
       ],
       "propSchema": {
         "sectionTitle": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Section heading, e.g. \"Shop by Collection\"."
         },
         "sectionSubtitle": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Optional subheading."
         },
         "showTitle": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Render the section heading."
         },
         "columns": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Collection cards per row on desktop (2-4)."
         },
         "columnsTablet": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Cards per row on tablet."
         },
         "columnsMobile": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Cards per row on mobile."
         },
         "gap": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Gap between cards in px."
         },
         "showCollectionImage": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show each collection's image."
         },
         "showCollectionTitle": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show collection titles."
         },
         "showProductCount": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show product count per collection."
         },
         "showDescription": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show collection descriptions."
         },
         "imageAspectRatio": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Card image ratio: square | portrait | landscape."
         },
         "backgroundColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
         },
         "textColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path (e.g. \"text.primary\") or hex."
         },
         "cardStyle": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Card look: standard | bordered | shadow."
         },
         "borderRadius": {
-          "type": "string"
-        },
-        "hoverEffect": {
-          "type": "string"
-        },
-        "collectionSource": {
-          "type": "string"
-        },
-        "selectedCollectionIds": {
-          "type": "array"
-        },
-        "loading": {
-          "type": "boolean"
-        },
-        "error": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Card corner radius: none | sm | md | lg | full."
         }
       },
       "jsonSchema": {
         "sectionTitle": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Section heading, e.g. \"Shop by Collection\"."
         },
         "sectionSubtitle": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Optional subheading."
         },
         "showTitle": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Render the section heading."
         },
         "columns": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Collection cards per row on desktop (2-4)."
         },
         "columnsTablet": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Cards per row on tablet."
         },
         "columnsMobile": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Cards per row on mobile."
         },
         "gap": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Gap between cards in px."
         },
         "showCollectionImage": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show each collection's image."
         },
         "showCollectionTitle": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show collection titles."
         },
         "showProductCount": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show product count per collection."
         },
         "showDescription": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show collection descriptions."
         },
         "imageAspectRatio": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Card image ratio: square | portrait | landscape."
         },
         "backgroundColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
         },
         "textColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path (e.g. \"text.primary\") or hex."
         },
         "cardStyle": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Card look: standard | bordered | shadow."
         },
         "borderRadius": {
-          "type": "string"
-        },
-        "hoverEffect": {
-          "type": "string"
-        },
-        "collectionSource": {
-          "type": "string"
-        },
-        "selectedCollectionIds": {
-          "type": "array"
-        },
-        "loading": {
-          "type": "boolean"
-        },
-        "error": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Card corner radius: none | sm | md | lg | full."
         }
       },
       "defaultProps": {
@@ -9389,7 +9438,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\CollectionsGrid.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\collectionsgrid.meta.ts"
     },
     {
       "name": "CountdownTimer",
@@ -10392,22 +10441,28 @@ export const registry: CompiledRegistry = {
           "type": "string"
         },
         "backgroundColor": {
-          "type": "string"
+          "type": "color",
+          "description": "Section background. Token path (e.g. \"brand.primary\") or hex. PRECEDENCE: backgroundImage > gradientFrom/To > backgroundScheme > backgroundColor — this only applies when backgroundScheme is empty and no image/gradient is set. If the user asks for a background color and a scheme is active, also set backgroundScheme to \"\"."
         },
         "textColor": {
-          "type": "string"
+          "type": "color",
+          "description": "Text color over the background. Token path or hex. Only applies when backgroundScheme is empty (schemes control their own text color)."
         },
         "inputBackground": {
-          "type": "string"
+          "type": "color",
+          "description": "Email input field background. Token path (e.g. \"ui.surface\") or hex."
         },
         "inputBorder": {
-          "type": "string"
+          "type": "color",
+          "description": "Email input border color. Token path (e.g. \"ui.border\") or hex."
         },
         "buttonBackground": {
-          "type": "string"
+          "type": "color",
+          "description": "Subscribe button background. Token path (e.g. \"button.primary.background\") or hex."
         },
         "buttonTextColor": {
-          "type": "string"
+          "type": "color",
+          "description": "Subscribe button label color. Token path or hex."
         },
         "borderRadius": {
           "type": "enum",
@@ -10418,6 +10473,53 @@ export const registry: CompiledRegistry = {
             "lg",
             "full"
           ]
+        },
+        "backgroundScheme": {
+          "type": "enum",
+          "description": "Theme background scheme. Takes precedence over backgroundColor — set to \"\" to use a custom backgroundColor. Schemes also control text color (textColor is ignored while a scheme is active).",
+          "options": [
+            "",
+            "light",
+            "dark",
+            "accent",
+            "subtle"
+          ]
+        },
+        "backgroundImage": {
+          "type": "string",
+          "description": "Optional background image URL — overrides all other background settings."
+        },
+        "overlayColor": {
+          "type": "color",
+          "description": "Overlay tint over a background image (with overlayOpacity)."
+        },
+        "overlayOpacity": {
+          "type": "string",
+          "description": "Overlay strength, e.g. \"50\" (percent) — used with backgroundImage."
+        },
+        "gradientFrom": {
+          "type": "color",
+          "description": "Gradient start color — when set (with gradientTo), overrides scheme/color backgrounds."
+        },
+        "gradientTo": {
+          "type": "color",
+          "description": "Gradient end color."
+        },
+        "density": {
+          "type": "string",
+          "description": "Section padding: sm | md | lg | xl."
+        },
+        "contentWidth": {
+          "type": "string",
+          "description": "Content container width: sm | md | lg | full."
+        },
+        "contentAlign": {
+          "type": "string",
+          "description": "Content alignment: left | center | right."
+        },
+        "minHeight": {
+          "type": "string",
+          "description": "Minimum section height."
         }
       },
       "jsonSchema": {
@@ -10470,22 +10572,28 @@ export const registry: CompiledRegistry = {
           "type": "string"
         },
         "backgroundColor": {
-          "type": "string"
+          "type": "color",
+          "description": "Section background. Token path (e.g. \"brand.primary\") or hex. PRECEDENCE: backgroundImage > gradientFrom/To > backgroundScheme > backgroundColor — this only applies when backgroundScheme is empty and no image/gradient is set. If the user asks for a background color and a scheme is active, also set backgroundScheme to \"\"."
         },
         "textColor": {
-          "type": "string"
+          "type": "color",
+          "description": "Text color over the background. Token path or hex. Only applies when backgroundScheme is empty (schemes control their own text color)."
         },
         "inputBackground": {
-          "type": "string"
+          "type": "color",
+          "description": "Email input field background. Token path (e.g. \"ui.surface\") or hex."
         },
         "inputBorder": {
-          "type": "string"
+          "type": "color",
+          "description": "Email input border color. Token path (e.g. \"ui.border\") or hex."
         },
         "buttonBackground": {
-          "type": "string"
+          "type": "color",
+          "description": "Subscribe button background. Token path (e.g. \"button.primary.background\") or hex."
         },
         "buttonTextColor": {
-          "type": "string"
+          "type": "color",
+          "description": "Subscribe button label color. Token path or hex."
         },
         "borderRadius": {
           "type": "enum",
@@ -10496,6 +10604,53 @@ export const registry: CompiledRegistry = {
             "lg",
             "full"
           ]
+        },
+        "backgroundScheme": {
+          "type": "enum",
+          "description": "Theme background scheme. Takes precedence over backgroundColor — set to \"\" to use a custom backgroundColor. Schemes also control text color (textColor is ignored while a scheme is active).",
+          "options": [
+            "",
+            "light",
+            "dark",
+            "accent",
+            "subtle"
+          ]
+        },
+        "backgroundImage": {
+          "type": "string",
+          "description": "Optional background image URL — overrides all other background settings."
+        },
+        "overlayColor": {
+          "type": "color",
+          "description": "Overlay tint over a background image (with overlayOpacity)."
+        },
+        "overlayOpacity": {
+          "type": "string",
+          "description": "Overlay strength, e.g. \"50\" (percent) — used with backgroundImage."
+        },
+        "gradientFrom": {
+          "type": "color",
+          "description": "Gradient start color — when set (with gradientTo), overrides scheme/color backgrounds."
+        },
+        "gradientTo": {
+          "type": "color",
+          "description": "Gradient end color."
+        },
+        "density": {
+          "type": "string",
+          "description": "Section padding: sm | md | lg | xl."
+        },
+        "contentWidth": {
+          "type": "string",
+          "description": "Content container width: sm | md | lg | full."
+        },
+        "contentAlign": {
+          "type": "string",
+          "description": "Content alignment: left | center | right."
+        },
+        "minHeight": {
+          "type": "string",
+          "description": "Minimum section height."
         }
       },
       "isContainer": false,
@@ -17299,53 +17454,318 @@ export const registry: CompiledRegistry = {
     },
     {
       "name": "RecentlyViewedProducts",
-      "label": "Recently Viewed Products",
-      "description": "Recently Viewed Products component (auto-derived).",
+      "label": "Recently Viewed",
+      "description": "Grid/carousel of products the shopper recently viewed (storefront-injected browsing history; renders empty for new visitors). Good near the footer or below the product page. For curated selections use FeaturedProducts; for related-to-product use RelatedProducts.",
       "category": "product",
       "intent": [
-        "recently",
-        "viewed",
-        "products"
+        "re-engage",
+        "browse-history",
+        "personalize"
       ],
-      "dataDeps": [],
-      "copyFields": [],
-      "themeable": [],
-      "a11yRisk": "low",
+      "visualRole": "block",
+      "dataDeps": [
+        "visitor browsing history (storefront-injected)"
+      ],
+      "copyFields": [
+        "title"
+      ],
+      "themeable": [
+        "textColor"
+      ],
+      "a11yRisk": "medium",
+      "mobileBehavior": "responsive",
       "searchTags": [
-        "recently",
-        "viewed",
-        "products"
+        "recently viewed",
+        "history",
+        "browse",
+        "carousel",
+        "product grid"
       ],
-      "propSchema": {},
-      "jsonSchema": {},
-      "defaultProps": {},
+      "propSchema": {
+        "showTitle": {
+          "type": "boolean",
+          "required": true,
+          "description": "Render the section heading."
+        },
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Section heading, e.g. \"Recently Viewed\"."
+        },
+        "displayStyle": {
+          "type": "enum",
+          "required": true,
+          "description": "grid = static rows; carousel = Swiper slider.",
+          "options": [
+            "grid",
+            "carousel"
+          ]
+        },
+        "maxProducts": {
+          "type": "number",
+          "required": true,
+          "description": "Max products shown (4-8 recommended)."
+        },
+        "containerPadding": {
+          "type": "enum",
+          "required": true,
+          "description": "Section padding.",
+          "options": [
+            "none",
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        "textColor": {
+          "type": "color",
+          "required": true,
+          "description": "Token path (e.g. \"text.secondary\") or hex."
+        }
+      },
+      "jsonSchema": {
+        "showTitle": {
+          "type": "boolean",
+          "required": true,
+          "description": "Render the section heading."
+        },
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Section heading, e.g. \"Recently Viewed\"."
+        },
+        "displayStyle": {
+          "type": "enum",
+          "required": true,
+          "description": "grid = static rows; carousel = Swiper slider.",
+          "options": [
+            "grid",
+            "carousel"
+          ]
+        },
+        "maxProducts": {
+          "type": "number",
+          "required": true,
+          "description": "Max products shown (4-8 recommended)."
+        },
+        "containerPadding": {
+          "type": "enum",
+          "required": true,
+          "description": "Section padding.",
+          "options": [
+            "none",
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        "textColor": {
+          "type": "color",
+          "required": true,
+          "description": "Token path (e.g. \"text.secondary\") or hex."
+        }
+      },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\product\\RecentlyViewedProducts\\RecentlyViewedProducts.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\product\\RecentlyViewedProducts\\recentlyviewedproducts.meta.ts"
     },
     {
       "name": "RelatedProducts",
       "label": "Related Products",
-      "description": "Related Products component (auto-derived).",
+      "description": "A products grid/carousel showing products RELATED to the current product — how to relate is configured via relatedBy (collection/tags/category/upsell/crosssell/frequently_bought). The storefront resolves and injects the actual products at render; the editor shows the configured section. Use on PRODUCT pages. For curated/storefront-wide product sections use FeaturedProducts.",
       "category": "product",
       "intent": [
-        "related",
-        "products"
+        "cross-sell",
+        "upsell",
+        "recommend",
+        "related"
       ],
-      "dataDeps": [],
-      "copyFields": [],
-      "themeable": [],
-      "a11yRisk": "low",
+      "visualRole": "block",
+      "dataDeps": [
+        "current product context (storefront-injected)"
+      ],
+      "copyFields": [
+        "title",
+        "tagline"
+      ],
+      "themeable": [
+        "textColor"
+      ],
+      "a11yRisk": "medium",
+      "mobileBehavior": "responsive",
       "searchTags": [
         "related",
-        "products"
+        "recommendations",
+        "upsell",
+        "cross-sell",
+        "you may also like",
+        "product grid"
       ],
-      "propSchema": {},
-      "jsonSchema": {},
-      "defaultProps": {},
+      "propSchema": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Section heading, e.g. \"You May Also Like\"."
+        },
+        "showTitle": {
+          "type": "boolean",
+          "required": true,
+          "description": "Render the section heading."
+        },
+        "tagline": {
+          "type": "string",
+          "required": true,
+          "description": "Small subheading under the title."
+        },
+        "showTagline": {
+          "type": "boolean",
+          "required": true,
+          "description": "Render the tagline."
+        },
+        "relatedBy": {
+          "type": "enum",
+          "required": true,
+          "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
+          "options": [
+            "collection",
+            "tags",
+            "category",
+            "upsell",
+            "crosssell",
+            "frequently_bought"
+          ]
+        },
+        "maxProducts": {
+          "type": "number",
+          "required": true,
+          "description": "Max products shown (4-8 recommended)."
+        },
+        "displayStyle": {
+          "type": "enum",
+          "required": true,
+          "description": "grid = static rows; carousel = Swiper slider.",
+          "options": [
+            "grid",
+            "carousel"
+          ]
+        },
+        "productCardTemplateId": {
+          "type": "string",
+          "required": true,
+          "description": "Optional saved product-card template id. Leave \"\" for the default card."
+        },
+        "gridColumns": {
+          "type": "enum",
+          "required": true,
+          "description": "Columns in grid mode.",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "containerPadding": {
+          "type": "enum",
+          "required": true,
+          "description": "Section padding.",
+          "options": [
+            "none",
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        "textColor": {
+          "type": "color",
+          "required": true,
+          "description": "Token path (e.g. \"text.primary\") or hex."
+        }
+      },
+      "jsonSchema": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "description": "Section heading, e.g. \"You May Also Like\"."
+        },
+        "showTitle": {
+          "type": "boolean",
+          "required": true,
+          "description": "Render the section heading."
+        },
+        "tagline": {
+          "type": "string",
+          "required": true,
+          "description": "Small subheading under the title."
+        },
+        "showTagline": {
+          "type": "boolean",
+          "required": true,
+          "description": "Render the tagline."
+        },
+        "relatedBy": {
+          "type": "enum",
+          "required": true,
+          "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
+          "options": [
+            "collection",
+            "tags",
+            "category",
+            "upsell",
+            "crosssell",
+            "frequently_bought"
+          ]
+        },
+        "maxProducts": {
+          "type": "number",
+          "required": true,
+          "description": "Max products shown (4-8 recommended)."
+        },
+        "displayStyle": {
+          "type": "enum",
+          "required": true,
+          "description": "grid = static rows; carousel = Swiper slider.",
+          "options": [
+            "grid",
+            "carousel"
+          ]
+        },
+        "productCardTemplateId": {
+          "type": "string",
+          "required": true,
+          "description": "Optional saved product-card template id. Leave \"\" for the default card."
+        },
+        "gridColumns": {
+          "type": "enum",
+          "required": true,
+          "description": "Columns in grid mode.",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "containerPadding": {
+          "type": "enum",
+          "required": true,
+          "description": "Section padding.",
+          "options": [
+            "none",
+            "sm",
+            "md",
+            "lg"
+          ]
+        },
+        "textColor": {
+          "type": "color",
+          "required": true,
+          "description": "Token path (e.g. \"text.primary\") or hex."
+        }
+      },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\product\\RelatedProducts\\RelatedProducts.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\product\\RelatedProducts\\relatedproducts.meta.ts"
     },
     {
       "name": "StockIndicator",
@@ -29007,148 +29427,197 @@ export const registry: CompiledRegistry = {
       {
         "name": "CollectionsGrid",
         "label": "Collections Grid",
-        "description": "Collections Grid component (auto-derived).",
+        "description": "Grid of the store's product COLLECTIONS (curated groups) — each card is a collection with image, title, and optional product count/description. Collections data is injected by the storefront at render (configure which via selectedCollectionIds, or leave empty for all). For product CATEGORIES use CategoryGrid; for products use FeaturedProducts.",
         "category": "homepage",
         "intent": [
-          "collections",
-          "grid"
+          "browse",
+          "navigate",
+          "curate",
+          "showcase"
         ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
+        "visualRole": "block",
+        "dataDeps": [
+          "collections (storefront-injected)"
+        ],
+        "copyFields": [
+          "sectionTitle",
+          "sectionSubtitle"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "collections",
-          "grid"
+          "curated",
+          "grid",
+          "shop by collection",
+          "groups"
         ],
         "propSchema": {
           "sectionTitle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Shop by Collection\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Optional subheading."
           },
           "showTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
           },
           "columns": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Collection cards per row on desktop (2-4)."
           },
           "columnsTablet": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on tablet."
           },
           "columnsMobile": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on mobile."
           },
           "gap": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Gap between cards in px."
           },
           "showCollectionImage": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show each collection's image."
           },
           "showCollectionTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection titles."
           },
           "showProductCount": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show product count per collection."
           },
           "showDescription": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection descriptions."
           },
           "imageAspectRatio": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card image ratio: square | portrait | landscape."
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
           },
           "borderRadius": {
-            "type": "string"
-          },
-          "hoverEffect": {
-            "type": "string"
-          },
-          "collectionSource": {
-            "type": "string"
-          },
-          "selectedCollectionIds": {
-            "type": "array"
-          },
-          "loading": {
-            "type": "boolean"
-          },
-          "error": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card corner radius: none | sm | md | lg | full."
           }
         },
         "jsonSchema": {
           "sectionTitle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Shop by Collection\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Optional subheading."
           },
           "showTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
           },
           "columns": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Collection cards per row on desktop (2-4)."
           },
           "columnsTablet": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on tablet."
           },
           "columnsMobile": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on mobile."
           },
           "gap": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Gap between cards in px."
           },
           "showCollectionImage": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show each collection's image."
           },
           "showCollectionTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection titles."
           },
           "showProductCount": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show product count per collection."
           },
           "showDescription": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection descriptions."
           },
           "imageAspectRatio": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card image ratio: square | portrait | landscape."
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
           },
           "borderRadius": {
-            "type": "string"
-          },
-          "hoverEffect": {
-            "type": "string"
-          },
-          "collectionSource": {
-            "type": "string"
-          },
-          "selectedCollectionIds": {
-            "type": "array"
-          },
-          "loading": {
-            "type": "boolean"
-          },
-          "error": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card corner radius: none | sm | md | lg | full."
           }
         },
         "defaultProps": {
@@ -29176,7 +29645,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\CollectionsGrid.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\collectionsgrid.meta.ts"
       },
       {
         "name": "CountdownTimer",
@@ -30179,22 +30648,28 @@ export const registry: CompiledRegistry = {
             "type": "string"
           },
           "backgroundColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Section background. Token path (e.g. \"brand.primary\") or hex. PRECEDENCE: backgroundImage > gradientFrom/To > backgroundScheme > backgroundColor — this only applies when backgroundScheme is empty and no image/gradient is set. If the user asks for a background color and a scheme is active, also set backgroundScheme to \"\"."
           },
           "textColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Text color over the background. Token path or hex. Only applies when backgroundScheme is empty (schemes control their own text color)."
           },
           "inputBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input field background. Token path (e.g. \"ui.surface\") or hex."
           },
           "inputBorder": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input border color. Token path (e.g. \"ui.border\") or hex."
           },
           "buttonBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button label color. Token path or hex."
           },
           "borderRadius": {
             "type": "enum",
@@ -30205,6 +30680,53 @@ export const registry: CompiledRegistry = {
               "lg",
               "full"
             ]
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme background scheme. Takes precedence over backgroundColor — set to \"\" to use a custom backgroundColor. Schemes also control text color (textColor is ignored while a scheme is active).",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Optional background image URL — overrides all other background settings."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image (with overlayOpacity)."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength, e.g. \"50\" (percent) — used with backgroundImage."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start color — when set (with gradientTo), overrides scheme/color backgrounds."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end color."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding: sm | md | lg | xl."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content container width: sm | md | lg | full."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "Content alignment: left | center | right."
+          },
+          "minHeight": {
+            "type": "string",
+            "description": "Minimum section height."
           }
         },
         "jsonSchema": {
@@ -30257,22 +30779,28 @@ export const registry: CompiledRegistry = {
             "type": "string"
           },
           "backgroundColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Section background. Token path (e.g. \"brand.primary\") or hex. PRECEDENCE: backgroundImage > gradientFrom/To > backgroundScheme > backgroundColor — this only applies when backgroundScheme is empty and no image/gradient is set. If the user asks for a background color and a scheme is active, also set backgroundScheme to \"\"."
           },
           "textColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Text color over the background. Token path or hex. Only applies when backgroundScheme is empty (schemes control their own text color)."
           },
           "inputBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input field background. Token path (e.g. \"ui.surface\") or hex."
           },
           "inputBorder": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input border color. Token path (e.g. \"ui.border\") or hex."
           },
           "buttonBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button label color. Token path or hex."
           },
           "borderRadius": {
             "type": "enum",
@@ -30283,6 +30811,53 @@ export const registry: CompiledRegistry = {
               "lg",
               "full"
             ]
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme background scheme. Takes precedence over backgroundColor — set to \"\" to use a custom backgroundColor. Schemes also control text color (textColor is ignored while a scheme is active).",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Optional background image URL — overrides all other background settings."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image (with overlayOpacity)."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength, e.g. \"50\" (percent) — used with backgroundImage."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start color — when set (with gradientTo), overrides scheme/color backgrounds."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end color."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding: sm | md | lg | xl."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content container width: sm | md | lg | full."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "Content alignment: left | center | right."
+          },
+          "minHeight": {
+            "type": "string",
+            "description": "Minimum section height."
           }
         },
         "isContainer": false,
@@ -37094,53 +37669,318 @@ export const registry: CompiledRegistry = {
       },
       {
         "name": "RecentlyViewedProducts",
-        "label": "Recently Viewed Products",
-        "description": "Recently Viewed Products component (auto-derived).",
+        "label": "Recently Viewed",
+        "description": "Grid/carousel of products the shopper recently viewed (storefront-injected browsing history; renders empty for new visitors). Good near the footer or below the product page. For curated selections use FeaturedProducts; for related-to-product use RelatedProducts.",
         "category": "product",
         "intent": [
-          "recently",
-          "viewed",
-          "products"
+          "re-engage",
+          "browse-history",
+          "personalize"
         ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
+        "visualRole": "block",
+        "dataDeps": [
+          "visitor browsing history (storefront-injected)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [
+          "textColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
         "searchTags": [
-          "recently",
-          "viewed",
-          "products"
+          "recently viewed",
+          "history",
+          "browse",
+          "carousel",
+          "product grid"
         ],
-        "propSchema": {},
-        "jsonSchema": {},
-        "defaultProps": {},
+        "propSchema": {
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Recently Viewed\"."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.secondary\") or hex."
+          }
+        },
+        "jsonSchema": {
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Recently Viewed\"."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.secondary\") or hex."
+          }
+        },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\product\\RecentlyViewedProducts\\RecentlyViewedProducts.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\product\\RecentlyViewedProducts\\recentlyviewedproducts.meta.ts"
       },
       {
         "name": "RelatedProducts",
         "label": "Related Products",
-        "description": "Related Products component (auto-derived).",
+        "description": "A products grid/carousel showing products RELATED to the current product — how to relate is configured via relatedBy (collection/tags/category/upsell/crosssell/frequently_bought). The storefront resolves and injects the actual products at render; the editor shows the configured section. Use on PRODUCT pages. For curated/storefront-wide product sections use FeaturedProducts.",
         "category": "product",
         "intent": [
-          "related",
-          "products"
+          "cross-sell",
+          "upsell",
+          "recommend",
+          "related"
         ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
+        "visualRole": "block",
+        "dataDeps": [
+          "current product context (storefront-injected)"
+        ],
+        "copyFields": [
+          "title",
+          "tagline"
+        ],
+        "themeable": [
+          "textColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "related",
-          "products"
+          "recommendations",
+          "upsell",
+          "cross-sell",
+          "you may also like",
+          "product grid"
         ],
-        "propSchema": {},
-        "jsonSchema": {},
-        "defaultProps": {},
+        "propSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"You May Also Like\"."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "tagline": {
+            "type": "string",
+            "required": true,
+            "description": "Small subheading under the title."
+          },
+          "showTagline": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the tagline."
+          },
+          "relatedBy": {
+            "type": "enum",
+            "required": true,
+            "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
+            "options": [
+              "collection",
+              "tags",
+              "category",
+              "upsell",
+              "crosssell",
+              "frequently_bought"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productCardTemplateId": {
+            "type": "string",
+            "required": true,
+            "description": "Optional saved product-card template id. Leave \"\" for the default card."
+          },
+          "gridColumns": {
+            "type": "enum",
+            "required": true,
+            "description": "Columns in grid mode.",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          }
+        },
+        "jsonSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"You May Also Like\"."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "tagline": {
+            "type": "string",
+            "required": true,
+            "description": "Small subheading under the title."
+          },
+          "showTagline": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the tagline."
+          },
+          "relatedBy": {
+            "type": "enum",
+            "required": true,
+            "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
+            "options": [
+              "collection",
+              "tags",
+              "category",
+              "upsell",
+              "crosssell",
+              "frequently_bought"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productCardTemplateId": {
+            "type": "string",
+            "required": true,
+            "description": "Optional saved product-card template id. Leave \"\" for the default card."
+          },
+          "gridColumns": {
+            "type": "enum",
+            "required": true,
+            "description": "Columns in grid mode.",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          }
+        },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\product\\RelatedProducts\\RelatedProducts.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\product\\RelatedProducts\\relatedproducts.meta.ts"
       },
       {
         "name": "StockIndicator",
@@ -55178,6 +56018,229 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\category\\CategoryGrid\\categorygrid.meta.ts"
+      },
+      {
+        "name": "CollectionsGrid",
+        "label": "Collections Grid",
+        "description": "Grid of the store's product COLLECTIONS (curated groups) — each card is a collection with image, title, and optional product count/description. Collections data is injected by the storefront at render (configure which via selectedCollectionIds, or leave empty for all). For product CATEGORIES use CategoryGrid; for products use FeaturedProducts.",
+        "category": "homepage",
+        "intent": [
+          "browse",
+          "navigate",
+          "curate",
+          "showcase"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "collections (storefront-injected)"
+        ],
+        "copyFields": [
+          "sectionTitle",
+          "sectionSubtitle"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "collections",
+          "curated",
+          "grid",
+          "shop by collection",
+          "groups"
+        ],
+        "propSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Shop by Collection\"."
+          },
+          "sectionSubtitle": {
+            "type": "string",
+            "required": true,
+            "description": "Optional subheading."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Collection cards per row on desktop (2-4)."
+          },
+          "columnsTablet": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on tablet."
+          },
+          "columnsMobile": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on mobile."
+          },
+          "gap": {
+            "type": "number",
+            "required": true,
+            "description": "Gap between cards in px."
+          },
+          "showCollectionImage": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each collection's image."
+          },
+          "showCollectionTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection titles."
+          },
+          "showProductCount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show product count per collection."
+          },
+          "showDescription": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection descriptions."
+          },
+          "imageAspectRatio": {
+            "type": "string",
+            "required": true,
+            "description": "Card image ratio: square | portrait | landscape."
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          },
+          "borderRadius": {
+            "type": "string",
+            "required": true,
+            "description": "Card corner radius: none | sm | md | lg | full."
+          }
+        },
+        "jsonSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Shop by Collection\"."
+          },
+          "sectionSubtitle": {
+            "type": "string",
+            "required": true,
+            "description": "Optional subheading."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Collection cards per row on desktop (2-4)."
+          },
+          "columnsTablet": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on tablet."
+          },
+          "columnsMobile": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on mobile."
+          },
+          "gap": {
+            "type": "number",
+            "required": true,
+            "description": "Gap between cards in px."
+          },
+          "showCollectionImage": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each collection's image."
+          },
+          "showCollectionTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection titles."
+          },
+          "showProductCount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show product count per collection."
+          },
+          "showDescription": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection descriptions."
+          },
+          "imageAspectRatio": {
+            "type": "string",
+            "required": true,
+            "description": "Card image ratio: square | portrait | landscape."
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          },
+          "borderRadius": {
+            "type": "string",
+            "required": true,
+            "description": "Card corner radius: none | sm | md | lg | full."
+          }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Collection",
+          "sectionSubtitle": "Browse our curated collections",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCollectionImage": true,
+          "showCollectionTitle": true,
+          "showProductCount": true,
+          "showDescription": false,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "collectionSource": "all",
+          "selectedCollectionIds": [],
+          "loading": false,
+          "error": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\collectionsgrid.meta.ts"
       }
     ],
     "browse": [
@@ -55567,6 +56630,229 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\homepage\\CategoriesGrid\\categoriesgrid.meta.ts"
+      },
+      {
+        "name": "CollectionsGrid",
+        "label": "Collections Grid",
+        "description": "Grid of the store's product COLLECTIONS (curated groups) — each card is a collection with image, title, and optional product count/description. Collections data is injected by the storefront at render (configure which via selectedCollectionIds, or leave empty for all). For product CATEGORIES use CategoryGrid; for products use FeaturedProducts.",
+        "category": "homepage",
+        "intent": [
+          "browse",
+          "navigate",
+          "curate",
+          "showcase"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "collections (storefront-injected)"
+        ],
+        "copyFields": [
+          "sectionTitle",
+          "sectionSubtitle"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "collections",
+          "curated",
+          "grid",
+          "shop by collection",
+          "groups"
+        ],
+        "propSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Shop by Collection\"."
+          },
+          "sectionSubtitle": {
+            "type": "string",
+            "required": true,
+            "description": "Optional subheading."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Collection cards per row on desktop (2-4)."
+          },
+          "columnsTablet": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on tablet."
+          },
+          "columnsMobile": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on mobile."
+          },
+          "gap": {
+            "type": "number",
+            "required": true,
+            "description": "Gap between cards in px."
+          },
+          "showCollectionImage": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each collection's image."
+          },
+          "showCollectionTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection titles."
+          },
+          "showProductCount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show product count per collection."
+          },
+          "showDescription": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection descriptions."
+          },
+          "imageAspectRatio": {
+            "type": "string",
+            "required": true,
+            "description": "Card image ratio: square | portrait | landscape."
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          },
+          "borderRadius": {
+            "type": "string",
+            "required": true,
+            "description": "Card corner radius: none | sm | md | lg | full."
+          }
+        },
+        "jsonSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Shop by Collection\"."
+          },
+          "sectionSubtitle": {
+            "type": "string",
+            "required": true,
+            "description": "Optional subheading."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Collection cards per row on desktop (2-4)."
+          },
+          "columnsTablet": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on tablet."
+          },
+          "columnsMobile": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on mobile."
+          },
+          "gap": {
+            "type": "number",
+            "required": true,
+            "description": "Gap between cards in px."
+          },
+          "showCollectionImage": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each collection's image."
+          },
+          "showCollectionTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection titles."
+          },
+          "showProductCount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show product count per collection."
+          },
+          "showDescription": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection descriptions."
+          },
+          "imageAspectRatio": {
+            "type": "string",
+            "required": true,
+            "description": "Card image ratio: square | portrait | landscape."
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          },
+          "borderRadius": {
+            "type": "string",
+            "required": true,
+            "description": "Card corner radius: none | sm | md | lg | full."
+          }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Collection",
+          "sectionSubtitle": "Browse our curated collections",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCollectionImage": true,
+          "showCollectionTitle": true,
+          "showProductCount": true,
+          "showDescription": false,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "collectionSource": "all",
+          "selectedCollectionIds": [],
+          "loading": false,
+          "error": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\collectionsgrid.meta.ts"
       }
     ],
     "organize": [
@@ -67127,56 +68413,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\homepage\\FeaturedProducts\\featuredproducts.meta.ts"
-      },
-      {
-        "name": "RecentlyViewedProducts",
-        "label": "Recently Viewed Products",
-        "description": "Recently Viewed Products component (auto-derived).",
-        "category": "product",
-        "intent": [
-          "recently",
-          "viewed",
-          "products"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "recently",
-          "viewed",
-          "products"
-        ],
-        "propSchema": {},
-        "jsonSchema": {},
-        "defaultProps": {},
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\product\\RecentlyViewedProducts\\RecentlyViewedProducts.tsx (auto-derived)"
-      },
-      {
-        "name": "RelatedProducts",
-        "label": "Related Products",
-        "description": "Related Products component (auto-derived).",
-        "category": "product",
-        "intent": [
-          "related",
-          "products"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "related",
-          "products"
-        ],
-        "propSchema": {},
-        "jsonSchema": {},
-        "defaultProps": {},
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\product\\RelatedProducts\\RelatedProducts.tsx (auto-derived)"
       }
     ],
     "grid": [
@@ -68111,180 +69347,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
-      },
-      {
-        "name": "CollectionsGrid",
-        "label": "Collections Grid",
-        "description": "Collections Grid component (auto-derived).",
-        "category": "homepage",
-        "intent": [
-          "collections",
-          "grid"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "collections",
-          "grid"
-        ],
-        "propSchema": {
-          "sectionTitle": {
-            "type": "string"
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean"
-          },
-          "columns": {
-            "type": "number"
-          },
-          "columnsTablet": {
-            "type": "number"
-          },
-          "columnsMobile": {
-            "type": "number"
-          },
-          "gap": {
-            "type": "number"
-          },
-          "showCollectionImage": {
-            "type": "boolean"
-          },
-          "showCollectionTitle": {
-            "type": "boolean"
-          },
-          "showProductCount": {
-            "type": "boolean"
-          },
-          "showDescription": {
-            "type": "boolean"
-          },
-          "imageAspectRatio": {
-            "type": "string"
-          },
-          "backgroundColor": {
-            "type": "color"
-          },
-          "textColor": {
-            "type": "color"
-          },
-          "cardStyle": {
-            "type": "string"
-          },
-          "borderRadius": {
-            "type": "string"
-          },
-          "hoverEffect": {
-            "type": "string"
-          },
-          "collectionSource": {
-            "type": "string"
-          },
-          "selectedCollectionIds": {
-            "type": "array"
-          },
-          "loading": {
-            "type": "boolean"
-          },
-          "error": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "sectionTitle": {
-            "type": "string"
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean"
-          },
-          "columns": {
-            "type": "number"
-          },
-          "columnsTablet": {
-            "type": "number"
-          },
-          "columnsMobile": {
-            "type": "number"
-          },
-          "gap": {
-            "type": "number"
-          },
-          "showCollectionImage": {
-            "type": "boolean"
-          },
-          "showCollectionTitle": {
-            "type": "boolean"
-          },
-          "showProductCount": {
-            "type": "boolean"
-          },
-          "showDescription": {
-            "type": "boolean"
-          },
-          "imageAspectRatio": {
-            "type": "string"
-          },
-          "backgroundColor": {
-            "type": "color"
-          },
-          "textColor": {
-            "type": "color"
-          },
-          "cardStyle": {
-            "type": "string"
-          },
-          "borderRadius": {
-            "type": "string"
-          },
-          "hoverEffect": {
-            "type": "string"
-          },
-          "collectionSource": {
-            "type": "string"
-          },
-          "selectedCollectionIds": {
-            "type": "array"
-          },
-          "loading": {
-            "type": "boolean"
-          },
-          "error": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "sectionTitle": "Shop by Collection",
-          "sectionSubtitle": "Browse our curated collections",
-          "showTitle": true,
-          "columns": 4,
-          "columnsTablet": 3,
-          "columnsMobile": 2,
-          "gap": 24,
-          "showCollectionImage": true,
-          "showCollectionTitle": true,
-          "showProductCount": true,
-          "showDescription": false,
-          "imageAspectRatio": "square",
-          "backgroundColor": "#f9fafb",
-          "textColor": "#000000",
-          "cardStyle": "shadow",
-          "borderRadius": "lg",
-          "hoverEffect": "scale",
-          "collectionSource": "all",
-          "selectedCollectionIds": [],
-          "loading": false,
-          "error": ""
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\CollectionsGrid.tsx (auto-derived)"
       },
       {
         "name": "FeaturedProducts",
@@ -91695,152 +92757,201 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
       }
     ],
-    "collections": [
+    "curate": [
       {
         "name": "CollectionsGrid",
         "label": "Collections Grid",
-        "description": "Collections Grid component (auto-derived).",
+        "description": "Grid of the store's product COLLECTIONS (curated groups) — each card is a collection with image, title, and optional product count/description. Collections data is injected by the storefront at render (configure which via selectedCollectionIds, or leave empty for all). For product CATEGORIES use CategoryGrid; for products use FeaturedProducts.",
         "category": "homepage",
         "intent": [
-          "collections",
-          "grid"
+          "browse",
+          "navigate",
+          "curate",
+          "showcase"
         ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
+        "visualRole": "block",
+        "dataDeps": [
+          "collections (storefront-injected)"
+        ],
+        "copyFields": [
+          "sectionTitle",
+          "sectionSubtitle"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "collections",
-          "grid"
+          "curated",
+          "grid",
+          "shop by collection",
+          "groups"
         ],
         "propSchema": {
           "sectionTitle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Shop by Collection\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Optional subheading."
           },
           "showTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
           },
           "columns": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Collection cards per row on desktop (2-4)."
           },
           "columnsTablet": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on tablet."
           },
           "columnsMobile": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on mobile."
           },
           "gap": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Gap between cards in px."
           },
           "showCollectionImage": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show each collection's image."
           },
           "showCollectionTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection titles."
           },
           "showProductCount": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show product count per collection."
           },
           "showDescription": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection descriptions."
           },
           "imageAspectRatio": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card image ratio: square | portrait | landscape."
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
           },
           "borderRadius": {
-            "type": "string"
-          },
-          "hoverEffect": {
-            "type": "string"
-          },
-          "collectionSource": {
-            "type": "string"
-          },
-          "selectedCollectionIds": {
-            "type": "array"
-          },
-          "loading": {
-            "type": "boolean"
-          },
-          "error": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card corner radius: none | sm | md | lg | full."
           }
         },
         "jsonSchema": {
           "sectionTitle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Shop by Collection\"."
           },
           "sectionSubtitle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Optional subheading."
           },
           "showTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
           },
           "columns": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Collection cards per row on desktop (2-4)."
           },
           "columnsTablet": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on tablet."
           },
           "columnsMobile": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on mobile."
           },
           "gap": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Gap between cards in px."
           },
           "showCollectionImage": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show each collection's image."
           },
           "showCollectionTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection titles."
           },
           "showProductCount": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show product count per collection."
           },
           "showDescription": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection descriptions."
           },
           "imageAspectRatio": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card image ratio: square | portrait | landscape."
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
           },
           "cardStyle": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
           },
           "borderRadius": {
-            "type": "string"
-          },
-          "hoverEffect": {
-            "type": "string"
-          },
-          "collectionSource": {
-            "type": "string"
-          },
-          "selectedCollectionIds": {
-            "type": "array"
-          },
-          "loading": {
-            "type": "boolean"
-          },
-          "error": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Card corner radius: none | sm | md | lg | full."
           }
         },
         "defaultProps": {
@@ -91868,7 +92979,612 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\CollectionsGrid.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\collectionsgrid.meta.ts"
+      }
+    ],
+    "showcase": [
+      {
+        "name": "CollectionsGrid",
+        "label": "Collections Grid",
+        "description": "Grid of the store's product COLLECTIONS (curated groups) — each card is a collection with image, title, and optional product count/description. Collections data is injected by the storefront at render (configure which via selectedCollectionIds, or leave empty for all). For product CATEGORIES use CategoryGrid; for products use FeaturedProducts.",
+        "category": "homepage",
+        "intent": [
+          "browse",
+          "navigate",
+          "curate",
+          "showcase"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "collections (storefront-injected)"
+        ],
+        "copyFields": [
+          "sectionTitle",
+          "sectionSubtitle"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "collections",
+          "curated",
+          "grid",
+          "shop by collection",
+          "groups"
+        ],
+        "propSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Shop by Collection\"."
+          },
+          "sectionSubtitle": {
+            "type": "string",
+            "required": true,
+            "description": "Optional subheading."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Collection cards per row on desktop (2-4)."
+          },
+          "columnsTablet": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on tablet."
+          },
+          "columnsMobile": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on mobile."
+          },
+          "gap": {
+            "type": "number",
+            "required": true,
+            "description": "Gap between cards in px."
+          },
+          "showCollectionImage": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each collection's image."
+          },
+          "showCollectionTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection titles."
+          },
+          "showProductCount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show product count per collection."
+          },
+          "showDescription": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection descriptions."
+          },
+          "imageAspectRatio": {
+            "type": "string",
+            "required": true,
+            "description": "Card image ratio: square | portrait | landscape."
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          },
+          "borderRadius": {
+            "type": "string",
+            "required": true,
+            "description": "Card corner radius: none | sm | md | lg | full."
+          }
+        },
+        "jsonSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Shop by Collection\"."
+          },
+          "sectionSubtitle": {
+            "type": "string",
+            "required": true,
+            "description": "Optional subheading."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Collection cards per row on desktop (2-4)."
+          },
+          "columnsTablet": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on tablet."
+          },
+          "columnsMobile": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on mobile."
+          },
+          "gap": {
+            "type": "number",
+            "required": true,
+            "description": "Gap between cards in px."
+          },
+          "showCollectionImage": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each collection's image."
+          },
+          "showCollectionTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection titles."
+          },
+          "showProductCount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show product count per collection."
+          },
+          "showDescription": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection descriptions."
+          },
+          "imageAspectRatio": {
+            "type": "string",
+            "required": true,
+            "description": "Card image ratio: square | portrait | landscape."
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          },
+          "borderRadius": {
+            "type": "string",
+            "required": true,
+            "description": "Card corner radius: none | sm | md | lg | full."
+          }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Collection",
+          "sectionSubtitle": "Browse our curated collections",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCollectionImage": true,
+          "showCollectionTitle": true,
+          "showProductCount": true,
+          "showDescription": false,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "collectionSource": "all",
+          "selectedCollectionIds": [],
+          "loading": false,
+          "error": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\collectionsgrid.meta.ts"
+      },
+      {
+        "name": "HeroSection",
+        "label": "Hero Section",
+        "description": "A large above-the-fold banner with title, subtitle, optional image, and up to two CTAs.",
+        "category": "homepage",
+        "intent": [
+          "announce",
+          "showcase",
+          "promote",
+          "introduce"
+        ],
+        "visualRole": "above-fold",
+        "dataDeps": [],
+        "copyFields": [
+          "title",
+          "subtitle",
+          "description",
+          "primaryButtonText",
+          "secondaryButtonText"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor",
+          "gradientFrom",
+          "gradientTo"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "banner",
+          "header",
+          "splash",
+          "landing",
+          "announcement",
+          "hero"
+        ],
+        "propSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Headline text"
+          },
+          "subtitle": {
+            "type": "string",
+            "description": "Small uppercase text above the title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Body copy below the title"
+          },
+          "showPrimaryButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "primaryButtonText": {
+            "type": "string"
+          },
+          "primaryButtonLink": {
+            "type": "string"
+          },
+          "showSecondaryButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "secondaryButtonText": {
+            "type": "string"
+          },
+          "secondaryButtonLink": {
+            "type": "string"
+          },
+          "showImage": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "imagePosition": {
+            "type": "enum",
+            "options": [
+              "left",
+              "right",
+              "background"
+            ]
+          },
+          "imageAlt": {
+            "type": "string"
+          },
+          "height": {
+            "type": "enum",
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "full"
+            ]
+          },
+          "contentAlignment": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlignment": {
+            "type": "enum",
+            "options": [
+              "top",
+              "center",
+              "bottom"
+            ]
+          },
+          "textColor": {
+            "type": "string"
+          },
+          "overlayOpacity": {
+            "type": "number",
+            "min": 0,
+            "max": 100
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "backgroundGradient": {
+            "type": "boolean",
+            "required": true
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          }
+        },
+        "jsonSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Headline text"
+          },
+          "subtitle": {
+            "type": "string",
+            "description": "Small uppercase text above the title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Body copy below the title"
+          },
+          "showPrimaryButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "primaryButtonText": {
+            "type": "string"
+          },
+          "primaryButtonLink": {
+            "type": "string"
+          },
+          "showSecondaryButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "secondaryButtonText": {
+            "type": "string"
+          },
+          "secondaryButtonLink": {
+            "type": "string"
+          },
+          "showImage": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "imagePosition": {
+            "type": "enum",
+            "options": [
+              "left",
+              "right",
+              "background"
+            ]
+          },
+          "imageAlt": {
+            "type": "string"
+          },
+          "height": {
+            "type": "enum",
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "full"
+            ]
+          },
+          "contentAlignment": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlignment": {
+            "type": "enum",
+            "options": [
+              "top",
+              "center",
+              "bottom"
+            ]
+          },
+          "textColor": {
+            "type": "string"
+          },
+          "overlayOpacity": {
+            "type": "number",
+            "min": 0,
+            "max": 100
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "backgroundGradient": {
+            "type": "boolean",
+            "required": true
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\Hero\\hero.meta.ts"
+      },
+      {
+        "name": "PromotionalBannerGrid",
+        "label": "Promotional Banner Grid",
+        "description": "A grid of promotional banners (2/3 columns or 1-2/2-1 split) with background images, overlay opacity, text positioning, and CTA links. Pls use \"Announce\" or \"Promote\" intent keywords.",
+        "category": "homepage",
+        "intent": [
+          "promote",
+          "showcase",
+          "campaign",
+          "collection",
+          "featured",
+          "cta"
+        ],
+        "visualRole": "mid-page",
+        "dataDeps": [],
+        "copyFields": [
+          "title",
+          "subtitle",
+          "banners[].title",
+          "banners[].subtitle",
+          "banners[].ctaText"
+        ],
+        "themeable": [
+          "banners[].textColor"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "banner",
+          "grid",
+          "campaign",
+          "collection",
+          "promotion",
+          "cta",
+          "image-overlay"
+        ],
+        "propSchema": {
+          "title": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "layout": {
+            "type": "enum",
+            "options": [
+              "2-column",
+              "3-column",
+              "1-2-split",
+              "2-1-split"
+            ]
+          },
+          "spacing": {
+            "type": "enum",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "banners": {
+            "type": "array"
+          },
+          "borderRadius": {
+            "type": "enum",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "hoverEffect": {
+            "type": "enum",
+            "options": [
+              "zoom",
+              "overlay",
+              "lift",
+              "none"
+            ]
+          },
+          "minHeight": {
+            "type": "string"
+          }
+        },
+        "jsonSchema": {
+          "title": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "layout": {
+            "type": "enum",
+            "options": [
+              "2-column",
+              "3-column",
+              "1-2-split",
+              "2-1-split"
+            ]
+          },
+          "spacing": {
+            "type": "enum",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "banners": {
+            "type": "array"
+          },
+          "borderRadius": {
+            "type": "enum",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "hoverEffect": {
+            "type": "enum",
+            "options": [
+              "zoom",
+              "overlay",
+              "lift",
+              "none"
+            ]
+          },
+          "minHeight": {
+            "type": "string"
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\PromotionalBannerGrid\\promotionalbannergrid.meta.ts"
       }
     ],
     "countdown": [
@@ -95358,388 +97074,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\homepage\\Hero\\hero.meta.ts"
       }
     ],
-    "showcase": [
-      {
-        "name": "HeroSection",
-        "label": "Hero Section",
-        "description": "A large above-the-fold banner with title, subtitle, optional image, and up to two CTAs.",
-        "category": "homepage",
-        "intent": [
-          "announce",
-          "showcase",
-          "promote",
-          "introduce"
-        ],
-        "visualRole": "above-fold",
-        "dataDeps": [],
-        "copyFields": [
-          "title",
-          "subtitle",
-          "description",
-          "primaryButtonText",
-          "secondaryButtonText"
-        ],
-        "themeable": [
-          "backgroundColor",
-          "textColor",
-          "gradientFrom",
-          "gradientTo"
-        ],
-        "a11yRisk": "low",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "banner",
-          "header",
-          "splash",
-          "landing",
-          "announcement",
-          "hero"
-        ],
-        "propSchema": {
-          "title": {
-            "type": "string",
-            "required": true,
-            "description": "Headline text"
-          },
-          "subtitle": {
-            "type": "string",
-            "description": "Small uppercase text above the title"
-          },
-          "description": {
-            "type": "string",
-            "description": "Body copy below the title"
-          },
-          "showPrimaryButton": {
-            "type": "boolean",
-            "required": true
-          },
-          "primaryButtonText": {
-            "type": "string"
-          },
-          "primaryButtonLink": {
-            "type": "string"
-          },
-          "showSecondaryButton": {
-            "type": "boolean",
-            "required": true
-          },
-          "secondaryButtonText": {
-            "type": "string"
-          },
-          "secondaryButtonLink": {
-            "type": "string"
-          },
-          "showImage": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageUrl": {
-            "type": "string"
-          },
-          "imagePosition": {
-            "type": "enum",
-            "options": [
-              "left",
-              "right",
-              "background"
-            ]
-          },
-          "imageAlt": {
-            "type": "string"
-          },
-          "height": {
-            "type": "enum",
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl",
-              "full"
-            ]
-          },
-          "contentAlignment": {
-            "type": "enum",
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "verticalAlignment": {
-            "type": "enum",
-            "options": [
-              "top",
-              "center",
-              "bottom"
-            ]
-          },
-          "textColor": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number",
-            "min": 0,
-            "max": 100
-          },
-          "backgroundColor": {
-            "type": "string"
-          },
-          "backgroundGradient": {
-            "type": "boolean",
-            "required": true
-          },
-          "gradientFrom": {
-            "type": "string"
-          },
-          "gradientTo": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "title": {
-            "type": "string",
-            "required": true,
-            "description": "Headline text"
-          },
-          "subtitle": {
-            "type": "string",
-            "description": "Small uppercase text above the title"
-          },
-          "description": {
-            "type": "string",
-            "description": "Body copy below the title"
-          },
-          "showPrimaryButton": {
-            "type": "boolean",
-            "required": true
-          },
-          "primaryButtonText": {
-            "type": "string"
-          },
-          "primaryButtonLink": {
-            "type": "string"
-          },
-          "showSecondaryButton": {
-            "type": "boolean",
-            "required": true
-          },
-          "secondaryButtonText": {
-            "type": "string"
-          },
-          "secondaryButtonLink": {
-            "type": "string"
-          },
-          "showImage": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageUrl": {
-            "type": "string"
-          },
-          "imagePosition": {
-            "type": "enum",
-            "options": [
-              "left",
-              "right",
-              "background"
-            ]
-          },
-          "imageAlt": {
-            "type": "string"
-          },
-          "height": {
-            "type": "enum",
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl",
-              "full"
-            ]
-          },
-          "contentAlignment": {
-            "type": "enum",
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "verticalAlignment": {
-            "type": "enum",
-            "options": [
-              "top",
-              "center",
-              "bottom"
-            ]
-          },
-          "textColor": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number",
-            "min": 0,
-            "max": 100
-          },
-          "backgroundColor": {
-            "type": "string"
-          },
-          "backgroundGradient": {
-            "type": "boolean",
-            "required": true
-          },
-          "gradientFrom": {
-            "type": "string"
-          },
-          "gradientTo": {
-            "type": "string"
-          }
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\Hero\\hero.meta.ts"
-      },
-      {
-        "name": "PromotionalBannerGrid",
-        "label": "Promotional Banner Grid",
-        "description": "A grid of promotional banners (2/3 columns or 1-2/2-1 split) with background images, overlay opacity, text positioning, and CTA links. Pls use \"Announce\" or \"Promote\" intent keywords.",
-        "category": "homepage",
-        "intent": [
-          "promote",
-          "showcase",
-          "campaign",
-          "collection",
-          "featured",
-          "cta"
-        ],
-        "visualRole": "mid-page",
-        "dataDeps": [],
-        "copyFields": [
-          "title",
-          "subtitle",
-          "banners[].title",
-          "banners[].subtitle",
-          "banners[].ctaText"
-        ],
-        "themeable": [
-          "banners[].textColor"
-        ],
-        "a11yRisk": "low",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "banner",
-          "grid",
-          "campaign",
-          "collection",
-          "promotion",
-          "cta",
-          "image-overlay"
-        ],
-        "propSchema": {
-          "title": {
-            "type": "string"
-          },
-          "subtitle": {
-            "type": "string"
-          },
-          "layout": {
-            "type": "enum",
-            "options": [
-              "2-column",
-              "3-column",
-              "1-2-split",
-              "2-1-split"
-            ]
-          },
-          "spacing": {
-            "type": "enum",
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg"
-            ]
-          },
-          "banners": {
-            "type": "array"
-          },
-          "borderRadius": {
-            "type": "enum",
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg"
-            ]
-          },
-          "hoverEffect": {
-            "type": "enum",
-            "options": [
-              "zoom",
-              "overlay",
-              "lift",
-              "none"
-            ]
-          },
-          "minHeight": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "title": {
-            "type": "string"
-          },
-          "subtitle": {
-            "type": "string"
-          },
-          "layout": {
-            "type": "enum",
-            "options": [
-              "2-column",
-              "3-column",
-              "1-2-split",
-              "2-1-split"
-            ]
-          },
-          "spacing": {
-            "type": "enum",
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg"
-            ]
-          },
-          "banners": {
-            "type": "array"
-          },
-          "borderRadius": {
-            "type": "enum",
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg"
-            ]
-          },
-          "hoverEffect": {
-            "type": "enum",
-            "options": [
-              "zoom",
-              "overlay",
-              "lift",
-              "none"
-            ]
-          },
-          "minHeight": {
-            "type": "string"
-          }
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\PromotionalBannerGrid\\promotionalbannergrid.meta.ts"
-      }
-    ],
     "promote": [
       {
         "name": "HeroSection",
@@ -96456,22 +97790,28 @@ export const registry: CompiledRegistry = {
             "type": "string"
           },
           "backgroundColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Section background. Token path (e.g. \"brand.primary\") or hex. PRECEDENCE: backgroundImage > gradientFrom/To > backgroundScheme > backgroundColor — this only applies when backgroundScheme is empty and no image/gradient is set. If the user asks for a background color and a scheme is active, also set backgroundScheme to \"\"."
           },
           "textColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Text color over the background. Token path or hex. Only applies when backgroundScheme is empty (schemes control their own text color)."
           },
           "inputBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input field background. Token path (e.g. \"ui.surface\") or hex."
           },
           "inputBorder": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input border color. Token path (e.g. \"ui.border\") or hex."
           },
           "buttonBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button label color. Token path or hex."
           },
           "borderRadius": {
             "type": "enum",
@@ -96482,6 +97822,53 @@ export const registry: CompiledRegistry = {
               "lg",
               "full"
             ]
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme background scheme. Takes precedence over backgroundColor — set to \"\" to use a custom backgroundColor. Schemes also control text color (textColor is ignored while a scheme is active).",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Optional background image URL — overrides all other background settings."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image (with overlayOpacity)."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength, e.g. \"50\" (percent) — used with backgroundImage."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start color — when set (with gradientTo), overrides scheme/color backgrounds."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end color."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding: sm | md | lg | xl."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content container width: sm | md | lg | full."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "Content alignment: left | center | right."
+          },
+          "minHeight": {
+            "type": "string",
+            "description": "Minimum section height."
           }
         },
         "jsonSchema": {
@@ -96534,22 +97921,28 @@ export const registry: CompiledRegistry = {
             "type": "string"
           },
           "backgroundColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Section background. Token path (e.g. \"brand.primary\") or hex. PRECEDENCE: backgroundImage > gradientFrom/To > backgroundScheme > backgroundColor — this only applies when backgroundScheme is empty and no image/gradient is set. If the user asks for a background color and a scheme is active, also set backgroundScheme to \"\"."
           },
           "textColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Text color over the background. Token path or hex. Only applies when backgroundScheme is empty (schemes control their own text color)."
           },
           "inputBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input field background. Token path (e.g. \"ui.surface\") or hex."
           },
           "inputBorder": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input border color. Token path (e.g. \"ui.border\") or hex."
           },
           "buttonBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button label color. Token path or hex."
           },
           "borderRadius": {
             "type": "enum",
@@ -96560,6 +97953,53 @@ export const registry: CompiledRegistry = {
               "lg",
               "full"
             ]
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme background scheme. Takes precedence over backgroundColor — set to \"\" to use a custom backgroundColor. Schemes also control text color (textColor is ignored while a scheme is active).",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Optional background image URL — overrides all other background settings."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image (with overlayOpacity)."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength, e.g. \"50\" (percent) — used with backgroundImage."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start color — when set (with gradientTo), overrides scheme/color backgrounds."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end color."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding: sm | md | lg | xl."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content container width: sm | md | lg | full."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "Content alignment: left | center | right."
+          },
+          "minHeight": {
+            "type": "string",
+            "description": "Minimum section height."
           }
         },
         "isContainer": false,
@@ -96659,22 +98099,28 @@ export const registry: CompiledRegistry = {
             "type": "string"
           },
           "backgroundColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Section background. Token path (e.g. \"brand.primary\") or hex. PRECEDENCE: backgroundImage > gradientFrom/To > backgroundScheme > backgroundColor — this only applies when backgroundScheme is empty and no image/gradient is set. If the user asks for a background color and a scheme is active, also set backgroundScheme to \"\"."
           },
           "textColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Text color over the background. Token path or hex. Only applies when backgroundScheme is empty (schemes control their own text color)."
           },
           "inputBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input field background. Token path (e.g. \"ui.surface\") or hex."
           },
           "inputBorder": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input border color. Token path (e.g. \"ui.border\") or hex."
           },
           "buttonBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button label color. Token path or hex."
           },
           "borderRadius": {
             "type": "enum",
@@ -96685,6 +98131,53 @@ export const registry: CompiledRegistry = {
               "lg",
               "full"
             ]
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme background scheme. Takes precedence over backgroundColor — set to \"\" to use a custom backgroundColor. Schemes also control text color (textColor is ignored while a scheme is active).",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Optional background image URL — overrides all other background settings."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image (with overlayOpacity)."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength, e.g. \"50\" (percent) — used with backgroundImage."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start color — when set (with gradientTo), overrides scheme/color backgrounds."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end color."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding: sm | md | lg | xl."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content container width: sm | md | lg | full."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "Content alignment: left | center | right."
+          },
+          "minHeight": {
+            "type": "string",
+            "description": "Minimum section height."
           }
         },
         "jsonSchema": {
@@ -96737,22 +98230,28 @@ export const registry: CompiledRegistry = {
             "type": "string"
           },
           "backgroundColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Section background. Token path (e.g. \"brand.primary\") or hex. PRECEDENCE: backgroundImage > gradientFrom/To > backgroundScheme > backgroundColor — this only applies when backgroundScheme is empty and no image/gradient is set. If the user asks for a background color and a scheme is active, also set backgroundScheme to \"\"."
           },
           "textColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Text color over the background. Token path or hex. Only applies when backgroundScheme is empty (schemes control their own text color)."
           },
           "inputBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input field background. Token path (e.g. \"ui.surface\") or hex."
           },
           "inputBorder": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input border color. Token path (e.g. \"ui.border\") or hex."
           },
           "buttonBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button label color. Token path or hex."
           },
           "borderRadius": {
             "type": "enum",
@@ -96763,6 +98262,53 @@ export const registry: CompiledRegistry = {
               "lg",
               "full"
             ]
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme background scheme. Takes precedence over backgroundColor — set to \"\" to use a custom backgroundColor. Schemes also control text color (textColor is ignored while a scheme is active).",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Optional background image URL — overrides all other background settings."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image (with overlayOpacity)."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength, e.g. \"50\" (percent) — used with backgroundImage."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start color — when set (with gradientTo), overrides scheme/color backgrounds."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end color."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding: sm | md | lg | xl."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content container width: sm | md | lg | full."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "Content alignment: left | center | right."
+          },
+          "minHeight": {
+            "type": "string",
+            "description": "Minimum section height."
           }
         },
         "isContainer": false,
@@ -96862,22 +98408,28 @@ export const registry: CompiledRegistry = {
             "type": "string"
           },
           "backgroundColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Section background. Token path (e.g. \"brand.primary\") or hex. PRECEDENCE: backgroundImage > gradientFrom/To > backgroundScheme > backgroundColor — this only applies when backgroundScheme is empty and no image/gradient is set. If the user asks for a background color and a scheme is active, also set backgroundScheme to \"\"."
           },
           "textColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Text color over the background. Token path or hex. Only applies when backgroundScheme is empty (schemes control their own text color)."
           },
           "inputBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input field background. Token path (e.g. \"ui.surface\") or hex."
           },
           "inputBorder": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input border color. Token path (e.g. \"ui.border\") or hex."
           },
           "buttonBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button label color. Token path or hex."
           },
           "borderRadius": {
             "type": "enum",
@@ -96888,6 +98440,53 @@ export const registry: CompiledRegistry = {
               "lg",
               "full"
             ]
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme background scheme. Takes precedence over backgroundColor — set to \"\" to use a custom backgroundColor. Schemes also control text color (textColor is ignored while a scheme is active).",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Optional background image URL — overrides all other background settings."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image (with overlayOpacity)."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength, e.g. \"50\" (percent) — used with backgroundImage."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start color — when set (with gradientTo), overrides scheme/color backgrounds."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end color."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding: sm | md | lg | xl."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content container width: sm | md | lg | full."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "Content alignment: left | center | right."
+          },
+          "minHeight": {
+            "type": "string",
+            "description": "Minimum section height."
           }
         },
         "jsonSchema": {
@@ -96940,22 +98539,28 @@ export const registry: CompiledRegistry = {
             "type": "string"
           },
           "backgroundColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Section background. Token path (e.g. \"brand.primary\") or hex. PRECEDENCE: backgroundImage > gradientFrom/To > backgroundScheme > backgroundColor — this only applies when backgroundScheme is empty and no image/gradient is set. If the user asks for a background color and a scheme is active, also set backgroundScheme to \"\"."
           },
           "textColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Text color over the background. Token path or hex. Only applies when backgroundScheme is empty (schemes control their own text color)."
           },
           "inputBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input field background. Token path (e.g. \"ui.surface\") or hex."
           },
           "inputBorder": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input border color. Token path (e.g. \"ui.border\") or hex."
           },
           "buttonBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button label color. Token path or hex."
           },
           "borderRadius": {
             "type": "enum",
@@ -96966,6 +98571,53 @@ export const registry: CompiledRegistry = {
               "lg",
               "full"
             ]
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme background scheme. Takes precedence over backgroundColor — set to \"\" to use a custom backgroundColor. Schemes also control text color (textColor is ignored while a scheme is active).",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Optional background image URL — overrides all other background settings."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image (with overlayOpacity)."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength, e.g. \"50\" (percent) — used with backgroundImage."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start color — when set (with gradientTo), overrides scheme/color backgrounds."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end color."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding: sm | md | lg | xl."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content container width: sm | md | lg | full."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "Content alignment: left | center | right."
+          },
+          "minHeight": {
+            "type": "string",
+            "description": "Minimum section height."
           }
         },
         "isContainer": false,
@@ -97065,22 +98717,28 @@ export const registry: CompiledRegistry = {
             "type": "string"
           },
           "backgroundColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Section background. Token path (e.g. \"brand.primary\") or hex. PRECEDENCE: backgroundImage > gradientFrom/To > backgroundScheme > backgroundColor — this only applies when backgroundScheme is empty and no image/gradient is set. If the user asks for a background color and a scheme is active, also set backgroundScheme to \"\"."
           },
           "textColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Text color over the background. Token path or hex. Only applies when backgroundScheme is empty (schemes control their own text color)."
           },
           "inputBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input field background. Token path (e.g. \"ui.surface\") or hex."
           },
           "inputBorder": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input border color. Token path (e.g. \"ui.border\") or hex."
           },
           "buttonBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button label color. Token path or hex."
           },
           "borderRadius": {
             "type": "enum",
@@ -97091,6 +98749,53 @@ export const registry: CompiledRegistry = {
               "lg",
               "full"
             ]
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme background scheme. Takes precedence over backgroundColor — set to \"\" to use a custom backgroundColor. Schemes also control text color (textColor is ignored while a scheme is active).",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Optional background image URL — overrides all other background settings."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image (with overlayOpacity)."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength, e.g. \"50\" (percent) — used with backgroundImage."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start color — when set (with gradientTo), overrides scheme/color backgrounds."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end color."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding: sm | md | lg | xl."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content container width: sm | md | lg | full."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "Content alignment: left | center | right."
+          },
+          "minHeight": {
+            "type": "string",
+            "description": "Minimum section height."
           }
         },
         "jsonSchema": {
@@ -97143,22 +98848,28 @@ export const registry: CompiledRegistry = {
             "type": "string"
           },
           "backgroundColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Section background. Token path (e.g. \"brand.primary\") or hex. PRECEDENCE: backgroundImage > gradientFrom/To > backgroundScheme > backgroundColor — this only applies when backgroundScheme is empty and no image/gradient is set. If the user asks for a background color and a scheme is active, also set backgroundScheme to \"\"."
           },
           "textColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Text color over the background. Token path or hex. Only applies when backgroundScheme is empty (schemes control their own text color)."
           },
           "inputBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input field background. Token path (e.g. \"ui.surface\") or hex."
           },
           "inputBorder": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input border color. Token path (e.g. \"ui.border\") or hex."
           },
           "buttonBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button label color. Token path or hex."
           },
           "borderRadius": {
             "type": "enum",
@@ -97169,6 +98880,53 @@ export const registry: CompiledRegistry = {
               "lg",
               "full"
             ]
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme background scheme. Takes precedence over backgroundColor — set to \"\" to use a custom backgroundColor. Schemes also control text color (textColor is ignored while a scheme is active).",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Optional background image URL — overrides all other background settings."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image (with overlayOpacity)."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength, e.g. \"50\" (percent) — used with backgroundImage."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start color — when set (with gradientTo), overrides scheme/color backgrounds."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end color."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding: sm | md | lg | xl."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content container width: sm | md | lg | full."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "Content alignment: left | center | right."
+          },
+          "minHeight": {
+            "type": "string",
+            "description": "Minimum section height."
           }
         },
         "isContainer": false,
@@ -97268,22 +99026,28 @@ export const registry: CompiledRegistry = {
             "type": "string"
           },
           "backgroundColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Section background. Token path (e.g. \"brand.primary\") or hex. PRECEDENCE: backgroundImage > gradientFrom/To > backgroundScheme > backgroundColor — this only applies when backgroundScheme is empty and no image/gradient is set. If the user asks for a background color and a scheme is active, also set backgroundScheme to \"\"."
           },
           "textColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Text color over the background. Token path or hex. Only applies when backgroundScheme is empty (schemes control their own text color)."
           },
           "inputBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input field background. Token path (e.g. \"ui.surface\") or hex."
           },
           "inputBorder": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input border color. Token path (e.g. \"ui.border\") or hex."
           },
           "buttonBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button label color. Token path or hex."
           },
           "borderRadius": {
             "type": "enum",
@@ -97294,6 +99058,53 @@ export const registry: CompiledRegistry = {
               "lg",
               "full"
             ]
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme background scheme. Takes precedence over backgroundColor — set to \"\" to use a custom backgroundColor. Schemes also control text color (textColor is ignored while a scheme is active).",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Optional background image URL — overrides all other background settings."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image (with overlayOpacity)."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength, e.g. \"50\" (percent) — used with backgroundImage."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start color — when set (with gradientTo), overrides scheme/color backgrounds."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end color."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding: sm | md | lg | xl."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content container width: sm | md | lg | full."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "Content alignment: left | center | right."
+          },
+          "minHeight": {
+            "type": "string",
+            "description": "Minimum section height."
           }
         },
         "jsonSchema": {
@@ -97346,22 +99157,28 @@ export const registry: CompiledRegistry = {
             "type": "string"
           },
           "backgroundColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Section background. Token path (e.g. \"brand.primary\") or hex. PRECEDENCE: backgroundImage > gradientFrom/To > backgroundScheme > backgroundColor — this only applies when backgroundScheme is empty and no image/gradient is set. If the user asks for a background color and a scheme is active, also set backgroundScheme to \"\"."
           },
           "textColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Text color over the background. Token path or hex. Only applies when backgroundScheme is empty (schemes control their own text color)."
           },
           "inputBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input field background. Token path (e.g. \"ui.surface\") or hex."
           },
           "inputBorder": {
-            "type": "string"
+            "type": "color",
+            "description": "Email input border color. Token path (e.g. \"ui.border\") or hex."
           },
           "buttonBackground": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Subscribe button label color. Token path or hex."
           },
           "borderRadius": {
             "type": "enum",
@@ -97372,6 +99189,53 @@ export const registry: CompiledRegistry = {
               "lg",
               "full"
             ]
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme background scheme. Takes precedence over backgroundColor — set to \"\" to use a custom backgroundColor. Schemes also control text color (textColor is ignored while a scheme is active).",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Optional background image URL — overrides all other background settings."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image (with overlayOpacity)."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength, e.g. \"50\" (percent) — used with backgroundImage."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start color — when set (with gradientTo), overrides scheme/color backgrounds."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end color."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding: sm | md | lg | xl."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content container width: sm | md | lg | full."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "Content alignment: left | center | right."
+          },
+          "minHeight": {
+            "type": "string",
+            "description": "Minimum section height."
           }
         },
         "isContainer": false,
@@ -120690,86 +122554,1161 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\product\\QuantitySelector\\quantityselector.meta.ts"
       }
     ],
-    "recently": [
+    "re-engage": [
       {
         "name": "RecentlyViewedProducts",
-        "label": "Recently Viewed Products",
-        "description": "Recently Viewed Products component (auto-derived).",
+        "label": "Recently Viewed",
+        "description": "Grid/carousel of products the shopper recently viewed (storefront-injected browsing history; renders empty for new visitors). Good near the footer or below the product page. For curated selections use FeaturedProducts; for related-to-product use RelatedProducts.",
         "category": "product",
         "intent": [
-          "recently",
-          "viewed",
-          "products"
+          "re-engage",
+          "browse-history",
+          "personalize"
         ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
+        "visualRole": "block",
+        "dataDeps": [
+          "visitor browsing history (storefront-injected)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [
+          "textColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
         "searchTags": [
-          "recently",
-          "viewed",
-          "products"
+          "recently viewed",
+          "history",
+          "browse",
+          "carousel",
+          "product grid"
         ],
-        "propSchema": {},
-        "jsonSchema": {},
-        "defaultProps": {},
+        "propSchema": {
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Recently Viewed\"."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.secondary\") or hex."
+          }
+        },
+        "jsonSchema": {
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Recently Viewed\"."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.secondary\") or hex."
+          }
+        },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\product\\RecentlyViewedProducts\\RecentlyViewedProducts.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\product\\RecentlyViewedProducts\\recentlyviewedproducts.meta.ts"
       }
     ],
-    "viewed": [
+    "browse-history": [
       {
         "name": "RecentlyViewedProducts",
-        "label": "Recently Viewed Products",
-        "description": "Recently Viewed Products component (auto-derived).",
+        "label": "Recently Viewed",
+        "description": "Grid/carousel of products the shopper recently viewed (storefront-injected browsing history; renders empty for new visitors). Good near the footer or below the product page. For curated selections use FeaturedProducts; for related-to-product use RelatedProducts.",
         "category": "product",
         "intent": [
-          "recently",
-          "viewed",
-          "products"
+          "re-engage",
+          "browse-history",
+          "personalize"
         ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
+        "visualRole": "block",
+        "dataDeps": [
+          "visitor browsing history (storefront-injected)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [
+          "textColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
         "searchTags": [
-          "recently",
-          "viewed",
-          "products"
+          "recently viewed",
+          "history",
+          "browse",
+          "carousel",
+          "product grid"
         ],
-        "propSchema": {},
-        "jsonSchema": {},
-        "defaultProps": {},
+        "propSchema": {
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Recently Viewed\"."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.secondary\") or hex."
+          }
+        },
+        "jsonSchema": {
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Recently Viewed\"."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.secondary\") or hex."
+          }
+        },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\product\\RecentlyViewedProducts\\RecentlyViewedProducts.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\product\\RecentlyViewedProducts\\recentlyviewedproducts.meta.ts"
+      }
+    ],
+    "personalize": [
+      {
+        "name": "RecentlyViewedProducts",
+        "label": "Recently Viewed",
+        "description": "Grid/carousel of products the shopper recently viewed (storefront-injected browsing history; renders empty for new visitors). Good near the footer or below the product page. For curated selections use FeaturedProducts; for related-to-product use RelatedProducts.",
+        "category": "product",
+        "intent": [
+          "re-engage",
+          "browse-history",
+          "personalize"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "visitor browsing history (storefront-injected)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [
+          "textColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "recently viewed",
+          "history",
+          "browse",
+          "carousel",
+          "product grid"
+        ],
+        "propSchema": {
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Recently Viewed\"."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.secondary\") or hex."
+          }
+        },
+        "jsonSchema": {
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Recently Viewed\"."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.secondary\") or hex."
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\product\\RecentlyViewedProducts\\recentlyviewedproducts.meta.ts"
+      }
+    ],
+    "cross-sell": [
+      {
+        "name": "RelatedProducts",
+        "label": "Related Products",
+        "description": "A products grid/carousel showing products RELATED to the current product — how to relate is configured via relatedBy (collection/tags/category/upsell/crosssell/frequently_bought). The storefront resolves and injects the actual products at render; the editor shows the configured section. Use on PRODUCT pages. For curated/storefront-wide product sections use FeaturedProducts.",
+        "category": "product",
+        "intent": [
+          "cross-sell",
+          "upsell",
+          "recommend",
+          "related"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "current product context (storefront-injected)"
+        ],
+        "copyFields": [
+          "title",
+          "tagline"
+        ],
+        "themeable": [
+          "textColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "related",
+          "recommendations",
+          "upsell",
+          "cross-sell",
+          "you may also like",
+          "product grid"
+        ],
+        "propSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"You May Also Like\"."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "tagline": {
+            "type": "string",
+            "required": true,
+            "description": "Small subheading under the title."
+          },
+          "showTagline": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the tagline."
+          },
+          "relatedBy": {
+            "type": "enum",
+            "required": true,
+            "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
+            "options": [
+              "collection",
+              "tags",
+              "category",
+              "upsell",
+              "crosssell",
+              "frequently_bought"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productCardTemplateId": {
+            "type": "string",
+            "required": true,
+            "description": "Optional saved product-card template id. Leave \"\" for the default card."
+          },
+          "gridColumns": {
+            "type": "enum",
+            "required": true,
+            "description": "Columns in grid mode.",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          }
+        },
+        "jsonSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"You May Also Like\"."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "tagline": {
+            "type": "string",
+            "required": true,
+            "description": "Small subheading under the title."
+          },
+          "showTagline": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the tagline."
+          },
+          "relatedBy": {
+            "type": "enum",
+            "required": true,
+            "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
+            "options": [
+              "collection",
+              "tags",
+              "category",
+              "upsell",
+              "crosssell",
+              "frequently_bought"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productCardTemplateId": {
+            "type": "string",
+            "required": true,
+            "description": "Optional saved product-card template id. Leave \"\" for the default card."
+          },
+          "gridColumns": {
+            "type": "enum",
+            "required": true,
+            "description": "Columns in grid mode.",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\product\\RelatedProducts\\relatedproducts.meta.ts"
+      }
+    ],
+    "upsell": [
+      {
+        "name": "RelatedProducts",
+        "label": "Related Products",
+        "description": "A products grid/carousel showing products RELATED to the current product — how to relate is configured via relatedBy (collection/tags/category/upsell/crosssell/frequently_bought). The storefront resolves and injects the actual products at render; the editor shows the configured section. Use on PRODUCT pages. For curated/storefront-wide product sections use FeaturedProducts.",
+        "category": "product",
+        "intent": [
+          "cross-sell",
+          "upsell",
+          "recommend",
+          "related"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "current product context (storefront-injected)"
+        ],
+        "copyFields": [
+          "title",
+          "tagline"
+        ],
+        "themeable": [
+          "textColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "related",
+          "recommendations",
+          "upsell",
+          "cross-sell",
+          "you may also like",
+          "product grid"
+        ],
+        "propSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"You May Also Like\"."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "tagline": {
+            "type": "string",
+            "required": true,
+            "description": "Small subheading under the title."
+          },
+          "showTagline": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the tagline."
+          },
+          "relatedBy": {
+            "type": "enum",
+            "required": true,
+            "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
+            "options": [
+              "collection",
+              "tags",
+              "category",
+              "upsell",
+              "crosssell",
+              "frequently_bought"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productCardTemplateId": {
+            "type": "string",
+            "required": true,
+            "description": "Optional saved product-card template id. Leave \"\" for the default card."
+          },
+          "gridColumns": {
+            "type": "enum",
+            "required": true,
+            "description": "Columns in grid mode.",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          }
+        },
+        "jsonSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"You May Also Like\"."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "tagline": {
+            "type": "string",
+            "required": true,
+            "description": "Small subheading under the title."
+          },
+          "showTagline": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the tagline."
+          },
+          "relatedBy": {
+            "type": "enum",
+            "required": true,
+            "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
+            "options": [
+              "collection",
+              "tags",
+              "category",
+              "upsell",
+              "crosssell",
+              "frequently_bought"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productCardTemplateId": {
+            "type": "string",
+            "required": true,
+            "description": "Optional saved product-card template id. Leave \"\" for the default card."
+          },
+          "gridColumns": {
+            "type": "enum",
+            "required": true,
+            "description": "Columns in grid mode.",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\product\\RelatedProducts\\relatedproducts.meta.ts"
+      }
+    ],
+    "recommend": [
+      {
+        "name": "RelatedProducts",
+        "label": "Related Products",
+        "description": "A products grid/carousel showing products RELATED to the current product — how to relate is configured via relatedBy (collection/tags/category/upsell/crosssell/frequently_bought). The storefront resolves and injects the actual products at render; the editor shows the configured section. Use on PRODUCT pages. For curated/storefront-wide product sections use FeaturedProducts.",
+        "category": "product",
+        "intent": [
+          "cross-sell",
+          "upsell",
+          "recommend",
+          "related"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "current product context (storefront-injected)"
+        ],
+        "copyFields": [
+          "title",
+          "tagline"
+        ],
+        "themeable": [
+          "textColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "related",
+          "recommendations",
+          "upsell",
+          "cross-sell",
+          "you may also like",
+          "product grid"
+        ],
+        "propSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"You May Also Like\"."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "tagline": {
+            "type": "string",
+            "required": true,
+            "description": "Small subheading under the title."
+          },
+          "showTagline": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the tagline."
+          },
+          "relatedBy": {
+            "type": "enum",
+            "required": true,
+            "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
+            "options": [
+              "collection",
+              "tags",
+              "category",
+              "upsell",
+              "crosssell",
+              "frequently_bought"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productCardTemplateId": {
+            "type": "string",
+            "required": true,
+            "description": "Optional saved product-card template id. Leave \"\" for the default card."
+          },
+          "gridColumns": {
+            "type": "enum",
+            "required": true,
+            "description": "Columns in grid mode.",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          }
+        },
+        "jsonSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"You May Also Like\"."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "tagline": {
+            "type": "string",
+            "required": true,
+            "description": "Small subheading under the title."
+          },
+          "showTagline": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the tagline."
+          },
+          "relatedBy": {
+            "type": "enum",
+            "required": true,
+            "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
+            "options": [
+              "collection",
+              "tags",
+              "category",
+              "upsell",
+              "crosssell",
+              "frequently_bought"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productCardTemplateId": {
+            "type": "string",
+            "required": true,
+            "description": "Optional saved product-card template id. Leave \"\" for the default card."
+          },
+          "gridColumns": {
+            "type": "enum",
+            "required": true,
+            "description": "Columns in grid mode.",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\product\\RelatedProducts\\relatedproducts.meta.ts"
       }
     ],
     "related": [
       {
         "name": "RelatedProducts",
         "label": "Related Products",
-        "description": "Related Products component (auto-derived).",
+        "description": "A products grid/carousel showing products RELATED to the current product — how to relate is configured via relatedBy (collection/tags/category/upsell/crosssell/frequently_bought). The storefront resolves and injects the actual products at render; the editor shows the configured section. Use on PRODUCT pages. For curated/storefront-wide product sections use FeaturedProducts.",
         "category": "product",
         "intent": [
-          "related",
-          "products"
+          "cross-sell",
+          "upsell",
+          "recommend",
+          "related"
         ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
+        "visualRole": "block",
+        "dataDeps": [
+          "current product context (storefront-injected)"
+        ],
+        "copyFields": [
+          "title",
+          "tagline"
+        ],
+        "themeable": [
+          "textColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "related",
-          "products"
+          "recommendations",
+          "upsell",
+          "cross-sell",
+          "you may also like",
+          "product grid"
         ],
-        "propSchema": {},
-        "jsonSchema": {},
-        "defaultProps": {},
+        "propSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"You May Also Like\"."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "tagline": {
+            "type": "string",
+            "required": true,
+            "description": "Small subheading under the title."
+          },
+          "showTagline": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the tagline."
+          },
+          "relatedBy": {
+            "type": "enum",
+            "required": true,
+            "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
+            "options": [
+              "collection",
+              "tags",
+              "category",
+              "upsell",
+              "crosssell",
+              "frequently_bought"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productCardTemplateId": {
+            "type": "string",
+            "required": true,
+            "description": "Optional saved product-card template id. Leave \"\" for the default card."
+          },
+          "gridColumns": {
+            "type": "enum",
+            "required": true,
+            "description": "Columns in grid mode.",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          }
+        },
+        "jsonSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"You May Also Like\"."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "tagline": {
+            "type": "string",
+            "required": true,
+            "description": "Small subheading under the title."
+          },
+          "showTagline": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the tagline."
+          },
+          "relatedBy": {
+            "type": "enum",
+            "required": true,
+            "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
+            "options": [
+              "collection",
+              "tags",
+              "category",
+              "upsell",
+              "crosssell",
+              "frequently_bought"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productCardTemplateId": {
+            "type": "string",
+            "required": true,
+            "description": "Optional saved product-card template id. Leave \"\" for the default card."
+          },
+          "gridColumns": {
+            "type": "enum",
+            "required": true,
+            "description": "Columns in grid mode.",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          }
+        },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\product\\RelatedProducts\\RelatedProducts.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\product\\RelatedProducts\\relatedproducts.meta.ts"
       },
       {
         "name": "ProductCarousel",

@@ -1,0 +1,29 @@
+export const accountSidebarMeta = {
+  name: 'AccountSidebar',
+  label: 'Account Sidebar',
+  description:
+    'The account area navigation: orders / profile / addresses / wishlist / payment methods / logout links. Controls which sections are reachable. Pairs with AccountContent.',
+  category: 'account',
+  intent: ['account', 'navigate', 'self-serve'],
+  visualRole: 'sidebar',
+  dataDeps: [],
+  copyFields: [],
+  themeable: [],
+  a11yRisk: 'low',
+  mobileBehavior: 'responsive',
+  searchTags: ['account', 'sidebar', 'menu', 'navigation', 'customer'],
+  props: {
+    showOrders: { type: 'boolean', required: true, description: 'Orders link.' },
+    showProfile: { type: 'boolean', required: true, description: 'Profile link.' },
+    showAddresses: { type: 'boolean', required: true, description: 'Addresses link.' },
+    showWishlist: { type: 'boolean', required: true, description: 'Wishlist link.' },
+    showPaymentMethods: { type: 'boolean', required: true, description: 'Payment methods link.' },
+    showConcierge: { type: 'boolean', required: true, description: 'Concierge/support link.' },
+    showRewards: { type: 'boolean', required: true, description: 'Rewards link.' },
+    showLogout: { type: 'boolean', required: true, description: 'Logout link.' },
+    style: { type: 'enum', options: ['standard', 'luxury'], required: true, description: 'Visual variant.' },
+    activeView: { type: 'string', required: true, description: 'Initially highlighted item, e.g. "orders".' },
+  },
+} as const;
+
+export type AccountSidebarMeta = typeof accountSidebarMeta;

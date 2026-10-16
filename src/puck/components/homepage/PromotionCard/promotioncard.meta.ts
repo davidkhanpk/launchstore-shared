@@ -1,0 +1,34 @@
+export const promotionCardMeta = {
+  name: 'PromotionCard',
+  label: 'Promotion Card',
+  description:
+    'A single promotional card: headline, description, CTA button — with the full section background model (image > gradient > scheme > color). Use inside PromotionalBannerGrid for multi-offer layouts.',
+  category: 'homepage',
+  intent: ['promote', 'offer', 'announce'],
+  visualRole: 'card',
+  dataDeps: [],
+  copyFields: ['title', 'description', 'buttonText'],
+  themeable: ['backgroundColor', 'textColor', 'buttonColor', 'buttonTextColor'],
+  a11yRisk: 'low',
+  mobileBehavior: 'responsive',
+  searchTags: ['promo', 'offer', 'card', 'sale', 'banner', 'cta'],
+  props: {
+    title: { type: 'string', required: true, description: 'Headline, e.g. "Special Offer".' },
+    description: { type: 'string', required: true, description: 'One-line offer description.' },
+    buttonText: { type: 'string', required: true, description: 'CTA button label.' },
+    buttonHref: { type: 'string', required: true, description: 'CTA link URL.' },
+    backgroundColor: { type: 'color', required: true, description: 'Card background. Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to "" when using a custom color.' },
+    textColor: { type: 'color', required: true, description: 'Text color. Token path or hex. Ignored while a scheme is active.' },
+    buttonColor: { type: 'color', required: true, description: 'CTA button background. Token path (e.g. "button.primary.background") or hex.' },
+    buttonTextColor: { type: 'color', required: true, description: 'CTA label color.' },
+    borderRadius: { type: 'string', required: true, description: 'Corner radius: none | sm | md | lg | full.' },
+    backgroundScheme: { type: 'enum', options: ['', 'light', 'dark', 'accent', 'subtle'], description: 'Theme scheme — overrides backgroundColor while set; also controls text color.' },
+    backgroundImage: { type: 'string', description: 'Background image URL — overrides all other backgrounds.' },
+    overlayColor: { type: 'color', description: 'Overlay tint over a background image.' },
+    overlayOpacity: { type: 'string', description: 'Overlay strength in percent, e.g. "40".' },
+    gradientFrom: { type: 'color', description: 'Gradient start — overrides scheme/color when set.' },
+    gradientTo: { type: 'color', description: 'Gradient end.' },
+  },
+} as const;
+
+export type PromotionCardMeta = typeof promotionCardMeta;

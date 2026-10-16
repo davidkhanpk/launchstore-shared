@@ -1,0 +1,27 @@
+export const headerActionsMeta = {
+    name: 'HeaderActions',
+    label: 'Header Actions',
+    description: 'The header icon cluster: search, account, wishlist, cart (with item-count badge). Part of the site header; not a standalone section.',
+    category: 'navigation',
+    intent: ['navigate', 'cart', 'search'],
+    visualRole: 'header-cluster',
+    dataDeps: ['cart count (host-injected)'],
+    copyFields: [],
+    themeable: ['color'],
+    a11yRisk: 'medium',
+    a11yNotes: 'Icons need accessible labels — verify the host provides aria-labels.',
+    mobileBehavior: 'responsive',
+    searchTags: ['header', 'icons', 'cart', 'search', 'account'],
+    props: {
+        showSearch: { type: 'boolean', required: true, description: 'Show the search icon.' },
+        showAccount: { type: 'boolean', required: true, description: 'Show the account icon.' },
+        showWishlist: { type: 'boolean', required: true, description: 'Show the wishlist icon.' },
+        showCart: { type: 'boolean', required: true, description: 'Show the cart icon with badge.' },
+        iconSize: { type: 'enum', options: ['sm', 'md', 'lg'], required: true, description: 'Icon size.' },
+        gap: { type: 'enum', options: ['sm', 'md', 'lg'], required: true, description: 'Spacing between icons.' },
+        alignment: { type: 'enum', options: ['left', 'center', 'right'], required: true, description: 'Cluster alignment.' },
+        color: { type: 'color', required: true, description: 'Icon color. Token path (e.g. "text.primary") or hex.' },
+        cartCount: { type: 'number', required: true, description: 'Cart badge count (host overrides live).' },
+    },
+};
+//# sourceMappingURL=headeractions.meta.js.map

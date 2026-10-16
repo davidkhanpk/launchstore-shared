@@ -36,70 +36,105 @@ export interface CompiledRegistry {
 }
 export const registry: CompiledRegistry = {
   "version": "1.0.0",
-  "generatedAt": "2026-10-16T06:44:29.037Z",
+  "generatedAt": "2026-10-16T13:28:44.313Z",
   "total": 141,
   "entries": [
     {
       "name": "AccountContent",
       "label": "Account Content",
-      "description": "Account Content component (auto-derived).",
+      "description": "The customer account dashboard body — configurable panels: recent orders, wishlist, recommendations, loyalty points. Account data is storefront-injected; the editor shows sample panels. Pairs with AccountSidebar.",
       "category": "account",
       "intent": [
         "account",
-        "content"
+        "self-serve"
       ],
-      "dataDeps": [],
+      "visualRole": "main",
+      "dataDeps": [
+        "customer account data (storefront-injected)"
+      ],
       "copyFields": [],
       "themeable": [],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
         "account",
-        "content"
+        "dashboard",
+        "orders",
+        "loyalty",
+        "customer"
       ],
       "propSchema": {
         "defaultView": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Initially active panel, e.g. \"dashboard\"."
         },
         "showRecentOrders": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the recent orders panel."
         },
         "showWishlist": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the wishlist panel."
         },
         "showRecommendations": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show recommended products."
         },
         "showLoyaltyPoints": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the loyalty points panel."
         },
         "showPersonalStylist": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the personal-stylist panel."
         },
         "luxuryStyle": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Lighter typography variant."
         }
       },
       "jsonSchema": {
         "defaultView": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Initially active panel, e.g. \"dashboard\"."
         },
         "showRecentOrders": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the recent orders panel."
         },
         "showWishlist": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the wishlist panel."
         },
         "showRecommendations": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show recommended products."
         },
         "showLoyaltyPoints": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the loyalty points panel."
         },
         "showPersonalStylist": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the personal-stylist panel."
         },
         "luxuryStyle": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Lighter typography variant."
         }
       },
       "defaultProps": {
@@ -113,7 +148,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\account\\AccountContent\\AccountContent.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\account\\AccountContent\\accountcontent.meta.ts"
     },
     {
       "name": "AccountProfile",
@@ -268,82 +303,136 @@ export const registry: CompiledRegistry = {
     {
       "name": "AccountSidebar",
       "label": "Account Sidebar",
-      "description": "Account Sidebar component (auto-derived).",
+      "description": "The account area navigation: orders / profile / addresses / wishlist / payment methods / logout links. Controls which sections are reachable. Pairs with AccountContent.",
       "category": "account",
       "intent": [
         "account",
-        "sidebar"
+        "navigate",
+        "self-serve"
       ],
+      "visualRole": "sidebar",
       "dataDeps": [],
       "copyFields": [],
       "themeable": [],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
         "account",
-        "sidebar"
+        "sidebar",
+        "menu",
+        "navigation",
+        "customer"
       ],
       "propSchema": {
         "showOrders": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Orders link."
         },
         "showProfile": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Profile link."
         },
         "showAddresses": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Addresses link."
         },
         "showWishlist": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Wishlist link."
         },
         "showPaymentMethods": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Payment methods link."
         },
         "showConcierge": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Concierge/support link."
         },
         "showRewards": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Rewards link."
         },
         "showLogout": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Logout link."
         },
         "style": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Visual variant.",
+          "options": [
+            "standard",
+            "luxury"
+          ]
         },
         "activeView": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Initially highlighted item, e.g. \"orders\"."
         }
       },
       "jsonSchema": {
         "showOrders": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Orders link."
         },
         "showProfile": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Profile link."
         },
         "showAddresses": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Addresses link."
         },
         "showWishlist": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Wishlist link."
         },
         "showPaymentMethods": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Payment methods link."
         },
         "showConcierge": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Concierge/support link."
         },
         "showRewards": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Rewards link."
         },
         "showLogout": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Logout link."
         },
         "style": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Visual variant.",
+          "options": [
+            "standard",
+            "luxury"
+          ]
         },
         "activeView": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Initially highlighted item, e.g. \"orders\"."
         }
       },
       "defaultProps": {
@@ -360,7 +449,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\account\\AccountSidebar\\AccountSidebar.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\account\\AccountSidebar\\accountsidebar.meta.ts"
     },
     {
       "name": "AddressBook",
@@ -1926,136 +2015,193 @@ export const registry: CompiledRegistry = {
     {
       "name": "CategoryHero",
       "label": "Category Hero",
-      "description": "Category Hero component (auto-derived).",
+      "description": "Category page banner: category image, title, and description over the full section background model (image > gradient > scheme > color). The category data comes from page context (storefront-injected).",
       "category": "category",
       "intent": [
-        "category",
-        "hero"
+        "announce",
+        "introduce"
       ],
-      "dataDeps": [],
+      "visualRole": "above-fold",
+      "dataDeps": [
+        "category title/description/image (page context)"
+      ],
       "copyFields": [],
-      "themeable": [],
+      "themeable": [
+        "backgroundColor",
+        "textColor"
+      ],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
         "category",
-        "hero"
+        "hero",
+        "banner",
+        "header"
       ],
       "propSchema": {
         "showImage": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the category image."
         },
         "showTitle": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the category title."
         },
         "showDescription": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the category description."
         },
         "style": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "luxury = lighter type, wider tracking.",
+          "options": [
+            "standard",
+            "luxury"
+          ]
         },
         "backgroundColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
         },
         "textColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path or hex. Ignored while a scheme is active."
         },
         "backgroundScheme": {
-          "type": "string"
+          "type": "enum",
+          "description": "Theme scheme — overrides backgroundColor while set.",
+          "options": [
+            "",
+            "light",
+            "dark",
+            "accent",
+            "subtle"
+          ]
         },
         "backgroundImage": {
-          "type": "string"
-        },
-        "backgroundSize": {
-          "type": "string"
-        },
-        "backgroundPosition": {
-          "type": "string"
+          "type": "string",
+          "description": "Background image URL — overrides all other backgrounds."
         },
         "overlayColor": {
-          "type": "color"
+          "type": "color",
+          "description": "Overlay tint over a background image."
         },
         "overlayOpacity": {
-          "type": "string"
+          "type": "string",
+          "description": "Overlay strength in percent."
         },
         "gradientFrom": {
-          "type": "string"
+          "type": "color",
+          "description": "Gradient start — overrides scheme/color."
         },
         "gradientTo": {
-          "type": "string"
+          "type": "color",
+          "description": "Gradient end."
         },
         "density": {
-          "type": "string"
+          "type": "string",
+          "description": "Section padding: sm | md | lg | spacious."
         },
         "contentWidth": {
-          "type": "string"
+          "type": "string",
+          "description": "Content width: sm | md | lg | full."
         },
         "contentAlign": {
-          "type": "string"
+          "type": "string",
+          "description": "left | center | right."
         },
         "verticalAlign": {
-          "type": "string"
-        },
-        "minHeight": {
-          "type": "string"
+          "type": "string",
+          "description": "top | middle | bottom."
         }
       },
       "jsonSchema": {
         "showImage": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the category image."
         },
         "showTitle": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the category title."
         },
         "showDescription": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the category description."
         },
         "style": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "luxury = lighter type, wider tracking.",
+          "options": [
+            "standard",
+            "luxury"
+          ]
         },
         "backgroundColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
         },
         "textColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path or hex. Ignored while a scheme is active."
         },
         "backgroundScheme": {
-          "type": "string"
+          "type": "enum",
+          "description": "Theme scheme — overrides backgroundColor while set.",
+          "options": [
+            "",
+            "light",
+            "dark",
+            "accent",
+            "subtle"
+          ]
         },
         "backgroundImage": {
-          "type": "string"
-        },
-        "backgroundSize": {
-          "type": "string"
-        },
-        "backgroundPosition": {
-          "type": "string"
+          "type": "string",
+          "description": "Background image URL — overrides all other backgrounds."
         },
         "overlayColor": {
-          "type": "color"
+          "type": "color",
+          "description": "Overlay tint over a background image."
         },
         "overlayOpacity": {
-          "type": "string"
+          "type": "string",
+          "description": "Overlay strength in percent."
         },
         "gradientFrom": {
-          "type": "string"
+          "type": "color",
+          "description": "Gradient start — overrides scheme/color."
         },
         "gradientTo": {
-          "type": "string"
+          "type": "color",
+          "description": "Gradient end."
         },
         "density": {
-          "type": "string"
+          "type": "string",
+          "description": "Section padding: sm | md | lg | spacious."
         },
         "contentWidth": {
-          "type": "string"
+          "type": "string",
+          "description": "Content width: sm | md | lg | full."
         },
         "contentAlign": {
-          "type": "string"
+          "type": "string",
+          "description": "left | center | right."
         },
         "verticalAlign": {
-          "type": "string"
-        },
-        "minHeight": {
-          "type": "string"
+          "type": "string",
+          "description": "top | middle | bottom."
         }
       },
       "defaultProps": {
@@ -2081,7 +2227,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\category\\CategoryHero\\CategoryHero.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\category\\CategoryHero\\categoryhero.meta.ts"
     },
     {
       "name": "CategoryMetadata",
@@ -2353,41 +2499,80 @@ export const registry: CompiledRegistry = {
     },
     {
       "name": "SubcategoryNav",
-      "label": "Subcategory Nav",
-      "description": "Subcategory Nav component (auto-derived).",
+      "label": "Subcategory Navigation",
+      "description": "Links to a category's subcategories — horizontal links, vertical list, or pill chips. Subcategory data is consumer-injected; the editor shows placeholders.",
       "category": "category",
       "intent": [
-        "subcategory",
-        "nav"
+        "navigate",
+        "browse"
       ],
-      "dataDeps": [],
+      "visualRole": "sub-header",
+      "dataDeps": [
+        "subcategories (consumer-injected)"
+      ],
       "copyFields": [],
       "themeable": [],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
         "subcategory",
-        "nav"
+        "navigation",
+        "links",
+        "pills",
+        "browse"
       ],
       "propSchema": {
         "layout": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Link arrangement — pills = rounded chips.",
+          "options": [
+            "horizontal",
+            "vertical",
+            "pills"
+          ]
         },
         "showIcons": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show an icon per subcategory."
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         }
       },
       "jsonSchema": {
         "layout": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Link arrangement — pills = rounded chips.",
+          "options": [
+            "horizontal",
+            "vertical",
+            "pills"
+          ]
         },
         "showIcons": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show an icon per subcategory."
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         }
       },
       "defaultProps": {
@@ -2397,7 +2582,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\category\\SubcategoryNav\\SubcategoryNav.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\category\\SubcategoryNav\\subcategorynav.meta.ts"
     },
     {
       "name": "CartItemsPreview",
@@ -3563,136 +3748,193 @@ export const registry: CompiledRegistry = {
     {
       "name": "CollectionHero",
       "label": "Collection Hero",
-      "description": "Collection Hero component (auto-derived).",
+      "description": "Collection page banner: collection image, title, and description over the full section background model (image > gradient > scheme > color). Collection data comes from page context (storefront-injected).",
       "category": "collection",
       "intent": [
-        "collection",
-        "hero"
+        "announce",
+        "introduce"
       ],
-      "dataDeps": [],
+      "visualRole": "above-fold",
+      "dataDeps": [
+        "collection title/description/image (page context)"
+      ],
       "copyFields": [],
-      "themeable": [],
+      "themeable": [
+        "backgroundColor",
+        "textColor"
+      ],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
         "collection",
-        "hero"
+        "hero",
+        "banner",
+        "header"
       ],
       "propSchema": {
         "showImage": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the collection image."
         },
         "showTitle": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the collection title."
         },
         "showDescription": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the collection description."
         },
         "style": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "luxury = lighter type, wider tracking.",
+          "options": [
+            "standard",
+            "luxury"
+          ]
         },
         "backgroundColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
         },
         "textColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path or hex. Ignored while a scheme is active."
         },
         "backgroundScheme": {
-          "type": "string"
+          "type": "enum",
+          "description": "Theme scheme — overrides backgroundColor while set.",
+          "options": [
+            "",
+            "light",
+            "dark",
+            "accent",
+            "subtle"
+          ]
         },
         "backgroundImage": {
-          "type": "string"
-        },
-        "backgroundSize": {
-          "type": "string"
-        },
-        "backgroundPosition": {
-          "type": "string"
+          "type": "string",
+          "description": "Background image URL — overrides all other backgrounds."
         },
         "overlayColor": {
-          "type": "color"
+          "type": "color",
+          "description": "Overlay tint over a background image."
         },
         "overlayOpacity": {
-          "type": "string"
+          "type": "string",
+          "description": "Overlay strength in percent."
         },
         "gradientFrom": {
-          "type": "string"
+          "type": "color",
+          "description": "Gradient start — overrides scheme/color."
         },
         "gradientTo": {
-          "type": "string"
+          "type": "color",
+          "description": "Gradient end."
         },
         "density": {
-          "type": "string"
+          "type": "string",
+          "description": "Section padding."
         },
         "contentWidth": {
-          "type": "string"
+          "type": "string",
+          "description": "Content width."
         },
         "contentAlign": {
-          "type": "string"
+          "type": "string",
+          "description": "left | center | right."
         },
         "verticalAlign": {
-          "type": "string"
-        },
-        "minHeight": {
-          "type": "string"
+          "type": "string",
+          "description": "top | middle | bottom."
         }
       },
       "jsonSchema": {
         "showImage": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the collection image."
         },
         "showTitle": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the collection title."
         },
         "showDescription": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the collection description."
         },
         "style": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "luxury = lighter type, wider tracking.",
+          "options": [
+            "standard",
+            "luxury"
+          ]
         },
         "backgroundColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
         },
         "textColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path or hex. Ignored while a scheme is active."
         },
         "backgroundScheme": {
-          "type": "string"
+          "type": "enum",
+          "description": "Theme scheme — overrides backgroundColor while set.",
+          "options": [
+            "",
+            "light",
+            "dark",
+            "accent",
+            "subtle"
+          ]
         },
         "backgroundImage": {
-          "type": "string"
-        },
-        "backgroundSize": {
-          "type": "string"
-        },
-        "backgroundPosition": {
-          "type": "string"
+          "type": "string",
+          "description": "Background image URL — overrides all other backgrounds."
         },
         "overlayColor": {
-          "type": "color"
+          "type": "color",
+          "description": "Overlay tint over a background image."
         },
         "overlayOpacity": {
-          "type": "string"
+          "type": "string",
+          "description": "Overlay strength in percent."
         },
         "gradientFrom": {
-          "type": "string"
+          "type": "color",
+          "description": "Gradient start — overrides scheme/color."
         },
         "gradientTo": {
-          "type": "string"
+          "type": "color",
+          "description": "Gradient end."
         },
         "density": {
-          "type": "string"
+          "type": "string",
+          "description": "Section padding."
         },
         "contentWidth": {
-          "type": "string"
+          "type": "string",
+          "description": "Content width."
         },
         "contentAlign": {
-          "type": "string"
+          "type": "string",
+          "description": "left | center | right."
         },
         "verticalAlign": {
-          "type": "string"
-        },
-        "minHeight": {
-          "type": "string"
+          "type": "string",
+          "description": "top | middle | bottom."
         }
       },
       "defaultProps": {
@@ -3718,7 +3960,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\collection\\CollectionHero\\CollectionHero.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\collection\\CollectionHero\\collectionhero.meta.ts"
     },
     {
       "name": "CollectionMetadata",
@@ -6103,58 +6345,109 @@ export const registry: CompiledRegistry = {
     {
       "name": "LinkList",
       "label": "Link List",
-      "description": "Link List component (auto-derived).",
+      "description": "A configurable list of links with custom colors — the building block for footer link columns. Unlike QuickLinks, the links themselves are editable props.",
       "category": "footer",
       "intent": [
-        "link",
-        "list"
+        "navigate",
+        "links"
       ],
+      "visualRole": "footer-column",
       "dataDeps": [],
       "copyFields": [],
-      "themeable": [],
+      "themeable": [
+        "color",
+        "hoverColor"
+      ],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
-        "link",
-        "list"
+        "links",
+        "footer",
+        "column",
+        "navigation"
       ],
       "propSchema": {
-        "links": {
-          "type": "array"
-        },
         "color": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Link text color. Token path (e.g. \"text.secondary\") or hex."
         },
         "hoverColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Hover color. Token path or hex."
         },
         "fontSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Link text size.",
+          "options": [
+            "xs",
+            "sm",
+            "md"
+          ]
         },
         "spacing": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Vertical spacing between links.",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ]
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "List alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         }
       },
       "jsonSchema": {
-        "links": {
-          "type": "array"
-        },
         "color": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Link text color. Token path (e.g. \"text.secondary\") or hex."
         },
         "hoverColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Hover color. Token path or hex."
         },
         "fontSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Link text size.",
+          "options": [
+            "xs",
+            "sm",
+            "md"
+          ]
         },
         "spacing": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Vertical spacing between links.",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ]
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "List alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         }
       },
       "defaultProps": {
@@ -6180,7 +6473,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\footer\\LinkList\\LinkList.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\footer\\LinkList\\linklist.meta.ts"
     },
     {
       "name": "SocialIcons",
@@ -10800,154 +11093,190 @@ export const registry: CompiledRegistry = {
     {
       "name": "PromotionCard",
       "label": "Promotion Card",
-      "description": "Promotion Card component (auto-derived).",
+      "description": "A single promotional card: headline, description, CTA button — with the full section background model (image > gradient > scheme > color). Use inside PromotionalBannerGrid for multi-offer layouts.",
       "category": "homepage",
       "intent": [
-        "promotion",
-        "card"
+        "promote",
+        "offer",
+        "announce"
       ],
+      "visualRole": "card",
       "dataDeps": [],
-      "copyFields": [],
-      "themeable": [],
+      "copyFields": [
+        "title",
+        "description",
+        "buttonText"
+      ],
+      "themeable": [
+        "backgroundColor",
+        "textColor",
+        "buttonColor",
+        "buttonTextColor"
+      ],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
-        "promotion",
-        "card"
+        "promo",
+        "offer",
+        "card",
+        "sale",
+        "banner",
+        "cta"
       ],
       "propSchema": {
         "title": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Headline, e.g. \"Special Offer\"."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "One-line offer description."
         },
         "buttonText": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "CTA button label."
         },
         "buttonHref": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "CTA link URL."
         },
         "backgroundColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Card background. Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
         },
         "textColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Text color. Token path or hex. Ignored while a scheme is active."
         },
         "buttonColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "CTA button background. Token path (e.g. \"button.primary.background\") or hex."
         },
         "buttonTextColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "CTA label color."
         },
         "borderRadius": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Corner radius: none | sm | md | lg | full."
         },
         "backgroundScheme": {
-          "type": "string"
+          "type": "enum",
+          "description": "Theme scheme — overrides backgroundColor while set; also controls text color.",
+          "options": [
+            "",
+            "light",
+            "dark",
+            "accent",
+            "subtle"
+          ]
         },
         "backgroundImage": {
-          "type": "string"
-        },
-        "backgroundSize": {
-          "type": "string"
-        },
-        "backgroundPosition": {
-          "type": "string"
+          "type": "string",
+          "description": "Background image URL — overrides all other backgrounds."
         },
         "overlayColor": {
-          "type": "string"
+          "type": "color",
+          "description": "Overlay tint over a background image."
         },
         "overlayOpacity": {
-          "type": "string"
+          "type": "string",
+          "description": "Overlay strength in percent, e.g. \"40\"."
         },
         "gradientFrom": {
-          "type": "string"
+          "type": "color",
+          "description": "Gradient start — overrides scheme/color when set."
         },
         "gradientTo": {
-          "type": "string"
-        },
-        "density": {
-          "type": "string"
-        },
-        "contentWidth": {
-          "type": "string"
-        },
-        "contentAlign": {
-          "type": "string"
-        },
-        "verticalAlign": {
-          "type": "string"
-        },
-        "minHeight": {
-          "type": "string"
+          "type": "color",
+          "description": "Gradient end."
         }
       },
       "jsonSchema": {
         "title": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Headline, e.g. \"Special Offer\"."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "One-line offer description."
         },
         "buttonText": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "CTA button label."
         },
         "buttonHref": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "CTA link URL."
         },
         "backgroundColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Card background. Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
         },
         "textColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Text color. Token path or hex. Ignored while a scheme is active."
         },
         "buttonColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "CTA button background. Token path (e.g. \"button.primary.background\") or hex."
         },
         "buttonTextColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "CTA label color."
         },
         "borderRadius": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Corner radius: none | sm | md | lg | full."
         },
         "backgroundScheme": {
-          "type": "string"
+          "type": "enum",
+          "description": "Theme scheme — overrides backgroundColor while set; also controls text color.",
+          "options": [
+            "",
+            "light",
+            "dark",
+            "accent",
+            "subtle"
+          ]
         },
         "backgroundImage": {
-          "type": "string"
-        },
-        "backgroundSize": {
-          "type": "string"
-        },
-        "backgroundPosition": {
-          "type": "string"
+          "type": "string",
+          "description": "Background image URL — overrides all other backgrounds."
         },
         "overlayColor": {
-          "type": "string"
+          "type": "color",
+          "description": "Overlay tint over a background image."
         },
         "overlayOpacity": {
-          "type": "string"
+          "type": "string",
+          "description": "Overlay strength in percent, e.g. \"40\"."
         },
         "gradientFrom": {
-          "type": "string"
+          "type": "color",
+          "description": "Gradient start — overrides scheme/color when set."
         },
         "gradientTo": {
-          "type": "string"
-        },
-        "density": {
-          "type": "string"
-        },
-        "contentWidth": {
-          "type": "string"
-        },
-        "contentAlign": {
-          "type": "string"
-        },
-        "verticalAlign": {
-          "type": "string"
-        },
-        "minHeight": {
-          "type": "string"
+          "type": "color",
+          "description": "Gradient end."
         }
       },
       "defaultProps": {
@@ -10976,7 +11305,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\homepage\\PromotionCard\\PromotionCard.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\homepage\\PromotionCard\\promotioncard.meta.ts"
     },
     {
       "name": "StatsSection",
@@ -12962,70 +13291,140 @@ export const registry: CompiledRegistry = {
     {
       "name": "AnnouncementBar",
       "label": "Announcement Bar",
-      "description": "Announcement Bar component (auto-derived).",
+      "description": "Thin top-of-page banner for short promotions (\"Free shipping over $50\"). Sits above the header on every page. Keep text under ~80 characters.",
       "category": "navigation",
       "intent": [
-        "announcement",
-        "bar"
+        "announce",
+        "promote",
+        "shipping-offer"
       ],
+      "visualRole": "top-strip",
       "dataDeps": [],
-      "copyFields": [],
-      "themeable": [],
+      "copyFields": [
+        "text",
+        "linkText"
+      ],
+      "themeable": [
+        "backgroundColor",
+        "textColor"
+      ],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
         "announcement",
-        "bar"
+        "banner",
+        "top bar",
+        "promo strip",
+        "free shipping"
       ],
       "propSchema": {
         "text": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "The announcement message."
         },
         "linkText": {
-          "type": "string"
+          "type": "string",
+          "description": "Optional CTA label; adds a link inside the bar."
         },
         "linkUrl": {
-          "type": "string"
+          "type": "string",
+          "description": "URL for the CTA link."
         },
         "backgroundColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path (e.g. \"brand.primary\") or hex."
         },
         "textColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path (e.g. \"text.inverse\") or hex."
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         },
         "fontSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text size.",
+          "options": [
+            "xs",
+            "sm",
+            "md"
+          ]
         },
         "paddingY": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Vertical padding.",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ]
         }
       },
       "jsonSchema": {
         "text": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "The announcement message."
         },
         "linkText": {
-          "type": "string"
+          "type": "string",
+          "description": "Optional CTA label; adds a link inside the bar."
         },
         "linkUrl": {
-          "type": "string"
+          "type": "string",
+          "description": "URL for the CTA link."
         },
         "backgroundColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path (e.g. \"brand.primary\") or hex."
         },
         "textColor": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path (e.g. \"text.inverse\") or hex."
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         },
         "fontSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text size.",
+          "options": [
+            "xs",
+            "sm",
+            "md"
+          ]
         },
         "paddingY": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Vertical padding.",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ]
         }
       },
       "defaultProps": {
@@ -13040,7 +13439,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\navigation\\AnnouncementBar\\AnnouncementBar.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\navigation\\AnnouncementBar\\announcementbar.meta.ts"
     },
     {
       "name": "CartButton",
@@ -13272,47 +13671,71 @@ export const registry: CompiledRegistry = {
     },
     {
       "name": "CategoryNav",
-      "label": "Category Nav",
-      "description": "Category Nav component (auto-derived).",
+      "label": "Category Navigation",
+      "description": "Vertical list of product categories with optional icons — a sidebar-style category menu. Categories data is injected by the host; the editor shows placeholders. For a horizontal top menu use MenuNavigation; for category CARDS use CategoryGrid.",
       "category": "navigation",
       "intent": [
-        "category",
-        "nav"
+        "navigate",
+        "browse",
+        "menu"
       ],
-      "dataDeps": [],
-      "copyFields": [],
+      "visualRole": "sidebar",
+      "dataDeps": [
+        "categories (consumer-injected)"
+      ],
+      "copyFields": [
+        "title"
+      ],
       "themeable": [],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
-        "category",
-        "nav"
+        "categories",
+        "menu",
+        "sidebar",
+        "navigation",
+        "browse"
       ],
       "propSchema": {
         "title": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Optional heading above the list."
         },
         "showIcons": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show an icon per category."
         },
         "style": {
-          "type": "string"
-        },
-        "categories": {
-          "type": "array"
+          "type": "enum",
+          "required": true,
+          "description": "standard = normal; luxury = lighter type with wider tracking.",
+          "options": [
+            "standard",
+            "luxury"
+          ]
         }
       },
       "jsonSchema": {
         "title": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Optional heading above the list."
         },
         "showIcons": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show an icon per category."
         },
         "style": {
-          "type": "string"
-        },
-        "categories": {
-          "type": "array"
+          "type": "enum",
+          "required": true,
+          "description": "standard = normal; luxury = lighter type with wider tracking.",
+          "options": [
+            "standard",
+            "luxury"
+          ]
         }
       },
       "defaultProps": {
@@ -13323,81 +13746,157 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\navigation\\CategoryNav\\CategoryNav.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\navigation\\CategoryNav\\categorynav.meta.ts"
     },
     {
       "name": "HeaderActions",
       "label": "Header Actions",
-      "description": "Header Actions component (auto-derived).",
+      "description": "The header icon cluster: search, account, wishlist, cart (with item-count badge). Part of the site header; not a standalone section.",
       "category": "navigation",
       "intent": [
-        "header",
-        "actions"
+        "navigate",
+        "cart",
+        "search"
       ],
-      "dataDeps": [],
+      "visualRole": "header-cluster",
+      "dataDeps": [
+        "cart count (host-injected)"
+      ],
       "copyFields": [],
-      "themeable": [],
-      "a11yRisk": "low",
+      "themeable": [
+        "color"
+      ],
+      "a11yRisk": "medium",
+      "mobileBehavior": "responsive",
       "searchTags": [
         "header",
-        "actions"
+        "icons",
+        "cart",
+        "search",
+        "account"
       ],
       "propSchema": {
         "showSearch": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the search icon."
         },
         "showAccount": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the account icon."
         },
         "showWishlist": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the wishlist icon."
         },
         "showCart": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the cart icon with badge."
         },
         "iconSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Icon size.",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ]
         },
         "gap": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Spacing between icons.",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ]
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Cluster alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         },
         "color": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Icon color. Token path (e.g. \"text.primary\") or hex."
         },
         "cartCount": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Cart badge count (host overrides live)."
         }
       },
       "jsonSchema": {
         "showSearch": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the search icon."
         },
         "showAccount": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the account icon."
         },
         "showWishlist": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the wishlist icon."
         },
         "showCart": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the cart icon with badge."
         },
         "iconSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Icon size.",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ]
         },
         "gap": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Spacing between icons.",
+          "options": [
+            "sm",
+            "md",
+            "lg"
+          ]
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Cluster alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         },
         "color": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Icon color. Token path (e.g. \"text.primary\") or hex."
         },
         "cartCount": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Cart badge count (host overrides live)."
         }
       },
       "defaultProps": {
@@ -13413,7 +13912,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\navigation\\HeaderActions\\HeaderActions.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\navigation\\HeaderActions\\headeractions.meta.ts"
     },
     {
       "name": "Logo",
@@ -13967,40 +14466,61 @@ export const registry: CompiledRegistry = {
     {
       "name": "QuickLinks",
       "label": "Quick Links",
-      "description": "Quick Links component (auto-derived).",
+      "description": "A titled list of plain links — typically used in footers or help areas (\"Shipping\", \"Returns\", \"Contact\"). Links data is consumer-injected; the editor shows placeholders.",
       "category": "navigation",
       "intent": [
-        "quick",
+        "navigate",
         "links"
       ],
-      "dataDeps": [],
-      "copyFields": [],
+      "visualRole": "footer-column",
+      "dataDeps": [
+        "links (consumer-injected)"
+      ],
+      "copyFields": [
+        "title"
+      ],
       "themeable": [],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
-        "quick",
-        "links"
+        "links",
+        "footer",
+        "quick links",
+        "menu",
+        "help"
       ],
       "propSchema": {
         "title": {
-          "type": "string"
-        },
-        "links": {
-          "type": "array"
+          "type": "string",
+          "required": true,
+          "description": "Optional heading above the list."
         },
         "fontSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Link text size.",
+          "options": [
+            "xs",
+            "sm",
+            "md"
+          ]
         }
       },
       "jsonSchema": {
         "title": {
-          "type": "string"
-        },
-        "links": {
-          "type": "array"
+          "type": "string",
+          "required": true,
+          "description": "Optional heading above the list."
         },
         "fontSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Link text size.",
+          "options": [
+            "xs",
+            "sm",
+            "md"
+          ]
         }
       },
       "defaultProps": {
@@ -14010,7 +14530,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\navigation\\QuickLinks\\QuickLinks.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\navigation\\QuickLinks\\quicklinks.meta.ts"
     },
     {
       "name": "SearchBar",
@@ -14306,53 +14826,103 @@ export const registry: CompiledRegistry = {
     },
     {
       "name": "CustomerEmail",
-      "label": "Customer Email",
-      "description": "Customer Email component (auto-derived).",
+      "label": "Customer Email Line",
+      "description": "Order-confirmation atom: \"A confirmation email has been sent to {email}\". The email value comes from order context (storefront-injected).",
       "category": "order",
       "intent": [
-        "customer",
-        "email"
+        "confirm"
       ],
-      "dataDeps": [],
-      "copyFields": [],
-      "themeable": [],
+      "visualRole": "atom",
+      "dataDeps": [
+        "order email (page context)"
+      ],
+      "copyFields": [
+        "label"
+      ],
+      "themeable": [
+        "color"
+      ],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
-        "customer",
-        "email"
+        "order confirmation",
+        "email",
+        "atom"
       ],
       "propSchema": {
         "label": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Text before the email address. Empty = email only."
         },
         "showIcon": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show a mail icon."
         },
         "fontSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text size.",
+          "options": [
+            "xs",
+            "sm",
+            "md",
+            "lg"
+          ]
         },
         "color": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path (e.g. \"text.secondary\") or hex."
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         }
       },
       "jsonSchema": {
         "label": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Text before the email address. Empty = email only."
         },
         "showIcon": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show a mail icon."
         },
         "fontSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text size.",
+          "options": [
+            "xs",
+            "sm",
+            "md",
+            "lg"
+          ]
         },
         "color": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path (e.g. \"text.secondary\") or hex."
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         }
       },
       "defaultProps": {
@@ -14364,7 +14934,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\order\\CustomerEmail.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\order\\customeremail.meta.ts"
     },
     {
       "name": "GiftCardCodesDisplay",
@@ -14436,43 +15006,51 @@ export const registry: CompiledRegistry = {
     {
       "name": "NextSteps",
       "label": "Next Steps",
-      "description": "Next Steps component (auto-derived).",
+      "description": "Order-confirmation atom: a numbered list of \"what happens next\" steps (processing → shipped → delivered). Step content is consumer-injected; editor shows placeholders.",
       "category": "order",
       "intent": [
-        "next",
-        "steps"
+        "confirm",
+        "guide"
       ],
-      "dataDeps": [],
+      "visualRole": "atom",
+      "dataDeps": [
+        "steps (consumer-injected)"
+      ],
       "copyFields": [],
       "themeable": [],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
-        "next",
-        "steps"
+        "order",
+        "next steps",
+        "timeline",
+        "atom"
       ],
       "propSchema": {
-        "steps": {
-          "type": "array"
-        },
         "layout": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Step arrangement.",
+          "options": [
+            "vertical",
+            "horizontal"
+          ]
         }
       },
       "jsonSchema": {
-        "steps": {
-          "type": "array"
-        },
         "layout": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Step arrangement.",
+          "options": [
+            "vertical",
+            "horizontal"
+          ]
         }
-      },
-      "defaultProps": {
-        "steps": [],
-        "layout": "vertical"
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\order\\NextSteps\\NextSteps.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\order\\nextsteps.meta.ts"
     },
     {
       "name": "OrderActions",
@@ -14706,47 +15284,93 @@ export const registry: CompiledRegistry = {
     },
     {
       "name": "OrderDate",
-      "label": "Order Date",
-      "description": "Order Date component (auto-derived).",
+      "label": "Order Date Line",
+      "description": "Order-confirmation atom: \"Placed on {date}\". Date comes from order context.",
       "category": "order",
       "intent": [
-        "order",
-        "date"
+        "confirm"
       ],
-      "dataDeps": [],
-      "copyFields": [],
-      "themeable": [],
+      "visualRole": "atom",
+      "dataDeps": [
+        "order date (page context)"
+      ],
+      "copyFields": [
+        "label"
+      ],
+      "themeable": [
+        "color"
+      ],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
         "order",
-        "date"
+        "date",
+        "atom"
       ],
       "propSchema": {
         "label": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Prefix text, e.g. \"Placed on\". Empty = date only."
         },
         "fontSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text size.",
+          "options": [
+            "xs",
+            "sm",
+            "md",
+            "lg"
+          ]
         },
         "color": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path or hex."
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         }
       },
       "jsonSchema": {
         "label": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Prefix text, e.g. \"Placed on\". Empty = date only."
         },
         "fontSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text size.",
+          "options": [
+            "xs",
+            "sm",
+            "md",
+            "lg"
+          ]
         },
         "color": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path or hex."
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         }
       },
       "defaultProps": {
@@ -14757,7 +15381,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\order\\OrderDate.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\order\\orderdate.meta.ts"
     },
     {
       "name": "OrderDetails",
@@ -14877,53 +15501,115 @@ export const registry: CompiledRegistry = {
     },
     {
       "name": "OrderNumber",
-      "label": "Order Number",
-      "description": "Order Number component (auto-derived).",
+      "label": "Order Number Line",
+      "description": "Order-confirmation atom: \"Order {number}\". The number comes from order context.",
       "category": "order",
       "intent": [
-        "order",
-        "number"
+        "confirm"
       ],
-      "dataDeps": [],
-      "copyFields": [],
-      "themeable": [],
+      "visualRole": "atom",
+      "dataDeps": [
+        "order number (page context)"
+      ],
+      "copyFields": [
+        "label"
+      ],
+      "themeable": [
+        "color"
+      ],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
         "order",
-        "number"
+        "number",
+        "atom"
       ],
       "propSchema": {
         "label": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Prefix text, e.g. \"Order\"."
         },
         "fontSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text size.",
+          "options": [
+            "sm",
+            "md",
+            "lg",
+            "xl"
+          ]
         },
         "color": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path or hex."
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         },
         "fontWeight": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text weight.",
+          "options": [
+            "normal",
+            "medium",
+            "semibold",
+            "bold"
+          ]
         }
       },
       "jsonSchema": {
         "label": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Prefix text, e.g. \"Order\"."
         },
         "fontSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text size.",
+          "options": [
+            "sm",
+            "md",
+            "lg",
+            "xl"
+          ]
         },
         "color": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path or hex."
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         },
         "fontWeight": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text weight.",
+          "options": [
+            "normal",
+            "medium",
+            "semibold",
+            "bold"
+          ]
         }
       },
       "defaultProps": {
@@ -14935,7 +15621,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\order\\OrderNumber.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\order\\ordernumber.meta.ts"
     },
     {
       "name": "OrderTimeline",
@@ -15038,53 +15724,112 @@ export const registry: CompiledRegistry = {
     },
     {
       "name": "OrderTotal",
-      "label": "Order Total",
-      "description": "Order Total component (auto-derived).",
+      "label": "Order Total Line",
+      "description": "Order-confirmation atom: \"Total: {amount}\". Amount and price formatting come from order context.",
       "category": "order",
       "intent": [
-        "order",
-        "total"
+        "confirm"
       ],
-      "dataDeps": [],
-      "copyFields": [],
-      "themeable": [],
+      "visualRole": "atom",
+      "dataDeps": [
+        "order total (page context)"
+      ],
+      "copyFields": [
+        "label"
+      ],
+      "themeable": [
+        "color"
+      ],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
         "order",
-        "total"
+        "total",
+        "price",
+        "atom"
       ],
       "propSchema": {
         "label": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Prefix text, e.g. \"Total\"."
         },
         "fontSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text size — typically larger than other atoms.",
+          "options": [
+            "md",
+            "lg",
+            "xl",
+            "2xl"
+          ]
         },
         "color": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path or hex."
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         },
         "fontWeight": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text weight.",
+          "options": [
+            "semibold",
+            "bold"
+          ]
         }
       },
       "jsonSchema": {
         "label": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Prefix text, e.g. \"Total\"."
         },
         "fontSize": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text size — typically larger than other atoms.",
+          "options": [
+            "md",
+            "lg",
+            "xl",
+            "2xl"
+          ]
         },
         "color": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path or hex."
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         },
         "fontWeight": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Text weight.",
+          "options": [
+            "semibold",
+            "bold"
+          ]
         }
       },
       "defaultProps": {
@@ -15096,165 +15841,223 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\order\\OrderTotal.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\order\\ordertotal.meta.ts"
     },
     {
       "name": "PremiumServices",
       "label": "Premium Services",
-      "description": "Premium Services component (auto-derived).",
+      "description": "Order-confirmation atom: highlight cards for premium perks (warranty, gift wrap, support). Service items are consumer-injected.",
       "category": "order",
       "intent": [
-        "premium",
-        "services"
+        "confirm",
+        "upsell"
       ],
-      "dataDeps": [],
+      "visualRole": "atom",
+      "dataDeps": [
+        "services (consumer-injected)"
+      ],
       "copyFields": [],
       "themeable": [],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
+        "order",
         "premium",
-        "services"
+        "services",
+        "perks",
+        "atom"
       ],
       "propSchema": {
-        "services": {
-          "type": "array"
-        },
         "columns": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Cards per row (1-3)."
         }
       },
       "jsonSchema": {
-        "services": {
-          "type": "array"
-        },
         "columns": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Cards per row (1-3)."
         }
-      },
-      "defaultProps": {
-        "services": [],
-        "columns": 1
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\order\\PremiumServices\\PremiumServices.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\order\\premiumservices.meta.ts"
     },
     {
       "name": "SuccessIcon",
       "label": "Success Icon",
-      "description": "Success Icon component (auto-derived).",
+      "description": "Order-confirmation atom: the large checkmark/celebration icon at the top of the confirmation page.",
       "category": "order",
       "intent": [
-        "success",
-        "icon"
+        "confirm",
+        "celebrate"
       ],
+      "visualRole": "atom",
       "dataDeps": [],
       "copyFields": [],
-      "themeable": [],
+      "themeable": [
+        "color"
+      ],
       "a11yRisk": "low",
+      "mobileBehavior": "fixed",
       "searchTags": [
+        "order",
         "success",
-        "icon"
+        "checkmark",
+        "icon",
+        "atom"
       ],
       "propSchema": {
         "size": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Icon size.",
+          "options": [
+            "md",
+            "lg",
+            "xl"
+          ]
         },
         "color": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path (e.g. \"status.success\") or hex."
         },
         "animate": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Subtle entrance animation."
         },
         "style": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "luxury adds a ring.",
+          "options": [
+            "standard",
+            "luxury"
+          ]
         }
       },
       "jsonSchema": {
         "size": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Icon size.",
+          "options": [
+            "md",
+            "lg",
+            "xl"
+          ]
         },
         "color": {
-          "type": "color"
+          "type": "color",
+          "required": true,
+          "description": "Token path (e.g. \"status.success\") or hex."
         },
         "animate": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Subtle entrance animation."
         },
         "style": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "luxury adds a ring.",
+          "options": [
+            "standard",
+            "luxury"
+          ]
         }
-      },
-      "defaultProps": {
-        "size": "xl",
-        "color": "#10b981",
-        "animate": false,
-        "style": "standard"
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\order\\SuccessIcon\\SuccessIcon.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\order\\successicon.meta.ts"
     },
     {
       "name": "TrackingInfo",
       "label": "Tracking Info",
-      "description": "Tracking Info component (auto-derived).",
+      "description": "Order-confirmation atom: shipping & tracking panel — estimated delivery, carrier, tracking number. Values come from order context.",
       "category": "order",
       "intent": [
-        "tracking",
-        "info"
+        "confirm",
+        "track"
       ],
-      "dataDeps": [],
-      "copyFields": [],
+      "visualRole": "atom",
+      "dataDeps": [
+        "shipment data (page context)"
+      ],
+      "copyFields": [
+        "message"
+      ],
       "themeable": [],
       "a11yRisk": "low",
+      "mobileBehavior": "responsive",
       "searchTags": [
+        "order",
         "tracking",
-        "info"
+        "shipping",
+        "delivery",
+        "atom"
       ],
       "propSchema": {
         "showEstimatedDelivery": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the estimated delivery line."
         },
         "showCarrier": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the carrier line."
         },
         "showTrackingNumber": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the tracking number."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Fallback message before the order ships."
         },
         "luxuryStyle": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Lighter typography variant."
         }
       },
       "jsonSchema": {
         "showEstimatedDelivery": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the estimated delivery line."
         },
         "showCarrier": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the carrier line."
         },
         "showTrackingNumber": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the tracking number."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "required": true,
+          "description": "Fallback message before the order ships."
         },
         "luxuryStyle": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Lighter typography variant."
         }
-      },
-      "defaultProps": {
-        "showEstimatedDelivery": true,
-        "showCarrier": true,
-        "showTrackingNumber": false,
-        "message": "You will receive tracking information once your order ships.",
-        "luxuryStyle": false
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\order\\TrackingInfo\\TrackingInfo.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\order\\trackinginfo.meta.ts"
     },
     {
       "name": "AddToCart",
@@ -18618,52 +19421,90 @@ export const registry: CompiledRegistry = {
     {
       "name": "FilterBar",
       "label": "Filter Bar",
-      "description": "Filter Bar component (auto-derived).",
+      "description": "Storefront listing controls: filter panel (sidebar/drawer), sort dropdown, result count, clear-all. Category/collection listing pages only; filters are resolved by the storefront at render.",
       "category": "storefront",
       "intent": [
         "filter",
-        "bar"
+        "sort",
+        "browse"
       ],
-      "dataDeps": [],
+      "visualRole": "listing-controls",
+      "dataDeps": [
+        "facet data (storefront-resolved)"
+      ],
       "copyFields": [],
       "themeable": [],
-      "a11yRisk": "low",
+      "a11yRisk": "medium",
+      "mobileBehavior": "drawer",
       "searchTags": [
         "filter",
-        "bar"
+        "sort",
+        "listing",
+        "collection page",
+        "facets"
       ],
       "propSchema": {
         "filterLayout": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Filter placement. drawer is best on mobile.",
+          "options": [
+            "sidebar",
+            "drawer",
+            "horizontal"
+          ]
         },
         "showSort": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the sort dropdown."
         },
         "showCount": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the result count."
         },
         "showClearAll": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show a clear-all-filters action."
         },
         "showFilters": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the filter controls at all."
         }
       },
       "jsonSchema": {
         "filterLayout": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Filter placement. drawer is best on mobile.",
+          "options": [
+            "sidebar",
+            "drawer",
+            "horizontal"
+          ]
         },
         "showSort": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the sort dropdown."
         },
         "showCount": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the result count."
         },
         "showClearAll": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show a clear-all-filters action."
         },
         "showFilters": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the filter controls at all."
         }
       },
       "defaultProps": {
@@ -18675,75 +19516,104 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\storefront\\FilterBar.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\storefront\\filterbar.meta.ts"
     },
     {
       "name": "PaginationBar",
       "label": "Pagination Bar",
-      "description": "Pagination Bar component (auto-derived).",
+      "description": "Listing page pagination: numbered pages or prev/next, plus an optional per-page selector. The storefront drives actual navigation.",
       "category": "storefront",
       "intent": [
-        "pagination",
-        "bar"
+        "paginate",
+        "browse"
       ],
-      "dataDeps": [],
+      "visualRole": "listing-controls",
+      "dataDeps": [
+        "page state (storefront-driven)"
+      ],
       "copyFields": [],
       "themeable": [],
-      "a11yRisk": "low",
+      "a11yRisk": "medium",
+      "mobileBehavior": "compact",
       "searchTags": [
         "pagination",
-        "bar"
+        "pages",
+        "listing",
+        "next",
+        "prev"
       ],
       "propSchema": {
-        "currentPage": {
-          "type": "number"
-        },
-        "totalPages": {
-          "type": "number"
-        },
         "style": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "numbered = page buttons; compact = prev/next; load-more = single button.",
+          "options": [
+            "numbered",
+            "compact",
+            "load-more"
+          ]
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Bar alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         },
         "maxPageNumbers": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Max visible page buttons before ellipsis."
         },
         "showPerPageSelector": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the per-page dropdown."
         },
         "perPageOptions": {
-          "type": "array"
-        },
-        "perPage": {
-          "type": "number"
+          "type": "array",
+          "required": true,
+          "description": "Choices for per-page, e.g. [12, 24, 48]."
         }
       },
       "jsonSchema": {
-        "currentPage": {
-          "type": "number"
-        },
-        "totalPages": {
-          "type": "number"
-        },
         "style": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "numbered = page buttons; compact = prev/next; load-more = single button.",
+          "options": [
+            "numbered",
+            "compact",
+            "load-more"
+          ]
         },
         "alignment": {
-          "type": "string"
+          "type": "enum",
+          "required": true,
+          "description": "Bar alignment.",
+          "options": [
+            "left",
+            "center",
+            "right"
+          ]
         },
         "maxPageNumbers": {
-          "type": "number"
+          "type": "number",
+          "required": true,
+          "description": "Max visible page buttons before ellipsis."
         },
         "showPerPageSelector": {
-          "type": "boolean"
+          "type": "boolean",
+          "required": true,
+          "description": "Show the per-page dropdown."
         },
         "perPageOptions": {
-          "type": "array"
-        },
-        "perPage": {
-          "type": "number"
+          "type": "array",
+          "required": true,
+          "description": "Choices for per-page, e.g. [12, 24, 48]."
         }
       },
       "defaultProps": {
@@ -18762,7 +19632,7 @@ export const registry: CompiledRegistry = {
       },
       "isContainer": false,
       "zones": [],
-      "metaPath": "src\\puck\\components\\storefront\\PaginationBar.tsx (auto-derived)"
+      "metaPath": "src\\puck\\components\\storefront\\paginationbar.meta.ts"
     },
     {
       "name": "ContentSlider",
@@ -20229,64 +21099,99 @@ export const registry: CompiledRegistry = {
       {
         "name": "AccountContent",
         "label": "Account Content",
-        "description": "Account Content component (auto-derived).",
+        "description": "The customer account dashboard body — configurable panels: recent orders, wishlist, recommendations, loyalty points. Account data is storefront-injected; the editor shows sample panels. Pairs with AccountSidebar.",
         "category": "account",
         "intent": [
           "account",
-          "content"
+          "self-serve"
         ],
-        "dataDeps": [],
+        "visualRole": "main",
+        "dataDeps": [
+          "customer account data (storefront-injected)"
+        ],
         "copyFields": [],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "account",
-          "content"
+          "dashboard",
+          "orders",
+          "loyalty",
+          "customer"
         ],
         "propSchema": {
           "defaultView": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Initially active panel, e.g. \"dashboard\"."
           },
           "showRecentOrders": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the recent orders panel."
           },
           "showWishlist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the wishlist panel."
           },
           "showRecommendations": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show recommended products."
           },
           "showLoyaltyPoints": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the loyalty points panel."
           },
           "showPersonalStylist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the personal-stylist panel."
           },
           "luxuryStyle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Lighter typography variant."
           }
         },
         "jsonSchema": {
           "defaultView": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Initially active panel, e.g. \"dashboard\"."
           },
           "showRecentOrders": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the recent orders panel."
           },
           "showWishlist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the wishlist panel."
           },
           "showRecommendations": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show recommended products."
           },
           "showLoyaltyPoints": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the loyalty points panel."
           },
           "showPersonalStylist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the personal-stylist panel."
           },
           "luxuryStyle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Lighter typography variant."
           }
         },
         "defaultProps": {
@@ -20300,7 +21205,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\account\\AccountContent\\AccountContent.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\account\\AccountContent\\accountcontent.meta.ts"
       },
       {
         "name": "AccountProfile",
@@ -20455,82 +21360,136 @@ export const registry: CompiledRegistry = {
       {
         "name": "AccountSidebar",
         "label": "Account Sidebar",
-        "description": "Account Sidebar component (auto-derived).",
+        "description": "The account area navigation: orders / profile / addresses / wishlist / payment methods / logout links. Controls which sections are reachable. Pairs with AccountContent.",
         "category": "account",
         "intent": [
           "account",
-          "sidebar"
+          "navigate",
+          "self-serve"
         ],
+        "visualRole": "sidebar",
         "dataDeps": [],
         "copyFields": [],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "account",
-          "sidebar"
+          "sidebar",
+          "menu",
+          "navigation",
+          "customer"
         ],
         "propSchema": {
           "showOrders": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Orders link."
           },
           "showProfile": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Profile link."
           },
           "showAddresses": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Addresses link."
           },
           "showWishlist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Wishlist link."
           },
           "showPaymentMethods": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Payment methods link."
           },
           "showConcierge": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Concierge/support link."
           },
           "showRewards": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Rewards link."
           },
           "showLogout": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Logout link."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Visual variant.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           },
           "activeView": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Initially highlighted item, e.g. \"orders\"."
           }
         },
         "jsonSchema": {
           "showOrders": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Orders link."
           },
           "showProfile": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Profile link."
           },
           "showAddresses": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Addresses link."
           },
           "showWishlist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Wishlist link."
           },
           "showPaymentMethods": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Payment methods link."
           },
           "showConcierge": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Concierge/support link."
           },
           "showRewards": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Rewards link."
           },
           "showLogout": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Logout link."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Visual variant.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           },
           "activeView": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Initially highlighted item, e.g. \"orders\"."
           }
         },
         "defaultProps": {
@@ -20547,7 +21506,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\account\\AccountSidebar\\AccountSidebar.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\account\\AccountSidebar\\accountsidebar.meta.ts"
       },
       {
         "name": "AddressBook",
@@ -22117,136 +23076,193 @@ export const registry: CompiledRegistry = {
       {
         "name": "CategoryHero",
         "label": "Category Hero",
-        "description": "Category Hero component (auto-derived).",
+        "description": "Category page banner: category image, title, and description over the full section background model (image > gradient > scheme > color). The category data comes from page context (storefront-injected).",
         "category": "category",
         "intent": [
-          "category",
-          "hero"
+          "announce",
+          "introduce"
         ],
-        "dataDeps": [],
+        "visualRole": "above-fold",
+        "dataDeps": [
+          "category title/description/image (page context)"
+        ],
         "copyFields": [],
-        "themeable": [],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "category",
-          "hero"
+          "hero",
+          "banner",
+          "header"
         ],
         "propSchema": {
           "showImage": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category image."
           },
           "showTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category title."
           },
           "showDescription": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category description."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "luxury = lighter type, wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. Ignored while a scheme is active."
           },
           "backgroundScheme": {
-            "type": "string"
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
           },
           "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
           },
           "overlayColor": {
-            "type": "color"
+            "type": "color",
+            "description": "Overlay tint over a background image."
           },
           "overlayOpacity": {
-            "type": "string"
+            "type": "string",
+            "description": "Overlay strength in percent."
           },
           "gradientFrom": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color."
           },
           "gradientTo": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient end."
           },
           "density": {
-            "type": "string"
+            "type": "string",
+            "description": "Section padding: sm | md | lg | spacious."
           },
           "contentWidth": {
-            "type": "string"
+            "type": "string",
+            "description": "Content width: sm | md | lg | full."
           },
           "contentAlign": {
-            "type": "string"
+            "type": "string",
+            "description": "left | center | right."
           },
           "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
+            "type": "string",
+            "description": "top | middle | bottom."
           }
         },
         "jsonSchema": {
           "showImage": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category image."
           },
           "showTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category title."
           },
           "showDescription": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category description."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "luxury = lighter type, wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. Ignored while a scheme is active."
           },
           "backgroundScheme": {
-            "type": "string"
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
           },
           "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
           },
           "overlayColor": {
-            "type": "color"
+            "type": "color",
+            "description": "Overlay tint over a background image."
           },
           "overlayOpacity": {
-            "type": "string"
+            "type": "string",
+            "description": "Overlay strength in percent."
           },
           "gradientFrom": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color."
           },
           "gradientTo": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient end."
           },
           "density": {
-            "type": "string"
+            "type": "string",
+            "description": "Section padding: sm | md | lg | spacious."
           },
           "contentWidth": {
-            "type": "string"
+            "type": "string",
+            "description": "Content width: sm | md | lg | full."
           },
           "contentAlign": {
-            "type": "string"
+            "type": "string",
+            "description": "left | center | right."
           },
           "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
+            "type": "string",
+            "description": "top | middle | bottom."
           }
         },
         "defaultProps": {
@@ -22272,7 +23288,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\category\\CategoryHero\\CategoryHero.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\category\\CategoryHero\\categoryhero.meta.ts"
       },
       {
         "name": "CategoryMetadata",
@@ -22544,41 +23560,80 @@ export const registry: CompiledRegistry = {
       },
       {
         "name": "SubcategoryNav",
-        "label": "Subcategory Nav",
-        "description": "Subcategory Nav component (auto-derived).",
+        "label": "Subcategory Navigation",
+        "description": "Links to a category's subcategories — horizontal links, vertical list, or pill chips. Subcategory data is consumer-injected; the editor shows placeholders.",
         "category": "category",
         "intent": [
-          "subcategory",
-          "nav"
+          "navigate",
+          "browse"
         ],
-        "dataDeps": [],
+        "visualRole": "sub-header",
+        "dataDeps": [
+          "subcategories (consumer-injected)"
+        ],
         "copyFields": [],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "subcategory",
-          "nav"
+          "navigation",
+          "links",
+          "pills",
+          "browse"
         ],
         "propSchema": {
           "layout": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Link arrangement — pills = rounded chips.",
+            "options": [
+              "horizontal",
+              "vertical",
+              "pills"
+            ]
           },
           "showIcons": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show an icon per subcategory."
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           }
         },
         "jsonSchema": {
           "layout": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Link arrangement — pills = rounded chips.",
+            "options": [
+              "horizontal",
+              "vertical",
+              "pills"
+            ]
           },
           "showIcons": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show an icon per subcategory."
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           }
         },
         "defaultProps": {
@@ -22588,7 +23643,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\category\\SubcategoryNav\\SubcategoryNav.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\category\\SubcategoryNav\\subcategorynav.meta.ts"
       }
     ],
     "checkout": [
@@ -23758,136 +24813,193 @@ export const registry: CompiledRegistry = {
       {
         "name": "CollectionHero",
         "label": "Collection Hero",
-        "description": "Collection Hero component (auto-derived).",
+        "description": "Collection page banner: collection image, title, and description over the full section background model (image > gradient > scheme > color). Collection data comes from page context (storefront-injected).",
         "category": "collection",
         "intent": [
-          "collection",
-          "hero"
+          "announce",
+          "introduce"
         ],
-        "dataDeps": [],
+        "visualRole": "above-fold",
+        "dataDeps": [
+          "collection title/description/image (page context)"
+        ],
         "copyFields": [],
-        "themeable": [],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "collection",
-          "hero"
+          "hero",
+          "banner",
+          "header"
         ],
         "propSchema": {
           "showImage": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection image."
           },
           "showTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection title."
           },
           "showDescription": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection description."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "luxury = lighter type, wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. Ignored while a scheme is active."
           },
           "backgroundScheme": {
-            "type": "string"
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
           },
           "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
           },
           "overlayColor": {
-            "type": "color"
+            "type": "color",
+            "description": "Overlay tint over a background image."
           },
           "overlayOpacity": {
-            "type": "string"
+            "type": "string",
+            "description": "Overlay strength in percent."
           },
           "gradientFrom": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color."
           },
           "gradientTo": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient end."
           },
           "density": {
-            "type": "string"
+            "type": "string",
+            "description": "Section padding."
           },
           "contentWidth": {
-            "type": "string"
+            "type": "string",
+            "description": "Content width."
           },
           "contentAlign": {
-            "type": "string"
+            "type": "string",
+            "description": "left | center | right."
           },
           "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
+            "type": "string",
+            "description": "top | middle | bottom."
           }
         },
         "jsonSchema": {
           "showImage": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection image."
           },
           "showTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection title."
           },
           "showDescription": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection description."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "luxury = lighter type, wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. Ignored while a scheme is active."
           },
           "backgroundScheme": {
-            "type": "string"
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
           },
           "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
           },
           "overlayColor": {
-            "type": "color"
+            "type": "color",
+            "description": "Overlay tint over a background image."
           },
           "overlayOpacity": {
-            "type": "string"
+            "type": "string",
+            "description": "Overlay strength in percent."
           },
           "gradientFrom": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color."
           },
           "gradientTo": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient end."
           },
           "density": {
-            "type": "string"
+            "type": "string",
+            "description": "Section padding."
           },
           "contentWidth": {
-            "type": "string"
+            "type": "string",
+            "description": "Content width."
           },
           "contentAlign": {
-            "type": "string"
+            "type": "string",
+            "description": "left | center | right."
           },
           "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
+            "type": "string",
+            "description": "top | middle | bottom."
           }
         },
         "defaultProps": {
@@ -23913,7 +25025,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\collection\\CollectionHero\\CollectionHero.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\collection\\CollectionHero\\collectionhero.meta.ts"
       },
       {
         "name": "CollectionMetadata",
@@ -26304,58 +27416,109 @@ export const registry: CompiledRegistry = {
       {
         "name": "LinkList",
         "label": "Link List",
-        "description": "Link List component (auto-derived).",
+        "description": "A configurable list of links with custom colors — the building block for footer link columns. Unlike QuickLinks, the links themselves are editable props.",
         "category": "footer",
         "intent": [
-          "link",
-          "list"
+          "navigate",
+          "links"
         ],
+        "visualRole": "footer-column",
         "dataDeps": [],
         "copyFields": [],
-        "themeable": [],
+        "themeable": [
+          "color",
+          "hoverColor"
+        ],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
-          "link",
-          "list"
+          "links",
+          "footer",
+          "column",
+          "navigation"
         ],
         "propSchema": {
-          "links": {
-            "type": "array"
-          },
           "color": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Link text color. Token path (e.g. \"text.secondary\") or hex."
           },
           "hoverColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Hover color. Token path or hex."
           },
           "fontSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Link text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
           },
           "spacing": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Vertical spacing between links.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "List alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           }
         },
         "jsonSchema": {
-          "links": {
-            "type": "array"
-          },
           "color": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Link text color. Token path (e.g. \"text.secondary\") or hex."
           },
           "hoverColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Hover color. Token path or hex."
           },
           "fontSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Link text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
           },
           "spacing": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Vertical spacing between links.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "List alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           }
         },
         "defaultProps": {
@@ -26381,7 +27544,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\footer\\LinkList\\LinkList.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\footer\\LinkList\\linklist.meta.ts"
       },
       {
         "name": "SocialIcons",
@@ -31007,154 +32170,190 @@ export const registry: CompiledRegistry = {
       {
         "name": "PromotionCard",
         "label": "Promotion Card",
-        "description": "Promotion Card component (auto-derived).",
+        "description": "A single promotional card: headline, description, CTA button — with the full section background model (image > gradient > scheme > color). Use inside PromotionalBannerGrid for multi-offer layouts.",
         "category": "homepage",
         "intent": [
-          "promotion",
-          "card"
+          "promote",
+          "offer",
+          "announce"
         ],
+        "visualRole": "card",
         "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
+        "copyFields": [
+          "title",
+          "description",
+          "buttonText"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor",
+          "buttonColor",
+          "buttonTextColor"
+        ],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
-          "promotion",
-          "card"
+          "promo",
+          "offer",
+          "card",
+          "sale",
+          "banner",
+          "cta"
         ],
         "propSchema": {
           "title": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Headline, e.g. \"Special Offer\"."
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "One-line offer description."
           },
           "buttonText": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "CTA button label."
           },
           "buttonHref": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "CTA link URL."
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Card background. Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Text color. Token path or hex. Ignored while a scheme is active."
           },
           "buttonColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "CTA button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "CTA label color."
           },
           "borderRadius": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Corner radius: none | sm | md | lg | full."
           },
           "backgroundScheme": {
-            "type": "string"
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set; also controls text color.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
           },
           "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
           },
           "overlayColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Overlay tint over a background image."
           },
           "overlayOpacity": {
-            "type": "string"
+            "type": "string",
+            "description": "Overlay strength in percent, e.g. \"40\"."
           },
           "gradientFrom": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color when set."
           },
           "gradientTo": {
-            "type": "string"
-          },
-          "density": {
-            "type": "string"
-          },
-          "contentWidth": {
-            "type": "string"
-          },
-          "contentAlign": {
-            "type": "string"
-          },
-          "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient end."
           }
         },
         "jsonSchema": {
           "title": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Headline, e.g. \"Special Offer\"."
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "One-line offer description."
           },
           "buttonText": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "CTA button label."
           },
           "buttonHref": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "CTA link URL."
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Card background. Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Text color. Token path or hex. Ignored while a scheme is active."
           },
           "buttonColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "CTA button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "CTA label color."
           },
           "borderRadius": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Corner radius: none | sm | md | lg | full."
           },
           "backgroundScheme": {
-            "type": "string"
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set; also controls text color.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
           },
           "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
           },
           "overlayColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Overlay tint over a background image."
           },
           "overlayOpacity": {
-            "type": "string"
+            "type": "string",
+            "description": "Overlay strength in percent, e.g. \"40\"."
           },
           "gradientFrom": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color when set."
           },
           "gradientTo": {
-            "type": "string"
-          },
-          "density": {
-            "type": "string"
-          },
-          "contentWidth": {
-            "type": "string"
-          },
-          "contentAlign": {
-            "type": "string"
-          },
-          "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient end."
           }
         },
         "defaultProps": {
@@ -31183,7 +32382,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\PromotionCard\\PromotionCard.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\homepage\\PromotionCard\\promotioncard.meta.ts"
       },
       {
         "name": "StatsSection",
@@ -33173,70 +34372,140 @@ export const registry: CompiledRegistry = {
       {
         "name": "AnnouncementBar",
         "label": "Announcement Bar",
-        "description": "Announcement Bar component (auto-derived).",
+        "description": "Thin top-of-page banner for short promotions (\"Free shipping over $50\"). Sits above the header on every page. Keep text under ~80 characters.",
         "category": "navigation",
         "intent": [
-          "announcement",
-          "bar"
+          "announce",
+          "promote",
+          "shipping-offer"
         ],
+        "visualRole": "top-strip",
         "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
+        "copyFields": [
+          "text",
+          "linkText"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "announcement",
-          "bar"
+          "banner",
+          "top bar",
+          "promo strip",
+          "free shipping"
         ],
         "propSchema": {
           "text": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "The announcement message."
           },
           "linkText": {
-            "type": "string"
+            "type": "string",
+            "description": "Optional CTA label; adds a link inside the bar."
           },
           "linkUrl": {
-            "type": "string"
+            "type": "string",
+            "description": "URL for the CTA link."
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"brand.primary\") or hex."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.inverse\") or hex."
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           },
           "fontSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
           },
           "paddingY": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Vertical padding.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
           }
         },
         "jsonSchema": {
           "text": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "The announcement message."
           },
           "linkText": {
-            "type": "string"
+            "type": "string",
+            "description": "Optional CTA label; adds a link inside the bar."
           },
           "linkUrl": {
-            "type": "string"
+            "type": "string",
+            "description": "URL for the CTA link."
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"brand.primary\") or hex."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.inverse\") or hex."
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           },
           "fontSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
           },
           "paddingY": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Vertical padding.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
           }
         },
         "defaultProps": {
@@ -33251,7 +34520,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\AnnouncementBar\\AnnouncementBar.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\navigation\\AnnouncementBar\\announcementbar.meta.ts"
       },
       {
         "name": "CartButton",
@@ -33483,47 +34752,71 @@ export const registry: CompiledRegistry = {
       },
       {
         "name": "CategoryNav",
-        "label": "Category Nav",
-        "description": "Category Nav component (auto-derived).",
+        "label": "Category Navigation",
+        "description": "Vertical list of product categories with optional icons — a sidebar-style category menu. Categories data is injected by the host; the editor shows placeholders. For a horizontal top menu use MenuNavigation; for category CARDS use CategoryGrid.",
         "category": "navigation",
         "intent": [
-          "category",
-          "nav"
+          "navigate",
+          "browse",
+          "menu"
         ],
-        "dataDeps": [],
-        "copyFields": [],
+        "visualRole": "sidebar",
+        "dataDeps": [
+          "categories (consumer-injected)"
+        ],
+        "copyFields": [
+          "title"
+        ],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
-          "category",
-          "nav"
+          "categories",
+          "menu",
+          "sidebar",
+          "navigation",
+          "browse"
         ],
         "propSchema": {
           "title": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Optional heading above the list."
           },
           "showIcons": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show an icon per category."
           },
           "style": {
-            "type": "string"
-          },
-          "categories": {
-            "type": "array"
+            "type": "enum",
+            "required": true,
+            "description": "standard = normal; luxury = lighter type with wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           }
         },
         "jsonSchema": {
           "title": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Optional heading above the list."
           },
           "showIcons": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show an icon per category."
           },
           "style": {
-            "type": "string"
-          },
-          "categories": {
-            "type": "array"
+            "type": "enum",
+            "required": true,
+            "description": "standard = normal; luxury = lighter type with wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           }
         },
         "defaultProps": {
@@ -33534,81 +34827,157 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\CategoryNav\\CategoryNav.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\navigation\\CategoryNav\\categorynav.meta.ts"
       },
       {
         "name": "HeaderActions",
         "label": "Header Actions",
-        "description": "Header Actions component (auto-derived).",
+        "description": "The header icon cluster: search, account, wishlist, cart (with item-count badge). Part of the site header; not a standalone section.",
         "category": "navigation",
         "intent": [
-          "header",
-          "actions"
+          "navigate",
+          "cart",
+          "search"
         ],
-        "dataDeps": [],
+        "visualRole": "header-cluster",
+        "dataDeps": [
+          "cart count (host-injected)"
+        ],
         "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
+        "themeable": [
+          "color"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "header",
-          "actions"
+          "icons",
+          "cart",
+          "search",
+          "account"
         ],
         "propSchema": {
           "showSearch": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the search icon."
           },
           "showAccount": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the account icon."
           },
           "showWishlist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the wishlist icon."
           },
           "showCart": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the cart icon with badge."
           },
           "iconSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Icon size.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
           },
           "gap": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Spacing between icons.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Cluster alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           },
           "color": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Icon color. Token path (e.g. \"text.primary\") or hex."
           },
           "cartCount": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Cart badge count (host overrides live)."
           }
         },
         "jsonSchema": {
           "showSearch": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the search icon."
           },
           "showAccount": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the account icon."
           },
           "showWishlist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the wishlist icon."
           },
           "showCart": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the cart icon with badge."
           },
           "iconSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Icon size.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
           },
           "gap": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Spacing between icons.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Cluster alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           },
           "color": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Icon color. Token path (e.g. \"text.primary\") or hex."
           },
           "cartCount": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Cart badge count (host overrides live)."
           }
         },
         "defaultProps": {
@@ -33624,7 +34993,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\HeaderActions\\HeaderActions.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\navigation\\HeaderActions\\headeractions.meta.ts"
       },
       {
         "name": "Logo",
@@ -34178,40 +35547,61 @@ export const registry: CompiledRegistry = {
       {
         "name": "QuickLinks",
         "label": "Quick Links",
-        "description": "Quick Links component (auto-derived).",
+        "description": "A titled list of plain links — typically used in footers or help areas (\"Shipping\", \"Returns\", \"Contact\"). Links data is consumer-injected; the editor shows placeholders.",
         "category": "navigation",
         "intent": [
-          "quick",
+          "navigate",
           "links"
         ],
-        "dataDeps": [],
-        "copyFields": [],
+        "visualRole": "footer-column",
+        "dataDeps": [
+          "links (consumer-injected)"
+        ],
+        "copyFields": [
+          "title"
+        ],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
-          "quick",
-          "links"
+          "links",
+          "footer",
+          "quick links",
+          "menu",
+          "help"
         ],
         "propSchema": {
           "title": {
-            "type": "string"
-          },
-          "links": {
-            "type": "array"
+            "type": "string",
+            "required": true,
+            "description": "Optional heading above the list."
           },
           "fontSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Link text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
           }
         },
         "jsonSchema": {
           "title": {
-            "type": "string"
-          },
-          "links": {
-            "type": "array"
+            "type": "string",
+            "required": true,
+            "description": "Optional heading above the list."
           },
           "fontSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Link text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
           }
         },
         "defaultProps": {
@@ -34221,7 +35611,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\QuickLinks\\QuickLinks.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\navigation\\QuickLinks\\quicklinks.meta.ts"
       },
       {
         "name": "SearchBar",
@@ -34519,53 +35909,103 @@ export const registry: CompiledRegistry = {
     "order": [
       {
         "name": "CustomerEmail",
-        "label": "Customer Email",
-        "description": "Customer Email component (auto-derived).",
+        "label": "Customer Email Line",
+        "description": "Order-confirmation atom: \"A confirmation email has been sent to {email}\". The email value comes from order context (storefront-injected).",
         "category": "order",
         "intent": [
-          "customer",
-          "email"
+          "confirm"
         ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
+        "visualRole": "atom",
+        "dataDeps": [
+          "order email (page context)"
+        ],
+        "copyFields": [
+          "label"
+        ],
+        "themeable": [
+          "color"
+        ],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
-          "customer",
-          "email"
+          "order confirmation",
+          "email",
+          "atom"
         ],
         "propSchema": {
           "label": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Text before the email address. Empty = email only."
           },
           "showIcon": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show a mail icon."
           },
           "fontSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md",
+              "lg"
+            ]
           },
           "color": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.secondary\") or hex."
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           }
         },
         "jsonSchema": {
           "label": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Text before the email address. Empty = email only."
           },
           "showIcon": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show a mail icon."
           },
           "fontSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md",
+              "lg"
+            ]
           },
           "color": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.secondary\") or hex."
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           }
         },
         "defaultProps": {
@@ -34577,7 +36017,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\order\\CustomerEmail.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\order\\customeremail.meta.ts"
       },
       {
         "name": "GiftCardCodesDisplay",
@@ -34649,43 +36089,51 @@ export const registry: CompiledRegistry = {
       {
         "name": "NextSteps",
         "label": "Next Steps",
-        "description": "Next Steps component (auto-derived).",
+        "description": "Order-confirmation atom: a numbered list of \"what happens next\" steps (processing → shipped → delivered). Step content is consumer-injected; editor shows placeholders.",
         "category": "order",
         "intent": [
-          "next",
-          "steps"
+          "confirm",
+          "guide"
         ],
-        "dataDeps": [],
+        "visualRole": "atom",
+        "dataDeps": [
+          "steps (consumer-injected)"
+        ],
         "copyFields": [],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
-          "next",
-          "steps"
+          "order",
+          "next steps",
+          "timeline",
+          "atom"
         ],
         "propSchema": {
-          "steps": {
-            "type": "array"
-          },
           "layout": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Step arrangement.",
+            "options": [
+              "vertical",
+              "horizontal"
+            ]
           }
         },
         "jsonSchema": {
-          "steps": {
-            "type": "array"
-          },
           "layout": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Step arrangement.",
+            "options": [
+              "vertical",
+              "horizontal"
+            ]
           }
-        },
-        "defaultProps": {
-          "steps": [],
-          "layout": "vertical"
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\order\\NextSteps\\NextSteps.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\order\\nextsteps.meta.ts"
       },
       {
         "name": "OrderActions",
@@ -34919,47 +36367,93 @@ export const registry: CompiledRegistry = {
       },
       {
         "name": "OrderDate",
-        "label": "Order Date",
-        "description": "Order Date component (auto-derived).",
+        "label": "Order Date Line",
+        "description": "Order-confirmation atom: \"Placed on {date}\". Date comes from order context.",
         "category": "order",
         "intent": [
-          "order",
-          "date"
+          "confirm"
         ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
+        "visualRole": "atom",
+        "dataDeps": [
+          "order date (page context)"
+        ],
+        "copyFields": [
+          "label"
+        ],
+        "themeable": [
+          "color"
+        ],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "order",
-          "date"
+          "date",
+          "atom"
         ],
         "propSchema": {
           "label": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Prefix text, e.g. \"Placed on\". Empty = date only."
           },
           "fontSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md",
+              "lg"
+            ]
           },
           "color": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex."
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           }
         },
         "jsonSchema": {
           "label": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Prefix text, e.g. \"Placed on\". Empty = date only."
           },
           "fontSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md",
+              "lg"
+            ]
           },
           "color": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex."
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           }
         },
         "defaultProps": {
@@ -34970,7 +36464,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\order\\OrderDate.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\order\\orderdate.meta.ts"
       },
       {
         "name": "OrderDetails",
@@ -35090,53 +36584,115 @@ export const registry: CompiledRegistry = {
       },
       {
         "name": "OrderNumber",
-        "label": "Order Number",
-        "description": "Order Number component (auto-derived).",
+        "label": "Order Number Line",
+        "description": "Order-confirmation atom: \"Order {number}\". The number comes from order context.",
         "category": "order",
         "intent": [
-          "order",
-          "number"
+          "confirm"
         ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
+        "visualRole": "atom",
+        "dataDeps": [
+          "order number (page context)"
+        ],
+        "copyFields": [
+          "label"
+        ],
+        "themeable": [
+          "color"
+        ],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "order",
-          "number"
+          "number",
+          "atom"
         ],
         "propSchema": {
           "label": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Prefix text, e.g. \"Order\"."
           },
           "fontSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
           },
           "color": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex."
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           },
           "fontWeight": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text weight.",
+            "options": [
+              "normal",
+              "medium",
+              "semibold",
+              "bold"
+            ]
           }
         },
         "jsonSchema": {
           "label": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Prefix text, e.g. \"Order\"."
           },
           "fontSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
           },
           "color": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex."
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           },
           "fontWeight": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text weight.",
+            "options": [
+              "normal",
+              "medium",
+              "semibold",
+              "bold"
+            ]
           }
         },
         "defaultProps": {
@@ -35148,7 +36704,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\order\\OrderNumber.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\order\\ordernumber.meta.ts"
       },
       {
         "name": "OrderTimeline",
@@ -35251,53 +36807,112 @@ export const registry: CompiledRegistry = {
       },
       {
         "name": "OrderTotal",
-        "label": "Order Total",
-        "description": "Order Total component (auto-derived).",
+        "label": "Order Total Line",
+        "description": "Order-confirmation atom: \"Total: {amount}\". Amount and price formatting come from order context.",
         "category": "order",
         "intent": [
-          "order",
-          "total"
+          "confirm"
         ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
+        "visualRole": "atom",
+        "dataDeps": [
+          "order total (page context)"
+        ],
+        "copyFields": [
+          "label"
+        ],
+        "themeable": [
+          "color"
+        ],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "order",
-          "total"
+          "total",
+          "price",
+          "atom"
         ],
         "propSchema": {
           "label": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Prefix text, e.g. \"Total\"."
           },
           "fontSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text size — typically larger than other atoms.",
+            "options": [
+              "md",
+              "lg",
+              "xl",
+              "2xl"
+            ]
           },
           "color": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex."
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           },
           "fontWeight": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text weight.",
+            "options": [
+              "semibold",
+              "bold"
+            ]
           }
         },
         "jsonSchema": {
           "label": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Prefix text, e.g. \"Total\"."
           },
           "fontSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text size — typically larger than other atoms.",
+            "options": [
+              "md",
+              "lg",
+              "xl",
+              "2xl"
+            ]
           },
           "color": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex."
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           },
           "fontWeight": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text weight.",
+            "options": [
+              "semibold",
+              "bold"
+            ]
           }
         },
         "defaultProps": {
@@ -35309,165 +36924,223 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\order\\OrderTotal.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\order\\ordertotal.meta.ts"
       },
       {
         "name": "PremiumServices",
         "label": "Premium Services",
-        "description": "Premium Services component (auto-derived).",
+        "description": "Order-confirmation atom: highlight cards for premium perks (warranty, gift wrap, support). Service items are consumer-injected.",
         "category": "order",
         "intent": [
-          "premium",
-          "services"
+          "confirm",
+          "upsell"
         ],
-        "dataDeps": [],
+        "visualRole": "atom",
+        "dataDeps": [
+          "services (consumer-injected)"
+        ],
         "copyFields": [],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
+          "order",
           "premium",
-          "services"
+          "services",
+          "perks",
+          "atom"
         ],
         "propSchema": {
-          "services": {
-            "type": "array"
-          },
           "columns": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Cards per row (1-3)."
           }
         },
         "jsonSchema": {
-          "services": {
-            "type": "array"
-          },
           "columns": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Cards per row (1-3)."
           }
-        },
-        "defaultProps": {
-          "services": [],
-          "columns": 1
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\order\\PremiumServices\\PremiumServices.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\order\\premiumservices.meta.ts"
       },
       {
         "name": "SuccessIcon",
         "label": "Success Icon",
-        "description": "Success Icon component (auto-derived).",
+        "description": "Order-confirmation atom: the large checkmark/celebration icon at the top of the confirmation page.",
         "category": "order",
         "intent": [
-          "success",
-          "icon"
+          "confirm",
+          "celebrate"
         ],
+        "visualRole": "atom",
         "dataDeps": [],
         "copyFields": [],
-        "themeable": [],
+        "themeable": [
+          "color"
+        ],
         "a11yRisk": "low",
+        "mobileBehavior": "fixed",
         "searchTags": [
+          "order",
           "success",
-          "icon"
+          "checkmark",
+          "icon",
+          "atom"
         ],
         "propSchema": {
           "size": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Icon size.",
+            "options": [
+              "md",
+              "lg",
+              "xl"
+            ]
           },
           "color": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"status.success\") or hex."
           },
           "animate": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Subtle entrance animation."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "luxury adds a ring.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           }
         },
         "jsonSchema": {
           "size": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Icon size.",
+            "options": [
+              "md",
+              "lg",
+              "xl"
+            ]
           },
           "color": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"status.success\") or hex."
           },
           "animate": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Subtle entrance animation."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "luxury adds a ring.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           }
-        },
-        "defaultProps": {
-          "size": "xl",
-          "color": "#10b981",
-          "animate": false,
-          "style": "standard"
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\order\\SuccessIcon\\SuccessIcon.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\order\\successicon.meta.ts"
       },
       {
         "name": "TrackingInfo",
         "label": "Tracking Info",
-        "description": "Tracking Info component (auto-derived).",
+        "description": "Order-confirmation atom: shipping & tracking panel — estimated delivery, carrier, tracking number. Values come from order context.",
         "category": "order",
         "intent": [
-          "tracking",
-          "info"
+          "confirm",
+          "track"
         ],
-        "dataDeps": [],
-        "copyFields": [],
+        "visualRole": "atom",
+        "dataDeps": [
+          "shipment data (page context)"
+        ],
+        "copyFields": [
+          "message"
+        ],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
+          "order",
           "tracking",
-          "info"
+          "shipping",
+          "delivery",
+          "atom"
         ],
         "propSchema": {
           "showEstimatedDelivery": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the estimated delivery line."
           },
           "showCarrier": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the carrier line."
           },
           "showTrackingNumber": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the tracking number."
           },
           "message": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Fallback message before the order ships."
           },
           "luxuryStyle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Lighter typography variant."
           }
         },
         "jsonSchema": {
           "showEstimatedDelivery": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the estimated delivery line."
           },
           "showCarrier": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the carrier line."
           },
           "showTrackingNumber": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the tracking number."
           },
           "message": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Fallback message before the order ships."
           },
           "luxuryStyle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Lighter typography variant."
           }
-        },
-        "defaultProps": {
-          "showEstimatedDelivery": true,
-          "showCarrier": true,
-          "showTrackingNumber": false,
-          "message": "You will receive tracking information once your order ships.",
-          "luxuryStyle": false
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\order\\TrackingInfo\\TrackingInfo.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\order\\trackinginfo.meta.ts"
       }
     ],
     "product": [
@@ -38837,52 +40510,90 @@ export const registry: CompiledRegistry = {
       {
         "name": "FilterBar",
         "label": "Filter Bar",
-        "description": "Filter Bar component (auto-derived).",
+        "description": "Storefront listing controls: filter panel (sidebar/drawer), sort dropdown, result count, clear-all. Category/collection listing pages only; filters are resolved by the storefront at render.",
         "category": "storefront",
         "intent": [
           "filter",
-          "bar"
+          "sort",
+          "browse"
         ],
-        "dataDeps": [],
+        "visualRole": "listing-controls",
+        "dataDeps": [
+          "facet data (storefront-resolved)"
+        ],
         "copyFields": [],
         "themeable": [],
-        "a11yRisk": "low",
+        "a11yRisk": "medium",
+        "mobileBehavior": "drawer",
         "searchTags": [
           "filter",
-          "bar"
+          "sort",
+          "listing",
+          "collection page",
+          "facets"
         ],
         "propSchema": {
           "filterLayout": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Filter placement. drawer is best on mobile.",
+            "options": [
+              "sidebar",
+              "drawer",
+              "horizontal"
+            ]
           },
           "showSort": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the sort dropdown."
           },
           "showCount": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the result count."
           },
           "showClearAll": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show a clear-all-filters action."
           },
           "showFilters": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the filter controls at all."
           }
         },
         "jsonSchema": {
           "filterLayout": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Filter placement. drawer is best on mobile.",
+            "options": [
+              "sidebar",
+              "drawer",
+              "horizontal"
+            ]
           },
           "showSort": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the sort dropdown."
           },
           "showCount": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the result count."
           },
           "showClearAll": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show a clear-all-filters action."
           },
           "showFilters": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the filter controls at all."
           }
         },
         "defaultProps": {
@@ -38894,75 +40605,104 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\storefront\\FilterBar.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\storefront\\filterbar.meta.ts"
       },
       {
         "name": "PaginationBar",
         "label": "Pagination Bar",
-        "description": "Pagination Bar component (auto-derived).",
+        "description": "Listing page pagination: numbered pages or prev/next, plus an optional per-page selector. The storefront drives actual navigation.",
         "category": "storefront",
         "intent": [
-          "pagination",
-          "bar"
+          "paginate",
+          "browse"
         ],
-        "dataDeps": [],
+        "visualRole": "listing-controls",
+        "dataDeps": [
+          "page state (storefront-driven)"
+        ],
         "copyFields": [],
         "themeable": [],
-        "a11yRisk": "low",
+        "a11yRisk": "medium",
+        "mobileBehavior": "compact",
         "searchTags": [
           "pagination",
-          "bar"
+          "pages",
+          "listing",
+          "next",
+          "prev"
         ],
         "propSchema": {
-          "currentPage": {
-            "type": "number"
-          },
-          "totalPages": {
-            "type": "number"
-          },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "numbered = page buttons; compact = prev/next; load-more = single button.",
+            "options": [
+              "numbered",
+              "compact",
+              "load-more"
+            ]
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Bar alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           },
           "maxPageNumbers": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Max visible page buttons before ellipsis."
           },
           "showPerPageSelector": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the per-page dropdown."
           },
           "perPageOptions": {
-            "type": "array"
-          },
-          "perPage": {
-            "type": "number"
+            "type": "array",
+            "required": true,
+            "description": "Choices for per-page, e.g. [12, 24, 48]."
           }
         },
         "jsonSchema": {
-          "currentPage": {
-            "type": "number"
-          },
-          "totalPages": {
-            "type": "number"
-          },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "numbered = page buttons; compact = prev/next; load-more = single button.",
+            "options": [
+              "numbered",
+              "compact",
+              "load-more"
+            ]
           },
           "alignment": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Bar alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           },
           "maxPageNumbers": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Max visible page buttons before ellipsis."
           },
           "showPerPageSelector": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the per-page dropdown."
           },
           "perPageOptions": {
-            "type": "array"
-          },
-          "perPage": {
-            "type": "number"
+            "type": "array",
+            "required": true,
+            "description": "Choices for per-page, e.g. [12, 24, 48]."
           }
         },
         "defaultProps": {
@@ -38981,7 +40721,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\storefront\\PaginationBar.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\storefront\\paginationbar.meta.ts"
       }
     ],
     "swiper": [
@@ -40451,64 +42191,99 @@ export const registry: CompiledRegistry = {
       {
         "name": "AccountContent",
         "label": "Account Content",
-        "description": "Account Content component (auto-derived).",
+        "description": "The customer account dashboard body — configurable panels: recent orders, wishlist, recommendations, loyalty points. Account data is storefront-injected; the editor shows sample panels. Pairs with AccountSidebar.",
         "category": "account",
         "intent": [
           "account",
-          "content"
+          "self-serve"
         ],
-        "dataDeps": [],
+        "visualRole": "main",
+        "dataDeps": [
+          "customer account data (storefront-injected)"
+        ],
         "copyFields": [],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "account",
-          "content"
+          "dashboard",
+          "orders",
+          "loyalty",
+          "customer"
         ],
         "propSchema": {
           "defaultView": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Initially active panel, e.g. \"dashboard\"."
           },
           "showRecentOrders": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the recent orders panel."
           },
           "showWishlist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the wishlist panel."
           },
           "showRecommendations": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show recommended products."
           },
           "showLoyaltyPoints": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the loyalty points panel."
           },
           "showPersonalStylist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the personal-stylist panel."
           },
           "luxuryStyle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Lighter typography variant."
           }
         },
         "jsonSchema": {
           "defaultView": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Initially active panel, e.g. \"dashboard\"."
           },
           "showRecentOrders": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the recent orders panel."
           },
           "showWishlist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the wishlist panel."
           },
           "showRecommendations": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show recommended products."
           },
           "showLoyaltyPoints": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the loyalty points panel."
           },
           "showPersonalStylist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the personal-stylist panel."
           },
           "luxuryStyle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Lighter typography variant."
           }
         },
         "defaultProps": {
@@ -40522,7 +42297,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\account\\AccountContent\\AccountContent.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\account\\AccountContent\\accountcontent.meta.ts"
       },
       {
         "name": "AccountProfile",
@@ -40677,82 +42452,136 @@ export const registry: CompiledRegistry = {
       {
         "name": "AccountSidebar",
         "label": "Account Sidebar",
-        "description": "Account Sidebar component (auto-derived).",
+        "description": "The account area navigation: orders / profile / addresses / wishlist / payment methods / logout links. Controls which sections are reachable. Pairs with AccountContent.",
         "category": "account",
         "intent": [
           "account",
-          "sidebar"
+          "navigate",
+          "self-serve"
         ],
+        "visualRole": "sidebar",
         "dataDeps": [],
         "copyFields": [],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "account",
-          "sidebar"
+          "sidebar",
+          "menu",
+          "navigation",
+          "customer"
         ],
         "propSchema": {
           "showOrders": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Orders link."
           },
           "showProfile": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Profile link."
           },
           "showAddresses": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Addresses link."
           },
           "showWishlist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Wishlist link."
           },
           "showPaymentMethods": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Payment methods link."
           },
           "showConcierge": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Concierge/support link."
           },
           "showRewards": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Rewards link."
           },
           "showLogout": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Logout link."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Visual variant.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           },
           "activeView": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Initially highlighted item, e.g. \"orders\"."
           }
         },
         "jsonSchema": {
           "showOrders": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Orders link."
           },
           "showProfile": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Profile link."
           },
           "showAddresses": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Addresses link."
           },
           "showWishlist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Wishlist link."
           },
           "showPaymentMethods": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Payment methods link."
           },
           "showConcierge": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Concierge/support link."
           },
           "showRewards": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Rewards link."
           },
           "showLogout": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Logout link."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Visual variant.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           },
           "activeView": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Initially highlighted item, e.g. \"orders\"."
           }
         },
         "defaultProps": {
@@ -40769,7 +42598,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\account\\AccountSidebar\\AccountSidebar.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\account\\AccountSidebar\\accountsidebar.meta.ts"
       },
       {
         "name": "AddressBook",
@@ -41631,68 +43460,103 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\navigation\\AccountButton\\accountbutton.meta.ts"
       }
     ],
-    "content": [
+    "self-serve": [
       {
         "name": "AccountContent",
         "label": "Account Content",
-        "description": "Account Content component (auto-derived).",
+        "description": "The customer account dashboard body — configurable panels: recent orders, wishlist, recommendations, loyalty points. Account data is storefront-injected; the editor shows sample panels. Pairs with AccountSidebar.",
         "category": "account",
         "intent": [
           "account",
-          "content"
+          "self-serve"
         ],
-        "dataDeps": [],
+        "visualRole": "main",
+        "dataDeps": [
+          "customer account data (storefront-injected)"
+        ],
         "copyFields": [],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "account",
-          "content"
+          "dashboard",
+          "orders",
+          "loyalty",
+          "customer"
         ],
         "propSchema": {
           "defaultView": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Initially active panel, e.g. \"dashboard\"."
           },
           "showRecentOrders": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the recent orders panel."
           },
           "showWishlist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the wishlist panel."
           },
           "showRecommendations": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show recommended products."
           },
           "showLoyaltyPoints": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the loyalty points panel."
           },
           "showPersonalStylist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the personal-stylist panel."
           },
           "luxuryStyle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Lighter typography variant."
           }
         },
         "jsonSchema": {
           "defaultView": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Initially active panel, e.g. \"dashboard\"."
           },
           "showRecentOrders": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the recent orders panel."
           },
           "showWishlist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the wishlist panel."
           },
           "showRecommendations": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show recommended products."
           },
           "showLoyaltyPoints": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the loyalty points panel."
           },
           "showPersonalStylist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the personal-stylist panel."
           },
           "luxuryStyle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Lighter typography variant."
           }
         },
         "defaultProps": {
@@ -41706,186 +43570,158 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\account\\AccountContent\\AccountContent.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\account\\AccountContent\\accountcontent.meta.ts"
       },
       {
-        "name": "Text",
-        "label": "Text",
-        "description": "A text block with typography controls (size, weight, line-height, alignment), color, max-width, and padding/margin spacing. Supports a rich-text switch that renders content via dangerouslySetInnerHTML inside the Tailwind prose container.",
-        "category": "content",
+        "name": "AccountSidebar",
+        "label": "Account Sidebar",
+        "description": "The account area navigation: orders / profile / addresses / wishlist / payment methods / logout links. Controls which sections are reachable. Pairs with AccountContent.",
+        "category": "account",
         "intent": [
-          "text",
-          "paragraph",
-          "copy",
-          "body",
-          "content"
+          "account",
+          "navigate",
+          "self-serve"
         ],
-        "visualRole": "inline",
+        "visualRole": "sidebar",
         "dataDeps": [],
-        "copyFields": [
-          "text"
-        ],
-        "themeable": [
-          "color"
-        ],
+        "copyFields": [],
+        "themeable": [],
         "a11yRisk": "low",
         "mobileBehavior": "responsive",
         "searchTags": [
-          "text",
-          "paragraph",
-          "copy",
-          "p",
-          "body",
-          "rich text",
-          "typography"
+          "account",
+          "sidebar",
+          "menu",
+          "navigation",
+          "customer"
         ],
         "propSchema": {
-          "text": {
-            "type": "string",
-            "required": true
-          },
-          "richText": {
+          "showOrders": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Orders link."
           },
-          "fontSize": {
+          "showProfile": {
+            "type": "boolean",
+            "required": true,
+            "description": "Profile link."
+          },
+          "showAddresses": {
+            "type": "boolean",
+            "required": true,
+            "description": "Addresses link."
+          },
+          "showWishlist": {
+            "type": "boolean",
+            "required": true,
+            "description": "Wishlist link."
+          },
+          "showPaymentMethods": {
+            "type": "boolean",
+            "required": true,
+            "description": "Payment methods link."
+          },
+          "showConcierge": {
+            "type": "boolean",
+            "required": true,
+            "description": "Concierge/support link."
+          },
+          "showRewards": {
+            "type": "boolean",
+            "required": true,
+            "description": "Rewards link."
+          },
+          "showLogout": {
+            "type": "boolean",
+            "required": true,
+            "description": "Logout link."
+          },
+          "style": {
             "type": "enum",
+            "required": true,
+            "description": "Visual variant.",
             "options": [
-              "xs",
-              "sm",
-              "base",
-              "lg",
-              "xl",
-              "2xl"
+              "standard",
+              "luxury"
             ]
           },
-          "fontWeight": {
-            "type": "enum",
-            "options": [
-              "light",
-              "normal",
-              "medium",
-              "semibold",
-              "bold"
-            ]
-          },
-          "lineHeight": {
-            "type": "enum",
-            "options": [
-              "tight",
-              "snug",
-              "normal",
-              "relaxed",
-              "loose"
-            ]
-          },
-          "textAlign": {
-            "type": "enum",
-            "options": [
-              "left",
-              "center",
-              "right",
-              "justify"
-            ]
-          },
-          "color": {
-            "type": "string"
-          },
-          "maxWidth": {
-            "type": "string"
-          },
-          "marginTop": {
-            "type": "number",
-            "required": true
-          },
-          "marginBottom": {
-            "type": "number",
-            "required": true
-          },
-          "paddingX": {
-            "type": "number",
-            "required": true
-          },
-          "paddingY": {
-            "type": "number",
-            "required": true
+          "activeView": {
+            "type": "string",
+            "required": true,
+            "description": "Initially highlighted item, e.g. \"orders\"."
           }
         },
         "jsonSchema": {
-          "text": {
-            "type": "string",
-            "required": true
-          },
-          "richText": {
+          "showOrders": {
             "type": "boolean",
-            "required": true
+            "required": true,
+            "description": "Orders link."
           },
-          "fontSize": {
+          "showProfile": {
+            "type": "boolean",
+            "required": true,
+            "description": "Profile link."
+          },
+          "showAddresses": {
+            "type": "boolean",
+            "required": true,
+            "description": "Addresses link."
+          },
+          "showWishlist": {
+            "type": "boolean",
+            "required": true,
+            "description": "Wishlist link."
+          },
+          "showPaymentMethods": {
+            "type": "boolean",
+            "required": true,
+            "description": "Payment methods link."
+          },
+          "showConcierge": {
+            "type": "boolean",
+            "required": true,
+            "description": "Concierge/support link."
+          },
+          "showRewards": {
+            "type": "boolean",
+            "required": true,
+            "description": "Rewards link."
+          },
+          "showLogout": {
+            "type": "boolean",
+            "required": true,
+            "description": "Logout link."
+          },
+          "style": {
             "type": "enum",
+            "required": true,
+            "description": "Visual variant.",
             "options": [
-              "xs",
-              "sm",
-              "base",
-              "lg",
-              "xl",
-              "2xl"
+              "standard",
+              "luxury"
             ]
           },
-          "fontWeight": {
-            "type": "enum",
-            "options": [
-              "light",
-              "normal",
-              "medium",
-              "semibold",
-              "bold"
-            ]
-          },
-          "lineHeight": {
-            "type": "enum",
-            "options": [
-              "tight",
-              "snug",
-              "normal",
-              "relaxed",
-              "loose"
-            ]
-          },
-          "textAlign": {
-            "type": "enum",
-            "options": [
-              "left",
-              "center",
-              "right",
-              "justify"
-            ]
-          },
-          "color": {
-            "type": "string"
-          },
-          "maxWidth": {
-            "type": "string"
-          },
-          "marginTop": {
-            "type": "number",
-            "required": true
-          },
-          "marginBottom": {
-            "type": "number",
-            "required": true
-          },
-          "paddingX": {
-            "type": "number",
-            "required": true
-          },
-          "paddingY": {
-            "type": "number",
-            "required": true
+          "activeView": {
+            "type": "string",
+            "required": true,
+            "description": "Initially highlighted item, e.g. \"orders\"."
           }
+        },
+        "defaultProps": {
+          "showOrders": true,
+          "showProfile": true,
+          "showAddresses": true,
+          "showWishlist": false,
+          "showPaymentMethods": false,
+          "showConcierge": false,
+          "showRewards": false,
+          "showLogout": true,
+          "style": "standard",
+          "activeView": "orders"
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\content\\Text\\text.meta.ts"
+        "metaPath": "src\\puck\\components\\account\\AccountSidebar\\accountsidebar.meta.ts"
       }
     ],
     "profile": [
@@ -42459,150 +44295,142 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\account\\accountprofile.meta.ts"
-      },
-      {
-        "name": "CustomerEmail",
-        "label": "Customer Email",
-        "description": "Customer Email component (auto-derived).",
-        "category": "order",
-        "intent": [
-          "customer",
-          "email"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "customer",
-          "email"
-        ],
-        "propSchema": {
-          "label": {
-            "type": "string"
-          },
-          "showIcon": {
-            "type": "boolean"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "label": {
-            "type": "string"
-          },
-          "showIcon": {
-            "type": "boolean"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "label": "A confirmation email has been sent to",
-          "showIcon": true,
-          "fontSize": "sm",
-          "color": "#6b7280",
-          "alignment": "center"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\order\\CustomerEmail.tsx (auto-derived)"
       }
     ],
-    "sidebar": [
+    "navigate": [
       {
         "name": "AccountSidebar",
         "label": "Account Sidebar",
-        "description": "Account Sidebar component (auto-derived).",
+        "description": "The account area navigation: orders / profile / addresses / wishlist / payment methods / logout links. Controls which sections are reachable. Pairs with AccountContent.",
         "category": "account",
         "intent": [
           "account",
-          "sidebar"
+          "navigate",
+          "self-serve"
         ],
+        "visualRole": "sidebar",
         "dataDeps": [],
         "copyFields": [],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "account",
-          "sidebar"
+          "sidebar",
+          "menu",
+          "navigation",
+          "customer"
         ],
         "propSchema": {
           "showOrders": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Orders link."
           },
           "showProfile": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Profile link."
           },
           "showAddresses": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Addresses link."
           },
           "showWishlist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Wishlist link."
           },
           "showPaymentMethods": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Payment methods link."
           },
           "showConcierge": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Concierge/support link."
           },
           "showRewards": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Rewards link."
           },
           "showLogout": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Logout link."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Visual variant.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           },
           "activeView": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Initially highlighted item, e.g. \"orders\"."
           }
         },
         "jsonSchema": {
           "showOrders": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Orders link."
           },
           "showProfile": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Profile link."
           },
           "showAddresses": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Addresses link."
           },
           "showWishlist": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Wishlist link."
           },
           "showPaymentMethods": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Payment methods link."
           },
           "showConcierge": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Concierge/support link."
           },
           "showRewards": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Rewards link."
           },
           "showLogout": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Logout link."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Visual variant.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           },
           "activeView": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Initially highlighted item, e.g. \"orders\"."
           }
         },
         "defaultProps": {
@@ -42619,7 +44447,866 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\account\\AccountSidebar\\AccountSidebar.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\account\\AccountSidebar\\accountsidebar.meta.ts"
+      },
+      {
+        "name": "CategoryGrid",
+        "label": "Category Grid",
+        "description": "Grid of the store's product CATEGORIES (not products) — each card is a category with image, name, and optional product count. Categories data is injected by the host at render time; in the editor it shows placeholder cards. Use this for \"browse by category\" / collection navigation sections. To FEATURE PRODUCTS instead, use FeaturedProducts or a product carousel.",
+        "category": "category",
+        "intent": [
+          "navigate",
+          "browse",
+          "organize",
+          "group"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "categories (consumer-injected)"
+        ],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "categories",
+          "collections",
+          "grid",
+          "browse",
+          "navigation"
+        ],
+        "propSchema": {
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Category cards per row (1-4)."
+          },
+          "gap": {
+            "type": "string",
+            "required": true,
+            "description": "Spacing between cards: sm | md | lg."
+          },
+          "showImages": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each category's image."
+          },
+          "showCounts": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the product count per category."
+          },
+          "showDescriptions": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show category descriptions."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          }
+        },
+        "jsonSchema": {
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Category cards per row (1-4)."
+          },
+          "gap": {
+            "type": "string",
+            "required": true,
+            "description": "Spacing between cards: sm | md | lg."
+          },
+          "showImages": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each category's image."
+          },
+          "showCounts": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the product count per category."
+          },
+          "showDescriptions": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show category descriptions."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          }
+        },
+        "defaultProps": {
+          "columns": 4,
+          "gap": "lg",
+          "showImages": true,
+          "showCounts": true,
+          "showDescriptions": false,
+          "cardStyle": "standard"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\category\\CategoryGrid\\categorygrid.meta.ts"
+      },
+      {
+        "name": "SubcategoryNav",
+        "label": "Subcategory Navigation",
+        "description": "Links to a category's subcategories — horizontal links, vertical list, or pill chips. Subcategory data is consumer-injected; the editor shows placeholders.",
+        "category": "category",
+        "intent": [
+          "navigate",
+          "browse"
+        ],
+        "visualRole": "sub-header",
+        "dataDeps": [
+          "subcategories (consumer-injected)"
+        ],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "subcategory",
+          "navigation",
+          "links",
+          "pills",
+          "browse"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": true,
+            "description": "Link arrangement — pills = rounded chips.",
+            "options": [
+              "horizontal",
+              "vertical",
+              "pills"
+            ]
+          },
+          "showIcons": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show an icon per subcategory."
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": true,
+            "description": "Link arrangement — pills = rounded chips.",
+            "options": [
+              "horizontal",
+              "vertical",
+              "pills"
+            ]
+          },
+          "showIcons": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show an icon per subcategory."
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          }
+        },
+        "defaultProps": {
+          "layout": "horizontal",
+          "showIcons": false,
+          "alignment": "center"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\category\\SubcategoryNav\\subcategorynav.meta.ts"
+      },
+      {
+        "name": "LinkList",
+        "label": "Link List",
+        "description": "A configurable list of links with custom colors — the building block for footer link columns. Unlike QuickLinks, the links themselves are editable props.",
+        "category": "footer",
+        "intent": [
+          "navigate",
+          "links"
+        ],
+        "visualRole": "footer-column",
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [
+          "color",
+          "hoverColor"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "links",
+          "footer",
+          "column",
+          "navigation"
+        ],
+        "propSchema": {
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Link text color. Token path (e.g. \"text.secondary\") or hex."
+          },
+          "hoverColor": {
+            "type": "color",
+            "required": true,
+            "description": "Hover color. Token path or hex."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Link text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
+          },
+          "spacing": {
+            "type": "enum",
+            "required": true,
+            "description": "Vertical spacing between links.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "List alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Link text color. Token path (e.g. \"text.secondary\") or hex."
+          },
+          "hoverColor": {
+            "type": "color",
+            "required": true,
+            "description": "Hover color. Token path or hex."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Link text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
+          },
+          "spacing": {
+            "type": "enum",
+            "required": true,
+            "description": "Vertical spacing between links.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "List alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          }
+        },
+        "defaultProps": {
+          "links": [
+            {
+              "text": "Link One",
+              "url": "#"
+            },
+            {
+              "text": "Link Two",
+              "url": "#"
+            },
+            {
+              "text": "Link Three",
+              "url": "#"
+            }
+          ],
+          "color": "#6b7280",
+          "hoverColor": "#111827",
+          "fontSize": "sm",
+          "spacing": "md",
+          "alignment": "left"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\footer\\LinkList\\linklist.meta.ts"
+      },
+      {
+        "name": "CollectionsGrid",
+        "label": "Collections Grid",
+        "description": "Grid of the store's product COLLECTIONS (curated groups) — each card is a collection with image, title, and optional product count/description. Collections data is injected by the storefront at render (configure which via selectedCollectionIds, or leave empty for all). For product CATEGORIES use CategoryGrid; for products use FeaturedProducts.",
+        "category": "homepage",
+        "intent": [
+          "browse",
+          "navigate",
+          "curate",
+          "showcase"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "collections (storefront-injected)"
+        ],
+        "copyFields": [
+          "sectionTitle",
+          "sectionSubtitle"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "collections",
+          "curated",
+          "grid",
+          "shop by collection",
+          "groups"
+        ],
+        "propSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Shop by Collection\"."
+          },
+          "sectionSubtitle": {
+            "type": "string",
+            "required": true,
+            "description": "Optional subheading."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Collection cards per row on desktop (2-4)."
+          },
+          "columnsTablet": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on tablet."
+          },
+          "columnsMobile": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on mobile."
+          },
+          "gap": {
+            "type": "number",
+            "required": true,
+            "description": "Gap between cards in px."
+          },
+          "showCollectionImage": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each collection's image."
+          },
+          "showCollectionTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection titles."
+          },
+          "showProductCount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show product count per collection."
+          },
+          "showDescription": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection descriptions."
+          },
+          "imageAspectRatio": {
+            "type": "string",
+            "required": true,
+            "description": "Card image ratio: square | portrait | landscape."
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          },
+          "borderRadius": {
+            "type": "string",
+            "required": true,
+            "description": "Card corner radius: none | sm | md | lg | full."
+          }
+        },
+        "jsonSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"Shop by Collection\"."
+          },
+          "sectionSubtitle": {
+            "type": "string",
+            "required": true,
+            "description": "Optional subheading."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Collection cards per row on desktop (2-4)."
+          },
+          "columnsTablet": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on tablet."
+          },
+          "columnsMobile": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row on mobile."
+          },
+          "gap": {
+            "type": "number",
+            "required": true,
+            "description": "Gap between cards in px."
+          },
+          "showCollectionImage": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show each collection's image."
+          },
+          "showCollectionTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection titles."
+          },
+          "showProductCount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show product count per collection."
+          },
+          "showDescription": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show collection descriptions."
+          },
+          "imageAspectRatio": {
+            "type": "string",
+            "required": true,
+            "description": "Card image ratio: square | portrait | landscape."
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          },
+          "cardStyle": {
+            "type": "string",
+            "required": true,
+            "description": "Card look: standard | bordered | shadow."
+          },
+          "borderRadius": {
+            "type": "string",
+            "required": true,
+            "description": "Card corner radius: none | sm | md | lg | full."
+          }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Collection",
+          "sectionSubtitle": "Browse our curated collections",
+          "showTitle": true,
+          "columns": 4,
+          "columnsTablet": 3,
+          "columnsMobile": 2,
+          "gap": 24,
+          "showCollectionImage": true,
+          "showCollectionTitle": true,
+          "showProductCount": true,
+          "showDescription": false,
+          "imageAspectRatio": "square",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#000000",
+          "cardStyle": "shadow",
+          "borderRadius": "lg",
+          "hoverEffect": "scale",
+          "collectionSource": "all",
+          "selectedCollectionIds": [],
+          "loading": false,
+          "error": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\collectionsgrid.meta.ts"
+      },
+      {
+        "name": "CategoryNav",
+        "label": "Category Navigation",
+        "description": "Vertical list of product categories with optional icons — a sidebar-style category menu. Categories data is injected by the host; the editor shows placeholders. For a horizontal top menu use MenuNavigation; for category CARDS use CategoryGrid.",
+        "category": "navigation",
+        "intent": [
+          "navigate",
+          "browse",
+          "menu"
+        ],
+        "visualRole": "sidebar",
+        "dataDeps": [
+          "categories (consumer-injected)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "categories",
+          "menu",
+          "sidebar",
+          "navigation",
+          "browse"
+        ],
+        "propSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Optional heading above the list."
+          },
+          "showIcons": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show an icon per category."
+          },
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "standard = normal; luxury = lighter type with wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Optional heading above the list."
+          },
+          "showIcons": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show an icon per category."
+          },
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "standard = normal; luxury = lighter type with wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
+          }
+        },
+        "defaultProps": {
+          "title": "Featured",
+          "showIcons": true,
+          "style": "standard",
+          "categories": []
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\navigation\\CategoryNav\\categorynav.meta.ts"
+      },
+      {
+        "name": "HeaderActions",
+        "label": "Header Actions",
+        "description": "The header icon cluster: search, account, wishlist, cart (with item-count badge). Part of the site header; not a standalone section.",
+        "category": "navigation",
+        "intent": [
+          "navigate",
+          "cart",
+          "search"
+        ],
+        "visualRole": "header-cluster",
+        "dataDeps": [
+          "cart count (host-injected)"
+        ],
+        "copyFields": [],
+        "themeable": [
+          "color"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "header",
+          "icons",
+          "cart",
+          "search",
+          "account"
+        ],
+        "propSchema": {
+          "showSearch": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the search icon."
+          },
+          "showAccount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the account icon."
+          },
+          "showWishlist": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the wishlist icon."
+          },
+          "showCart": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the cart icon with badge."
+          },
+          "iconSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Icon size.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "gap": {
+            "type": "enum",
+            "required": true,
+            "description": "Spacing between icons.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Cluster alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Icon color. Token path (e.g. \"text.primary\") or hex."
+          },
+          "cartCount": {
+            "type": "number",
+            "required": true,
+            "description": "Cart badge count (host overrides live)."
+          }
+        },
+        "jsonSchema": {
+          "showSearch": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the search icon."
+          },
+          "showAccount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the account icon."
+          },
+          "showWishlist": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the wishlist icon."
+          },
+          "showCart": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the cart icon with badge."
+          },
+          "iconSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Icon size.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "gap": {
+            "type": "enum",
+            "required": true,
+            "description": "Spacing between icons.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Cluster alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Icon color. Token path (e.g. \"text.primary\") or hex."
+          },
+          "cartCount": {
+            "type": "number",
+            "required": true,
+            "description": "Cart badge count (host overrides live)."
+          }
+        },
+        "defaultProps": {
+          "showSearch": true,
+          "showAccount": true,
+          "showWishlist": false,
+          "showCart": true,
+          "iconSize": "md",
+          "gap": "md",
+          "alignment": "right",
+          "color": "#111827",
+          "cartCount": 0
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\navigation\\HeaderActions\\headeractions.meta.ts"
+      },
+      {
+        "name": "QuickLinks",
+        "label": "Quick Links",
+        "description": "A titled list of plain links — typically used in footers or help areas (\"Shipping\", \"Returns\", \"Contact\"). Links data is consumer-injected; the editor shows placeholders.",
+        "category": "navigation",
+        "intent": [
+          "navigate",
+          "links"
+        ],
+        "visualRole": "footer-column",
+        "dataDeps": [
+          "links (consumer-injected)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "links",
+          "footer",
+          "quick links",
+          "menu",
+          "help"
+        ],
+        "propSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Optional heading above the list."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Link text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Optional heading above the list."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Link text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
+          }
+        },
+        "defaultProps": {
+          "title": "Quick Links",
+          "links": [],
+          "fontSize": "sm"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\navigation\\QuickLinks\\quicklinks.meta.ts"
       }
     ],
     "address": [
@@ -45389,6 +48076,172 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\navigation\\CartButton\\cartbutton.meta.ts"
+      },
+      {
+        "name": "HeaderActions",
+        "label": "Header Actions",
+        "description": "The header icon cluster: search, account, wishlist, cart (with item-count badge). Part of the site header; not a standalone section.",
+        "category": "navigation",
+        "intent": [
+          "navigate",
+          "cart",
+          "search"
+        ],
+        "visualRole": "header-cluster",
+        "dataDeps": [
+          "cart count (host-injected)"
+        ],
+        "copyFields": [],
+        "themeable": [
+          "color"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "header",
+          "icons",
+          "cart",
+          "search",
+          "account"
+        ],
+        "propSchema": {
+          "showSearch": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the search icon."
+          },
+          "showAccount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the account icon."
+          },
+          "showWishlist": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the wishlist icon."
+          },
+          "showCart": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the cart icon with badge."
+          },
+          "iconSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Icon size.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "gap": {
+            "type": "enum",
+            "required": true,
+            "description": "Spacing between icons.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Cluster alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Icon color. Token path (e.g. \"text.primary\") or hex."
+          },
+          "cartCount": {
+            "type": "number",
+            "required": true,
+            "description": "Cart badge count (host overrides live)."
+          }
+        },
+        "jsonSchema": {
+          "showSearch": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the search icon."
+          },
+          "showAccount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the account icon."
+          },
+          "showWishlist": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the wishlist icon."
+          },
+          "showCart": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the cart icon with badge."
+          },
+          "iconSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Icon size.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "gap": {
+            "type": "enum",
+            "required": true,
+            "description": "Spacing between icons.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Cluster alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Icon color. Token path (e.g. \"text.primary\") or hex."
+          },
+          "cartCount": {
+            "type": "number",
+            "required": true,
+            "description": "Cart badge count (host overrides live)."
+          }
+        },
+        "defaultProps": {
+          "showSearch": true,
+          "showAccount": true,
+          "showWishlist": false,
+          "showCart": true,
+          "iconSize": "md",
+          "gap": "md",
+          "alignment": "right",
+          "color": "#111827",
+          "cartCount": 0
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\navigation\\HeaderActions\\headeractions.meta.ts"
       },
       {
         "name": "AddToCart",
@@ -51556,61 +54409,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\order\\orderconfirmation.meta.ts"
       },
       {
-        "name": "OrderDate",
-        "label": "Order Date",
-        "description": "Order Date component (auto-derived).",
-        "category": "order",
-        "intent": [
-          "order",
-          "date"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "order",
-          "date"
-        ],
-        "propSchema": {
-          "label": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "label": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "label": "Placed on",
-          "fontSize": "sm",
-          "color": "#6b7280",
-          "alignment": "center"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\order\\OrderDate.tsx (auto-derived)"
-      },
-      {
         "name": "OrderDetails",
         "label": "Order Details",
         "description": "Full order details page: items list (with optional preorder badge), shipping + billing addresses, payment method, shipping method, pricing breakdown. Cart-library-agnostic: takes items, shippingAddress, billingAddress, payment, shippingMethod, totals, formatPrice.",
@@ -51727,68 +54525,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\order\\orderdetails.meta.ts"
       },
       {
-        "name": "OrderNumber",
-        "label": "Order Number",
-        "description": "Order Number component (auto-derived).",
-        "category": "order",
-        "intent": [
-          "order",
-          "number"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "order",
-          "number"
-        ],
-        "propSchema": {
-          "label": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "fontWeight": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "label": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "fontWeight": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "label": "Order",
-          "fontSize": "lg",
-          "color": "#111827",
-          "alignment": "center",
-          "fontWeight": "semibold"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\order\\OrderNumber.tsx (auto-derived)"
-      },
-      {
         "name": "OrderTimeline",
         "label": "Order Timeline",
         "description": "Order status timeline (placed → processing → shipped → delivered) with 2 orientations (vertical/horizontal) and 3 detail levels. Optional tracking number with copy button. Cart-library-agnostic: takes steps[], trackingNumber, onCopyTracking.",
@@ -51886,68 +54622,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\order\\ordertimeline.meta.ts"
-      },
-      {
-        "name": "OrderTotal",
-        "label": "Order Total",
-        "description": "Order Total component (auto-derived).",
-        "category": "order",
-        "intent": [
-          "order",
-          "total"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "order",
-          "total"
-        ],
-        "propSchema": {
-          "label": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "fontWeight": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "label": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "fontWeight": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "label": "Total",
-          "fontSize": "xl",
-          "color": "#111827",
-          "alignment": "center",
-          "fontWeight": "bold"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\order\\OrderTotal.tsx (auto-derived)"
       }
     ],
     "review": [
@@ -55916,7 +58590,7 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\category\\CategoryDescription\\categorydescription.meta.ts"
       }
     ],
-    "navigate": [
+    "browse": [
       {
         "name": "CategoryGrid",
         "label": "Category Grid",
@@ -56020,331 +58694,91 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\category\\CategoryGrid\\categorygrid.meta.ts"
       },
       {
-        "name": "CollectionsGrid",
-        "label": "Collections Grid",
-        "description": "Grid of the store's product COLLECTIONS (curated groups) — each card is a collection with image, title, and optional product count/description. Collections data is injected by the storefront at render (configure which via selectedCollectionIds, or leave empty for all). For product CATEGORIES use CategoryGrid; for products use FeaturedProducts.",
-        "category": "homepage",
-        "intent": [
-          "browse",
-          "navigate",
-          "curate",
-          "showcase"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "collections (storefront-injected)"
-        ],
-        "copyFields": [
-          "sectionTitle",
-          "sectionSubtitle"
-        ],
-        "themeable": [
-          "backgroundColor",
-          "textColor"
-        ],
-        "a11yRisk": "low",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "collections",
-          "curated",
-          "grid",
-          "shop by collection",
-          "groups"
-        ],
-        "propSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true,
-            "description": "Section heading, e.g. \"Shop by Collection\"."
-          },
-          "sectionSubtitle": {
-            "type": "string",
-            "required": true,
-            "description": "Optional subheading."
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true,
-            "description": "Render the section heading."
-          },
-          "columns": {
-            "type": "number",
-            "required": true,
-            "description": "Collection cards per row on desktop (2-4)."
-          },
-          "columnsTablet": {
-            "type": "number",
-            "required": true,
-            "description": "Cards per row on tablet."
-          },
-          "columnsMobile": {
-            "type": "number",
-            "required": true,
-            "description": "Cards per row on mobile."
-          },
-          "gap": {
-            "type": "number",
-            "required": true,
-            "description": "Gap between cards in px."
-          },
-          "showCollectionImage": {
-            "type": "boolean",
-            "required": true,
-            "description": "Show each collection's image."
-          },
-          "showCollectionTitle": {
-            "type": "boolean",
-            "required": true,
-            "description": "Show collection titles."
-          },
-          "showProductCount": {
-            "type": "boolean",
-            "required": true,
-            "description": "Show product count per collection."
-          },
-          "showDescription": {
-            "type": "boolean",
-            "required": true,
-            "description": "Show collection descriptions."
-          },
-          "imageAspectRatio": {
-            "type": "string",
-            "required": true,
-            "description": "Card image ratio: square | portrait | landscape."
-          },
-          "backgroundColor": {
-            "type": "color",
-            "required": true,
-            "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
-          },
-          "textColor": {
-            "type": "color",
-            "required": true,
-            "description": "Token path (e.g. \"text.primary\") or hex."
-          },
-          "cardStyle": {
-            "type": "string",
-            "required": true,
-            "description": "Card look: standard | bordered | shadow."
-          },
-          "borderRadius": {
-            "type": "string",
-            "required": true,
-            "description": "Card corner radius: none | sm | md | lg | full."
-          }
-        },
-        "jsonSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true,
-            "description": "Section heading, e.g. \"Shop by Collection\"."
-          },
-          "sectionSubtitle": {
-            "type": "string",
-            "required": true,
-            "description": "Optional subheading."
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true,
-            "description": "Render the section heading."
-          },
-          "columns": {
-            "type": "number",
-            "required": true,
-            "description": "Collection cards per row on desktop (2-4)."
-          },
-          "columnsTablet": {
-            "type": "number",
-            "required": true,
-            "description": "Cards per row on tablet."
-          },
-          "columnsMobile": {
-            "type": "number",
-            "required": true,
-            "description": "Cards per row on mobile."
-          },
-          "gap": {
-            "type": "number",
-            "required": true,
-            "description": "Gap between cards in px."
-          },
-          "showCollectionImage": {
-            "type": "boolean",
-            "required": true,
-            "description": "Show each collection's image."
-          },
-          "showCollectionTitle": {
-            "type": "boolean",
-            "required": true,
-            "description": "Show collection titles."
-          },
-          "showProductCount": {
-            "type": "boolean",
-            "required": true,
-            "description": "Show product count per collection."
-          },
-          "showDescription": {
-            "type": "boolean",
-            "required": true,
-            "description": "Show collection descriptions."
-          },
-          "imageAspectRatio": {
-            "type": "string",
-            "required": true,
-            "description": "Card image ratio: square | portrait | landscape."
-          },
-          "backgroundColor": {
-            "type": "color",
-            "required": true,
-            "description": "Section background. Token path (e.g. \"ui.surface\") or hex."
-          },
-          "textColor": {
-            "type": "color",
-            "required": true,
-            "description": "Token path (e.g. \"text.primary\") or hex."
-          },
-          "cardStyle": {
-            "type": "string",
-            "required": true,
-            "description": "Card look: standard | bordered | shadow."
-          },
-          "borderRadius": {
-            "type": "string",
-            "required": true,
-            "description": "Card corner radius: none | sm | md | lg | full."
-          }
-        },
-        "defaultProps": {
-          "sectionTitle": "Shop by Collection",
-          "sectionSubtitle": "Browse our curated collections",
-          "showTitle": true,
-          "columns": 4,
-          "columnsTablet": 3,
-          "columnsMobile": 2,
-          "gap": 24,
-          "showCollectionImage": true,
-          "showCollectionTitle": true,
-          "showProductCount": true,
-          "showDescription": false,
-          "imageAspectRatio": "square",
-          "backgroundColor": "#f9fafb",
-          "textColor": "#000000",
-          "cardStyle": "shadow",
-          "borderRadius": "lg",
-          "hoverEffect": "scale",
-          "collectionSource": "all",
-          "selectedCollectionIds": [],
-          "loading": false,
-          "error": ""
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\collectionsgrid.meta.ts"
-      }
-    ],
-    "browse": [
-      {
-        "name": "CategoryGrid",
-        "label": "Category Grid",
-        "description": "Grid of the store's product CATEGORIES (not products) — each card is a category with image, name, and optional product count. Categories data is injected by the host at render time; in the editor it shows placeholder cards. Use this for \"browse by category\" / collection navigation sections. To FEATURE PRODUCTS instead, use FeaturedProducts or a product carousel.",
+        "name": "SubcategoryNav",
+        "label": "Subcategory Navigation",
+        "description": "Links to a category's subcategories — horizontal links, vertical list, or pill chips. Subcategory data is consumer-injected; the editor shows placeholders.",
         "category": "category",
         "intent": [
           "navigate",
-          "browse",
-          "organize",
-          "group"
+          "browse"
         ],
-        "visualRole": "block",
+        "visualRole": "sub-header",
         "dataDeps": [
-          "categories (consumer-injected)"
+          "subcategories (consumer-injected)"
         ],
         "copyFields": [],
         "themeable": [],
         "a11yRisk": "low",
         "mobileBehavior": "responsive",
         "searchTags": [
-          "categories",
-          "collections",
-          "grid",
-          "browse",
-          "navigation"
+          "subcategory",
+          "navigation",
+          "links",
+          "pills",
+          "browse"
         ],
         "propSchema": {
-          "columns": {
-            "type": "number",
+          "layout": {
+            "type": "enum",
             "required": true,
-            "description": "Category cards per row (1-4)."
+            "description": "Link arrangement — pills = rounded chips.",
+            "options": [
+              "horizontal",
+              "vertical",
+              "pills"
+            ]
           },
-          "gap": {
-            "type": "string",
-            "required": true,
-            "description": "Spacing between cards: sm | md | lg."
-          },
-          "showImages": {
+          "showIcons": {
             "type": "boolean",
             "required": true,
-            "description": "Show each category's image."
+            "description": "Show an icon per subcategory."
           },
-          "showCounts": {
-            "type": "boolean",
+          "alignment": {
+            "type": "enum",
             "required": true,
-            "description": "Show the product count per category."
-          },
-          "showDescriptions": {
-            "type": "boolean",
-            "required": true,
-            "description": "Show category descriptions."
-          },
-          "cardStyle": {
-            "type": "string",
-            "required": true,
-            "description": "Card look: standard | bordered | shadow."
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           }
         },
         "jsonSchema": {
-          "columns": {
-            "type": "number",
+          "layout": {
+            "type": "enum",
             "required": true,
-            "description": "Category cards per row (1-4)."
+            "description": "Link arrangement — pills = rounded chips.",
+            "options": [
+              "horizontal",
+              "vertical",
+              "pills"
+            ]
           },
-          "gap": {
-            "type": "string",
-            "required": true,
-            "description": "Spacing between cards: sm | md | lg."
-          },
-          "showImages": {
+          "showIcons": {
             "type": "boolean",
             "required": true,
-            "description": "Show each category's image."
+            "description": "Show an icon per subcategory."
           },
-          "showCounts": {
-            "type": "boolean",
+          "alignment": {
+            "type": "enum",
             "required": true,
-            "description": "Show the product count per category."
-          },
-          "showDescriptions": {
-            "type": "boolean",
-            "required": true,
-            "description": "Show category descriptions."
-          },
-          "cardStyle": {
-            "type": "string",
-            "required": true,
-            "description": "Card look: standard | bordered | shadow."
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           }
         },
         "defaultProps": {
-          "columns": 4,
-          "gap": "lg",
-          "showImages": true,
-          "showCounts": true,
-          "showDescriptions": false,
-          "cardStyle": "standard"
+          "layout": "horizontal",
+          "showIcons": false,
+          "alignment": "center"
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\category\\CategoryGrid\\categorygrid.meta.ts"
+        "metaPath": "src\\puck\\components\\category\\SubcategoryNav\\subcategorynav.meta.ts"
       },
       {
         "name": "CategoriesGrid",
@@ -56853,6 +59287,301 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\homepage\\CollectionsGrid\\collectionsgrid.meta.ts"
+      },
+      {
+        "name": "CategoryNav",
+        "label": "Category Navigation",
+        "description": "Vertical list of product categories with optional icons — a sidebar-style category menu. Categories data is injected by the host; the editor shows placeholders. For a horizontal top menu use MenuNavigation; for category CARDS use CategoryGrid.",
+        "category": "navigation",
+        "intent": [
+          "navigate",
+          "browse",
+          "menu"
+        ],
+        "visualRole": "sidebar",
+        "dataDeps": [
+          "categories (consumer-injected)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "categories",
+          "menu",
+          "sidebar",
+          "navigation",
+          "browse"
+        ],
+        "propSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Optional heading above the list."
+          },
+          "showIcons": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show an icon per category."
+          },
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "standard = normal; luxury = lighter type with wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Optional heading above the list."
+          },
+          "showIcons": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show an icon per category."
+          },
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "standard = normal; luxury = lighter type with wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
+          }
+        },
+        "defaultProps": {
+          "title": "Featured",
+          "showIcons": true,
+          "style": "standard",
+          "categories": []
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\navigation\\CategoryNav\\categorynav.meta.ts"
+      },
+      {
+        "name": "FilterBar",
+        "label": "Filter Bar",
+        "description": "Storefront listing controls: filter panel (sidebar/drawer), sort dropdown, result count, clear-all. Category/collection listing pages only; filters are resolved by the storefront at render.",
+        "category": "storefront",
+        "intent": [
+          "filter",
+          "sort",
+          "browse"
+        ],
+        "visualRole": "listing-controls",
+        "dataDeps": [
+          "facet data (storefront-resolved)"
+        ],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "medium",
+        "mobileBehavior": "drawer",
+        "searchTags": [
+          "filter",
+          "sort",
+          "listing",
+          "collection page",
+          "facets"
+        ],
+        "propSchema": {
+          "filterLayout": {
+            "type": "enum",
+            "required": true,
+            "description": "Filter placement. drawer is best on mobile.",
+            "options": [
+              "sidebar",
+              "drawer",
+              "horizontal"
+            ]
+          },
+          "showSort": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the sort dropdown."
+          },
+          "showCount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the result count."
+          },
+          "showClearAll": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show a clear-all-filters action."
+          },
+          "showFilters": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the filter controls at all."
+          }
+        },
+        "jsonSchema": {
+          "filterLayout": {
+            "type": "enum",
+            "required": true,
+            "description": "Filter placement. drawer is best on mobile.",
+            "options": [
+              "sidebar",
+              "drawer",
+              "horizontal"
+            ]
+          },
+          "showSort": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the sort dropdown."
+          },
+          "showCount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the result count."
+          },
+          "showClearAll": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show a clear-all-filters action."
+          },
+          "showFilters": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the filter controls at all."
+          }
+        },
+        "defaultProps": {
+          "filterLayout": "sidebar",
+          "showSort": true,
+          "showCount": true,
+          "showClearAll": true,
+          "showFilters": true
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\storefront\\filterbar.meta.ts"
+      },
+      {
+        "name": "PaginationBar",
+        "label": "Pagination Bar",
+        "description": "Listing page pagination: numbered pages or prev/next, plus an optional per-page selector. The storefront drives actual navigation.",
+        "category": "storefront",
+        "intent": [
+          "paginate",
+          "browse"
+        ],
+        "visualRole": "listing-controls",
+        "dataDeps": [
+          "page state (storefront-driven)"
+        ],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "medium",
+        "mobileBehavior": "compact",
+        "searchTags": [
+          "pagination",
+          "pages",
+          "listing",
+          "next",
+          "prev"
+        ],
+        "propSchema": {
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "numbered = page buttons; compact = prev/next; load-more = single button.",
+            "options": [
+              "numbered",
+              "compact",
+              "load-more"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Bar alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "maxPageNumbers": {
+            "type": "number",
+            "required": true,
+            "description": "Max visible page buttons before ellipsis."
+          },
+          "showPerPageSelector": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the per-page dropdown."
+          },
+          "perPageOptions": {
+            "type": "array",
+            "required": true,
+            "description": "Choices for per-page, e.g. [12, 24, 48]."
+          }
+        },
+        "jsonSchema": {
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "numbered = page buttons; compact = prev/next; load-more = single button.",
+            "options": [
+              "numbered",
+              "compact",
+              "load-more"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Bar alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "maxPageNumbers": {
+            "type": "number",
+            "required": true,
+            "description": "Max visible page buttons before ellipsis."
+          },
+          "showPerPageSelector": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the per-page dropdown."
+          },
+          "perPageOptions": {
+            "type": "array",
+            "required": true,
+            "description": "Choices for per-page, e.g. [12, 24, 48]."
+          }
+        },
+        "defaultProps": {
+          "currentPage": 1,
+          "totalPages": 5,
+          "style": "numbered",
+          "alignment": "center",
+          "maxPageNumbers": 7,
+          "showPerPageSelector": true,
+          "perPageOptions": [
+            12,
+            24,
+            48
+          ],
+          "perPage": 12
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\storefront\\paginationbar.meta.ts"
       }
     ],
     "organize": [
@@ -57063,739 +59792,197 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\category\\CategoryGrid\\categorygrid.meta.ts"
       }
     ],
-    "category": [
+    "announce": [
       {
         "name": "CategoryHero",
         "label": "Category Hero",
-        "description": "Category Hero component (auto-derived).",
+        "description": "Category page banner: category image, title, and description over the full section background model (image > gradient > scheme > color). The category data comes from page context (storefront-injected).",
         "category": "category",
         "intent": [
-          "category",
-          "hero"
+          "announce",
+          "introduce"
         ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "category",
-          "hero"
-        ],
-        "propSchema": {
-          "showImage": {
-            "type": "boolean"
-          },
-          "showTitle": {
-            "type": "boolean"
-          },
-          "showDescription": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          },
-          "backgroundColor": {
-            "type": "color"
-          },
-          "textColor": {
-            "type": "color"
-          },
-          "backgroundScheme": {
-            "type": "string"
-          },
-          "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
-          },
-          "overlayColor": {
-            "type": "color"
-          },
-          "overlayOpacity": {
-            "type": "string"
-          },
-          "gradientFrom": {
-            "type": "string"
-          },
-          "gradientTo": {
-            "type": "string"
-          },
-          "density": {
-            "type": "string"
-          },
-          "contentWidth": {
-            "type": "string"
-          },
-          "contentAlign": {
-            "type": "string"
-          },
-          "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "showImage": {
-            "type": "boolean"
-          },
-          "showTitle": {
-            "type": "boolean"
-          },
-          "showDescription": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          },
-          "backgroundColor": {
-            "type": "color"
-          },
-          "textColor": {
-            "type": "color"
-          },
-          "backgroundScheme": {
-            "type": "string"
-          },
-          "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
-          },
-          "overlayColor": {
-            "type": "color"
-          },
-          "overlayOpacity": {
-            "type": "string"
-          },
-          "gradientFrom": {
-            "type": "string"
-          },
-          "gradientTo": {
-            "type": "string"
-          },
-          "density": {
-            "type": "string"
-          },
-          "contentWidth": {
-            "type": "string"
-          },
-          "contentAlign": {
-            "type": "string"
-          },
-          "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "showImage": true,
-          "showTitle": true,
-          "showDescription": true,
-          "style": "standard",
-          "backgroundColor": "#111827",
-          "textColor": "#ffffff",
-          "backgroundScheme": "",
-          "backgroundImage": "",
-          "backgroundSize": "cover",
-          "backgroundPosition": "center",
-          "overlayColor": "#000000",
-          "overlayOpacity": "40",
-          "gradientFrom": "",
-          "gradientTo": "",
-          "density": "spacious",
-          "contentWidth": "full",
-          "contentAlign": "center",
-          "verticalAlign": "middle",
-          "minHeight": "lg"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\category\\CategoryHero\\CategoryHero.tsx (auto-derived)"
-      },
-      {
-        "name": "CategoryProducts",
-        "label": "Category Products",
-        "description": "Products-from-a-specific-category section. Grid or carousel (Swiper) display modes. Each card can show image with optional Sale/New badges, rating, price (with compare-at-price), and Add to Cart. Bottom View All button. Consumer fetches via category_id (or override via renderProduct — D-1 escape hatch).",
-        "category": "homepage",
-        "intent": [
-          "products",
-          "category",
-          "shop-by-category",
-          "grid",
-          "carousel",
-          "department-products"
-        ],
-        "visualRole": "block",
+        "visualRole": "above-fold",
         "dataDeps": [
-          "products (consumer-injected, keyed by categoryId)",
-          "loading flag",
-          "error string"
+          "category title/description/image (page context)"
         ],
-        "copyFields": [
-          "sectionTitle",
-          "sectionSubtitle",
-          "viewAllButtonText",
-          "categoryName"
-        ],
+        "copyFields": [],
         "themeable": [
           "backgroundColor",
-          "textColor",
-          "buttonColor",
-          "buttonTextColor"
+          "textColor"
         ],
-        "a11yRisk": "medium",
+        "a11yRisk": "low",
         "mobileBehavior": "responsive",
         "searchTags": [
-          "products",
           "category",
-          "shop",
-          "department",
-          "carousel",
-          "grid"
-        ],
-        "propSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "categoryId": {
-            "type": "string",
-            "required": true
-          },
-          "categoryName": {
-            "type": "string",
-            "required": true
-          },
-          "displayMode": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "grid",
-              "carousel"
-            ]
-          },
-          "productsPerRow": {
-            "type": "number",
-            "required": true
-          },
-          "maxProducts": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerView": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewTablet": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewMobile": {
-            "type": "number",
-            "required": true
-          },
-          "spaceBetween": {
-            "type": "number",
-            "required": true
-          },
-          "autoplay": {
-            "type": "boolean",
-            "required": true
-          },
-          "autoplayDelay": {
-            "type": "number",
-            "required": true
-          },
-          "loop": {
-            "type": "boolean",
-            "required": true
-          },
-          "navigation": {
-            "type": "boolean",
-            "required": true
-          },
-          "pagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageAspectRatio": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "square",
-              "portrait",
-              "landscape"
-            ]
-          },
-          "showPrice": {
-            "type": "boolean",
-            "required": true
-          },
-          "showAddToCart": {
-            "type": "boolean",
-            "required": true
-          },
-          "showRating": {
-            "type": "boolean",
-            "required": true
-          },
-          "showBadges": {
-            "type": "boolean",
-            "required": true
-          },
-          "showViewAllButton": {
-            "type": "boolean",
-            "required": true
-          },
-          "viewAllButtonText": {
-            "type": "string",
-            "required": true
-          },
-          "backgroundColor": {
-            "type": "string",
-            "required": true
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "cardStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "minimal",
-              "bordered",
-              "shadow"
-            ]
-          },
-          "borderRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg"
-            ]
-          },
-          "buttonColor": {
-            "type": "string",
-            "required": true
-          },
-          "buttonTextColor": {
-            "type": "string",
-            "required": true
-          },
-          "buttonRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "medium",
-              "small",
-              "large",
-              "none"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "sectionTitle": {
-            "type": "string",
-            "required": true
-          },
-          "sectionSubtitle": {
-            "type": "string"
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true
-          },
-          "categoryId": {
-            "type": "string",
-            "required": true
-          },
-          "categoryName": {
-            "type": "string",
-            "required": true
-          },
-          "displayMode": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "grid",
-              "carousel"
-            ]
-          },
-          "productsPerRow": {
-            "type": "number",
-            "required": true
-          },
-          "maxProducts": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerView": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewTablet": {
-            "type": "number",
-            "required": true
-          },
-          "slidesPerViewMobile": {
-            "type": "number",
-            "required": true
-          },
-          "spaceBetween": {
-            "type": "number",
-            "required": true
-          },
-          "autoplay": {
-            "type": "boolean",
-            "required": true
-          },
-          "autoplayDelay": {
-            "type": "number",
-            "required": true
-          },
-          "loop": {
-            "type": "boolean",
-            "required": true
-          },
-          "navigation": {
-            "type": "boolean",
-            "required": true
-          },
-          "pagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageAspectRatio": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "square",
-              "portrait",
-              "landscape"
-            ]
-          },
-          "showPrice": {
-            "type": "boolean",
-            "required": true
-          },
-          "showAddToCart": {
-            "type": "boolean",
-            "required": true
-          },
-          "showRating": {
-            "type": "boolean",
-            "required": true
-          },
-          "showBadges": {
-            "type": "boolean",
-            "required": true
-          },
-          "showViewAllButton": {
-            "type": "boolean",
-            "required": true
-          },
-          "viewAllButtonText": {
-            "type": "string",
-            "required": true
-          },
-          "backgroundColor": {
-            "type": "string",
-            "required": true
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "cardStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "minimal",
-              "bordered",
-              "shadow"
-            ]
-          },
-          "borderRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg"
-            ]
-          },
-          "buttonColor": {
-            "type": "string",
-            "required": true
-          },
-          "buttonTextColor": {
-            "type": "string",
-            "required": true
-          },
-          "buttonRadius": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "medium",
-              "small",
-              "large",
-              "none"
-            ]
-          }
-        },
-        "defaultProps": {
-          "sectionTitle": "Shop by Category",
-          "sectionSubtitle": "Discover our curated collection",
-          "showTitle": true,
-          "categoryId": "",
-          "categoryName": "",
-          "displayMode": "grid",
-          "productsPerRow": 4,
-          "maxProducts": 12,
-          "slidesPerView": 4,
-          "slidesPerViewTablet": 3,
-          "slidesPerViewMobile": 1,
-          "spaceBetween": 20,
-          "autoplay": false,
-          "autoplayDelay": 3000,
-          "loop": false,
-          "navigation": true,
-          "pagination": true,
-          "imageAspectRatio": "square",
-          "showPrice": true,
-          "showAddToCart": true,
-          "showRating": false,
-          "showBadges": true,
-          "showViewAllButton": true,
-          "viewAllButtonText": "View All Products",
-          "backgroundColor": "#f9fafb",
-          "textColor": "#111827",
-          "cardStyle": "shadow",
-          "borderRadius": "md",
-          "buttonColor": "#000000",
-          "buttonTextColor": "#ffffff",
-          "buttonRadius": "medium",
-          "loading": false,
-          "error": ""
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
-      },
-      {
-        "name": "CategoryNav",
-        "label": "Category Nav",
-        "description": "Category Nav component (auto-derived).",
-        "category": "navigation",
-        "intent": [
-          "category",
-          "nav"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "category",
-          "nav"
-        ],
-        "propSchema": {
-          "title": {
-            "type": "string"
-          },
-          "showIcons": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          },
-          "categories": {
-            "type": "array"
-          }
-        },
-        "jsonSchema": {
-          "title": {
-            "type": "string"
-          },
-          "showIcons": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          },
-          "categories": {
-            "type": "array"
-          }
-        },
-        "defaultProps": {
-          "title": "Featured",
-          "showIcons": true,
-          "style": "standard",
-          "categories": []
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\CategoryNav\\CategoryNav.tsx (auto-derived)"
-      }
-    ],
-    "hero": [
-      {
-        "name": "CategoryHero",
-        "label": "Category Hero",
-        "description": "Category Hero component (auto-derived).",
-        "category": "category",
-        "intent": [
-          "category",
-          "hero"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "category",
-          "hero"
+          "hero",
+          "banner",
+          "header"
         ],
         "propSchema": {
           "showImage": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category image."
           },
           "showTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category title."
           },
           "showDescription": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category description."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "luxury = lighter type, wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. Ignored while a scheme is active."
           },
           "backgroundScheme": {
-            "type": "string"
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
           },
           "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
           },
           "overlayColor": {
-            "type": "color"
+            "type": "color",
+            "description": "Overlay tint over a background image."
           },
           "overlayOpacity": {
-            "type": "string"
+            "type": "string",
+            "description": "Overlay strength in percent."
           },
           "gradientFrom": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color."
           },
           "gradientTo": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient end."
           },
           "density": {
-            "type": "string"
+            "type": "string",
+            "description": "Section padding: sm | md | lg | spacious."
           },
           "contentWidth": {
-            "type": "string"
+            "type": "string",
+            "description": "Content width: sm | md | lg | full."
           },
           "contentAlign": {
-            "type": "string"
+            "type": "string",
+            "description": "left | center | right."
           },
           "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
+            "type": "string",
+            "description": "top | middle | bottom."
           }
         },
         "jsonSchema": {
           "showImage": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category image."
           },
           "showTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category title."
           },
           "showDescription": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category description."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "luxury = lighter type, wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. Ignored while a scheme is active."
           },
           "backgroundScheme": {
-            "type": "string"
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
           },
           "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
           },
           "overlayColor": {
-            "type": "color"
+            "type": "color",
+            "description": "Overlay tint over a background image."
           },
           "overlayOpacity": {
-            "type": "string"
+            "type": "string",
+            "description": "Overlay strength in percent."
           },
           "gradientFrom": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color."
           },
           "gradientTo": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient end."
           },
           "density": {
-            "type": "string"
+            "type": "string",
+            "description": "Section padding: sm | md | lg | spacious."
           },
           "contentWidth": {
-            "type": "string"
+            "type": "string",
+            "description": "Content width: sm | md | lg | full."
           },
           "contentAlign": {
-            "type": "string"
+            "type": "string",
+            "description": "left | center | right."
           },
           "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
+            "type": "string",
+            "description": "top | middle | bottom."
           }
         },
         "defaultProps": {
@@ -57821,141 +60008,198 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\category\\CategoryHero\\CategoryHero.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\category\\CategoryHero\\categoryhero.meta.ts"
       },
       {
         "name": "CollectionHero",
         "label": "Collection Hero",
-        "description": "Collection Hero component (auto-derived).",
+        "description": "Collection page banner: collection image, title, and description over the full section background model (image > gradient > scheme > color). Collection data comes from page context (storefront-injected).",
         "category": "collection",
         "intent": [
-          "collection",
-          "hero"
+          "announce",
+          "introduce"
         ],
-        "dataDeps": [],
+        "visualRole": "above-fold",
+        "dataDeps": [
+          "collection title/description/image (page context)"
+        ],
         "copyFields": [],
-        "themeable": [],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
           "collection",
-          "hero"
+          "hero",
+          "banner",
+          "header"
         ],
         "propSchema": {
           "showImage": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection image."
           },
           "showTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection title."
           },
           "showDescription": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection description."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "luxury = lighter type, wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. Ignored while a scheme is active."
           },
           "backgroundScheme": {
-            "type": "string"
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
           },
           "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
           },
           "overlayColor": {
-            "type": "color"
+            "type": "color",
+            "description": "Overlay tint over a background image."
           },
           "overlayOpacity": {
-            "type": "string"
+            "type": "string",
+            "description": "Overlay strength in percent."
           },
           "gradientFrom": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color."
           },
           "gradientTo": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient end."
           },
           "density": {
-            "type": "string"
+            "type": "string",
+            "description": "Section padding."
           },
           "contentWidth": {
-            "type": "string"
+            "type": "string",
+            "description": "Content width."
           },
           "contentAlign": {
-            "type": "string"
+            "type": "string",
+            "description": "left | center | right."
           },
           "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
+            "type": "string",
+            "description": "top | middle | bottom."
           }
         },
         "jsonSchema": {
           "showImage": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection image."
           },
           "showTitle": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection title."
           },
           "showDescription": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection description."
           },
           "style": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "luxury = lighter type, wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. Ignored while a scheme is active."
           },
           "backgroundScheme": {
-            "type": "string"
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
           },
           "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
           },
           "overlayColor": {
-            "type": "color"
+            "type": "color",
+            "description": "Overlay tint over a background image."
           },
           "overlayOpacity": {
-            "type": "string"
+            "type": "string",
+            "description": "Overlay strength in percent."
           },
           "gradientFrom": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color."
           },
           "gradientTo": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient end."
           },
           "density": {
-            "type": "string"
+            "type": "string",
+            "description": "Section padding."
           },
           "contentWidth": {
-            "type": "string"
+            "type": "string",
+            "description": "Content width."
           },
           "contentAlign": {
-            "type": "string"
+            "type": "string",
+            "description": "left | center | right."
           },
           "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
+            "type": "string",
+            "description": "top | middle | bottom."
           }
         },
         "defaultProps": {
@@ -57981,54 +60225,98 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\collection\\CollectionHero\\CollectionHero.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\collection\\CollectionHero\\collectionhero.meta.ts"
       },
       {
-        "name": "ContentSlider",
-        "label": "Content Slider (Swiper)",
-        "description": "Full-bleed content slider for hero banners, promos, and announcements. Each slide has title/description/button/background. Optional custom HTML per slide. Falls back to 3 mock slides. Uses SwiperBase for shared config.",
-        "category": "swiper",
+        "name": "HeroSection",
+        "label": "Hero Section",
+        "description": "A large above-the-fold banner with title, subtitle, optional image, and up to two CTAs.",
+        "category": "homepage",
         "intent": [
-          "hero",
-          "banner",
-          "slider",
-          "carousel",
-          "announcement"
+          "announce",
+          "showcase",
+          "promote",
+          "introduce"
         ],
-        "visualRole": "block",
+        "visualRole": "above-fold",
         "dataDeps": [],
         "copyFields": [
-          "slides.title",
-          "slides.description",
-          "slides.buttonText",
-          "slides.buttonLink",
-          "slides.htmlContent"
+          "title",
+          "subtitle",
+          "description",
+          "primaryButtonText",
+          "secondaryButtonText"
         ],
         "themeable": [
-          "slides.backgroundColor",
-          "slides.textColor",
-          "slides.buttonColor",
-          "overlayColor"
+          "backgroundColor",
+          "textColor",
+          "gradientFrom",
+          "gradientTo"
         ],
-        "a11yRisk": "medium",
+        "a11yRisk": "low",
         "mobileBehavior": "responsive",
         "searchTags": [
-          "hero",
           "banner",
-          "slider",
-          "carousel",
+          "header",
+          "splash",
+          "landing",
           "announcement",
-          "content"
+          "hero"
         ],
         "propSchema": {
-          "slides": {
-            "type": "array",
+          "title": {
+            "type": "string",
             "required": true,
-            "items": "$item"
+            "description": "Headline text"
           },
-          "slideHeight": {
+          "subtitle": {
+            "type": "string",
+            "description": "Small uppercase text above the title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Body copy below the title"
+          },
+          "showPrimaryButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "primaryButtonText": {
+            "type": "string"
+          },
+          "primaryButtonLink": {
+            "type": "string"
+          },
+          "showSecondaryButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "secondaryButtonText": {
+            "type": "string"
+          },
+          "secondaryButtonLink": {
+            "type": "string"
+          },
+          "showImage": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "imagePosition": {
             "type": "enum",
-            "required": true,
+            "options": [
+              "left",
+              "right",
+              "background"
+            ]
+          },
+          "imageAlt": {
+            "type": "string"
+          },
+          "height": {
+            "type": "enum",
             "options": [
               "sm",
               "md",
@@ -58037,109 +60325,98 @@ export const registry: CompiledRegistry = {
               "full"
             ]
           },
-          "contentWidth": {
+          "contentAlignment": {
             "type": "enum",
-            "required": true,
-            "options": [
-              "full",
-              "contained"
-            ]
-          },
-          "contentPosition": {
-            "type": "enum",
-            "required": true,
             "options": [
               "left",
               "center",
               "right"
             ]
           },
-          "effect": {
+          "verticalAlignment": {
             "type": "enum",
-            "required": true,
             "options": [
-              "slide",
-              "fade",
-              "cube",
-              "coverflow",
-              "flip"
-            ]
-          },
-          "showNavigation": {
-            "type": "boolean",
-            "required": true
-          },
-          "navigationColor": {
-            "type": "string",
-            "required": true
-          },
-          "navigationPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
+              "top",
               "center",
               "bottom"
             ]
           },
-          "showPagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationType": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "bullets",
-              "fraction",
-              "progressbar"
-            ]
-          },
-          "paginationColor": {
-            "type": "string",
-            "required": true
-          },
-          "enableAutoplay": {
-            "type": "boolean",
-            "required": true
-          },
-          "autoplayDelay": {
-            "type": "number",
-            "required": true
-          },
-          "pauseOnHover": {
-            "type": "boolean",
-            "required": true
-          },
-          "loop": {
-            "type": "boolean",
-            "required": true
-          },
-          "speed": {
-            "type": "number",
-            "required": true
-          },
-          "enableOverlay": {
-            "type": "boolean",
-            "required": true
-          },
-          "overlayColor": {
-            "type": "string",
-            "required": true
+          "textColor": {
+            "type": "string"
           },
           "overlayOpacity": {
             "type": "number",
+            "min": 0,
+            "max": 100
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "backgroundGradient": {
+            "type": "boolean",
             "required": true
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
           }
         },
         "jsonSchema": {
-          "slides": {
-            "type": "array",
+          "title": {
+            "type": "string",
             "required": true,
-            "items": "$item"
+            "description": "Headline text"
           },
-          "slideHeight": {
+          "subtitle": {
+            "type": "string",
+            "description": "Small uppercase text above the title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Body copy below the title"
+          },
+          "showPrimaryButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "primaryButtonText": {
+            "type": "string"
+          },
+          "primaryButtonLink": {
+            "type": "string"
+          },
+          "showSecondaryButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "secondaryButtonText": {
+            "type": "string"
+          },
+          "secondaryButtonLink": {
+            "type": "string"
+          },
+          "showImage": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "imagePosition": {
             "type": "enum",
-            "required": true,
+            "options": [
+              "left",
+              "right",
+              "background"
+            ]
+          },
+          "imageAlt": {
+            "type": "string"
+          },
+          "height": {
+            "type": "enum",
             "options": [
               "sm",
               "md",
@@ -58148,103 +60425,1093 @@ export const registry: CompiledRegistry = {
               "full"
             ]
           },
-          "contentWidth": {
+          "contentAlignment": {
             "type": "enum",
-            "required": true,
-            "options": [
-              "full",
-              "contained"
-            ]
-          },
-          "contentPosition": {
-            "type": "enum",
-            "required": true,
             "options": [
               "left",
               "center",
               "right"
             ]
           },
-          "effect": {
+          "verticalAlignment": {
             "type": "enum",
-            "required": true,
             "options": [
-              "slide",
-              "fade",
-              "cube",
-              "coverflow",
-              "flip"
-            ]
-          },
-          "showNavigation": {
-            "type": "boolean",
-            "required": true
-          },
-          "navigationColor": {
-            "type": "string",
-            "required": true
-          },
-          "navigationPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
+              "top",
               "center",
               "bottom"
             ]
           },
-          "showPagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationType": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "bullets",
-              "fraction",
-              "progressbar"
-            ]
-          },
-          "paginationColor": {
-            "type": "string",
-            "required": true
-          },
-          "enableAutoplay": {
-            "type": "boolean",
-            "required": true
-          },
-          "autoplayDelay": {
-            "type": "number",
-            "required": true
-          },
-          "pauseOnHover": {
-            "type": "boolean",
-            "required": true
-          },
-          "loop": {
-            "type": "boolean",
-            "required": true
-          },
-          "speed": {
-            "type": "number",
-            "required": true
-          },
-          "enableOverlay": {
-            "type": "boolean",
-            "required": true
-          },
-          "overlayColor": {
-            "type": "string",
-            "required": true
+          "textColor": {
+            "type": "string"
           },
           "overlayOpacity": {
             "type": "number",
+            "min": 0,
+            "max": 100
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "backgroundGradient": {
+            "type": "boolean",
             "required": true
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
           }
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\swiper\\ContentSlider\\contentslider.meta.ts"
+        "metaPath": "src\\puck\\components\\homepage\\Hero\\hero.meta.ts"
+      },
+      {
+        "name": "PromotionCard",
+        "label": "Promotion Card",
+        "description": "A single promotional card: headline, description, CTA button — with the full section background model (image > gradient > scheme > color). Use inside PromotionalBannerGrid for multi-offer layouts.",
+        "category": "homepage",
+        "intent": [
+          "promote",
+          "offer",
+          "announce"
+        ],
+        "visualRole": "card",
+        "dataDeps": [],
+        "copyFields": [
+          "title",
+          "description",
+          "buttonText"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor",
+          "buttonColor",
+          "buttonTextColor"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "promo",
+          "offer",
+          "card",
+          "sale",
+          "banner",
+          "cta"
+        ],
+        "propSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Headline, e.g. \"Special Offer\"."
+          },
+          "description": {
+            "type": "string",
+            "required": true,
+            "description": "One-line offer description."
+          },
+          "buttonText": {
+            "type": "string",
+            "required": true,
+            "description": "CTA button label."
+          },
+          "buttonHref": {
+            "type": "string",
+            "required": true,
+            "description": "CTA link URL."
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Card background. Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Text color. Token path or hex. Ignored while a scheme is active."
+          },
+          "buttonColor": {
+            "type": "color",
+            "required": true,
+            "description": "CTA button background. Token path (e.g. \"button.primary.background\") or hex."
+          },
+          "buttonTextColor": {
+            "type": "color",
+            "required": true,
+            "description": "CTA label color."
+          },
+          "borderRadius": {
+            "type": "string",
+            "required": true,
+            "description": "Corner radius: none | sm | md | lg | full."
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set; also controls text color.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength in percent, e.g. \"40\"."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color when set."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end."
+          }
+        },
+        "jsonSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Headline, e.g. \"Special Offer\"."
+          },
+          "description": {
+            "type": "string",
+            "required": true,
+            "description": "One-line offer description."
+          },
+          "buttonText": {
+            "type": "string",
+            "required": true,
+            "description": "CTA button label."
+          },
+          "buttonHref": {
+            "type": "string",
+            "required": true,
+            "description": "CTA link URL."
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Card background. Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Text color. Token path or hex. Ignored while a scheme is active."
+          },
+          "buttonColor": {
+            "type": "color",
+            "required": true,
+            "description": "CTA button background. Token path (e.g. \"button.primary.background\") or hex."
+          },
+          "buttonTextColor": {
+            "type": "color",
+            "required": true,
+            "description": "CTA label color."
+          },
+          "borderRadius": {
+            "type": "string",
+            "required": true,
+            "description": "Corner radius: none | sm | md | lg | full."
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set; also controls text color.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength in percent, e.g. \"40\"."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color when set."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end."
+          }
+        },
+        "defaultProps": {
+          "title": "Special Offer",
+          "description": "Get 20% off your first order",
+          "buttonText": "Shop Now",
+          "buttonHref": "#",
+          "backgroundColor": "#111827",
+          "textColor": "#ffffff",
+          "buttonColor": "#ffffff",
+          "buttonTextColor": "#111827",
+          "borderRadius": "lg",
+          "backgroundScheme": "",
+          "backgroundImage": "",
+          "backgroundSize": "cover",
+          "backgroundPosition": "center",
+          "overlayColor": "",
+          "overlayOpacity": "0",
+          "gradientFrom": "",
+          "gradientTo": "",
+          "density": "compact",
+          "contentWidth": "full",
+          "contentAlign": "center",
+          "verticalAlign": "top",
+          "minHeight": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\PromotionCard\\promotioncard.meta.ts"
+      },
+      {
+        "name": "AnnouncementBar",
+        "label": "Announcement Bar",
+        "description": "Thin top-of-page banner for short promotions (\"Free shipping over $50\"). Sits above the header on every page. Keep text under ~80 characters.",
+        "category": "navigation",
+        "intent": [
+          "announce",
+          "promote",
+          "shipping-offer"
+        ],
+        "visualRole": "top-strip",
+        "dataDeps": [],
+        "copyFields": [
+          "text",
+          "linkText"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "announcement",
+          "banner",
+          "top bar",
+          "promo strip",
+          "free shipping"
+        ],
+        "propSchema": {
+          "text": {
+            "type": "string",
+            "required": true,
+            "description": "The announcement message."
+          },
+          "linkText": {
+            "type": "string",
+            "description": "Optional CTA label; adds a link inside the bar."
+          },
+          "linkUrl": {
+            "type": "string",
+            "description": "URL for the CTA link."
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"brand.primary\") or hex."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.inverse\") or hex."
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Text alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
+          },
+          "paddingY": {
+            "type": "enum",
+            "required": true,
+            "description": "Vertical padding.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "text": {
+            "type": "string",
+            "required": true,
+            "description": "The announcement message."
+          },
+          "linkText": {
+            "type": "string",
+            "description": "Optional CTA label; adds a link inside the bar."
+          },
+          "linkUrl": {
+            "type": "string",
+            "description": "URL for the CTA link."
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"brand.primary\") or hex."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.inverse\") or hex."
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Text alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
+          },
+          "paddingY": {
+            "type": "enum",
+            "required": true,
+            "description": "Vertical padding.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          }
+        },
+        "defaultProps": {
+          "text": "Free shipping on orders over $50",
+          "linkText": "",
+          "linkUrl": "",
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "alignment": "center",
+          "fontSize": "sm",
+          "paddingY": "md"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\navigation\\AnnouncementBar\\announcementbar.meta.ts"
+      }
+    ],
+    "introduce": [
+      {
+        "name": "CategoryHero",
+        "label": "Category Hero",
+        "description": "Category page banner: category image, title, and description over the full section background model (image > gradient > scheme > color). The category data comes from page context (storefront-injected).",
+        "category": "category",
+        "intent": [
+          "announce",
+          "introduce"
+        ],
+        "visualRole": "above-fold",
+        "dataDeps": [
+          "category title/description/image (page context)"
+        ],
+        "copyFields": [],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "category",
+          "hero",
+          "banner",
+          "header"
+        ],
+        "propSchema": {
+          "showImage": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category image."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category title."
+          },
+          "showDescription": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category description."
+          },
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "luxury = lighter type, wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. Ignored while a scheme is active."
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength in percent."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding: sm | md | lg | spacious."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content width: sm | md | lg | full."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "left | center | right."
+          },
+          "verticalAlign": {
+            "type": "string",
+            "description": "top | middle | bottom."
+          }
+        },
+        "jsonSchema": {
+          "showImage": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category image."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category title."
+          },
+          "showDescription": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the category description."
+          },
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "luxury = lighter type, wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. Ignored while a scheme is active."
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength in percent."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding: sm | md | lg | spacious."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content width: sm | md | lg | full."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "left | center | right."
+          },
+          "verticalAlign": {
+            "type": "string",
+            "description": "top | middle | bottom."
+          }
+        },
+        "defaultProps": {
+          "showImage": true,
+          "showTitle": true,
+          "showDescription": true,
+          "style": "standard",
+          "backgroundColor": "#111827",
+          "textColor": "#ffffff",
+          "backgroundScheme": "",
+          "backgroundImage": "",
+          "backgroundSize": "cover",
+          "backgroundPosition": "center",
+          "overlayColor": "#000000",
+          "overlayOpacity": "40",
+          "gradientFrom": "",
+          "gradientTo": "",
+          "density": "spacious",
+          "contentWidth": "full",
+          "contentAlign": "center",
+          "verticalAlign": "middle",
+          "minHeight": "lg"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\category\\CategoryHero\\categoryhero.meta.ts"
+      },
+      {
+        "name": "CollectionHero",
+        "label": "Collection Hero",
+        "description": "Collection page banner: collection image, title, and description over the full section background model (image > gradient > scheme > color). Collection data comes from page context (storefront-injected).",
+        "category": "collection",
+        "intent": [
+          "announce",
+          "introduce"
+        ],
+        "visualRole": "above-fold",
+        "dataDeps": [
+          "collection title/description/image (page context)"
+        ],
+        "copyFields": [],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "collection",
+          "hero",
+          "banner",
+          "header"
+        ],
+        "propSchema": {
+          "showImage": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection image."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection title."
+          },
+          "showDescription": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection description."
+          },
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "luxury = lighter type, wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. Ignored while a scheme is active."
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength in percent."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content width."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "left | center | right."
+          },
+          "verticalAlign": {
+            "type": "string",
+            "description": "top | middle | bottom."
+          }
+        },
+        "jsonSchema": {
+          "showImage": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection image."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection title."
+          },
+          "showDescription": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the collection description."
+          },
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "luxury = lighter type, wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex. Ignored while a scheme is active."
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength in percent."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end."
+          },
+          "density": {
+            "type": "string",
+            "description": "Section padding."
+          },
+          "contentWidth": {
+            "type": "string",
+            "description": "Content width."
+          },
+          "contentAlign": {
+            "type": "string",
+            "description": "left | center | right."
+          },
+          "verticalAlign": {
+            "type": "string",
+            "description": "top | middle | bottom."
+          }
+        },
+        "defaultProps": {
+          "showImage": true,
+          "showTitle": true,
+          "showDescription": true,
+          "style": "standard",
+          "backgroundColor": "#111827",
+          "textColor": "#ffffff",
+          "backgroundScheme": "",
+          "backgroundImage": "",
+          "backgroundSize": "cover",
+          "backgroundPosition": "center",
+          "overlayColor": "#000000",
+          "overlayOpacity": "30",
+          "gradientFrom": "",
+          "gradientTo": "",
+          "density": "spacious",
+          "contentWidth": "full",
+          "contentAlign": "center",
+          "verticalAlign": "middle",
+          "minHeight": "lg"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\collection\\CollectionHero\\collectionhero.meta.ts"
+      },
+      {
+        "name": "HeroSection",
+        "label": "Hero Section",
+        "description": "A large above-the-fold banner with title, subtitle, optional image, and up to two CTAs.",
+        "category": "homepage",
+        "intent": [
+          "announce",
+          "showcase",
+          "promote",
+          "introduce"
+        ],
+        "visualRole": "above-fold",
+        "dataDeps": [],
+        "copyFields": [
+          "title",
+          "subtitle",
+          "description",
+          "primaryButtonText",
+          "secondaryButtonText"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor",
+          "gradientFrom",
+          "gradientTo"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "banner",
+          "header",
+          "splash",
+          "landing",
+          "announcement",
+          "hero"
+        ],
+        "propSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Headline text"
+          },
+          "subtitle": {
+            "type": "string",
+            "description": "Small uppercase text above the title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Body copy below the title"
+          },
+          "showPrimaryButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "primaryButtonText": {
+            "type": "string"
+          },
+          "primaryButtonLink": {
+            "type": "string"
+          },
+          "showSecondaryButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "secondaryButtonText": {
+            "type": "string"
+          },
+          "secondaryButtonLink": {
+            "type": "string"
+          },
+          "showImage": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "imagePosition": {
+            "type": "enum",
+            "options": [
+              "left",
+              "right",
+              "background"
+            ]
+          },
+          "imageAlt": {
+            "type": "string"
+          },
+          "height": {
+            "type": "enum",
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "full"
+            ]
+          },
+          "contentAlignment": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlignment": {
+            "type": "enum",
+            "options": [
+              "top",
+              "center",
+              "bottom"
+            ]
+          },
+          "textColor": {
+            "type": "string"
+          },
+          "overlayOpacity": {
+            "type": "number",
+            "min": 0,
+            "max": 100
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "backgroundGradient": {
+            "type": "boolean",
+            "required": true
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          }
+        },
+        "jsonSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Headline text"
+          },
+          "subtitle": {
+            "type": "string",
+            "description": "Small uppercase text above the title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Body copy below the title"
+          },
+          "showPrimaryButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "primaryButtonText": {
+            "type": "string"
+          },
+          "primaryButtonLink": {
+            "type": "string"
+          },
+          "showSecondaryButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "secondaryButtonText": {
+            "type": "string"
+          },
+          "secondaryButtonLink": {
+            "type": "string"
+          },
+          "showImage": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageUrl": {
+            "type": "string"
+          },
+          "imagePosition": {
+            "type": "enum",
+            "options": [
+              "left",
+              "right",
+              "background"
+            ]
+          },
+          "imageAlt": {
+            "type": "string"
+          },
+          "height": {
+            "type": "enum",
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "full"
+            ]
+          },
+          "contentAlignment": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "verticalAlignment": {
+            "type": "enum",
+            "options": [
+              "top",
+              "center",
+              "bottom"
+            ]
+          },
+          "textColor": {
+            "type": "string"
+          },
+          "overlayOpacity": {
+            "type": "number",
+            "min": 0,
+            "max": 100
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "backgroundGradient": {
+            "type": "boolean",
+            "required": true
+          },
+          "gradientFrom": {
+            "type": "string"
+          },
+          "gradientTo": {
+            "type": "string"
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\Hero\\hero.meta.ts"
       }
     ],
     "metadata": [
@@ -58794,68 +62061,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\generic\\Alert\\alert.meta.ts"
-      },
-      {
-        "name": "TrackingInfo",
-        "label": "Tracking Info",
-        "description": "Tracking Info component (auto-derived).",
-        "category": "order",
-        "intent": [
-          "tracking",
-          "info"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "tracking",
-          "info"
-        ],
-        "propSchema": {
-          "showEstimatedDelivery": {
-            "type": "boolean"
-          },
-          "showCarrier": {
-            "type": "boolean"
-          },
-          "showTrackingNumber": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string"
-          },
-          "luxuryStyle": {
-            "type": "boolean"
-          }
-        },
-        "jsonSchema": {
-          "showEstimatedDelivery": {
-            "type": "boolean"
-          },
-          "showCarrier": {
-            "type": "boolean"
-          },
-          "showTrackingNumber": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string"
-          },
-          "luxuryStyle": {
-            "type": "boolean"
-          }
-        },
-        "defaultProps": {
-          "showEstimatedDelivery": true,
-          "showCarrier": true,
-          "showTrackingNumber": false,
-          "message": "You will receive tracking information once your order ships.",
-          "luxuryStyle": false
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\order\\TrackingInfo\\TrackingInfo.tsx (auto-derived)"
       }
     ],
     "category-meta": [
@@ -61053,96 +64258,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\layout\\Header\\header.meta.ts"
       },
       {
-        "name": "HeaderActions",
-        "label": "Header Actions",
-        "description": "Header Actions component (auto-derived).",
-        "category": "navigation",
-        "intent": [
-          "header",
-          "actions"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "header",
-          "actions"
-        ],
-        "propSchema": {
-          "showSearch": {
-            "type": "boolean"
-          },
-          "showAccount": {
-            "type": "boolean"
-          },
-          "showWishlist": {
-            "type": "boolean"
-          },
-          "showCart": {
-            "type": "boolean"
-          },
-          "iconSize": {
-            "type": "string"
-          },
-          "gap": {
-            "type": "string"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "cartCount": {
-            "type": "number"
-          }
-        },
-        "jsonSchema": {
-          "showSearch": {
-            "type": "boolean"
-          },
-          "showAccount": {
-            "type": "boolean"
-          },
-          "showWishlist": {
-            "type": "boolean"
-          },
-          "showCart": {
-            "type": "boolean"
-          },
-          "iconSize": {
-            "type": "string"
-          },
-          "gap": {
-            "type": "string"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "cartCount": {
-            "type": "number"
-          }
-        },
-        "defaultProps": {
-          "showSearch": true,
-          "showAccount": true,
-          "showWishlist": false,
-          "showCart": true,
-          "iconSize": "md",
-          "gap": "md",
-          "alignment": "right",
-          "color": "#111827",
-          "cartCount": 0
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\HeaderActions\\HeaderActions.tsx (auto-derived)"
-      },
-      {
         "name": "Logo",
         "label": "Logo",
         "description": "Logo image + optional storefront name text. Renders as an <a href> linking to the configured URL. Image-only or text-only fallback when one of imageUrl/text is empty. Plain anchor link (consumers wrap with their Link component if next.js routing is needed).",
@@ -61742,758 +64857,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\category\\CategoryTitle\\categorytitle.meta.ts"
-      }
-    ],
-    "subcategory": [
-      {
-        "name": "SubcategoryNav",
-        "label": "Subcategory Nav",
-        "description": "Subcategory Nav component (auto-derived).",
-        "category": "category",
-        "intent": [
-          "subcategory",
-          "nav"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "subcategory",
-          "nav"
-        ],
-        "propSchema": {
-          "layout": {
-            "type": "string"
-          },
-          "showIcons": {
-            "type": "boolean"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "layout": {
-            "type": "string"
-          },
-          "showIcons": {
-            "type": "boolean"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "layout": "horizontal",
-          "showIcons": false,
-          "alignment": "center"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\category\\SubcategoryNav\\SubcategoryNav.tsx (auto-derived)"
-      }
-    ],
-    "nav": [
-      {
-        "name": "SubcategoryNav",
-        "label": "Subcategory Nav",
-        "description": "Subcategory Nav component (auto-derived).",
-        "category": "category",
-        "intent": [
-          "subcategory",
-          "nav"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "subcategory",
-          "nav"
-        ],
-        "propSchema": {
-          "layout": {
-            "type": "string"
-          },
-          "showIcons": {
-            "type": "boolean"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "layout": {
-            "type": "string"
-          },
-          "showIcons": {
-            "type": "boolean"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "layout": "horizontal",
-          "showIcons": false,
-          "alignment": "center"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\category\\SubcategoryNav\\SubcategoryNav.tsx (auto-derived)"
-      },
-      {
-        "name": "Header",
-        "label": "Header",
-        "description": "Site header (top bar + sticky nav + mobile drawer) with layout presets, logo, navigation menu (data injected by consumer via menuItems prop), action icons (search/wishlist/account/cart) with cart badge, and top-bar announcement. Presentational only — accepts pre-fetched menu items as props.",
-        "category": "layout",
-        "intent": [
-          "header",
-          "navigation",
-          "nav",
-          "site-header",
-          "top-nav",
-          "menu",
-          "header-bar"
-        ],
-        "visualRole": "top",
-        "dataDeps": [
-          "menuItems (consumer-injected)",
-          "cartBadgeCount"
-        ],
-        "copyFields": [
-          "logoAlt",
-          "topBar.leftText",
-          "topBar.centerText",
-          "topBar.rightText"
-        ],
-        "themeable": [
-          "backgroundColor",
-          "textColor",
-          "menuTextColor",
-          "menuHoverColor",
-          "topBar.backgroundColor",
-          "topBar.textColor"
-        ],
-        "a11yRisk": "high",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "header",
-          "nav",
-          "navigation",
-          "logo",
-          "menu",
-          "cart",
-          "search",
-          "drawer",
-          "mobile-menu"
-        ],
-        "propSchema": {
-          "layout": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left-center-right",
-              "stacked",
-              "centered"
-            ]
-          },
-          "backgroundColor": {
-            "type": "string"
-          },
-          "textColor": {
-            "type": "string"
-          },
-          "sticky": {
-            "type": "boolean",
-            "required": true
-          },
-          "shadow": {
-            "type": "boolean",
-            "required": true
-          },
-          "transparent": {
-            "type": "boolean",
-            "required": true
-          },
-          "logoPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "logoMaxWidth": {
-            "type": "string",
-            "required": true
-          },
-          "logoUrl": {
-            "type": "string",
-            "required": true
-          },
-          "logoAlt": {
-            "type": "string",
-            "required": true
-          },
-          "menuPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "menuStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "horizontal",
-              "vertical"
-            ]
-          },
-          "menuTextColor": {
-            "type": "string"
-          },
-          "menuHoverColor": {
-            "type": "string"
-          },
-          "actions": {
-            "type": "array",
-            "required": true
-          },
-          "actionsPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "right"
-            ]
-          },
-          "showCartBadge": {
-            "type": "boolean",
-            "required": true
-          },
-          "showLabels": {
-            "type": "boolean",
-            "required": true
-          },
-          "cartBadgeCount": {
-            "type": "number",
-            "required": true
-          },
-          "mobileBreakpoint": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "md",
-              "lg"
-            ]
-          },
-          "mobileMenuStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "drawer",
-              "fullscreen"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "layout": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left-center-right",
-              "stacked",
-              "centered"
-            ]
-          },
-          "backgroundColor": {
-            "type": "string"
-          },
-          "textColor": {
-            "type": "string"
-          },
-          "sticky": {
-            "type": "boolean",
-            "required": true
-          },
-          "shadow": {
-            "type": "boolean",
-            "required": true
-          },
-          "transparent": {
-            "type": "boolean",
-            "required": true
-          },
-          "logoPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "logoMaxWidth": {
-            "type": "string",
-            "required": true
-          },
-          "logoUrl": {
-            "type": "string",
-            "required": true
-          },
-          "logoAlt": {
-            "type": "string",
-            "required": true
-          },
-          "menuPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "menuStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "horizontal",
-              "vertical"
-            ]
-          },
-          "menuTextColor": {
-            "type": "string"
-          },
-          "menuHoverColor": {
-            "type": "string"
-          },
-          "actions": {
-            "type": "array",
-            "required": true
-          },
-          "actionsPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "right"
-            ]
-          },
-          "showCartBadge": {
-            "type": "boolean",
-            "required": true
-          },
-          "showLabels": {
-            "type": "boolean",
-            "required": true
-          },
-          "cartBadgeCount": {
-            "type": "number",
-            "required": true
-          },
-          "mobileBreakpoint": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "md",
-              "lg"
-            ]
-          },
-          "mobileMenuStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "drawer",
-              "fullscreen"
-            ]
-          }
-        },
-        "defaultProps": {
-          "layout": "left-center-right",
-          "backgroundColor": "#ffffff",
-          "textColor": "#000000",
-          "sticky": true,
-          "shadow": true,
-          "transparent": false,
-          "logoPosition": "left",
-          "logoMaxWidth": "150px",
-          "logoUrl": "/logo.svg",
-          "logoAlt": "Store Logo",
-          "menuPosition": "center",
-          "menuStyle": "horizontal",
-          "menuHoverColor": "#3b82f6",
-          "actions": [
-            "search",
-            "account",
-            "cart"
-          ],
-          "actionsPosition": "right",
-          "showCartBadge": true,
-          "showLabels": false,
-          "cartBadgeCount": 0,
-          "menuLoading": false,
-          "menuError": false,
-          "mobileBreakpoint": "md",
-          "mobileMenuStyle": "drawer"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\layout\\Header\\header.meta.ts"
-      },
-      {
-        "name": "CategoryNav",
-        "label": "Category Nav",
-        "description": "Category Nav component (auto-derived).",
-        "category": "navigation",
-        "intent": [
-          "category",
-          "nav"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "category",
-          "nav"
-        ],
-        "propSchema": {
-          "title": {
-            "type": "string"
-          },
-          "showIcons": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          },
-          "categories": {
-            "type": "array"
-          }
-        },
-        "jsonSchema": {
-          "title": {
-            "type": "string"
-          },
-          "showIcons": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          },
-          "categories": {
-            "type": "array"
-          }
-        },
-        "defaultProps": {
-          "title": "Featured",
-          "showIcons": true,
-          "style": "standard",
-          "categories": []
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\CategoryNav\\CategoryNav.tsx (auto-derived)"
-      },
-      {
-        "name": "MenuNavigation",
-        "label": "Menu Navigation",
-        "description": "Top-level storefront navigation menu. Puck canvas uses CSS-popover dropdowns (no @medusajs/ui dependency) with hover-driven sub-panels. Items can be plain links or have a dropdown of children. Mega-menu style is configurable (default dropdown or grid). Data is injected at render-time via the `menuData` prop by the consumer wrapper (frontend reads from useMenu hook, storefront projects layout-level menu fetch).",
-        "category": "navigation",
-        "intent": [
-          "nav",
-          "navigation",
-          "menu",
-          "header",
-          "dropdown"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "menuData"
-        ],
-        "copyFields": [],
-        "themeable": [
-          "textColor",
-          "hoverColor",
-          "dropdownBackground",
-          "dropdownBorder",
-          "dropdownShadow",
-          "dropdownRadius"
-        ],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "nav",
-          "navigation",
-          "menu",
-          "header",
-          "dropdown",
-          "popover"
-        ],
-        "propSchema": {
-          "menuHandle": {
-            "type": "string",
-            "required": true
-          },
-          "layout": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "horizontal",
-              "vertical",
-              "stacked"
-            ]
-          },
-          "alignment": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "hoverEffect": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "underline",
-              "background",
-              "color",
-              "none"
-            ]
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "hoverColor": {
-            "type": "string",
-            "required": true
-          },
-          "fontSize": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "base",
-              "lg"
-            ]
-          },
-          "fontWeight": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "normal",
-              "medium",
-              "semibold",
-              "bold"
-            ]
-          },
-          "showDropdownArrows": {
-            "type": "boolean",
-            "required": true
-          },
-          "dropdownStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "default",
-              "mega"
-            ]
-          },
-          "maxDepth": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "1",
-              "2",
-              "3"
-            ]
-          },
-          "menuData": {
-            "type": "array",
-            "required": false,
-            "items": "$item"
-          },
-          "dropdownBackground": {
-            "type": "string",
-            "required": false
-          },
-          "dropdownBorder": {
-            "type": "string",
-            "required": false
-          },
-          "dropdownShadow": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "dropdownRadius": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          }
-        },
-        "jsonSchema": {
-          "menuHandle": {
-            "type": "string",
-            "required": true
-          },
-          "layout": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "horizontal",
-              "vertical",
-              "stacked"
-            ]
-          },
-          "alignment": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "hoverEffect": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "underline",
-              "background",
-              "color",
-              "none"
-            ]
-          },
-          "textColor": {
-            "type": "string",
-            "required": true
-          },
-          "hoverColor": {
-            "type": "string",
-            "required": true
-          },
-          "fontSize": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "sm",
-              "base",
-              "lg"
-            ]
-          },
-          "fontWeight": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "normal",
-              "medium",
-              "semibold",
-              "bold"
-            ]
-          },
-          "showDropdownArrows": {
-            "type": "boolean",
-            "required": true
-          },
-          "dropdownStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "default",
-              "mega"
-            ]
-          },
-          "maxDepth": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "1",
-              "2",
-              "3"
-            ]
-          },
-          "menuData": {
-            "type": "array",
-            "required": false,
-            "items": "$item"
-          },
-          "dropdownBackground": {
-            "type": "string",
-            "required": false
-          },
-          "dropdownBorder": {
-            "type": "string",
-            "required": false
-          },
-          "dropdownShadow": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          },
-          "dropdownRadius": {
-            "type": "enum",
-            "required": false,
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl"
-            ]
-          }
-        },
-        "defaultProps": {
-          "menuHandle": "",
-          "layout": "horizontal",
-          "alignment": "center",
-          "hoverEffect": "underline",
-          "textColor": "#111827",
-          "hoverColor": "#3b82f6",
-          "fontSize": "base",
-          "fontWeight": "medium",
-          "showDropdownArrows": true,
-          "dropdownStyle": "default",
-          "triggerMode": "hover",
-          "subMenuPosition": "right",
-          "maxDepth": "3",
-          "menuData": [],
-          "dropdownBackground": "#ffffff",
-          "dropdownBorder": "#e5e7eb",
-          "dropdownShadow": "lg",
-          "dropdownRadius": "md",
-          "mobileBreakpoint": 768,
-          "mobileSearchPlaceholder": "Search products…"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\MenuNavigation\\menunavigation.meta.ts"
       }
     ],
     "preview": [
@@ -63554,187 +65917,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\generic\\Card\\card.meta.ts"
       },
       {
-        "name": "PromotionCard",
-        "label": "Promotion Card",
-        "description": "Promotion Card component (auto-derived).",
-        "category": "homepage",
-        "intent": [
-          "promotion",
-          "card"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "promotion",
-          "card"
-        ],
-        "propSchema": {
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "buttonText": {
-            "type": "string"
-          },
-          "buttonHref": {
-            "type": "string"
-          },
-          "backgroundColor": {
-            "type": "color"
-          },
-          "textColor": {
-            "type": "color"
-          },
-          "buttonColor": {
-            "type": "color"
-          },
-          "buttonTextColor": {
-            "type": "color"
-          },
-          "borderRadius": {
-            "type": "string"
-          },
-          "backgroundScheme": {
-            "type": "string"
-          },
-          "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
-          },
-          "overlayColor": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "string"
-          },
-          "gradientFrom": {
-            "type": "string"
-          },
-          "gradientTo": {
-            "type": "string"
-          },
-          "density": {
-            "type": "string"
-          },
-          "contentWidth": {
-            "type": "string"
-          },
-          "contentAlign": {
-            "type": "string"
-          },
-          "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "buttonText": {
-            "type": "string"
-          },
-          "buttonHref": {
-            "type": "string"
-          },
-          "backgroundColor": {
-            "type": "color"
-          },
-          "textColor": {
-            "type": "color"
-          },
-          "buttonColor": {
-            "type": "color"
-          },
-          "buttonTextColor": {
-            "type": "color"
-          },
-          "borderRadius": {
-            "type": "string"
-          },
-          "backgroundScheme": {
-            "type": "string"
-          },
-          "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
-          },
-          "overlayColor": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "string"
-          },
-          "gradientFrom": {
-            "type": "string"
-          },
-          "gradientTo": {
-            "type": "string"
-          },
-          "density": {
-            "type": "string"
-          },
-          "contentWidth": {
-            "type": "string"
-          },
-          "contentAlign": {
-            "type": "string"
-          },
-          "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "title": "Special Offer",
-          "description": "Get 20% off your first order",
-          "buttonText": "Shop Now",
-          "buttonHref": "#",
-          "backgroundColor": "#111827",
-          "textColor": "#ffffff",
-          "buttonColor": "#ffffff",
-          "buttonTextColor": "#111827",
-          "borderRadius": "lg",
-          "backgroundScheme": "",
-          "backgroundImage": "",
-          "backgroundSize": "cover",
-          "backgroundPosition": "center",
-          "overlayColor": "",
-          "overlayOpacity": "0",
-          "gradientFrom": "",
-          "gradientTo": "",
-          "density": "compact",
-          "contentWidth": "full",
-          "contentAlign": "center",
-          "verticalAlign": "top",
-          "minHeight": ""
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\PromotionCard\\PromotionCard.tsx (auto-derived)"
-      },
-      {
         "name": "ProductCard",
         "label": "Product Card",
         "description": "Single-product card with image / title / price / badges / add-to-cart. Stand-in product card for stores that don't ship a ProductPreview component. Optional renderProduct escape hatch: storefront passes its own renderer (HttpTypes.StoreProduct → themed Card) via the consumer wrapper. Default card renders a full feature set using only Tailwind classes — useful for editor preview and frontend (no Medusa SDK).",
@@ -64564,166 +66746,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\collection\\collectionheader.meta.ts"
-      },
-      {
-        "name": "CollectionHero",
-        "label": "Collection Hero",
-        "description": "Collection Hero component (auto-derived).",
-        "category": "collection",
-        "intent": [
-          "collection",
-          "hero"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "collection",
-          "hero"
-        ],
-        "propSchema": {
-          "showImage": {
-            "type": "boolean"
-          },
-          "showTitle": {
-            "type": "boolean"
-          },
-          "showDescription": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          },
-          "backgroundColor": {
-            "type": "color"
-          },
-          "textColor": {
-            "type": "color"
-          },
-          "backgroundScheme": {
-            "type": "string"
-          },
-          "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
-          },
-          "overlayColor": {
-            "type": "color"
-          },
-          "overlayOpacity": {
-            "type": "string"
-          },
-          "gradientFrom": {
-            "type": "string"
-          },
-          "gradientTo": {
-            "type": "string"
-          },
-          "density": {
-            "type": "string"
-          },
-          "contentWidth": {
-            "type": "string"
-          },
-          "contentAlign": {
-            "type": "string"
-          },
-          "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "showImage": {
-            "type": "boolean"
-          },
-          "showTitle": {
-            "type": "boolean"
-          },
-          "showDescription": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          },
-          "backgroundColor": {
-            "type": "color"
-          },
-          "textColor": {
-            "type": "color"
-          },
-          "backgroundScheme": {
-            "type": "string"
-          },
-          "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
-          },
-          "overlayColor": {
-            "type": "color"
-          },
-          "overlayOpacity": {
-            "type": "string"
-          },
-          "gradientFrom": {
-            "type": "string"
-          },
-          "gradientTo": {
-            "type": "string"
-          },
-          "density": {
-            "type": "string"
-          },
-          "contentWidth": {
-            "type": "string"
-          },
-          "contentAlign": {
-            "type": "string"
-          },
-          "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "showImage": true,
-          "showTitle": true,
-          "showDescription": true,
-          "style": "standard",
-          "backgroundColor": "#111827",
-          "textColor": "#ffffff",
-          "backgroundScheme": "",
-          "backgroundImage": "",
-          "backgroundSize": "cover",
-          "backgroundPosition": "center",
-          "overlayColor": "#000000",
-          "overlayOpacity": "30",
-          "gradientFrom": "",
-          "gradientTo": "",
-          "density": "spacious",
-          "contentWidth": "full",
-          "contentAlign": "center",
-          "verticalAlign": "middle",
-          "minHeight": "lg"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\collection\\CollectionHero\\CollectionHero.tsx (auto-derived)"
       },
       {
         "name": "CollectionMetadata",
@@ -66749,93 +68771,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\collection\\pagination.meta.ts"
-      },
-      {
-        "name": "PaginationBar",
-        "label": "Pagination Bar",
-        "description": "Pagination Bar component (auto-derived).",
-        "category": "storefront",
-        "intent": [
-          "pagination",
-          "bar"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "pagination",
-          "bar"
-        ],
-        "propSchema": {
-          "currentPage": {
-            "type": "number"
-          },
-          "totalPages": {
-            "type": "number"
-          },
-          "style": {
-            "type": "string"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "maxPageNumbers": {
-            "type": "number"
-          },
-          "showPerPageSelector": {
-            "type": "boolean"
-          },
-          "perPageOptions": {
-            "type": "array"
-          },
-          "perPage": {
-            "type": "number"
-          }
-        },
-        "jsonSchema": {
-          "currentPage": {
-            "type": "number"
-          },
-          "totalPages": {
-            "type": "number"
-          },
-          "style": {
-            "type": "string"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "maxPageNumbers": {
-            "type": "number"
-          },
-          "showPerPageSelector": {
-            "type": "boolean"
-          },
-          "perPageOptions": {
-            "type": "array"
-          },
-          "perPage": {
-            "type": "number"
-          }
-        },
-        "defaultProps": {
-          "currentPage": 1,
-          "totalPages": 5,
-          "style": "numbered",
-          "alignment": "center",
-          "maxPageNumbers": 7,
-          "showPerPageSelector": true,
-          "perPageOptions": [
-            12,
-            24,
-            48
-          ],
-          "perPage": 12
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\storefront\\PaginationBar.tsx (auto-derived)"
       }
     ],
     "pages": [
@@ -67254,6 +69189,172 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\collection\\productfilters.meta.ts"
+      },
+      {
+        "name": "HeaderActions",
+        "label": "Header Actions",
+        "description": "The header icon cluster: search, account, wishlist, cart (with item-count badge). Part of the site header; not a standalone section.",
+        "category": "navigation",
+        "intent": [
+          "navigate",
+          "cart",
+          "search"
+        ],
+        "visualRole": "header-cluster",
+        "dataDeps": [
+          "cart count (host-injected)"
+        ],
+        "copyFields": [],
+        "themeable": [
+          "color"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "header",
+          "icons",
+          "cart",
+          "search",
+          "account"
+        ],
+        "propSchema": {
+          "showSearch": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the search icon."
+          },
+          "showAccount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the account icon."
+          },
+          "showWishlist": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the wishlist icon."
+          },
+          "showCart": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the cart icon with badge."
+          },
+          "iconSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Icon size.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "gap": {
+            "type": "enum",
+            "required": true,
+            "description": "Spacing between icons.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Cluster alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Icon color. Token path (e.g. \"text.primary\") or hex."
+          },
+          "cartCount": {
+            "type": "number",
+            "required": true,
+            "description": "Cart badge count (host overrides live)."
+          }
+        },
+        "jsonSchema": {
+          "showSearch": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the search icon."
+          },
+          "showAccount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the account icon."
+          },
+          "showWishlist": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the wishlist icon."
+          },
+          "showCart": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the cart icon with badge."
+          },
+          "iconSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Icon size.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "gap": {
+            "type": "enum",
+            "required": true,
+            "description": "Spacing between icons.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Cluster alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Icon color. Token path (e.g. \"text.primary\") or hex."
+          },
+          "cartCount": {
+            "type": "number",
+            "required": true,
+            "description": "Cart badge count (host overrides live)."
+          }
+        },
+        "defaultProps": {
+          "showSearch": true,
+          "showAccount": true,
+          "showWishlist": false,
+          "showCart": true,
+          "iconSize": "md",
+          "gap": "md",
+          "alignment": "right",
+          "color": "#111827",
+          "cartCount": 0
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\navigation\\HeaderActions\\headeractions.meta.ts"
       },
       {
         "name": "SearchBar",
@@ -69955,88 +72056,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\collection\\productgrid.meta.ts"
       },
       {
-        "name": "LinkList",
-        "label": "Link List",
-        "description": "Link List component (auto-derived).",
-        "category": "footer",
-        "intent": [
-          "link",
-          "list"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "link",
-          "list"
-        ],
-        "propSchema": {
-          "links": {
-            "type": "array"
-          },
-          "color": {
-            "type": "color"
-          },
-          "hoverColor": {
-            "type": "color"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "spacing": {
-            "type": "string"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "links": {
-            "type": "array"
-          },
-          "color": {
-            "type": "color"
-          },
-          "hoverColor": {
-            "type": "color"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "spacing": {
-            "type": "string"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "links": [
-            {
-              "text": "Link One",
-              "url": "#"
-            },
-            {
-              "text": "Link Two",
-              "url": "#"
-            },
-            {
-              "text": "Link Three",
-              "url": "#"
-            }
-          ],
-          "color": "#6b7280",
-          "hoverColor": "#111827",
-          "fontSize": "sm",
-          "spacing": "md",
-          "alignment": "left"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\footer\\LinkList\\LinkList.tsx (auto-derived)"
-      },
-      {
         "name": "List",
         "label": "List",
         "description": "Vertical list with 4 marker styles (bullet, numbered, check, none). Item spacing (tight/normal/relaxed) + font size (sm/base/lg). Text color accepts hex or theme token.",
@@ -70241,6 +72260,106 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\collection\\productsort.meta.ts"
+      },
+      {
+        "name": "FilterBar",
+        "label": "Filter Bar",
+        "description": "Storefront listing controls: filter panel (sidebar/drawer), sort dropdown, result count, clear-all. Category/collection listing pages only; filters are resolved by the storefront at render.",
+        "category": "storefront",
+        "intent": [
+          "filter",
+          "sort",
+          "browse"
+        ],
+        "visualRole": "listing-controls",
+        "dataDeps": [
+          "facet data (storefront-resolved)"
+        ],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "medium",
+        "mobileBehavior": "drawer",
+        "searchTags": [
+          "filter",
+          "sort",
+          "listing",
+          "collection page",
+          "facets"
+        ],
+        "propSchema": {
+          "filterLayout": {
+            "type": "enum",
+            "required": true,
+            "description": "Filter placement. drawer is best on mobile.",
+            "options": [
+              "sidebar",
+              "drawer",
+              "horizontal"
+            ]
+          },
+          "showSort": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the sort dropdown."
+          },
+          "showCount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the result count."
+          },
+          "showClearAll": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show a clear-all-filters action."
+          },
+          "showFilters": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the filter controls at all."
+          }
+        },
+        "jsonSchema": {
+          "filterLayout": {
+            "type": "enum",
+            "required": true,
+            "description": "Filter placement. drawer is best on mobile.",
+            "options": [
+              "sidebar",
+              "drawer",
+              "horizontal"
+            ]
+          },
+          "showSort": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the sort dropdown."
+          },
+          "showCount": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the result count."
+          },
+          "showClearAll": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show a clear-all-filters action."
+          },
+          "showFilters": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the filter controls at all."
+          }
+        },
+        "defaultProps": {
+          "filterLayout": "sidebar",
+          "showSort": true,
+          "showCount": true,
+          "showClearAll": true,
+          "showFilters": true
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\storefront\\filterbar.meta.ts"
       }
     ],
     "filter": [
@@ -70339,52 +72458,90 @@ export const registry: CompiledRegistry = {
       {
         "name": "FilterBar",
         "label": "Filter Bar",
-        "description": "Filter Bar component (auto-derived).",
+        "description": "Storefront listing controls: filter panel (sidebar/drawer), sort dropdown, result count, clear-all. Category/collection listing pages only; filters are resolved by the storefront at render.",
         "category": "storefront",
         "intent": [
           "filter",
-          "bar"
+          "sort",
+          "browse"
         ],
-        "dataDeps": [],
+        "visualRole": "listing-controls",
+        "dataDeps": [
+          "facet data (storefront-resolved)"
+        ],
         "copyFields": [],
         "themeable": [],
-        "a11yRisk": "low",
+        "a11yRisk": "medium",
+        "mobileBehavior": "drawer",
         "searchTags": [
           "filter",
-          "bar"
+          "sort",
+          "listing",
+          "collection page",
+          "facets"
         ],
         "propSchema": {
           "filterLayout": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Filter placement. drawer is best on mobile.",
+            "options": [
+              "sidebar",
+              "drawer",
+              "horizontal"
+            ]
           },
           "showSort": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the sort dropdown."
           },
           "showCount": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the result count."
           },
           "showClearAll": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show a clear-all-filters action."
           },
           "showFilters": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the filter controls at all."
           }
         },
         "jsonSchema": {
           "filterLayout": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Filter placement. drawer is best on mobile.",
+            "options": [
+              "sidebar",
+              "drawer",
+              "horizontal"
+            ]
           },
           "showSort": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the sort dropdown."
           },
           "showCount": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the result count."
           },
           "showClearAll": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show a clear-all-filters action."
           },
           "showFilters": {
-            "type": "boolean"
+            "type": "boolean",
+            "required": true,
+            "description": "Show the filter controls at all."
           }
         },
         "defaultProps": {
@@ -70396,7 +72553,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\storefront\\FilterBar.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\storefront\\filterbar.meta.ts"
       }
     ],
     "view": [
@@ -71686,88 +73843,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\content\\Link\\link.meta.ts"
-      },
-      {
-        "name": "LinkList",
-        "label": "Link List",
-        "description": "Link List component (auto-derived).",
-        "category": "footer",
-        "intent": [
-          "link",
-          "list"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "link",
-          "list"
-        ],
-        "propSchema": {
-          "links": {
-            "type": "array"
-          },
-          "color": {
-            "type": "color"
-          },
-          "hoverColor": {
-            "type": "color"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "spacing": {
-            "type": "string"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "links": {
-            "type": "array"
-          },
-          "color": {
-            "type": "color"
-          },
-          "hoverColor": {
-            "type": "color"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "spacing": {
-            "type": "string"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "links": [
-            {
-              "text": "Link One",
-              "url": "#"
-            },
-            {
-              "text": "Link Two",
-              "url": "#"
-            },
-            {
-              "text": "Link Three",
-              "url": "#"
-            }
-          ],
-          "color": "#6b7280",
-          "hoverColor": "#111827",
-          "fontSize": "sm",
-          "spacing": "md",
-          "alignment": "left"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\footer\\LinkList\\LinkList.tsx (auto-derived)"
       }
     ],
     "submit": [
@@ -75847,6 +77922,187 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\content\\Text\\text.meta.ts"
       }
     ],
+    "content": [
+      {
+        "name": "Text",
+        "label": "Text",
+        "description": "A text block with typography controls (size, weight, line-height, alignment), color, max-width, and padding/margin spacing. Supports a rich-text switch that renders content via dangerouslySetInnerHTML inside the Tailwind prose container.",
+        "category": "content",
+        "intent": [
+          "text",
+          "paragraph",
+          "copy",
+          "body",
+          "content"
+        ],
+        "visualRole": "inline",
+        "dataDeps": [],
+        "copyFields": [
+          "text"
+        ],
+        "themeable": [
+          "color"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "text",
+          "paragraph",
+          "copy",
+          "p",
+          "body",
+          "rich text",
+          "typography"
+        ],
+        "propSchema": {
+          "text": {
+            "type": "string",
+            "required": true
+          },
+          "richText": {
+            "type": "boolean",
+            "required": true
+          },
+          "fontSize": {
+            "type": "enum",
+            "options": [
+              "xs",
+              "sm",
+              "base",
+              "lg",
+              "xl",
+              "2xl"
+            ]
+          },
+          "fontWeight": {
+            "type": "enum",
+            "options": [
+              "light",
+              "normal",
+              "medium",
+              "semibold",
+              "bold"
+            ]
+          },
+          "lineHeight": {
+            "type": "enum",
+            "options": [
+              "tight",
+              "snug",
+              "normal",
+              "relaxed",
+              "loose"
+            ]
+          },
+          "textAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right",
+              "justify"
+            ]
+          },
+          "color": {
+            "type": "string"
+          },
+          "maxWidth": {
+            "type": "string"
+          },
+          "marginTop": {
+            "type": "number",
+            "required": true
+          },
+          "marginBottom": {
+            "type": "number",
+            "required": true
+          },
+          "paddingX": {
+            "type": "number",
+            "required": true
+          },
+          "paddingY": {
+            "type": "number",
+            "required": true
+          }
+        },
+        "jsonSchema": {
+          "text": {
+            "type": "string",
+            "required": true
+          },
+          "richText": {
+            "type": "boolean",
+            "required": true
+          },
+          "fontSize": {
+            "type": "enum",
+            "options": [
+              "xs",
+              "sm",
+              "base",
+              "lg",
+              "xl",
+              "2xl"
+            ]
+          },
+          "fontWeight": {
+            "type": "enum",
+            "options": [
+              "light",
+              "normal",
+              "medium",
+              "semibold",
+              "bold"
+            ]
+          },
+          "lineHeight": {
+            "type": "enum",
+            "options": [
+              "tight",
+              "snug",
+              "normal",
+              "relaxed",
+              "loose"
+            ]
+          },
+          "textAlign": {
+            "type": "enum",
+            "options": [
+              "left",
+              "center",
+              "right",
+              "justify"
+            ]
+          },
+          "color": {
+            "type": "string"
+          },
+          "maxWidth": {
+            "type": "string"
+          },
+          "marginTop": {
+            "type": "number",
+            "required": true
+          },
+          "marginBottom": {
+            "type": "number",
+            "required": true
+          },
+          "paddingX": {
+            "type": "number",
+            "required": true
+          },
+          "paddingY": {
+            "type": "number",
+            "required": true
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\content\\Text\\text.meta.ts"
+      }
+    ],
     "video": [
       {
         "name": "Video",
@@ -77937,68 +80193,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\footer\\ContactInfo\\contactinfo.meta.ts"
-      },
-      {
-        "name": "CustomerEmail",
-        "label": "Customer Email",
-        "description": "Customer Email component (auto-derived).",
-        "category": "order",
-        "intent": [
-          "customer",
-          "email"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "customer",
-          "email"
-        ],
-        "propSchema": {
-          "label": {
-            "type": "string"
-          },
-          "showIcon": {
-            "type": "boolean"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "label": {
-            "type": "string"
-          },
-          "showIcon": {
-            "type": "boolean"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "label": "A confirmation email has been sent to",
-          "showIcon": true,
-          "fontSize": "sm",
-          "color": "#6b7280",
-          "alignment": "center"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\order\\CustomerEmail.tsx (auto-derived)"
       }
     ],
     "hours": [
@@ -79039,6 +81233,210 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\footer\\Copyright\\copyright.meta.ts"
+      }
+    ],
+    "links": [
+      {
+        "name": "LinkList",
+        "label": "Link List",
+        "description": "A configurable list of links with custom colors — the building block for footer link columns. Unlike QuickLinks, the links themselves are editable props.",
+        "category": "footer",
+        "intent": [
+          "navigate",
+          "links"
+        ],
+        "visualRole": "footer-column",
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [
+          "color",
+          "hoverColor"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "links",
+          "footer",
+          "column",
+          "navigation"
+        ],
+        "propSchema": {
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Link text color. Token path (e.g. \"text.secondary\") or hex."
+          },
+          "hoverColor": {
+            "type": "color",
+            "required": true,
+            "description": "Hover color. Token path or hex."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Link text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
+          },
+          "spacing": {
+            "type": "enum",
+            "required": true,
+            "description": "Vertical spacing between links.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "List alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Link text color. Token path (e.g. \"text.secondary\") or hex."
+          },
+          "hoverColor": {
+            "type": "color",
+            "required": true,
+            "description": "Hover color. Token path or hex."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Link text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
+          },
+          "spacing": {
+            "type": "enum",
+            "required": true,
+            "description": "Vertical spacing between links.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "List alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          }
+        },
+        "defaultProps": {
+          "links": [
+            {
+              "text": "Link One",
+              "url": "#"
+            },
+            {
+              "text": "Link Two",
+              "url": "#"
+            },
+            {
+              "text": "Link Three",
+              "url": "#"
+            }
+          ],
+          "color": "#6b7280",
+          "hoverColor": "#111827",
+          "fontSize": "sm",
+          "spacing": "md",
+          "alignment": "left"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\footer\\LinkList\\linklist.meta.ts"
+      },
+      {
+        "name": "QuickLinks",
+        "label": "Quick Links",
+        "description": "A titled list of plain links — typically used in footers or help areas (\"Shipping\", \"Returns\", \"Contact\"). Links data is consumer-injected; the editor shows placeholders.",
+        "category": "navigation",
+        "intent": [
+          "navigate",
+          "links"
+        ],
+        "visualRole": "footer-column",
+        "dataDeps": [
+          "links (consumer-injected)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "links",
+          "footer",
+          "quick links",
+          "menu",
+          "help"
+        ],
+        "propSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Optional heading above the list."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Link text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Optional heading above the list."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Link text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
+          }
+        },
+        "defaultProps": {
+          "title": "Quick Links",
+          "links": [],
+          "fontSize": "sm"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\navigation\\QuickLinks\\quicklinks.meta.ts"
       }
     ],
     "social": [
@@ -86743,61 +89141,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\generic\\Icon\\icon.meta.ts"
-      },
-      {
-        "name": "SuccessIcon",
-        "label": "Success Icon",
-        "description": "Success Icon component (auto-derived).",
-        "category": "order",
-        "intent": [
-          "success",
-          "icon"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "success",
-          "icon"
-        ],
-        "propSchema": {
-          "size": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "animate": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "size": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "animate": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "size": "xl",
-          "color": "#10b981",
-          "animate": false,
-          "style": "standard"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\order\\SuccessIcon\\SuccessIcon.tsx (auto-derived)"
       }
     ],
     "glyph": [
@@ -90708,6 +93051,390 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\homepage\\CategoriesGrid\\categoriesgrid.meta.ts"
+      }
+    ],
+    "category": [
+      {
+        "name": "CategoryProducts",
+        "label": "Category Products",
+        "description": "Products-from-a-specific-category section. Grid or carousel (Swiper) display modes. Each card can show image with optional Sale/New badges, rating, price (with compare-at-price), and Add to Cart. Bottom View All button. Consumer fetches via category_id (or override via renderProduct — D-1 escape hatch).",
+        "category": "homepage",
+        "intent": [
+          "products",
+          "category",
+          "shop-by-category",
+          "grid",
+          "carousel",
+          "department-products"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "products (consumer-injected, keyed by categoryId)",
+          "loading flag",
+          "error string"
+        ],
+        "copyFields": [
+          "sectionTitle",
+          "sectionSubtitle",
+          "viewAllButtonText",
+          "categoryName"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor",
+          "buttonColor",
+          "buttonTextColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "products",
+          "category",
+          "shop",
+          "department",
+          "carousel",
+          "grid"
+        ],
+        "propSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true
+          },
+          "categoryId": {
+            "type": "string",
+            "required": true
+          },
+          "categoryName": {
+            "type": "string",
+            "required": true
+          },
+          "displayMode": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productsPerRow": {
+            "type": "number",
+            "required": true
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerView": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewTablet": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewMobile": {
+            "type": "number",
+            "required": true
+          },
+          "spaceBetween": {
+            "type": "number",
+            "required": true
+          },
+          "autoplay": {
+            "type": "boolean",
+            "required": true
+          },
+          "autoplayDelay": {
+            "type": "number",
+            "required": true
+          },
+          "loop": {
+            "type": "boolean",
+            "required": true
+          },
+          "navigation": {
+            "type": "boolean",
+            "required": true
+          },
+          "pagination": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageAspectRatio": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "square",
+              "portrait",
+              "landscape"
+            ]
+          },
+          "showPrice": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddToCart": {
+            "type": "boolean",
+            "required": true
+          },
+          "showRating": {
+            "type": "boolean",
+            "required": true
+          },
+          "showBadges": {
+            "type": "boolean",
+            "required": true
+          },
+          "showViewAllButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "viewAllButtonText": {
+            "type": "string",
+            "required": true
+          },
+          "backgroundColor": {
+            "type": "string",
+            "required": true
+          },
+          "textColor": {
+            "type": "string",
+            "required": true
+          },
+          "cardStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "minimal",
+              "bordered",
+              "shadow"
+            ]
+          },
+          "borderRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "buttonColor": {
+            "type": "string",
+            "required": true
+          },
+          "buttonTextColor": {
+            "type": "string",
+            "required": true
+          },
+          "buttonRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "medium",
+              "small",
+              "large",
+              "none"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "sectionTitle": {
+            "type": "string",
+            "required": true
+          },
+          "sectionSubtitle": {
+            "type": "string"
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true
+          },
+          "categoryId": {
+            "type": "string",
+            "required": true
+          },
+          "categoryName": {
+            "type": "string",
+            "required": true
+          },
+          "displayMode": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productsPerRow": {
+            "type": "number",
+            "required": true
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerView": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewTablet": {
+            "type": "number",
+            "required": true
+          },
+          "slidesPerViewMobile": {
+            "type": "number",
+            "required": true
+          },
+          "spaceBetween": {
+            "type": "number",
+            "required": true
+          },
+          "autoplay": {
+            "type": "boolean",
+            "required": true
+          },
+          "autoplayDelay": {
+            "type": "number",
+            "required": true
+          },
+          "loop": {
+            "type": "boolean",
+            "required": true
+          },
+          "navigation": {
+            "type": "boolean",
+            "required": true
+          },
+          "pagination": {
+            "type": "boolean",
+            "required": true
+          },
+          "imageAspectRatio": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "square",
+              "portrait",
+              "landscape"
+            ]
+          },
+          "showPrice": {
+            "type": "boolean",
+            "required": true
+          },
+          "showAddToCart": {
+            "type": "boolean",
+            "required": true
+          },
+          "showRating": {
+            "type": "boolean",
+            "required": true
+          },
+          "showBadges": {
+            "type": "boolean",
+            "required": true
+          },
+          "showViewAllButton": {
+            "type": "boolean",
+            "required": true
+          },
+          "viewAllButtonText": {
+            "type": "string",
+            "required": true
+          },
+          "backgroundColor": {
+            "type": "string",
+            "required": true
+          },
+          "textColor": {
+            "type": "string",
+            "required": true
+          },
+          "cardStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "minimal",
+              "bordered",
+              "shadow"
+            ]
+          },
+          "borderRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "buttonColor": {
+            "type": "string",
+            "required": true
+          },
+          "buttonTextColor": {
+            "type": "string",
+            "required": true
+          },
+          "buttonRadius": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "medium",
+              "small",
+              "large",
+              "none"
+            ]
+          }
+        },
+        "defaultProps": {
+          "sectionTitle": "Shop by Category",
+          "sectionSubtitle": "Discover our curated collection",
+          "showTitle": true,
+          "categoryId": "",
+          "categoryName": "",
+          "displayMode": "grid",
+          "productsPerRow": 4,
+          "maxProducts": 12,
+          "slidesPerView": 4,
+          "slidesPerViewTablet": 3,
+          "slidesPerViewMobile": 1,
+          "spaceBetween": 20,
+          "autoplay": false,
+          "autoplayDelay": 3000,
+          "loop": false,
+          "navigation": true,
+          "pagination": true,
+          "imageAspectRatio": "square",
+          "showPrice": true,
+          "showAddToCart": true,
+          "showRating": false,
+          "showBadges": true,
+          "showViewAllButton": true,
+          "viewAllButtonText": "View All Products",
+          "backgroundColor": "#f9fafb",
+          "textColor": "#111827",
+          "cardStyle": "shadow",
+          "borderRadius": "md",
+          "buttonColor": "#000000",
+          "buttonTextColor": "#ffffff",
+          "buttonRadius": "medium",
+          "loading": false,
+          "error": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\CategoryProducts\\categoryproducts.meta.ts"
       }
     ],
     "carousel": [
@@ -96832,248 +99559,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\homepage\\FeaturedProducts\\featuredproducts.meta.ts"
       }
     ],
-    "announce": [
-      {
-        "name": "HeroSection",
-        "label": "Hero Section",
-        "description": "A large above-the-fold banner with title, subtitle, optional image, and up to two CTAs.",
-        "category": "homepage",
-        "intent": [
-          "announce",
-          "showcase",
-          "promote",
-          "introduce"
-        ],
-        "visualRole": "above-fold",
-        "dataDeps": [],
-        "copyFields": [
-          "title",
-          "subtitle",
-          "description",
-          "primaryButtonText",
-          "secondaryButtonText"
-        ],
-        "themeable": [
-          "backgroundColor",
-          "textColor",
-          "gradientFrom",
-          "gradientTo"
-        ],
-        "a11yRisk": "low",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "banner",
-          "header",
-          "splash",
-          "landing",
-          "announcement",
-          "hero"
-        ],
-        "propSchema": {
-          "title": {
-            "type": "string",
-            "required": true,
-            "description": "Headline text"
-          },
-          "subtitle": {
-            "type": "string",
-            "description": "Small uppercase text above the title"
-          },
-          "description": {
-            "type": "string",
-            "description": "Body copy below the title"
-          },
-          "showPrimaryButton": {
-            "type": "boolean",
-            "required": true
-          },
-          "primaryButtonText": {
-            "type": "string"
-          },
-          "primaryButtonLink": {
-            "type": "string"
-          },
-          "showSecondaryButton": {
-            "type": "boolean",
-            "required": true
-          },
-          "secondaryButtonText": {
-            "type": "string"
-          },
-          "secondaryButtonLink": {
-            "type": "string"
-          },
-          "showImage": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageUrl": {
-            "type": "string"
-          },
-          "imagePosition": {
-            "type": "enum",
-            "options": [
-              "left",
-              "right",
-              "background"
-            ]
-          },
-          "imageAlt": {
-            "type": "string"
-          },
-          "height": {
-            "type": "enum",
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl",
-              "full"
-            ]
-          },
-          "contentAlignment": {
-            "type": "enum",
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "verticalAlignment": {
-            "type": "enum",
-            "options": [
-              "top",
-              "center",
-              "bottom"
-            ]
-          },
-          "textColor": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number",
-            "min": 0,
-            "max": 100
-          },
-          "backgroundColor": {
-            "type": "string"
-          },
-          "backgroundGradient": {
-            "type": "boolean",
-            "required": true
-          },
-          "gradientFrom": {
-            "type": "string"
-          },
-          "gradientTo": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "title": {
-            "type": "string",
-            "required": true,
-            "description": "Headline text"
-          },
-          "subtitle": {
-            "type": "string",
-            "description": "Small uppercase text above the title"
-          },
-          "description": {
-            "type": "string",
-            "description": "Body copy below the title"
-          },
-          "showPrimaryButton": {
-            "type": "boolean",
-            "required": true
-          },
-          "primaryButtonText": {
-            "type": "string"
-          },
-          "primaryButtonLink": {
-            "type": "string"
-          },
-          "showSecondaryButton": {
-            "type": "boolean",
-            "required": true
-          },
-          "secondaryButtonText": {
-            "type": "string"
-          },
-          "secondaryButtonLink": {
-            "type": "string"
-          },
-          "showImage": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageUrl": {
-            "type": "string"
-          },
-          "imagePosition": {
-            "type": "enum",
-            "options": [
-              "left",
-              "right",
-              "background"
-            ]
-          },
-          "imageAlt": {
-            "type": "string"
-          },
-          "height": {
-            "type": "enum",
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl",
-              "full"
-            ]
-          },
-          "contentAlignment": {
-            "type": "enum",
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "verticalAlignment": {
-            "type": "enum",
-            "options": [
-              "top",
-              "center",
-              "bottom"
-            ]
-          },
-          "textColor": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number",
-            "min": 0,
-            "max": 100
-          },
-          "backgroundColor": {
-            "type": "string"
-          },
-          "backgroundGradient": {
-            "type": "boolean",
-            "required": true
-          },
-          "gradientFrom": {
-            "type": "string"
-          },
-          "gradientTo": {
-            "type": "string"
-          }
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\Hero\\hero.meta.ts"
-      }
-    ],
     "promote": [
       {
         "name": "HeroSection",
@@ -97454,248 +99939,376 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\homepage\\PromotionalBannerGrid\\promotionalbannergrid.meta.ts"
-      }
-    ],
-    "introduce": [
+      },
       {
-        "name": "HeroSection",
-        "label": "Hero Section",
-        "description": "A large above-the-fold banner with title, subtitle, optional image, and up to two CTAs.",
+        "name": "PromotionCard",
+        "label": "Promotion Card",
+        "description": "A single promotional card: headline, description, CTA button — with the full section background model (image > gradient > scheme > color). Use inside PromotionalBannerGrid for multi-offer layouts.",
         "category": "homepage",
         "intent": [
-          "announce",
-          "showcase",
           "promote",
-          "introduce"
+          "offer",
+          "announce"
         ],
-        "visualRole": "above-fold",
+        "visualRole": "card",
         "dataDeps": [],
         "copyFields": [
           "title",
-          "subtitle",
           "description",
-          "primaryButtonText",
-          "secondaryButtonText"
+          "buttonText"
         ],
         "themeable": [
           "backgroundColor",
           "textColor",
-          "gradientFrom",
-          "gradientTo"
+          "buttonColor",
+          "buttonTextColor"
         ],
         "a11yRisk": "low",
         "mobileBehavior": "responsive",
         "searchTags": [
+          "promo",
+          "offer",
+          "card",
+          "sale",
           "banner",
-          "header",
-          "splash",
-          "landing",
-          "announcement",
-          "hero"
+          "cta"
         ],
         "propSchema": {
           "title": {
             "type": "string",
             "required": true,
-            "description": "Headline text"
-          },
-          "subtitle": {
-            "type": "string",
-            "description": "Small uppercase text above the title"
+            "description": "Headline, e.g. \"Special Offer\"."
           },
           "description": {
             "type": "string",
-            "description": "Body copy below the title"
+            "required": true,
+            "description": "One-line offer description."
           },
-          "showPrimaryButton": {
-            "type": "boolean",
-            "required": true
+          "buttonText": {
+            "type": "string",
+            "required": true,
+            "description": "CTA button label."
           },
-          "primaryButtonText": {
-            "type": "string"
-          },
-          "primaryButtonLink": {
-            "type": "string"
-          },
-          "showSecondaryButton": {
-            "type": "boolean",
-            "required": true
-          },
-          "secondaryButtonText": {
-            "type": "string"
-          },
-          "secondaryButtonLink": {
-            "type": "string"
-          },
-          "showImage": {
-            "type": "boolean",
-            "required": true
-          },
-          "imageUrl": {
-            "type": "string"
-          },
-          "imagePosition": {
-            "type": "enum",
-            "options": [
-              "left",
-              "right",
-              "background"
-            ]
-          },
-          "imageAlt": {
-            "type": "string"
-          },
-          "height": {
-            "type": "enum",
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl",
-              "full"
-            ]
-          },
-          "contentAlignment": {
-            "type": "enum",
-            "options": [
-              "left",
-              "center",
-              "right"
-            ]
-          },
-          "verticalAlignment": {
-            "type": "enum",
-            "options": [
-              "top",
-              "center",
-              "bottom"
-            ]
-          },
-          "textColor": {
-            "type": "string"
-          },
-          "overlayOpacity": {
-            "type": "number",
-            "min": 0,
-            "max": 100
+          "buttonHref": {
+            "type": "string",
+            "required": true,
+            "description": "CTA link URL."
           },
           "backgroundColor": {
-            "type": "string"
+            "type": "color",
+            "required": true,
+            "description": "Card background. Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
           },
-          "backgroundGradient": {
-            "type": "boolean",
-            "required": true
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Text color. Token path or hex. Ignored while a scheme is active."
+          },
+          "buttonColor": {
+            "type": "color",
+            "required": true,
+            "description": "CTA button background. Token path (e.g. \"button.primary.background\") or hex."
+          },
+          "buttonTextColor": {
+            "type": "color",
+            "required": true,
+            "description": "CTA label color."
+          },
+          "borderRadius": {
+            "type": "string",
+            "required": true,
+            "description": "Corner radius: none | sm | md | lg | full."
+          },
+          "backgroundScheme": {
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set; also controls text color.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
+          },
+          "backgroundImage": {
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
+          },
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image."
+          },
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength in percent, e.g. \"40\"."
           },
           "gradientFrom": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color when set."
           },
           "gradientTo": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient end."
           }
         },
         "jsonSchema": {
           "title": {
             "type": "string",
             "required": true,
-            "description": "Headline text"
-          },
-          "subtitle": {
-            "type": "string",
-            "description": "Small uppercase text above the title"
+            "description": "Headline, e.g. \"Special Offer\"."
           },
           "description": {
             "type": "string",
-            "description": "Body copy below the title"
+            "required": true,
+            "description": "One-line offer description."
           },
-          "showPrimaryButton": {
-            "type": "boolean",
-            "required": true
+          "buttonText": {
+            "type": "string",
+            "required": true,
+            "description": "CTA button label."
           },
-          "primaryButtonText": {
-            "type": "string"
+          "buttonHref": {
+            "type": "string",
+            "required": true,
+            "description": "CTA link URL."
           },
-          "primaryButtonLink": {
-            "type": "string"
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Card background. Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
           },
-          "showSecondaryButton": {
-            "type": "boolean",
-            "required": true
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Text color. Token path or hex. Ignored while a scheme is active."
           },
-          "secondaryButtonText": {
-            "type": "string"
+          "buttonColor": {
+            "type": "color",
+            "required": true,
+            "description": "CTA button background. Token path (e.g. \"button.primary.background\") or hex."
           },
-          "secondaryButtonLink": {
-            "type": "string"
+          "buttonTextColor": {
+            "type": "color",
+            "required": true,
+            "description": "CTA label color."
           },
-          "showImage": {
-            "type": "boolean",
-            "required": true
+          "borderRadius": {
+            "type": "string",
+            "required": true,
+            "description": "Corner radius: none | sm | md | lg | full."
           },
-          "imageUrl": {
-            "type": "string"
-          },
-          "imagePosition": {
+          "backgroundScheme": {
             "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set; also controls text color.",
             "options": [
-              "left",
-              "right",
-              "background"
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
             ]
           },
-          "imageAlt": {
-            "type": "string"
+          "backgroundImage": {
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
           },
-          "height": {
-            "type": "enum",
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl",
-              "full"
-            ]
+          "overlayColor": {
+            "type": "color",
+            "description": "Overlay tint over a background image."
           },
-          "contentAlignment": {
+          "overlayOpacity": {
+            "type": "string",
+            "description": "Overlay strength in percent, e.g. \"40\"."
+          },
+          "gradientFrom": {
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color when set."
+          },
+          "gradientTo": {
+            "type": "color",
+            "description": "Gradient end."
+          }
+        },
+        "defaultProps": {
+          "title": "Special Offer",
+          "description": "Get 20% off your first order",
+          "buttonText": "Shop Now",
+          "buttonHref": "#",
+          "backgroundColor": "#111827",
+          "textColor": "#ffffff",
+          "buttonColor": "#ffffff",
+          "buttonTextColor": "#111827",
+          "borderRadius": "lg",
+          "backgroundScheme": "",
+          "backgroundImage": "",
+          "backgroundSize": "cover",
+          "backgroundPosition": "center",
+          "overlayColor": "",
+          "overlayOpacity": "0",
+          "gradientFrom": "",
+          "gradientTo": "",
+          "density": "compact",
+          "contentWidth": "full",
+          "contentAlign": "center",
+          "verticalAlign": "top",
+          "minHeight": ""
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\homepage\\PromotionCard\\promotioncard.meta.ts"
+      },
+      {
+        "name": "AnnouncementBar",
+        "label": "Announcement Bar",
+        "description": "Thin top-of-page banner for short promotions (\"Free shipping over $50\"). Sits above the header on every page. Keep text under ~80 characters.",
+        "category": "navigation",
+        "intent": [
+          "announce",
+          "promote",
+          "shipping-offer"
+        ],
+        "visualRole": "top-strip",
+        "dataDeps": [],
+        "copyFields": [
+          "text",
+          "linkText"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "announcement",
+          "banner",
+          "top bar",
+          "promo strip",
+          "free shipping"
+        ],
+        "propSchema": {
+          "text": {
+            "type": "string",
+            "required": true,
+            "description": "The announcement message."
+          },
+          "linkText": {
+            "type": "string",
+            "description": "Optional CTA label; adds a link inside the bar."
+          },
+          "linkUrl": {
+            "type": "string",
+            "description": "URL for the CTA link."
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"brand.primary\") or hex."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.inverse\") or hex."
+          },
+          "alignment": {
             "type": "enum",
+            "required": true,
+            "description": "Text alignment.",
             "options": [
               "left",
               "center",
               "right"
             ]
           },
-          "verticalAlignment": {
+          "fontSize": {
             "type": "enum",
+            "required": true,
+            "description": "Text size.",
             "options": [
-              "top",
-              "center",
-              "bottom"
+              "xs",
+              "sm",
+              "md"
             ]
           },
-          "textColor": {
-            "type": "string"
+          "paddingY": {
+            "type": "enum",
+            "required": true,
+            "description": "Vertical padding.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "text": {
+            "type": "string",
+            "required": true,
+            "description": "The announcement message."
           },
-          "overlayOpacity": {
-            "type": "number",
-            "min": 0,
-            "max": 100
+          "linkText": {
+            "type": "string",
+            "description": "Optional CTA label; adds a link inside the bar."
+          },
+          "linkUrl": {
+            "type": "string",
+            "description": "URL for the CTA link."
           },
           "backgroundColor": {
-            "type": "string"
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"brand.primary\") or hex."
           },
-          "backgroundGradient": {
-            "type": "boolean",
-            "required": true
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.inverse\") or hex."
           },
-          "gradientFrom": {
-            "type": "string"
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Text alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
           },
-          "gradientTo": {
-            "type": "string"
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
+          },
+          "paddingY": {
+            "type": "enum",
+            "required": true,
+            "description": "Vertical padding.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
           }
+        },
+        "defaultProps": {
+          "text": "Free shipping on orders over $50",
+          "linkText": "",
+          "linkUrl": "",
+          "backgroundColor": "#000000",
+          "textColor": "#ffffff",
+          "alignment": "center",
+          "fontSize": "sm",
+          "paddingY": "md"
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\Hero\\hero.meta.ts"
+        "metaPath": "src\\puck\\components\\navigation\\AnnouncementBar\\announcementbar.meta.ts"
       }
     ],
     "subscribe": [
@@ -99385,158 +101998,194 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\homepage\\PromotionalBannerGrid\\promotionalbannergrid.meta.ts"
       }
     ],
-    "promotion": [
+    "offer": [
       {
         "name": "PromotionCard",
         "label": "Promotion Card",
-        "description": "Promotion Card component (auto-derived).",
+        "description": "A single promotional card: headline, description, CTA button — with the full section background model (image > gradient > scheme > color). Use inside PromotionalBannerGrid for multi-offer layouts.",
         "category": "homepage",
         "intent": [
-          "promotion",
-          "card"
+          "promote",
+          "offer",
+          "announce"
         ],
+        "visualRole": "card",
         "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
+        "copyFields": [
+          "title",
+          "description",
+          "buttonText"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor",
+          "buttonColor",
+          "buttonTextColor"
+        ],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
-          "promotion",
-          "card"
+          "promo",
+          "offer",
+          "card",
+          "sale",
+          "banner",
+          "cta"
         ],
         "propSchema": {
           "title": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Headline, e.g. \"Special Offer\"."
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "One-line offer description."
           },
           "buttonText": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "CTA button label."
           },
           "buttonHref": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "CTA link URL."
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Card background. Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Text color. Token path or hex. Ignored while a scheme is active."
           },
           "buttonColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "CTA button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "CTA label color."
           },
           "borderRadius": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Corner radius: none | sm | md | lg | full."
           },
           "backgroundScheme": {
-            "type": "string"
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set; also controls text color.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
           },
           "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
           },
           "overlayColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Overlay tint over a background image."
           },
           "overlayOpacity": {
-            "type": "string"
+            "type": "string",
+            "description": "Overlay strength in percent, e.g. \"40\"."
           },
           "gradientFrom": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color when set."
           },
           "gradientTo": {
-            "type": "string"
-          },
-          "density": {
-            "type": "string"
-          },
-          "contentWidth": {
-            "type": "string"
-          },
-          "contentAlign": {
-            "type": "string"
-          },
-          "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient end."
           }
         },
         "jsonSchema": {
           "title": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Headline, e.g. \"Special Offer\"."
           },
           "description": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "One-line offer description."
           },
           "buttonText": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "CTA button label."
           },
           "buttonHref": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "CTA link URL."
           },
           "backgroundColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Card background. Token path or hex. PRECEDENCE: backgroundImage > gradient > backgroundScheme > backgroundColor — clear backgroundScheme to \"\" when using a custom color."
           },
           "textColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "Text color. Token path or hex. Ignored while a scheme is active."
           },
           "buttonColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "CTA button background. Token path (e.g. \"button.primary.background\") or hex."
           },
           "buttonTextColor": {
-            "type": "color"
+            "type": "color",
+            "required": true,
+            "description": "CTA label color."
           },
           "borderRadius": {
-            "type": "string"
+            "type": "string",
+            "required": true,
+            "description": "Corner radius: none | sm | md | lg | full."
           },
           "backgroundScheme": {
-            "type": "string"
+            "type": "enum",
+            "description": "Theme scheme — overrides backgroundColor while set; also controls text color.",
+            "options": [
+              "",
+              "light",
+              "dark",
+              "accent",
+              "subtle"
+            ]
           },
           "backgroundImage": {
-            "type": "string"
-          },
-          "backgroundSize": {
-            "type": "string"
-          },
-          "backgroundPosition": {
-            "type": "string"
+            "type": "string",
+            "description": "Background image URL — overrides all other backgrounds."
           },
           "overlayColor": {
-            "type": "string"
+            "type": "color",
+            "description": "Overlay tint over a background image."
           },
           "overlayOpacity": {
-            "type": "string"
+            "type": "string",
+            "description": "Overlay strength in percent, e.g. \"40\"."
           },
           "gradientFrom": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient start — overrides scheme/color when set."
           },
           "gradientTo": {
-            "type": "string"
-          },
-          "density": {
-            "type": "string"
-          },
-          "contentWidth": {
-            "type": "string"
-          },
-          "contentAlign": {
-            "type": "string"
-          },
-          "verticalAlign": {
-            "type": "string"
-          },
-          "minHeight": {
-            "type": "string"
+            "type": "color",
+            "description": "Gradient end."
           }
         },
         "defaultProps": {
@@ -99565,7 +102214,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\homepage\\PromotionCard\\PromotionCard.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\homepage\\PromotionCard\\promotioncard.meta.ts"
       }
     ],
     "trust": [
@@ -106021,6 +108670,85 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\layout\\Header\\header.meta.ts"
       },
       {
+        "name": "CategoryNav",
+        "label": "Category Navigation",
+        "description": "Vertical list of product categories with optional icons — a sidebar-style category menu. Categories data is injected by the host; the editor shows placeholders. For a horizontal top menu use MenuNavigation; for category CARDS use CategoryGrid.",
+        "category": "navigation",
+        "intent": [
+          "navigate",
+          "browse",
+          "menu"
+        ],
+        "visualRole": "sidebar",
+        "dataDeps": [
+          "categories (consumer-injected)"
+        ],
+        "copyFields": [
+          "title"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "categories",
+          "menu",
+          "sidebar",
+          "navigation",
+          "browse"
+        ],
+        "propSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Optional heading above the list."
+          },
+          "showIcons": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show an icon per category."
+          },
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "standard = normal; luxury = lighter type with wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Optional heading above the list."
+          },
+          "showIcons": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show an icon per category."
+          },
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "standard = normal; luxury = lighter type with wider tracking.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
+          }
+        },
+        "defaultProps": {
+          "title": "Featured",
+          "showIcons": true,
+          "style": "standard",
+          "categories": []
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\navigation\\CategoryNav\\categorynav.meta.ts"
+      },
+      {
         "name": "MenuNavigation",
         "label": "Menu Navigation",
         "description": "Top-level storefront navigation menu. Puck canvas uses CSS-popover dropdowns (no @medusajs/ui dependency) with hover-driven sub-panels. Items can be plain links or have a dropdown of children. Mega-menu style is configurable (default dropdown or grid). Data is injected at render-time via the `menuData` prop by the consumer wrapper (frontend reads from useMenu hook, storefront projects layout-level menu fetch).",
@@ -106572,6 +109300,605 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\layout\\Footer\\footer.meta.ts"
+      }
+    ],
+    "nav": [
+      {
+        "name": "Header",
+        "label": "Header",
+        "description": "Site header (top bar + sticky nav + mobile drawer) with layout presets, logo, navigation menu (data injected by consumer via menuItems prop), action icons (search/wishlist/account/cart) with cart badge, and top-bar announcement. Presentational only — accepts pre-fetched menu items as props.",
+        "category": "layout",
+        "intent": [
+          "header",
+          "navigation",
+          "nav",
+          "site-header",
+          "top-nav",
+          "menu",
+          "header-bar"
+        ],
+        "visualRole": "top",
+        "dataDeps": [
+          "menuItems (consumer-injected)",
+          "cartBadgeCount"
+        ],
+        "copyFields": [
+          "logoAlt",
+          "topBar.leftText",
+          "topBar.centerText",
+          "topBar.rightText"
+        ],
+        "themeable": [
+          "backgroundColor",
+          "textColor",
+          "menuTextColor",
+          "menuHoverColor",
+          "topBar.backgroundColor",
+          "topBar.textColor"
+        ],
+        "a11yRisk": "high",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "header",
+          "nav",
+          "navigation",
+          "logo",
+          "menu",
+          "cart",
+          "search",
+          "drawer",
+          "mobile-menu"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left-center-right",
+              "stacked",
+              "centered"
+            ]
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "textColor": {
+            "type": "string"
+          },
+          "sticky": {
+            "type": "boolean",
+            "required": true
+          },
+          "shadow": {
+            "type": "boolean",
+            "required": true
+          },
+          "transparent": {
+            "type": "boolean",
+            "required": true
+          },
+          "logoPosition": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "logoMaxWidth": {
+            "type": "string",
+            "required": true
+          },
+          "logoUrl": {
+            "type": "string",
+            "required": true
+          },
+          "logoAlt": {
+            "type": "string",
+            "required": true
+          },
+          "menuPosition": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "menuStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "menuTextColor": {
+            "type": "string"
+          },
+          "menuHoverColor": {
+            "type": "string"
+          },
+          "actions": {
+            "type": "array",
+            "required": true
+          },
+          "actionsPosition": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left",
+              "right"
+            ]
+          },
+          "showCartBadge": {
+            "type": "boolean",
+            "required": true
+          },
+          "showLabels": {
+            "type": "boolean",
+            "required": true
+          },
+          "cartBadgeCount": {
+            "type": "number",
+            "required": true
+          },
+          "mobileBreakpoint": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "mobileMenuStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "drawer",
+              "fullscreen"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left-center-right",
+              "stacked",
+              "centered"
+            ]
+          },
+          "backgroundColor": {
+            "type": "string"
+          },
+          "textColor": {
+            "type": "string"
+          },
+          "sticky": {
+            "type": "boolean",
+            "required": true
+          },
+          "shadow": {
+            "type": "boolean",
+            "required": true
+          },
+          "transparent": {
+            "type": "boolean",
+            "required": true
+          },
+          "logoPosition": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "logoMaxWidth": {
+            "type": "string",
+            "required": true
+          },
+          "logoUrl": {
+            "type": "string",
+            "required": true
+          },
+          "logoAlt": {
+            "type": "string",
+            "required": true
+          },
+          "menuPosition": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "menuStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "horizontal",
+              "vertical"
+            ]
+          },
+          "menuTextColor": {
+            "type": "string"
+          },
+          "menuHoverColor": {
+            "type": "string"
+          },
+          "actions": {
+            "type": "array",
+            "required": true
+          },
+          "actionsPosition": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left",
+              "right"
+            ]
+          },
+          "showCartBadge": {
+            "type": "boolean",
+            "required": true
+          },
+          "showLabels": {
+            "type": "boolean",
+            "required": true
+          },
+          "cartBadgeCount": {
+            "type": "number",
+            "required": true
+          },
+          "mobileBreakpoint": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "mobileMenuStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "drawer",
+              "fullscreen"
+            ]
+          }
+        },
+        "defaultProps": {
+          "layout": "left-center-right",
+          "backgroundColor": "#ffffff",
+          "textColor": "#000000",
+          "sticky": true,
+          "shadow": true,
+          "transparent": false,
+          "logoPosition": "left",
+          "logoMaxWidth": "150px",
+          "logoUrl": "/logo.svg",
+          "logoAlt": "Store Logo",
+          "menuPosition": "center",
+          "menuStyle": "horizontal",
+          "menuHoverColor": "#3b82f6",
+          "actions": [
+            "search",
+            "account",
+            "cart"
+          ],
+          "actionsPosition": "right",
+          "showCartBadge": true,
+          "showLabels": false,
+          "cartBadgeCount": 0,
+          "menuLoading": false,
+          "menuError": false,
+          "mobileBreakpoint": "md",
+          "mobileMenuStyle": "drawer"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\layout\\Header\\header.meta.ts"
+      },
+      {
+        "name": "MenuNavigation",
+        "label": "Menu Navigation",
+        "description": "Top-level storefront navigation menu. Puck canvas uses CSS-popover dropdowns (no @medusajs/ui dependency) with hover-driven sub-panels. Items can be plain links or have a dropdown of children. Mega-menu style is configurable (default dropdown or grid). Data is injected at render-time via the `menuData` prop by the consumer wrapper (frontend reads from useMenu hook, storefront projects layout-level menu fetch).",
+        "category": "navigation",
+        "intent": [
+          "nav",
+          "navigation",
+          "menu",
+          "header",
+          "dropdown"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "menuData"
+        ],
+        "copyFields": [],
+        "themeable": [
+          "textColor",
+          "hoverColor",
+          "dropdownBackground",
+          "dropdownBorder",
+          "dropdownShadow",
+          "dropdownRadius"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "nav",
+          "navigation",
+          "menu",
+          "header",
+          "dropdown",
+          "popover"
+        ],
+        "propSchema": {
+          "menuHandle": {
+            "type": "string",
+            "required": true
+          },
+          "layout": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "horizontal",
+              "vertical",
+              "stacked"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "hoverEffect": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "underline",
+              "background",
+              "color",
+              "none"
+            ]
+          },
+          "textColor": {
+            "type": "string",
+            "required": true
+          },
+          "hoverColor": {
+            "type": "string",
+            "required": true
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "sm",
+              "base",
+              "lg"
+            ]
+          },
+          "fontWeight": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "normal",
+              "medium",
+              "semibold",
+              "bold"
+            ]
+          },
+          "showDropdownArrows": {
+            "type": "boolean",
+            "required": true
+          },
+          "dropdownStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "default",
+              "mega"
+            ]
+          },
+          "maxDepth": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "1",
+              "2",
+              "3"
+            ]
+          },
+          "menuData": {
+            "type": "array",
+            "required": false,
+            "items": "$item"
+          },
+          "dropdownBackground": {
+            "type": "string",
+            "required": false
+          },
+          "dropdownBorder": {
+            "type": "string",
+            "required": false
+          },
+          "dropdownShadow": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
+          },
+          "dropdownRadius": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "menuHandle": {
+            "type": "string",
+            "required": true
+          },
+          "layout": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "horizontal",
+              "vertical",
+              "stacked"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "hoverEffect": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "underline",
+              "background",
+              "color",
+              "none"
+            ]
+          },
+          "textColor": {
+            "type": "string",
+            "required": true
+          },
+          "hoverColor": {
+            "type": "string",
+            "required": true
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "sm",
+              "base",
+              "lg"
+            ]
+          },
+          "fontWeight": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "normal",
+              "medium",
+              "semibold",
+              "bold"
+            ]
+          },
+          "showDropdownArrows": {
+            "type": "boolean",
+            "required": true
+          },
+          "dropdownStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "default",
+              "mega"
+            ]
+          },
+          "maxDepth": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "1",
+              "2",
+              "3"
+            ]
+          },
+          "menuData": {
+            "type": "array",
+            "required": false,
+            "items": "$item"
+          },
+          "dropdownBackground": {
+            "type": "string",
+            "required": false
+          },
+          "dropdownBorder": {
+            "type": "string",
+            "required": false
+          },
+          "dropdownShadow": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
+          },
+          "dropdownRadius": {
+            "type": "enum",
+            "required": false,
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
+          }
+        },
+        "defaultProps": {
+          "menuHandle": "",
+          "layout": "horizontal",
+          "alignment": "center",
+          "hoverEffect": "underline",
+          "textColor": "#111827",
+          "hoverColor": "#3b82f6",
+          "fontSize": "base",
+          "fontWeight": "medium",
+          "showDropdownArrows": true,
+          "dropdownStyle": "default",
+          "triggerMode": "hover",
+          "subMenuPosition": "right",
+          "maxDepth": "3",
+          "menuData": [],
+          "dropdownBackground": "#ffffff",
+          "dropdownBorder": "#e5e7eb",
+          "dropdownShadow": "lg",
+          "dropdownRadius": "md",
+          "mobileBreakpoint": 768,
+          "mobileSearchPlaceholder": "Search products…"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\navigation\\MenuNavigation\\menunavigation.meta.ts"
       }
     ],
     "site-header": [
@@ -109586,422 +112913,144 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\navigation\\AccountButton\\accountbutton.meta.ts"
       }
     ],
-    "announcement": [
+    "shipping-offer": [
       {
         "name": "AnnouncementBar",
         "label": "Announcement Bar",
-        "description": "Announcement Bar component (auto-derived).",
+        "description": "Thin top-of-page banner for short promotions (\"Free shipping over $50\"). Sits above the header on every page. Keep text under ~80 characters.",
         "category": "navigation",
         "intent": [
-          "announcement",
-          "bar"
+          "announce",
+          "promote",
+          "shipping-offer"
         ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "announcement",
-          "bar"
-        ],
-        "propSchema": {
-          "text": {
-            "type": "string"
-          },
-          "linkText": {
-            "type": "string"
-          },
-          "linkUrl": {
-            "type": "string"
-          },
-          "backgroundColor": {
-            "type": "color"
-          },
-          "textColor": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "paddingY": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "text": {
-            "type": "string"
-          },
-          "linkText": {
-            "type": "string"
-          },
-          "linkUrl": {
-            "type": "string"
-          },
-          "backgroundColor": {
-            "type": "color"
-          },
-          "textColor": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "paddingY": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "text": "Free shipping on orders over $50",
-          "linkText": "",
-          "linkUrl": "",
-          "backgroundColor": "#000000",
-          "textColor": "#ffffff",
-          "alignment": "center",
-          "fontSize": "sm",
-          "paddingY": "md"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\AnnouncementBar\\AnnouncementBar.tsx (auto-derived)"
-      },
-      {
-        "name": "ContentSlider",
-        "label": "Content Slider (Swiper)",
-        "description": "Full-bleed content slider for hero banners, promos, and announcements. Each slide has title/description/button/background. Optional custom HTML per slide. Falls back to 3 mock slides. Uses SwiperBase for shared config.",
-        "category": "swiper",
-        "intent": [
-          "hero",
-          "banner",
-          "slider",
-          "carousel",
-          "announcement"
-        ],
-        "visualRole": "block",
+        "visualRole": "top-strip",
         "dataDeps": [],
         "copyFields": [
-          "slides.title",
-          "slides.description",
-          "slides.buttonText",
-          "slides.buttonLink",
-          "slides.htmlContent"
+          "text",
+          "linkText"
         ],
         "themeable": [
-          "slides.backgroundColor",
-          "slides.textColor",
-          "slides.buttonColor",
-          "overlayColor"
+          "backgroundColor",
+          "textColor"
         ],
-        "a11yRisk": "medium",
+        "a11yRisk": "low",
         "mobileBehavior": "responsive",
         "searchTags": [
-          "hero",
+          "announcement",
           "banner",
-          "slider",
-          "carousel",
-          "announcement",
-          "content"
+          "top bar",
+          "promo strip",
+          "free shipping"
         ],
         "propSchema": {
-          "slides": {
-            "type": "array",
+          "text": {
+            "type": "string",
             "required": true,
-            "items": "$item"
+            "description": "The announcement message."
           },
-          "slideHeight": {
+          "linkText": {
+            "type": "string",
+            "description": "Optional CTA label; adds a link inside the bar."
+          },
+          "linkUrl": {
+            "type": "string",
+            "description": "URL for the CTA link."
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"brand.primary\") or hex."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.inverse\") or hex."
+          },
+          "alignment": {
             "type": "enum",
             "required": true,
-            "options": [
-              "sm",
-              "md",
-              "lg",
-              "xl",
-              "full"
-            ]
-          },
-          "contentWidth": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "full",
-              "contained"
-            ]
-          },
-          "contentPosition": {
-            "type": "enum",
-            "required": true,
+            "description": "Text alignment.",
             "options": [
               "left",
               "center",
               "right"
             ]
           },
-          "effect": {
+          "fontSize": {
             "type": "enum",
             "required": true,
+            "description": "Text size.",
             "options": [
-              "slide",
-              "fade",
-              "cube",
-              "coverflow",
-              "flip"
+              "xs",
+              "sm",
+              "md"
             ]
           },
-          "showNavigation": {
-            "type": "boolean",
-            "required": true
-          },
-          "navigationColor": {
-            "type": "string",
-            "required": true
-          },
-          "navigationPosition": {
+          "paddingY": {
             "type": "enum",
             "required": true,
-            "options": [
-              "center",
-              "bottom"
-            ]
-          },
-          "showPagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationType": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "bullets",
-              "fraction",
-              "progressbar"
-            ]
-          },
-          "paginationColor": {
-            "type": "string",
-            "required": true
-          },
-          "enableAutoplay": {
-            "type": "boolean",
-            "required": true
-          },
-          "autoplayDelay": {
-            "type": "number",
-            "required": true
-          },
-          "pauseOnHover": {
-            "type": "boolean",
-            "required": true
-          },
-          "loop": {
-            "type": "boolean",
-            "required": true
-          },
-          "speed": {
-            "type": "number",
-            "required": true
-          },
-          "enableOverlay": {
-            "type": "boolean",
-            "required": true
-          },
-          "overlayColor": {
-            "type": "string",
-            "required": true
-          },
-          "overlayOpacity": {
-            "type": "number",
-            "required": true
-          }
-        },
-        "jsonSchema": {
-          "slides": {
-            "type": "array",
-            "required": true,
-            "items": "$item"
-          },
-          "slideHeight": {
-            "type": "enum",
-            "required": true,
+            "description": "Vertical padding.",
             "options": [
               "sm",
               "md",
-              "lg",
-              "xl",
-              "full"
+              "lg"
             ]
+          }
+        },
+        "jsonSchema": {
+          "text": {
+            "type": "string",
+            "required": true,
+            "description": "The announcement message."
           },
-          "contentWidth": {
+          "linkText": {
+            "type": "string",
+            "description": "Optional CTA label; adds a link inside the bar."
+          },
+          "linkUrl": {
+            "type": "string",
+            "description": "URL for the CTA link."
+          },
+          "backgroundColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"brand.primary\") or hex."
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.inverse\") or hex."
+          },
+          "alignment": {
             "type": "enum",
             "required": true,
-            "options": [
-              "full",
-              "contained"
-            ]
-          },
-          "contentPosition": {
-            "type": "enum",
-            "required": true,
+            "description": "Text alignment.",
             "options": [
               "left",
               "center",
               "right"
             ]
           },
-          "effect": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "slide",
-              "fade",
-              "cube",
-              "coverflow",
-              "flip"
-            ]
-          },
-          "showNavigation": {
-            "type": "boolean",
-            "required": true
-          },
-          "navigationColor": {
-            "type": "string",
-            "required": true
-          },
-          "navigationPosition": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "center",
-              "bottom"
-            ]
-          },
-          "showPagination": {
-            "type": "boolean",
-            "required": true
-          },
-          "paginationType": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "bullets",
-              "fraction",
-              "progressbar"
-            ]
-          },
-          "paginationColor": {
-            "type": "string",
-            "required": true
-          },
-          "enableAutoplay": {
-            "type": "boolean",
-            "required": true
-          },
-          "autoplayDelay": {
-            "type": "number",
-            "required": true
-          },
-          "pauseOnHover": {
-            "type": "boolean",
-            "required": true
-          },
-          "loop": {
-            "type": "boolean",
-            "required": true
-          },
-          "speed": {
-            "type": "number",
-            "required": true
-          },
-          "enableOverlay": {
-            "type": "boolean",
-            "required": true
-          },
-          "overlayColor": {
-            "type": "string",
-            "required": true
-          },
-          "overlayOpacity": {
-            "type": "number",
-            "required": true
-          }
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\swiper\\ContentSlider\\contentslider.meta.ts"
-      }
-    ],
-    "bar": [
-      {
-        "name": "AnnouncementBar",
-        "label": "Announcement Bar",
-        "description": "Announcement Bar component (auto-derived).",
-        "category": "navigation",
-        "intent": [
-          "announcement",
-          "bar"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "announcement",
-          "bar"
-        ],
-        "propSchema": {
-          "text": {
-            "type": "string"
-          },
-          "linkText": {
-            "type": "string"
-          },
-          "linkUrl": {
-            "type": "string"
-          },
-          "backgroundColor": {
-            "type": "color"
-          },
-          "textColor": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          },
           "fontSize": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md"
+            ]
           },
           "paddingY": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "text": {
-            "type": "string"
-          },
-          "linkText": {
-            "type": "string"
-          },
-          "linkUrl": {
-            "type": "string"
-          },
-          "backgroundColor": {
-            "type": "color"
-          },
-          "textColor": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "paddingY": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Vertical padding.",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
           }
         },
         "defaultProps": {
@@ -110016,156 +113065,7 @@ export const registry: CompiledRegistry = {
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\AnnouncementBar\\AnnouncementBar.tsx (auto-derived)"
-      },
-      {
-        "name": "FilterBar",
-        "label": "Filter Bar",
-        "description": "Filter Bar component (auto-derived).",
-        "category": "storefront",
-        "intent": [
-          "filter",
-          "bar"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "filter",
-          "bar"
-        ],
-        "propSchema": {
-          "filterLayout": {
-            "type": "string"
-          },
-          "showSort": {
-            "type": "boolean"
-          },
-          "showCount": {
-            "type": "boolean"
-          },
-          "showClearAll": {
-            "type": "boolean"
-          },
-          "showFilters": {
-            "type": "boolean"
-          }
-        },
-        "jsonSchema": {
-          "filterLayout": {
-            "type": "string"
-          },
-          "showSort": {
-            "type": "boolean"
-          },
-          "showCount": {
-            "type": "boolean"
-          },
-          "showClearAll": {
-            "type": "boolean"
-          },
-          "showFilters": {
-            "type": "boolean"
-          }
-        },
-        "defaultProps": {
-          "filterLayout": "sidebar",
-          "showSort": true,
-          "showCount": true,
-          "showClearAll": true,
-          "showFilters": true
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\storefront\\FilterBar.tsx (auto-derived)"
-      },
-      {
-        "name": "PaginationBar",
-        "label": "Pagination Bar",
-        "description": "Pagination Bar component (auto-derived).",
-        "category": "storefront",
-        "intent": [
-          "pagination",
-          "bar"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "pagination",
-          "bar"
-        ],
-        "propSchema": {
-          "currentPage": {
-            "type": "number"
-          },
-          "totalPages": {
-            "type": "number"
-          },
-          "style": {
-            "type": "string"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "maxPageNumbers": {
-            "type": "number"
-          },
-          "showPerPageSelector": {
-            "type": "boolean"
-          },
-          "perPageOptions": {
-            "type": "array"
-          },
-          "perPage": {
-            "type": "number"
-          }
-        },
-        "jsonSchema": {
-          "currentPage": {
-            "type": "number"
-          },
-          "totalPages": {
-            "type": "number"
-          },
-          "style": {
-            "type": "string"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "maxPageNumbers": {
-            "type": "number"
-          },
-          "showPerPageSelector": {
-            "type": "boolean"
-          },
-          "perPageOptions": {
-            "type": "array"
-          },
-          "perPage": {
-            "type": "number"
-          }
-        },
-        "defaultProps": {
-          "currentPage": 1,
-          "totalPages": 5,
-          "style": "numbered",
-          "alignment": "center",
-          "maxPageNumbers": 7,
-          "showPerPageSelector": true,
-          "perPageOptions": [
-            12,
-            24,
-            48
-          ],
-          "perPage": 12
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\storefront\\PaginationBar.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\navigation\\AnnouncementBar\\announcementbar.meta.ts"
       }
     ],
     "basket": [
@@ -110778,218 +113678,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\navigation\\CategoryMegaMenu\\categorymegamenu.meta.ts"
-      }
-    ],
-    "actions": [
-      {
-        "name": "HeaderActions",
-        "label": "Header Actions",
-        "description": "Header Actions component (auto-derived).",
-        "category": "navigation",
-        "intent": [
-          "header",
-          "actions"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "header",
-          "actions"
-        ],
-        "propSchema": {
-          "showSearch": {
-            "type": "boolean"
-          },
-          "showAccount": {
-            "type": "boolean"
-          },
-          "showWishlist": {
-            "type": "boolean"
-          },
-          "showCart": {
-            "type": "boolean"
-          },
-          "iconSize": {
-            "type": "string"
-          },
-          "gap": {
-            "type": "string"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "cartCount": {
-            "type": "number"
-          }
-        },
-        "jsonSchema": {
-          "showSearch": {
-            "type": "boolean"
-          },
-          "showAccount": {
-            "type": "boolean"
-          },
-          "showWishlist": {
-            "type": "boolean"
-          },
-          "showCart": {
-            "type": "boolean"
-          },
-          "iconSize": {
-            "type": "string"
-          },
-          "gap": {
-            "type": "string"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "cartCount": {
-            "type": "number"
-          }
-        },
-        "defaultProps": {
-          "showSearch": true,
-          "showAccount": true,
-          "showWishlist": false,
-          "showCart": true,
-          "iconSize": "md",
-          "gap": "md",
-          "alignment": "right",
-          "color": "#111827",
-          "cartCount": 0
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\HeaderActions\\HeaderActions.tsx (auto-derived)"
-      },
-      {
-        "name": "OrderActions",
-        "label": "Order Actions",
-        "description": "Post-order action buttons (download invoice, track shipment, contact support, reorder, return request) with 3 layouts (buttons/cards/list) and 3 button styles. Cart-library-agnostic: takes onInvoice/onTrack/onSupport/onReorder/onReturn callbacks.",
-        "category": "order",
-        "intent": [
-          "order",
-          "actions",
-          "post-purchase"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "callbacks (injected)"
-        ],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "order",
-          "actions",
-          "invoice",
-          "tracking",
-          "support",
-          "reorder",
-          "return"
-        ],
-        "propSchema": {
-          "layout": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "buttons",
-              "cards",
-              "list"
-            ]
-          },
-          "buttonStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "filled",
-              "outlined",
-              "text"
-            ]
-          },
-          "showDownloadInvoice": {
-            "type": "boolean",
-            "required": true
-          },
-          "showTrackShipment": {
-            "type": "boolean",
-            "required": true
-          },
-          "showContactSupport": {
-            "type": "boolean",
-            "required": true
-          },
-          "showReorder": {
-            "type": "boolean",
-            "required": true
-          },
-          "showReturnRequest": {
-            "type": "boolean",
-            "required": true
-          }
-        },
-        "jsonSchema": {
-          "layout": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "buttons",
-              "cards",
-              "list"
-            ]
-          },
-          "buttonStyle": {
-            "type": "enum",
-            "required": true,
-            "options": [
-              "filled",
-              "outlined",
-              "text"
-            ]
-          },
-          "showDownloadInvoice": {
-            "type": "boolean",
-            "required": true
-          },
-          "showTrackShipment": {
-            "type": "boolean",
-            "required": true
-          },
-          "showContactSupport": {
-            "type": "boolean",
-            "required": true
-          },
-          "showReorder": {
-            "type": "boolean",
-            "required": true
-          },
-          "showReturnRequest": {
-            "type": "boolean",
-            "required": true
-          }
-        },
-        "defaultProps": {
-          "showDownloadInvoice": true,
-          "showTrackShipment": true,
-          "showContactSupport": true,
-          "showReorder": true,
-          "showReturnRequest": false,
-          "layout": "buttons",
-          "buttonStyle": "outlined"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\order\\orderactions.meta.ts"
       }
     ],
     "logo": [
@@ -112452,106 +115140,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\navigation\\MobileMenu\\mobilemenu.meta.ts"
       }
     ],
-    "quick": [
-      {
-        "name": "QuickLinks",
-        "label": "Quick Links",
-        "description": "Quick Links component (auto-derived).",
-        "category": "navigation",
-        "intent": [
-          "quick",
-          "links"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "quick",
-          "links"
-        ],
-        "propSchema": {
-          "title": {
-            "type": "string"
-          },
-          "links": {
-            "type": "array"
-          },
-          "fontSize": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "title": {
-            "type": "string"
-          },
-          "links": {
-            "type": "array"
-          },
-          "fontSize": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "title": "Quick Links",
-          "links": [],
-          "fontSize": "sm"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\QuickLinks\\QuickLinks.tsx (auto-derived)"
-      }
-    ],
-    "links": [
-      {
-        "name": "QuickLinks",
-        "label": "Quick Links",
-        "description": "Quick Links component (auto-derived).",
-        "category": "navigation",
-        "intent": [
-          "quick",
-          "links"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "quick",
-          "links"
-        ],
-        "propSchema": {
-          "title": {
-            "type": "string"
-          },
-          "links": {
-            "type": "array"
-          },
-          "fontSize": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "title": {
-            "type": "string"
-          },
-          "links": {
-            "type": "array"
-          },
-          "fontSize": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "title": "Quick Links",
-          "links": [],
-          "fontSize": "sm"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\navigation\\QuickLinks\\QuickLinks.tsx (auto-derived)"
-      }
-    ],
     "find": [
       {
         "name": "SearchBar",
@@ -113636,6 +116224,731 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\navigation\\SearchIcon\\searchicon.meta.ts"
       }
     ],
+    "confirm": [
+      {
+        "name": "CustomerEmail",
+        "label": "Customer Email Line",
+        "description": "Order-confirmation atom: \"A confirmation email has been sent to {email}\". The email value comes from order context (storefront-injected).",
+        "category": "order",
+        "intent": [
+          "confirm"
+        ],
+        "visualRole": "atom",
+        "dataDeps": [
+          "order email (page context)"
+        ],
+        "copyFields": [
+          "label"
+        ],
+        "themeable": [
+          "color"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "order confirmation",
+          "email",
+          "atom"
+        ],
+        "propSchema": {
+          "label": {
+            "type": "string",
+            "required": true,
+            "description": "Text before the email address. Empty = email only."
+          },
+          "showIcon": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show a mail icon."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.secondary\") or hex."
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "label": {
+            "type": "string",
+            "required": true,
+            "description": "Text before the email address. Empty = email only."
+          },
+          "showIcon": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show a mail icon."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.secondary\") or hex."
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          }
+        },
+        "defaultProps": {
+          "label": "A confirmation email has been sent to",
+          "showIcon": true,
+          "fontSize": "sm",
+          "color": "#6b7280",
+          "alignment": "center"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\customeremail.meta.ts"
+      },
+      {
+        "name": "NextSteps",
+        "label": "Next Steps",
+        "description": "Order-confirmation atom: a numbered list of \"what happens next\" steps (processing → shipped → delivered). Step content is consumer-injected; editor shows placeholders.",
+        "category": "order",
+        "intent": [
+          "confirm",
+          "guide"
+        ],
+        "visualRole": "atom",
+        "dataDeps": [
+          "steps (consumer-injected)"
+        ],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "order",
+          "next steps",
+          "timeline",
+          "atom"
+        ],
+        "propSchema": {
+          "layout": {
+            "type": "enum",
+            "required": true,
+            "description": "Step arrangement.",
+            "options": [
+              "vertical",
+              "horizontal"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "layout": {
+            "type": "enum",
+            "required": true,
+            "description": "Step arrangement.",
+            "options": [
+              "vertical",
+              "horizontal"
+            ]
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\nextsteps.meta.ts"
+      },
+      {
+        "name": "OrderDate",
+        "label": "Order Date Line",
+        "description": "Order-confirmation atom: \"Placed on {date}\". Date comes from order context.",
+        "category": "order",
+        "intent": [
+          "confirm"
+        ],
+        "visualRole": "atom",
+        "dataDeps": [
+          "order date (page context)"
+        ],
+        "copyFields": [
+          "label"
+        ],
+        "themeable": [
+          "color"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "order",
+          "date",
+          "atom"
+        ],
+        "propSchema": {
+          "label": {
+            "type": "string",
+            "required": true,
+            "description": "Prefix text, e.g. \"Placed on\". Empty = date only."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex."
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "label": {
+            "type": "string",
+            "required": true,
+            "description": "Prefix text, e.g. \"Placed on\". Empty = date only."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "xs",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex."
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          }
+        },
+        "defaultProps": {
+          "label": "Placed on",
+          "fontSize": "sm",
+          "color": "#6b7280",
+          "alignment": "center"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\orderdate.meta.ts"
+      },
+      {
+        "name": "OrderNumber",
+        "label": "Order Number Line",
+        "description": "Order-confirmation atom: \"Order {number}\". The number comes from order context.",
+        "category": "order",
+        "intent": [
+          "confirm"
+        ],
+        "visualRole": "atom",
+        "dataDeps": [
+          "order number (page context)"
+        ],
+        "copyFields": [
+          "label"
+        ],
+        "themeable": [
+          "color"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "order",
+          "number",
+          "atom"
+        ],
+        "propSchema": {
+          "label": {
+            "type": "string",
+            "required": true,
+            "description": "Prefix text, e.g. \"Order\"."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex."
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "fontWeight": {
+            "type": "enum",
+            "required": true,
+            "description": "Text weight.",
+            "options": [
+              "normal",
+              "medium",
+              "semibold",
+              "bold"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "label": {
+            "type": "string",
+            "required": true,
+            "description": "Prefix text, e.g. \"Order\"."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Text size.",
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex."
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "fontWeight": {
+            "type": "enum",
+            "required": true,
+            "description": "Text weight.",
+            "options": [
+              "normal",
+              "medium",
+              "semibold",
+              "bold"
+            ]
+          }
+        },
+        "defaultProps": {
+          "label": "Order",
+          "fontSize": "lg",
+          "color": "#111827",
+          "alignment": "center",
+          "fontWeight": "semibold"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\ordernumber.meta.ts"
+      },
+      {
+        "name": "OrderTotal",
+        "label": "Order Total Line",
+        "description": "Order-confirmation atom: \"Total: {amount}\". Amount and price formatting come from order context.",
+        "category": "order",
+        "intent": [
+          "confirm"
+        ],
+        "visualRole": "atom",
+        "dataDeps": [
+          "order total (page context)"
+        ],
+        "copyFields": [
+          "label"
+        ],
+        "themeable": [
+          "color"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "order",
+          "total",
+          "price",
+          "atom"
+        ],
+        "propSchema": {
+          "label": {
+            "type": "string",
+            "required": true,
+            "description": "Prefix text, e.g. \"Total\"."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Text size — typically larger than other atoms.",
+            "options": [
+              "md",
+              "lg",
+              "xl",
+              "2xl"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex."
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "fontWeight": {
+            "type": "enum",
+            "required": true,
+            "description": "Text weight.",
+            "options": [
+              "semibold",
+              "bold"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "label": {
+            "type": "string",
+            "required": true,
+            "description": "Prefix text, e.g. \"Total\"."
+          },
+          "fontSize": {
+            "type": "enum",
+            "required": true,
+            "description": "Text size — typically larger than other atoms.",
+            "options": [
+              "md",
+              "lg",
+              "xl",
+              "2xl"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Token path or hex."
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "fontWeight": {
+            "type": "enum",
+            "required": true,
+            "description": "Text weight.",
+            "options": [
+              "semibold",
+              "bold"
+            ]
+          }
+        },
+        "defaultProps": {
+          "label": "Total",
+          "fontSize": "xl",
+          "color": "#111827",
+          "alignment": "center",
+          "fontWeight": "bold"
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\ordertotal.meta.ts"
+      },
+      {
+        "name": "PremiumServices",
+        "label": "Premium Services",
+        "description": "Order-confirmation atom: highlight cards for premium perks (warranty, gift wrap, support). Service items are consumer-injected.",
+        "category": "order",
+        "intent": [
+          "confirm",
+          "upsell"
+        ],
+        "visualRole": "atom",
+        "dataDeps": [
+          "services (consumer-injected)"
+        ],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "order",
+          "premium",
+          "services",
+          "perks",
+          "atom"
+        ],
+        "propSchema": {
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row (1-3)."
+          }
+        },
+        "jsonSchema": {
+          "columns": {
+            "type": "number",
+            "required": true,
+            "description": "Cards per row (1-3)."
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\premiumservices.meta.ts"
+      },
+      {
+        "name": "SuccessIcon",
+        "label": "Success Icon",
+        "description": "Order-confirmation atom: the large checkmark/celebration icon at the top of the confirmation page.",
+        "category": "order",
+        "intent": [
+          "confirm",
+          "celebrate"
+        ],
+        "visualRole": "atom",
+        "dataDeps": [],
+        "copyFields": [],
+        "themeable": [
+          "color"
+        ],
+        "a11yRisk": "low",
+        "mobileBehavior": "fixed",
+        "searchTags": [
+          "order",
+          "success",
+          "checkmark",
+          "icon",
+          "atom"
+        ],
+        "propSchema": {
+          "size": {
+            "type": "enum",
+            "required": true,
+            "description": "Icon size.",
+            "options": [
+              "md",
+              "lg",
+              "xl"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"status.success\") or hex."
+          },
+          "animate": {
+            "type": "boolean",
+            "required": true,
+            "description": "Subtle entrance animation."
+          },
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "luxury adds a ring.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
+          }
+        },
+        "jsonSchema": {
+          "size": {
+            "type": "enum",
+            "required": true,
+            "description": "Icon size.",
+            "options": [
+              "md",
+              "lg",
+              "xl"
+            ]
+          },
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"status.success\") or hex."
+          },
+          "animate": {
+            "type": "boolean",
+            "required": true,
+            "description": "Subtle entrance animation."
+          },
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "luxury adds a ring.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\successicon.meta.ts"
+      },
+      {
+        "name": "TrackingInfo",
+        "label": "Tracking Info",
+        "description": "Order-confirmation atom: shipping & tracking panel — estimated delivery, carrier, tracking number. Values come from order context.",
+        "category": "order",
+        "intent": [
+          "confirm",
+          "track"
+        ],
+        "visualRole": "atom",
+        "dataDeps": [
+          "shipment data (page context)"
+        ],
+        "copyFields": [
+          "message"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "order",
+          "tracking",
+          "shipping",
+          "delivery",
+          "atom"
+        ],
+        "propSchema": {
+          "showEstimatedDelivery": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the estimated delivery line."
+          },
+          "showCarrier": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the carrier line."
+          },
+          "showTrackingNumber": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the tracking number."
+          },
+          "message": {
+            "type": "string",
+            "required": true,
+            "description": "Fallback message before the order ships."
+          },
+          "luxuryStyle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Lighter typography variant."
+          }
+        },
+        "jsonSchema": {
+          "showEstimatedDelivery": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the estimated delivery line."
+          },
+          "showCarrier": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the carrier line."
+          },
+          "showTrackingNumber": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the tracking number."
+          },
+          "message": {
+            "type": "string",
+            "required": true,
+            "description": "Fallback message before the order ships."
+          },
+          "luxuryStyle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Lighter typography variant."
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\trackinginfo.meta.ts"
+      }
+    ],
     "order-confirmation": [
       {
         "name": "GiftCardCodesDisplay",
@@ -113951,147 +117264,179 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\order\\orderconfirmation.meta.ts"
-      },
-      {
-        "name": "SuccessIcon",
-        "label": "Success Icon",
-        "description": "Success Icon component (auto-derived).",
-        "category": "order",
-        "intent": [
-          "success",
-          "icon"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "success",
-          "icon"
-        ],
-        "propSchema": {
-          "size": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "animate": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "size": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "animate": {
-            "type": "boolean"
-          },
-          "style": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "size": "xl",
-          "color": "#10b981",
-          "animate": false,
-          "style": "standard"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\order\\SuccessIcon\\SuccessIcon.tsx (auto-derived)"
       }
     ],
-    "next": [
+    "guide": [
       {
         "name": "NextSteps",
         "label": "Next Steps",
-        "description": "Next Steps component (auto-derived).",
+        "description": "Order-confirmation atom: a numbered list of \"what happens next\" steps (processing → shipped → delivered). Step content is consumer-injected; editor shows placeholders.",
         "category": "order",
         "intent": [
-          "next",
-          "steps"
+          "confirm",
+          "guide"
         ],
-        "dataDeps": [],
+        "visualRole": "atom",
+        "dataDeps": [
+          "steps (consumer-injected)"
+        ],
         "copyFields": [],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
-          "next",
-          "steps"
+          "order",
+          "next steps",
+          "timeline",
+          "atom"
         ],
         "propSchema": {
-          "steps": {
-            "type": "array"
-          },
           "layout": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Step arrangement.",
+            "options": [
+              "vertical",
+              "horizontal"
+            ]
           }
         },
         "jsonSchema": {
-          "steps": {
-            "type": "array"
-          },
           "layout": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "description": "Step arrangement.",
+            "options": [
+              "vertical",
+              "horizontal"
+            ]
           }
-        },
-        "defaultProps": {
-          "steps": [],
-          "layout": "vertical"
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\order\\NextSteps\\NextSteps.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\order\\nextsteps.meta.ts"
       }
     ],
-    "steps": [
+    "actions": [
       {
-        "name": "NextSteps",
-        "label": "Next Steps",
-        "description": "Next Steps component (auto-derived).",
+        "name": "OrderActions",
+        "label": "Order Actions",
+        "description": "Post-order action buttons (download invoice, track shipment, contact support, reorder, return request) with 3 layouts (buttons/cards/list) and 3 button styles. Cart-library-agnostic: takes onInvoice/onTrack/onSupport/onReorder/onReturn callbacks.",
         "category": "order",
         "intent": [
-          "next",
-          "steps"
+          "order",
+          "actions",
+          "post-purchase"
         ],
-        "dataDeps": [],
+        "visualRole": "block",
+        "dataDeps": [
+          "callbacks (injected)"
+        ],
         "copyFields": [],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
-          "next",
-          "steps"
+          "order",
+          "actions",
+          "invoice",
+          "tracking",
+          "support",
+          "reorder",
+          "return"
         ],
         "propSchema": {
-          "steps": {
-            "type": "array"
-          },
           "layout": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "options": [
+              "buttons",
+              "cards",
+              "list"
+            ]
+          },
+          "buttonStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "filled",
+              "outlined",
+              "text"
+            ]
+          },
+          "showDownloadInvoice": {
+            "type": "boolean",
+            "required": true
+          },
+          "showTrackShipment": {
+            "type": "boolean",
+            "required": true
+          },
+          "showContactSupport": {
+            "type": "boolean",
+            "required": true
+          },
+          "showReorder": {
+            "type": "boolean",
+            "required": true
+          },
+          "showReturnRequest": {
+            "type": "boolean",
+            "required": true
           }
         },
         "jsonSchema": {
-          "steps": {
-            "type": "array"
-          },
           "layout": {
-            "type": "string"
+            "type": "enum",
+            "required": true,
+            "options": [
+              "buttons",
+              "cards",
+              "list"
+            ]
+          },
+          "buttonStyle": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "filled",
+              "outlined",
+              "text"
+            ]
+          },
+          "showDownloadInvoice": {
+            "type": "boolean",
+            "required": true
+          },
+          "showTrackShipment": {
+            "type": "boolean",
+            "required": true
+          },
+          "showContactSupport": {
+            "type": "boolean",
+            "required": true
+          },
+          "showReorder": {
+            "type": "boolean",
+            "required": true
+          },
+          "showReturnRequest": {
+            "type": "boolean",
+            "required": true
           }
         },
         "defaultProps": {
-          "steps": [],
-          "layout": "vertical"
+          "showDownloadInvoice": true,
+          "showTrackShipment": true,
+          "showContactSupport": true,
+          "showReorder": true,
+          "showReturnRequest": false,
+          "layout": "buttons",
+          "buttonStyle": "outlined"
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\order\\NextSteps\\NextSteps.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\order\\orderactions.meta.ts"
       }
     ],
     "post-purchase": [
@@ -114326,63 +117671,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\order\\orderconfirmation.meta.ts"
-      }
-    ],
-    "date": [
-      {
-        "name": "OrderDate",
-        "label": "Order Date",
-        "description": "Order Date component (auto-derived).",
-        "category": "order",
-        "intent": [
-          "order",
-          "date"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "order",
-          "date"
-        ],
-        "propSchema": {
-          "label": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "label": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "label": "Placed on",
-          "fontSize": "sm",
-          "color": "#6b7280",
-          "alignment": "center"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\order\\OrderDate.tsx (auto-derived)"
       }
     ],
     "details": [
@@ -114739,70 +118027,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\order\\orderdetails.meta.ts"
       }
     ],
-    "number": [
-      {
-        "name": "OrderNumber",
-        "label": "Order Number",
-        "description": "Order Number component (auto-derived).",
-        "category": "order",
-        "intent": [
-          "order",
-          "number"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "order",
-          "number"
-        ],
-        "propSchema": {
-          "label": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "fontWeight": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "label": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "fontWeight": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "label": "Order",
-          "fontSize": "lg",
-          "color": "#111827",
-          "alignment": "center",
-          "fontWeight": "semibold"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\order\\OrderNumber.tsx (auto-derived)"
-      }
-    ],
     "tracking": [
       {
         "name": "OrderTimeline",
@@ -114902,68 +118126,6 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\order\\ordertimeline.meta.ts"
-      },
-      {
-        "name": "TrackingInfo",
-        "label": "Tracking Info",
-        "description": "Tracking Info component (auto-derived).",
-        "category": "order",
-        "intent": [
-          "tracking",
-          "info"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "tracking",
-          "info"
-        ],
-        "propSchema": {
-          "showEstimatedDelivery": {
-            "type": "boolean"
-          },
-          "showCarrier": {
-            "type": "boolean"
-          },
-          "showTrackingNumber": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string"
-          },
-          "luxuryStyle": {
-            "type": "boolean"
-          }
-        },
-        "jsonSchema": {
-          "showEstimatedDelivery": {
-            "type": "boolean"
-          },
-          "showCarrier": {
-            "type": "boolean"
-          },
-          "showTrackingNumber": {
-            "type": "boolean"
-          },
-          "message": {
-            "type": "string"
-          },
-          "luxuryStyle": {
-            "type": "boolean"
-          }
-        },
-        "defaultProps": {
-          "showEstimatedDelivery": true,
-          "showCarrier": true,
-          "showTrackingNumber": false,
-          "message": "You will receive tracking information once your order ships.",
-          "luxuryStyle": false
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\order\\TrackingInfo\\TrackingInfo.tsx (auto-derived)"
       }
     ],
     "timeline": [
@@ -115067,154 +118229,424 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\order\\ordertimeline.meta.ts"
       }
     ],
-    "total": [
-      {
-        "name": "OrderTotal",
-        "label": "Order Total",
-        "description": "Order Total component (auto-derived).",
-        "category": "order",
-        "intent": [
-          "order",
-          "total"
-        ],
-        "dataDeps": [],
-        "copyFields": [],
-        "themeable": [],
-        "a11yRisk": "low",
-        "searchTags": [
-          "order",
-          "total"
-        ],
-        "propSchema": {
-          "label": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "fontWeight": {
-            "type": "string"
-          }
-        },
-        "jsonSchema": {
-          "label": {
-            "type": "string"
-          },
-          "fontSize": {
-            "type": "string"
-          },
-          "color": {
-            "type": "color"
-          },
-          "alignment": {
-            "type": "string"
-          },
-          "fontWeight": {
-            "type": "string"
-          }
-        },
-        "defaultProps": {
-          "label": "Total",
-          "fontSize": "xl",
-          "color": "#111827",
-          "alignment": "center",
-          "fontWeight": "bold"
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\order\\OrderTotal.tsx (auto-derived)"
-      }
-    ],
-    "premium": [
+    "upsell": [
       {
         "name": "PremiumServices",
         "label": "Premium Services",
-        "description": "Premium Services component (auto-derived).",
+        "description": "Order-confirmation atom: highlight cards for premium perks (warranty, gift wrap, support). Service items are consumer-injected.",
         "category": "order",
         "intent": [
-          "premium",
-          "services"
+          "confirm",
+          "upsell"
         ],
-        "dataDeps": [],
+        "visualRole": "atom",
+        "dataDeps": [
+          "services (consumer-injected)"
+        ],
         "copyFields": [],
         "themeable": [],
         "a11yRisk": "low",
+        "mobileBehavior": "responsive",
         "searchTags": [
+          "order",
           "premium",
-          "services"
+          "services",
+          "perks",
+          "atom"
         ],
         "propSchema": {
-          "services": {
-            "type": "array"
-          },
           "columns": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Cards per row (1-3)."
           }
         },
         "jsonSchema": {
-          "services": {
-            "type": "array"
-          },
           "columns": {
-            "type": "number"
+            "type": "number",
+            "required": true,
+            "description": "Cards per row (1-3)."
           }
-        },
-        "defaultProps": {
-          "services": [],
-          "columns": 1
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\order\\PremiumServices\\PremiumServices.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\order\\premiumservices.meta.ts"
+      },
+      {
+        "name": "RelatedProducts",
+        "label": "Related Products",
+        "description": "A products grid/carousel showing products RELATED to the current product — how to relate is configured via relatedBy (collection/tags/category/upsell/crosssell/frequently_bought). The storefront resolves and injects the actual products at render; the editor shows the configured section. Use on PRODUCT pages. For curated/storefront-wide product sections use FeaturedProducts.",
+        "category": "product",
+        "intent": [
+          "cross-sell",
+          "upsell",
+          "recommend",
+          "related"
+        ],
+        "visualRole": "block",
+        "dataDeps": [
+          "current product context (storefront-injected)"
+        ],
+        "copyFields": [
+          "title",
+          "tagline"
+        ],
+        "themeable": [
+          "textColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "related",
+          "recommendations",
+          "upsell",
+          "cross-sell",
+          "you may also like",
+          "product grid"
+        ],
+        "propSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"You May Also Like\"."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "tagline": {
+            "type": "string",
+            "required": true,
+            "description": "Small subheading under the title."
+          },
+          "showTagline": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the tagline."
+          },
+          "relatedBy": {
+            "type": "enum",
+            "required": true,
+            "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
+            "options": [
+              "collection",
+              "tags",
+              "category",
+              "upsell",
+              "crosssell",
+              "frequently_bought"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productCardTemplateId": {
+            "type": "string",
+            "required": true,
+            "description": "Optional saved product-card template id. Leave \"\" for the default card."
+          },
+          "gridColumns": {
+            "type": "enum",
+            "required": true,
+            "description": "Columns in grid mode.",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          }
+        },
+        "jsonSchema": {
+          "title": {
+            "type": "string",
+            "required": true,
+            "description": "Section heading, e.g. \"You May Also Like\"."
+          },
+          "showTitle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the section heading."
+          },
+          "tagline": {
+            "type": "string",
+            "required": true,
+            "description": "Small subheading under the title."
+          },
+          "showTagline": {
+            "type": "boolean",
+            "required": true,
+            "description": "Render the tagline."
+          },
+          "relatedBy": {
+            "type": "enum",
+            "required": true,
+            "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
+            "options": [
+              "collection",
+              "tags",
+              "category",
+              "upsell",
+              "crosssell",
+              "frequently_bought"
+            ]
+          },
+          "maxProducts": {
+            "type": "number",
+            "required": true,
+            "description": "Max products shown (4-8 recommended)."
+          },
+          "displayStyle": {
+            "type": "enum",
+            "required": true,
+            "description": "grid = static rows; carousel = Swiper slider.",
+            "options": [
+              "grid",
+              "carousel"
+            ]
+          },
+          "productCardTemplateId": {
+            "type": "string",
+            "required": true,
+            "description": "Optional saved product-card template id. Leave \"\" for the default card."
+          },
+          "gridColumns": {
+            "type": "enum",
+            "required": true,
+            "description": "Columns in grid mode.",
+            "options": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          "containerPadding": {
+            "type": "enum",
+            "required": true,
+            "description": "Section padding.",
+            "options": [
+              "none",
+              "sm",
+              "md",
+              "lg"
+            ]
+          },
+          "textColor": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"text.primary\") or hex."
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\product\\RelatedProducts\\relatedproducts.meta.ts"
       }
     ],
-    "services": [
+    "celebrate": [
       {
-        "name": "PremiumServices",
-        "label": "Premium Services",
-        "description": "Premium Services component (auto-derived).",
+        "name": "SuccessIcon",
+        "label": "Success Icon",
+        "description": "Order-confirmation atom: the large checkmark/celebration icon at the top of the confirmation page.",
         "category": "order",
         "intent": [
-          "premium",
-          "services"
+          "confirm",
+          "celebrate"
         ],
+        "visualRole": "atom",
         "dataDeps": [],
         "copyFields": [],
-        "themeable": [],
+        "themeable": [
+          "color"
+        ],
         "a11yRisk": "low",
+        "mobileBehavior": "fixed",
         "searchTags": [
-          "premium",
-          "services"
+          "order",
+          "success",
+          "checkmark",
+          "icon",
+          "atom"
         ],
         "propSchema": {
-          "services": {
-            "type": "array"
+          "size": {
+            "type": "enum",
+            "required": true,
+            "description": "Icon size.",
+            "options": [
+              "md",
+              "lg",
+              "xl"
+            ]
           },
-          "columns": {
-            "type": "number"
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"status.success\") or hex."
+          },
+          "animate": {
+            "type": "boolean",
+            "required": true,
+            "description": "Subtle entrance animation."
+          },
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "luxury adds a ring.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           }
         },
         "jsonSchema": {
-          "services": {
-            "type": "array"
+          "size": {
+            "type": "enum",
+            "required": true,
+            "description": "Icon size.",
+            "options": [
+              "md",
+              "lg",
+              "xl"
+            ]
           },
-          "columns": {
-            "type": "number"
+          "color": {
+            "type": "color",
+            "required": true,
+            "description": "Token path (e.g. \"status.success\") or hex."
+          },
+          "animate": {
+            "type": "boolean",
+            "required": true,
+            "description": "Subtle entrance animation."
+          },
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "luxury adds a ring.",
+            "options": [
+              "standard",
+              "luxury"
+            ]
           }
-        },
-        "defaultProps": {
-          "services": [],
-          "columns": 1
         },
         "isContainer": false,
         "zones": [],
-        "metaPath": "src\\puck\\components\\order\\PremiumServices\\PremiumServices.tsx (auto-derived)"
+        "metaPath": "src\\puck\\components\\order\\successicon.meta.ts"
+      }
+    ],
+    "track": [
+      {
+        "name": "TrackingInfo",
+        "label": "Tracking Info",
+        "description": "Order-confirmation atom: shipping & tracking panel — estimated delivery, carrier, tracking number. Values come from order context.",
+        "category": "order",
+        "intent": [
+          "confirm",
+          "track"
+        ],
+        "visualRole": "atom",
+        "dataDeps": [
+          "shipment data (page context)"
+        ],
+        "copyFields": [
+          "message"
+        ],
+        "themeable": [],
+        "a11yRisk": "low",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "order",
+          "tracking",
+          "shipping",
+          "delivery",
+          "atom"
+        ],
+        "propSchema": {
+          "showEstimatedDelivery": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the estimated delivery line."
+          },
+          "showCarrier": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the carrier line."
+          },
+          "showTrackingNumber": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the tracking number."
+          },
+          "message": {
+            "type": "string",
+            "required": true,
+            "description": "Fallback message before the order ships."
+          },
+          "luxuryStyle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Lighter typography variant."
+          }
+        },
+        "jsonSchema": {
+          "showEstimatedDelivery": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the estimated delivery line."
+          },
+          "showCarrier": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the carrier line."
+          },
+          "showTrackingNumber": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the tracking number."
+          },
+          "message": {
+            "type": "string",
+            "required": true,
+            "description": "Fallback message before the order ships."
+          },
+          "luxuryStyle": {
+            "type": "boolean",
+            "required": true,
+            "description": "Lighter typography variant."
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\order\\trackinginfo.meta.ts"
       }
     ],
     "add-to-cart": [
@@ -123111,206 +126543,6 @@ export const registry: CompiledRegistry = {
         "metaPath": "src\\puck\\components\\product\\RelatedProducts\\relatedproducts.meta.ts"
       }
     ],
-    "upsell": [
-      {
-        "name": "RelatedProducts",
-        "label": "Related Products",
-        "description": "A products grid/carousel showing products RELATED to the current product — how to relate is configured via relatedBy (collection/tags/category/upsell/crosssell/frequently_bought). The storefront resolves and injects the actual products at render; the editor shows the configured section. Use on PRODUCT pages. For curated/storefront-wide product sections use FeaturedProducts.",
-        "category": "product",
-        "intent": [
-          "cross-sell",
-          "upsell",
-          "recommend",
-          "related"
-        ],
-        "visualRole": "block",
-        "dataDeps": [
-          "current product context (storefront-injected)"
-        ],
-        "copyFields": [
-          "title",
-          "tagline"
-        ],
-        "themeable": [
-          "textColor"
-        ],
-        "a11yRisk": "medium",
-        "mobileBehavior": "responsive",
-        "searchTags": [
-          "related",
-          "recommendations",
-          "upsell",
-          "cross-sell",
-          "you may also like",
-          "product grid"
-        ],
-        "propSchema": {
-          "title": {
-            "type": "string",
-            "required": true,
-            "description": "Section heading, e.g. \"You May Also Like\"."
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true,
-            "description": "Render the section heading."
-          },
-          "tagline": {
-            "type": "string",
-            "required": true,
-            "description": "Small subheading under the title."
-          },
-          "showTagline": {
-            "type": "boolean",
-            "required": true,
-            "description": "Render the tagline."
-          },
-          "relatedBy": {
-            "type": "enum",
-            "required": true,
-            "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
-            "options": [
-              "collection",
-              "tags",
-              "category",
-              "upsell",
-              "crosssell",
-              "frequently_bought"
-            ]
-          },
-          "maxProducts": {
-            "type": "number",
-            "required": true,
-            "description": "Max products shown (4-8 recommended)."
-          },
-          "displayStyle": {
-            "type": "enum",
-            "required": true,
-            "description": "grid = static rows; carousel = Swiper slider.",
-            "options": [
-              "grid",
-              "carousel"
-            ]
-          },
-          "productCardTemplateId": {
-            "type": "string",
-            "required": true,
-            "description": "Optional saved product-card template id. Leave \"\" for the default card."
-          },
-          "gridColumns": {
-            "type": "enum",
-            "required": true,
-            "description": "Columns in grid mode.",
-            "options": [
-              "2",
-              "3",
-              "4",
-              "5"
-            ]
-          },
-          "containerPadding": {
-            "type": "enum",
-            "required": true,
-            "description": "Section padding.",
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg"
-            ]
-          },
-          "textColor": {
-            "type": "color",
-            "required": true,
-            "description": "Token path (e.g. \"text.primary\") or hex."
-          }
-        },
-        "jsonSchema": {
-          "title": {
-            "type": "string",
-            "required": true,
-            "description": "Section heading, e.g. \"You May Also Like\"."
-          },
-          "showTitle": {
-            "type": "boolean",
-            "required": true,
-            "description": "Render the section heading."
-          },
-          "tagline": {
-            "type": "string",
-            "required": true,
-            "description": "Small subheading under the title."
-          },
-          "showTagline": {
-            "type": "boolean",
-            "required": true,
-            "description": "Render the tagline."
-          },
-          "relatedBy": {
-            "type": "enum",
-            "required": true,
-            "description": "How the storefront picks the related products. \"upsell\"/\"crosssell\" fit order-confirmation and product pages; \"collection\"/\"tags\" fit general product pages.",
-            "options": [
-              "collection",
-              "tags",
-              "category",
-              "upsell",
-              "crosssell",
-              "frequently_bought"
-            ]
-          },
-          "maxProducts": {
-            "type": "number",
-            "required": true,
-            "description": "Max products shown (4-8 recommended)."
-          },
-          "displayStyle": {
-            "type": "enum",
-            "required": true,
-            "description": "grid = static rows; carousel = Swiper slider.",
-            "options": [
-              "grid",
-              "carousel"
-            ]
-          },
-          "productCardTemplateId": {
-            "type": "string",
-            "required": true,
-            "description": "Optional saved product-card template id. Leave \"\" for the default card."
-          },
-          "gridColumns": {
-            "type": "enum",
-            "required": true,
-            "description": "Columns in grid mode.",
-            "options": [
-              "2",
-              "3",
-              "4",
-              "5"
-            ]
-          },
-          "containerPadding": {
-            "type": "enum",
-            "required": true,
-            "description": "Section padding.",
-            "options": [
-              "none",
-              "sm",
-              "md",
-              "lg"
-            ]
-          },
-          "textColor": {
-            "type": "color",
-            "required": true,
-            "description": "Token path (e.g. \"text.primary\") or hex."
-          }
-        },
-        "isContainer": false,
-        "zones": [],
-        "metaPath": "src\\puck\\components\\product\\RelatedProducts\\relatedproducts.meta.ts"
-      }
-    ],
     "recommend": [
       {
         "name": "RelatedProducts",
@@ -127101,6 +130333,654 @@ export const registry: CompiledRegistry = {
         "isContainer": false,
         "zones": [],
         "metaPath": "src\\puck\\components\\product-image-gallery\\imagegalleryzoom.meta.ts"
+      }
+    ],
+    "paginate": [
+      {
+        "name": "PaginationBar",
+        "label": "Pagination Bar",
+        "description": "Listing page pagination: numbered pages or prev/next, plus an optional per-page selector. The storefront drives actual navigation.",
+        "category": "storefront",
+        "intent": [
+          "paginate",
+          "browse"
+        ],
+        "visualRole": "listing-controls",
+        "dataDeps": [
+          "page state (storefront-driven)"
+        ],
+        "copyFields": [],
+        "themeable": [],
+        "a11yRisk": "medium",
+        "mobileBehavior": "compact",
+        "searchTags": [
+          "pagination",
+          "pages",
+          "listing",
+          "next",
+          "prev"
+        ],
+        "propSchema": {
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "numbered = page buttons; compact = prev/next; load-more = single button.",
+            "options": [
+              "numbered",
+              "compact",
+              "load-more"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Bar alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "maxPageNumbers": {
+            "type": "number",
+            "required": true,
+            "description": "Max visible page buttons before ellipsis."
+          },
+          "showPerPageSelector": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the per-page dropdown."
+          },
+          "perPageOptions": {
+            "type": "array",
+            "required": true,
+            "description": "Choices for per-page, e.g. [12, 24, 48]."
+          }
+        },
+        "jsonSchema": {
+          "style": {
+            "type": "enum",
+            "required": true,
+            "description": "numbered = page buttons; compact = prev/next; load-more = single button.",
+            "options": [
+              "numbered",
+              "compact",
+              "load-more"
+            ]
+          },
+          "alignment": {
+            "type": "enum",
+            "required": true,
+            "description": "Bar alignment.",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "maxPageNumbers": {
+            "type": "number",
+            "required": true,
+            "description": "Max visible page buttons before ellipsis."
+          },
+          "showPerPageSelector": {
+            "type": "boolean",
+            "required": true,
+            "description": "Show the per-page dropdown."
+          },
+          "perPageOptions": {
+            "type": "array",
+            "required": true,
+            "description": "Choices for per-page, e.g. [12, 24, 48]."
+          }
+        },
+        "defaultProps": {
+          "currentPage": 1,
+          "totalPages": 5,
+          "style": "numbered",
+          "alignment": "center",
+          "maxPageNumbers": 7,
+          "showPerPageSelector": true,
+          "perPageOptions": [
+            12,
+            24,
+            48
+          ],
+          "perPage": 12
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\storefront\\paginationbar.meta.ts"
+      }
+    ],
+    "hero": [
+      {
+        "name": "ContentSlider",
+        "label": "Content Slider (Swiper)",
+        "description": "Full-bleed content slider for hero banners, promos, and announcements. Each slide has title/description/button/background. Optional custom HTML per slide. Falls back to 3 mock slides. Uses SwiperBase for shared config.",
+        "category": "swiper",
+        "intent": [
+          "hero",
+          "banner",
+          "slider",
+          "carousel",
+          "announcement"
+        ],
+        "visualRole": "block",
+        "dataDeps": [],
+        "copyFields": [
+          "slides.title",
+          "slides.description",
+          "slides.buttonText",
+          "slides.buttonLink",
+          "slides.htmlContent"
+        ],
+        "themeable": [
+          "slides.backgroundColor",
+          "slides.textColor",
+          "slides.buttonColor",
+          "overlayColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "hero",
+          "banner",
+          "slider",
+          "carousel",
+          "announcement",
+          "content"
+        ],
+        "propSchema": {
+          "slides": {
+            "type": "array",
+            "required": true,
+            "items": "$item"
+          },
+          "slideHeight": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "full"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "full",
+              "contained"
+            ]
+          },
+          "contentPosition": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "effect": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "slide",
+              "fade",
+              "cube",
+              "coverflow",
+              "flip"
+            ]
+          },
+          "showNavigation": {
+            "type": "boolean",
+            "required": true
+          },
+          "navigationColor": {
+            "type": "string",
+            "required": true
+          },
+          "navigationPosition": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "center",
+              "bottom"
+            ]
+          },
+          "showPagination": {
+            "type": "boolean",
+            "required": true
+          },
+          "paginationType": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "bullets",
+              "fraction",
+              "progressbar"
+            ]
+          },
+          "paginationColor": {
+            "type": "string",
+            "required": true
+          },
+          "enableAutoplay": {
+            "type": "boolean",
+            "required": true
+          },
+          "autoplayDelay": {
+            "type": "number",
+            "required": true
+          },
+          "pauseOnHover": {
+            "type": "boolean",
+            "required": true
+          },
+          "loop": {
+            "type": "boolean",
+            "required": true
+          },
+          "speed": {
+            "type": "number",
+            "required": true
+          },
+          "enableOverlay": {
+            "type": "boolean",
+            "required": true
+          },
+          "overlayColor": {
+            "type": "string",
+            "required": true
+          },
+          "overlayOpacity": {
+            "type": "number",
+            "required": true
+          }
+        },
+        "jsonSchema": {
+          "slides": {
+            "type": "array",
+            "required": true,
+            "items": "$item"
+          },
+          "slideHeight": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "full"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "full",
+              "contained"
+            ]
+          },
+          "contentPosition": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "effect": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "slide",
+              "fade",
+              "cube",
+              "coverflow",
+              "flip"
+            ]
+          },
+          "showNavigation": {
+            "type": "boolean",
+            "required": true
+          },
+          "navigationColor": {
+            "type": "string",
+            "required": true
+          },
+          "navigationPosition": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "center",
+              "bottom"
+            ]
+          },
+          "showPagination": {
+            "type": "boolean",
+            "required": true
+          },
+          "paginationType": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "bullets",
+              "fraction",
+              "progressbar"
+            ]
+          },
+          "paginationColor": {
+            "type": "string",
+            "required": true
+          },
+          "enableAutoplay": {
+            "type": "boolean",
+            "required": true
+          },
+          "autoplayDelay": {
+            "type": "number",
+            "required": true
+          },
+          "pauseOnHover": {
+            "type": "boolean",
+            "required": true
+          },
+          "loop": {
+            "type": "boolean",
+            "required": true
+          },
+          "speed": {
+            "type": "number",
+            "required": true
+          },
+          "enableOverlay": {
+            "type": "boolean",
+            "required": true
+          },
+          "overlayColor": {
+            "type": "string",
+            "required": true
+          },
+          "overlayOpacity": {
+            "type": "number",
+            "required": true
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\swiper\\ContentSlider\\contentslider.meta.ts"
+      }
+    ],
+    "announcement": [
+      {
+        "name": "ContentSlider",
+        "label": "Content Slider (Swiper)",
+        "description": "Full-bleed content slider for hero banners, promos, and announcements. Each slide has title/description/button/background. Optional custom HTML per slide. Falls back to 3 mock slides. Uses SwiperBase for shared config.",
+        "category": "swiper",
+        "intent": [
+          "hero",
+          "banner",
+          "slider",
+          "carousel",
+          "announcement"
+        ],
+        "visualRole": "block",
+        "dataDeps": [],
+        "copyFields": [
+          "slides.title",
+          "slides.description",
+          "slides.buttonText",
+          "slides.buttonLink",
+          "slides.htmlContent"
+        ],
+        "themeable": [
+          "slides.backgroundColor",
+          "slides.textColor",
+          "slides.buttonColor",
+          "overlayColor"
+        ],
+        "a11yRisk": "medium",
+        "mobileBehavior": "responsive",
+        "searchTags": [
+          "hero",
+          "banner",
+          "slider",
+          "carousel",
+          "announcement",
+          "content"
+        ],
+        "propSchema": {
+          "slides": {
+            "type": "array",
+            "required": true,
+            "items": "$item"
+          },
+          "slideHeight": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "full"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "full",
+              "contained"
+            ]
+          },
+          "contentPosition": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "effect": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "slide",
+              "fade",
+              "cube",
+              "coverflow",
+              "flip"
+            ]
+          },
+          "showNavigation": {
+            "type": "boolean",
+            "required": true
+          },
+          "navigationColor": {
+            "type": "string",
+            "required": true
+          },
+          "navigationPosition": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "center",
+              "bottom"
+            ]
+          },
+          "showPagination": {
+            "type": "boolean",
+            "required": true
+          },
+          "paginationType": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "bullets",
+              "fraction",
+              "progressbar"
+            ]
+          },
+          "paginationColor": {
+            "type": "string",
+            "required": true
+          },
+          "enableAutoplay": {
+            "type": "boolean",
+            "required": true
+          },
+          "autoplayDelay": {
+            "type": "number",
+            "required": true
+          },
+          "pauseOnHover": {
+            "type": "boolean",
+            "required": true
+          },
+          "loop": {
+            "type": "boolean",
+            "required": true
+          },
+          "speed": {
+            "type": "number",
+            "required": true
+          },
+          "enableOverlay": {
+            "type": "boolean",
+            "required": true
+          },
+          "overlayColor": {
+            "type": "string",
+            "required": true
+          },
+          "overlayOpacity": {
+            "type": "number",
+            "required": true
+          }
+        },
+        "jsonSchema": {
+          "slides": {
+            "type": "array",
+            "required": true,
+            "items": "$item"
+          },
+          "slideHeight": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "sm",
+              "md",
+              "lg",
+              "xl",
+              "full"
+            ]
+          },
+          "contentWidth": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "full",
+              "contained"
+            ]
+          },
+          "contentPosition": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "left",
+              "center",
+              "right"
+            ]
+          },
+          "effect": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "slide",
+              "fade",
+              "cube",
+              "coverflow",
+              "flip"
+            ]
+          },
+          "showNavigation": {
+            "type": "boolean",
+            "required": true
+          },
+          "navigationColor": {
+            "type": "string",
+            "required": true
+          },
+          "navigationPosition": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "center",
+              "bottom"
+            ]
+          },
+          "showPagination": {
+            "type": "boolean",
+            "required": true
+          },
+          "paginationType": {
+            "type": "enum",
+            "required": true,
+            "options": [
+              "bullets",
+              "fraction",
+              "progressbar"
+            ]
+          },
+          "paginationColor": {
+            "type": "string",
+            "required": true
+          },
+          "enableAutoplay": {
+            "type": "boolean",
+            "required": true
+          },
+          "autoplayDelay": {
+            "type": "number",
+            "required": true
+          },
+          "pauseOnHover": {
+            "type": "boolean",
+            "required": true
+          },
+          "loop": {
+            "type": "boolean",
+            "required": true
+          },
+          "speed": {
+            "type": "number",
+            "required": true
+          },
+          "enableOverlay": {
+            "type": "boolean",
+            "required": true
+          },
+          "overlayColor": {
+            "type": "string",
+            "required": true
+          },
+          "overlayOpacity": {
+            "type": "number",
+            "required": true
+          }
+        },
+        "isContainer": false,
+        "zones": [],
+        "metaPath": "src\\puck\\components\\swiper\\ContentSlider\\contentslider.meta.ts"
       }
     ],
     "gallery": [
